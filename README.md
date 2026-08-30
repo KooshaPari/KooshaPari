@@ -1,4 +1,4 @@
-# Koosha Paridehpour
+# 👋
 
 Software engineer working across systems software, distributed and agent infrastructure, ML inference/evaluation, developer tooling, and cloud platforms. I also have a background in technical product/program leadership and physical-product commercialization.
 
