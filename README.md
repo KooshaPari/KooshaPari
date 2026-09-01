@@ -2,8 +2,6 @@
 
 Software engineer working across systems software, distributed and agent infrastructure, ML inference/evaluation, developer tooling, and cloud platforms. I also have a background in technical product/program leadership and physical-product commercialization.
 
-[![AI slop inside](https://sladge.net/badge.svg)](https://sladge.net) [![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/KooshaPari/KooshaPari/total)](https://github.com/KooshaPari/KooshaPari/releases)
-
 ## Selected Engineering Work
 
 ### [ShareCLI](https://github.com/KooshaPari/sharecli)
