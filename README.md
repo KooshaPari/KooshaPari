@@ -38,6 +38,23 @@ Extended open-source multi-provider AI proxy work covering provider-aware routin
 - [Phenotype Journeys](https://github.com/KooshaPari/phenotype-journeys)
 - [hwLedger](https://github.com/KooshaPari/hwLedger)
 
+## External Open Source Contributions
+
+### [OmniRoute](https://github.com/diegosouzapw/OmniRoute) — External Contributor
+
+**Rank #5 in published upstream contributor census · 101 merged PRs**
+
+Contributed across routing intelligence, provider integrations, reliability hardening, API/protocol compatibility, and operational tooling.
+
+Highlights:
+- Bifrost auto-fallback cooldown and latency/speed-optimized routing
+- OpenAPI 3.0 + Redoc API documentation
+- Provider-manifest infrastructure and integrations (Factory.ai, MiniMax M3, xAI, Bailian, OpenAI-compatible MCP Responses)
+- Reliability hardening across cooldowns, fallback caches, and stream lifetime
+- Contributions named in 21 upstream releases; personally acknowledged by the maintainer
+
+[View merged contributions → upstream PR search](https://github.com/diegosouzapw/OmniRoute/pulls?q=author%3AKooshaPari)
+
 ## Earlier Work
 
 [Frostify](https://github.com/KooshaPari/Frostify) — substantially customized Spicetify theme released in 2020; packaged GitHub release accumulated 3,350+ release-asset downloads.
