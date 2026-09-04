@@ -1,0 +1,14 @@
+koosha@domain.com,E,1,2026-08-25T00:00:00Z,recruiter,Maria Clark,DataAnnotation,Head of People,100000,US$,
+koosha@domain.com,E,2,2026-08-31T00:00:00Z,recruiter,Aryan Gulati,,,,,,
+koosha@domain.com,D,3,2026-08-31T00:00:00Z,recruiter,Robert Half,Technical Lead/Application Architect,5-10 years Java/J2EE/Spring,W2,$50-59/hr,Torrance Onsite,5
+koosha@domain.com,C,4,2026-08-31T00:00:00Z,comment,OmniRoute,Ravi,,,
+koosha@domain.com,C,5,2026-08-31T00:00:00Z,comment,Ravi Tharuma,,,
+koosha@domain.com,A,6,2026-08-31T00:00:00Z,recruiter,Brodie Grant,AI Chips/AI Tooling,Rust,,,,
+koosha@domain.com,C,7,2026-08-31T00:00:00Z,recruiter,Joe Fields,Product Marketing Manager,timebook.ai,,,,
+koosha@domain.com,B,8,2026-08-31T00:00:00Z,social,Mahmoud Paridehpour,,,,,,
+koosha@domain.com,B,9,2026-08-31T00:00:00Z,recruiter,Rachel Haigh,AI/Data/Automation,Radiant Nuclear,,,,
+koosha@domain.com,A,10,2026-08-31T00:00:00Z,recruiter,Nikhil Ravindran,AI SRE,,,,
+scope_pass: analysis
+read_only: true
+omniroute_attribution_check: passed
+evidence_policy: source=linkedin_mcp|date=2026-09-03|evidence_type=inbound_extraction|confidence=medium

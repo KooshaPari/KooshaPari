@@ -1,0 +1,14 @@
+koosha@domain.com,E,1,2026-08-25T00:00:00Z,recruiter,Maria Clark,DataAnnotation,spam_eval,unqualified,sample_spam,sample_size=1/7
+koosha@domain.com,E,2,2026-08-31T00:00:00Z,recruiter,Aryan Gulati,informal_generic,unqualified,sample_spam,sample_size=1/7
+koosha@domain.com,D,3,2026-08-31T00:00:00Z,recruiter,Robert Half,Torrance onsite Java,stack_mismatch;comp_mismatch,declined,java_spring_5_10yoe,sample_size=1/7
+koosha@domain.com,C,4,2026-08-31T00:00:00Z,comment,OmniRoute (Ravi),internal_followup,n/a,n/a,n/a
+koosha@domain.com,C,5,2026-08-31T00:00:00Z,comment,Ravi Tharuma,internal_followup,n/a,n/a,n/a
+koosha@domain.com,A,6,2026-08-31T00:00:00Z,recruiter,Brodie Grant,AI Chips/Rust/AI Tooling,qualified,engage,rust_ai_tooling,sample_size=1/7
+koosha@domain.com,C,7,2026-08-31T00:00:00Z,recruiter,Joe Fields,Product Marketing Manager timebook.ai,role_mismatch,low_priority,pm_non_technical,sample_size=1/7
+koosha@domain.com,B,8,2026-08-31T00:00:00Z,social,Mahmoud Paridehpour,post_driven,network,n/a,sample_size=1/7
+koosha@domain.com,B,9,2026-08-31T00:00:00Z,recruiter,Rachel Haigh,Radiant Nuclear AI/Data/Automation,qualified,engage,hardtech_ai_radiant,sample_size=1/7
+koosha@domain.com,A,10,2026-08-31T00:00:00Z,recruiter,Nikhil Ravindran,AI SRE tooling routing,qualified,engage,ai_sre_agent_infra,sample_size=1/7
+scope_pass: analysis
+read_only: true
+omniroute_attribution_check: passed
+evidence_policy: source=linkedin_mcp|date=2026-09-03|evidence_type=recruiter_quality_assessment|confidence=medium

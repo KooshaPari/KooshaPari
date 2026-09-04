@@ -1,0 +1,23 @@
+role_band,role_id,ideal,feasible,stretch,overreach,yoe_range,comp_target_base,stack_fit,seniority_fit,scope_fit,comp_fit,overall_score,match_rationale
+SYSTEMS_INFRA_SWE,SYS-SWE-III,Senior SWE,SWESenior,Staff,Architect,3-7,140000-180000,0.95,0.65,0.80,0.75,0.79,"agent runtime repos, inference/eval tooling, routing infra"
+RUST_BACKEND,RUST-BE-II,Senior Rust Engineer,Senior Rust,Staff Rust,na,3-6,160000-200000,0.95,0.70,0.75,0.80,0.81,"Rust primary language, co-verification/simulation adjacency"
+GO_BACKEND,GO-BE-II,Senior Go Engineer,Senior Go,na,na,3-6,140000-180000,0.95,0.70,0.75,0.75,0.79,"agent runtime, distributed APIs, routing infrastructure"
+AI_ML_INFRA,ML-INF-II,ML Platform Engineer,Senior ML,Staff ML,na,4-7,160000-200000,0.90,0.70,0.80,0.80,0.80,"inference/eval tooling, agent routing, tooling gap work"
+DEV_TOOLS,DEVTOOL-I,DevTools SWE,Senior DevTools,Staff,na,3-6,150000-190000,0.90,0.70,0.75,0.75,0.78,"developer platforms, 0-to-1 tooling, CLI/repo automation"
+DISTRIBUTED_SYSTEMS,DIST-I,Distributed SWE,Senior Distributed,Staff,na,4-7,160000-200000,0.90,0.70,0.80,0.80,0.80,"API design, routing, observability stack"
+HARDTECH_SOFTWARE,HARDTECH-I,Hardtech SWE,Senior Hardtech,Staff,na,3-7,150000-190000,0.85,0.70,0.85,0.75,0.79,"GMK Arch, 40+ manufacturers, WITF, supply chain"
+VERIFICATION_SIM,VERIF-I,Verification Engineer,Senior Verification,Staff,na,4-8,160000-210000,0.80,0.70,0.70,0.80,0.75,"simulation work, co-verification adjacency"
+PRODUCT_ENGINEER,PE-I,Product Engineer,Senior PE,na,na,3-6,130000-170000,0.85,0.75,0.90,0.70,0.80,"systems + manufacturing crossover, agent tooling"
+TECHNICAL_PM,TPM-I,TPM,Senior TPM,Staff TPM,na,4-7,150000-190000,0.80,0.80,0.85,0.70,0.79,"product + engineering, supply-chain traceability"
+SUPPLY_CHAIN_PM,SCM-I,SCM PM,Senior SCM,na,na,5-8,150000-190000,0.80,0.75,0.90,0.70,0.78,"supply-chain traceability, manufacturing, WITF"
+scope_pass: analysis
+read_only: true
+omniroute_attribution_check: passed
+evidence_policy: source=linkedin_mcp|date=2026-09-03|evidence_type=role_band_map|confidence=mediump"
+INDUSTRIAL_SOFTWARE_PM,IND-PM-I,Industrial PM,Senior Industrial,Staff,na,4-7,150000-190000,0.80,0.80,0.85,0.70,0.79,"traceability, workflow automation, regulatory"
+TECHNICAL_LEAD,TL-I,Technical Lead,Senior TL,Staff,na,5-8,160000-210000,0.85,0.75,0.85,0.80,0.81,"five-team leadership, ~25 contributors"
+ARCHITECTURE,ARCH-I,Architect,Staff,Principal,na,7-10,180000-250000,0.90,0.80,0.80,0.85,0.84,"architecture language in profile, business ownership evidence"
+scope_pass: analysis
+read_only: true
+omniroute_attribution_check: passed
+evidence_policy: source=linkedin_mcp|date=2026-09-03|evidence_type=role_band_mapping|confidence=medium

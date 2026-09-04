@@ -1,0 +1,6 @@
+candidate_id,role_id,role_name,company,source_channel,date_format,timezone,version_stamp
+koosha@domain.com,act-001,systems_infra_swe,First Resonance,recruiter,2026-09-01T00:00:00Z,UTC,2026-09-03
+scope_pass: analysis
+read_only: true
+omniroute_attribution_check: passed
+evidence_policy: source=linkedin_mcp|date=2026-09-03|evidence_type=playbook_raw|confidence=medium

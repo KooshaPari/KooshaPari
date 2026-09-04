@@ -1,0 +1,10 @@
+candidate_id,message_id,timestamp_utc,timezone,version_stamp,note_type,entity,entity_type,entity_role,entity_notes
+koosha@domain.com,kalib-001,2026-09-03T00:00:00Z,UTC,2026-09-03,calibration,LinkedIn,platform_update,system,OTW title swap: Systems/AI Infrastructure Engineer | Rust, Go, Agent Runtimes; Summary updated with chronology anchor
+koosha@domain.com,omn-001,2026-09-03T00:00:00Z,UTC,2026-09-03,followup,OmniRoute,internal_contact,network,OmniRoute / Ravi Sep 2 — UPDATED Sep 3: internal follow-up confirmed active; VERIFIED 2026-09-03: diegosouzapw/OmniRoute = 60,705 stars, surpasses LiteLLM (57,933) and all evaluated comparables (Portkey-AI/gateway: 12,890; coaidev/coai: 9,308; katanemo/plano: 7,033); KooshaPari fork = 6 stars (third-party validation — not owned-project scale)
+koosha@domain.com,ossig-001,2026-09-03T00:00:00Z,UTC,2026-09-03,verification,OmniRoute,oss_evidence,oss,OSS evidence snapshot 2026-09-03: OmniRoute (diegosouzapw) 60,705 stars; LiteLLM (BerriAI) 57,933; Portkey-AI/gateway 12,890; coaidev/coai 9,308; katanemo/plano 7,033; category = AI routing/gateway/open-source-LLM-proxy; KooshaPari fork = 6 stars; attribution: third-party, not owned/maintained
+koosha@domain.com,netw-001,2026-09-03T00:00:00Z,UTC,2026-09-03,portfolio,NetWeave,phenotype_project,oss,Phenotype portfolio project: full engineering case-study candidate; OSS credibility + portfolio visibility drives inbound
+koosha@domain.com,skil-001,2026-09-03T00:00:00Z,UTC,2026-09-03,calibration,skills,ordering,linkedin,Skill ordering documented: Rust/Go/AI-infra priority over Product Management; LinkedIn UI reorder recommended
+scope_pass: analysis
+read_only: true
+omniroute_attribution_check: passed
+evidence_policy: source=linkedin_mcp|date=2026-09-03|evidence_type=raw_notes|confidence=low

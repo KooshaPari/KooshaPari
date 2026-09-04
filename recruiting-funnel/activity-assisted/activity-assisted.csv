@@ -1,0 +1,11 @@
+candidate_id,message_id,date_format,timezone,version_stamp,source_channel,event_type,event_value
+koosha@domain.com,act-001,2026-08-25T00:00:00Z,UTC,2026-09-03,comment,post_engagement,ai_infra_agent_runtime
+koosha@domain.com,act-002,2026-08-25T00:00:00Z,UTC,2026-09-03,comment,post_react,ai_routing_oss
+koosha@domain.com,act-003,2026-08-31T00:00:00Z,UTC,2026-09-03,comment,comment_thread,omniorute_performance
+koosha@domain.com,act-004,2026-09-01T00:00:00Z,UTC,2026-09-03,comment,post_engagement,agent_infra_visibility
+koosha@domain.com,act-005,2026-09-02T00:00:00Z,UTC,2026-09-03,comment,comment_thread,phenotype_phenomene
+koosha@domain.com,act-006,2026-09-02T00:00:00Z,UTC,2026-09-03,comment,profile_visit,recruiter_search_visibility
+scope_pass: analysis
+read_only: true
+omniroute_attribution_check: passed
+evidence_policy: source=linkedin_mcp|date=2026-09-03|evidence_type=activity_tracking|confidence=medium

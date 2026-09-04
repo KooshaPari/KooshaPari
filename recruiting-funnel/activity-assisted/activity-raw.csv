@@ -1,0 +1,6 @@
+candidate_id,message_id,date_format,timezone,version_stamp
+koosha@domain.com,act-001,2026-08-25T00:00:00Z,UTC,2026-09-03
+scope_pass: analysis
+read_only: true
+omniroute_attribution_check: passed
+evidence_policy: source=linkedin_mcp|date=2026-09-03|evidence_type=activity_raw|confidence=low
