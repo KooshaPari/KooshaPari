@@ -1,0 +1,489 @@
+.atelier-transition {
+  display: grid;
+  align-content: end;
+  min-height: min(68vh, 48rem);
+  padding-block: var(--space-7) var(--space-5);
+  border-bottom: 1px solid var(--rule);
+}
+
+.atelier-transition h1 {
+  margin-bottom: var(--space-4);
+}
+
+.atelier-back-link {
+  width: fit-content;
+  margin-top: var(--space-4);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+}
+
+.project-index {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: var(--space-5) var(--gutter);
+  border: 0;
+  background: var(--graphite-950);
+  color: var(--paper-100);
+}
+
+.project-index::backdrop {
+  background: color-mix(in oklch, var(--graphite-950) 70%, transparent);
+}
+
+.project-index-head {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid color-mix(in oklch, var(--paper-100) 28%, transparent);
+  background: var(--graphite-950);
+}
+
+.project-index-head h2 {
+  margin: 0;
+}
+
+.project-index .atelier-label {
+  color: var(--concrete-300);
+}
+
+.project-index-close {
+  min-width: 5rem;
+  min-height: 2.75rem;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.project-index-groups {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-5) var(--space-4);
+  padding-block: var(--space-5) var(--space-7);
+}
+
+.project-index-group {
+  grid-column: span 6;
+}
+
+.project-index-group h3 {
+  margin-bottom: var(--space-3);
+  color: var(--arch-300);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-index-group ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-index-group li {
+  border-top: 1px solid color-mix(in oklch, var(--paper-100) 20%, transparent);
+}
+
+.project-index-group a {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(8rem, 0.7fr) 1fr auto;
+  gap: var(--space-3);
+  align-items: baseline;
+  padding-block: var(--space-3);
+  text-decoration: none;
+}
+
+.project-index-group a:hover strong,
+.project-index-group a:focus-visible strong {
+  color: var(--acid-500);
+}
+
+.project-index-group a > span:nth-of-type(2),
+.project-index-group small {
+  color: var(--concrete-300);
+}
+
+.project-index-number,
+.project-index-group small {
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+}
+
+/* Technical Atelier / selected artifacts ----------------------------------- */
+.home-view {
+  max-width: 92rem;
+  margin-inline: auto;
+}
+
+.home-opening {
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.82fr) minmax(34rem, 1.45fr);
+  gap: clamp(2rem, 5vw, 6.5rem);
+  align-items: start;
+  min-height: 0;
+  padding-block: clamp(1.5rem, 3vw, 3rem) clamp(2rem, 4.5vw, 4.5rem);
+  border-bottom: 1px solid var(--rule);
+}
+
+.home-identity {
+  align-self: start;
+  max-width: 34rem;
+  padding-top: 0;
+}
+
+.home-identity h1 {
+  margin-block: var(--space-3) var(--space-4);
+}
+
+.home-intro,
+.home-reading {
+  max-width: 45ch;
+}
+
+.home-intro {
+  color: var(--ink-muted);
+  font-size: var(--step-1);
+}
+
+.home-reading {
+  margin-bottom: var(--space-4);
+  padding-left: var(--space-3);
+  border-left: 3px solid var(--arch-500);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+}
+
+.home-primary-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+}
+
+.home-primary-links a {
+  min-height: 2.75rem;
+  padding: 0.8rem 0;
+  text-decoration: none;
+}
+
+.home-primary-links a:last-child {
+  color: var(--ink-muted);
+}
+
+.home-opening-artifact {
+  width: 100%;
+  max-width: none;
+}
+
+.artifact {
+  position: relative;
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+  padding: clamp(1.2rem, 2.5vw, 2.5rem);
+  border: 1px solid var(--rule);
+  background: var(--surface-raised);
+}
+
+.artifact::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3.5rem;
+  height: 3px;
+  background: var(--arch-500);
+  content: '';
+}
+
+.artifact-header {
+  max-width: 44rem;
+}
+
+.artifact-header .atelier-label {
+  margin-bottom: var(--space-2);
+}
+
+.artifact-header h2 {
+  margin-bottom: var(--space-2);
+}
+
+.artifact-header h2 a {
+  text-decoration: none;
+}
+
+.artifact-header h2 a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--arch-500);
+}
+
+.artifact-summary {
+  max-width: 62ch;
+  margin-bottom: 0;
+  color: var(--ink-muted);
+}
+
+.artifact-media {
+  margin: 0;
+  border: 1px solid color-mix(in oklch, var(--ink) 16%, transparent);
+  background: var(--graphite-900);
+}
+
+.artifact-media img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.artifact-media figcaption {
+  padding: var(--space-2) var(--space-3);
+  color: var(--concrete-300);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.home-opening-artifact .artifact-media {
+  height: auto;
+  aspect-ratio: 16 / 9;
+  max-height: 27rem;
+  overflow: hidden;
+  box-shadow: 1rem 1rem 0 color-mix(in oklch, var(--olive-500) 18%, transparent);
+}
+
+.home-opening-artifact .artifact-media img {
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: contain; object-position: center;
+}
+
+.artifact-context {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(9rem, 0.44fr);
+  gap: var(--space-4);
+  align-items: start;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--rule);
+}
+
+.artifact-annotation {
+  display: grid;
+  grid-template-columns: 1.8rem minmax(0, 1fr);
+  gap: var(--space-2);
+}
+
+.artifact-annotation > span {
+  display: grid;
+  width: 1.8rem;
+  height: 1.8rem;
+  place-items: center;
+  background: var(--graphite-950);
+  color: var(--paper-100);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+}
+
+.artifact-annotation p,
+.metric-annotation,
+.evidence-label {
+  margin: 0;
+}
+
+.metric-annotation {
+  display: grid;
+  gap: 0.1rem;
+  padding-left: var(--space-3);
+  border-left: 1px solid var(--rule);
+}
+
+.metric-annotation strong {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1;
+}
+
+.metric-annotation span,
+.metric-annotation small,
+.evidence-label small {
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+}
+
+.metric-annotation small {
+  margin-top: var(--space-1);
+}
+
+.evidence-label {
+  display: grid;
+  gap: var(--space-1);
+  grid-column: 1 / -1;
+  padding: var(--space-3);
+  border-top: 1px solid var(--rule);
+  background: color-mix(in oklch, var(--paper-100) 72%, var(--concrete-300));
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+  line-height: 1.45;
+}
+
+.evidence-label span {
+  color: var(--olive-500);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.home-featured {
+  padding-block: clamp(4rem, 10vw, 11rem);
+}
+
+.home-featured-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(16rem, 0.3fr);
+  gap: var(--space-4);
+  align-items: end;
+  margin-bottom: clamp(2.5rem, 5vw, 5rem);
+}
+
+.home-featured-heading h2 {
+  grid-column: 1;
+  margin-block: var(--space-2) 0;
+}
+
+.home-featured-heading > p:last-child {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+.home-artifact-sequence {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(1rem, 2.6vw, 3rem);
+  align-items: start;
+}
+
+.home-artifact-sequence .artifact--systems {
+  grid-column: span 7;
+  margin-top: 0;
+}
+
+.home-artifact-sequence .artifact--experiment {
+  grid-column: span 5;
+  margin-top: clamp(2rem, 9vw, 9rem);
+  background: color-mix(in oklch, var(--paper-100) 90%, var(--olive-300));
+}
+
+.home-artifact-sequence .artifact--physical {
+  min-height: 0;
+  grid-column: 2 / span 8;
+  margin-top: clamp(1rem, 3vw, 4rem);
+}
+
+/* The retained GMK render is a 354 x 90 source. Keep it as a provenance-
+   carrying specimen strip rather than scaling it into a soft hero photograph. */
+.home-artifact-sequence .artifact--gmk-arch {
+  grid-column: 3 / span 7;
+  background: color-mix(in oklch, var(--paper-100) 88%, var(--arch-300));
+}
+
+.artifact--gmk-arch .artifact-media {
+  display: grid;
+  min-height: clamp(8rem, 13vw, 12rem);
+  place-items: center;
+  padding: clamp(1rem, 2vw, 2rem);
+  background:
+    linear-gradient(90deg, transparent 0 49.9%, color-mix(in oklch, var(--ink) 10%, transparent) 50%, transparent 50.1%),
+    var(--graphite-950);
+}
+
+.artifact--gmk-arch .artifact-media img {
+  width: min(100%, 22.125rem);
+  height: auto;
+  aspect-ratio: 354 / 90;
+  object-fit: contain;
+}
+
+.systems-diagram,
+.experiment-sheet {
+  border: 1px solid var(--rule);
+  background:
+    linear-gradient(90deg, transparent 0 49.88%, color-mix(in oklch, var(--ink) 7%, transparent) 50%, transparent 50.12%),
+    var(--paper-200);
+}
+
+.systems-diagram {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  align-items: center;
+  min-height: 12rem;
+  padding: var(--space-3);
+}
+
+.systems-node {
+  display: grid;
+  min-height: 7rem;
+  align-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid color-mix(in oklch, var(--ink) 22%, transparent);
+  background: var(--surface-raised);
+}
+
+.systems-node span,
+.experiment-row > span {
+  color: var(--arch-500);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+}
+
+.systems-route {
+  color: var(--olive-500);
+  font-family: var(--font-meta);
+  text-align: center;
+}
+
+.artifact-text-summary {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+}
+
+.experiment-sheet {
+  display: grid;
+}
+
+.experiment-row {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(8rem, 0.8fr) minmax(0, 1.5fr);
+  gap: var(--space-2);
+  align-items: baseline;
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--rule);
+}
+
+.experiment-row:last-child {
+  border-bottom: 0;
+}
+
+.experiment-row p {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+.home-view--product .artifact::before,
+.home-view--product .home-reading {
+  background-color: var(--olive-500);
+  border-color: var(--olive-500);
+}
+
+.home-view--product .home-artifact-sequence .artifact--experiment {
+  background: color-mix(in oklch, var(--paper-100) 89%, var(--arch-300));
+}

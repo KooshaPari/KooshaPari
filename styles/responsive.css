@@ -1,0 +1,114 @@
+@media (max-width: 760px) {
+  #view-root {
+    padding-top: var(--space-5);
+  }
+
+  .project-index-group {
+    grid-column: 1 / -1;
+  }
+
+  .project-index-group a {
+    grid-template-columns: 2rem 1fr;
+  }
+
+  .project-index-group a > span:nth-of-type(2),
+  .project-index-group small {
+    grid-column: 2;
+  }
+
+  .home-opening {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    min-height: auto;
+    padding-block: var(--space-3) var(--space-4);
+  }
+
+  .home-identity {
+    max-width: none;
+  }
+
+  .home-opening-artifact .artifact-media {
+    max-height: none;
+    aspect-ratio: 16 / 9;
+    box-shadow: 0.6rem 0.6rem 0 color-mix(in oklch, var(--olive-500) 18%, transparent);
+  }
+
+  .artifact {
+    gap: var(--space-3);
+    padding: var(--space-3);
+  }
+
+  .artifact-context,
+  .home-featured-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .home-featured-heading h2,
+  .home-featured-heading > p:last-child {
+    grid-column: auto;
+  }
+
+  .home-artifact-sequence {
+    grid-template-columns: 1fr;
+  }
+
+  .home-artifact-sequence .artifact--systems,
+  .home-artifact-sequence .artifact--experiment,
+  .home-artifact-sequence .artifact--physical {
+    grid-column: auto;
+    margin-top: 0;
+  }
+
+  .systems-diagram {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+    padding: var(--space-2);
+  }
+
+  .systems-node {
+    min-height: auto;
+    grid-template-columns: 2rem 1fr;
+    align-items: baseline;
+  }
+
+  .systems-route {
+    display: none;
+  }
+
+  .experiment-row {
+    grid-template-columns: 2rem 1fr;
+  }
+
+  .experiment-row p {
+    grid-column: 2;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1080px) {
+  .home-opening {
+    grid-template-columns: minmax(16rem, 0.75fr) minmax(28rem, 1.25fr);
+    gap: var(--space-5);
+  }
+
+  .home-artifact-sequence .artifact--systems,
+  .home-artifact-sequence .artifact--experiment {
+    grid-column: span 6;
+  }
+
+  .home-artifact-sequence .artifact--experiment {
+    margin-top: var(--space-5);
+  }
+
+  .home-artifact-sequence .artifact--physical {
+    grid-column: 2 / span 10;
+  }
+
+  .systems-diagram {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+
+  .systems-route {
+    display: none;
+  }
+}
