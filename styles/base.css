@@ -1,0 +1,369 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-reading);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    linear-gradient(90deg, transparent 0 49.96%, color-mix(in oklch, var(--ink) 3%, transparent) 50%, transparent 50.04%),
+    var(--surface);
+  font-size: var(--step-0);
+  line-height: 1.6;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-block-start: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+h1 {
+  max-width: 16ch;
+  font-size: var(--step-4);
+}
+
+h2 {
+  font-size: var(--step-3);
+}
+
+h3 {
+  font-size: var(--step-2);
+}
+
+:focus-visible {
+  border-radius: 1px;
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  inset: var(--space-3) auto auto var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--graphite-950);
+  color: var(--paper-100);
+  transform: translateY(-180%);
+  transition: transform var(--motion-fast) var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ================================================
+   READER MODE — per READER_MODE.md spec
+   ================================================ */
+
+:root {
+  --reader-header-height: 32px;
+  --reader-wayfinding-height: 0px;
+  --reader-footer-height: 0px;
+  --content-max-width-reader: 58ch;
+  --font-size-body-reader: var(--step-3);
+  --line-height-reader: 1.7;
+}
+
+body[data-reader="true"] .atelier-header {
+  height: var(--reader-header-height);
+}
+
+body[data-reader="true"] .atelier-nav,
+body[data-reader="true"] .index-trigger {
+  display: none;
+}
+
+body[data-reader="true"] #wayfinding {
+  height: var(--reader-wayfinding-height);
+  overflow: hidden;
+}
+
+body[data-reader="true"] #canvas {
+  max-width: var(--content-max-width-reader);
+  font-size: var(--font-size-body-reader);
+  line-height: var(--line-height-reader);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+body[data-reader="true"] #footer {
+  height: var(--reader-footer-height);
+  overflow: hidden;
+}
+
+/* Motion off in Reader Mode */
+body[data-reader="true"] * {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Live region for announcements */
+#announcements {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reader toggle styling */
+.reader-toggle {
+  background: none;
+  border: 1px solid var(--ink);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--step--1);
+  cursor: pointer;
+}
+
+.reader-toggle[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+#view-root {
+  min-height: 70vh;
+  padding: var(--space-6) var(--gutter) var(--space-7);
+}
+
+.eyebrow,
+.atelier-label {
+  color: var(--ink-muted);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lede {
+  max-width: var(--measure);
+  color: var(--ink-muted);
+  font-size: var(--step-1);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-inline: var(--gutter);
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--rule);
+  color: var(--ink-muted);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ================================================
+   LENS ACCENTS — per VISUAL_SYSTEM.md
+   ================================================ */
+
+body[data-lens="engineering"] {
+  --accent: var(--accent-engineering);
+}
+body[data-lens="product"] {
+  --accent: var(--accent-product);
+}
+
+/* Any element marked [data-accent] uses lens accent */
+[data-accent] {
+  color: var(--accent);
+}
+
+/* Lens toggle active state */
+.lens-toggle[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ================================================
+   DEPTH LAYER — per VISUAL_SYSTEM.md
+   ================================================ */
+
+#chrome,
+.atelier-header {
+  z-index: var(--z-chrome);
+  position: relative;
+}
+#canvas,
+#view-root {
+  z-index: var(--z-canvas);
+  position: relative;
+}
+#wayfinding,
+.overlay {
+  z-index: var(--z-overlay);
+}
+#footer {
+  z-index: var(--z-footer);
+  position: relative;
+}
+[data-elevated] {
+  box-shadow: var(--shadow-card);
+}
+
+/* ================================================
+   COMPONENT STATE MATRIX — per COMPONENT_STATE_MATRIX.md
+   ================================================ */
+
+/* loading state — skeleton-like subtle pulse on children with [data-state] */
+[data-state="loading"] {
+  cursor: progress;
+  opacity: 0.7;
+  pointer-events: none;
+}
+[data-state="loading"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklch, var(--ink) 6%, transparent),
+    transparent
+  );
+  animation: state-loading-shimmer var(--motion-slow) linear infinite;
+  pointer-events: none;
+}
+@keyframes state-loading-shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+/* error state */
+[data-state="error"] {
+  border: 1px solid color-mix(in oklch, var(--acid-500) 60%, var(--ink));
+  background: color-mix(in oklch, var(--acid-500) 6%, var(--surface));
+}
+
+/* empty state */
+[data-state="empty"] {
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+/* pressed/active/selected/focused are handled by browser pseudo-classes; we add
+   the explicit "data-" state hooks for parity with the 28-state spec. */
+[data-state="pressed"] { transform: scale(0.97); }
+[data-state="active"]  { color: var(--accent); }
+[data-state="selected"] { outline: 2px solid var(--accent); outline-offset: 2px; }
+[data-state="disabled"] { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+/* hidden/unmounted default to display:none only when explicitly set (a11y rule:
+   no default-hidden state on mount). Use aria-controls to expose collapsed sections. */
+[data-state="hidden"],
+[data-state="unmounted"] {
+  display: none;
+}
+
+/* ================================================
+   MOTION APPLICATION — references tokens defined in tokens.css
+   ================================================ */
+
+/* Page enter — applied to #view-root on navigation */
+#view-root[data-motion="enter"] {
+  animation: page-enter var(--motion-normal) var(--ease-out) both;
+}
+#view-root[data-motion="exit"] {
+  animation: page-exit var(--motion-fast) var(--ease-out) both;
+}
+
+/* Lens cross-fade — overlay covers canvas during lens switch */
+#canvas[data-lens-switch="true"] {
+  animation: lens-cross-fade var(--motion-slow) var(--ease-in-out) both;
+}
+
+/* Button press feedback */
+button:active,
+[role="button"]:active {
+  animation: button-press var(--motion-fast) var(--ease-out) both;
+}
+
+/* Hover lift on interactive cards */
+[data-hover-lift]:hover {
+  animation: hover-lift var(--motion-normal) var(--ease-out) both;
+}
+
+/* === §13 Evidence Panel (provenance, attribution, lineage) === */
+.case-evidence-panel {
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
+  border-left: 3px solid var(--accent);
+  background: color-mix(in oklch, var(--accent) 5%, transparent);
+}
+.case-evidence-panel h2 { font-size: var(--step--1); color: var(--text-secondary); }
+.evidence-list { display: grid; gap: var(--space-sm); margin-top: var(--space-md); }
+.evidence-list > div { display: grid; grid-template-columns: 9rem 1fr; gap: var(--space-sm); align-items: start; }
+.evidence-list dt { font-size: var(--step--2); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--font-mono); }
+.evidence-list dd { font-size: var(--step--1); color: var(--text); margin: 0; }
+.evidence-list dd a { color: var(--accent); text-decoration: underline; }
+
+/* === §7 Lens Annotation (lens-aware case study content) === */
+.lens-annotation {
+  margin: var(--space-lg) 0;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-sm);
+  background: color-mix(in oklch, var(--accent) 8%, transparent);
+  border-left: 4px solid var(--accent);
+}
+.lens-annotation h3 { font-size: var(--step--1); color: var(--accent); margin-bottom: var(--space-xs); }
+.lens-annotation p { font-size: var(--step-0); color: var(--text); margin: 0; line-height: 1.6; }

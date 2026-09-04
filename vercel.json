@@ -1,0 +1,91 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/engineering",
+      "destination": "/engineering.html"
+    },
+    {
+      "source": "/product",
+      "destination": "/product.html"
+    },
+    {
+      "source": "/work",
+      "destination": "/work.html"
+    },
+    {
+      "source": "/work/sharecli",
+      "destination": "/work/sharecli.html"
+    },
+    {
+      "source": "/work/gmk-arch",
+      "destination": "/work/gmk-arch.html"
+    },
+    {
+      "source": "/work/witf",
+      "destination": "/work/witf.html"
+    },
+    {
+      "source": "/work/substrate",
+      "destination": "/work/substrate.html"
+    },
+    {
+      "source": "/work/phenotype-omlx",
+      "destination": "/work/phenotype-omlx.html"
+    },
+    {
+      "source": "/work/netweave",
+      "destination": "/work/netweave.html"
+    },
+    {
+      "source": "/work/byteport",
+      "destination": "/work/byteport.html"
+    },
+    {
+      "source": "/work/tracera",
+      "destination": "/work/tracera.html"
+    },
+    {
+      "source": "/work/omniroute",
+      "destination": "/work/omniroute.html"
+    },
+    {
+      "source": "/work/dss-cipher",
+      "destination": "/work/dss-cipher.html"
+    },
+    {
+      "source": "/work/frostify",
+      "destination": "/work/frostify.html"
+    },
+    {
+      "source": "/resume",
+      "destination": "/resume.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog.html"
+    },
+    {
+      "source": "/blog/why-we-forked-omniroute",
+      "destination": "/blog/why-we-forked-omniroute.html"
+    },
+    {
+      "source": "/archive",
+      "destination": "/archive.html"
+    },
+    {
+      "source": "/((?!index\\.html|sitemap\\.xml|robots\\.txt|favicon\\.ico|assets/|styles/|scripts/|data/|public/|.*\\.html).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+old_url,new_url,status_code,classification,notes
+https://kooshapari.com/,https://kooshapari.com/,200,CANONICAL,Root already canonical
+https://ramdesigns.xyz/,https://kooshapari.com/archive,301,READY,Legacy design portfolio redirects to archive
+https://ramdesigns.xyz/home,https://kooshapari.com/,301,READY,Legacy home redirects to canonical root
+https://projects.kooshapari.com/,https://kooshapari.com/work,301,DEFER,Keep live until functional role resolved
+https://phenotype.space/,,NONE,DO NOT REDIRECT,Keep as separate domain
+https://kooshapari.com/gmk-arch,https://kooshapari.com/work/gmk-arch,301,READY,Adobe Portfolio project redirect
+https://kooshapari.com/witf,https://kooshapari.com/work/witf,301,READY,Adobe Portfolio project redirect
+https://kooshapari.com/dss-cipher,https://kooshapari.com/work/dss-cipher,301,READY,Adobe Portfolio project redirect
+
