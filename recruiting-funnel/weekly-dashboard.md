@@ -2,7 +2,9 @@
 
 **Candidate:** Koosha Paridehpour  
 **Version stamp:** 2026-09-03  
-**Window:** 30-day rolling
+**Window:** 30-day rolling  
+**Last verified:** 2026-09-04  
+**Data status:** provisional; 7 real recruiter contacts observed (below the ≥20 graduation floor)
 
 ---
 
