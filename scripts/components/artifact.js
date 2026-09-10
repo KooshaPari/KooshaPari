@@ -1,4 +1,6 @@
 import { el } from './dom.js';
+import { createLayeredImage } from '../media/layered-image.js';
+import { renderOmniRouteTopology } from '../media/omniroute-topology.js';
 import {
   createEvidenceLabel,
   createMetricAnnotation,
@@ -17,7 +19,7 @@ function artifactHeader(record, label) {
     'header',
     { class: 'artifact-header' },
     el('p', { class: 'atelier-label' }, label),
-    el('h2', {}, el('a', { href: `#work/${record.slug}` }, record.title)),
+    el('h2', {}, el('a', { href: `/work/${record.slug}` }, record.title)),
     el('p', { class: 'artifact-summary' }, record.summary),
   );
 }
@@ -48,7 +50,16 @@ export function physicalPlate(record, lens) {
       ? el(
           'figure',
           { class: 'artifact-media artifact-media--physical' },
-          el('img', {
+          record.slug === 'witf'
+            ? createLayeredImage({
+                src: image,
+                alt: record.presentation.alt,
+                width: selectedAsset?.width ?? media.width,
+                height: selectedAsset?.height ?? media.height,
+                layers: [{ label: 'shadow', className: 'layered-image__layer--shadow' }],
+                className: 'artifact-media__layered',
+              })
+            : el('img', {
             src: image,
             alt: record.presentation.alt,
             width: selectedAsset?.width ?? media.width,
@@ -56,7 +67,7 @@ export function physicalPlate(record, lens) {
             loading: record.slug === 'witf' ? 'eager' : 'lazy',
             decoding: 'async',
             ...(record.slug === 'witf' ? { fetchpriority: 'high' } : {}),
-          }),
+            }),
           el('figcaption', {}, `${record.category} / ${record.status}`),
         )
       : null,
@@ -84,8 +95,8 @@ export function systemsSheet(record, lens) {
   return el(
     'article',
     { class: `artifact artifact--systems artifact--${record.slug}`, 'data-artifact': record.slug },
-    artifactHeader(record, record.slug === 'substrate' ? 'Policy routing sheet' : 'Runtime topology'),
-    el(
+    artifactHeader(record, record.slug === 'omniroute' ? 'Upstream routing overview' : record.slug === 'substrate' ? 'Policy routing sheet' : 'Runtime topology'),
+    record.slug === 'omniroute' ? renderOmniRouteTopology(lens) : el(
       'div',
       {
         class: 'systems-diagram',

@@ -1,11 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "outputDirectory": ".",
+  "buildCommand": "npm run stage:publication",
+  "outputDirectory": "dist",
   "cleanUrls": true,
   "rewrites": [
     {
       "source": "/",
-      "destination": "/index.html"
+      "destination": "/root"
     },
     {
       "source": "/engineering",
@@ -64,6 +65,10 @@
       "destination": "/work/frostify.html"
     },
     {
+      "source": "/work/(.*)",
+      "destination": "/root"
+    },
+    {
       "source": "/resume",
       "destination": "/resume.html"
     },
@@ -84,8 +89,8 @@
       "destination": "/archive.html"
     },
     {
-      "source": "/((?!index\\.html|sitemap\\.xml|robots\\.txt|favicon\\.ico|assets/|styles/|scripts/|data/|public/|.*\\.html).*)",
-      "destination": "/index.html"
+      "source": "/((?!index\\.html|sitemap\\.xml|robots\\.txt|favicon\\.ico|assets/|asset-sources/|styles/|scripts/|data/|public/|tests/|docs/|output/|\\.playwright-cli/|.*\\.md|.*\\.html).*)",
+      "destination": "/root"
     }
   ]
 }

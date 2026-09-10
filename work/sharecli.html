@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ShareCLI — Koosha Paridehpour</title>
-  <meta name="description" content="Share-friendly CLI tool for capturing and replaying shell sessions across host environments.">
+  <meta name="description" content="Rust process and resource runtime for high-concurrency coding-agent workloads.">
   <link rel="canonical" href="https://kooshapari.com/work/sharecli">
   <meta property="og:type" content="website" />
   <meta property="og:title" content="ShareCLI — Koosha Paridehpour">
-  <meta property="og:description" content="Share-friendly CLI tool for capturing and replaying shell sessions across host environments.">
+  <meta property="og:description" content="Rust process and resource runtime for high-concurrency coding-agent workloads.">
   <meta property="og:url" content="https://kooshapari.com/work/sharecli">
   <meta name="twitter:card" content="summary" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -24,7 +24,21 @@
   <div id="app">
     <div id="shell-root"></div>
 
-    <main id="view-root"></main>
+    <main id="view-root">
+      <noscript>
+        <section aria-labelledby="sharecli-static-title">
+          <h1 id="sharecli-static-title">ShareCLI Runtime Workbench</h1>
+          <p>This is an illustrative, evidence-labelled model of the documented runtime flow, not a captured terminal session.</p>
+          <ol aria-label="Illustrative ShareCLI runtime states">
+            <li><strong>Burst</strong> &mdash; concurrent work enters the runtime boundary.</li>
+            <li><strong>Coalesce</strong> &mdash; related work is grouped before dispatch.</li>
+            <li><strong>Observe</strong> &mdash; queue and resource signals are inspected.</li>
+            <li><strong>Recover</strong> &mdash; the runtime returns to a usable state.</li>
+          </ol>
+          <p>Evidence boundary: these states are a static explanatory fallback; no terminal recording or live telemetry is shown.</p>
+        </section>
+      </noscript>
+    </main>
   </div>
 
   <script type="module" src="/scripts/app.js"></script>

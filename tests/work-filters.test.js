@@ -1,7 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { WORK_FILTERS, matchesWorkFilter } from '../scripts/work-filters.js';
+import {
+  WORK_FILTERS,
+  filterWorkProjects,
+  matchesWorkFilter,
+} from '../scripts/work-filters.js';
 
 const system = { status: 'current', category: 'systems', lens: ['engineering'] };
 const physical = { status: 'historical', category: 'physical-product', lens: ['product', 'engineering'] };
@@ -33,4 +37,13 @@ test('matchesWorkFilter includes representative records for every approved filte
 test('matchesWorkFilter excludes non-matching and unknown filters', () => {
   assert.equal(matchesWorkFilter(system, 'product'), false);
   assert.equal(matchesWorkFilter(system, 'not-a-filter'), false);
+});
+
+test('filterWorkProjects preserves source order and never mutates its input', () => {
+  const projects = [system, physical, aiResearch];
+  const original = [...projects];
+
+  assert.deepEqual(filterWorkProjects(projects, 'engineering'), [system, physical, aiResearch]);
+  assert.deepEqual(projects, original);
+  assert.deepEqual(filterWorkProjects(projects, 'not-a-filter'), []);
 });

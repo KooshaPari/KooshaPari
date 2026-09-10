@@ -1,7 +1,7 @@
 // Per READER_MODE.md spec:
 // - Trigger: R key (global), Reader toggle click, prefers-reduced-motion: reduce (if user hasn't toggled before)
-// - Exit: R key, toggle click, Esc, viewport >1200px (optional)
-// - DOM: body[data-reader="true"] applied globally
+// - Exit: R key, toggle click, Esc; resizing preserves the visitor's choice
+// - DOM: html[data-reader="true"] applied globally
 // - Persistence: localStorage reads/writes
 
 let readerMode = false;
@@ -22,7 +22,8 @@ function applyReaderMode(on = true) {
 
   // Focus management per spec
   if (on) {
-    const firstHeading = document.querySelector('#canvas h1, #canvas h2');
+    const firstHeading = document.querySelector('#view-root h1, #view-root h2');
+    firstHeading?.setAttribute('tabindex', '-1');
     firstHeading?.focus?.();
   } else {
     document.getElementById('reader-toggle')?.focus?.();
@@ -34,6 +35,14 @@ function applyReaderMode(on = true) {
 function initReader() {
   if (initReady) return;
   initReady = true;
+  try {
+    readerMode = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch { /* retain default when media queries are unavailable */ }
+  try {
+    const saved = localStorage.getItem('koosha-atelier-reader');
+    if (saved === 'true' || saved === 'false') readerMode = saved === 'true';
+  } catch { /* storage can be unavailable */ }
+  document.documentElement.dataset.reader = String(readerMode);
 
   // Ensure live region exists
   if (!document.getElementById('announcements')) {
@@ -50,7 +59,9 @@ function initReader() {
 
   // Keyboard handler: R key (global, not in input)
   document.addEventListener('keydown', (e) => {
-    if (e.key.toLowerCase() === 'r' && !e.target.matches('input, textarea, select')) {
+    if (e.defaultPrevented || e.isComposing || e.repeat || e.ctrlKey || e.metaKey || e.altKey ||
+        e.target?.isContentEditable || e.target?.closest?.('input, textarea, select, [role="textbox"]')) return;
+    if (e.key.toLowerCase() === 'r') {
       e.preventDefault();
       toggleReader();
     }
@@ -58,24 +69,21 @@ function initReader() {
 
   // Escape exits Reader Mode
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && readerMode) applyReaderMode(false);
+    if (e.key === 'Escape' && readerMode && !e.defaultPrevented) {
+      applyReaderMode(false);
+      persistReader();
+    }
   });
 
-  // Optional viewport exit (if enabled)
-  let mq = null;
-  try {
-    mq = window.matchMedia('(min-width: 1200px)');
-    const check = () => {
-      if (mq.matches) applyReaderMode(false);
-    };
-    mq.addEventListener('change', check);
-  } catch {
-    /* ignore */
-  }
+  // Resizing must not override the visitor's Reader preference.
 }
 
 function toggleReader() {
   applyReaderMode(!readerMode);
+  persistReader();
+}
+
+function persistReader() {
   // Persist user choice
   try {
     localStorage.setItem('koosha-atelier-reader', readerMode.toString());
@@ -86,7 +94,7 @@ function toggleReader() {
 }
 
 export function createReaderState() {
-  let initialized = false;
+  initReader();
 
   return {
     get() {
@@ -94,18 +102,11 @@ export function createReaderState() {
     },
 
     set(value) {
-      if (!initialized) {
-        initialized = true;
-        initReader();
-      }
       applyReaderMode(Boolean(value));
+      persistReader();
     },
 
     toggle() {
-      if (!initialized) {
-        initialized = true;
-        initReader();
-      }
       toggleReader();
     },
 

@@ -126,8 +126,8 @@
 
 .home-opening {
   display: grid;
-  grid-template-columns: minmax(18rem, 0.82fr) minmax(34rem, 1.45fr);
-  gap: clamp(2rem, 5vw, 6.5rem);
+  grid-template-columns: minmax(20rem, 0.95fr) minmax(0, 1.25fr);
+  gap: clamp(2rem, 4vw, 4rem);
   align-items: start;
   min-height: 0;
   padding-block: clamp(1.5rem, 3vw, 3rem) clamp(2rem, 4.5vw, 4.5rem);
@@ -141,6 +141,7 @@
 }
 
 .home-identity h1 {
+  max-width: 19ch;
   margin-block: var(--space-3) var(--space-4);
 }
 
@@ -342,7 +343,7 @@
 }
 
 .home-featured {
-  padding-block: clamp(4rem, 10vw, 11rem);
+  padding-block: clamp(3rem, 5vw, 5rem);
 }
 
 .home-featured-heading {
@@ -350,7 +351,7 @@
   grid-template-columns: minmax(0, 0.7fr) minmax(16rem, 0.3fr);
   gap: var(--space-4);
   align-items: end;
-  margin-bottom: clamp(2.5rem, 5vw, 5rem);
+  margin-bottom: clamp(1.5rem, 3vw, 3rem);
 }
 
 .home-featured-heading h2 {
@@ -365,32 +366,32 @@
 
 .home-artifact-sequence {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: clamp(1rem, 2.6vw, 3rem);
   align-items: start;
 }
 
 .home-artifact-sequence .artifact--systems {
-  grid-column: span 7;
+  grid-column: auto;
   margin-top: 0;
 }
 
 .home-artifact-sequence .artifact--experiment {
-  grid-column: span 5;
-  margin-top: clamp(2rem, 9vw, 9rem);
+  grid-column: auto;
+  margin-top: 0;
   background: color-mix(in oklch, var(--paper-100) 90%, var(--olive-300));
 }
 
 .home-artifact-sequence .artifact--physical {
   min-height: 0;
-  grid-column: 2 / span 8;
-  margin-top: clamp(1rem, 3vw, 4rem);
+  grid-column: auto;
+  margin-top: 0;
 }
 
 /* The retained GMK render is a 354 x 90 source. Keep it as a provenance-
    carrying specimen strip rather than scaling it into a soft hero photograph. */
 .home-artifact-sequence .artifact--gmk-arch {
-  grid-column: 3 / span 7;
+  grid-column: auto;
   background: color-mix(in oklch, var(--paper-100) 88%, var(--arch-300));
 }
 

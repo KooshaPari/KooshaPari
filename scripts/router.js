@@ -9,7 +9,7 @@ const VIEW_ROUTES = new Set([
 ]);
 
 export function parseRoute(input = '') {
-  const pathStr = String(input).trim();
+  const pathStr = String(input).trim().replace(/^#/, '');
 
   if (!pathStr) return { view: 'home' };
 
@@ -59,23 +59,25 @@ export function parseRoute(input = '') {
     return { view: segments[0] };
   }
 
-  // Anything else → home
+  // Unknown paths are an explicit application 404, not a silent Home fallback.
   if (VIEW_ROUTES.has(segments[0])) {
     return { view: segments[0] };
   }
 
-  return { view: 'home' };
+  return { view: 'not-found' };
 }
 
 /**
  * Read route from the current browser location.
- * Priority: hash → pathname
+ * Priority: pathname, with legacy project-detail hash support on /work.
  * Lens is read from ?lens= query param if present.
  */
 export function routeFromLocation() {
-  // Prefer pathname (new path-based format) — hash is legacy fallback
   const path = location.pathname.replace(/\/+$/, '').replace(/^\//, '');
-  const route = parseRoute(path || '');
+  let route = parseRoute(path || '');
+  if (route.view === 'work' && location.hash.startsWith('#work/')) {
+    route = parseRoute(location.hash.slice(1));
+  }
 
   // Lift lens from ?lens= query param (URL‑bound lens per spec)
   const urlLens = new URLSearchParams(location.search).get('lens');

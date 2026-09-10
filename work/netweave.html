@@ -24,7 +24,19 @@
   <div id="app">
     <div id="shell-root"></div>
 
-    <main id="view-root"></main>
+    <main id="view-root">
+      <article class="case-study">
+        <h1>NetWeave</h1>
+        <p>Historical Go traffic simulation combining directed-graph routing and local vehicle behavior.</p>
+        <picture>
+          <source media="(max-width: 600px)" srcset="/public/projects/netweave/mobile-01.webp" width="800" height="1000">
+          <img src="/public/projects/netweave/desktop-01.webp" width="1600" height="1100" style="width:100%;height:auto" alt="Four vehicle blocks on a gridded lane approaching a stationary lead vehicle.">
+        </picture>
+        <p>Illustrative local-spacing study. Original explanatory artwork, not recorded NetWeave output.</p>
+        <p>Three following vehicles approach a stationary lead vehicle. Their available gap shrinks across three discrete drawings. No vehicle changes route; congestion-aware rerouting remained future work.</p>
+        <a href="/work">Back to work</a>
+      </article>
+    </main>
   </div>
 
   <script type="module" src="/scripts/app.js"></script>

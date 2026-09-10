@@ -17,10 +17,14 @@ export function matchesWorkFilter(project, filter) {
   if (filter === 'all') return true;
   if (filter === 'historical') return project.status === 'historical';
   if (filter === 'engineering' || filter === 'product') {
-    return project.lens.includes(filter);
+    return project.lens?.includes(filter) ?? false;
   }
   if (filter === 'ai-ml') {
     return project.category === 'ai-ml' || project.category === 'ai-infrastructure';
   }
   return project.category === filter;
+}
+
+export function filterWorkProjects(projects, filter) {
+  return projects.filter((project) => matchesWorkFilter(project, filter));
 }

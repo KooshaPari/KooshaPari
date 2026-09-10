@@ -27,6 +27,25 @@
     max-width: none;
   }
 
+  .home-identity h1 {
+    max-width: none;
+    font-size: clamp(1.8rem, 7.5vw, 2.8rem);
+    margin-block: var(--space-2) var(--space-3);
+  }
+
+  .home-intro {
+    font-size: var(--step-0);
+    margin-bottom: var(--space-3);
+  }
+
+  .home-reading {
+    margin-bottom: var(--space-2);
+  }
+
+  .home-featured {
+    padding-block: var(--space-5);
+  }
+
   .home-opening-artifact .artifact-media {
     max-height: none;
     aspect-ratio: 16 / 9;
@@ -86,21 +105,21 @@
 
 @media (min-width: 761px) and (max-width: 1080px) {
   .home-opening {
-    grid-template-columns: minmax(16rem, 0.75fr) minmax(28rem, 1.25fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     gap: var(--space-5);
   }
 
   .home-artifact-sequence .artifact--systems,
   .home-artifact-sequence .artifact--experiment {
-    grid-column: span 6;
+    grid-column: auto;
   }
 
   .home-artifact-sequence .artifact--experiment {
-    margin-top: var(--space-5);
+    margin-top: 0;
   }
 
   .home-artifact-sequence .artifact--physical {
-    grid-column: 2 / span 10;
+    grid-column: auto;
   }
 
   .systems-diagram {

@@ -30,7 +30,7 @@ function initialLens() {
   return 'engineering';
 }
 
-export function createLensState(initial = 'engineering') {
+export function createLensState(initial) {
   let current = LENSES.has(initial) ? initial : initialLens();
   const subscribers = new Set();
 
@@ -41,6 +41,8 @@ export function createLensState(initial = 'engineering') {
       /* ignore */
     }
   }
+
+  if (LENSES.has(initial)) persist(current);
 
   return {
     get() {

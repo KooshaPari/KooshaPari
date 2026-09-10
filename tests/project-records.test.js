@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
 
 import { PROJECTS } from '../data/projects.js';
 import { orderFeaturedProjects } from '../scripts/views/home.js';
@@ -42,7 +44,7 @@ test('featured records include authored artifact presentation', () => {
   }
 });
 
-test('selected homepage assets retain source, hash, dimensions, and review status', () => {
+test('selected homepage assets distinguish deployed derivatives from retained sources', async () => {
   for (const slug of ['gmk-arch', 'witf']) {
     const project = PROJECTS.find((entry) => entry.slug === slug);
     assert.ok(project.presentation.assets, `${slug} missing selected asset provenance`);
@@ -50,12 +52,43 @@ test('selected homepage assets retain source, hash, dimensions, and review statu
 
     for (const asset of project.presentation.assets) {
       assert.ok(asset.src, `${slug} asset missing deployed src`);
-      assert.ok(asset.source, `${slug} asset missing crawl source`);
+      assert.ok(asset.alt, `${slug} asset missing authored alt`);
       assert.match(asset.sha256, /^[a-f0-9]{64}$/);
       assert.ok(asset.width > 0 && asset.height > 0, `${slug} asset missing dimensions`);
+      assert.ok(asset.retainedSource, `${slug} asset missing retained source record`);
+      assert.match(asset.retainedSource.sha256, /^[a-f0-9]{64}$/);
+      assert.ok(asset.retainedSource.width > 0 && asset.retainedSource.height > 0);
       assert.equal(asset.ownership, 'review-pending');
       assert.equal(asset.licensing, 'review-pending');
+
+      const bytes = await readFile(`.${asset.src}`);
+      assert.equal(createHash('sha256').update(bytes).digest('hex'), asset.sha256);
     }
+  }
+});
+
+test('public project data keeps retained source locations private', async () => {
+  const source = await readFile(new URL('../data/projects.js', import.meta.url), 'utf8');
+  assert.doesNotMatch(source, /web-migration|retainedSource\s*:\s*\{[^}]*\bpath\s*:|\bmanifest\s*:/s);
+
+  for (const asset of PROJECTS.flatMap((project) => project.presentation?.assets ?? [])) {
+    assert.match(asset.provenance, /retained source and custody record are private/i);
+    assert.match(asset.retainedSource.sha256, /^[a-f0-9]{64}$/);
+    assert.ok(asset.retainedSource.width > 0 && asset.retainedSource.height > 0);
+  }
+});
+
+test('deployed hero asset byte hashes and dimensions match the recorded derivatives exactly', () => {
+  const expected = {
+    'gmk-arch': [['73362047e4efa5f89a2d355f732425ab7afe3a206f3c4d421dade1cefc10a11a', 354, 90]],
+    witf: [
+      ['48d335f2eb138833f715b4945073e47a3df1ab079fe6c505a42f893c3ae25370', 1600, 900],
+      ['57c0128902f6861a9fbb078742bf3f2f03070a0476180e2858ebcbd99033bac5', 1600, 900],
+    ],
+  };
+  for (const [slug, values] of Object.entries(expected)) {
+    const assets = PROJECTS.find((project) => project.slug === slug).presentation.assets;
+    assert.deepEqual(assets.map(({ sha256, width, height }) => [sha256, width, height]), values);
   }
 });
 

@@ -7,18 +7,20 @@ import { createLensState } from './lens-state.js';
 import { createReaderState } from './reader-state.js';
 import { parseRoute, routeFromLocation } from './router.js';
 import { renderHome } from './views/home.js';
-import { renderWorkIndex } from './views/work-index.js';
+import { renderWorkCatalog } from './views/work.js';
 import { renderProjectDetail } from './views/project-detail.js';
 import { renderResume } from './views/resume.js';
 import { renderContact } from './views/contact.js';
+import { renderNotFound } from './views/not-found.js';
 import { renderBlogIndex } from './views/blog-index.js';
 import { renderBlogPost } from './views/blog-post.js';
+import { initializeConstructionGate } from './construction-gate.js';
 
 const shellRoot = $('#shell-root');
 const viewRoot = $('#view-root');
 
 // Read lens from URL ?lens= first (persisted via lens-state/localStorage)
-const initialLens = routeFromLocation().lens || 'engineering';
+const initialLens = routeFromLocation().lens;
 const lensState = createLensState(initialLens);
 
 // Initialize reader state
@@ -42,7 +44,7 @@ function setPageMetadata(route) {
     contact: 'Contact',
     blog: 'Writing',
   };
-  const title = project?.title ?? post?.title ?? labels[route.view] ?? 'Technical Atelier';
+  const title = project?.title ?? post?.title ?? labels[route.view] ?? 'Page not found';
   const description = project?.summary ?? post?.excerpt
     ?? 'Software systems, technical products, and the infrastructure between them.';
 
@@ -51,18 +53,20 @@ function setPageMetadata(route) {
     ? `/work/${route.slug}`
     : post
       ? `/blog/${route.slug}`
-      : route.view === 'home' || !labels[route.view] ? '/' : `/${route.view}`;
+      : route.view === 'home' ? '/' : `/${route.view}`;
+  const canonicalUrl = `https://kooshapari.com${canonicalPath}`;
   document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://kooshapari.com${canonicalPath}`);
   document.querySelector('meta[name="description"]')?.setAttribute('content', description);
   document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title);
   document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
+  document.querySelector('meta[property="og:url"]')?.setAttribute('content', canonicalUrl);
+  document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', document.title);
+  document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
 }
 
 function render() {
   const route = routeFromLocation();
-  if (route.view === 'engineering' || route.view === 'product') {
-    lensState.set(route.view);
-  }
+  if (route.lens) lensState.set(route.lens);
 
   const lens = lensState.get();
   const reader = readerState.get();
@@ -72,11 +76,15 @@ function render() {
     reader,
     onLensChange(next) {
       lensState.set(next);
+      const url = new URL(location.href);
+      if (route.view === 'engineering' || route.view === 'product') url.pathname = `/${next}`;
+      url.searchParams.set('lens', next);
+      history.replaceState(null, '', url);
       render();
+      document.querySelector(`[aria-label="Portfolio lens"] button[aria-pressed="true"]`)?.focus();
     },
     onReaderToggle() {
       readerState.toggle();
-      render();
     },
     onIndexOpen(event) {
       projectIndex.open(event?.currentTarget ?? document.activeElement);
@@ -85,9 +93,9 @@ function render() {
   if (['home', 'engineering', 'product'].includes(route.view)) {
     renderHome(viewRoot, { projects: PROJECTS, lens });
   } else if (route.view === 'work') {
-    renderWorkIndex(viewRoot, { projects: PROJECTS });
+    renderWorkCatalog(viewRoot, { projects: PROJECTS });
   } else if (route.view === 'project') {
-    renderProjectDetail(viewRoot, route.slug);
+    renderProjectDetail(viewRoot, route.slug, lens);
   } else if (route.view === 'resume') {
     renderResume(viewRoot);
   } else if (route.view === 'contact') {
@@ -96,6 +104,8 @@ function render() {
     renderBlogIndex(viewRoot, { posts: POSTS });
   } else if (route.view === 'post') {
     renderBlogPost(viewRoot, route.slug);
+  } else if (route.view === 'not-found') {
+    renderNotFound(viewRoot);
   } else {
     renderHome(viewRoot, { projects: PROJECTS, lens });
   }
@@ -103,13 +113,24 @@ function render() {
 }
 
 window.addEventListener('hashchange', render);
+window.addEventListener('popstate', render);
 window.addEventListener('routechange', render);
 lensState.subscribe(() => {
   document.documentElement.dataset.lens = lensState.get();
 });
 readerState.subscribe(() => {
   document.documentElement.dataset.reader = readerState.get() ? 'true' : 'false';
+  const toggle = document.getElementById('reader-toggle');
+  if (toggle) {
+    const active = readerState.get();
+    toggle.setAttribute('aria-pressed', String(active));
+    toggle.dataset.state = active ? 'active' : 'pending';
+    toggle.title = active ? 'Exit Reader Mode' : 'Enter Reader Mode (R)';
+    toggle.textContent = active ? 'Exit Reader' : 'Reader';
+  }
 });
+
+initializeConstructionGate(document);
 
 if (!location.hash && location.pathname.replace(/\/+$/, '') === '') {
   history.replaceState(null, '', '/');

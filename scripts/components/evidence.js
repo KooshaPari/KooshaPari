@@ -1,5 +1,15 @@
 import { el } from './dom.js';
 
+// Public summaries describe source types without exposing internal ledger names.
+export function publicEvidenceSummary(record) {
+  switch (record.evidence) {
+    case 'github-pass1-after.md': return 'Repository documentation and project history';
+    case 'EVIDENCE_LEDGER.md': return 'Retained project records';
+    case 'omniroute-evidence-ledger.md': return 'Upstream contribution records';
+    default: return 'Supporting project evidence is being assembled';
+  }
+}
+
 function preferredMetric(record, lens) {
   if (!record.metrics?.length) return null;
   const index = lens === 'product' && record.metrics.length > 1 ? 1 : 0;
@@ -27,7 +37,7 @@ export function evidenceLabel(record, lens) {
     'p',
     { class: 'evidence-label' },
     el('span', {}, label),
-    el('strong', {}, record.evidence),
+    el('strong', {}, publicEvidenceSummary(record)),
     assets.length
       ? el(
           'small',

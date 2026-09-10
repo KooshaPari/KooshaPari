@@ -34,8 +34,8 @@ function identityBlock(lens) {
     el(
       'nav',
       { class: 'home-primary-links', 'aria-label': 'Portfolio readings' },
-      el('a', { href: '#engineering' }, 'Read Engineering'),
-      el('a', { href: '#product' }, 'Read Product'),
+      el('a', { href: '/engineering' }, 'Read Engineering'),
+      el('a', { href: '/product' }, 'Read Product'),
     ),
   );
 }

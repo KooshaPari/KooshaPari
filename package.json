@@ -4,7 +4,15 @@
   "type": "module",
   "scripts": {
     "test": "node --test tests/*.test.js",
-    "check": "node --check scripts/app.js && node --check data/projects.js",
-    "preview": "python3 -m http.server 4173"
+    "test:e2e": "npm run stage:publication && npx playwright test",
+    "check": "node --check scripts/app.js && node --check scripts/stage-publication.js && node --check data/projects.js",
+    "verify": "npx --no-install vercel build --yes && npm test && npm run check && npm run test:e2e",
+    "stage:publication": "node scripts/stage-publication.js",
+    "preview": "npm run stage:publication && node scripts/preview-server.js"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "linkedom": "^0.18.13"
   }
 }

@@ -69,7 +69,7 @@ export function createProjectIndex({ projects, onNavigate = () => {} }) {
                   el(
                     'a',
                     {
-                      href: `#work/${project.slug}`,
+                      href: `/work/${project.slug}`,
                       onclick: () => {
                         onNavigate(project);
                         close();

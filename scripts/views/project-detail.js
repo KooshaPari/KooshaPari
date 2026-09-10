@@ -1,6 +1,12 @@
 import { PROJECTS } from '../../data/projects.js';
 import { el } from '../components/dom.js';
-import { metricAnnotation, evidenceLabel } from '../components/evidence.js';
+import { metricAnnotation, evidenceLabel, publicEvidenceSummary } from '../components/evidence.js';
+import { diagramFromCaseStudy, renderDiagram } from '../media/diagrams.js';
+import { renderNetWeaveWorkbench } from '../media/netweave-workbench.js';
+import { renderShareCliWorkbench } from '../media/sharecli-workbench.js';
+import { renderShareCliRecordings } from '../media/sharecli-recording.js';
+import { renderSubstratePlate } from '../media/systems-plate.js';
+import { renderNotFound } from './not-found.js';
 
 const COMPACT_SECTIONS = {
   byteport: [
@@ -43,63 +49,9 @@ const COMPACT_SECTIONS = {
   ],
 };
 
-const OMNIROUTE_SECTIONS = [
-  ['Context', 'OmniRoute is a meta-framework for managing multiple workflows and deployment pipelines across the KooshaPari organization.'],
-  ['Audit source', 'This entry consumes the OmniRoute audit via §15E handoff contract (`OMNIROUTE_AUDIT.json`).'],
-  ['Current boundary', 'Consumes audit data; no direct deployment claims beyond the audit evidence.'],
-  ['External contributors', 'Rank #5 external contributor (101 merged PRs).'],
-];
-
-export function renderProjectDetail(root, slug) {
+export function renderProjectDetail(root, slug, lens = 'engineering') {
   const project = PROJECTS.find(p => p.slug === slug);
   if (!project) return renderNotFound(root, slug);
-
-  // Lens binding from URL
-  const url = new URL(window.location.href);
-  const lens = url.searchParams.get('lens') || 'engineering';
-
-  // Handle OmniRoute special case
-  if (slug === 'omniroute') {
-    const sections = OMNIROUTE_SECTIONS;
-    const overview = null;
-    const diagram = null;
-    const disclosure = el('div', { class: 'case-section case-disclosure' },
-      el('h2', {}, 'OmniRoute Integration'),
-      el('p', {}, 'This case study consumes the OmniRoute audit data via the §15E handoff contract.'),
-      el('p', {}, 'Audit data source: `docs/redesign/OMNIROUTE_AUDIT.json`'),
-    );
-    const evidence = null;
-    const metrics = null;
-    const gallery = null;
-    const title = 'OmniRoute Audit Integration';
-    const summary = 'Consumes OmniRoute audit data via §15E contract';
-    const category = 'infrastructure';
-    const status = 'complete';
-    const repo = null;
-
-    root.replaceChildren(
-      el('section', { class: 'view active portfolio-view case-study' },
-        el('a', { href: '#work', class: 'back-link' }, '\u2190 Back to work'),
-        el('p', { class: 'eyebrow' }, category + ' \u00b7 ' + status),
-        el('h1', {}, title),
-        el('p', { class: 'lede' }, summary),
-        metrics,
-        gallery ? el('div', { class: 'case-gallery' },
-            gallery.map((src, i) =>
-              el('img', { src, alt: title + ' project image ' + (i + 1), loading: 'lazy', width: '1600', height: '900' })))
-          : null,
-        el('div', { class: 'case-copy' },
-          overview, diagram,
-          sections.map(([heading, copy]) =>
-            el('div', { class: 'case-section' }, el('h2', {}, heading), el('p', {}, copy))),
-          disclosure, evidence,
-          project.provenance ? el('p', {}, project.provenance) : null,
-        ),
-        project.repo ? el('a', { href: project.repo, target: '_blank', rel: 'noreferrer', class: 'text-link' }, 'View repository') : null,
-      ),
-    );
-    return;
-  }
 
   const metrics = project.metrics?.length
     ? el('div', { class: 'metric-grid' },
@@ -127,7 +79,16 @@ export function renderProjectDetail(root, slug) {
     : null;
 
   const diagram = project.caseStudy?.diagram
-    ? el('div', { class: 'case-section case-diagram' }, el('h2', {}, 'Architecture'), el('pre', {}, project.caseStudy.diagram))
+    ? el('div', { class: 'case-section case-diagram' }, el('h2', {}, 'Architecture'), renderDiagram(diagramFromCaseStudy(project), { title: `${project.title} architecture` }))
+    : null;
+  const netweaveField = project.slug === 'netweave'
+    ? el('div', { class: 'case-section case-netweave-field' }, el('h2', {}, 'Traffic field'), renderNetWeaveWorkbench())
+    : null;
+  const shareCliWorkbench = project.slug === 'sharecli'
+    ? el('div', { class: 'case-section case-sharecli-workbench' }, el('h2', {}, 'Runtime boundary'), renderShareCliWorkbench(), renderShareCliRecordings())
+    : null;
+  const substratePlate = project.slug === 'substrate'
+    ? el('div', { class: 'case-section case-substrate-plate' }, el('h2', {}, 'Execution boundary'), renderSubstratePlate())
     : null;
 
   const disclosure = project.caseStudy?.disclosure
@@ -144,7 +105,7 @@ export function renderProjectDetail(root, slug) {
     ? el('div', { class: 'case-section case-evidence-panel' },
         el('h2', {}, 'Provenance & Attribution'),
         el('dl', { class: 'evidence-list' },
-          project.evidence ? el('div', {}, el('dt', {}, 'Evidence source'), el('dd', {}, project.evidence)) : null,
+          project.evidence ? el('div', {}, el('dt', {}, 'Evidence source'), el('dd', {}, publicEvidenceSummary(project))) : null,
           project.provenance ? el('div', {}, el('dt', {}, 'Provenance'), el('dd', {}, project.provenance)) : null,
           project.repo ? el('div', {}, el('dt', {}, 'Repository'), el('dd', {}, el('a', { href: project.repo, target: '_blank', rel: 'noreferrer' }, project.repo))) : null,
           project.lens ? el('div', {}, el('dt', {}, 'Available in lens'), el('dd', {}, project.lens.join(', '))) : null,
@@ -162,19 +123,27 @@ export function renderProjectDetail(root, slug) {
 
   root.replaceChildren(
     el('section', { class: 'view active portfolio-view case-study' },
-      el('a', { href: '#work', class: 'back-link' }, '\u2190 Back to work'),
+      el('a', { href: '/work', class: 'back-link' }, '\u2190 Back to work'),
       el('p', { class: 'eyebrow' }, project.category + ' \u00b7 ' + project.status),
       el('h1', {}, project.title),
       el('p', { class: 'lede' }, project.summary),
       metrics,
       project.gallery?.length
         ? el('div', { class: 'case-gallery' },
-            project.gallery.map((src, i) =>
-              el('img', { src, alt: project.title + ' project image ' + (i + 1), loading: 'lazy', width: '1600', height: '900' })))
+            project.gallery.map((src) => {
+              const asset = project.presentation?.assets?.find((entry) => entry.src === src);
+              return el('img', {
+                src,
+                alt: asset?.alt ?? project.presentation?.alt ?? `${project.title} project visual`,
+                loading: 'lazy',
+                width: asset?.width ?? project.presentation?.media?.width ?? 1600,
+                height: asset?.height ?? project.presentation?.media?.height ?? 900,
+              });
+            }))
         : null,
       lensAnnotation,
       el('div', { class: 'case-copy' },
-        overview, diagram,
+        overview, diagram, netweaveField, shareCliWorkbench, substratePlate,
         sections.map(([heading, copy]) =>
           el('div', { class: 'case-section' }, el('h2', {}, heading), el('p', {}, copy))),
         disclosure, evidence,
@@ -185,15 +154,3 @@ export function renderProjectDetail(root, slug) {
     ),
   );
 }
-
-export function renderNotFound(root, slug) {
-  root.replaceChildren(
-    el('section', { class: 'view active portfolio-view not-found' },
-      el('p', { class: 'eyebrow' }, '404'),
-      el('h1', {}, 'Project not found'),
-      el('p', { class: 'lede' }, 'No curated project record exists for \u201c' + slug + '\u201d.'),
-      el('a', { href: '#work', class: 'cta cta-eng' }, 'Browse work'),
-    ),
-  );
-}
-

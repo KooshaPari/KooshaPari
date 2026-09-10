@@ -1,1 +1,70 @@
 /* Case-study layouts are introduced in Technical Atelier Tasks 7-9. */
+.case-svg-diagram { width: 100%; height: auto; border: 1px solid var(--rule); background: var(--surface-raised); }
+.case-svg-diagram__edge { stroke: var(--arch-500); stroke-width: 2; }
+.case-svg-diagram__node rect { fill: var(--surface); stroke: var(--rule); }
+.case-svg-diagram__node text { fill: var(--ink); font: 0.85rem var(--font-meta); }
+.case-diagram-figure figcaption, .netweave-field__summary, .model-slot__status { color: var(--ink-muted); font: var(--step--1) var(--font-meta); }
+.case-study .case-copy .case-section > p { min-width: 0; overflow-wrap: anywhere; }
+.omniroute-topology { margin: var(--space-3) 0; min-width: 0; }
+.omniroute-topology__mobile { display: none; }
+.omniroute-topology__qualification { margin-block: var(--space-2); color: var(--ink-muted); }
+.omniroute-topology__reader { border-top: 1px solid var(--rule); }
+.omniroute-topology__reader summary { padding-block: .75rem; min-height: 44px; cursor: pointer; }
+.omniroute-topology__reader ol { margin-block: 0 var(--space-3); padding-left: 1.5rem; }
+.omniroute-topology__reader li + li { margin-top: var(--space-2); }
+.case-diagram-reader { display: none; }
+@media (max-width: 600px) {
+  .case-diagram-figure:has(.case-diagram-reader) > .case-svg-diagram { display: none; }
+  .case-diagram-reader { display: block; font: 1rem/1.5 var(--font-reading); overflow-wrap: anywhere; }
+  .case-diagram-reader__nodes, .case-diagram-reader__edges { padding-left: 1.5rem; margin-block: var(--space-2) var(--space-3); }
+  .case-diagram-reader__nodes li, .case-diagram-reader__edges li { padding-block: .35rem; }
+  .case-diagram-reader__nodes li { border-bottom: 1px solid var(--rule); }
+  .omniroute-topology__desktop { display: none; }
+  .omniroute-topology__mobile { display: block; font: 1rem/1.5 var(--font-reading); }
+  .omniroute-topology__mobile ol { margin: 0; padding-left: 1.5rem; }
+  .omniroute-topology__mobile li { padding: .5rem; border-bottom: 1px solid var(--rule); }
+  .omniroute-topology__mobile [data-mobile-node="failure"] { margin-block: var(--space-3); padding: var(--space-3); border-left: 2px dashed var(--arch-500); background: var(--surface); }
+  .omniroute-topology__mobile p { margin: var(--space-2) 0 0; }
+}
+.netweave-field { position: relative; min-height: 12rem; overflow: hidden; border: 1px solid var(--rule); background: linear-gradient(90deg, transparent 49%, var(--rule) 50%, transparent 51%), var(--surface-raised); }
+.netweave-field__vehicle { position: absolute; left: var(--x); top: var(--y); width: .55rem; height: .55rem; border-radius: 50%; background: var(--arch-500); transform: translate(-50%, -50%); }
+.netweave-field__vehicle--2, .netweave-field__vehicle--3 { background: var(--acid-500); }
+.netweave-workbench { margin-block: var(--space-5); padding: var(--space-4); border: 1px solid var(--rule); background: var(--surface-raised); }
+.netweave-workbench__intro, .netweave-workbench__panel p, .netweave-workbench figcaption { color: var(--ink-muted); }
+.netweave-workbench__tabs, .netweave-workbench__states, .netweave-workbench__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: var(--space-3); }
+.netweave-workbench button { min-height: 44px; padding: .5rem .75rem; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer; }
+.netweave-workbench button.is-active, .netweave-workbench button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--surface); }
+.netweave-workbench__panel { min-height: 8rem; padding: var(--space-3); border-block: 1px solid var(--rule); }
+.netweave-workbench__figure { margin: var(--space-3) 0 0; }
+.netweave-workbench__figure img { width: 100%; height: auto; aspect-ratio: 16 / 11; object-fit: cover; }
+.sharecli-workbench { margin-block: var(--space-5); padding: var(--space-4); border: 1px solid var(--rule); background: var(--surface-raised); }
+.sharecli-workbench__intro, .sharecli-workbench__evidence { color: var(--ink-muted); }
+.sharecli-workbench__controls, .sharecli-workbench__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: var(--space-3); }
+.sharecli-workbench button { min-height: 44px; padding: .5rem .75rem; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer; }
+.sharecli-workbench button.is-active, .sharecli-workbench button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--surface); }
+.sharecli-workbench__panel { min-height: 12rem; padding: var(--space-3); border-block: 1px solid var(--rule); }
+.sharecli-workbench__eyebrow { margin: 0 0 .5rem; color: var(--ink-muted); font: var(--step--1) var(--font-meta); text-transform: uppercase; letter-spacing: .06em; }
+.sharecli-workbench__lanes { display: grid; gap: .5rem; margin-top: var(--space-3); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.sharecli-workbench__lane { padding: .7rem; border: 1px solid var(--rule); background: var(--surface); font: var(--step--1) var(--font-meta); }
+.sharecli-workbench__lane--2 { border-color: var(--arch-500); }
+.sharecli-workbench__reader { margin-top: var(--space-4); padding-top: var(--space-3); border-top: 1px solid var(--rule); }
+.sharecli-workbench__reader-sequence { padding-left: 1.25rem; color: var(--ink-muted); }
+.sharecli-recordings { margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--rule); }
+.sharecli-recordings__intro, .sharecli-recording__kind, .sharecli-recording__boundary { color: var(--ink-muted); }
+.sharecli-recordings__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sharecli-recording { padding: var(--space-3); border: 1px solid var(--rule); background: var(--surface); }
+.sharecli-recording h4 { margin-top: 0; }
+.sharecli-recording dl { margin-block: var(--space-3); }
+.sharecli-recording dl div { display: grid; gap: .25rem; grid-template-columns: 5rem 1fr; margin-top: .4rem; }
+.sharecli-recording dt { color: var(--ink-muted); font: var(--step--1) var(--font-meta); text-transform: uppercase; }
+.sharecli-recording dd { margin: 0; overflow-wrap: anywhere; font: var(--step--1) var(--font-meta); }
+.systems-plate { margin-block: var(--space-3); }
+.systems-plate__svg { width: 100%; height: auto; border: 1px solid var(--rule); background: var(--surface-raised); }
+.systems-plate__edge { stroke: var(--arch-500); stroke-width: 2; }
+.systems-plate__node rect { fill: var(--surface); stroke: var(--rule); }
+.systems-plate__node text { fill: var(--ink); font: 0.78rem var(--font-meta); }
+.systems-plate__node .systems-plate__index { fill: var(--ink-muted); }
+.systems-plate__fallback, .systems-plate figcaption { color: var(--ink-muted); font: var(--step--1) var(--font-meta); }
+@media (max-width: 480px) { .sharecli-workbench__lanes { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .sharecli-recordings__grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .netweave-workbench button, .sharecli-workbench button { transition: none; } }
