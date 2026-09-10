@@ -3,7 +3,6 @@ const STORAGE_KEY = 'portfolio-construction-entered';
 function safeGet(storage) {
   try { return storage?.getItem(STORAGE_KEY) === 'yes'; } catch { return false; }
 }
-
 function safeSet(storage) {
   try { storage?.setItem(STORAGE_KEY, 'yes'); } catch { /* session storage is optional */ }
 }

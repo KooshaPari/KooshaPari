@@ -13,7 +13,6 @@ test('every HTML shell receives first-paint gate and native Continue fallback on
   assert.equal(document.querySelector('#construction-continue').getAttribute('href'), '#construction-entered');
   assert.ok(document.querySelector('head script').textContent.includes('sessionStorage'));
 });
-
 test('Continue restores background and persists only for the session', () => {
   const { document } = parseHTML(injectConstructionGate('<html><head></head><body><main>Site</main></body></html>'));
   let stored;
