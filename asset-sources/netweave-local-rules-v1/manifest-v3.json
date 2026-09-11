@@ -1,0 +1,24 @@
+{
+  "id": "netweave-local-rules-v3",
+  "project": "netweave",
+  "iteration": "v3-overhead-traffic-instrument",
+  "created": "2026-09-10T17:00:02-07:00",
+  "rights": "Original procedural geometry; no third-party inputs; no license grant asserted",
+  "boundary": "Illustrative local-spacing study, not recorded NetWeave output; no congestion-aware rerouting implemented",
+  "generator": "asset-sources/netweave-local-rules-v1/build_scene_v3.py",
+  "tools": { "blender": "4.4.3 direct application binary", "encoder": "cwebp" },
+  "states": [1, 2, 3],
+  "dimensions": { "desktop": [1600, 1100], "mobile": [800, 1000] },
+  "outputs": {
+    "desktop": ["desktop-01-v3.webp", "desktop-02-v3.webp", "desktop-03-v3.webp"],
+    "mobile": ["mobile-01-v3.webp", "mobile-02-v3.webp", "mobile-03-v3.webp"]
+  },
+  "notes": [
+    "Road slab replaces keyboard-like raised tile frame.",
+    "Vehicles are elongated low-profile objects with wheels, windshield hints, and directional chevrons.",
+    "Portrait camera was widened to retain the complete road and all four vehicles.",
+    "v1 and v2 derivatives remain preserved and are not overwritten."
+  ],
+  "review": "Blind draft; visual review pending",
+  "disposition": "LOCAL-VERIFIED; NOT YET PROMOTED"
+}

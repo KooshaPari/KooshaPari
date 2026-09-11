@@ -13,6 +13,12 @@ for (const lens of ['engineering', 'product']) {
       assert.doesNotMatch(artifact.textContent, /agent bursts|process observation|coalesce \+ queue|shared host state/);
       const svg = artifact.querySelector('svg[data-topology="omniroute"]');
       assert.ok(svg, 'OmniRoute needs its own SVG, not ShareCLI topology');
+      const plate = artifact.querySelector('.omniroute-topology__plate');
+      assert.ok(plate, 'routing object needs a bounded plate');
+      assert.ok(plate.contains(svg));
+      assert.match(plate.querySelector('.omniroute-topology__plate-header').textContent, /Conceptual model/);
+      assert.deepEqual([...plate.querySelectorAll('.omniroute-topology__legend li')].map(node => node.textContent), ['Request / response path', 'Conditional failure path']);
+      assert.equal(plate.querySelectorAll('animate, animateTransform, video').length, 0);
       assert.equal(svg.namespaceURI, 'http://www.w3.org/2000/svg');
       assert.deepEqual([...svg.querySelectorAll('[data-node]')].map(n => n.getAttribute('data-node')),
         ['request', 'selection', 'execution', 'response', 'failure']);

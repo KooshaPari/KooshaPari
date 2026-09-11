@@ -6,6 +6,14 @@
 .case-diagram-figure figcaption, .netweave-field__summary, .model-slot__status { color: var(--ink-muted); font: var(--step--1) var(--font-meta); }
 .case-study .case-copy .case-section > p { min-width: 0; overflow-wrap: anywhere; }
 .omniroute-topology { margin: var(--space-3) 0; min-width: 0; }
+.omniroute-topology__plate { padding: clamp(.65rem, 1.5vw, 1rem); border: 1px solid var(--rule); border-radius: 5px; background: linear-gradient(145deg, var(--surface-raised), var(--surface)); box-shadow: inset 0 1px 0 var(--surface), 0 3px 0 var(--rule); }
+.omniroute-topology__plate-header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem 1rem; padding-bottom: .75rem; color: var(--ink-muted); font: .75rem/1.5 var(--font-meta); }
+.omniroute-topology__plate .case-svg-diagram { display: block; border-radius: 3px; background: var(--surface); }
+.omniroute-topology__plate .case-svg-diagram__node rect { stroke-width: 1.25; }
+.omniroute-topology__legend { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: .85rem 0 0; padding: 0; list-style: none; color: var(--ink-muted); font: .75rem/1.5 var(--font-meta); }
+.omniroute-topology__legend li { display: flex; align-items: center; gap: .5rem; }
+.omniroute-topology__legend li::before { content: ''; width: 1.5rem; border-top: 2px solid var(--arch-500); flex: none; }
+.omniroute-topology__legend .omniroute-topology__legend-conditional::before { border-top-style: dashed; }
 .omniroute-topology__mobile { display: none; }
 .omniroute-topology__qualification { margin-block: var(--space-2); color: var(--ink-muted); }
 .omniroute-topology__reader { border-top: 1px solid var(--rule); }
@@ -19,7 +27,7 @@
   .case-diagram-reader__nodes, .case-diagram-reader__edges { padding-left: 1.5rem; margin-block: var(--space-2) var(--space-3); }
   .case-diagram-reader__nodes li, .case-diagram-reader__edges li { padding-block: .35rem; }
   .case-diagram-reader__nodes li { border-bottom: 1px solid var(--rule); }
-  .omniroute-topology__desktop { display: none; }
+  .omniroute-topology__plate .omniroute-topology__desktop { display: none; }
   .omniroute-topology__mobile { display: block; font: 1rem/1.5 var(--font-reading); }
   .omniroute-topology__mobile ol { margin: 0; padding-left: 1.5rem; }
   .omniroute-topology__mobile li { padding: .5rem; border-bottom: 1px solid var(--rule); }
@@ -37,6 +45,11 @@
 .netweave-workbench__panel { min-height: 8rem; padding: var(--space-3); border-block: 1px solid var(--rule); }
 .netweave-workbench__figure { margin: var(--space-3) 0 0; }
 .netweave-workbench__figure img { width: 100%; height: auto; aspect-ratio: 16 / 11; object-fit: cover; }
+.netweave-field__image { display: block; width: 100%; height: auto; }
+@media (max-width: 600px) {
+  .netweave-field-figure { margin-inline: 0; }
+  .netweave-field__image { aspect-ratio: 2.5 / 1; object-fit: cover; object-position: center; }
+}
 .sharecli-workbench { margin-block: var(--space-5); padding: var(--space-4); border: 1px solid var(--rule); background: var(--surface-raised); }
 .sharecli-workbench__intro, .sharecli-workbench__evidence { color: var(--ink-muted); }
 .sharecli-workbench__controls, .sharecli-workbench__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: var(--space-3); }
