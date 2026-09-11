@@ -107,7 +107,7 @@ verification, commit, and push.
 |---|---|
 | Release commit | `4aad4157aeffa02a44f6c15e42bdca0ab26b8c9e` |
 | Remote branch | `origin/review/public-site-sync-20260909` matched the local SHA |
-| Deployment | `dpl_9Hn43wDs8czHQdfnuuVDn8QoMij8`, READY, production target |
+| Deployment | `dpl_F1PFVwL3cK9kZvAzmVuEWMeMhD3T`, READY, final branch-tip production redeploy (supersedes `dpl_9Hn43wDs8czHQdfnuuVDn8QoMij8`) |
 | Production alias | `https://koosha-phenotype-koosha-paridehpours-projects.vercel.app` |
 | HTTP smoke | Canonical routes and changed assets returned 200 |
 | Browser smoke | Gate, ShareCLI, NetWeave, OmniRoute, and homepage plate observed |
