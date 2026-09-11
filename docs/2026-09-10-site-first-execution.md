@@ -96,3 +96,22 @@ the two deferred P2 findings above; this docs task did not rerun verification.
 Approach-state touching/overlap is preserved from the underlying sequence, not
 introduced by this patch. Broader independent visual acceptance remains separate.
 No source edits, deploy or push were performed by this documentation update.
+
+## Production deployment evidence
+
+Visual approval was recorded as `APPROVE ALL`, followed by allowlisted
+source-to-worktree reconciliation, publication/privacy audit, Git-worktree
+verification, commit, and push.
+
+| Gate | Evidence |
+|---|---|
+| Release commit | `4aad4157aeffa02a44f6c15e42bdca0ab26b8c9e` |
+| Remote branch | `origin/review/public-site-sync-20260909` matched the local SHA |
+| Deployment | `dpl_9Hn43wDs8czHQdfnuuVDn8QoMij8`, READY, production target |
+| Production alias | `https://koosha-phenotype-koosha-paridehpours-projects.vercel.app` |
+| HTTP smoke | Canonical routes and changed assets returned 200 |
+| Browser smoke | Gate, ShareCLI, NetWeave, OmniRoute, and homepage plate observed |
+| Privacy smoke | No `/Users/`, `/Volumes/`, `node_modules`, or source-copy paths found |
+
+Custom-domain attachment, DNS changes, redirect retirement, and legacy-origin
+retirement remain out of scope for this deployment and were not performed.
