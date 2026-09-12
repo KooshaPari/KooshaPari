@@ -210,6 +210,22 @@
   background: var(--family-accent, var(--arch-500));
 }
 
+.artifact-badge {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  font: 600 0.65rem/1 var(--font-meta);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--radius-control);
+  background: color-mix(in oklch, var(--family-accent, var(--arch-500)) 12%, transparent);
+  color: var(--family-accent, var(--arch-500));
+}
+
 .artifact-header {
   max-width: 44rem;
 }

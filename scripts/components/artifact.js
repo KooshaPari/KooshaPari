@@ -205,6 +205,12 @@ export function createArtifact(record, lens) {
     artifact.style.setProperty('--family-accent', `var(--family-${family}-active, var(--family-${family}))`);
   }
 
+  // Category badge overlay on the media area
+  if (record.category) {
+    const badge = el('span', { class: 'artifact-badge' }, record.category);
+    artifact.prepend(badge);
+  }
+
   return artifact;
 }
 

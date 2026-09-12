@@ -123,9 +123,16 @@ function featuredProject(project) {
 }
 
 function compactProject(project) {
+  const family = FAMILY_MAP[project.slug];
+  const attrs = { class: 'work-catalog__specimen' };
+  if (family) {
+    attrs['data-family'] = family;
+    attrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family}))`;
+  }
+
   return el(
     'li',
-    { class: 'work-catalog__specimen' },
+    attrs,
     el('p', { class: 'work-catalog__specimen-code' }, project.slug),
     el('h3', {}, projectLink(project)),
     projectMeta(project),
