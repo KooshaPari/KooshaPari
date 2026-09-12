@@ -78,6 +78,10 @@ const CARD_IMAGES = {
   netweave: { src: '/public/projects/netweave/desktop-01-v3.webp', alt: 'NetWeave traffic simulation showing directed-graph routing and cellular automata lane behavior across a road network.' },
   'gmk-arch': { src: '/public/projects/gmk-arch/hero.png', alt: 'Transparent GMK Arch wordmark with a pale ARCH letterform and teal Arch Linux and GMK marks.' },
   witf: { src: '/public/projects/witf/hero-01.jpg', alt: 'Black WITF Board keyboard shown from above on a warm concrete-colored surface, revealing its split Alice layout.' },
+  sharecli: { src: '/public/projects/sharecli/card.webp', alt: 'ShareCLI runtime and resource observation interface for coding-agent concurrency.' },
+  omniroute: { src: '/public/projects/omniroute/card.webp', alt: 'OmniRoute policy-aware multi-provider routing topology.' },
+  substrate: { src: '/public/projects/substrate/card.webp', alt: 'Substrate AI execution and provider-routing boundary.' },
+  'phenotype-omlx': { src: '/public/projects/phenotype-omlx/card.webp', alt: 'phenotype-omlx MLX inference research stack with Rust performance cores.' },
 };
 
 function featuredProject(project) {
