@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OmniRoute — Koosha Paridehpour</title>
+  <meta name="description" content="Rank #5 external contributor to OmniRoute (`diegosouzapw/OmniRoute`, ~59.9k GitHub stars at audit time), with 101 merged pull requests across routing intelligence, provider integrations, reliability hardening, API/protocol compatibility, and operational tooling. Contributions named in 21 upstream releases and personally acknowledged by the maintainer.">
+  <link rel="canonical" href="https://kooshapari.com/work/omniroute">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OmniRoute — Koosha Paridehpour">
+  <meta property="og:description" content="Rank #5 external contributor to OmniRoute (`diegosouzapw/OmniRoute`, ~59.9k GitHub stars at audit time), with 101 merged pull requests across routing intelligence, provider integrations, reliability hardening, API/protocol compatibility, and operational tooling. Contributions named in 21 upstream releases and personally acknowledged by the maintainer.">
+  <meta property="og:url" content="https://kooshapari.com/work/omniroute">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles/tokens.css">
+  <link rel="stylesheet" href="/styles/base.css">
+  <link rel="stylesheet" href="/styles/shell.css">
+  <link rel="stylesheet" href="/styles/artifacts.css">
+  <link rel="stylesheet" href="/styles/case-studies.css">
+  <link rel="stylesheet" href="/styles/responsive.css">
+  <link rel="stylesheet" href="/styles/construction-gate.css">
+<script>(function(){try{if(sessionStorage.getItem('portfolio-construction-entered')==='yes')document.documentElement.dataset.construction='entered';}catch(_){}}());</script>
+</head>
+<body>
+  <div id="construction-gate" class="construction-gate" role="dialog" aria-modal="true" aria-labelledby="construction-title" aria-describedby="construction-copy">
+    <div class="construction-gate__chrome" aria-hidden="true"></div>
+    <div class="construction-gate__content">
+      <svg class="construction-gate__icon" viewBox="0 0 96 96" role="img" aria-label="Construction icon" focusable="false">
+        <path d="M25 65 61 29l10 10-36 36H25V65Z" />
+        <path d="m55 35 8-8 10 10-8 8M31 75l-9-9M27 61l8 9M43 45l9 9M51 37l9 9" />
+        <path d="M17 80h62" />
+      </svg>
+      <p class="construction-gate__eyebrow">Technical atelier</p>
+      <h1 id="construction-title">Under construction</h1>
+      <p id="construction-copy">Rebuilding this portfolio; some pages and project visuals are still being refined.</p>
+    </div>
+    <a id="construction-continue" class="construction-gate__continue" href="#construction-entered">Continue to site</a>
+    <span id="construction-entered" class="construction-gate__target" aria-hidden="true"></span>
+  </div>
+
+  <div id="construction-site">
+  <a class="skip-link" href="#view-root">Skip to content</a>
+  <div id="app"><header data-state="idle" class="atelier-header"><a href="/" class="atelier-identity"><strong>Koosha Paridehpour</strong><span>Systems / products / infrastructure</span></a><nav data-state="idle" aria-label="Primary navigation" class="atelier-nav"><a aria-current="page" href="/work">Work</a><a href="/blog">Writing</a><a href="/resume">Resume</a><a href="/contact">Contact</a></nav><div class="atelier-tools"><div data-state="idle" aria-label="Portfolio lens" role="group" class="lens-control"></div></div></header><main id="view-root"><section class="view active portfolio-view case-study"><a class="back-link" href="/work">← Back to work</a><p class="eyebrow">ai-infrastructure · upstream-contribution</p><h1>OmniRoute</h1><p class="lede">Rank #5 external contributor to OmniRoute (`diegosouzapw/OmniRoute`, ~59.9k GitHub stars at audit time), with 101 merged pull requests across routing intelligence, provider integrations, reliability hardening, API/protocol compatibility, and operational tooling. Contributions named in 21 upstream releases and personally acknowledged by the maintainer.</p><div class="case-tech"><span>TypeScript</span><span>Rust</span><span>Routing</span><span>OpenAPI</span><span>MCP</span><span>Provider integration</span><span>Reliability</span></div><div class="metric-grid"><div class="metric-card"><strong>101</strong><span>merged pull requests</span><small>upstream PR history</small></div><div class="metric-card"><strong>21</strong><span>upstream releases naming contributions</span><small>release notes audit</small></div><div class="metric-card"><strong>#5</strong><span>external contributor rank in published upstream census</span><small>upstream contributor table</small></div></div><div data-lens="engineering" class="lens-annotation"><h3>Engineering lens</h3><p>Fallback cooldowns, latency-optimized routing, and fallback-cache scoping by target URL hardened dispatch under provider degradation.</p></div><div class="case-copy"><div class="case-section"><h2>Classification</h2><p>PROMINENT COMPACT OSS CONTRIBUTION — earns a prominent portfolio entry but not a full case study. The contribution window is a focused 28-day burst (June 20 – July 18, 2026) and KooshaPari does not own or maintain OmniRoute.</p></div><div class="case-section"><h2>Routing intelligence</h2><p>Built the Bifrost auto-fallback cooldown and introduced latency/speed-optimized routing modes, improving how OmniRoute dispatches requests under provider degradation. Added the `omniroute_pick_fastest_model` MCP tool for downstream tooling.</p></div><div class="case-section"><h2>Provider and model integration</h2><p>Added or extended support for Factory.ai, MiniMax M3 reasoning-content extraction, xAI, Bailian, and OpenAI-compatible MCP Responses; introduced provider manifest infrastructure enabling smarter manifest-gated routing decisions.</p></div><div class="case-section"><h2>Reliability and degraded-provider handling</h2><p>Hardened OmniRoute behavior under production failure: retained cooldowns, circuit-breaking patterns, stream lifetime bounds, DB probe-loop avoidance, and fallback-cache scoping by target URL.</p></div><div class="case-section"><h2>API and protocol compatibility</h2><p>Authored the complete OpenAPI 3.0 specification with Redoc-rendered `/api/docs`; added live WebSocket support for non-loopback clients and cross-client compatibility fixes for Claude, Cline, and shell-tool envelopes.</p></div><div class="case-section"><h2>UI and dashboard performance</h2><p>Asset optimization, health-polling fixes, and onboarding-wizard stability work shipped to upstream.</p></div><div class="case-section"><h2>Operational and security documentation</h2><p>Added a STRIDE-based threat model, per-endpoint latency/cost budgets, a canonical incident response runbook (sev1–sev5), and structured incident-response templates.</p></div><div class="case-section"><h2>Verification</h2><p>Upstream PR history is the authoritative evidence source (`https://github.com/diegosouzapw/OmniRoute/pulls?q=author%3AKooshaPari`). The personal fork (`KooshaPari/OmniRoute`) is NOT a clean staging ground for the 101 upstream PRs — see `fork-state-reconciliation.md`.</p></div><div class="case-section"><h2>Claims excluded</h2><p>No claim of ownership or maintainership. No "125K lines authored" hero metric. No claim that the ~59.9k stars belong to KooshaPari. No claim of current live rank without the "as recorded" qualifier.</p></div><div class="case-section"><h2>Retrospective</h2><p>The lesson is that concentrated, evidence-led contributions to a maintained upstream can be integrated quickly and recognized by maintainers — but the contribution does not become the contributor's project.</p></div><p>External contribution to `diegosouzapw/OmniRoute`. Not an owned or maintained project.</p><div class="case-section case-evidence-panel"><h2>Provenance &amp; Attribution</h2><dl class="evidence-list"><div><dt>Evidence source</dt><dd>Upstream contribution records</dd></div><div><dt>Provenance</dt><dd>External contribution to `diegosouzapw/OmniRoute`. Not an owned or maintained project.</dd></div><div><dt>Repository</dt><dd><a rel="noreferrer" target="_blank" href="https://github.com/diegosouzapw/OmniRoute">https://github.com/diegosouzapw/OmniRoute</a></dd></div><div><dt>Available in lens</dt><dd>engineering</dd></div></dl></div></div><a class="text-link" rel="noreferrer" target="_blank" href="https://github.com/diegosouzapw/OmniRoute">View repository</a></section></main><footer class="footer"><span>Koosha Paridehpour · canonical portfolio preview</span><span>Evidence-led · legacy sources preserved</span></footer></div>
+
+  <script type="module" src="/scripts/app.js"></script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Koosha Paridehpour","url":"https://kooshapari.com/","sameAs":["https://github.com/KooshaPari","https://www.linkedin.com/in/koosha-paridehpour-1079b61b5/"]}
+  </script>
+  </div>
+</body>
+</html>

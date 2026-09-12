@@ -1,0 +1,117 @@
+/* ================================================================
+   Timeline component — vertical experience timeline
+   Used on Recruiter and Phenotype views. Distinct from the simpler
+   .timeline / .timeline-item rules in cards.css (which target list
+   items); this file targets a richer, calendar-style lane.
+   ================================================================ */
+
+.xp-lane {
+  position: relative;
+  padding: 6px 0 6px 28px;
+}
+.xp-lane::before {
+  content: "";
+  position: absolute;
+  left: 9px; top: 6px; bottom: 6px;
+  width: 2px;
+  background: linear-gradient(180deg,
+    var(--accent-prod) 0%,
+    var(--accent-eng) 50%,
+    var(--accent-pheno) 100%);
+  border-radius: 2px;
+  opacity: 0.55;
+}
+
+.xp-node {
+  position: relative;
+  padding: 14px 0 22px 14px;
+}
+.xp-node::before {
+  content: "";
+  position: absolute;
+  left: -25px; top: 18px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--bg-1);
+  border: 2px solid var(--accent-prod);
+  box-shadow: 0 0 12px rgba(255,185,92,.45);
+}
+.xp-node.blue::before {
+  border-color: var(--accent-eng);
+  box-shadow: 0 0 12px rgba(95,180,255,.45);
+}
+.xp-node.lime::before {
+  border-color: var(--accent-pheno);
+  box-shadow: 0 0 12px rgba(182,240,107,.45);
+}
+.xp-node.gray::before {
+  border-color: var(--line-2);
+  box-shadow: none;
+}
+
+.xp-node .when {
+  font: 700 11.5px/1 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--fg-mute);
+  margin-bottom: 6px;
+}
+.xp-node .what {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--fg);
+  letter-spacing: -0.2px;
+}
+.xp-node .where {
+  font: 500 12.5px/1.4 var(--mono);
+  color: var(--accent-eng);
+  margin-top: 4px;
+}
+.xp-node .blurb {
+  font: 400 13.5px/1.55 var(--sans);
+  color: var(--fg-mute);
+  margin-top: 8px;
+  max-width: 70ch;
+}
+.xp-node .tagrow {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 10px;
+}
+
+/* ---------- compact horizontal timeline ---------- */
+.timeline-h {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.timeline-h .col {
+  flex: 1;
+  padding: 12px 14px;
+  border-right: 1px solid var(--line);
+  background: var(--bg-1);
+}
+.timeline-h .col:last-child { border-right: none; }
+.timeline-h .col .k {
+  font: 700 10px/1 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--fg-mute);
+}
+.timeline-h .col .v {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--fg);
+  margin-top: 6px;
+}
+.timeline-h .col .h {
+  font-size: 11px;
+  color: var(--fg-dim);
+  margin-top: 4px;
+}
+.timeline-h .col.amber .v { color: var(--accent-prod); }
+.timeline-h .col.blue  .v { color: var(--accent-eng); }
+.timeline-h .col.lime  .v { color: var(--accent-pheno); }

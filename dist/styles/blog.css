@@ -1,0 +1,172 @@
+/* Writing / blog layout
+ * ---------------------------------------------------------------------------
+ * List view (blog-index) renders an array of post cards; single-post view
+ * (blog-post) renders a long-form article with a header, body blocks, and
+ * a footer back-link. Tokens are pulled from /styles/tokens.css.
+ */
+
+.blog-view {
+  display: block;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+}
+
+.blog-view .lede {
+  max-width: 60ch;
+  margin-bottom: 3rem;
+}
+
+.post-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+.post-card {
+  display: block;
+  padding: 1.75rem 2rem;
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  border-radius: 14px;
+  background: var(--color-surface-1, rgba(255, 255, 255, 0.02));
+  transition: border-color 120ms ease, transform 120ms ease;
+}
+
+.post-card:hover {
+  border-color: var(--color-accent, currentColor);
+  transform: translateY(-1px);
+}
+
+.post-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.post-card-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-muted, currentColor);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.post-card-excerpt {
+  margin-top: 0.5rem;
+  color: var(--color-muted, currentColor);
+  max-width: 60ch;
+}
+
+.post-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+/* Single-post layout */
+
+.post-header {
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+}
+
+.post-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.post-title {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.15;
+  margin: 0.25rem 0 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.post-subtitle {
+  max-width: 60ch;
+  color: var(--color-muted, currentColor);
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+
+.post-article {
+  max-width: 65ch;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+.post-article .post-heading {
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.post-article h2.post-heading {
+  font-size: 1.5rem;
+}
+
+.post-article h3.post-heading {
+  font-size: 1.2rem;
+}
+
+.post-article .post-para {
+  margin: 1rem 0;
+}
+
+.post-article .post-list-block {
+  margin: 1rem 0 1.5rem 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.post-article .post-list-block li {
+  margin-bottom: 0.6rem;
+}
+
+.post-article .post-quote {
+  border-left: 3px solid var(--color-accent, currentColor);
+  padding: 0.25rem 0 0.25rem 1rem;
+  margin: 1.5rem 0;
+  color: var(--color-muted, currentColor);
+  font-style: italic;
+}
+
+.post-article .post-code {
+  background: var(--color-surface-2, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  font-size: 0.95em;
+}
+
+.post-article .post-divider {
+  border: 0;
+  border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  margin: 2.5rem 0;
+}
+
+.post-article .post-note {
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  border-left: 3px solid var(--color-accent, currentColor);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 2rem 0 0;
+  background: var(--color-surface-1, rgba(255, 255, 255, 0.02));
+  color: var(--color-muted, currentColor);
+}
+
+.post-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+}
