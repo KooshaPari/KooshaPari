@@ -179,6 +179,17 @@ export function experimentNote(record, lens) {
   );
 }
 
+const ARTIFACT_FAMILY_MAP = {
+  netweave: 'netweave',
+  sharecli: 'sharecli',
+  omniroute: 'omniroute',
+  'gmk-arch': 'physical',
+  witf: 'physical',
+  'dss-cipher': 'physical',
+  substrate: 'substrate',
+  'phenotype-omlx': 'omlx',
+};
+
 export function createArtifact(record, lens) {
   const renderers = {
     'physical-plate': physicalPlate,
@@ -186,7 +197,15 @@ export function createArtifact(record, lens) {
     'experiment-note': experimentNote,
   };
   const render = renderers[record.presentation?.type] ?? systemsSheet;
-  return render(record, lens);
+  const artifact = render(record, lens);
+
+  const family = ARTIFACT_FAMILY_MAP[record.slug];
+  if (family) {
+    artifact.setAttribute('data-family', family);
+    artifact.style.setProperty('--family-accent', `var(--family-${family}-active, var(--family-${family}))`);
+  }
+
+  return artifact;
 }
 
 export {

@@ -143,8 +143,20 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
       })()
     : null;
 
+  const FAMILY_MAP = {
+    netweave: 'netweave', sharecli: 'sharecli', omniroute: 'omniroute',
+    'gmk-arch': 'physical', witf: 'physical', 'dss-cipher': 'physical',
+    substrate: 'substrate', 'phenotype-omlx': 'omlx',
+  };
+  const family = FAMILY_MAP[project.slug];
+  const caseStudyAttrs = { class: 'view active portfolio-view case-study' };
+  if (family) {
+    caseStudyAttrs['data-family'] = family;
+    caseStudyAttrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family}))`;
+  }
+
   root.replaceChildren(
-    el('section', { class: 'view active portfolio-view case-study' },
+    el('section', caseStudyAttrs,
       el('a', { href: '/work', class: 'back-link' }, '\u2190 Back to work'),
       el('p', { class: 'eyebrow' }, project.category + ' \u00b7 ' + project.status),
       el('h1', {}, project.title),

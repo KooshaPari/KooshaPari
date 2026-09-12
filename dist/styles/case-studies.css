@@ -61,6 +61,8 @@
 .netweave-workbench__tabs, .netweave-workbench__states, .netweave-workbench__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: var(--space-3); }
 .netweave-workbench button { min-height: 44px; padding: .5rem .75rem; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer; }
 .netweave-workbench button.is-active, .netweave-workbench button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--surface); }
+.case-study[data-family] .netweave-workbench button.is-active,
+.case-study[data-family] .netweave-workbench button[aria-pressed="true"] { background: var(--family-accent, var(--ink)); border-color: var(--family-accent, var(--ink)); }
 .netweave-workbench__panel { min-height: 8rem; padding: var(--space-3); border-block: 1px solid var(--rule); }
 .netweave-workbench__figure { margin: var(--space-3) 0 0; }
 .netweave-workbench__figure img { width: 100%; height: auto; aspect-ratio: 16 / 11; object-fit: cover; }
@@ -74,6 +76,8 @@
 .sharecli-workbench__controls, .sharecli-workbench__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: var(--space-3); }
 .sharecli-workbench button { min-height: 44px; padding: .5rem .75rem; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer; }
 .sharecli-workbench button.is-active, .sharecli-workbench button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--surface); }
+.case-study[data-family] .sharecli-workbench button.is-active,
+.case-study[data-family] .sharecli-workbench button[aria-pressed="true"] { background: var(--family-accent, var(--ink)); border-color: var(--family-accent, var(--ink)); }
 .sharecli-workbench__panel { min-height: 12rem; padding: var(--space-3); border-block: 1px solid var(--rule); }
 .sharecli-workbench__eyebrow { margin: 0 0 .5rem; color: var(--ink-muted); font: var(--step--1) var(--font-meta); text-transform: uppercase; letter-spacing: .06em; }
 .sharecli-workbench__lanes { display: grid; gap: .5rem; margin-top: var(--space-3); grid-template-columns: repeat(3, minmax(0, 1fr)); }

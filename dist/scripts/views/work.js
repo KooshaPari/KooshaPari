@@ -83,7 +83,12 @@ const CARD_IMAGES = {
 function featuredProject(project) {
   const family = FAMILY_MAP[project.slug];
   const image = CARD_IMAGES[project.slug];
-  const attrs = { class: 'work-catalog__featured-project' };
+  const href = `/work/${encodeURIComponent(project.slug)}`;
+  const attrs = {
+    class: 'work-catalog__featured-project',
+    href,
+    'aria-label': `${project.title}, ${project.category}, ${project.status}`,
+  };
   if (family) {
     attrs['data-family'] = family;
     attrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family}))`;
@@ -102,7 +107,7 @@ function featuredProject(project) {
   }
 
   children.push(
-    el('h3', {}, el('a', { href: `/work/${encodeURIComponent(project.slug)}` }, project.title)),
+    el('h3', {}, project.title),
     el('p', { class: 'work-catalog__featured-summary' }, project.summary),
   );
 
@@ -114,7 +119,7 @@ function featuredProject(project) {
     );
   }
 
-  return el('article', attrs, ...children);
+  return el('a', attrs, ...children);
 }
 
 function compactProject(project) {

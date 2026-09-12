@@ -206,6 +206,10 @@
   content: '';
 }
 
+.artifact[data-family]::before {
+  background: var(--family-accent, var(--arch-500));
+}
+
 .artifact-header {
   max-width: 44rem;
 }
