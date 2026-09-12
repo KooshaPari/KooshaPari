@@ -26,14 +26,15 @@
 .post-card {
   display: block;
   padding: 1.75rem 2rem;
-  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
-  border-radius: 14px;
-  background: var(--color-surface-1, rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent-500);
+  border-radius: var(--radius-panel);
+  background: var(--surface-raised);
   transition: border-color 120ms ease, transform 120ms ease;
 }
 
 .post-card:hover {
-  border-color: var(--color-accent, currentColor);
+  border-color: var(--accent-500);
   transform: translateY(-1px);
 }
 
@@ -49,14 +50,14 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--color-muted, currentColor);
+  color: var(--ink-muted);
   font-size: 0.85rem;
   font-variant-numeric: tabular-nums;
 }
 
 .post-card-excerpt {
   margin-top: 0.5rem;
-  color: var(--color-muted, currentColor);
+  color: var(--ink-muted);
   max-width: 60ch;
 }
 
@@ -72,7 +73,7 @@
 .post-header {
   margin-bottom: 3rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  border-bottom: 1px solid var(--rule);
 }
 
 .post-header-top {
@@ -92,7 +93,7 @@
 
 .post-subtitle {
   max-width: 60ch;
-  color: var(--color-muted, currentColor);
+  color: var(--ink-muted);
   font-size: 1.05rem;
   margin-bottom: 1rem;
 }
@@ -131,16 +132,16 @@
 }
 
 .post-article .post-quote {
-  border-left: 3px solid var(--color-accent, currentColor);
+  border-left: 3px solid var(--accent-500);
   padding: 0.25rem 0 0.25rem 1rem;
   margin: 1.5rem 0;
-  color: var(--color-muted, currentColor);
+  color: var(--ink-muted);
   font-style: italic;
 }
 
 .post-article .post-code {
-  background: var(--color-surface-2, rgba(255, 255, 255, 0.04));
-  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  background: var(--surface-raised);
+  border: 1px solid var(--rule);
   border-radius: 8px;
   padding: 1rem 1.25rem;
   overflow-x: auto;
@@ -151,22 +152,22 @@
 
 .post-article .post-divider {
   border: 0;
-  border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  border-top: 1px solid var(--rule);
   margin: 2.5rem 0;
 }
 
 .post-article .post-note {
-  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
-  border-left: 3px solid var(--color-accent, currentColor);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent-500);
   border-radius: 8px;
   padding: 1rem 1.25rem;
   margin: 2rem 0 0;
-  background: var(--color-surface-1, rgba(255, 255, 255, 0.02));
-  color: var(--color-muted, currentColor);
+  background: var(--surface-raised);
+  color: var(--ink-muted);
 }
 
 .post-footer {
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  border-top: 1px solid var(--rule);
 }
