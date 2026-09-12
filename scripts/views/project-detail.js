@@ -126,6 +126,22 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
         project.technologies.map((t) => el('span', {}, t)))
     : null;
 
+  const FAMILY_MAP = {
+    netweave: 'netweave', sharecli: 'sharecli', omniroute: 'omniroute',
+    'gmk-arch': 'physical', witf: 'physical', 'dss-cipher': 'physical',
+    substrate: 'substrate', 'phenotype-omlx': 'omlx',
+  };
+  const family = FAMILY_MAP[project.slug];
+
+  const familyAccentBar = family
+    ? el('div', { class: 'hero-accent-bar', 'aria-hidden': 'true' })
+    : null;
+
+  const heroEyebrow = el('p', { class: 'eyebrow' }, project.category + ' \u00b7 ' + project.status);
+  const heroTitle = el('h1', {}, project.title);
+  const heroLede = el('p', { class: 'lede' }, project.summary);
+  const heroMeta = el('div', { class: 'hero-meta' }, heroEyebrow, heroTitle, heroLede, techPills, metrics);
+
   const heroImage = project.gallery?.[0]
     ? (() => {
         const asset = project.presentation?.assets?.find((entry) => entry.src === project.gallery[0]);
@@ -143,12 +159,12 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
       })()
     : null;
 
-  const FAMILY_MAP = {
-    netweave: 'netweave', sharecli: 'sharecli', omniroute: 'omniroute',
-    'gmk-arch': 'physical', witf: 'physical', 'dss-cipher': 'physical',
-    substrate: 'substrate', 'phenotype-omlx': 'omlx',
-  };
-  const family = FAMILY_MAP[project.slug];
+  const heroPlate = el('div', { class: 'hero-plate' },
+    familyAccentBar,
+    heroMeta,
+    heroImage || el('div', { class: 'hero-plate__placeholder' }),
+  );
+
   const caseStudyAttrs = { class: 'view active portfolio-view case-study' };
   if (family) {
     caseStudyAttrs['data-family'] = family;
@@ -158,13 +174,8 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
   root.replaceChildren(
     el('section', caseStudyAttrs,
       el('a', { href: '/work', class: 'back-link' }, '\u2190 Back to work'),
-      el('p', { class: 'eyebrow' }, project.category + ' \u00b7 ' + project.status),
-      el('h1', {}, project.title),
-      el('p', { class: 'lede' }, project.summary),
-      techPills,
-      metrics,
-      heroImage,
-      project.gallery?.length
+      heroPlate,
+      project.gallery?.length > 1
         ? el('div', { class: 'case-gallery' },
             project.gallery.map((src) => {
               const asset = project.presentation?.assets?.find((entry) => entry.src === src);
