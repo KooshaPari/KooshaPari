@@ -1,0 +1,35 @@
+KOOSHA PARIDEHPOUR
+Santa Monica, CA  |  kooshapari@kooshapari.com  |  linkedin.com/in/kooshapari  |  github.com/KooshaPari  |  kooshapari.com
+GO SOFTWARE ENGINEER  |  LINUX & VIRTUALIZATION  |  DISTRIBUTED / REAL-TIME SYSTEMS
+Go-first software engineer and systems generalist with a long-running background in Linux administration, virtualization, networking, game and real-time development, and self-hosted infrastructure. Built Go/Rust services, real-time protocols, cloud deployment tooling, observability and CI systems, and requirements-traceability platforms across heterogeneous Linux and Windows environments.
+EXPERIENCE
+Atoms.Tech  |  Lead Software Engineer & Technical Program Manager  |  Tempe, AZMay 2025 - Jan 2026
+•  Architected and coordinated engineering across five teams building an AI-assisted requirements and systems-traceability platform; defined service interfaces, delivery workflows, development standards, and sponsor, IP, legal, and stakeholder coordination.
+•  Built and directed delivery of an MCP server, project infrastructure, CI/CD and QA suites, platform features, and Discord/Coda/GitHub/Jira automation; designed SysML-inspired versioning and traceability workflows.
+CVS Health  |  Development Engineer, AI Innovation (DDAT / InnoTech)  |  Scottsdale, AZMay 2025 - Aug 2025
+•  Won a company-wide innovation challenge with a separate patient electronic prior authorization (ePA) proposal.
+•  Architected and delivered an AI workflow-transpilation system that converted a manual, rules-driven process into an executable agent workflow with human-in-the-loop validation, operational guardrails, data requirements, and rollout controls; completed the planned 10-week scope by week 3.
+•  The system was subsequently piloted; presented architecture, implementation, risk, and expected ROI to DDAT and Innovation leadership.
+Akoma  |  Lead Software Engineer  |  Ithaca, NYOct 2023 - Jan 2024
+•  Led development of an offline-first React Native ERP/accounting application and coordinated product delivery across the development team.
+Phenotype  |  Product Manager  |  Santa Monica, CAOct 2020 - Present
+•  Owned product, operations, supply chain, e-commerce, and 10+ international vendors; generated more than $400K in revenue in 30 days and reduced manufacturing costs by more than 25%.
+SELECTED PROJECTS & SYSTEMS
+Go Service Infrastructure  |  AgentAPI++, CLIProxyAPI++, Chatta  |  Go, HTTP/SSE, WebSockets/WebRTC
+•  Extended Go-based agent-control and provider-routing services and built a real-time chat system, covering PTY/process and session management, streaming interfaces, authentication, request translation, rate/quota controls, and operational diagnostics.
+BytePort  |  Go, AWS, deployment automation
+•  Built a manifest-driven platform for deploying projects to AWS and generating portfolio metadata from YAML configuration; integrated backend services, repository workflows, authentication, and LLM-assisted project-page generation.
+Independent Systems Lab  |  Linux, QEMU/KVM, VFIO/IOMMU, Docker
+•  Built and administered Linux/Windows development and virtualization environments; configured GPU passthrough, storage, networking, drivers, containers, and self-hosted services across custom hardware.
+Project Spyn  |  MATLAB, LEGO EV3, PID control
+•  Programmed an autonomous EV3 vehicle to navigate a maze using gyro-based PID control for smooth turns and acceleration, with sensor-driven obstacle and route handling.
+EDUCATION
+Arizona State University  |  M.S. Computer Science  |  GPA: 3.75/4.0  |  Tempe, AZExpected Dec 2026
+Arizona State University  |  B.S. Computer Science  |  Barrett Honors College  |  GPA: 3.65/4.0  |  Tempe, AZDec 2025
+TECHNICAL SKILLS
+Languages: Go (primary), Rust, Python, TypeScript/JavaScript, C/C++, Java, SQL, Bash, MATLAB, C#
+Systems / Networking: Linux, Windows, QEMU/KVM, VFIO/IOMMU, WSL, virtual machines, process/service management, TCP/IP, storage, GPU/PCIe and hardware diagnostics
+Backend / Protocols: Gin, Fiber, Axum, Tokio, REST/HTTP, JSON-RPC, WebSockets, WebRTC, SSE, OpenAPI, MCP, LSP, OAuth 2.0
+Cloud / Delivery: AWS (EC2, S3, IAM), Docker, Kubernetes, GitHub Actions, CI/CD, Git, YAML, WASM/Spin
+: PostgreSQL, pgvector, Redis, SQLite, Neo4j, GORM, OpenTelemetry, Prometheus, structured logging, health checks
+ Svelte/SvelteKit, React, React Native, Tauri, Electron

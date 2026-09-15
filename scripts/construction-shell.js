@@ -1,4 +1,4 @@
-const GATE_STYLE = '/styles/construction-gate.css';
+// construction-gate.css is included in the pages.css bundle — no separate link needed.
 const STORAGE_KEY = 'portfolio-construction-entered';
 
 const GATE_MARKUP = `
@@ -19,10 +19,11 @@ const GATE_MARKUP = `
   </div>
 `;
 
-const EARLY_SCRIPT = `<script>(function(){try{if(sessionStorage.getItem('${STORAGE_KEY}')==='yes')document.documentElement.dataset.construction='entered';}catch(_){}}());</script>`;
+const EARLY_SCRIPT = `<script>(function(){try{var k='${STORAGE_KEY}';if(sessionStorage.getItem(k)==='yes'){document.documentElement.dataset.construction='entered';return;}if(/Googlebot|bingbot|YandexBot|DuckDuckBot|Baiduspider|Applebot|Slurp|facebookexternalhit|LinkedInBot|Twitterbot|WhatsApp|TelegramBot|Discordbot|Pinterestbot|SemrushBot|AhrefsBot|MJ12bot|DotBot|Sogou|Bytespider|GPTBot|ChatGPT-User|ClaudeBot|anthropic-ai|Omgilibot|Scrapy|curl|wget|HeadlessChrome|Lighthouse|Chrome-Lighthouse|ucbot/i.test(navigator.userAgent))document.documentElement.dataset.construction='entered';}catch(_){}}());</script><style>html[data-construction="entered"] #construction-gate{display:none!important}html[data-construction="entered"] #construction-site{inset:auto}</style>`;
 
 export function injectConstructionGate(html) {
   if (html.includes('id="construction-gate"')) return html;
-  const withStyle = html.replace('</head>', `  <link rel="stylesheet" href="${GATE_STYLE}">\n${EARLY_SCRIPT}\n</head>`);
-  return withStyle.replace(/(<body[^>]*>)/, `$1${GATE_MARKUP}\n  <div id="construction-site">`).replace('</body>', '  </div>\n</body>');
+  // No separate CSS link — construction-gate.css is in the pages.css bundle.
+  const withScript = html.replace('</head>', `  ${EARLY_SCRIPT}\n</head>`);
+  return withScript.replace(/(<body[^>]*>)/, `$1${GATE_MARKUP}\n  <div id="construction-site">`).replace('</body>', '  </div>\n</body>');
 }

@@ -1,0 +1,29 @@
+
+Languages: Go (primary), Rust, Python, TypeScript/JavaScript, C/C++, SQL, Bash
+Systems & Networking: Linux, TCP/IP, distributed systems, concurrency, process/service management, QEMU/KVM, VFIO/IOMMU, Docker, Kubernetes
+Backend & Data: HTTP/REST, JSON-RPC, WebSockets, SSE, Gin, Fiber, PostgreSQL, Redis, SQLite, pgvector, PASETO, OAuth
+Cloud & Delivery: AWS (EC2/S3/IAM), GitHub Actions, CI/CD, automated testing, release workflows
+Observability & Reliability: OpenTelemetry, Prometheus, structured logging, health checks, retries, rate limiting, root cause analysis
+EXPERIENCE
+Development Engineer, AI Innovation (DDAT) | CVS Health, Scottsdale, AZMay 2025 - Aug 2025
+•  Won a company-wide innovation challenge across intern teams with a separate patient electronic prior authorization (ePA) proposal.
+•  Architected and delivered an AI workflow-transpilation system that converted a manual, rules-driven process into an executable agent workflow with human validation and operational guardrails; completed a planned 10-week scope by week 3, and the system was subsequently piloted.
+•  Defined data and control-flow requirements and rollout risks; presented architecture, implementation, and expected ROI to DDAT and Innovation leaders.
+Lead Software Engineer / Technical Program Manager | Atoms.Tech, Tempe, AZMay 2025 - Jan 2026
+•  Led architecture and technical coordination across five teams building an AI-assisted requirements and systems-traceability platform; defined service boundaries, development standards, and sponsor-to-implementation workflows.
+•  Built an MCP service, CI/CD and QA infrastructure, and Discord/GitHub/Jira integrations; designed SysML-informed versioning and traceability that converted sponsor needs into testable features while coordinating IP and legal constraints.
+Lead Software Engineer | Akoma, Ithaca, NYOct 2023 - Jan 2024
+•  Led development of an offline-first React Native ERP/accounting application and coordinated architecture, delivery, and project execution across the development team.
+Product Manager | Phenotype, Santa Monica, CAOct 2020 - Present
+•  Owned product and operations across 10+ international vendors; generated $400K in revenue in 30 days and reduced manufacturing costs by more than 25% through supplier and design negotiations.
+SELECTED TECHNICAL PROJECTS
+AgentAPI++ / CLIProxyAPI++ | Go, HTTP/SSE, PTY, routing, authentication
+•  Extended a Go HTTP control plane for 11 agent CLIs, covering PTY-backed process/session management, message parsing, SSE streaming, health endpoints, and diagnostics; extended a multi-provider Go proxy with unified auth/token handling, provider-aware translation and routing, quota/cooldown controls, management APIs, and CI.
+Civis | Rust, ECS, WebSockets, JSON-RPC
+•  Built a deterministic fixed-step simulation with replay and BLAKE3 hash-chain validation; exposed state and commands over WebSocket JSON-RPC and compact binary frames for reproducible real-time clients.
+Tracera | Rust, PostgreSQL, pgvector, Redis, WebSockets
+•  Implemented a hybrid data-processing and retrieval pipeline across PostgreSQL full-text search, pgvector semantic search, fuzzy matching, Redis caching, and reciprocal-rank fusion for requirement discovery and impact analysis; added real-time WebSocket sync and evidence/coverage governance.
+BytePort / Systems Lab | Go, AWS, Linux, QEMU/KVM, VFIO, Docker
+•  Built a manifest-driven Go deployment platform with AWS provisioning, PASETO sessions, and OpenTelemetry; maintained Linux/VM/container environments and diagnosed kernel, driver, PCIe/GPU, storage, and network failures across custom hardware.
+EDUCATION
+Arizona State University | M.S. Computer Science, Expected Dec 2026, GPA 3.75 | B.S. Computer Science, Dec 2025, GPA 3.65 | Barrett Honors College

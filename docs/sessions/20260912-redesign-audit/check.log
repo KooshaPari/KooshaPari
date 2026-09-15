@@ -1,0 +1,4 @@
+
+> check
+> node --check scripts/app.js && node --check scripts/stage-publication.js && node --check data/projects.js
+

@@ -1,0 +1,104 @@
+                                                 Koosha Paridehpour
+  Santa Monica, CA ● +1 (424) 330-5106 ● kooshapari@kooshapari.com ● kooshapari.com ● github.com/kooshapari
+ Software Engineer specializing in Go, Rust, distributed systems, agent infrastructure, and performance-oriented developer tooling. Built OS-adjacent
+ runtimes, AI dispatch gateways, inference and evaluation systems, traceability services, and cloud deployment platforms. Independently delivered a
+ regulatory-driven migration MVP ahead of plan and led technical execution across three teams (~15 contributors). Works across application code,
+ runtimes, cloud infrastructure, operating systems, and hardware boundaries.
+
+ENGINEERING EXPERIENCE
+Development Engineer - CVS Health - AI Innovation (DDAT) | Scottsdale, AZ ​                                          May 2025 - August 2025
+   ●​   Independently designed and implemented an AI-assisted legacy-system migration pipeline in response to regulatory change;
+        authored product and architecture specifications including the PRD, ADD, LLD, and acceptance criteria; completed a planned
+        10-week scope by week 3 and advanced the MVP to pilot.
+   ●​   Built a staged transformation pipeline spanning source ingestion, intermediate-representation extraction, file-level code
+        generation, business-logic traceability, linting, validation, and generated-test verification, with machine-verifiable quality gates
+        and SME approval only at deployment.
+   ●​   Won a company-wide innovation challenge with a separate patient electronic prior authorization (ePA) proposal.
+Lead Software Engineer & Technical Program Manager - Atoms.Tech | Tempe, AZ​                                ​        May 2025 - January 2026
+   ●​   Led technical architecture and coordination across three teams (~15 contributors), translating 3–5 weekly sponsor touchpoints
+        spanning demos, requirements changes, technical decisions, and reprioritization into reusable service boundaries, engineering
+        standards, and execution plans.
+   ●​   Built MCP services, SysML-informed traceability workflows, CI/CD and QA infrastructure, and Discord/Coda/GitHub/Jira
+        integrations for an AI-assisted requirements and systems-traceability platform.
+   ●​   Built threaded bug/feature intake and Vercel deployment controls that reduced manual sponsor coordination, cross-team
+        onboarding friction and rework, and local clone/branch/deployment steps while supporting frequent sponsor-driven pivots.
+Software Engineer → Product Manager - Akoma | Ithaca, NY​                                                       October 2023 - January 2024
+   ●​   Led architecture and internal delivery of an offline-first React Native ERP/accounting application targeting markets with limited
+        access to modern accounting tooling.
+   ●​   Translated accounting workflows into application behavior and technical requirements; supported a distributed React Native
+        team through prototyping, architecture review, implementation guidance, debugging, and delivery triage under an aggressive
+        deadline.
+Product Manager - Phenotype. | Santa Monica, CA​                                                                      October 2020 - Present
+   ●​   Engineered and prototyped physical hardware products while evaluating 40+ manufacturers and working directly with multiple
+        factories to translate specifications into production-ready designs; reduced manufacturing costs by >40%, including negotiating
+        a flagship case/plate assembly from $500+ to approximately $350 all-in per unit.
+   ●​   Built SKU, BOM, MOQ, freight, tax, inventory, and production models supporting international manufacturing and a 10-region
+        launch that sold approximately 4,900 line items and generated approximately $432K in 30 days.mately $432K in 30 days.
+SELECTED SYSTEMS ENGINEERING
+ShareCLI | Rust, Tokio, FUSE, process supervision, Prometheus
+   ●​   Built and released an OS-adjacent runtime for high-concurrency coding agents that supervises processes, tracks host resource
+        pressure, coalesces duplicate commands through lock/wait caching, and gates execution using thermal and contention state.
+   ●​   Added optional FUSE I/O interception, declarative process supervision, hot-reloaded configuration, HTTP/TCP/exec health
+        checks, HMAC-signed notifications, Prometheus telemetry, plugin interfaces, and cross-platform packaging.
+Substrate / CLIProxyAPI++ / AgentAPI++ | Rust, Go, Axum, SSE, SQLite, terminal/process control
+   ●​   Extended an open-source Go control plane spanning 11 coding-agent CLIs, implementing terminal/process sessions, message
+        parsing, streaming events, health endpoints, and operational diagnostics.
+   ●​   Extended an OpenAI-compatible provider proxy with streaming routing, token-bucket rate limiting, full-jitter retries, fallback
+        chains, circuit breakers, per-session budgets, audit logging, hot-reloaded configuration, and Prometheus metrics.
+   ●​   Integrated agent-control and provider-proxy adapters behind a shared routing core exposing HTTP, CLI, MCP, and agent-to-agent
+        interfaces, with configuration and mailbox state persisted in SQLite.
+BytePort | Go, Gin, AWS, OTel, PASETO​
+   ●​   Built a declarative GitHub-to-cloud deployment platform with authenticated Go APIs, GitHub OAuth, project manifests, AWS
+        resource provisioning, endpoint registration, secure session handling, and OpenTelemetry-backed observability behind a
+        self-service deployment workflow.
+Systems Administration & Virtualization | Linux, GCP, QEMU/KVM, VFIO/IOMMU
+    ●​   Built and operated Linux, cloud, and virtualization environments across bare-metal, VPS, and desktop systems, including Arch
+         Linux, GCP-hosted Ubuntu services, self-hosted applications, networking, storage, and custom OS configurations.
+    ●​   Built a daily-use Windows VM under Linux with VFIO/IOMMU GPU passthrough, evdev, Looking Glass, VR and peripheral
+         passthrough, achieving measured gaming performance at ~95% of bare metal; also deployed Jamulus infrastructure on fresh
+         GCP instances for two SMMUSD concerts and provided remote installation/troubleshooting support to student performers.
+    ●​   Managed VPS-hosted game and application services, including heavily customized Minecraft/FiveM environments and
+         self-hosted messaging services (AirMessage), and manually configured Ryzen/OpenCore Hackintosh systems while debugging
+         bootloader, firmware, driver, and hardware-compatibility issues.
+LLM-Lab | Python, Rust, MLX, Metal, model evaluation
+    ●​   Extended OMLX with policy-based routing across local and server inference backends and a Rust performance core for
+         speculative decoding, tree proposals, quantization, concurrent execution, and JSON-RPC fleet control exposed through PyO3.
+    ●​   Built resumable Terminal-Bench model/routing evaluation matrices with persisted run state and scoring; developed an
+         Apple-Silicon kernel/code-generation test suite sharing model architecture constants across Metal, C, Rust, Zig, Mojo, Nim, and
+         MLX implementations.
+ForgeCode | Rust, SQLite, zstd, FTS, terminal tooling
+    ●​   Extended an open-source Rust coding-agent CLI/TUI with persistent, branchable sessions; split SQLite storage preserving legacy
+         history; zstd-compressed conversation payloads; FTS-backed search; snapshots; and subagent-context controls while
+         maintaining upstream compatibility.
+Civis | Rust, ECS, deterministic simulation, WebSockets, JSON-RPC
+    ●​   Designed and prototyped a deterministic civilization simulation using fixed-point ECS state and seeded randomness, with a
+         replayable headless engine exposing WebSocket JSON-RPC commands and compact binary tick frames to renderer clients.
+AgilePlus | Rust, Axum, SQLite, Git/GitHub, workflow state machines
+    ●​   Built a spec-first software-delivery platform around an eight-stage feature state machine, traceability graphs, evidence-gated
+         transitions, and adapters spanning Git/GitHub, Plane, SQLite, telemetry, CLI, and HTTP APIs.
+    ●​   Separated domain, application, governance, storage, VCS, graph, triage, event, and integration layers while enforcing lifecycle
+         invariants and policy transitions through tests.
+Tracera | Rust, REST APIs, WebSockets, observability
+    ●​   Built a traceability and audit service linking software artifacts, evidence, agent activity, and delivery state through
+         confidence-weighted trace relationships and ingestion pipelines, with interchangeable PostgreSQL/SQLite storage exposed
+         through server, CLI, edge, and MCP interfaces.
+Phenotype Journeys | Rust, TypeScript, Playwright, test infrastructure
+    ●​   Released a reusable journey-verification framework and Rust CLI that converts CLI/web recordings into schema-validated test
+         manifests with exit-code and OCR assertions, Playwright capture, optional model-assisted verification, and CI quality gates.
+NetWeave | Go, graph algorithms, cellular automata, WebSockets
+    ●​   Built a concurrent Go traffic simulator combining cellular automata, congestion-aware A* routing with BFS fallback, procedural
+         road graphs, autonomous vehicle agents, and real-time WebSocket/browser visualization.
+Frostify | Spicetify / Desktop UI — 3,350+ release downloads
+    ●​   Extended and published an open-source Spotify desktop theme with custom transparency, background, and UI behavior;
+         packaged release accumulated 3,000+ GitHub downloads over six months and organic community adoption.
+EDUCATION
+Arizona State University | M.S. Computer Science Dec `26 - GPA 3.75| B.S. Computer Science Dec `25 - GPA 3.65 | Barrett Honors College
+TECHNICAL SKILLS
+Languages: Go, Rust, Python, TypeScript/JavaScript, C/C++, SQL, Bash, Zig
+Systems: Linux, async/concurrency, process supervision, IPC, FUSE, TCP/IP, HTTP, WebSockets, SSE, JSON-RPC, QEMU/KVM,
+VFIO/IOMMU
+Agent & ML Infrastructure: MCP, LSP, provider routing, agent orchestration, model evaluation, speculative decoding,
+MLX/Metal, llama.cpp, SGLang, vLLM
+Backend & Cloud: Axum, Gin, PostgreSQL, SQLite, Redis, AWS, GCP, Docker, Kubernetes, GitHub Actions, OpenTelemetry,
+Prometheus
+

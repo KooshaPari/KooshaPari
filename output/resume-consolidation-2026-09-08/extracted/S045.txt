@@ -1,0 +1,16 @@
+
+
+
+Arizona State University  |  M.S. Computer Science  |  GPA: 3.75/4.0  |  Tempe, AZExpected Dec 2026
+Arizona State University  |  B.S. Computer Science  |  Barrett Honors College  |  GPA: 3.65/4.0  |  Tempe, AZDec 2025
+TECHNICAL SKILLS
+Languages: Go (primary), Rust, Python, C/C++, TypeScript/JavaScript, Java, SQL, Bash, MATLAB, C#
+Systems / Infrastructure: Linux, QEMU/KVM, VFIO, virtual machines, networking, AWS, Docker, Kubernetes, Git, GitHub Actions, CI/CD, hardware troubleshooting
+Backend / Real-Time: REST/HTTP, WebSockets, WebRTC, SSE, Fiber, Gin, PostgreSQL, Redis, React, Svelte, React Native
+
+
+
+TECHNICAL SKILLS
+Languages: Go (primary), Rust, Python, C/C++, TypeScript/JavaScript, Java, SQL, Bash, MATLAB
+Systems: Linux, QEMU/KVM, VFIO, virtual machines, networking, process/service management, hardware troubleshooting
+Backend / Infrastructure: REST/HTTP, WebSockets, SSE, PostgreSQL, Redis, AWS, Docker, Kubernetes, GitHub Actions, CI/CD, OpenTelemetry, Prometheus

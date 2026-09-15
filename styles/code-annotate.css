@@ -1,0 +1,309 @@
+/* ================================================================
+   Code Annotation System — dark-theme code blocks with line
+   numbers, annotation markers, callout badges, and copy button.
+
+   Tokens consumed from tokens.css:
+     --font-meta, --seed-teal, --graphite-950, --radius-panel,
+     --motion-fast, --motion-normal, --ease-out, --radius-control
+   ================================================================ */
+
+/* ---- Wrapper -------------------------------------------------- */
+.code-block {
+  position: relative;
+  background: #0d0f0e;
+  border: 1px solid color-mix(in oklch, var(--seed-teal) 12%, #0d0f0e);
+  border-radius: var(--radius-panel);
+  margin: var(--space-4) 0;
+  overflow: hidden;
+}
+
+/* ---- Header bar (language badge + copy button) --------------- */
+.code-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-0) var(--space-2);
+  background: color-mix(in oklch, var(--graphite-950) 80%, #0d0f0e);
+  border-bottom: 1px solid color-mix(in oklch, var(--seed-teal) 8%, transparent);
+  min-height: 2rem;
+}
+
+/* Language badge */
+.code-block__lang {
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+  color: var(--seed-teal);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  user-select: none;
+}
+
+/* Copy button */
+.code-block__copy-btn {
+  background: none;
+  border: 1px solid color-mix(in oklch, var(--seed-teal) 18%, transparent);
+  border-radius: var(--radius-control);
+  color: var(--seed-teal);
+  font-family: var(--font-meta);
+  font-size: 0.6875rem;
+  padding: 0.15em 0.55em;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--motion-fast) var(--ease-out),
+              background var(--motion-fast) var(--ease-out);
+}
+
+.code-block:hover .code-block__copy-btn {
+  opacity: 1;
+}
+
+.code-block__copy-btn:hover {
+  background: color-mix(in oklch, var(--seed-teal) 12%, transparent);
+}
+
+.code-block__copy-btn--copied {
+  color: var(--acid-500);
+  border-color: color-mix(in oklch, var(--acid-500) 24%, transparent);
+}
+
+/* ---- Code scroll container ----------------------------------- */
+.code-block__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.code-block__scroll::-webkit-scrollbar {
+  height: 5px;
+}
+
+.code-block__scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.code-block__scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--seed-teal) 16%, transparent);
+  border-radius: 3px;
+}
+
+/* ---- Table layout (line numbers + code) ---------------------- */
+.code-block__table {
+  display: table;
+  width: 100%;
+  min-width: 100%;
+  border-collapse: collapse;
+}
+
+/* ---- Line numbers gutter ------------------------------------- */
+.code-block__line-numbers {
+  display: table-cell;
+  width: 3.5rem;
+  min-width: 3.5rem;
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3);
+  text-align: right;
+  vertical-align: top;
+  user-select: none;
+  border-right: 1px solid color-mix(in oklch, var(--seed-teal) 8%, transparent);
+  font-family: var(--font-meta);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: color-mix(in oklch, var(--seed-teal) 30%, var(--graphite-950));
+}
+
+.code-block__line-numbers span {
+  display: block;
+}
+
+/* ---- Code column --------------------------------------------- */
+.code-block__code {
+  display: table-cell;
+  padding: var(--space-2) var(--space-3);
+  vertical-align: top;
+  font-family: var(--font-meta);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: #d0d4cc;
+  white-space: pre;
+}
+
+.code-block__code code {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* ---- Code lines (one per row for annotation support) --------- */
+.code-block__line {
+  display: block;
+  position: relative;
+  padding: 0 var(--space-1);
+  border-radius: 3px;
+}
+
+/* ---- Highlighted line ---------------------------------------- */
+.code-block__highlight-line {
+  background: rgba(126, 186, 181, 0.12);
+}
+
+/* Left teal accent for highlighted lines */
+.code-block__highlight-line::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--space-1));
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--seed-teal);
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+/* ---- Annotation marker line ---------------------------------- */
+.code-block__annotation-line {
+  cursor: help;
+}
+
+/* ---- Annotation tooltip/popover ------------------------------ */
+.code-block__annotation {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: var(--space-2);
+  z-index: var(--z-chrome);
+  max-width: 260px;
+  padding: var(--space-1) var(--space-2);
+  background: #1a1d1b;
+  border: 1px solid color-mix(in oklch, var(--seed-teal) 20%, transparent);
+  border-radius: var(--radius-control);
+  color: var(--paper-200);
+  font-family: var(--font-reading);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  white-space: normal;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--motion-fast) var(--ease-out);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Triangle pointer */
+.code-block__annotation::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-right-color: color-mix(in oklch, var(--seed-teal) 20%, transparent);
+}
+
+.code-block__annotation-line:hover .code-block__annotation {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---- Callout badge (numbered circle) ------------------------- */
+.code-block__callout-badge {
+  position: absolute;
+  left: -0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: var(--seed-teal);
+  color: #0d0f0e;
+  font-family: var(--font-meta);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1.125rem;
+  text-align: center;
+  z-index: var(--z-canvas);
+  box-shadow: 0 0 0 2px #0d0f0e;
+}
+
+/* Callout line gets subtle left padding to avoid overlap */
+.code-block__callout-line {
+  padding-left: 1.25rem !important;
+}
+
+/* ---- Syntax highlighting (CSS-only, dark theme) ------------- */
+
+/* Keywords: teal */
+.code-block__code .tok-kw {
+  color: #7EBAB5;
+}
+
+/* Strings: olive */
+.code-block__code .tok-str {
+  color: #a9b47a;
+}
+
+/* Comments: muted */
+.code-block__code .tok-cmt {
+  color: #555a52;
+  font-style: italic;
+}
+
+/* Functions: arch-light */
+.code-block__code .tok-fn {
+  color: #76aeb5;
+}
+
+/* Numbers: acid */
+.code-block__code .tok-num {
+  color: #b6d448;
+}
+
+/* Operators and punctuation */
+.code-block__code .tok-op {
+  color: #9ea396;
+}
+
+/* Types / classes */
+.code-block__code .tok-type {
+  color: #d4c89a;
+}
+
+/* Decorators / annotations */
+.code-block__code .tok-deco {
+  color: #c76a3a;
+}
+
+/* ---- Responsive ---------------------------------------------- */
+@media (max-width: 640px) {
+  .code-block__line-numbers {
+    width: 2.5rem;
+    min-width: 2.5rem;
+    padding-left: var(--space-1);
+    font-size: 0.6875rem;
+  }
+
+  .code-block__code {
+    font-size: 0.75rem;
+    padding: var(--space-2);
+  }
+
+  .code-block__annotation {
+    position: fixed;
+    left: var(--space-2);
+    right: var(--space-2);
+    top: auto;
+    bottom: var(--space-2);
+    transform: none;
+    max-width: none;
+  }
+
+  .code-block__annotation::before {
+    display: none;
+  }
+}
+
+/* ---- Reduced motion ------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .code-block__copy-btn,
+  .code-block__annotation {
+    transition: none;
+  }
+}

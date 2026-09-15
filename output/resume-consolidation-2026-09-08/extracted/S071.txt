@@ -1,0 +1,99 @@
+CSE 598 ASAD Summer 2026
+Koosha Paridehpour
+
+               Directory Management System Project
+
+
+Phase I Part 1
+Use Astah to draw a class diagram diagram. Use proper UML notation. Take a clear screenshot of
+your completed diagram and paste it on this page.
+
+
+
+
+                                                                                                 1
+CSE 598 ASAD Summer 2026
+Koosha Paridehpour
+
+
+
+
+Phase I Part 2
+Identify the places in the code where there are object-oriented concept violations, content coupling,
+common coupling, control coupling, and stamp coupling situations. On this page, paste the code
+segments that correspond to each situation and explain how you would fix object-oriented concept
+violations, common coupling, control coupling, and content coupling issues. You may add pages if
+necessary.
+
+
+for(int i =0; i <per.personList.size(); i++)​
+{​
+   if( per.personList.get(i).first.equals(firstN) && per.personList.get(i).last.equals(lastN))
+
+Directory reaches directly into the person list and name fields in the objects. Exposes details and
+makes PersonnelDirectory responsible for traversal and matching logics. Keep list and fields private
+and provide methods\getters.
+
+private static int numObjects = 0;​
+​
+public totalObjects()​
+{​
+   numObjects=0;​
+}
+
+
+
+                                                                                                        2
+CSE 598 ASAD Summer 2026
+Koosha Paridehpour
+
+The obj count is a shared static state and can be tampered\reset by other instances of totalObjects.
+Common coupling present and makes count unrelated the ground truth of directory contents. Remove
+shared counter and return count from store w\ size().
+
+per.personList.get(i).printName(order);
+Caller passes an int that controls how another class branches internally. Meaning of 0\1\2 not explicit.
+Convert input at boundary to a NameFormat enum and ask each personal obj for getName(format.
+Personnel per = new Personnel();​
+totalObjects total = new totalObjects();​
+Scanner scan = new Scanner(System.in);​
+...​
+switch(choice)
+Main method handles display, input parse, personnel creation search, storage access, printing, and
+counting. Cohesion violation of multiple responsibilities. Decouple storage behavior into
+PersonnelStore, keep state in model classes, leave PersonnelDirectory as a CLI controller.
+
+Employee e1 = new Employee(lastN, firstN, middleN, empID, salary);​
+...​
+Person p1 = new Person(lastN, firstN, " ");
+
+Directory constructs concrete classes directly, which makes future categories require directory edits.
+Reduction of creation behavior and entire removal of direct construction needed.
+
+Employee e1 = new Employee(lastN, firstN, middleN, empID, salary);​
+per.addPersonnel(e1);​
+...​
+if( per.personList.get(i).first.equals(firstN) && per.personList.get(i).last.equals(lastN))
+The directory passes and stores a full Employee object, but later search depends only on the name
+portion of the object. Stamp coupling present because a larger object is used where narrower
+scope\behavior enough. Object structure hiding behind PersonnelStore.findByName(first,last) and
+Personnel.hasName(first,last) so callers don’t pass\inspect a full personnel record for basic
+comparison.
+
+
+
+
+                                                                                                         3
+CSE 598 ASAD Summer 2026
+Koosha Paridehpour
+
+Phase II Part 2
+After you have incorporated the PersonnelFactory, use Ashta to draw a UML class diagram of the
+Personnel Directory. Use proper UML notation. When you have completed your diagram, take a clear
+screenshot of your diagram and paste it on this page.
+
+
+
+
+                                                                                              4
+

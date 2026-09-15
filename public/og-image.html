@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1200" />
+  <title>OG Image — Koosha Paridehpour</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    /* ================================================================
+       OG Image Template — 1200x630
+       Designed for screenshot-to-PNG workflow.
+       Open in browser, capture at 1200x630, export as PNG.
+       ================================================================ */
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+    }
+
+    body {
+      background: #171a18;
+      display: flex;
+      align-items: center;
+      font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+      position: relative;
+    }
+
+    /* --- Background grid ------------------------------------------------ */
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(126, 186, 181, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126, 186, 181, 0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      background-position: 24px 24px;
+      pointer-events: none;
+    }
+
+    /* --- Bottom accent bar ---------------------------------------------- */
+    .accent-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #7EBAB5;
+    }
+
+    /* --- Content layout ------------------------------------------------- */
+    .content {
+      display: flex;
+      align-items: center;
+      padding: 0 100px;
+      gap: 72px;
+      z-index: 1;
+      width: 100%;
+    }
+
+    /* --- KP Monogram ---------------------------------------------------- */
+    .monogram {
+      flex-shrink: 0;
+    }
+
+    .monogram svg {
+      width: 220px;
+      height: 220px;
+      display: block;
+    }
+
+    /* --- Text block ----------------------------------------------------- */
+    .text {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .name {
+      font-size: 62px;
+      font-weight: 600;
+      color: #F6F5F5;
+      letter-spacing: -0.025em;
+      line-height: 1.08;
+    }
+
+    .title-divider {
+      width: 56px;
+      height: 2px;
+      background: #7EBAB5;
+      border-radius: 1px;
+    }
+
+    .subtitle {
+      font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+      font-size: 24px;
+      font-weight: 400;
+      color: #7EBAB5;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* --- Subtle corner marks (technical detail) ------------------------- */
+    .corner-mark {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-color: rgba(126, 186, 181, 0.12);
+      border-style: solid;
+    }
+
+    .corner-mark--tl {
+      top: 32px;
+      left: 32px;
+      border-width: 2px 0 0 2px;
+    }
+
+    .corner-mark--tr {
+      top: 32px;
+      right: 32px;
+      border-width: 2px 2px 0 0;
+    }
+
+    .corner-mark--bl {
+      bottom: 36px;
+      left: 32px;
+      border-width: 0 0 2px 2px;
+    }
+
+    .corner-mark--br {
+      bottom: 36px;
+      right: 32px;
+      border-width: 0 2px 2px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background grid -->
+  <div class="grid" aria-hidden="true"></div>
+
+  <!-- Corner registration marks -->
+  <div class="corner-mark corner-mark--tl" aria-hidden="true"></div>
+  <div class="corner-mark corner-mark--tr" aria-hidden="true"></div>
+  <div class="corner-mark corner-mark--bl" aria-hidden="true"></div>
+  <div class="corner-mark corner-mark--br" aria-hidden="true"></div>
+
+  <!-- Main content -->
+  <div class="content">
+    <!-- KP Monogram (stroke-only, no background rect) -->
+    <div class="monogram">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KP monogram">
+        <g fill="none" stroke="#7EBAB5" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter">
+          <!-- Vertical stem (shared K and P) -->
+          <line x1="18" y1="12" x2="18" y2="52"/>
+          <!-- P bowl (top half) -->
+          <polyline points="18,12 40,12 40,32 18,32"/>
+          <!-- K upper diagonal -->
+          <line x1="18" y1="32" x2="40" y2="12"/>
+          <!-- K lower diagonal -->
+          <line x1="18" y1="32" x2="40" y2="52"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Name and subtitle -->
+    <div class="text">
+      <div class="name">Koosha Paridehpour</div>
+      <div class="title-divider"></div>
+      <div class="subtitle">Technical Atelier</div>
+    </div>
+  </div>
+
+  <!-- Bottom accent bar -->
+  <div class="accent-bar" aria-hidden="true"></div>
+</body>
+</html>

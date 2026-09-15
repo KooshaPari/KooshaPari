@@ -1,4 +1,5 @@
 import { el } from './dom.js';
+import { initDarkMode } from '../dark-mode.js';
 
 const ROUTES = [
   ['/work', 'Work'],
@@ -105,5 +106,11 @@ export function renderShell(
 
   const appRoot = document.getElementById('app');
   appRoot.replaceChildren(header, document.getElementById('view-root'), footer);
+
+  // Insert dark mode toggle into .atelier-tools each time shell is rendered.
+  // renderShell uses replaceChildren which destroys prior DOM, so the toggle
+  // must be re-inserted on every navigation.
+  initDarkMode({ toolbar: header.querySelector('.atelier-tools') });
+
   return header;
 }

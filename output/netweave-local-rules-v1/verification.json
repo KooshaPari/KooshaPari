@@ -1,0 +1,195 @@
+{
+  "date": "2026-09-05T10:17:10.925Z",
+  "pngCount": 6,
+  "dimensionsPassed": true,
+  "renderExitCodes": [
+    0,
+    0,
+    0
+  ],
+  "publication": "Not integrated or published",
+  "entries": [
+    {
+      "path": "asset-sources/netweave-local-rules-v1/build_scene.py",
+      "bytes": 4294,
+      "sha256": "61ab5e10e545ca9fc7f2292e59deba265cec553fe6556754db789ad98ffb0c38"
+    },
+    {
+      "path": "asset-sources/netweave-local-rules-v1/scene.blend",
+      "bytes": 787297,
+      "sha256": "a1666753a4eb828245cd1ce84ee8d92b2f3758c28efb2da015b2d497c469e580"
+    },
+    {
+      "path": "output/netweave-local-rules-v1/desktop-01.png",
+      "bytes": 1814257,
+      "sha256": "8461f8aa826e991cb8677200172fc19b6d28646e23f84f867c158fb3cf21f2e6",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 1600,
+            "height": 1100
+          }
+        ],
+        "format": {
+          "size": "1814257"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/desktop-02.png",
+      "bytes": 1811798,
+      "sha256": "024af6dea60ec50fb6337a275a98c777049c268786a966b1a3511394283293c4",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 1600,
+            "height": 1100
+          }
+        ],
+        "format": {
+          "size": "1811798"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/desktop-03.png",
+      "bytes": 1812938,
+      "sha256": "9be1984cb3325f48a646dfd3d43422fcaed308023a27f691d850574f4a615d00",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 1600,
+            "height": 1100
+          }
+        ],
+        "format": {
+          "size": "1812938"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/mobile-01.png",
+      "bytes": 887049,
+      "sha256": "9ec35f5448cb367c894616f5917aa24e466ee1d4f5868f5994831221299f3663",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 800,
+            "height": 1000
+          }
+        ],
+        "format": {
+          "size": "887049"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/mobile-02.png",
+      "bytes": 886810,
+      "sha256": "face5aea3ad0a870408f70665d3a07070ec1a04f493a8ff880cbef418c361cff",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 800,
+            "height": 1000
+          }
+        ],
+        "format": {
+          "size": "886810"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/mobile-03.png",
+      "bytes": 887509,
+      "sha256": "1533f877d0ecb3ae150d7af3677ba6bb5734d99af8b078b193b9f3d6d442a613",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 800,
+            "height": 1000
+          }
+        ],
+        "format": {
+          "size": "887509"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/poster-mobile.webp",
+      "bytes": 12458,
+      "sha256": "9e1cfa32f6106dc9452d865924c2171d29fc9905ca1a22c92a3a4a724ee6e54a",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "webp",
+            "width": 800,
+            "height": 1000
+          }
+        ],
+        "format": {
+          "size": "12458"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/poster.webp",
+      "bytes": 20236,
+      "sha256": "5f1120c081abfa0fb8851be7fd7e7ccc1cfec2798b819742a6b8482af3b16d08",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "webp",
+            "width": 1600,
+            "height": 1100
+          }
+        ],
+        "format": {
+          "size": "20236"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/sequence.mp4",
+      "bytes": 163720,
+      "sha256": "8e035988615e40196f481e9708b75754a3c0bd2bdba2444ac48b377583e3820b",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1600,
+            "height": 1100
+          }
+        ],
+        "format": {
+          "duration": "6.000000",
+          "size": "163720"
+        }
+      }
+    }
+  ]
+}

@@ -55,13 +55,28 @@
 .work-catalog__group > h2,
 .work-catalog__group summary { font: 700 1.25rem/1.1 var(--font-display); letter-spacing: -0.02em; }
 
-.work-catalog__featured-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1px; margin-top: 1rem; background: var(--rule); }
-.work-catalog__featured-project { padding: clamp(1.2rem, 3vw, 2.2rem); background: var(--surface); }
+.work-catalog__featured-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 1px; margin-top: 1rem; background: var(--rule); }
+.work-catalog__featured-project { display: flex; flex-direction: column; padding: clamp(1.2rem, 3vw, 2.2rem); background: var(--surface); text-decoration: none; color: inherit; border-left: 3px solid var(--rule); transition: border-left-width var(--motion-short) ease; }
+.work-catalog__featured-project:hover { border-left-width: 5px; }
+.work-catalog__featured-project:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.work-catalog__featured-project[data-family] { border-left-color: var(--family-accent, var(--rule)); }
+.work-catalog__featured-project[data-family]:hover { border-left-color: var(--family-accent, var(--rule)); }
+.work-catalog__featured-image { aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius-control); margin-bottom: var(--space-3); background: var(--surface-inset); }
+.work-catalog__featured-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 200ms ease; }
+.work-catalog__featured-project:hover .work-catalog__featured-image img { transform: scale(1.02); }
+@media (prefers-reduced-motion: reduce) { .work-catalog__featured-image img { transform: none; transition: none; } }
+.work-catalog__featured-badge { display: inline-flex; align-items: center; gap: 0.35rem; font: 600 0.7rem/1 var(--font-meta); letter-spacing: 0.06em; text-transform: uppercase; padding: 0.35rem 0.6rem; border-radius: var(--radius-control); background: color-mix(in oklch, var(--family-accent, var(--arch-500)) 12%, transparent); color: var(--family-accent, var(--arch-500)); width: fit-content; margin-bottom: var(--space-2); }
+.work-catalog__featured-status { font: 600 0.7rem/1 var(--font-meta); color: var(--ink-muted); margin-bottom: var(--space-1); }
+.work-catalog__featured-project h3 { margin: 0 0 var(--space-1); font: 650 clamp(1.05rem, 2vw, 1.45rem)/1.08 var(--font-display); color: inherit; }
+.work-catalog__featured-summary { max-width: 38rem; color: var(--ink-muted); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.work-catalog__featured-tech { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: var(--space-2); }
+.work-catalog__featured-tech span { font: 600 0.65rem/1 var(--font-meta); color: var(--ink-muted); background: var(--surface-inset); padding: 0.25rem 0.5rem; border-radius: var(--radius-control); }
 
 .work-catalog__specimen-list,
 .work-catalog__archive-list { list-style: none; padding: 0; }
 .work-catalog__specimen-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.9rem; margin-top: 1rem; }
 .work-catalog__specimen { border: 1px solid var(--rule); padding: 1rem; background: linear-gradient(145deg, var(--surface-raised), var(--surface)); }
+.work-catalog__specimen[data-family] { border-left: 2px solid var(--family-accent, var(--rule)); }
 .work-catalog__specimen-code,
 .work-catalog__meta { color: var(--ink-muted); font: 600 0.7rem/1.35 var(--font-meta); letter-spacing: 0.06em; text-transform: uppercase; }
 .work-catalog__specimen-code { margin: 0 0 2.5rem; }
@@ -74,7 +89,7 @@
 
 .work-catalog h3 { margin: 0; font: 650 clamp(1.05rem, 2vw, 1.45rem)/1.08 var(--font-display); }
 .work-catalog__project-link { color: var(--ink); text-decoration: none; }
-.work-catalog__project-link:hover { color: var(--accent-engineering); }
+.work-catalog__project-link:hover { color: var(--accent); }
 .work-catalog__summary { max-width: 38rem; color: var(--ink-muted); line-height: 1.55; }
 
 @media (max-width: 40rem) {

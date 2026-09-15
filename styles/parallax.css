@@ -1,0 +1,39 @@
+/* ------------------------------------------------------------------
+   Parallax Depth Layer System
+   ------------------------------------------------------------------
+   Provides GPU-composited transforms and reduced-motion safety
+   for elements driven by scripts/parallax.js.
+
+   Usage:
+     <div class="parallax-container">
+       <img class="parallax-layer" data-parallax="0.3" src="..." />
+     </div>
+   ----------------------------------------------------------------*/
+
+/* --- Layer base styles ------------------------------------------ */
+
+.parallax-layer {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Promote to its own compositing layer */
+  transform: translateZ(0);
+}
+
+/* --- Container containment -------------------------------------- */
+
+.parallax-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- Reduced-motion override ------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-layer {
+    transform: none !important;
+    will-change: auto;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+  }
+}

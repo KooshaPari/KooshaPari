@@ -6,7 +6,7 @@ import { renderNetWeaveWorkbench } from '../media/netweave-workbench.js';
 import { renderShareCliWorkbench } from '../media/sharecli-workbench.js';
 import { renderShareCliRecordings } from '../media/sharecli-recording.js';
 import { renderSubstratePlate } from '../media/systems-plate.js';
-import { renderNotFound } from './not-found.js';
+import { render as renderNotFound } from './not-found.js';
 
 const COMPACT_SECTIONS = {
   byteport: [
@@ -121,14 +121,61 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
       )
     : null;
 
+  const techPills = project.technologies?.length
+    ? el('div', { class: 'case-tech' },
+        project.technologies.map((t) => el('span', {}, t)))
+    : null;
+
+  const FAMILY_MAP = {
+    netweave: 'netweave', sharecli: 'sharecli', omniroute: 'omniroute',
+    'gmk-arch': 'physical', witf: 'physical', 'dss-cipher': 'physical',
+    substrate: 'substrate', 'phenotype-omlx': 'omlx',
+  };
+  const family = FAMILY_MAP[project.slug];
+
+  const familyAccentBar = family
+    ? el('div', { class: 'hero-accent-bar', 'aria-hidden': 'true' })
+    : null;
+
+  const heroEyebrow = el('p', { class: 'eyebrow' }, project.category + ' \u00b7 ' + project.status);
+  const heroTitle = el('h1', {}, project.title);
+  const heroLede = el('p', { class: 'lede' }, project.summary);
+  const heroMeta = el('div', { class: 'hero-meta' }, heroEyebrow, heroTitle, heroLede, techPills, metrics);
+
+  const heroImage = project.gallery?.[0]
+    ? (() => {
+        const asset = project.presentation?.assets?.find((entry) => entry.src === project.gallery[0]);
+        return el('figure', { class: 'case-hero' },
+          el('img', {
+            src: project.gallery[0],
+            alt: asset?.alt ?? project.presentation?.alt ?? `${project.title} project visual`,
+            loading: 'eager',
+            decoding: 'async',
+            width: asset?.width ?? project.presentation?.media?.width ?? 1600,
+            height: asset?.height ?? project.presentation?.media?.height ?? 900,
+          }),
+          asset?.alt ? el('figcaption', {}, asset.alt) : null,
+        );
+      })()
+    : null;
+
+  const heroPlate = el('div', { class: 'hero-plate' },
+    familyAccentBar,
+    heroMeta,
+    heroImage || el('div', { class: 'hero-plate__placeholder' }),
+  );
+
+  const caseStudyAttrs = { class: 'view active portfolio-view case-study' };
+  if (family) {
+    caseStudyAttrs['data-family'] = family;
+    caseStudyAttrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family}))`;
+  }
+
   root.replaceChildren(
-    el('section', { class: 'view active portfolio-view case-study' },
+    el('section', caseStudyAttrs,
       el('a', { href: '/work', class: 'back-link' }, '\u2190 Back to work'),
-      el('p', { class: 'eyebrow' }, project.category + ' \u00b7 ' + project.status),
-      el('h1', {}, project.title),
-      el('p', { class: 'lede' }, project.summary),
-      metrics,
-      project.gallery?.length
+      heroPlate,
+      project.gallery?.length > 1
         ? el('div', { class: 'case-gallery' },
             project.gallery.map((src) => {
               const asset = project.presentation?.assets?.find((entry) => entry.src === src);
@@ -154,3 +201,5 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
     ),
   );
 }
+
+

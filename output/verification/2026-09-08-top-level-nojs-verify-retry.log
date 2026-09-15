@@ -1,0 +1,124 @@
+
+> verify
+> npx --no-install vercel build --yes && npm test && npm run check && npm run test:e2e
+
+Installing dependencies...
+
+up to date in 192ms
+
+16 packages are looking for funding
+  run `npm fund` for details
+
+> stage:publication
+> node scripts/stage-publication.js
+
+{
+  "status": "ok",
+  "outputDir": "/Users/kooshapari/CodeProjects/Phenotype/repos/koosha-phenotype/.vercel/output",
+  "outputDirRelative": ".vercel/output",
+  "target": "preview",
+  "message": "Build completed successfully.",
+  "next": [
+    {
+      "command": "vercel deploy",
+      "when": "Deploy the build output"
+    }
+  ]
+}
+─────────────────────────────────────────────────────────────────────────
+
+Update available! v52.0.0 ≫ v59.11.7
+Changelog: https://github.com/vercel/vercel/releases/tag/vercel%4059.11.7
+Run `brew upgrade vercel-cli` to update.
+
+─────────────────────────────────────────────────────────────────────────
+
+> test
+> node --test tests/*.test.js
+
+✔ publication outputs exclude macOS Finder metadata at every depth (23.13625ms)
+✔ Vercel static output contains only staged publication assets and matches source (21.419417ms)
+(node:59351) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ lens state accepts engineering and product values (2.070958ms)
+✔ lens state rejects unsupported values without notifying (0.153334ms)
+✔ diagram contract requires unique nodes and valid edge endpoints (0.627125ms)
+✔ NetWeave uses deterministic illustrative data (0.842292ms)
+✔ progressive media defaults to a static, reduced-motion-safe fallback (0.118458ms)
+✔ OmniRoute static metadata retains its contribution boundary (2.129042ms)
+✔ SPA metadata updates every route-level social field (2.1635ms)
+✔ Workbench exposes five stable inspection views and three bounded states (1.179416ms)
+✔ Workbench state is keyboard friendly and reset returns to the entry view (0.316333ms)
+✔ Workbench never schedules playback and describes its no-JS fallback (1.154917ms)
+✔ portfolio records have unique slugs and required evidence fields (0.773417ms)
+✔ fork entries preserve upstream provenance (0.127334ms)
+✔ featured records include authored artifact presentation (0.103375ms)
+✔ selected homepage assets distinguish deployed derivatives from retained sources (4.576ms)
+✔ deployed hero asset byte hashes and dimensions match the recorded derivatives exactly (0.784708ms)
+✔ homepage featured order responds to the active lens while keeping WITF first (0.245875ms)
+✔ all featured records have §13 Evidence Panel field (non-empty evidence string) (0.154459ms)
+✔ all featured records have §7 lens annotations per COMPONENT_STATE_MATRIX (0.142959ms)
+✔ homepage hero projects (gmk-arch, witf) have §13 asset provenance (src + sha256 + dimensions) (0.17875ms)
+✔ public evidence labels retain source distinctions without internal filenames (1.133292ms)
+(node:59357) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Reader initializes, honors saved choices, and handles keyboard focus (3.927375ms)
+✔ parseRoute recognizes portfolio views (1.29375ms)
+✔ parseRoute separates project detail slugs (0.144583ms)
+✔ parseRoute recognizes lens routes from path (0.969458ms)
+✔ parseRoute returns home for empty and an explicit 404 for unknown routes (0.15125ms)
+✔ routeToHash serializes views and project details (0.179542ms)
+✔ routeFromLocation honors a legacy project hash only on the Work index (0.274958ms)
+✔ ShareCLI recording catalog keeps replay artifacts attributable and separate from the Workbench (1.700833ms)
+✔ published recordings preserve the captured bytes and revision (5.551625ms)
+✔ ShareCLI workbench exposes four bounded illustrative runtime states (1.620916ms)
+✔ ShareCLI workbench is visitor-stepped and resettable without playback (0.300708ms)
+✔ ShareCLI workbench keeps its fixture and static-fallback limits visible (9.338833ms)
+✔ published top-level navigation pages retain meaningful static content (31.304541ms)
+✔ every published project has meaningful static content and truthful provenance (20.1185ms)
+✔ Substrate plate keeps its ownership boundary explicit (1.033625ms)
+✔ systems plate views describe architecture, not measured telemetry (0.501625ms)
+✔ catalog classification is a disjoint featured, compact, archive partition (0.728625ms)
+✔ buildWorkCatalog preserves approved filtering and stable group contracts (10.051833ms)
+✔ buildWorkCatalog does not mutate records or the source array (0.994958ms)
+✔ archive drawers sort dated records newest first and retain undated source order last (0.184542ms)
+✔ work filters expose the approved catalog values (1.750083ms)
+✔ matchesWorkFilter includes representative records for every approved filter (0.257583ms)
+✔ matchesWorkFilter excludes non-matching and unknown filters (0.142792ms)
+✔ filterWorkProjects preserves source order and never mutates its input (1.6695ms)
+✔ Work view renders accessible filters, a live total, and distinct catalog structures (8.6355ms)
+✔ Work filters rerender the live count and pressed state without changing the route (1.450083ms)
+ℹ tests 48
+ℹ suites 0
+ℹ pass 48
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 471.692125
+
+> check
+> node --check scripts/app.js && node --check scripts/stage-publication.js && node --check data/projects.js
+
+
+> test:e2e
+> npm run stage:publication && npx playwright test
+
+
+> stage:publication
+> node scripts/stage-publication.js
+
+[WebServer] (node:59622) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:59636) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/acceptance.spec.js:5:1 › Reader shortcut, persistence, reduced motion and focus (2.0s)
+  ✓  2 tests/browser/acceptance.spec.js:26:1 › clean navigation and saved lens (725ms)
+  ✓  3 tests/browser/acceptance.spec.js:43:1 › all project pages have no-JavaScript content and downloads (958ms)
+  ✓  4 tests/browser/acceptance.spec.js:59:1 › top-level navigation pages have no-JavaScript content and clean links (649ms)
+  ✓  5 tests/browser/acceptance.spec.js:84:1 › ShareCLI desktop and mobile accessibility (5.3s)
+
+  5 passed (11.8s)

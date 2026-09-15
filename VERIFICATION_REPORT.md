@@ -1,5 +1,38 @@
 # Preview verification report
 
+## Repeatable local verification gate (2026-09-08)
+
+Run `npm run verify` for the local release candidate gate. It runs Vercel's
+local build first because the Node output contract reads
+`.vercel/output/static`; it then runs the unit suite, syntax checks, stages the
+publication artifact, and exercises that staged `dist/` artifact with
+Playwright through `scripts/preview-server.js` on `127.0.0.1:4197`.
+
+`npm run test:e2e` is available when only the staged browser suite is needed.
+`npm run preview` stages the same artifact before serving it for manual local
+review. Neither command deploys, attaches a domain, or changes remote state.
+
+Local prerequisites are Node/npm with the checked-in dependencies installed,
+the Vercel CLI plus usable local project configuration for `vercel build`, and
+Chrome because Playwright is configured with its `chrome` channel. Port 4197
+must be available. This documents the verified local environment; it is not a
+claim of clean-clone or hosted-preview reproducibility.
+
+Top-level no-JavaScript pages are generated at staging time from the same
+shell and route renderers as the enhanced application. The generated scope is
+limited to `/`, `/engineering`, `/product`, `/work`, `/resume`, `/contact`,
+and `/blog`; project and published blog-post detail routes retain separate
+prerender paths.
+
+Project static pages also receive the shared primary shell. Their static view
+keeps clean Work, Writing, Resume, and Contact links plus project text and
+downloads, while rich controls are removed until JavaScript enhancement.
+
+Published blog-post pages use the same shared shell and their existing post
+renderer at staging time. The static scope follows `data/posts.js` and does
+not create pages for unknown slugs; it preserves article text, clean primary
+navigation, post metadata, and a clean `/blog` return link without JavaScript.
+
 Date: 2026-09-01
 
 - `node --check scripts/app.js`: PASS

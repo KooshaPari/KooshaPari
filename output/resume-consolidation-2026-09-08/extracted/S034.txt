@@ -1,0 +1,50 @@
+            Koosha Paridehpour | Role Fit
+            Synopsis - Founding Engineer,
+            Generative UI Systems
+            Career Narrative Summary
+            Koosha Paridehpour blends product leadership with hands-on engineering across
+            web and mobile. The resume shows early founder and PM ownership, followed by
+            technical roles delivering agentic automation, MCP-based tooling, and cross-
+            functional program leadership. Projects span React/React Native, Node,
+            TypeScript, AWS, and LangChain/LangGraph, with evidence of building internal
+            tooling, CI/CD, and integrations that accelerate team velocity. The throughline is
+            high agency, systems thinking, and translation between business goals and
+            technical execution.
+
+
+            Observed Alignment & Supporting Evidence
+                  Systems Builder — Architected an AI-driven requirements platform across five
+                  teams, establishing development standards, CI/CD, and a Discord–Coda–
+                  GitHub–Jira bot to automate program management.
+
+                  First-Principles Innovator — Built an MCP server and project infrastructure
+                  that enabled consistent agentic workflows and templated generation for
+                  project showcases (Byteport).
+
+                  High-Agency Operator — Led an InnoTech initiative at CVS winning the
+                  company-wide challenge, delivering ahead of schedule with measurable ROI
+                  and executive presentations.
+
+                  Deep Generalist — Spans PM, program leadership, React/Native,
+                  Electron/Tauri, Node/TS, AWS, and AI frameworks (LangChain, LangGraph),
+                  with additional experience in operations and e-commerce.
+
+
+            Key Exploration Themes
+
+
+Koosha Paridehpour | Role Fit Synopsis - Founding Engineer, Generative UI Systems                1
+                  Protocol and DSL design: How would Koosha formalize a token-driven, AI-
+                  legible UI system and runtime enforcement inside AIOS while maintaining sub-
+                  100ms interactions and consumer-grade polish? What golden-path docs and
+                  guardrails would onboard others quickly at Demand.io?
+
+                  Migration and scope control: Proposed migration plan from existing surfaces
+                  to a unified stack, including performance budgets, observability, and agent
+                  rules that prevent drift while enabling rapid iteration.
+
+
+
+
+Koosha Paridehpour | Role Fit Synopsis - Founding Engineer, Generative UI Systems                2
+

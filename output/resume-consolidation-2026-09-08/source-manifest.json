@@ -1,0 +1,641 @@
+[
+  {
+    "id": "S001",
+    "path": "/Users/kooshapari/Downloads/Copy of Koosha Paridehpour Resume-2.docx",
+    "format": "docx",
+    "bytes": 652294,
+    "sha256": "b6a5365f9e0c3f7dd6ce30c01ddcfe8d25c5fb11b2566bdfe9672b82e3e4a752",
+    "normalized_text_sha256": "8e9d6a7c3eafcebde7f27b1582a20d58ed63b7d1bcf2315e66f5fa0ca4e745a2",
+    "extracted": "extracted/S001.txt"
+  },
+  {
+    "id": "S002",
+    "path": "/Users/kooshapari/Downloads/Copy of Koosha Paridehpour Resume-2.pdf",
+    "format": "pdf",
+    "bytes": 94578,
+    "sha256": "551162b839ed8c9e2a5e374319c44e34128ef67eb8329224b0cb4b7a2563d64f",
+    "normalized_text_sha256": "bf545a0d309fac0cc9d9fc00c65a8ba63d7ab9030f4294d5419bcb4fc1705e7e",
+    "extracted": "extracted/S002.txt"
+  },
+  {
+    "id": "S003",
+    "path": "/Users/kooshapari/Downloads/Copy of Koosha Paridehpour Resume.docx",
+    "format": "docx",
+    "bytes": 652294,
+    "sha256": "ce178e8c40fccd25faaeb97ef7d74d814d81373318f208f0068835ac93e3911d",
+    "normalized_text_sha256": "8e9d6a7c3eafcebde7f27b1582a20d58ed63b7d1bcf2315e66f5fa0ca4e745a2",
+    "extracted": "extracted/S003.txt"
+  },
+  {
+    "id": "S004",
+    "path": "/Users/kooshapari/Downloads/Copy of Koosha Paridehpour Resume.pdf",
+    "format": "pdf",
+    "bytes": 95306,
+    "sha256": "9b7b9a15ef23429d796125ecc688d35de6e560586930db8e0552582dbe4c4179",
+    "normalized_text_sha256": "28a77d9153745e2deb1aba7d09b8b5807f597f54b2cac5df93f9b87fe0b6a811",
+    "extracted": "extracted/S004.txt"
+  },
+  {
+    "id": "S005",
+    "path": "/Users/kooshapari/Downloads/Eng Resume-2.pdf",
+    "format": "pdf",
+    "bytes": 133772,
+    "sha256": "fbd9c8064d31bc97f16fedb6bd5e7a60ac9f3588caf8fde49ec7867b673a8ac4",
+    "normalized_text_sha256": "3c5d779ccfb4411d85a67a4fca0d545b901a5e59483b66c6511ccaa3210cb482",
+    "extracted": "extracted/S005.txt"
+  },
+  {
+    "id": "S006",
+    "path": "/Users/kooshapari/Downloads/Eng Resume-3.pdf",
+    "format": "pdf",
+    "bytes": 132725,
+    "sha256": "350b171fad9f78f58c8c57938e0696c7f9d1ba20a9b4a12f1ba8dd66da1edf31",
+    "normalized_text_sha256": "b039b61eb4651b913a693c937193e5466866adda162825049a9b05ac35b48b76",
+    "extracted": "extracted/S006.txt"
+  },
+  {
+    "id": "S007",
+    "path": "/Users/kooshapari/Downloads/Eng Resume-4.pdf",
+    "format": "pdf",
+    "bytes": 131962,
+    "sha256": "baf95c3532bcfc4bdf4394053d5d0eb5376736867d4ec84f09fc2239204bfd9c",
+    "normalized_text_sha256": "b039b61eb4651b913a693c937193e5466866adda162825049a9b05ac35b48b76",
+    "extracted": "extracted/S007.txt"
+  },
+  {
+    "id": "S008",
+    "path": "/Users/kooshapari/Downloads/Eng Resume.docx",
+    "format": "docx",
+    "bytes": 655083,
+    "sha256": "b269606b1af465836a70ecbb73928ee27837848987dcd48d7237fbc29e216039",
+    "normalized_text_sha256": "49f652bcf9252c9201e5919eca6a8ff056b9b3399eb05619151add9ded6304ce",
+    "extracted": "extracted/S008.txt"
+  },
+  {
+    "id": "S009",
+    "path": "/Users/kooshapari/Downloads/Eng Resume.pdf",
+    "format": "pdf",
+    "bytes": 104655,
+    "sha256": "8b984ccff6b94e58ffa0145fefe5852d2b3e2c55a22ea47f6db0a40cfb9f684f",
+    "normalized_text_sha256": "cdce9e3a3ceea8a41593a4301e9272b0e8b1815d397405f0eebe2eb7649293be",
+    "extracted": "extracted/S009.txt"
+  },
+  {
+    "id": "S010",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume (1).pdf",
+    "format": "pdf",
+    "bytes": 63726,
+    "sha256": "b4d378ca6d7b685d4895b7cb41c9db81b228090fbbb448197b527a4c59eb0a3f",
+    "normalized_text_sha256": "6f7a990ed3ed013236b92acf32d9eeeec57f0f789de9a82de1c67ff74004f3d0",
+    "extracted": "extracted/S010.txt"
+  },
+  {
+    "id": "S011",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-10.pdf",
+    "format": "pdf",
+    "bytes": 105040,
+    "sha256": "183e66b4942feb17f5118665f2618a6be048cd88cc20d6aa2f95440ff6a22dd0",
+    "normalized_text_sha256": "536a61698b1499a813d9e6f961648f97c369114f50238a0e37392029269c75e4",
+    "extracted": "extracted/S011.txt"
+  },
+  {
+    "id": "S012",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-11.pdf",
+    "format": "pdf",
+    "bytes": 105216,
+    "sha256": "574ffbb4bdc8b2825c802af150328c2e9f3596305b6bd7a6789937725926b870",
+    "normalized_text_sha256": "757f1e31904870917bf943eab2b256f5937ef186797c7a16aacece7b4fe6e24b",
+    "extracted": "extracted/S012.txt"
+  },
+  {
+    "id": "S013",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-12.pdf",
+    "format": "pdf",
+    "bytes": 105271,
+    "sha256": "895453923c3c0b87c583e30aca86e56e203612393852386b35c64ff569652b8c",
+    "normalized_text_sha256": "9077fc6d0e48491abd1125d5cf2afa3afeacd84e4d643bd7373e9b94ebf52b25",
+    "extracted": "extracted/S013.txt"
+  },
+  {
+    "id": "S014",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-13.pdf",
+    "format": "pdf",
+    "bytes": 105467,
+    "sha256": "4606b2137c8541836b8ff9893a20bcd071e25409bb50bb3bff396eeb1f311424",
+    "normalized_text_sha256": "092845adedea8c7ab43e16fffaeef2e541f2bdca4d138587dbcb9bf487d36e20",
+    "extracted": "extracted/S014.txt"
+  },
+  {
+    "id": "S015",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-14.pdf",
+    "format": "pdf",
+    "bytes": 106384,
+    "sha256": "2fb4362639da1415ae28b17426cde323d533283afa76c795bb6deac88be21aeb",
+    "normalized_text_sha256": "48dbd62997dc896197c66421d9d06afd1766a63af1472d3deb70845651e8635c",
+    "extracted": "extracted/S015.txt"
+  },
+  {
+    "id": "S016",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-15.pdf",
+    "format": "pdf",
+    "bytes": 115658,
+    "sha256": "17623c97794ddf78e78fa22263356a5d6018faa4b9ebb42094ca9c40460568e5",
+    "normalized_text_sha256": "4fe1ff778e572ef48db9d96617c4069c31ba8825e33ef3afafb47155eeaa387a",
+    "extracted": "extracted/S016.txt"
+  },
+  {
+    "id": "S017",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-16.pdf",
+    "format": "pdf",
+    "bytes": 122429,
+    "sha256": "22758e52c428b51c8cee76c4c3c046bd263e247b9a2e24607fea70ed719fb46b",
+    "normalized_text_sha256": "4b9ecf53f0efe835219952f61852ac16ccdd5bc9b911c8d4cc124afde4d73fb9",
+    "extracted": "extracted/S017.txt"
+  },
+  {
+    "id": "S018",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-17.pdf",
+    "format": "pdf",
+    "bytes": 120195,
+    "sha256": "dc9e33a2ad86a459075d97ff152fe6d7005adf2424d1330f2621a209356b3404",
+    "normalized_text_sha256": "dcfc035bc0528e0880b81694dffb791a222222d98c71baf7eaa3c8aa00a9c844",
+    "extracted": "extracted/S018.txt"
+  },
+  {
+    "id": "S019",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-18.pdf",
+    "format": "pdf",
+    "bytes": 104898,
+    "sha256": "901e0cfe96e1503d46a91fe734b73dfb8acfa316df73be51eb257ab37f41d839",
+    "normalized_text_sha256": "54ff503777cfa9a0a94b62e63f5ed56cc19eca904d7e34a9f03e965626cb6a2f",
+    "extracted": "extracted/S019.txt"
+  },
+  {
+    "id": "S020",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-19.pdf",
+    "format": "pdf",
+    "bytes": 150851,
+    "sha256": "763e22485e5be8b01cd206a44b497ee60136138ffb303216322f9c44b8e618e0",
+    "normalized_text_sha256": "f37eb4cb4fa8e3d840327246d65144c7ecfd78db14cd760d0b3ae9f12f529dea",
+    "extracted": "extracted/S020.txt"
+  },
+  {
+    "id": "S021",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-2.pdf",
+    "format": "pdf",
+    "bytes": 63659,
+    "sha256": "c0b4ca15b491c820124d2ac817d94b62c3cf48b9b0e16285e0398d4180b3df48",
+    "normalized_text_sha256": "4b757595a9295436096de17d75b21f49d8445b2df93315377ae5d74d09a18693",
+    "extracted": "extracted/S021.txt"
+  },
+  {
+    "id": "S022",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-20.pdf",
+    "format": "pdf",
+    "bytes": 126775,
+    "sha256": "aab3d957de2261ebc214b973267e507133b6c02668bf0a909c66469ca190868e",
+    "normalized_text_sha256": "9a02fcb469d3508238a5753ac3dc12666a6832690a073b07c6e0586681621a12",
+    "extracted": "extracted/S022.txt"
+  },
+  {
+    "id": "S023",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-2026.pdf",
+    "format": "pdf",
+    "bytes": 86509,
+    "sha256": "cb125f9de9c9f16b34c7f460b15d99cfc9b37f37cb5718870968086d10896869",
+    "normalized_text_sha256": "af0c100463a283c5534a4115e6f9886cfb5dfba4dffa83bb2a0bef0c67f9b2bb",
+    "extracted": "extracted/S023.txt"
+  },
+  {
+    "id": "S024",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-21.pdf",
+    "format": "pdf",
+    "bytes": 126830,
+    "sha256": "68c942c9ef3e2bc6aaa9774bd182d84a9e7b197489755235610d230a04d9b149",
+    "normalized_text_sha256": "50c36f6c1506e16ac6e1e7771b1cda07b577678db213ff2e88a32cea31f57e50",
+    "extracted": "extracted/S024.txt"
+  },
+  {
+    "id": "S025",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-22.pdf",
+    "format": "pdf",
+    "bytes": 86508,
+    "sha256": "80203be93ede404196f56251dd1f0d2466cb7e6af033f0fdfe26717b40c9b31d",
+    "normalized_text_sha256": "ecd0389bcd06dd88c3e4ffbcd386f587f8c0d99091297fd09e543e6f76ec9ae0",
+    "extracted": "extracted/S025.txt"
+  },
+  {
+    "id": "S026",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-3.pdf",
+    "format": "pdf",
+    "bytes": 63777,
+    "sha256": "0ab21c65623db176e15c4d0eecb8507b4efa97d6b2d4a8217b2e2df1a01b0877",
+    "normalized_text_sha256": "13619d112f7a4c95306dd970741fa3ff7f18586ab12048295640ef292c159ca7",
+    "extracted": "extracted/S026.txt"
+  },
+  {
+    "id": "S027",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-4.pdf",
+    "format": "pdf",
+    "bytes": 73922,
+    "sha256": "1d63abf7fd994ef746e3c94e6223f68176c906da98d808606feed537ffc8884c",
+    "normalized_text_sha256": "522d64bb65fd2a67b6a59d7432c2c8dccb0f2a42aaa3570d40926c3d4ee16b61",
+    "extracted": "extracted/S027.txt"
+  },
+  {
+    "id": "S028",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-5.pdf",
+    "format": "pdf",
+    "bytes": 82106,
+    "sha256": "c0eadbb6f1ca1ad196cecb13862197c49e27326b0a3182084c0d692c313b0a13",
+    "normalized_text_sha256": "8b94a6f09051e027e98fb4a6b22e084035781f94c35ebc9570ecc97b7543aa30",
+    "extracted": "extracted/S028.txt"
+  },
+  {
+    "id": "S029",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-6.pdf",
+    "format": "pdf",
+    "bytes": 81726,
+    "sha256": "3afd6742412b38b3843c3003cca2261912b15f1ae0dd04e8ca7ee275496cef57",
+    "normalized_text_sha256": "8b94a6f09051e027e98fb4a6b22e084035781f94c35ebc9570ecc97b7543aa30",
+    "extracted": "extracted/S029.txt"
+  },
+  {
+    "id": "S030",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-7.pdf",
+    "format": "pdf",
+    "bytes": 81755,
+    "sha256": "b6d3f6b8e6faa1c49e4eb52b5cb3b961369be5b77caf888d21ae5dbe6389a79a",
+    "normalized_text_sha256": "8bb180ed7a6a401dce84d465d42004841627be744ea61354c7d6b37ef9a5f52b",
+    "extracted": "extracted/S030.txt"
+  },
+  {
+    "id": "S031",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-8.pdf",
+    "format": "pdf",
+    "bytes": 81961,
+    "sha256": "59ffceb25e2c3b6ebb621a316e7f7b43aaf2bef48501b74e603934270554e3e7",
+    "normalized_text_sha256": "a51d96fd2439f01e64e04a3f728572b34f4c09edbc850c240e86be929b3d240f",
+    "extracted": "extracted/S031.txt"
+  },
+  {
+    "id": "S032",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume-9.pdf",
+    "format": "pdf",
+    "bytes": 82048,
+    "sha256": "ba18b8d35c2c44f223d6aa452c9efd0cf5104712868ac6151540f7a68cdd3c21",
+    "normalized_text_sha256": "8328fb7f0bcfc8f167ad6d60f75b03aa755d812ef3569d94403c63ff6c3ab9ac",
+    "extracted": "extracted/S032.txt"
+  },
+  {
+    "id": "S033",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour Resume.pdf",
+    "format": "pdf",
+    "bytes": 63726,
+    "sha256": "b4d378ca6d7b685d4895b7cb41c9db81b228090fbbb448197b527a4c59eb0a3f",
+    "normalized_text_sha256": "6f7a990ed3ed013236b92acf32d9eeeec57f0f789de9a82de1c67ff74004f3d0",
+    "extracted": "extracted/S033.txt"
+  },
+  {
+    "id": "S034",
+    "path": "/Users/kooshapari/Downloads/Koosha Paridehpour | Role Fit Synopsis - Founding Engineer, Generative UI Systems.pdf",
+    "format": "pdf",
+    "bytes": 43728,
+    "sha256": "1c311ce13de6d3d990e77b443289484d9367c295026d0716aa930a72af97cd35",
+    "normalized_text_sha256": "6bc5c891952d6f907fe8c9afd434826f0394f413e9a82cb53d09d2d7f13b4b74",
+    "extracted": "extracted/S034.txt"
+  },
+  {
+    "id": "S035",
+    "path": "/Users/kooshapari/Downloads/KooshaParidehpour-Eng.pdf",
+    "format": "pdf",
+    "bytes": 97215,
+    "sha256": "62cdbc786bfe77da5f3545bad95184f295aad829bbd5b2907fb45503980e7292",
+    "normalized_text_sha256": "a7f6f4b20f8a8e43dc3a67a8d57355fc55ea11b77f44d646d72f9da80ff30377",
+    "extracted": "extracted/S035.txt"
+  },
+  {
+    "id": "S036",
+    "path": "/Users/kooshapari/Downloads/KooshaParidehpour-Prod.pdf",
+    "format": "pdf",
+    "bytes": 91413,
+    "sha256": "ebdfed67073a514c68c77b099c9be0ba16990184c532c5926587cb84f866adac",
+    "normalized_text_sha256": "2859ba03dd519d48a56f224e5e641b48b9c6966c7c0429a01469693570dca45b",
+    "extracted": "extracted/S036.txt"
+  },
+  {
+    "id": "S037",
+    "path": "/Users/kooshapari/Downloads/KooshaParidehpour_CSE578_CourseProjectFinalReport.pdf",
+    "format": "pdf",
+    "bytes": 2060921,
+    "sha256": "4861c5ecbd35647602b40a875fc12e233f5c4bc11abe936aab55fc0b7fc7718d",
+    "normalized_text_sha256": "9d5585886cdc3eebf8960237dd13454cde81910b74e4cc809f3cf48af500cc71",
+    "extracted": "extracted/S037.txt"
+  },
+  {
+    "id": "S038",
+    "path": "/Users/kooshapari/Downloads/KooshaParidehpour_CSE578_CourseProjectPythonCode.pdf",
+    "format": "pdf",
+    "bytes": 46243,
+    "sha256": "a2214cfcb36f472ad360f5b497e1a9cc51e2d658cb3aa812b03923bc731b55a5",
+    "normalized_text_sha256": "baa9bb99cb16aeb7ff5e7aa3c372c958f801749e8ff1c8d85ecff99534de9828",
+    "extracted": "extracted/S038.txt"
+  },
+  {
+    "id": "S039",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour.pdf",
+    "format": "pdf",
+    "bytes": 106768,
+    "sha256": "685ae3ddc2d1d9835619cc6384732333a2721f7d13466e059bb306a815d7670d",
+    "normalized_text_sha256": "5b3e7126777d279f1db923af8d5ad82320a7fd901c07adeae6ee3a74fa4a90bd",
+    "extracted": "extracted/S039.txt"
+  },
+  {
+    "id": "S040",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Anduril_Connected_Warfare_Resume.docx",
+    "format": "docx",
+    "bytes": 39671,
+    "sha256": "30524f2caed5e0dd92e1be5447bf97c9f07f67c08b9516c4802c4430c0b59fa9",
+    "normalized_text_sha256": "d8fc7363108693f96bf90f0dd477a0a8cc547df3f61e1b9314af12dd98e1f879",
+    "extracted": "extracted/S040.txt"
+  },
+  {
+    "id": "S041",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Anduril_Connected_Warfare_Resume_CW_Master.docx",
+    "format": "docx",
+    "bytes": 5995,
+    "sha256": "bcf7359aae7dfd23f7339487ecb29e1292db886619d6eac972871ff2c861ba56",
+    "normalized_text_sha256": "02a68d8959034376693880fa7f60c94dc4642067ad296623c4fb25b1d66ecbca",
+    "extracted": "extracted/S041.txt"
+  },
+  {
+    "id": "S042",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Anduril_Connected_Warfare_Resume_CW_Master.pdf",
+    "format": "pdf",
+    "bytes": 57701,
+    "sha256": "e35fb8b716671f7a314a9451a27bc2e893aa1520ab74f4689402cc65c087adae",
+    "normalized_text_sha256": "23e4d3ea07a7da86ee97c9e72065aed19950997d06698b742f6a53997a951049",
+    "extracted": "extracted/S042.txt"
+  },
+  {
+    "id": "S043",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Anduril_Connected_Warfare_Resume_Corrected (1).docx",
+    "format": "docx",
+    "bytes": 6417,
+    "sha256": "6eb4bc98bf8c433a8d5abf9d8fe8e8ccf1d35e5916681c57a8b8e60418ad76c1",
+    "normalized_text_sha256": "7bae60b79da03e50223fb77402e15ce48db0faef1353aeb43949c1e45d2e1bf7",
+    "extracted": "extracted/S043.txt"
+  },
+  {
+    "id": "S044",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Anduril_Connected_Warfare_Resume_Corrected.docx",
+    "format": "docx",
+    "bytes": 39847,
+    "sha256": "40f8a007c3fec947c22ccd184dbb450350593ae2a017ee6af5642bb7ec8625c9",
+    "normalized_text_sha256": "1f5f374e3a188d0cba08ba66fe1a6c16b1a05b726c270d59a087ddcb19dfefd2",
+    "extracted": "extracted/S044.txt"
+  },
+  {
+    "id": "S045",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Anduril_Connected_Warfare_Resume_Final.docx",
+    "format": "docx",
+    "bytes": 4350,
+    "sha256": "47120a6d38bf85856dbc6c877f04cdd319c7d6db6c21f0cf441aeb4badd2c636",
+    "normalized_text_sha256": "ba526a61ee9f6ec832fa32ceda98a22b88390c7e707a4fbb42b4a187c36855f3",
+    "extracted": "extracted/S045.txt"
+  },
+  {
+    "id": "S046",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Anduril_Connected_Warfare_Resume_Final.pdf",
+    "format": "pdf",
+    "bytes": 51929,
+    "sha256": "390720a11f08f97e1537e5e7c4d09184322c0b15ab1aff65bd71b9994c142e6e",
+    "normalized_text_sha256": "96f571f793c2a65fcbbee8ab27924ea2e4250619ec6815b745440c132974a7b5",
+    "extracted": "extracted/S046.txt"
+  },
+  {
+    "id": "S047",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Anduril_Resume_Targeted_Draft.docx",
+    "format": "docx",
+    "bytes": 4622,
+    "sha256": "1b13676db1b2a9d625946e5b9924f9950b724b5ccfa97df435cf0b7cfb19fca9",
+    "normalized_text_sha256": "e7502adcaa4dd0f38f6afbf37a368b6f2ca6f42aba5a03406f47578438f7bf2b",
+    "extracted": "extracted/S047.txt"
+  },
+  {
+    "id": "S048",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Anduril_Resume_Targeted_Draft.pdf",
+    "format": "pdf",
+    "bytes": 53250,
+    "sha256": "151e1fac8cfa32fc981560b583507584ac918fa40f9b0f46963a7d09144378e2",
+    "normalized_text_sha256": "54e2ab7a5f970c4704637a7e6ae34cce0263f88c516086cc418ee896a44f4adc",
+    "extracted": "extracted/S048.txt"
+  },
+  {
+    "id": "S049",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_CSE578_Course_Project_Progress_Report-1.pdf",
+    "format": "pdf",
+    "bytes": 95691,
+    "sha256": "d4346d421ee69188d76641c3b66404f7fec12f0378ed2cf12adf59514e7dc6e3",
+    "normalized_text_sha256": "38afbd2e036b24b653d65074450b0efbe0cb6e813ffd90ab982e368ac9f059cd",
+    "extracted": "extracted/S049.txt"
+  },
+  {
+    "id": "S050",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_CSE578_Course_Project_Progress_Report.pdf",
+    "format": "pdf",
+    "bytes": 95691,
+    "sha256": "d4346d421ee69188d76641c3b66404f7fec12f0378ed2cf12adf59514e7dc6e3",
+    "normalized_text_sha256": "38afbd2e036b24b653d65074450b0efbe0cb6e813ffd90ab982e368ac9f059cd",
+    "extracted": "extracted/S050.txt"
+  },
+  {
+    "id": "S051",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Software_Engineer_Resume_Final.pdf",
+    "format": "pdf",
+    "bytes": 97816,
+    "sha256": "6954b528f289630f3c3d4a2882dbdba6b19c5aa4fb7817188e74a1e2eb440c1e",
+    "normalized_text_sha256": "7ded07c1c0d06ccdd8a0a6654f834fa67c8b72a6067cd2fe1226e7ab656658a4",
+    "extracted": "extracted/S051.txt"
+  },
+  {
+    "id": "S052",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Software_Engineer_Resume_Master.pdf",
+    "format": "pdf",
+    "bytes": 98152,
+    "sha256": "b14d760760cc713728854cc2cafdb8f96795a238f305558c6837bf2f4a0ee560",
+    "normalized_text_sha256": "38c5990692292088d035d3cdb851d18685029c9f405bc1ab7fdf200e6e1d0dd4",
+    "extracted": "extracted/S052.txt"
+  },
+  {
+    "id": "S053",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Technical_Product_Program_Resume_Management_Master.pdf",
+    "format": "pdf",
+    "bytes": 61364,
+    "sha256": "79756c843ee8675fc771fbcbd30898c55a2f37a14739bf368a78802acc4f49a7",
+    "normalized_text_sha256": "ec529bb6f6e010e4d24f3bdf0528fc2700f5ec2dc0f0c547217787aaff66d473",
+    "extracted": "extracted/S053.txt"
+  },
+  {
+    "id": "S054",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Universal_Engineering_Resume.docx",
+    "format": "docx",
+    "bytes": 656723,
+    "sha256": "db884dae8c79f223743acb110c87c68d446cdffab15f3e88c42c3b5d102979c0",
+    "normalized_text_sha256": "c8ef27f23d7e650e3d10cf934b352034fb99ea78d2241ecf84605792bfe459f8",
+    "extracted": "extracted/S054.txt"
+  },
+  {
+    "id": "S055",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Universal_Engineering_Resume_backup-2026-08-26_pre-omniroute.docx",
+    "format": "docx",
+    "bytes": 654987,
+    "sha256": "7686c08f4d80adb42cf023e29c1286b34acb3789a9b8c2abd7bbd9fa12681cd4",
+    "normalized_text_sha256": "49ff719363b382a50b504127ef09c4319f6d56efd3463190b9a5d62a0acf94d2",
+    "extracted": "extracted/S055.txt"
+  },
+  {
+    "id": "S056",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Universal_Engineering_Resume_v2026-09-02_omniroute.docx",
+    "format": "docx",
+    "bytes": 656723,
+    "sha256": "db884dae8c79f223743acb110c87c68d446cdffab15f3e88c42c3b5d102979c0",
+    "normalized_text_sha256": "c8ef27f23d7e650e3d10cf934b352034fb99ea78d2241ecf84605792bfe459f8",
+    "extracted": "extracted/S056.txt"
+  },
+  {
+    "id": "S057",
+    "path": "/Users/kooshapari/Downloads/Koosha_Paridehpour_Universal_Management_Resume.docx",
+    "format": "docx",
+    "bytes": 654821,
+    "sha256": "2a36f0a1421aa4f0c5a96d9bbca44b124b6d7c138a95d6d3c0b954cacb7359a6",
+    "normalized_text_sha256": "16bf8fed881cac5805d7e604960b7b770f3c84f900f0b97d9036037b5490001c",
+    "extracted": "extracted/S057.txt"
+  },
+  {
+    "id": "S058",
+    "path": "/Users/kooshapari/Downloads/MGMTProduct Resume-2.docx",
+    "format": "docx",
+    "bytes": 655108,
+    "sha256": "6445107489f809c382dfc96893ca38d1d2088183203e2c65e7c1f574b20a359b",
+    "normalized_text_sha256": "c25aa001bbe07946bd19e5b8e4b8494722e98761b64e37911eba1db69997c25a",
+    "extracted": "extracted/S058.txt"
+  },
+  {
+    "id": "S059",
+    "path": "/Users/kooshapari/Downloads/MGMTProduct Resume-2.pdf",
+    "format": "pdf",
+    "bytes": 124921,
+    "sha256": "2d97cfa26f9b79ef86eb120a7713e3e805949fcc2bf5104812150edcedfbd079",
+    "normalized_text_sha256": "c9c9267d3e586f38cec7faa09b5d8fd69b1849f62887ab2a166d3e0c0a211ff2",
+    "extracted": "extracted/S059.txt"
+  },
+  {
+    "id": "S060",
+    "path": "/Users/kooshapari/Downloads/MGMTProduct Resume-3.docx",
+    "format": "docx",
+    "bytes": 655088,
+    "sha256": "5cd88520b3a8d2062801aa8e9d6e3daeb9cbaec9ceb412a614829b71cd4c3e2b",
+    "normalized_text_sha256": "4df9d5bd88338c702d2031506e9e9ba9ac80a8e5ec4e1477abf015418e85807e",
+    "extracted": "extracted/S060.txt"
+  },
+  {
+    "id": "S061",
+    "path": "/Users/kooshapari/Downloads/MGMTProduct Resume-3.pdf",
+    "format": "pdf",
+    "bytes": 125319,
+    "sha256": "260a625eb357453b5dfad4e6e4eeb71feed0258a025f5843e005f5bc0275467f",
+    "normalized_text_sha256": "a75c88c7d9d33a3239694f4854209c368623dc9104900dccebbc573fac073a36",
+    "extracted": "extracted/S061.txt"
+  },
+  {
+    "id": "S062",
+    "path": "/Users/kooshapari/Downloads/MGMTProduct Resume-4.pdf",
+    "format": "pdf",
+    "bytes": 124203,
+    "sha256": "c65ba400fe992ad1a129191e2708225afa221d57caaba0a5ec52d19467ac5e6e",
+    "normalized_text_sha256": "169adee11d1235a3485a73666dee1ca439d16505e6ec956ecf41faf2d53103b0",
+    "extracted": "extracted/S062.txt"
+  },
+  {
+    "id": "S063",
+    "path": "/Users/kooshapari/Downloads/MGMTProduct Resume-5.pdf",
+    "format": "pdf",
+    "bytes": 124190,
+    "sha256": "761e75945c9ae6a640e6a30153f2bfda4fed02f2dc7ce608f4550610041bb0d2",
+    "normalized_text_sha256": "fe2ae7e7a0bbff7e5c1b99f74739d3cee1f84b64c006d751fe24691a85ee828e",
+    "extracted": "extracted/S063.txt"
+  },
+  {
+    "id": "S064",
+    "path": "/Users/kooshapari/Downloads/MGMTProduct Resume.docx",
+    "format": "docx",
+    "bytes": 655246,
+    "sha256": "e7d4e20476e02a2f6a2fa140dd61ed608cfc9b26c4e1895fc77f925267785ee5",
+    "normalized_text_sha256": "09038b72b74a062ccaea95a84a37995bae4df400c8465598b9e1ec419ee29499",
+    "extracted": "extracted/S064.txt"
+  },
+  {
+    "id": "S065",
+    "path": "/Users/kooshapari/Downloads/MGMTProduct Resume.pdf",
+    "format": "pdf",
+    "bytes": 124891,
+    "sha256": "3422307a3db991b0039d2f9b9c81b2dcb3c23d0b966ce15f92506079f45b3376",
+    "normalized_text_sha256": "81143f06722853d95dc533ae6691b4ae6dee0b69fd0ab4c62d7b2c042317600c",
+    "extracted": "extracted/S065.txt"
+  },
+  {
+    "id": "S066",
+    "path": "/Users/kooshapari/Downloads/Offer_for_Job_Application__Koosha_Paridehpour_\u200e-_R0584463_InnoTech_Summer_Undergraduate_Internship_2025_\u2013_Pharmacy_Services_\u2013_Development_Engineering_(CAND-3964526).pdf",
+    "format": "pdf",
+    "bytes": 79825,
+    "sha256": "e3341ccbe3575886ac891b19b8338327262ccb49cc7a3e494876b1b54df1315f",
+    "normalized_text_sha256": "2b491ce8d346810b9e21deab6be6c5eb663c005622b9c945db392b507d4d6541",
+    "extracted": "extracted/S066.txt"
+  },
+  {
+    "id": "S067",
+    "path": "/Users/kooshapari/Downloads/Onboarding_for_Koosha_Paridehpour-2.pdf",
+    "format": "pdf",
+    "bytes": 77200,
+    "sha256": "36a72105560db8f9e095a3b8da4b3e4bc56db9e7d328cd1f60b7f797515e4db4",
+    "normalized_text_sha256": "7c8fd2631a00f34aa090b65aeb52b96f71e53f19739f0e425fa0adfc8c544c5a",
+    "extracted": "extracted/S067.txt"
+  },
+  {
+    "id": "S068",
+    "path": "/Users/kooshapari/Downloads/Onboarding_for_Koosha_Paridehpour.pdf",
+    "format": "pdf",
+    "bytes": 90883,
+    "sha256": "f98ea53264627d0d7c6a1b9d29945ef547831bcecbeeab1685e0e4714a6b606b",
+    "normalized_text_sha256": "86d119e52c552a457e410805b4a5bd27dc92924eee93653017a5a495d0be96ac",
+    "extracted": "extracted/S068.txt"
+  },
+  {
+    "id": "S069",
+    "path": "/Users/kooshapari/Downloads/Paridehpour, Koosha  2025 Summer Intern Performance Form  08_07_2025.pdf",
+    "format": "pdf",
+    "bytes": 87632,
+    "sha256": "f8c94fcfd9e7d22421cff4c6370ceee643c9aace0fd553a16a0a8bf34640b64e",
+    "normalized_text_sha256": "d536d3cace510e9aa78fbee73621d4f93ea7cb87461efab113534aaed269f08e",
+    "extracted": "extracted/S069.txt"
+  },
+  {
+    "id": "S070",
+    "path": "/Users/kooshapari/Downloads/Paridehpour_Koosha_0597385_2_11_2025.pdf",
+    "format": "pdf",
+    "bytes": 9624,
+    "sha256": "ae7e079030eaa11cc5bcb4f7abd076b2297a4cfd946c3d0308d5616c6252ac1a",
+    "normalized_text_sha256": "98f005c1f65fab0161f885d9eb8cef05cd704c90ba9c26d20da924328a4c9638",
+    "extracted": "extracted/S070.txt"
+  },
+  {
+    "id": "S071",
+    "path": "/Users/kooshapari/Downloads/Paridehpour_Koosha_CSE 598 ASAD_Directory Management System Project.pdf",
+    "format": "pdf",
+    "bytes": 350291,
+    "sha256": "9f63e7e494b324459d8678c641f34c206fefb4669b1a120ee9955187c8e96693",
+    "normalized_text_sha256": "aea85e60e51c266fe5dde33ac19548df8e11177548272640a2a9cd104e97211f",
+    "extracted": "extracted/S071.txt"
+  }
+]

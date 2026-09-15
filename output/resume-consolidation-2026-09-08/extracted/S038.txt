@@ -1,0 +1,230 @@
+```censusIncomeAnalysis.py
+import pandas as pd​
+import numpy as np​
+import matplotlib.pyplot as plt​
+import seaborn as sns​
+from pathlib import Path​
+​
+columnNames = ['age', 'workclass', 'fnlwgt', 'education', 'education-num',​
+              'marital-status', 'occupation', 'relationship', 'race',
+'sex',​
+              'capital-gain', 'capital-loss', 'hours-per-week',
+'native-country', 'income']​
+​
+BASE_DIR = Path(__file__).resolve().parent​
+DATA_PATH = BASE_DIR.parent / "adult.data"​
+FIGURES_DIR = BASE_DIR / "figures"​
+​
+​
+def loadData(filepath):​
+   df = pd.read_csv(filepath, names=columnNames, skipinitialspace=True)​
+   return df​
+​
+​
+def cleanData(df):​
+   df = df.replace(' ?', np.nan)​
+   df = df.dropna()​
+   df['income'] = df['income'].str.strip().str.replace('.', '',
+regex=False)​
+   df = df.copy()​
+   return df​
+​
+​
+def userStory1AgeVsIncome(df):​
+   ageBins = [0, 18, 35, 50, 65, 100]​
+   ageLabels = ['<18', '18-35', '35-50', '50-65', '65+']​
+   df['ageGroup'] = pd.cut(df['age'], bins=ageBins, labels=ageLabels)​
+   incomeByAge = df.groupby('ageGroup',
+observed=False)['income'].value_counts(normalize=True).unstack()​
+   return incomeByAge​
+​
+​
+def userStory2EducationVsIncome(df):​
+   incomeByEdu =
+df.groupby('education')['income'].value_counts(normalize=True).unstack()​
+   return incomeByEdu​
+​
+​
+def userStory3AgeEducationHoursVsIncome(df):​
+   df['highIncome'] = df['income'].str.contains('>50K')​
+   highIncomeUsers = df[df['highIncome']]['age'].mean()​
+   lowIncomeUsers = df[~df['highIncome']]['age'].mean()​
+   return {'highIncome': highIncomeUsers, 'lowIncome': lowIncomeUsers}​
+​
+​
+def userStory4OccupationMaritalVsIncome(df):​
+   incomeByOccupation = df.groupby(['occupation',
+'marital-status'])['income'].value_counts(normalize=True)​
+   return incomeByOccupation​
+​
+​
+def userStory5SexRaceCapitalVsIncome(df):​
+   df['capGainFlag'] = df['capital-gain'] > 0​
+   incomeBySexRace = df.groupby(['sex',
+'race'])['income'].value_counts(normalize=True)​
+   return incomeBySexRace​
+​
+​
+def generateSummaryStatistics(df):​
+   print(f"Dataset shape: {df.shape}")​
+   print(f"Income distribution:\n{df['income'].value_counts()}")​
+   print(f"Age stats: mean={df['age'].mean():.1f},
+median={df['age'].median():.1f}")​
+​
+​
+def plot_user_story_1(df, output_dir):​
+   plt.figure(figsize=(10, 6))​
+   sns.histplot(data=df, x='age', hue='income', bins=25, stat='density',
+common_norm=False, alpha=0.5)​
+   plt.title('User Story 1: Age Distribution by Income')​
+   plt.xlabel('Age')​
+   plt.ylabel('Density')​
+   plt.tight_layout()​
+   plt.savefig(output_dir / "user_story1_age_income.png", dpi=300)​
+   plt.close()​
+​
+​
+def plot_user_story_2(df, output_dir):​
+   education_order =
+df.groupby('education')['education-num'].mean().sort_values().index​
+   chart_data = (​
+       df.groupby(['education', 'income']).size().unstack(fill_value=0)​
+       .reindex(education_order)​
+   )​
+   chart_data = chart_data.div(chart_data.sum(axis=1), axis=0)​
+   chart_data.plot(kind='barh', stacked=True, figsize=(10, 8),
+color=['#4C72B0', '#DD8452'])​
+   plt.title('User Story 2: Education Level vs Income')​
+   plt.xlabel('Proportion')​
+   plt.ylabel('Education')​
+   plt.legend(title='Income')​
+   plt.tight_layout()​
+   plt.savefig(output_dir / "user_story2_education_income.png", dpi=300)​
+   plt.close()​
+​
+​
+def plot_user_story_3(df, output_dir):​
+   sample_parts = []​
+   for income_value, group in df.groupby('income'):​
+       sample_size = min(len(group), 1500)​
+       sample_parts.append(group.sample(sample_size, random_state=42))​
+   sample = pd.concat(sample_parts, ignore_index=True)​
+   plt.figure(figsize=(10, 7))​
+   sns.scatterplot(​
+       data=sample,​
+       x='age',​
+       y='hours-per-week',​
+       hue='income',​
+       size='education-num',​
+       alpha=0.6,​
+       sizes=(20, 180),​
+   )​
+   plt.title('User Story 3: Age, Hours Worked, and Education by Income')​
+   plt.xlabel('Age')​
+   plt.ylabel('Hours per Week')​
+   plt.tight_layout()​
+   plt.savefig(output_dir / "user_story3_age_edu_hours_income.png",
+dpi=300)​
+   plt.close()​
+​
+​
+def plot_user_story_4(df, output_dir):​
+   top_occupations = df['occupation'].value_counts().head(10).index​
+   subset = df[df['occupation'].isin(top_occupations)]​
+   chart_data = subset.groupby(['occupation',
+'income']).size().unstack(fill_value=0)​
+   chart_data = chart_data.div(chart_data.sum(axis=1),
+axis=0).sort_values('>50K')​
+   chart_data.plot(kind='barh', stacked=True, figsize=(10, 7),
+color=['#4C72B0', '#DD8452'])​
+   plt.title('User Story 4: Occupation vs Income (Top 10 Occupations)')​
+   plt.xlabel('Proportion')​
+   plt.ylabel('Occupation')​
+   plt.legend(title='Income')​
+   plt.tight_layout()​
+   plt.savefig(output_dir / "user_story4_occupation_marital_income.png",
+dpi=300)​
+   plt.close()​
+​
+​
+def plot_user_story_5(df, output_dir):​
+   figure, axes = plt.subplots(1, 2, figsize=(12, 5))​
+   sex_income = df.groupby(['sex', 'income']).size().unstack(fill_value=0)​
+   sex_income = sex_income.div(sex_income.sum(axis=1), axis=0)​
+   sex_income.plot(kind='bar', stacked=True, color=['#4C72B0', '#DD8452'],
+ax=axes[0])​
+   axes[0].set_title('Income Proportion by Sex')​
+   axes[0].set_ylabel('Proportion')​
+   axes[0].set_xlabel('Sex')​
+   axes[0].legend(title='Income')​
+​
+   race_order =
+df.groupby('race')['capital-gain'].median().sort_values().index​
+   sns.boxplot(​
+       data=df[df['capital-gain'] > 0],​
+       x='race',​
+       y='capital-gain',​
+       hue='income',​
+       order=race_order,​
+       ax=axes[1],​
+   )​
+   axes[1].set_title('Capital Gain Distribution by Race and Income')​
+    axes[1].set_xlabel('Race')​
+    axes[1].set_ylabel('Capital Gain')​
+    axes[1].tick_params(axis='x', rotation=30)​
+    axes[1].legend(title='Income', loc='upper right')​
+​
+   plt.tight_layout()​
+   plt.savefig(output_dir / "user_story5_sex_race_capital_income.png",
+dpi=300)​
+   plt.close(figure)​
+​
+​
+def generate_visualizations(df, output_dir):​
+   output_dir.mkdir(parents=True, exist_ok=True)​
+   plot_user_story_1(df, output_dir)​
+   plot_user_story_2(df, output_dir)​
+   plot_user_story_3(df, output_dir)​
+   plot_user_story_4(df, output_dir)​
+   plot_user_story_5(df, output_dir)​
+​
+​
+if __name__ == '__main__':​
+   sns.set_theme(style="whitegrid")​
+   print("Loading Census Income Dataset...")​
+   df = loadData(DATA_PATH)​
+   print(f"Loaded {len(df)} records")​
+​
+   df = cleanData(df)​
+   print(f"After cleaning: {len(df)} records")​
+​
+   print("\nUser Story 1 - Age vs Income")​
+   story1 = userStory1AgeVsIncome(df)​
+   print(story1)​
+​
+   print("\nUser Story 2 - Education vs Income")​
+   story2 = userStory2EducationVsIncome(df)​
+   print(story2)​
+​
+   print("\nUser Story 3 - Age/Education/Hours vs Income")​
+   story3 = userStory3AgeEducationHoursVsIncome(df)​
+   print(story3)​
+​
+   print("\nUser Story 4 - Occupation/Marital vs Income")​
+   story4 = userStory4OccupationMaritalVsIncome(df)​
+      print(story4)​
+ ​
+      print("\nUser Story 5 - Sex/Race/Capital vs Income")​
+      story5 = userStory5SexRaceCapitalVsIncome(df)​
+      print(story5)​
+ ​
+      print("\nSummary Statistics")​
+      generateSummaryStatistics(df)​
+      print("\nGenerating visualizations...")​
+      generate_visualizations(df, FIGURES_DIR)​
+      print(f"Saved figures in: {FIGURES_DIR}")​
+ ​
+
+
+```
+

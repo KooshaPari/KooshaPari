@@ -1,0 +1,151 @@
+/* ================================================================
+   Custom Precision Cursor System
+
+   Replaces the default cursor with a crosshair dot + outer ring
+   on devices with fine pointer (mouse). Touch devices keep the
+   default cursor. Reduced-motion disables trail and speeds up lerp.
+
+   Design tokens consumed:
+     --seed-teal  (#7EBAB5)  — accent / ring color
+     --ink        (#171a18)  — hover ring highlight
+     --ease-out   cubic-bezier(0.16, 1, 0.3, 1) — sharp easing
+   ================================================================ */
+
+/* --- Hide default cursor on fine-pointer devices ----------------- */
+@media (pointer: fine) {
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}
+
+/* --- Dot: 6px crosshair center ---------------------------------- */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--seed-teal);
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  transition:
+    width 0.2s var(--ease-out),
+    height 0.2s var(--ease-out),
+    background-color 0.2s var(--ease-out);
+}
+
+/* --- Ring: 32px outer ring -------------------------------------- */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--seed-teal);
+  background: transparent;
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+  transition:
+    width 0.2s var(--ease-out),
+    height 0.2s var(--ease-out),
+    margin 0.2s var(--ease-out),
+    border-color 0.2s var(--ease-out),
+    opacity 0.2s var(--ease-out);
+}
+
+/* --- States ----------------------------------------------------- */
+
+/* Hover: ring expands to 48px, border highlights to --ink */
+.cursor-ring--hover {
+  width: 48px;
+  height: 48px;
+  margin: -24px 0 0 -24px;
+  border-color: var(--ink);
+}
+
+/* Click: ring contracts via scale */
+.cursor-ring--click {
+  transform: scale(0.8);
+}
+
+/* Text: dot becomes I-beam shape */
+.cursor-dot--text {
+  width: 2px;
+  height: 18px;
+  margin: -9px 0 0 -1px;
+  border-radius: 1px;
+}
+
+/* Image / magnify: dot becomes a small magnifier */
+.cursor-dot--image {
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 1.5px solid var(--seed-teal);
+  background: transparent;
+}
+
+.cursor-dot--image::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 7px;
+  height: 2px;
+  background: var(--seed-teal);
+  transform: rotate(45deg);
+  border-radius: 1px;
+}
+
+/* --- Trail dots (fading afterimages) ---------------------------- */
+.cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  border-radius: 50%;
+  background: var(--seed-teal);
+  pointer-events: none;
+  z-index: 9997;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+
+.cursor-trail:nth-child(1) { opacity: 0.18; }
+.cursor-trail:nth-child(2) { opacity: 0.10; }
+.cursor-trail:nth-child(3) { opacity: 0.05; }
+
+/* --- Touch devices: show default cursor, hide custom ------------- */
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring,
+  .cursor-trail {
+    display: none;
+  }
+
+  body {
+    cursor: auto !important;
+  }
+}
+
+/* --- Reduced motion: disable trail, snap lerp ------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-trail {
+    display: none;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    transition-duration: 0.01ms !important;
+  }
+}

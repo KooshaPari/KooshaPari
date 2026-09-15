@@ -1,0 +1,51 @@
+                                           Koosha Paridehpour
+                    (424)-330-5106 ● Santa Monica, CA ● kooshapari@kooshapari.com ● kooshapari.com
+  EDUCATION
+  Arizona State University | Computer Science B.S.                  ​                                               Class of 2026
+        ●​   Barrett Honors College - 2x Dean’s List Recipient - New American University President’s Award​         GPA: 3.53/4.0
+  EXPERIENCE
+  Product Manager & Founder​                                                                              October 2020 - Present
+  Phenotype. (MP Advance Solutions LLC) | Santa Monica, CA
+        ●​   Led business operations, logistics, product design, fulfillment, e-commerce, and international vendor
+             management (10+ vendors) for joint ventures.
+        ●​   Spearheaded design and marketing for "GMK Arch," generating over $400,000 in revenue within 30 days.
+             Reduced manufacturing costs by 25% through negotiation in the "WITF Board" project.
+        ●​   Developed computational models for cost optimization and statistical analysis of market research.
+  Software Engineer ​                                                                              December 2023 - August 2024
+  Triple M Imports | Santa Ana, CA​
+     ●​    Designed and developed a dealership website focused on user experience and responsive design. Utilized cloud
+           microservices for CDN, listing databases (Supabase, Cloudinary), and SEO/speed optimization.
+     ●​    Implemented a CRUD interface for handling car listings, enhancing inventory management and user engagement.
+     ●​    Collaborated with clients to ensure an ideal and mobile-responsive web solution.
+ Lead Software Engineer ​                                                                          October 2023 - January 2024
+ Stealth Startup | Ithaca, NY
+     ●​    Spearheaded development of an offline-first ERP/accounting application using React Native and React.
+     ●​    Led development teams and guided the CEO in core product decisions.
+     ●​    Integrated frontend features with backend services for smooth data synchronization and functionality.
+     ●​    Managed frontend development team, overseeing project timelines, coding standards, and utilizing Jira.
+PROJECTS
+Project Spyn - GitHub.com/kooshapari/Project-Spyn​                                                August 2023 - December 2023
+     ●​    Developed and programmed a Lego EV3 unit into a pseudo-autonomous vehicle to pick up “passengers” and
+           navigate a maze using MATLAB. Gained large amounts of knowledge on developing software for hardware.
+     ●​    Created efficient algorithms for handling maze navigation and color zone detection and utilizing a self-developed
+           software PID controller.
+Chatta! - Github.com/kooshapari/chatta​                                                         September 2024 - October 2024
+     ●​    Developed a chat (WS/wRTC) application with a Fiber backend and a SvelteKit frontend modeled on Discord/Slack
+     ●​    Implemented robust data models and optimized system architecture, leveraging TypeScript and Vite.
+FixIt-Go - Github.com/kooshapari/fixit-go​                                                                     September 2024
+     ●​    A task management application using Go (Gin framework) for the backend and Svelte for the frontend, facilitating
+           task creation, updating, and deletion functionalities. Utilizes SQLite for storage and a CRUD api interface
+Byteport - Github.com/kooshapari/byteport​                                                                     September 2024
+     ●​    Developed a Platform-as-a-Service (PaaS) for deploying personal projects to AWS and automatically generating
+           portfolio entries through a simple YAML file and leverage LLM-assisted template generation for project showcases.
+     ●​    Implemented custom REST SDKs for GitHub, AWS, and major LLM providers (ByteLlama, OpenAI, Anthropic,
+           Deepseek, Gemini) due to WASI incompatibilities.
+     ●​    Designed a BuildPack system to minimize project modifications required for deployment.
+SKILLS
+     ●​    Languages: HTML/CSS/JS (React, React-Native, Svelte, NodeJS) , Typescript, Java, Python(Flask), SQL, React,
+           React-Native, MATLAB, Assembly, C/C++, Go(Fiber, Gin, Tinygo-WASI, Spin), Svelte, Bash, Rust, Swift,
+     ●​    Technologies: AWS, Linux, Git, Docker,Kubernetes, QuantConnect, Jira, Postman, Websockets, Automation,
+           Scripting, App Development, Adobe Suite, Office Suite, AI Integration, Robotics, Autodesk Suite/CAD, Blender
+     ●​    Misc: Farsi (5/5) , Mandarin (⅗), Product Management, Logistics, Supply Chain Management, E-Commerce, Project
+           Management, Systems Engineering, Solutions Architecture, Urban Design, Digital Audio Workstations
+

@@ -1,0 +1,140 @@
+/* ================================================================
+   Skeleton — loading placeholder screens for the SPA.
+
+   Provides shimmer-animated placeholder shapes that mirror the
+   dimensions of real content, then fade out once data arrives.
+
+   Relies on tokens.css for:
+     --graphite-900:   #20231f   (dark base)
+     --graphite-800:   #30332e   (shimmer highlight)
+     --ease-out:       cubic-bezier(0.16, 1, 0.3, 1)
+     --radius-panel:   10px
+   ================================================================ */
+
+/* ── Shimmer keyframe ───────────────────────────────────────────── */
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ── Base skeleton element ──────────────────────────────────────── */
+
+.skeleton {
+  background:
+    linear-gradient(
+      90deg,
+      var(--graphite-900) 25%,
+      var(--graphite-800) 50%,
+      var(--graphite-900) 75%
+    );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite linear;
+  border-radius: var(--radius-panel);
+  color: transparent !important;
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+/* ── Loading state (visible) ────────────────────────────────────── */
+
+.skeleton--loading {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ── Loaded state (fade out) ────────────────────────────────────── */
+
+.skeleton--loaded {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition:
+    opacity 300ms var(--ease-out),
+    height 300ms var(--ease-out);
+}
+
+/* ── Line placeholder ───────────────────────────────────────────── */
+
+.skeleton-line {
+  height: 1em;
+  border-radius: 4px;
+  width: var(--skeleton-width, 80%);
+}
+
+/* ── Heading placeholder ────────────────────────────────────────── */
+
+.skeleton-heading {
+  height: 1.6em;
+  width: var(--skeleton-width, 45%);
+  border-radius: 4px;
+  margin-bottom: 0.5em;
+}
+
+/* ── Card-shaped skeleton (project cards, list items) ───────────── */
+
+.skeleton-card {
+  width: 100%;
+  min-height: 180px;
+  border-radius: var(--radius-panel);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-card .skeleton-line:nth-child(1) { --skeleton-width: 60%; }
+.skeleton-card .skeleton-line:nth-child(2) { --skeleton-width: 85%; }
+.skeleton-card .skeleton-line:nth-child(3) { --skeleton-width: 40%; }
+
+/* ── Image-shaped skeleton (aspect-ratio 16/9) ──────────────────── */
+
+.skeleton-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-panel);
+}
+
+/* ── Group layout helpers ───────────────────────────────────────── */
+
+.skeleton-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.skeleton-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+/* ── Dark mode adaptation ───────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background:
+      linear-gradient(
+        90deg,
+        var(--graphite-950) 25%,
+        var(--graphite-900) 50%,
+        var(--graphite-950) 75%
+      );
+    background-size: 200% 100%;
+  }
+}
+
+/* ── Reduced motion: disable shimmer, show static placeholder ──── */
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}

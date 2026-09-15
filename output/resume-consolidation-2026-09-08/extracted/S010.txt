@@ -1,0 +1,51 @@
+                                          Koosha Paridehpour
+                    (424)-330-5106 ● Santa Monica, CA ● kooshapari@ramdesigns.xyz ● kooshapari.com
+  EDUCATION
+  Arizona State University | Computer Science B.S.                                                               Class of 2026
+       ●   GPA: 3.71/4.0
+       ●   2x Dean’s List Recipient
+       ●   Barrett Honors College
+  EXPERIENCE
+  Product Manager & Founder                                                                           October 2020 - Present
+  Phenotype (MP Advance Solutions LLC) | Santa Monica, CA
+       ●   Spearheaded business operations at Phenotype, including logistics, product design, fulfillment, e-commerce, and
+           international vendor management.
+       ●   Led design and marketing for key products like “GMK Arch”, driving over $400,000 in revenue within 30 days.
+       ●   Coordinated with 10 international vendors, enhancing global business relationships.
+       ●   Achieved a 25% cost reduction in “WITF Board” manufacturing, demonstrating strong negotiation skills.
+       ●   Fostered strategic partnerships with manufacturers, optimizing supply chain efficiency.
+       ●   Managed and delivered two high-profit projects, showcasing leadership and project management skills.
+  Software Engineer                                                                              December 2023 - May 2024
+  Triple M Imports | Santa Ana, CA
+     ●   Developed a dealership website, focusing on user experience and responsive design while providing my client with
+         the ability to maintain the site themselves.
+     ●   Implemented a feature for posting new car listings, enhancing inventory management and user engagement.
+     ●   Collaborated with the client to deliver a customized web solution, ensuring cross-browser compatibility and mobile
+         responsiveness.
+     ●   Managed the project lifecycle, including design, development, testing, and deployment.
+Lead Software Engineer                                                                     October 2023 - December 2023
+Stealth Startup | Ithaca, NY
+     ●   Spearheaded the development of an offline-first application using React Native
+     ●   Focused on creating an intuitive and responsive user interface, ensuring seamless user experience in offline mode.
+     ●   Integrated frontend features with backend services provided by the backend team, ensuring smooth data
+         synchronization and functionality.
+     ●   Led the frontend development team, overseeing project timelines and coding standards as well as utilizing Jira.
+PROJECTS
+Server Management                                                                                 January 2019 - May 2021
+     ●   Developed and maintained a VPS with constant modifications and maintenance managing 2 cloud-based game
+         servers.
+     ●   Created, configured, managed, and hosted Google Cloud Ubuntu VPSs for Jamulus servers that were critical in
+         putting together the Winter and Spring Jazz Concerts for the 2020-21 School Year. Gained experience with and
+         utilized protocols such as FTP, SSH, and in-depth knowledge of Linux and Operating Systems.
+Project Spyn - GitHub.com/kooshapari/Project-Spyn                                       September 2023 - December 2023
+     ●   Developed and programmed a Lego EV3 unit into a pseudo-autonomous vehicle to pick up “passengers” and
+         navigate a maze using MATLAB. Gained large amounts of knowledge on developing software for hardware.
+     ●   Created efficient algorithms for handling maze navigation and color zone detection and utilizing a self-developed
+         software PID controller.
+SKILLS
+     ●   Languages: HTML/CSS/JS, Java, Python, SQL, React, React-Native, MATLAB, Assembly, C, Bash, MachineCode
+     ●   Technologies: AWS, Linux, App Development, Automation, Scripting, Server Management, Git, Docker/Kubernetes,
+         IntelliJ, Jira, Digital Logic
+     ●   Misc: English, Farsi, Mandarin, Product Management, Logistics, Supply Chain Management, Manufacturing,
+         E-Commerce
+

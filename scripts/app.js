@@ -11,17 +11,28 @@ import { renderWorkCatalog } from './views/work.js';
 import { renderProjectDetail } from './views/project-detail.js';
 import { renderResume } from './views/resume.js';
 import { renderContact } from './views/contact.js';
-import { renderNotFound } from './views/not-found.js';
+import { render as renderNotFoundHTML, initCanvas } from './views/not-found.js';
 import { renderBlogIndex } from './views/blog-index.js';
 import { renderBlogPost } from './views/blog-post.js';
-import { initializeConstructionGate } from './construction-gate.js';
+
+import { initScrollReveal, refreshObserver } from './scroll-reveal.js';
+import { initTransitions } from './transitions.js';
+import { initMagnetic } from './magnetic.js';
+import { initParallax, refreshParallax } from './parallax.js';
+import { initImageReveal } from './image-reveal.js';
+import { initCardComposer } from './media/card-composer.js';
+import { initAmbientField } from './media/ambient-field.js';
+import { initCastPlayers } from './media/cast-player.js';
+import { initImageSliders } from './media/image-slider.js';
+import { initCodeAnnotation } from './media/code-annotate.js';
+import { initTechIllustrations } from './media/tech-illustrations.js';
 
 const shellRoot = $('#shell-root');
 const viewRoot = $('#view-root');
 
 // Read lens from URL ?lens= first (persisted via lens-state/localStorage)
-const initialLens = routeFromLocation().lens;
-const lensState = createLensState(initialLens);
+const startLens = routeFromLocation().lens;
+const lensState = createLensState(startLens);
 
 // Initialize reader state
 const readerState = createReaderState();
@@ -105,11 +116,21 @@ function render() {
   } else if (route.view === 'post') {
     renderBlogPost(viewRoot, route.slug);
   } else if (route.view === 'not-found') {
-    renderNotFound(viewRoot);
+    viewRoot.innerHTML = renderNotFoundHTML();
+    initCanvas();
   } else {
     renderHome(viewRoot, { projects: PROJECTS, lens });
   }
   setPageMetadata(route);
+  refreshObserver();
+  refreshParallax();
+  initImageSliders();
+  initCastPlayers();
+  initCodeAnnotation();
+  if (route.view === 'home') {
+    const heroEl = viewRoot.querySelector('.home-opening');
+    if (heroEl) initAmbientField(heroEl);
+  }
 }
 
 window.addEventListener('hashchange', render);
@@ -130,7 +151,15 @@ readerState.subscribe(() => {
   }
 });
 
-initializeConstructionGate(document);
+
+initScrollReveal();
+
+// Initialize all UI/UX modules
+initMagnetic();
+initParallax();
+initImageReveal();
+initCardComposer(PROJECTS);
+initTechIllustrations();
 
 if (!location.hash && location.pathname.replace(/\/+$/, '') === '') {
   history.replaceState(null, '', '/');
@@ -138,3 +167,6 @@ if (!location.hash && location.pathname.replace(/\/+$/, '') === '') {
 document.documentElement.dataset.lens = lensState.get();
 document.documentElement.dataset.reader = readerState.get() ? 'true' : 'false';
 render();
+
+// Dark mode toggle is initialized inside renderShell (shell.js)
+// so it survives navigation (replaceChildren destroys prior DOM).

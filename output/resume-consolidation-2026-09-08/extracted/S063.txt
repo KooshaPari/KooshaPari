@@ -1,0 +1,106 @@
+                                             Koosha Paridehpour
+  Santa Monica, CA ● +1 (424) 330-5106 ● kooshapari@kooshapari.com ● kooshapari.com ● github.com/kooshapari
+
+ Technical Product and Program Manager spanning AI platforms, developer infrastructure, enterprise workflows, and physical
+ products. Led cross-functional execution across five teams, completed a planned 10-week AI workflow scope by week 3 and
+ advanced it to pilot, and built commercial product operations generating ~$432K in 30 days while reducing manufacturing costs by
+ >40%. Combines product strategy, technical architecture, stakeholder alignment, risk management, and hands-on prototyping to take
+ ambiguous initiatives from concept through delivery.
+
+PRODUCT & PROGRAM EXPERIENCE
+Product Manager - Phenotype. | Santa Monica, CA​                                                             October 2020 - Present
+   ●​   Built and operated an end-to-end enthusiast hardware business from zero, independently owning product discovery, concept
+        development, prototyping, sourcing, manufacturing, pricing, launch, international distribution, fulfillment strategy, customer
+        communication, and post-launch operations across multiple physical products and 36+ pa2rtner collaborations.
+   ●​   Built production and commercial ecosystem from scratch, evaluating 40+ manufacturers, prototyping with multiple factories,
+        coordinating suppliers, artists and specialist service providers, and establishing a 10-region international retail network.
+   ●​   Scaled GMK Arch to ~4,900 sold line items and ~$432K revenue in 30 days, supported by a community launch reaching 142K+
+        views; drove discovery, positioning, launch marketing, and customer engagement through Geekhack, Discord, and Reddit.
+   ●​   Built SKU-level pricing, MOQ, margin, freight, tax, inventory, and production models to drive launch economics and supplier
+        negotiations; reduced manufacturing costs by >40%, including negotiating a flagship keyboard’s case/plate manufacturing from
+        roughly $500+ to ~$350 all-in per unit while reducing production minimums.
+   ●​   Adapted WITF’s product and operating model as demand changed: expanded an expected 15-unit self-fulfilled launch toward
+        100 units, contracted local pick-and-pack support as volume grew, then renegotiated production to approximately 50 units as
+        time-to-market softened demand. Generated approximately $40K across 150 line items, cut price from $825 to $650, and
+        refunded an accessory that failed MOQ while preserving the core launch.
+Technical Program Manager - Atoms.Tech | Tempe, AZ ​ ​                 ​         ​        ​        ​        May 2025 - January 2026
+   ●​   Grew from an engineering-focused role into the primary product and technical coordination point across five teams (~25
+        contributors), translating sponsor priorities into product direction, architecture, roadmap structure, and execution plans.
+   ●​   Led a 3–5x weekly sponsor cadence spanning demos, requirements discovery, technical decisions, and reprioritization;
+        repeatedly re-scoped delivery around changing use cases while preserving shared architecture, development standards, and
+        team continuity.
+   ●​   Built the program’s operating infrastructure across Discord, Coda, GitHub, Jira, CI/CD, and QA, including threaded bug/feature
+        intake and Vercel deployment controls that reduced sponsor coordination, onboarding, rework, and manual deployment steps.
+   ●​   Defined service boundaries, acceptance criteria, SysML-informed traceability, and MCP-based platform integrations while
+        coordinating technical, IP, legal, and stakeholder constraints.
+Development Engineer - CVS Health - AI Innovation (DDAT) | Scottsdale, AZ ​                                 May 2025 - August 2025
+   ●​   Won a company-wide innovation challenge with a patient electronic prior authorization (ePA) proposal.
+   ●​   Independently owned discovery, requirements, architecture, and implementation for an AI-assisted legacy-system migration
+        and code-transformation workflow created in response to regulatory change; authored PRD/LLD/ADD and acceptance criteria,
+        built the MVP end to end, completed a planned 10-week scope by week 3, and advanced it to pilot.
+   ●​   Designed a staged agent pipeline spanning source ingestion, intermediate-representation generation, code transformation,
+        business-logic traceability, lint/validation, and automated test generation/verification, with machine-verifiable quality gates,
+        confidence thresholds, and human approval at deployment.
+Lead Software Engineer - Akoma | Remote | Ithaca, NY​                                                  October 2023 - January 2024
+   ●​   Expanded from direct implementation into product and technical leadership for an offline-first ERP/accounting application
+        intended for markets with limited access to modern accounting software, guiding architecture, feature scope, requirements,
+        and engineering priorities.
+   ●​   Supported a distributed React Native team through prototyping, architecture reviews, implementation guidance, and delivery
+        triage under an aggressive deadline, helping bring the application to a completed internal delivery state.
+SELECTED PRODUCT, PLATFORM, & SYSTEM ARCHITECTURE
+BytePort | Self-service deployment and productization ​
+   ●​   Defined a GitHub-to-cloud deployment experience abstracting repository ingestion, service configuration, infrastructure
+        provisioning, endpoint registration, observability, and project presentation behind a declarative manifest.
+   ●​   Designed the deployment lifecycle across validation, builds and images, AWS resource provisioning, networking/security,
+        service orchestration, and future Firecracker/microVM isolation, balancing developer simplicity against infrastructure flexibility
+        and control.
+AgentAPI++ / CLIProxyAPI++ / MCPForge | Developer Platform & Enterprise Integrations
+    ●​   Shaped a unified control and routing surface across 11 coding-agent CLIs and heterogeneous AI providers, covering sessions,
+         authentication, request translation, model routing, quotas, diagnostics, and management APIs.
+    ●​   Extended the platform with MCP/LSP code intelligence for definitions, references, diagnostics, symbol renaming, and structured
+         editing across languages and agent clients.
+Tracera | AI Workflow Knowledge Management, Traceability & Product Lifecycle Governance
+    ●​   Developed a system that converts agent activity into linked, auditable knowledge across requirements, evidence, execution
+         history, coverage, and delivery state.
+    ●​   Defined traceability, impact analysis, evidence governance, audit trails, and real-time investigation workflows spanning software
+         artifacts and agent execution.
+    ●​   Designed hybrid knowledge retrieval across structured relationships, full-text and semantic search, fuzzy matching, caching, and
+         rank fusion.
+AgilePlus | Spec-Driven Delivery & Program Governance
+    ●​   Defined a spec-driven delivery system that moves features from intake through specification, planning, implementation,
+         validation, release, and retrospective with evidence-gated state transitions.
+    ●​   Authored product vision, target users, epics, lifecycle models, work-package decomposition, governance rules, integrations,
+         audit requirements, and non-functional requirements for AI-assisted software delivery.
+Benchora | Benchmarking, Regression, & Quality Platform
+    ●​   Productized a Rust benchmarking and evaluation toolkit with repeatable suites, named baselines, regression thresholds,
+         mutation coverage, and CI-gated quality checks.
+    ●​   Released a versioned CLI/library package with SQLite-backed baselines, integrity hashes, scorecards, release runbooks, and
+         baseline-comparison workflows.
+Civis | Simulation Platform & Consumer Systems Product
+    ●​   Defined product direction and systems architecture for an emergent civilization simulation spanning economies, politics,
+         diplomacy, conflict, technology, culture, and player intervention.
+    ●​   Structured the product around a deterministic simulation core and decoupled presentation layer, enabling replay, real-time
+         APIs, multiple renderer clients, and iterative expansion of gameplay systems.
+SELECTED ARCHITECTURE & PRODUCT FRAMING WORK
+Multi-Tenant / Isolated Deployment Architecture​
+    ●​   Designed deployment patterns for SaaS customers requiring isolated cloud, customer-managed cloud, or on-prem
+         infrastructure, including central management, tenant isolation, cloud federation, security boundaries, and low-friction
+         repeatable deployment flows.
+Agent Delegation & Validation Systems​
+    ●​   Modeled agent teams as planner, research, SWE, and validation roles; designed delegation flows using WBS/PERT task graphs,
+         validation loops, QA agents, browser/desktop/mobile automation, and machine-verifiable completion gates.
+Feature Graphs & Product Skeletons​
+    ●​   Designed a feature-graph product model where user-facing, technical, UI, WBS, QA, and code-linked views describe the same
+         product at different levels of granularity, enabling diagram-driven scope editing and agent-task orchestration.
+EDUCATION
+Arizona State University | Computer Science M.S. Dec 2026 - 3.75 GPA | Computer Science B.S. Dec 2025 - 3.65 GPA | Barrett Honors Clg.
+PRODUCT, PROGRAM & TECHNICAL FLUENCY
+    ●​   Product: Strategy, discovery, roadmaps, prioritization, PRDs, requirements, lifecycle design, platform/developer products, AI
+         workflows, pricing, demand modeling, unit economics
+    ●​   Program: Cross-functional delivery, dependency mapping, PERT/WBS planning, acceptance criteria, risk management,
+         stakeholder/executive communication, governance, release planning, CI/CD and QA
+    ●​   Architecture: AI/agent orchestration, retrieval systems, distributed APIs, enterprise integrations, cloud deployment,
+         multi-tenant/isolation architecture, observability
+    ●​   Technical: Go, Rust, Python, TypeScript/JavaScript, SQL, REST, WebSockets, MCP, LSP, OAuth, PostgreSQL, Redis, pgvector, AWS,
+         GCP, Docker, Kubernetes, GitHub Actions, OpenTelemetry, Prometheus
+

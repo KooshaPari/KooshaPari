@@ -1,0 +1,4 @@
+
+> stage:publication
+> node scripts/stage-publication.js
+

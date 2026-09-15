@@ -8,11 +8,13 @@ html {
   background: var(--surface);
   color: var(--ink);
   font-family: var(--font-reading);
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
+  color: var(--ink);
   min-width: 320px;
   min-height: 100vh;
   background:
@@ -46,7 +48,6 @@ canvas {
   display: block;
   max-width: 100%;
 }
-
 h1,
 h2,
 h3,
@@ -61,25 +62,80 @@ h3 {
   font-weight: 600;
   letter-spacing: -0.035em;
   line-height: 1.05;
+  /* Optical baseline: headings sit on the 8px lattice without drifting */
+  text-wrap: balance;
 }
 
+/* h1 — display instrument: caps the measure to keep line breaks deliberate,
+   uses the largest step with tightened tracking for instrument feel. */
 h1 {
   max-width: 16ch;
   font-size: var(--step-4);
+  font-feature-settings: "ss01" on, "cv11" on;
 }
 
+/* h2 — section plate: hairline rule beneath sets the technical rhythm. */
 h2 {
   font-size: var(--step-3);
 }
 
+/* h3 — sub-plate: sits flush with body, marks the next division. */
 h3 {
   font-size: var(--step-2);
+  letter-spacing: -0.025em;
 }
 
+/* Section heading plate — pairs with h2 to form the precision ruling.
+   The hairline is 1px solid at --precision-rule (token-defined), never
+   a glow or shadow. */
+.section-heading {
+  display: grid;
+  gap: var(--space-2);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--precision-rule);
+}
+
+.section-heading--flush {
+  padding-bottom: var(--space-2);
+}
+
+/* ================================================
+   INTERACTION SYSTEM — transitions, hover, focus
+   ================================================ */
+
+/* Global interactive transitions */
+a { transition: color .12s ease; }
+button { transition: border-color .12s ease, box-shadow .12s ease, background .12s ease, color .12s ease; }
+
+/* Focus-visible ring */
 :focus-visible {
-  border-radius: 1px;
+  border-radius: 2px;
   outline: none;
   box-shadow: var(--focus-ring);
+}
+
+/* Card hover lift */
+.work-catalog__featured-project { transition: box-shadow var(--motion-normal) var(--ease-out), border-color .12s ease; }
+.work-catalog__featured-project:hover { box-shadow: 0 4px 12px color-mix(in oklch, var(--ink) 8%, transparent); border-color: var(--family-accent, var(--ink-muted)); }
+
+/* Image hover scale on case study hero */
+.case-hero { overflow: hidden; }
+.case-hero img { transition: transform .2s ease; }
+.case-hero:hover img { transform: scale(1.015); }
+
+/* Artifact hover */
+.home-artifact-sequence article { transition: box-shadow var(--motion-normal) var(--ease-out), transform var(--motion-normal) var(--ease-out); }
+.home-artifact-sequence article:hover { box-shadow: 0 3px 8px color-mix(in oklch, var(--ink) 6%, transparent); }
+
+::selection {
+  background: color-mix(in oklch, var(--seed-teal) 28%, transparent);
+  color: var(--ink);
+}
+
+/* Content frame — subtle left-edge structure line */
+#view-root {
+  border-left: var(--structure-line);
+  padding-left: var(--gutter);
 }
 
 .skip-link {
@@ -184,10 +240,46 @@ body[data-reader="true"] * {
   text-transform: uppercase;
 }
 
+/* Precision eyebrow — eyebrow with the canonical 1.125rem mono hairline
+   before the label, mirroring the Material Lab's instrument legend plates.
+   Use as: <p class="eyebrow eyebrow--precision">CASE&nbsp;01</p>. */
+.eyebrow--precision {
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: var(--space-2);
+  margin-block-end: var(--space-2);
+}
+
+.eyebrow--precision::before {
+  content: "";
+  display: inline-block;
+  width: var(--eyebrow-line);
+  height: 1px;
+  background: var(--precision-rule-strong);
+}
+
 .lede {
   max-width: var(--measure);
   color: var(--ink-muted);
   font-size: var(--step-1);
+  /* Optical lead-in: the lede reads as a measured introduction, set tighter
+     than body and capped to the measure. */
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+/* Precision rule — a section divider that opts in to the technical hairline.
+   Cheap, sharp, never glows. */
+.precision-rule {
+  height: 1px;
+  margin-block: var(--space-5);
+  background: var(--precision-rule);
+  border: 0;
+}
+
+.precision-rule--strong {
+  background: var(--precision-rule-strong);
 }
 
 .footer {
@@ -343,31 +435,3 @@ button:active,
   animation: hover-lift var(--motion-normal) var(--ease-out) both;
 }
 
-/* === §13 Evidence Panel (provenance, attribution, lineage) === */
-.case-evidence-panel {
-  margin-top: var(--space-xl);
-  padding: var(--space-lg);
-  border-left: 3px solid var(--accent);
-  background: color-mix(in oklch, var(--accent) 5%, transparent);
-}
-.case-evidence-panel h2 { font-size: var(--step--1); color: var(--text-secondary); }
-.evidence-list { display: grid; gap: var(--space-sm); margin-top: var(--space-md); }
-.evidence-list > div { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: var(--space-sm); align-items: start; }
-.evidence-list dt { font-size: var(--step--2); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--font-mono); }
-.evidence-list dd { min-width: 0; font-size: var(--step--1); color: var(--text); margin: 0; overflow-wrap: anywhere; }
-.evidence-list dd a { color: var(--accent); text-decoration: underline; }
-
-@media (max-width: 480px) {
-  .evidence-list > div { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* === §7 Lens Annotation (lens-aware case study content) === */
-.lens-annotation {
-  margin: var(--space-lg) 0;
-  padding: var(--space-md) var(--space-lg);
-  border-radius: var(--radius-sm);
-  background: color-mix(in oklch, var(--accent) 8%, transparent);
-  border-left: 4px solid var(--accent);
-}
-.lens-annotation h3 { font-size: var(--step--1); color: var(--accent); margin-bottom: var(--space-xs); }
-.lens-annotation p { font-size: var(--step-0); color: var(--text); margin: 0; line-height: 1.6; }

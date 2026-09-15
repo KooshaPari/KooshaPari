@@ -1,0 +1,41 @@
+{
+  "cssBundles": {
+    "pass": false,
+    "details": [
+      "Expected 3 bundled CSS files (/styles/bundled/{core,components,pages}.css) — all return 404 on production",
+      "Production serves 6 individual CSS files instead: tokens.css (1.4KB), base.css (2.2KB), shell.css (2.2KB), artifacts.css (9.9KB), case-studies.css (0.1KB), responsive.css (2.1KB)",
+      "Total CSS size: 18.1 KB (well under 200KB limit — PASS on size)",
+      "No CSS 404 errors for the files that are actually referenced",
+      "Root cause: Production HTML references individual unbundled CSS, dist/index.html references bundled CSS — Vercel build may not be bundling"
+    ]
+  },
+  "mobileScreenshots": {
+    "pass": true,
+    "details": [
+      "home: captured, 7382 chars, no horizontal overflow (scroll width: 375px)",
+      "projects: captured, 5493 chars, no horizontal overflow (scroll width: 375px)",
+      "resume: captured, 2974 chars, no horizontal overflow (scroll width: 375px)",
+      "All pages render with single-column mobile layout",
+      "Navigation, typography, and spacing look correct at 375px"
+    ]
+  },
+  "darkMode": {
+    "pass": false,
+    "details": [
+      "No dark mode toggle exists on the site",
+      "The .lens-control contains Engineering/Product toggle (portfolio lens, not theme)",
+      "No data-theme or data-color-scheme attributes on HTML element",
+      "No prefers-color-scheme media query in production CSS",
+      "The site is light-mode only with warm parchment color scheme"
+    ]
+  },
+  "consoleErrors": {
+    "pass": true,
+    "details": [
+      "No JavaScript console errors on home (/)",
+      "No JavaScript console errors on work (/work)",
+      "No JavaScript console errors on resume (/resume)",
+      "No PageError exceptions across all pages"
+    ]
+  }
+}

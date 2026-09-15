@@ -1,0 +1,3498 @@
+{
+  "browser": "152.0.7977.65",
+  "paths": [
+    "/",
+    "/engineering",
+    "/product",
+    "/work",
+    "/resume",
+    "/contact",
+    "/blog",
+    "/work/gmk-arch",
+    "/work/witf",
+    "/work/sharecli",
+    "/work/substrate",
+    "/work/phenotype-omlx",
+    "/work/omniroute",
+    "/work/netweave",
+    "/work/byteport",
+    "/work/tracera",
+    "/work/dss-cipher",
+    "/work/cliproxyapi-plusplus",
+    "/work/agentapi-plusplus",
+    "/work/mcpforge",
+    "/work/forgecode",
+    "/work/frostify",
+    "/blog/why-we-forked-omniroute",
+    "/not-a-real-route"
+  ],
+  "rows": [
+    {
+      "path": "/",
+      "width": 390,
+      "heading": "Software systems, technical products, and the infrastructure between them.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/project-index.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/work-catalog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        }
+      ],
+      "bodyWidth": 390,
+      "lens": "engineering",
+      "errors": []
+    },
+    {
+      "path": "/engineering",
+      "width": 390,
+      "heading": "Software systems, technical products, and the infrastructure between them.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        }
+      ],
+      "bodyWidth": 390,
+      "lens": "engineering",
+      "errors": []
+    },
+    {
+      "path": "/product",
+      "width": 390,
+      "heading": "Software systems, technical products, and the infrastructure between them.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        }
+      ],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work",
+      "width": 390,
+      "heading": "Work",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/resume",
+      "width": 390,
+      "heading": "Two ways to read the work",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/contact",
+      "width": 390,
+      "heading": "Let’s build something consequential.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/blog",
+      "width": 390,
+      "heading": "Writing",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/blog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/gmk-arch",
+      "width": 390,
+      "heading": "GMK Arch",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 368.59375,
+          "w": 357,
+          "h": 432.34375
+        },
+        {
+          "class": "case-hero",
+          "x": 17,
+          "y": 816.9375,
+          "w": 357,
+          "h": 161.25
+        }
+      ],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/witf",
+      "width": 390,
+      "heading": "WITF Board",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 368.59375,
+          "w": 357,
+          "h": 413.921875
+        },
+        {
+          "class": "case-hero",
+          "x": 17,
+          "y": 798.515625,
+          "w": 357,
+          "h": 286.6875
+        }
+      ],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/sharecli",
+      "width": 390,
+      "heading": "ShareCLI",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 368.59375,
+          "w": 357,
+          "h": 237.265625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 17,
+          "y": 621.859375,
+          "w": 357,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/substrate",
+      "width": 390,
+      "heading": "Substrate",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 368.59375,
+          "w": 357,
+          "h": 237.265625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 17,
+          "y": 621.859375,
+          "w": 357,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "x": 57,
+          "y": 1056.59375,
+          "w": 277,
+          "h": 223.34375
+        }
+      ],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/phenotype-omlx",
+      "width": 390,
+      "heading": "phenotype-omlx",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 368.59375,
+          "w": 357,
+          "h": 237.265625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 17,
+          "y": 621.859375,
+          "w": 357,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/omniroute",
+      "width": 390,
+      "heading": "OmniRoute",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 368.59375,
+          "w": 357,
+          "h": 603.609375
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 17,
+          "y": 988.203125,
+          "w": 357,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/netweave",
+      "width": 390,
+      "heading": "NetWeave",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 368.59375,
+          "w": 357,
+          "h": 268.03125
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 17,
+          "y": 652.625,
+          "w": 357,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        }
+      ],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/byteport",
+      "width": 390,
+      "heading": "BytePort",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 237.265625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 17,
+          "y": 601.859375,
+          "w": 357,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/tracera",
+      "width": 390,
+      "heading": "Tracera",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 209.75
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 17,
+          "y": 574.34375,
+          "w": 357,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/dss-cipher",
+      "width": 390,
+      "heading": "DSS Cipher",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 368.59375,
+          "w": 357,
+          "h": 190.40625
+        },
+        {
+          "class": "case-hero",
+          "x": 17,
+          "y": 575,
+          "w": 357,
+          "h": 169.703125
+        }
+      ],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/cliproxyapi-plusplus",
+      "width": 390,
+      "heading": "CLIProxyAPI++",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 162.890625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 17,
+          "y": 527.484375,
+          "w": 357,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/agentapi-plusplus",
+      "width": 390,
+      "heading": "AgentAPI++",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 135.375
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 17,
+          "y": 499.96875,
+          "w": 357,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/mcpforge",
+      "width": 390,
+      "heading": "MCPForge",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 135.375
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 17,
+          "y": 499.96875,
+          "w": 357,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/forgecode",
+      "width": 390,
+      "heading": "ForgeCode",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 135.375
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 17,
+          "y": 499.96875,
+          "w": 357,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/frostify",
+      "width": 390,
+      "heading": "Frostify",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 17,
+          "y": 348.59375,
+          "w": 357,
+          "h": 204.5625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 17,
+          "y": 569.15625,
+          "w": 357,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/blog/why-we-forked-omniroute",
+      "width": 390,
+      "heading": "Why we forked OmniRoute — and how to avoid it",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/blog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/not-a-real-route",
+      "width": 390,
+      "heading": "This page is not in the atelier.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/project-index.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/work-catalog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 390,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/",
+      "width": 760,
+      "heading": "Software systems, technical products, and the infrastructure between them.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/project-index.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/work-catalog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 53.1875,
+          "y": 5813.609375,
+          "w": 654.625,
+          "h": 506.09375
+        }
+      ],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/engineering",
+      "width": 760,
+      "heading": "Software systems, technical products, and the infrastructure between them.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 53.1875,
+          "y": 5813.609375,
+          "w": 654.625,
+          "h": 506.09375
+        }
+      ],
+      "bodyWidth": 760,
+      "lens": "engineering",
+      "errors": []
+    },
+    {
+      "path": "/product",
+      "width": 760,
+      "heading": "Software systems, technical products, and the infrastructure between them.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 53.1875,
+          "y": 5813.609375,
+          "w": 654.625,
+          "h": 506.09375
+        }
+      ],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work",
+      "width": 760,
+      "heading": "Work",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/resume",
+      "width": 760,
+      "heading": "Two ways to read the work",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/contact",
+      "width": 760,
+      "heading": "Let’s build something consequential.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/blog",
+      "width": 760,
+      "heading": "Writing",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/blog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/gmk-arch",
+      "width": 760,
+      "heading": "GMK Arch",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 278.203125,
+          "w": 713.40625,
+          "h": 352.171875
+        },
+        {
+          "class": "case-hero",
+          "x": 23.796875,
+          "y": 646.375,
+          "w": 713.40625,
+          "h": 237.859375
+        }
+      ],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/witf",
+      "width": 760,
+      "heading": "WITF Board",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 278.203125,
+          "w": 713.40625,
+          "h": 326.109375
+        },
+        {
+          "class": "case-hero",
+          "x": 23.796875,
+          "y": 620.3125,
+          "w": 713.40625,
+          "h": 457.15625
+        }
+      ],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/sharecli",
+      "width": 760,
+      "heading": "ShareCLI",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 278.203125,
+          "w": 713.40625,
+          "h": 227.921875
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 23.796875,
+          "y": 522.125,
+          "w": 713.40625,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/substrate",
+      "width": 760,
+      "heading": "Substrate",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 278.203125,
+          "w": 713.40625,
+          "h": 227.921875
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 23.796875,
+          "y": 522.125,
+          "w": 713.40625,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "x": 63.796875,
+          "y": 943.40625,
+          "w": 633.40625,
+          "h": 106.25
+        }
+      ],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/phenotype-omlx",
+      "width": 760,
+      "heading": "phenotype-omlx",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 278.203125,
+          "w": 713.40625,
+          "h": 227.921875
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 23.796875,
+          "y": 522.125,
+          "w": 713.40625,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/omniroute",
+      "width": 760,
+      "heading": "OmniRoute",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 278.203125,
+          "w": 713.40625,
+          "h": 416.4375
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 23.796875,
+          "y": 710.640625,
+          "w": 713.40625,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/netweave",
+      "width": 760,
+      "heading": "NetWeave",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 278.203125,
+          "w": 713.40625,
+          "h": 227.921875
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 23.796875,
+          "y": 522.125,
+          "w": 713.40625,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 63.796875,
+          "y": 1083.984375,
+          "w": 633.40625,
+          "h": 436.078125
+        }
+      ],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/byteport",
+      "width": 760,
+      "heading": "BytePort",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 227.921875
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 23.796875,
+          "y": 502.125,
+          "w": 713.40625,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/tracera",
+      "width": 760,
+      "heading": "Tracera",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 197.8125
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 23.796875,
+          "y": 472.015625,
+          "w": 713.40625,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/dss-cipher",
+      "width": 760,
+      "heading": "DSS Cipher",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 4
+        },
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 278.203125,
+          "w": 713.40625,
+          "h": 152.546875
+        },
+        {
+          "class": "case-hero",
+          "x": 23.796875,
+          "y": 446.75,
+          "w": 713.40625,
+          "h": 338.09375
+        }
+      ],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/cliproxyapi-plusplus",
+      "width": 760,
+      "heading": "CLIProxyAPI++",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 152.546875
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 23.796875,
+          "y": 426.75,
+          "w": 713.40625,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/agentapi-plusplus",
+      "width": 760,
+      "heading": "AgentAPI++",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 122.4375
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 23.796875,
+          "y": 396.640625,
+          "w": 713.40625,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/mcpforge",
+      "width": 760,
+      "heading": "MCPForge",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 122.4375
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 23.796875,
+          "y": 396.640625,
+          "w": 713.40625,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/forgecode",
+      "width": 760,
+      "heading": "ForgeCode",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 122.4375
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 23.796875,
+          "y": 396.640625,
+          "w": 713.40625,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/frostify",
+      "width": 760,
+      "heading": "Frostify",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 23.796875,
+          "y": 258.203125,
+          "w": 713.40625,
+          "h": 198.609375
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 23.796875,
+          "y": 472.8125,
+          "w": 713.40625,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/blog/why-we-forked-omniroute",
+      "width": 760,
+      "heading": "Why we forked OmniRoute — and how to avoid it",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/blog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/not-a-real-route",
+      "width": 760,
+      "heading": "This page is not in the atelier.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/project-index.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/work-catalog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 760,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/",
+      "width": 1080,
+      "heading": "Software systems, technical products, and the infrastructure between them.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/project-index.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/work-catalog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 623.015625,
+          "y": 3516.46875,
+          "w": 379.59375,
+          "h": 293.65625
+        }
+      ],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/engineering",
+      "width": 1080,
+      "heading": "Software systems, technical products, and the infrastructure between them.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 623.015625,
+          "y": 3642.15625,
+          "w": 379.59375,
+          "h": 293.65625
+        }
+      ],
+      "bodyWidth": 1080,
+      "lens": "engineering",
+      "errors": []
+    },
+    {
+      "path": "/product",
+      "width": 1080,
+      "heading": "Software systems, technical products, and the infrastructure between them.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 623.015625,
+          "y": 3516.46875,
+          "w": 379.59375,
+          "h": 293.65625
+        }
+      ],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work",
+      "width": 1080,
+      "heading": "Work",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/resume",
+      "width": 1080,
+      "heading": "Two ways to read the work",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/contact",
+      "width": 1080,
+      "heading": "Let’s build something consequential.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/blog",
+      "width": 1080,
+      "heading": "Writing",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/blog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/gmk-arch",
+      "width": 1080,
+      "heading": "GMK Arch",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 33.390625,
+          "y": 231,
+          "w": 4,
+          "h": 404.609375
+        },
+        {
+          "class": "hero-meta",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 404.609375
+        },
+        {
+          "class": "case-hero",
+          "x": 33.390625,
+          "y": 659.609375,
+          "w": 380.84375,
+          "h": 170.3125
+        }
+      ],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/witf",
+      "width": 1080,
+      "heading": "WITF Board",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 33.390625,
+          "y": 231,
+          "w": 4,
+          "h": 377.265625
+        },
+        {
+          "class": "hero-meta",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 377.265625
+        },
+        {
+          "class": "case-hero",
+          "x": 33.390625,
+          "y": 632.265625,
+          "w": 380.84375,
+          "h": 304.09375
+        }
+      ],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/sharecli",
+      "width": 1080,
+      "heading": "ShareCLI",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 33.390625,
+          "y": 231,
+          "w": 4,
+          "h": 242.90625
+        },
+        {
+          "class": "hero-meta",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 242.90625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 33.390625,
+          "y": 497.90625,
+          "w": 380.84375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/substrate",
+      "width": 1080,
+      "heading": "Substrate",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 33.390625,
+          "y": 231,
+          "w": 4,
+          "h": 242.90625
+        },
+        {
+          "class": "hero-meta",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 242.90625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 33.390625,
+          "y": 497.90625,
+          "w": 380.84375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "x": 73.390625,
+          "y": 928.03125,
+          "w": 934.21875,
+          "h": 84.03125
+        }
+      ],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/phenotype-omlx",
+      "width": 1080,
+      "heading": "phenotype-omlx",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 33.390625,
+          "y": 231,
+          "w": 4,
+          "h": 242.90625
+        },
+        {
+          "class": "hero-meta",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 242.90625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 33.390625,
+          "y": 497.90625,
+          "w": 380.84375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/omniroute",
+      "width": 1080,
+      "heading": "OmniRoute",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 33.390625,
+          "y": 231,
+          "w": 4,
+          "h": 565.6875
+        },
+        {
+          "class": "hero-meta",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 565.6875
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 33.390625,
+          "y": 820.6875,
+          "w": 380.84375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/netweave",
+      "width": 1080,
+      "heading": "NetWeave",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 33.390625,
+          "y": 231,
+          "w": 4,
+          "h": 242.90625
+        },
+        {
+          "class": "hero-meta",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 242.90625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 33.390625,
+          "y": 497.90625,
+          "w": 380.84375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 73.390625,
+          "y": 1050.90625,
+          "w": 934.21875,
+          "h": 642.890625
+        }
+      ],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/byteport",
+      "width": 1080,
+      "heading": "BytePort",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 33.390625,
+          "y": 231,
+          "w": 380.84375,
+          "h": 275.234375
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/tracera",
+      "width": 1080,
+      "heading": "Tracera",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 33.390625,
+          "y": 231,
+          "w": 380.84375,
+          "h": 275.234375
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/dss-cipher",
+      "width": 1080,
+      "heading": "DSS Cipher",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 33.390625,
+          "y": 231,
+          "w": 4,
+          "h": 167.53125
+        },
+        {
+          "class": "hero-meta",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 167.53125
+        },
+        {
+          "class": "case-hero",
+          "x": 33.390625,
+          "y": 422.53125,
+          "w": 380.84375,
+          "h": 180.96875
+        }
+      ],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/cliproxyapi-plusplus",
+      "width": 1080,
+      "heading": "CLIProxyAPI++",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 33.390625,
+          "y": 231,
+          "w": 384.921875,
+          "h": 199.859375
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 442.3125,
+          "y": 231,
+          "w": 605.296875,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/agentapi-plusplus",
+      "width": 1080,
+      "heading": "AgentAPI++",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 33.390625,
+          "y": 231,
+          "w": 380.84375,
+          "h": 167.53125
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/mcpforge",
+      "width": 1080,
+      "heading": "MCPForge",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 33.390625,
+          "y": 231,
+          "w": 380.84375,
+          "h": 167.53125
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/forgecode",
+      "width": 1080,
+      "heading": "ForgeCode",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 33.390625,
+          "y": 231,
+          "w": 380.84375,
+          "h": 167.53125
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/frostify",
+      "width": 1080,
+      "heading": "Frostify",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 33.390625,
+          "y": 231,
+          "w": 380.84375,
+          "h": 274.546875
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 438.234375,
+          "y": 231,
+          "w": 609.359375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/blog/why-we-forked-omniroute",
+      "width": 1080,
+      "heading": "Why we forked OmniRoute — and how to avoid it",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/blog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/not-a-real-route",
+      "width": 1080,
+      "heading": "This page is not in the atelier.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/project-index.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/work-catalog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1080,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "heading": "Software systems, technical products, and the infrastructure between them.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/project-index.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/work-catalog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 824.53125,
+          "y": 3421.890625,
+          "w": 518.28125,
+          "h": 400.78125
+        }
+      ],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/engineering",
+      "width": 1440,
+      "heading": "Software systems, technical products, and the infrastructure between them.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 824.53125,
+          "y": 3554.078125,
+          "w": 518.28125,
+          "h": 400.78125
+        }
+      ],
+      "bodyWidth": 1440,
+      "lens": "engineering",
+      "errors": []
+    },
+    {
+      "path": "/product",
+      "width": 1440,
+      "heading": "Software systems, technical products, and the infrastructure between them.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 824.53125,
+          "y": 3421.890625,
+          "w": 518.28125,
+          "h": 400.78125
+        }
+      ],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work",
+      "width": 1440,
+      "heading": "Work",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/resume",
+      "width": 1440,
+      "heading": "Two ways to read the work",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/contact",
+      "width": 1440,
+      "heading": "Let’s build something consequential.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/blog",
+      "width": 1440,
+      "heading": "Writing",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/blog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/gmk-arch",
+      "width": 1440,
+      "heading": "GMK Arch",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 44.1875,
+          "y": 231,
+          "w": 4,
+          "h": 379.828125
+        },
+        {
+          "class": "hero-meta",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 379.828125
+        },
+        {
+          "class": "case-hero",
+          "x": 44.1875,
+          "y": 634.828125,
+          "w": 511,
+          "h": 188.40625
+        }
+      ],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/witf",
+      "width": 1440,
+      "heading": "WITF Board",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 44.1875,
+          "y": 231,
+          "w": 4,
+          "h": 352.1875
+        },
+        {
+          "class": "hero-meta",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 352.1875
+        },
+        {
+          "class": "case-hero",
+          "x": 44.1875,
+          "y": 607.1875,
+          "w": 511,
+          "h": 363.3125
+        }
+      ],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/sharecli",
+      "width": 1440,
+      "heading": "ShareCLI",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 44.1875,
+          "y": 231,
+          "w": 4,
+          "h": 249.265625
+        },
+        {
+          "class": "hero-meta",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 249.265625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 44.1875,
+          "y": 504.265625,
+          "w": 511,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/substrate",
+      "width": 1440,
+      "heading": "Substrate",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 44.1875,
+          "y": 231,
+          "w": 4,
+          "h": 249.265625
+        },
+        {
+          "class": "hero-meta",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 249.265625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 44.1875,
+          "y": 504.265625,
+          "w": 511,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "x": 84.1875,
+          "y": 910.53125,
+          "w": 1272.625,
+          "h": 57.28125
+        }
+      ],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/phenotype-omlx",
+      "width": 1440,
+      "heading": "phenotype-omlx",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 44.1875,
+          "y": 231,
+          "w": 4,
+          "h": 249.265625
+        },
+        {
+          "class": "hero-meta",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 249.265625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 44.1875,
+          "y": 504.265625,
+          "w": 511,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/omniroute",
+      "width": 1440,
+      "heading": "OmniRoute",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 44.1875,
+          "y": 231,
+          "w": 4,
+          "h": 451
+        },
+        {
+          "class": "hero-meta",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 451
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 44.1875,
+          "y": 706,
+          "w": 511,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/netweave",
+      "width": 1440,
+      "heading": "NetWeave",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 44.1875,
+          "y": 231,
+          "w": 4,
+          "h": 249.265625
+        },
+        {
+          "class": "hero-meta",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 249.265625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 44.1875,
+          "y": 504.265625,
+          "w": 511,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [
+        {
+          "namespace": "http://www.w3.org/2000/svg",
+          "x": 84.1875,
+          "y": 1063.703125,
+          "w": 1272.625,
+          "h": 875.546875
+        }
+      ],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/byteport",
+      "width": 1440,
+      "heading": "BytePort",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 44.1875,
+          "y": 231,
+          "w": 511,
+          "h": 249.265625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/tracera",
+      "width": 1440,
+      "heading": "Tracera",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 44.1875,
+          "y": 231,
+          "w": 511,
+          "h": 249.265625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/dss-cipher",
+      "width": 1440,
+      "heading": "DSS Cipher",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-accent-bar",
+          "x": 44.1875,
+          "y": 231,
+          "w": 4,
+          "h": 172.890625
+        },
+        {
+          "class": "hero-meta",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 172.890625
+        },
+        {
+          "class": "case-hero",
+          "x": 44.1875,
+          "y": 427.890625,
+          "w": 511,
+          "h": 242.46875
+        }
+      ],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/cliproxyapi-plusplus",
+      "width": 1440,
+      "heading": "CLIProxyAPI++",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 44.1875,
+          "y": 231,
+          "w": 511,
+          "h": 205.828125
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/agentapi-plusplus",
+      "width": 1440,
+      "heading": "AgentAPI++",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 44.1875,
+          "y": 231,
+          "w": 511,
+          "h": 172.890625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/mcpforge",
+      "width": 1440,
+      "heading": "MCPForge",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 44.1875,
+          "y": 231,
+          "w": 511,
+          "h": 172.890625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/forgecode",
+      "width": 1440,
+      "heading": "ForgeCode",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 44.1875,
+          "y": 231,
+          "w": 511,
+          "h": 172.890625
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/work/frostify",
+      "width": 1440,
+      "heading": "Frostify",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [
+        {
+          "class": "hero-meta",
+          "x": 44.1875,
+          "y": 231,
+          "w": 511,
+          "h": 220.53125
+        },
+        {
+          "class": "hero-plate__placeholder",
+          "x": 579.1875,
+          "y": 231,
+          "w": 817.609375,
+          "h": 192
+        }
+      ],
+      "placeholders": 1,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/blog/why-we-forked-omniroute",
+      "width": 1440,
+      "heading": "Why we forked OmniRoute — and how to avoid it",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/blog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    },
+    {
+      "path": "/not-a-real-route",
+      "width": 1440,
+      "heading": "This page is not in the atelier.",
+      "styles": [
+        "http://127.0.0.1:4197/styles/tokens.css",
+        "http://127.0.0.1:4197/styles/base.css",
+        "http://127.0.0.1:4197/styles/shell.css",
+        "http://127.0.0.1:4197/styles/artifacts.css",
+        "http://127.0.0.1:4197/styles/project-index.css",
+        "http://127.0.0.1:4197/styles/case-studies.css",
+        "http://127.0.0.1:4197/styles/work-catalog.css",
+        "http://127.0.0.1:4197/styles/responsive.css",
+        "http://127.0.0.1:4197/styles/construction-gate.css"
+      ],
+      "overflow": [],
+      "hero": [],
+      "placeholders": 0,
+      "svg": [],
+      "bodyWidth": 1440,
+      "lens": "product",
+      "errors": []
+    }
+  ],
+  "axe": [
+    {
+      "path": "/",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "path": "/work",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "path": "/work/sharecli",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "path": "/work/omniroute",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "path": "/work/netweave",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "path": "/work/substrate",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "path": "/work/phenotype-omlx",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "path": "/work/gmk-arch",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "path": "/work/witf",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "path": "/resume",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "path": "/contact",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "path": "/blog",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "path": "/work",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "path": "/work/sharecli",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "path": "/work/omniroute",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "path": "/work/netweave",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "path": "/work/substrate",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "path": "/work/phenotype-omlx",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "path": "/work/gmk-arch",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "path": "/work/witf",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "path": "/resume",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "path": "/contact",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "path": "/blog",
+      "width": 1440,
+      "violations": []
+    }
+  ],
+  "spaWork": {
+    "styles": [
+      "http://127.0.0.1:4197/styles/tokens.css",
+      "http://127.0.0.1:4197/styles/base.css",
+      "http://127.0.0.1:4197/styles/shell.css",
+      "http://127.0.0.1:4197/styles/artifacts.css",
+      "http://127.0.0.1:4197/styles/case-studies.css",
+      "http://127.0.0.1:4197/styles/responsive.css",
+      "http://127.0.0.1:4197/styles/construction-gate.css"
+    ],
+    "display": "block"
+  },
+  "reducedHover": {
+    "transform": "none",
+    "transition": "1e-05s"
+  },
+  "focusAfter": {
+    "tag": "BODY",
+    "class": "",
+    "text": "\n  \n    \n    \n      \n        \n        \n        \n      \n      Technical atelier\n      Under construct"
+  }
+}

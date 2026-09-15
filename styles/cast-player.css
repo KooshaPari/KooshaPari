@@ -1,0 +1,245 @@
+/* ================================================================
+   Cast Player — asciinema .cast file terminal replay widget.
+
+   Renders a cast recording inside a dark terminal chrome frame
+   with typewriter playback, speed control, and auto-scroll.
+   ================================================================ */
+
+/* --- Frame ---------------------------------------------------- */
+.cast-player {
+  --cp-bg:       #0d0f0e;
+  --cp-text:     var(--seed-teal, #7EBAB5);
+  --cp-dim:      #4a5250;
+  --cp-rule:     var(--rule, color-mix(in oklch, #171a18 24%, transparent));
+  --cp-radius:   var(--radius-control, 6px);
+  --cp-font:     var(--font-meta, "JetBrains Mono", "SFMono-Regular", Consolas, monospace);
+  --cp-font-size: clamp(0.68rem, 0.62rem + 0.18vw, 0.78rem);
+
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--cp-rule);
+  border-radius: var(--cp-radius);
+  background: var(--cp-bg);
+  overflow: hidden;
+  box-shadow: 0 2px 12px color-mix(in oklch, #000 35%, transparent);
+}
+
+/* --- Title bar ------------------------------------------------ */
+.cast-player__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  background: color-mix(in oklch, var(--cp-bg) 85%, #000);
+  border-bottom: 1px solid var(--cp-rule);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cast-player__dots {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.cast-player__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.cast-player__dot--close  { background: #e25a54; }
+.cast-player__dot--min    { background: #d4a72e; }
+.cast-player__dot--max    { background: #62c554; }
+
+.cast-player__title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--cp-dim);
+  font: var(--cp-font-size) var(--cp-font);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* --- Terminal viewport ---------------------------------------- */
+.cast-player__terminal {
+  position: relative;
+  height: 320px;
+  padding: 0.75rem 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font: var(--cp-font-size) / 1.55 var(--cp-font);
+  color: var(--cp-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cp-dim) transparent;
+}
+
+.cast-player__terminal::-webkit-scrollbar {
+  width: 5px;
+}
+
+.cast-player__terminal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cast-player__terminal::-webkit-scrollbar-thumb {
+  background: var(--cp-dim);
+  border-radius: 3px;
+}
+
+/* --- Output lines --------------------------------------------- */
+.cast-player__line {
+  white-space: pre-wrap;
+  word-break: break-all;
+  min-height: 1.55em;
+}
+
+/* Subtle text glow on teal content */
+.cast-player__line:not(:empty) {
+  text-shadow: 0 0 8px color-mix(in oklch, var(--cp-text) 18%, transparent);
+}
+
+/* --- Block cursor --------------------------------------------- */
+.cast-player__cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.15em;
+  background: var(--cp-text);
+  vertical-align: text-bottom;
+  animation: cp-blink 1s step-end infinite;
+}
+
+@keyframes cp-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+.cast-player--paused .cast-player__cursor {
+  animation-play-state: paused;
+  opacity: 1;
+}
+
+.cast-player--finished .cast-player__cursor {
+  animation: none;
+  opacity: 0;
+}
+
+/* --- Controls bar --------------------------------------------- */
+.cast-player__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  border-top: 1px solid var(--cp-rule);
+  background: color-mix(in oklch, var(--cp-bg) 90%, #000);
+}
+
+.cast-player__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--cp-rule);
+  border-radius: var(--cp-radius);
+  background: transparent;
+  color: var(--cp-dim);
+  font: 600 0.7rem/1 var(--cp-font);
+  cursor: pointer;
+  transition: color var(--motion-short, 120ms) ease,
+              border-color var(--motion-short, 120ms) ease,
+              background var(--motion-short, 120ms) ease;
+}
+
+.cast-player__btn:hover {
+  color: var(--cp-text);
+  border-color: var(--cp-dim);
+  background: color-mix(in oklch, var(--cp-text) 8%, transparent);
+}
+
+.cast-player__btn--play {
+  font-size: 0.65rem;
+}
+
+.cast-player__btn--active {
+  color: var(--cp-text);
+  border-color: var(--cp-dim);
+  background: color-mix(in oklch, var(--cp-text) 10%, transparent);
+}
+
+/* Speed group */
+.cast-player__speed-group {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.cast-player__speed-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 0.45rem;
+  border: 1px solid transparent;
+  border-radius: var(--cp-radius);
+  background: transparent;
+  color: var(--cp-dim);
+  font: 500 0.62rem/1 var(--cp-font);
+  cursor: pointer;
+  transition: color var(--motion-short, 120ms) ease,
+              border-color var(--motion-short, 120ms) ease,
+              background var(--motion-short, 120ms) ease;
+}
+
+.cast-player__speed-btn:hover {
+  color: var(--cp-text);
+}
+
+.cast-player__speed-btn--active {
+  color: var(--cp-text);
+  border-color: var(--cp-dim);
+  background: color-mix(in oklch, var(--cp-text) 8%, transparent);
+}
+
+/* --- Command hint --------------------------------------------- */
+.cast-player__command {
+  display: block;
+  padding: 0.25rem 0.75rem 0;
+  color: var(--cp-dim);
+  font: italic 0.58rem/1 var(--cp-font);
+  letter-spacing: 0.01em;
+  opacity: 0.6;
+}
+
+/* --- Reduced motion ------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .cast-player__cursor {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* --- Responsive ------------------------------------------------ */
+@media (max-width: 600px) {
+  .cast-player__terminal {
+    height: 240px;
+    padding: 0.5rem 0.65rem;
+  }
+
+  .cast-player__controls {
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .cast-player__speed-group {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

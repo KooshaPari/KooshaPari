@@ -1,0 +1,16 @@
+[
+  {
+    "js": true,
+    "width": 390,
+    "scrollWidth": 390,
+    "text": true,
+    "animations": 0
+  },
+  {
+    "js": false,
+    "width": 390,
+    "scrollWidth": 390,
+    "text": true,
+    "animations": 0
+  }
+]

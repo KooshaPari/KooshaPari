@@ -9,7 +9,7 @@
 | 2 | Design system / shell / navigation | COMPLETE |
 | 3 | Homepage (Technical Atelier) | COMPLETE |
 | 4 | Engineering / Product lenses | COMPLETE |
-| 5 | Work index with filters | COMPLETE |
+| 5 | Work index with filters | COMPLETE (clean project paths, legacy hash compatibility, and filter-focus restoration verified locally 2026-09-04) |
 | 6 | GMK Arch + WITF case studies | PARTIAL (hero assets only, narrative needs enrichment) |
 | 7 | Top engineering case studies | PARTIAL (compact sections wired, full narrative pending) |
 | 8 | Archive / remaining compact entries | COMPLETE (all 14 records render) |
@@ -28,6 +28,6 @@
 
 ## Current blockers
 
-- Vercel redeployment requires auth token (sandbox lacks Vercel credential)
+- Local Vercel static output was rebuilt and verified on 2026-09-04; preview redeployment requires an authenticated Vercel credential.
 - Hosted Lighthouse/a11y checks require authenticated access to SSO-protected preview
 

@@ -69,17 +69,22 @@ export function parseRoute(input = '') {
 
 /**
  * Read route from the current browser location.
- * Priority: pathname, with legacy project-detail hash support on /work.
+ * Priority: pathname, with legacy hash fallback for all routes.
  * Lens is read from ?lens= query param if present.
  */
 export function routeFromLocation() {
   const path = location.pathname.replace(/\/+$/, '').replace(/^\//, '');
   let route = parseRoute(path || '');
-  if (route.view === 'work' && location.hash.startsWith('#work/')) {
-    route = parseRoute(location.hash.slice(1));
+
+  // Legacy hash fallback: if pathname resolved to home or bare work index,
+  // but a hash route exists, use it.
+  // Handles old-style URLs like /#/resume, /#/contact, /#/work/slug.
+  if ((route.view === 'home' || route.view === 'work') && location.hash && location.hash.length > 1) {
+    const hashRoute = parseRoute(location.hash.slice(1));
+    if (hashRoute.view !== 'home') route = hashRoute;
   }
 
-  // Lift lens from ?lens= query param (URL‑bound lens per spec)
+  // Lift lens from ?lens= query param (URL-bound lens per spec)
   const urlLens = new URLSearchParams(location.search).get('lens');
   if (urlLens === 'engineering' || urlLens === 'product') {
     return { ...route, lens: urlLens };

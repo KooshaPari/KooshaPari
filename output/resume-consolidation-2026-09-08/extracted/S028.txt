@@ -1,0 +1,51 @@
+                                           Koosha Paridehpour
+                     (424)-330-5106 ● Santa Monica, CA ● kooshapari@kooshapari.com ● kooshapari.com
+  EDUCATION
+  Arizona State University | Computer Science B.S.                                                                    Class of 2026
+        ●   Barrett Honors College - 2x Dean’s List Recipient - New American University President’s Award            GPA: 3.71/4.0
+  EXPERIENCE
+  Product Manager & Founder                                                                                 October 2020 - Present
+  Phenotype. (MP Advance Solutions LLC) | Santa Monica, CA
+        ●   Spearheaded business operations at Phenotype, including logistics, product design, fulfillment, e-commerce, and
+            international vendor management with as many as 10 different vendors.
+        ●   Led design and marketing for key products like “GMK Arch,” driving over $400,000 in revenue within 30 days and
+            achieving a 25% cost reduction in manufacturing through negotiations in our “WITF Board” project.
+        ●   Managed and delivered two high-profit projects, showcasing leadership and project management skills.
+  Software Engineer                                                                                  December 2023 - August 2024
+  Triple M Imports | Santa Ana, CA
+     ●    Developed a dealership website, focusing on user experience and responsive design while utilizing cloud
+          microservices for our CDN and listing databases.
+     ●    Implemented a CRUD interface for handling car listings, enhancing inventory management and user engagement.
+     ●    Collaborated with the client to deliver an ideal web solution, ensuring compatibility/mobile responsiveness.
+ Lead Software Engineer                                                                              October 2023 - January 2024
+ Stealth Startup | Ithaca, NY
+     ●    Spearheaded the development of an offline-first application using React Native
+     ●    Focused on creating an intuitive and responsive user interface, ensuring seamless user experience in offline mode.
+     ●    Integrated frontend features with backend services, ensuring smooth data synchronization and functionality.
+     ●    Led the frontend development team, overseeing project timelines and coding standards as well as utilizing Jira.
+PROJECTS
+ Server Management                                                                                      January 2019 - May 2021
+      ●    Developed and maintained a VPS with constant modifications/maintenance managing 2 cloud-based game servers.
+      ●    Created, configured, managed, and hosted Google Cloud Ubuntu VPSs for Jamulus servers that were critical in
+           putting together the Winter and Spring Jazz Concerts for the 2020-21 School Year. Gained experience with and
+           utilized protocols such as FTP, SSH, and in-depth knowledge of Linux and Operating Systems.
+Project Spyn - GitHub.com/kooshapari/Project-Spyn                                                   August 2023 - December 2023
+      ●    Developed and programmed a Lego EV3 unit into a pseudo-autonomous vehicle to pick up “passengers” and
+           navigate a maze using MATLAB. Gained large amounts of knowledge on developing software for hardware.
+      ●    Created efficient algorithms for handling maze navigation and color zone detection and utilizing a self-developed
+           software PID controller.
+Chatta! - Github.com/kooshapari/chatta                                                           September 2024 - October 2024
+      ●    Developed a chat (WS/wRTC) application with a Fiber backend and a SvelteKit frontend modeled on Discord/Slack
+      ●    Implemented robust data models and optimized system architecture, leveraging TypeScript and Vite for streamlined
+           frontend development and improved performance as well as type-safety.
+FixIt-Go - Github.com/kooshapari/fixit-go                                                                        September 2024
+      ●    Built a task management application using Go (Gin framework) for the backend and Svelte for the frontend,
+           facilitating task creation, updating, and deletion functionalities. Utilizes SQLite for storage and a CRUD api interface
+SKILLS
+      ●    Languages: HTML/CSS/JS (React, React-Native, Svelte, NodeJS) , Typescript, Java, Python, SQL, React, React-Native,
+           MATLAB, Assembly, C/C++, Go, Svelte, Bash, Fiber, Gin, Rust, Swift
+      ●    Technologies: AWS, Linux, Git, Docker/Kubernetes, QuantConnect, Jira, Postman, Websockets, Automation,
+           Scripting, App Development, Adobe Suite, Office Suite, AI Integration, Robotics, Autodesk Suite/CAD, Blender
+      ●    Misc: Farsi (5/5) , Mandarin (⅗), Product Management, Logistics, Supply Chain Management, E-Commerce, Project
+           Management, Systems Engineering, Solutions Architecture, Urban Design, Digital Audio Workstations
+

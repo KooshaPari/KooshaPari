@@ -1,0 +1,65 @@
+[
+  {
+    "name": "homepage",
+    "url": "https://www.kooshapari.com/#/",
+    "path": "docs/qa-screenshots/homepage.png",
+    "title": "Technical Atelier — Koosha Paridehpour",
+    "bodyHeight": 6405,
+    "hasContent": true,
+    "success": true
+  },
+  {
+    "name": "projects",
+    "url": "https://www.kooshapari.com/#/projects",
+    "path": "docs/qa-screenshots/projects.png",
+    "title": "Technical Atelier — Koosha Paridehpour",
+    "bodyHeight": 6405,
+    "hasContent": true,
+    "success": true
+  },
+  {
+    "name": "sharecli",
+    "url": "https://www.kooshapari.com/#/projects/sharecli",
+    "path": "docs/qa-screenshots/sharecli.png",
+    "title": "Technical Atelier — Koosha Paridehpour",
+    "bodyHeight": 6405,
+    "hasContent": true,
+    "success": true
+  },
+  {
+    "name": "netweave",
+    "url": "https://www.kooshapari.com/#/projects/netweave",
+    "path": "docs/qa-screenshots/netweave.png",
+    "title": "Technical Atelier — Koosha Paridehpour",
+    "bodyHeight": 6405,
+    "hasContent": true,
+    "success": true
+  },
+  {
+    "name": "emrvis",
+    "url": "https://www.kooshapari.com/#/projects/emrvis",
+    "path": "docs/qa-screenshots/emrvis.png",
+    "title": "Technical Atelier — Koosha Paridehpour",
+    "bodyHeight": 6405,
+    "hasContent": true,
+    "success": true
+  },
+  {
+    "name": "resume",
+    "url": "https://www.kooshapari.com/#/resume",
+    "path": "docs/qa-screenshots/resume.png",
+    "title": "Resume — Koosha Paridehpour",
+    "bodyHeight": 900,
+    "hasContent": true,
+    "success": true
+  },
+  {
+    "name": "contact",
+    "url": "https://www.kooshapari.com/#/contact",
+    "path": "docs/qa-screenshots/contact.png",
+    "title": "Contact — Koosha Paridehpour",
+    "bodyHeight": 900,
+    "hasContent": true,
+    "success": true
+  }
+]

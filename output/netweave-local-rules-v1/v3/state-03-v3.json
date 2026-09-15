@@ -1,0 +1,15 @@
+{
+  "state": 3,
+  "lane_0": [
+    2,
+    4,
+    6,
+    7
+  ],
+  "lane_1": [],
+  "seed": 0,
+  "asset_version": "v3-overhead-traffic-instrument",
+  "boundary": "Original illustrative artwork, not recorded NetWeave output",
+  "poses_source": "hand-authored, identical to v1/v2; visual treatment only differs",
+  "notes": "Plate flattened to thin asphalt slab; cells demoted from raised CNC pockets to subtle perpendicular ticks; vehicles elongated to ~2.25:1 length:width with four visible wheels and a windshield hint; chevrons painted on the road surface to indicate direction"
+}

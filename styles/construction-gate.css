@@ -4,6 +4,7 @@ html[data-construction='entered'] .construction-gate,
 .construction-gate__target { position: absolute; width: 1px; height: 1px; overflow: hidden; }
 
 body.construction-locked { overflow: hidden; }
+body.construction-locked #construction-site { opacity: 0; pointer-events: none; user-select: none; will-change: opacity; transition: opacity 0.25s ease; }
 
 .construction-gate {
   position: fixed;

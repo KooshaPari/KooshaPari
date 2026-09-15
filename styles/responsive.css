@@ -1,3 +1,11 @@
+/* Mobile overflow containment */
+.home-opening-artifact,
+.home-artifact-sequence,
+.artifact,
+.home-view {
+  overflow: hidden;
+}
+
 @media (max-width: 760px) {
   #view-root {
     padding-top: var(--space-5);
@@ -129,5 +137,24 @@
 
   .systems-route {
     display: none;
+  }
+}
+
+/* Featured cards — single column on small screens */
+@media (max-width: 760px) {
+  .work-catalog__featured-list {
+    grid-template-columns: 1fr;
+  }
+
+  .work-catalog__featured-project {
+    grid-column: auto;
+    margin-top: 0;
+  }
+
+  .case-hero {
+    margin-inline: calc(-1 * var(--gutter));
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
   }
 }

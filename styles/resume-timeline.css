@@ -1,0 +1,252 @@
+/* ================================================================
+   Resume — scroll-animated vertical experience timeline.
+   Scoped styles injected once via renderResume().
+   ================================================================ */
+
+/* --- Section frame --- */
+.resume-section { margin-bottom: var(--space-7); }
+
+/* --- Timeline rail (centered on desktop, left-aligned on mobile) --- */
+.resume-timeline {
+  position: relative;
+  padding: var(--space-4) 0;
+  max-width: 960px;
+  margin-inline: auto;
+}
+.resume-timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--seed-teal) 8%,
+    var(--seed-teal) 92%,
+    transparent 100%
+  );
+  opacity: 0.35;
+  transform: translateX(-50%);
+}
+
+/* --- Single timeline node card --- */
+.resume-node {
+  position: relative;
+  width: calc(50% - var(--space-5));
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--precision-rule);
+  border-radius: var(--radius-panel);
+  margin-bottom: var(--space-5);
+  transition: box-shadow var(--motion-normal) var(--ease-out),
+              border-color var(--motion-normal) var(--ease-out);
+}
+.resume-node:hover {
+  box-shadow: 0 4px 16px color-mix(in oklch, var(--ink) 6%, transparent);
+  border-color: var(--seed-teal);
+}
+
+/* Teal dot on the rail */
+.resume-node::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--seed-teal);
+  box-shadow: 0 0 10px rgba(126, 186, 181, 0.4);
+  z-index: 1;
+}
+/* Connector stub from dot to card */
+.resume-node::after {
+  content: "";
+  position: absolute;
+  top: 32px;
+  width: calc(var(--space-5) - 6px);
+  height: 1px;
+  background: var(--seed-teal);
+  opacity: 0.3;
+}
+
+/* Left node: card on left, dot on right edge */
+.resume-node--left { margin-left: 0; margin-right: auto; }
+.resume-node--left::before { right: -27px; }
+.resume-node--left::after { right: -25px; }
+
+/* Right node: card on right, dot on left edge */
+.resume-node--right { margin-left: auto; margin-right: 0; }
+.resume-node--right::before { left: -27px; }
+.resume-node--right::after { left: -25px; }
+
+/* --- Node internals --- */
+.resume-node__date {
+  font: 700 11px/1 var(--font-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--ink-muted);
+  margin-bottom: var(--space-1);
+}
+.resume-node__company {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-1);
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 var(--space-0);
+}
+.resume-node__role {
+  font: 500 12.5px/1.3 var(--font-meta);
+  color: var(--ink-muted);
+  margin-bottom: var(--space-2);
+}
+.resume-node__desc {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.resume-node__desc li {
+  position: relative;
+  padding-left: 1rem;
+  font: 400 13.5px/1.55 var(--font-reading);
+  color: var(--ink-muted);
+}
+.resume-node__desc li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--seed-teal);
+  opacity: 0.55;
+}
+
+/* --- Role badge --- */
+.resume-badge {
+  display: inline-block;
+  padding: 3px 9px;
+  font: 600 10px/1 var(--font-meta);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--radius-control);
+  margin-bottom: var(--space-2);
+}
+.resume-badge--eng {
+  color: var(--arch-500);
+  background: color-mix(in oklch, var(--arch-500) 10%, transparent);
+  border: 1px solid color-mix(in oklch, var(--arch-500) 30%, transparent);
+}
+.resume-badge--product {
+  color: var(--olive-500);
+  background: color-mix(in oklch, var(--olive-500) 10%, transparent);
+  border: 1px solid color-mix(in oklch, var(--olive-500) 30%, transparent);
+}
+.resume-badge--leadership {
+  color: var(--seed-teal);
+  background: color-mix(in oklch, var(--seed-teal) 10%, transparent);
+  border: 1px solid color-mix(in oklch, var(--seed-teal) 30%, transparent);
+}
+
+/* --- Skills grid --- */
+.resume-skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  max-width: 960px;
+  margin-inline: auto;
+}
+.resume-skill {
+  padding: var(--space-3);
+  background: var(--surface);
+  border: 1px solid var(--precision-rule);
+  border-radius: var(--radius-panel);
+  transition: border-color var(--motion-fast) var(--ease-out),
+              box-shadow var(--motion-fast) var(--ease-out);
+}
+.resume-skill:hover {
+  border-color: var(--seed-teal);
+  box-shadow: 0 2px 8px color-mix(in oklch, var(--seed-teal) 10%, transparent);
+}
+.resume-skill__name {
+  font: 600 13px/1.2 var(--font-display);
+  color: var(--ink);
+  margin-bottom: var(--space-1);
+}
+.resume-skill__bar-track {
+  height: 4px;
+  border-radius: 2px;
+  background: color-mix(in oklch, var(--ink) 8%, transparent);
+  overflow: hidden;
+}
+.resume-skill__bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--seed-teal);
+  transition: width 0.8s var(--ease-out);
+}
+
+/* --- Education card --- */
+.resume-edu-card {
+  max-width: 480px;
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--precision-rule);
+  border-radius: var(--radius-panel);
+}
+.resume-edu-card__school {
+  font: 700 var(--step-1) / 1.15 var(--font-display);
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-1);
+}
+.resume-edu-card__degree {
+  font: 500 13px/1.3 var(--font-meta);
+  color: var(--ink-muted);
+}
+.resume-edu-card__detail {
+  font: 400 13px/1.55 var(--font-reading);
+  color: var(--ink-muted);
+  margin-top: var(--space-2);
+}
+
+/* --- Mobile: single-column left-aligned --- */
+@media (max-width: 760px) {
+  .resume-timeline::before {
+    left: 14px;
+    transform: none;
+  }
+  .resume-node {
+    width: calc(100% - 40px);
+    margin-left: 40px !important;
+    margin-right: 0 !important;
+  }
+  .resume-node--left::before,
+  .resume-node--right::before {
+    left: -27px;
+    right: auto;
+  }
+  .resume-node--left::after,
+  .resume-node--right::after {
+    left: -25px;
+    right: auto;
+    width: calc(var(--space-5) - 6px);
+  }
+  .resume-skills {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Reduced motion: no transitions --- */
+@media (prefers-reduced-motion: reduce) {
+  .resume-node,
+  .resume-skill {
+    transition: none;
+  }
+}
