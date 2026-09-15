@@ -1,0 +1,52 @@
+                                                        Koosha Paridehpour
+                  Santa Monica, CA | +1 (424) 330-5106 | kooshapari@kooshapari.com | linkedin.com/in/kooshapari | github.com/KooshaPari
+                TECHNICAL PRODUCT & PROGRAM LEADER | AI PLATFORMS | ENTERPRISE WORKFLOWS | DEVELOPER INFRASTRUCTURE
+Technical product and program leader with 5+ years of product ownership across commercial hardware, AI-enabled enterprise workflows, and developer
+platforms. Combines product strategy, requirements architecture, cross-functional execution, and hands-on prototyping to turn ambiguous problems into
+executable roadmaps and shipped systems.
+                $400K+                                   >25%                                      10 -> 3 weeks                        5 teams
+            revenue in 30 days                        cost reduction                               enterprise scope                 program leadership
+
+PRODUCT & PROGRAM EXPERIENCE
+Product Manager | Phenotype | Santa Monica, CA                                                                                          Oct 2020 - Present
+  Owned end-to-end product and commercial operations across design, launch planning, e-commerce, fulfillment, and 10+ international vendors;
+   generated more than $400K in revenue in 30 days and reduced manufacturing costs by more than 25%.
+  Built pricing, demand, and market-research models for launch and inventory decisions, and introduced AI-assisted workflows for specifications,
+   documentation, QA, and engineering execution.
+Lead Software Engineer / Technical Program Manager | Atoms.Tech | Tempe, AZ                                                           May 2025 - Jan 2026
+  Led a five-team program building an AI-driven requirements and systems-traceability platform; owned roadmap structure, PM workflows, development
+   standards, and sponsor, legal, and IP coordination.
+  Defined service boundaries, acceptance criteria, and SysML-informed traceability; built the delivery system around the product through an MCP service,
+   CI/CD and QA infrastructure, and Discord, Coda, GitHub, and Jira automations.
+Development Engineer, AI Innovation (DDAT / InnoTech) | CVS Health | Scottsdale, AZ                                                  May 2025 - Aug 2025
+  Won a company-wide innovation challenge across intern teams with a separate patient electronic prior authorization (ePA) proposal.
+  Led discovery and architecture for an AI workflow-transpilation system that converted a manual process into an executable, human-validated agent
+   workflow; completed a planned 10-week scope by week 3, advanced it to pilot, and presented requirements, rollout risks, and expected value to DDAT
+   and Innovation leaders.
+Lead Software Engineer | Akoma | Ithaca, NY                                                                                            Oct 2023 - Jan 2024
+  Led product development and delivery for an offline-first ERP/accounting application, coordinating requirements, architecture, and execution across the
+   React Native team.
+SELECTED PRODUCT LEADERSHIP
+Tracera / AgilePlus | Knowledge, traceability, and delivery governance: Defined product vision, target users, prioritized epics, lifecycle state machines,
+requirements, evidence gates, auditability, and real-time workflows; designed hybrid retrieval across PostgreSQL full-text search, pgvector, fuzzy matching,
+Redis, and reciprocal-rank fusion.
+AgentAPI++ / CLIProxyAPI++ | Developer platform and enterprise integrations: Shaped and extended a unified control and routing layer across 11 coding-
+agent CLIs and heterogeneous AI providers, covering sessions, streaming, authentication, request translation, model routing, quotas, diagnostics, and
+management APIs.
+BytePort | Self-service deployment and productization: Defined and built a manifest-driven workflow connecting GitHub OAuth, secure sessions, AWS
+provisioning, endpoint registration, observability, and portfolio generation into one onboarding and deployment experience.
+LEADERSHIP & TECHNICAL FLUENCY
+Product: Vision and strategy, roadmaps, prioritization, PRDs and requirements, MVP and pilot design, AI workflow products, platform and integration
+products, pricing and demand modeling, market research
+Program: Cross-functional operating cadence, dependency and risk management, stakeholder alignment, sponsor and executive communication, legal and IP
+coordination, release planning, CI/CD and QA gates
+Technical: Go, Python, TypeScript/JavaScript, Rust, REST and WebSocket APIs, MCP, OAuth, PostgreSQL, Redis, pgvector, AWS, Docker, Kubernetes, GitHub
+Actions, OpenTelemetry, Prometheus
+EDUCATION
+Arizona State University | M.S. Computer Science, Expected Dec 2026, GPA 3.75 | B.S. Computer Science, Dec 2025, GPA 3.65 | Barrett Honors College
+
+
+
+
+                                                         Koosha Paridehpour | Technical Product & Program Resume
+

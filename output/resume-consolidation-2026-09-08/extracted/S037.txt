@@ -1,0 +1,158 @@
+                                                                                                                                        1
+
+
+
+
+                              CSE 578: Data Visualization
+                              Course Project Final Report
+                                                  Koosha Paridehpour
+                            Ira A. Fulton Schools of Engineering – Arizona State University
+
+
+                                                               Abstract
+        This final report documents the completed analysis of U.S. Census Income data to support UVW College’s marketing campaigns
+    and decision frameworks. The objective of this project is to identify income-related demographic patterns and translate them into
+    practical audience profiles for enrollment strategy.
+        We present five user-story-driven visualizations, corresponding conclusions, project questions and implemented solutions, and
+    scoped future work for the application team.
+
+
+                                              I. G OALS AND B USINESS O BJECTIVE
+A. Goals
+  1) Identify demographic and work-related attributes most associated with income label (≤ 50K vs. > 50K).
+  2) Build clear, readable visual evidence for at least five prioritized user stories.
+  3) Convert findings into practical marketing guidance for UVW College implementation teams.
+
+B. Business Objective
+   Provide UVW College with demographic targeting guidance so marketing resources can be focused on the segments most
+likely to benefit from degree completion and career advancement pathways provided.
+
+                                                         II. A SSUMPTIONS
+A. Technical Assumptions
+  1) After cleaning missing markers (?), the Adult dataset is valid for directional analysis.
+  2) The income label split (≤ 50K vs. > 50K) is suitable for segmentation decisions.
+  3) Patterns observed are informative for campaign strategy, even if not properly causal.
+
+B. Business Assumptions
+  1) Income mobility is a strong enrollment motivator for prospective students.
+  2) Better demographic segmentation improves overall campaign effectiveness.
+  3) Different demographic segments require different message framing.
+  4) UVW teams can utilize these insights in campaign and application design.
+
+                                                         III. U SER S TORIES
+  1) Age (Univariate): As a UVW marketing team member, I want to understand whether age is related to income so I can
+     tailor age-specific messaging.
+  2) Education (Univariate): As the marketing director, I want to understand how education level relates to income so I can
+     emphasize ROI by segment.
+  3) Age + Education-Num + Hours-Per-Week (Multivariate): As a program planner, I want to analyze these factors
+     against income so schedule and modality decisions are evidence-based.
+  4) Occupation + Marital-Status (Multivariate): As a campaign strategist, I want to analyze these factors against income
+     so messaging matches household and career context.
+  5) Sex + Race + Capital-Gain + Age (Multivariate): As a diversity lead, I want to review these factors against income
+     so outreach remains inclusive and practical.
+  Attributes used (10/14): age, education, education-num, hours-per-week, occupation, marital-status, sex, race, capital-gain,
+income.
+                                                                                                                       2
+
+
+
+                                                  IV. V ISUALIZATIONS
+A. Visualization 1: Age Distribution by Income (Univariate)
+
+
+
+
+Fig. 1. Age distribution by income class.
+
+  What it demonstrates: Higher-income records are concentrated in older age ranges compared to lower-income records.
+Why selected: Histogram comparison is the most direct method for distribution differences by class.
+Design process: Distribution choice → bin calibration → class color consistency → readability tuning.
+Conclusion: UVW can separate early-career and mid-career outreach narratives based on age-income patterns.
+                                                                                                                3
+
+
+
+B. Visualization 2: Education Level vs Income (Univariate)
+
+
+
+
+Fig. 2. Education level and income composition.
+
+  What it demonstrates: Income composition shifts toward > 50K as educational attainment increases.
+Why selected: Normalized stacked horizontal bars compare category composition clearly.
+Design process: Category ordering → normalization → label/legend refinement → readability checks.
+Conclusion: Degree-completion messaging is especially relevant for some-college and associate-level segments.
+                                                                                                                          4
+
+
+
+C. Visualization 3: Age, Education-Num, and Hours-Per-Week vs Income (Multivariate)
+
+
+
+
+Fig. 3. Multivariate view of age, weekly hours, education years, and income class.
+
+  What it demonstrates: Income class separation improves when age, work hours, and education years are considered together.
+Why selected: Scatter with multi-encoding (position, size, color) preserves three explanatory factors.
+Design process: Balanced sampling → encoding selection → overlap control (alpha/size) → legend optimization.
+Conclusion: Flexible program formats should be emphasized for working adults with constrained weekly hours.
+                                                                                                                          5
+
+
+
+D. Visualization 4: Occupation Context vs Income (Multivariate)
+
+
+
+
+Fig. 4. Occupation-level income composition (top categories).
+
+  What it demonstrates: Occupation groups show materially different income composition patterns.
+Why selected: Normalized bars provide clear group-level comparison for campaign segmentation.
+Design process: Top-category filtering → normalization → sort by higher-income share → annotation cleanup.
+Conclusion: Campaigns should differentiate between career-transition segments and already-advanced occupation segments.
+
+E. Visualization 5: Sex, Race, and Capital-Gain Patterns vs Income (Multivariate)
+
+
+
+
+Fig. 5. Composite demographic and capital-gain view by income class.
+                                                                                                                             6
+
+
+
+  What it demonstrates: Income composition varies across demographic groups; non-zero capital gain is more common in
+higher-income records.
+Why selected: Composite layout is needed to represent categorical and numeric relationships together.
+Design process: Panel decomposition → consistent color scale → axis/legend harmonization → readability pass.
+Conclusion: UVW should maintain inclusive outreach while adapting messaging for financially distinct segments.
+
+                                 V. Q UESTIONS R AISED AND I MPLEMENTED S OLUTIONS
+  1) Question: How can class imbalance distort visual interpretation?
+     Implemented solution: Used normalized proportions and balanced sampling where needed.
+  2) Question: Which attribute combinations are most useful for UVW decisions?
+     Implemented solution: Prioritized combinations tied to actionable marketing decisions instead of exhaustive pairing.
+  3) Question: How can multivariate analysis remain readable?
+     Implemented solution: Used constrained encodings, reduced clutter, and category filtering for interpretability.
+  4) Question: How should sparse variables (for example, capital-gain) be handled?
+     Implemented solution: Used targeted views to isolate informative non-zero behavior while retaining context.
+
+                                          VI. N OT D OING N OW (F UTURE W ORK )
+  1) Predictive modeling and feature-importance ranking.
+  2) Interactive dashboard for campaign planners.
+  3) Temporal validation with newer datasets.
+  4) A/B experiment design for message testing.
+  5) Expanded analysis using additional variables such as native-country and workclass.
+
+                                              VII. P ROFESSIONAL S UMMARY
+   All in all, project provides complete, well-aligned analyses outputs suitable for UVW’s incoming marketing strategy. The
+analysis confirms that income-related differences are best explained by combinations of demographic, education, and work-
+context factors rather than any single attribute. The five user-story visualizations provide implementation-ready guidance for
+UVW’s marketing application: who to prioritize, what message to deliver, and how to tailor campaigns by segment. In practical
+terms, UVW should focus on high-opportunity groups (<=50K, working adults, degree-incomplete learners) with flexible
+program positioning and clear income-mobility value propositions, while maintaining inclusive outreach across demographic
+groups.
+

@@ -1,8 +1,17 @@
 const STORAGE_KEY = 'portfolio-construction-entered';
+const BOT_RE = /Googlebot|bingbot|YandexBot|DuckDuckBot|Baiduspider|Applebot|Slurp|facebookexternalhit|LinkedInBot|Twitterbot|WhatsApp|TelegramBot|Discordbot|Pinterestbot|SemrushBot|AhrefsBot|MJ12bot|DotBot|Sogou|Bytespider|GPTBot|ChatGPT-User|ClaudeBot|anthropic-ai|Omgilibot|Scrapy|curl|wget|HeadlessChrome|Lighthouse|Chrome-Lighthouse|ucbot/i;
+
+function isBot(storage) {
+  try {
+    if (typeof navigator !== 'undefined' && BOT_RE.test(navigator.userAgent)) return true;
+  } catch (_) { /* ignore */ }
+  return false;
+}
 
 function safeGet(storage) {
   try { return storage?.getItem(STORAGE_KEY) === 'yes'; } catch { return false; }
 }
+
 function safeSet(storage) {
   try { storage?.setItem(STORAGE_KEY, 'yes'); } catch { /* session storage is optional */ }
 }
@@ -27,6 +36,12 @@ export function initializeConstructionGate(document, storage = getSessionStorage
     continueLink.blur();
   };
 
+  // Bots / crawlers bypass the gate entirely to avoid CLS.
+  if (isBot(storage)) {
+    enter();
+    return;
+  }
+
   const hash = document.location?.hash ?? '';
   if (safeGet(storage) || document.documentElement.dataset.construction === 'entered' || hash === '#construction-entered') {
     enter();
@@ -44,3 +59,4 @@ export function initializeConstructionGate(document, storage = getSessionStorage
     enter();
   });
 }
+

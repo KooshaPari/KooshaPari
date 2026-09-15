@@ -1,0 +1,322 @@
+[
+  {
+    "name": "home",
+    "device": "desktop",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "svg": [
+      {
+        "namespace": "http://www.w3.org/2000/svg",
+        "viewBox": "0 0 580 448"
+      }
+    ],
+    "animations": 0
+  },
+  {
+    "name": "omniroute-home-bounds",
+    "device": "desktop",
+    "bounds": [
+      {
+        "id": "request",
+        "label": [
+          14,
+          19.44757652282715,
+          57.078033447265625,
+          17.248538970947266
+        ],
+        "rect": [
+          0,
+          0,
+          220,
+          56
+        ]
+      },
+      {
+        "id": "selection",
+        "label": [
+          14,
+          19.44757652282715,
+          130.46131896972656,
+          17.248538970947266
+        ],
+        "rect": [
+          0,
+          0,
+          220,
+          56
+        ]
+      },
+      {
+        "id": "execution",
+        "label": [
+          14,
+          19.44757652282715,
+          146.76658630371094,
+          17.248538970947266
+        ],
+        "rect": [
+          0,
+          0,
+          220,
+          56
+        ]
+      },
+      {
+        "id": "response",
+        "label": [
+          14,
+          19.44757652282715,
+          65.24028778076172,
+          17.248538970947266
+        ],
+        "rect": [
+          0,
+          0,
+          220,
+          56
+        ]
+      },
+      {
+        "id": "failure",
+        "label": [
+          14,
+          19.44757652282715,
+          106.0130615234375,
+          17.248538970947266
+        ],
+        "rect": [
+          0,
+          0,
+          220,
+          56
+        ]
+      }
+    ]
+  },
+  {
+    "name": "omniroute",
+    "device": "desktop",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "svg": [],
+    "animations": 0
+  },
+  {
+    "name": "netweave",
+    "device": "desktop",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "svg": [
+      {
+        "namespace": "http://www.w3.org/2000/svg",
+        "viewBox": "0 0 640 440"
+      }
+    ],
+    "animations": 0
+  },
+  {
+    "name": "netweave-keyboard",
+    "device": "desktop",
+    "press": 1,
+    "focus": {
+      "tag": "BODY",
+      "role": null,
+      "text": "\n  Skip to content\n  Koosha ParidehpourSystems / products / "
+    },
+    "selected": "Route"
+  },
+  {
+    "name": "netweave-keyboard",
+    "device": "desktop",
+    "press": 2,
+    "focus": {
+      "tag": "BODY",
+      "role": null,
+      "text": "\n  Skip to content\n  Koosha ParidehpourSystems / products / "
+    },
+    "selected": "Route"
+  },
+  {
+    "name": "netweave-state-arrow",
+    "device": "desktop",
+    "selected": "Traffic",
+    "focusTag": "BUTTON"
+  },
+  {
+    "name": "netweave-controls",
+    "device": "desktop",
+    "count": 1,
+    "oldGeneric": 0,
+    "pressed": "true",
+    "image": "http://127.0.0.1:58624/public/projects/netweave/desktop-03.webp",
+    "text": "The amber vehicle approaches the lead vehicle. No vehicle changes lane or route."
+  },
+  {
+    "name": "reduced-reader",
+    "device": "desktop",
+    "reader": "true"
+  },
+  {
+    "name": "home",
+    "device": "mobile",
+    "width": 390,
+    "scrollWidth": 390,
+    "svg": [
+      {
+        "namespace": "http://www.w3.org/2000/svg",
+        "viewBox": "0 0 580 448"
+      }
+    ],
+    "animations": 0
+  },
+  {
+    "name": "omniroute-home-bounds",
+    "device": "mobile",
+    "bounds": [
+      {
+        "id": "request",
+        "label": [
+          14,
+          18.619661331176758,
+          57.10942077636719,
+          19.173786163330078
+        ],
+        "rect": [
+          0,
+          0,
+          220,
+          56
+        ]
+      },
+      {
+        "id": "selection",
+        "label": [
+          14,
+          18.619661331176758,
+          130.47161865234375,
+          19.173786163330078
+        ],
+        "rect": [
+          0,
+          0,
+          220,
+          56
+        ]
+      },
+      {
+        "id": "execution",
+        "label": [
+          14,
+          18.619661331176758,
+          146.79930114746094,
+          19.173786163330078
+        ],
+        "rect": [
+          0,
+          0,
+          220,
+          56
+        ]
+      },
+      {
+        "id": "response",
+        "label": [
+          14,
+          18.619661331176758,
+          65.23580932617188,
+          19.173786163330078
+        ],
+        "rect": [
+          0,
+          0,
+          220,
+          56
+        ]
+      },
+      {
+        "id": "failure",
+        "label": [
+          14,
+          18.619661331176758,
+          106.0175552368164,
+          19.173786163330078
+        ],
+        "rect": [
+          0,
+          0,
+          220,
+          56
+        ]
+      }
+    ]
+  },
+  {
+    "name": "omniroute",
+    "device": "mobile",
+    "width": 390,
+    "scrollWidth": 397,
+    "svg": [],
+    "animations": 0
+  },
+  {
+    "name": "netweave",
+    "device": "mobile",
+    "width": 390,
+    "scrollWidth": 390,
+    "svg": [
+      {
+        "namespace": "http://www.w3.org/2000/svg",
+        "viewBox": "0 0 640 440"
+      }
+    ],
+    "animations": 0
+  },
+  {
+    "name": "netweave-keyboard",
+    "device": "mobile",
+    "press": 1,
+    "focus": {
+      "tag": "BODY",
+      "role": null,
+      "text": "\n  Skip to content\n  Koosha ParidehpourSystems / products / "
+    },
+    "selected": "Route"
+  },
+  {
+    "name": "netweave-keyboard",
+    "device": "mobile",
+    "press": 2,
+    "focus": {
+      "tag": "BODY",
+      "role": null,
+      "text": "\n  Skip to content\n  Koosha ParidehpourSystems / products / "
+    },
+    "selected": "Route"
+  },
+  {
+    "name": "netweave-state-arrow",
+    "device": "mobile",
+    "selected": "Traffic",
+    "focusTag": "BUTTON"
+  },
+  {
+    "name": "netweave-controls",
+    "device": "mobile",
+    "count": 1,
+    "oldGeneric": 0,
+    "pressed": "true",
+    "image": "http://127.0.0.1:58624/public/projects/netweave/mobile-03.webp",
+    "text": "The amber vehicle approaches the lead vehicle. No vehicle changes lane or route."
+  },
+  {
+    "name": "reduced-reader",
+    "device": "mobile",
+    "reader": "true"
+  },
+  {
+    "name": "netweave-nojs",
+    "buttons": 0,
+    "images": 1,
+    "text": "← Back to work\n\nSIMULATION · HISTORICAL PROTOTYPE\n\nNetWeave\n\nGo traffic simulation combining directed-graph routing with disjoint cellular automata for vehicle and lane behavior.\n\nEngineering lens\n\nDirected-graph routing handles strategic movement while disjoint cellular automata expose lane-level congestion, waves, and gridlock.\n\nOverview\n\nA research-oriented browser simulation of road networks, vehicle flow, and routing decisions. A Go backend streamed state to an HTML/CSS/JavaScript visualization over WebSockets.\n\nArchitecture\nPOIs -> A* route cost (road type, speed, turn penalty)\ndirected road graph\nintersections = nodes\nroads = edges\nper-road 2D cellular automata\nTraffic-simulation study tracing points of interest through A-star routing, a directed road graph, per-road cellular automata, and a WebSocket browser view.\nTraffic field\nReader / Explore Workbench\n\nStatic poster and transcript are available without JavaScript, WebGL, or automatic playback. Reduced motion uses the same still artwork.\n\nA bounded traffic field\n\nAn original explanatory study of local vehicle spacing. It describes the relationship without presenting a recorded simulator trace.\n\nThree following vehicles have open gaps before the stationary lead vehicle.\n\nIllustrative local-spacing study. Original explanatory artwork, not recorded NetWeave output. The amber block is a following vehicle; the rightmost blue block stays stationary. Congestion-aware rerouting remained future work.\n\nWhy this simulation architecture\n\nThe model separated strategic movement through a directed road graph from local traffic physics. Intersections became graph nodes and road segments became edges, while each road carried a disjoint 2D cellular automaton for vehicles, lanes, and gaps.\n\nDirected graph + cellular automata split\n\nA* routed vehicles between points of interest using road type, speed limit, and turn penalties. The Nagel–Schreckenberg-inspired automata handled acceleration, gap-based slowing, randomized driver variability, lane/merge/intersection behavior, and progression into the next segment.\n\nRouting model\n\nVehicles spawned at residential POIs, travelled to commercial POIs, then received a new assignment of the opposite type. Congestion-aware weighting and in-route recalculation were documented as future work, not completed functionality.\n\nEmergent traffic behavior\n\nThe simulation produced congestion, stop-and-go waves, and gridlock from local rules running on ordinary consumer hardware. Those behaviors made the network-level consequences of routing policy visible rather than theoretical.\n\nThe system-level routing problem\n\nWithin roughly a week, the prototype exposed a mismatch between individually optimal routes and network-wide flow: independently minimizing route cost can concentrate agents on the same attractive segments. The next correction was identified as congestion-aware weighting, dynamic rerouting, and—at the broader system level—occasionally accepting a slower route to reduce aggregate bottleneck pressure.\n\nExperimental authoring workflow\n\nAn unsubmitted Stable Diffusion + ControlNet workflow translated hand-drawn road sketches into an OSM-like visual normalization and then into backend network geometry. The proof of concept worked at baseline, but limited data, compute, and iteration time kept accuracy below reliable-ingestion quality.\n\nWhat was not finished\n\nCongestion-aware A*, dynamic in-route recalculation, and production-grade sketch ingestion were future or experimental directions. This entry does not claim they shipped.\n\nRetrospective / later external comparison\n\nAny comparison to later mapping or routing experiments belongs in a separately sourced retrospective. No claim of prediction, copying, or causal influence is made here.\n\nAI-assistance disclosure\n\nAI-assisted implementation reduced the cost and time required to turn the simulation design into an executable environment. The requirements, architecture, simulation model, algorithm selection, routing design, system interpretation, future direction, and identification of the routing failure mode remained user-owned.\n\nEvidence status\n\nCanonical user brief supplied 2026-08-30\n\nRepository history, submitted Google Doc, MP4 presentation, screenshots, simulation output, and ControlNet experiment artifacts: locate and attach before public publication.\n\nProvenance & Attribution\nEVIDENCE SOURCE\nSupporting project evidence is being assembled\nAVAILABLE IN LENS\nengineering"
+  }
+]

@@ -55,7 +55,6 @@ html, body {
     radial-gradient(1000px 500px at 0% 10%,   rgba(182,240,107,.05), transparent 60%),
     radial-gradient(900px 500px at 50% 110%,  rgba(255,185,92,.05),  transparent 60%),
     var(--bg-0);
-  color: var(--fg);
   font-family: var(--sans);
   font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;

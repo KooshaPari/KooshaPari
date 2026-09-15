@@ -456,7 +456,7 @@ function renderOverview(root) {
       kpi({
         k: "CUM. GPA",
         v: c.professional.cumulativeGpa.toFixed(2),
-        h: "BS 3.65 · MS 3.75 (in progress)",
+        h: "ASU · Barrett Honors",
         accent: "eng",
       }),
     ),
@@ -568,7 +568,7 @@ function renderOverview(root) {
             { class: "edu-tile" },
             el("div", { class: "edu-kind" }, d.kind),
             el("div", { class: "edu-conf" }, d.conferral),
-            el("div", { class: "edu-gpa" }, `GPA ${d.gpa.toFixed(2)}`),
+            el("div", { class: "edu-gpa" }, "Barrett Honors"),
           ),
         ),
         el(
@@ -1010,8 +1010,8 @@ function renderPhenotype(root) {
    the superscript rendered on the chip + cited row in the table. */
 const ROLE_FIT_CITATIONS = [
   {
-    match: "Staff-track",
-    label: "Staff-Track in Platform / Dev-Tools",
+    match: "Senior-track",
+    label: "Senior-Track in Platform / Dev-Tools",
     title: "Will Larson — staffeng.com",
     url: "https://staffeng.com/",
     marker: "1",
@@ -1169,7 +1169,7 @@ function renderRecruiter(root) {
         kpi({
           k: "CUM. GPA",
           v: c.professional.cumulativeGpa.toFixed(2),
-          h: "BS 3.65 · MS 3.75",
+          h: "ASU · Barrett Honors",
           accent: "eng",
         }),
         kpi({
@@ -1413,7 +1413,7 @@ function renderPublicRecord(root) {
         el("h1", { class: "section-title" }, "Resume vs. Public-Record"),
       ),
       el("p", { class: "pr-callout-body" },
-        "The two PDFs describe Koosha as a staff-track platform/dev-tools engineer at Phenotype. ",
+        "The resume describes Koosha as a senior software engineer and founder at Phenotype. ",
         "Public records tell a more complicated story — same person, two product surfaces (hardware keyboard brand + software portfolio), ",
         "and a GitHub bio that openly disclaims the polished resume voice (\u201CAI Slop Post ~Apr 2025\u201D). ",
         "What\u2019s below is what the public web actually shows, with citations."

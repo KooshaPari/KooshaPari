@@ -1,0 +1,234 @@
+[
+  {
+    "name": "home",
+    "device": "desktop",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "readers": [
+      {
+        "visible": true,
+        "font": "17.28px",
+        "text": "Read routing pathsRequest -> Target selection: resolve the requested model or configured combo.Target selection -> Provider execution: select an eligible target"
+      }
+    ],
+    "svg": [
+      {
+        "width": 552.765625,
+        "labels": [
+          {
+            "text": "Request",
+            "pixelHeight": 17
+          },
+          {
+            "text": "Target selection",
+            "pixelHeight": 17
+          },
+          {
+            "text": "Provider execution",
+            "pixelHeight": 17
+          },
+          {
+            "text": "Response",
+            "pixelHeight": 17
+          },
+          {
+            "text": "Failure state",
+            "pixelHeight": 17
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "omniroute",
+    "device": "desktop",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "readers": [],
+    "svg": []
+  },
+  {
+    "name": "netweave",
+    "device": "desktop",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "readers": [
+      {
+        "visible": false,
+        "font": "17.28px",
+        "text": "NetWeave architecturePOIs -> A* route cost (road type, speed, turn penalty)directed road graphintersections = nodesroads = edgesper-road 2D cellular automataCon"
+      }
+    ],
+    "svg": [
+      {
+        "width": 1273.625,
+        "labels": [
+          {
+            "text": "POIs -> A* route cost (road type, speed, turn penalty)",
+            "pixelHeight": 35.99993896484375
+          },
+          {
+            "text": "directed road graph",
+            "pixelHeight": 35.99993896484375
+          },
+          {
+            "text": "intersections = nodes",
+            "pixelHeight": 36
+          },
+          {
+            "text": "roads = edges",
+            "pixelHeight": 36
+          },
+          {
+            "text": "per-road 2D cellular automata",
+            "pixelHeight": 36
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "tab-arrow",
+    "device": "desktop",
+    "count": 1,
+    "focus": "Route",
+    "role": "tab",
+    "selected": "Route"
+  },
+  {
+    "name": "tab-arrow",
+    "device": "desktop",
+    "count": 2,
+    "focus": "Traffic",
+    "role": "tab",
+    "selected": "Traffic"
+  },
+  {
+    "name": "state-arrow",
+    "device": "desktop",
+    "selected": "Traffic",
+    "image": "/public/projects/netweave/desktop-03.webp"
+  },
+  {
+    "name": "reset",
+    "device": "desktop",
+    "selected": "Overview",
+    "image": "/public/projects/netweave/desktop-01.webp"
+  },
+  {
+    "name": "home",
+    "device": "mobile",
+    "width": 390,
+    "scrollWidth": 390,
+    "readers": [
+      {
+        "visible": true,
+        "font": "15.375px",
+        "text": "Read routing pathsRequest -> Target selection: resolve the requested model or configured combo.Target selection -> Provider execution: select an eligible target"
+      }
+    ],
+    "svg": [
+      {
+        "width": 0,
+        "labels": [
+          {
+            "text": "Request",
+            "pixelHeight": 0
+          },
+          {
+            "text": "Target selection",
+            "pixelHeight": 0
+          },
+          {
+            "text": "Provider execution",
+            "pixelHeight": 0
+          },
+          {
+            "text": "Response",
+            "pixelHeight": 0
+          },
+          {
+            "text": "Failure state",
+            "pixelHeight": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "omniroute",
+    "device": "mobile",
+    "width": 390,
+    "scrollWidth": 390,
+    "readers": [],
+    "svg": []
+  },
+  {
+    "name": "netweave",
+    "device": "mobile",
+    "width": 390,
+    "scrollWidth": 390,
+    "readers": [
+      {
+        "visible": true,
+        "font": "16px",
+        "text": "NetWeave architecturePOIs -> A* route cost (road type, speed, turn penalty)directed road graphintersections = nodesroads = edgesper-road 2D cellular automataCon"
+      }
+    ],
+    "svg": [
+      {
+        "width": 0,
+        "labels": [
+          {
+            "text": "POIs -> A* route cost (road type, speed, turn penalty)",
+            "pixelHeight": 0
+          },
+          {
+            "text": "directed road graph",
+            "pixelHeight": 0
+          },
+          {
+            "text": "intersections = nodes",
+            "pixelHeight": 0
+          },
+          {
+            "text": "roads = edges",
+            "pixelHeight": 0
+          },
+          {
+            "text": "per-road 2D cellular automata",
+            "pixelHeight": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "tab-arrow",
+    "device": "mobile",
+    "count": 1,
+    "focus": "Route",
+    "role": "tab",
+    "selected": "Route"
+  },
+  {
+    "name": "tab-arrow",
+    "device": "mobile",
+    "count": 2,
+    "focus": "Traffic",
+    "role": "tab",
+    "selected": "Traffic"
+  },
+  {
+    "name": "state-arrow",
+    "device": "mobile",
+    "selected": "Traffic",
+    "image": "/public/projects/netweave/desktop-03.webp"
+  },
+  {
+    "name": "reset",
+    "device": "mobile",
+    "selected": "Overview",
+    "image": "/public/projects/netweave/desktop-01.webp"
+  }
+]

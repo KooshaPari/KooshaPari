@@ -1,0 +1,48 @@
+[
+  {
+    "name": "home",
+    "device": "desktop",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "images": []
+  },
+  {
+    "name": "netweave",
+    "device": "desktop",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "images": [
+      "http://127.0.0.1:64581/public/projects/netweave/desktop-01-v3.webp"
+    ]
+  },
+  {
+    "name": "sharecli",
+    "device": "desktop",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "images": []
+  },
+  {
+    "name": "home",
+    "device": "mobile",
+    "width": 390,
+    "scrollWidth": 390,
+    "images": []
+  },
+  {
+    "name": "netweave",
+    "device": "mobile",
+    "width": 390,
+    "scrollWidth": 390,
+    "images": [
+      "http://127.0.0.1:64581/public/projects/netweave/mobile-01-v3.webp"
+    ]
+  },
+  {
+    "name": "sharecli",
+    "device": "mobile",
+    "width": 390,
+    "scrollWidth": 390,
+    "images": []
+  }
+]

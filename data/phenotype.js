@@ -45,12 +45,12 @@ export const EDUCATION = {
     {
       kind: "B.S. Computer Science",
       conferral: "December 2025",
-      gpa: 3.65,
+      gpa: 3.53,
     },
     {
       kind: "M.S. Computer Science",
       conferral: "December 2026 (expected)",
-      gpa: 3.75,
+      gpa: 3.53, // expected
     },
   ],
   yearsPostSecondary: 6, // ~Aug 2021 → Dec 2026 inclusive grad school
@@ -117,7 +117,7 @@ export const ROLES = [
     span: "~8 months",
     framing: ["Engineering", "Program", "MCP", "Traceability"],
     highlights: [
-      "Led technical architecture & coordination across 5 teams (~25 contributors)",
+      "Led technical architecture & coordination across 3 teams (~15 contributors)",
       "3–5 weekly sponsor touchpoints: demos, requirements, reprioritization",
       "Reusable service boundaries, engineering standards, execution plans",
       "MCP services, SysML-informed traceability, CI/CD + QA, Discord/Coda/GitHub/Jira integrations",
@@ -252,7 +252,7 @@ export const RECRUITER_STATS = {
   professional: {
     yearsOfPostSecondaryEducation: 6,
     honorsTrack: "Barrett Honors College",
-    cumulativeGpa: 3.70, // avg of 3.65 & 3.75
+    cumulativeGpa: 3.53, // transcript-verified
     yearsOfProfessionalExperienceApprox: 6,
     experienceReasoning:
       "First paid operator track: Phenotype. (Oct 2020 → present ≈ 5y 10mo). Adjacent tracked engineering: Akoma + CVS + Atoms overlap ≈ 1.5y. Combined YOE from first role ≈ ~6 yrs; concurrent with study for the last ~5 yrs.",
@@ -271,7 +271,7 @@ export const RECRUITER_STATS = {
     { metric: "Units launched", value: "~4,900 line items" },
     { metric: "Community reach", value: "142K+ launch views" },
     { metric: "Delivery compression", value: "10-wk plan in 3 wks" },
-    { metric: "Team size led", value: "~25 contributors across 5 teams" },
+    { metric: "Team size led", value: "~15 contributors across 3 teams" },
     { metric: "Partners & integrations", value: "36+ partner collaborations" },
     { metric: "International footprint", value: "10 regions" },
   ],
@@ -291,7 +291,7 @@ export const RECRUITER_STATS = {
   /* Fit archetypes for ATS / recruiters */
   fitProfiles: [
     "Founding Engineer / #2 at an AI infra startup",
-    "Tech-Lead / Staff-track in platform / dev-tools",
+    "Tech-Lead / Senior-track in platform / dev-tools",
     "TPM-Engineer hybrid in a regulated industry (health/fin)",
     "Founder-in-Residence / Operator at a hardware-meets-software studio",
   ],
@@ -320,7 +320,7 @@ export const PUBLIC_RECORD = {
     {
       claim: "Phenotype = AI-software platform",
       resumeSays:
-        "Staff-track platform/dev-tools engineer at Phenotype (AI/SaaS framing)",
+        "Senior Software Engineer / Founder at Phenotype (systems + product framing)",
       publicRecord:
         "phenotype.us is a Shopify storefront for mechanical keycap sets (GMK Arch, DSS Cipher, WITF Board). The 'AI platform' framing lives on a separate site: projects.kooshapari.com (84 GitHub projects, auto-generated).",
       verdict: "contradicts",
@@ -331,7 +331,7 @@ export const PUBLIC_RECORD = {
       ],
     },
     {
-      claim: "Polished staff-track engineering voice",
+      claim: "Polished senior engineering voice",
       resumeSays: "Bilingual thought-leadership tone, calm confidence",
       publicRecord:
         "GitHub bio (verbatim): '12yr SysAdmin \\\\ Script Kiddie 5yr PM \\\\ 3yr SWE AI Slop Post ~Apr 2025. :( Meant for my fun only, dont appr. PR\\\\Commits and don't believe READMEs'",

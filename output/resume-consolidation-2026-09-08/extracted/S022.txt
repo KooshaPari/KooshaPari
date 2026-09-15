@@ -1,0 +1,77 @@
+                                          Koosha Paridehpour
+           Santa Monica, CA ● kooshapari@kooshapari.com ● Linkedin.com/in/kooshapari ● kooshapari.com
+  EDUCATION
+  Arizona State University | Computer Science B.S.                ​                                                  Dec 2025
+       ●​   Barrett Honors College - 3x Dean’s List Recipient - New American University President’s Award​      TGPA: 3.65/4.0
+  Arizona State University | Computer Science M.S.C.S.           ​                                         May 2026 - 4.0 GPA
+  EXPERIENCE
+  Product Manager​                                                                                     October 2020 - Present
+  Phenotype. | Santa Monica, CA
+       ●​   Led business operations, logistics, product design, fulfillment, e-commerce, and international vendor
+            management (10+ vendors) for joint ventures;
+       ●​   Generated over $400,000 in revenue in 30 days; reduced manufacturing costs by >25% through negotiations.
+       ●​   Developed a swathe of infrastructure projects using OpenAI Codex and Claude Code covering QA/Qeng with a
+            strong focus on humanless engineering.
+  Development Engineer ​                                                                              May 2025 - August 2025
+  CVS Health | Scottsdale, AZ | AI Innovation - Digital, Data, Analytics, & Technology InnoTech Program
+    ●​    Won company-wide innovation challenge with patient EPA solution proposal among all intern teams
+    ●​    Delivered AI solution ahead of schedule; now in pilot for org rollout with measurable ROI impact
+    ●​     Led technical discovery and solution architecture for agentic tooling that automated manual processes with
+          human-in-the-loop validation and
+    ●​    clear operational guardrails.
+    ●​    Built MVPs and implementation prototypes with Cursor and Claude Code; translated business requirements into
+          engineering-ready workflows,
+    ●​    data needs, and rollout plans.
+    ●​    Reduced processing time/costs through agentic automation system with human-in-loop validation
+    ●​    Presented to executive leadership across multiple business units including DDAT and Innovation teams
+ Lead Software Engineer - Technical Program Manager​                                               May 2025 - January 2026
+ Stealth Startup | Tempe, AZ
+    ●​    Architected and led cross-functional program across 5 teams developing AI-driven requirements platform,
+          coordinating technical execution through daily meetings while serving as primary sponsor liaison for IP, legal
+          compliance, and stakeholder communications; Established PM workflows, development standards
+    ●​    Developed team tooling as well as knowledge sharing processes and built MCP server, project infrastructure, CI/CD \
+          QA suites, platform features, and a Discord-Coda-Github-Jira integration bot automating project management.
+    ●​    Developed a Claude Code powered chat agent that acted similarly to a Claude Code for web precursor for the
+          Sponsor’s IDE.
+    ●​    Developed extensive architecture and features for systems Versioning and traceability using frameworks like SysML.
+Lead Software Engineer ​                                                                        October 2023 - January 2024
+Stealth Startup | Ithaca, NY
+    ●​    Spearheaded development of an offline-first ERP/accounting application using React Native and React
+    ●​    Led development teams, overseeing product development and project management.
+PROJECTS (0 Human written or evaluate LOC following Apr. 2025; incl. in assoc. professional experiences above)
+Byteport - Github.com/kooshapari/byteport​                                                   September 2024 - January 2025
+    ●​    Developed a Platform-as-a-Service (PaaS) for deploying personal projects to AWS and automatically generating
+          portfolio entries through a simple YAML file and leverage LLM-assisted template generation for project showcases
+Chatta! - Github.com/kooshapari/chatta​                                                     September 2024 - October 2024
+    ●​    WebRTC + WebSockets Go Fiber \ Svelte Chat application modeled on Discord/Slack w\ Private DMs and Threading
+Project Spyn - Github.com/kooshapari/byteport​                                                August 2023 - December 2023
+    ●​    EV3 unit as autonomous vehicle to navigate a maze utilizing a software PID controller for smooth turns\acceleration
+SmartCP - Github.com/kooshapari/[deleted]​                                                           July 2025 - August 2025
+    ●​    Built MCP-based agent infrastructure and AI developer tooling, including code-intelligence backends,
+        semantic/hybrid retrieval patterns, and multi-agent workflow orchestration.
+Tracera - Github.com/kooshapari/tracera​                                                               August 2025 - Present
+    ●​   Built product and technical architecture for multi-view traceability, real-time WebSocket sync, graph visualization,
+        and AI-assisted governance workflows.
+    ●​  Implemented hybrid search across PostgreSQL full-text, pgvector semantic search, fuzzy matching, Redis caching,
+        and RRF ranking for requirement discovery and analysis.
+AgentAPI++ - Github.com/kooshapari/agentapi-plusplus​                                                   March 2026 - Present
+    ●​   Extended an HTTP API for programmatic control of Claude Code, Cursor CLI, Codex, Gemini, Copilot, Goose, and
+        other agent CLIs, including session management, streaming, and chat interfaces.
+CLIProxyAPI++ - Github.com/kooshapari/cliproxyapi-plusplus​ ​               ​        ​      ​       February 2026 -Present
+    ●​  Built and maintained agent-native proxy infrastructure with unified auth and token handling, provider-aware routing
+        / model conversion, diagnostics, and operational tooling across Anthropic, Gemini, Copilot, and other providers.
+hwLedger - github.com/KooshaPari/hwLedger​ ​               ​       ​        ​        February 2026 -Present
+    ●​  LLM capacity-planning and fleet-ledger platform for local and rented inference hardware, modeling VRAM,
+        throughput, telemetry reconciliation, and cost-aware dispatch across Apple Silicon, NVIDIA/AMD, and cloud GPU
+        fleets.
+Journeys github.com/KooshaPari/phenotype-journeys​​                ​        ​        ​      February 2026 -Present
+    ●​  Record a user-facing flow (CLI tape, UI test, or Playwright trace), emit a canonical manifest, and verify it with a
+        Claude-describe + Claude-judge loop.
+SKILLS
+    ●​  Languages: React/Native, Electron, Tauri Svelte, NodeJS , Typescript, Java, Python, LangChain, SQL, React,
+        React-Native, MATLAB, Assembly, C/C++,C#(.NET, ASPX) Go(Fiber, Gin, Spin), Svelte, Bash, Rust, RPG IV/400,
+    ●​  Technologies: AWS, Linux, Git, Docker,Kubernetes, QuantConnect, Jira, Postman, Websockets, Automation,
+        Scripting, App Development, Adobe Suite, Office Suite,, Robotics, Autodesk Suite/CAD, Langgraph
+    ●​  Misc: Farsi (5/5) , Mandarin (⅗), Product Management, Supply Chain Management, E-Commerce, Project
+        Management, Systems Engineering, Solutions Architecture, Urban Design, Digital Audio Workstations
+

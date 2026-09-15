@@ -1,0 +1,72 @@
+/* ================================================================
+   Scroll-reveal — transition states for IntersectionObserver reveals.
+
+   data-reveal values: left | right | up (default) | down | fade | scale | rotate
+
+   Relies on tokens.css for:
+     --ease-out: cubic-bezier(0.16, 1, 0.3, 1)
+   ================================================================ */
+
+/* --- Shared transition --- */
+:root {
+  --reveal-transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Hidden state (before element enters viewport) --- */
+.reveal-hidden {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: var(--reveal-transition);
+}
+
+/* --- Visible state (after element enters viewport) --- */
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+  transition: var(--reveal-transition);
+}
+
+/* --- Directional transforms per data-reveal --- */
+
+/* Default: slide up 24px */
+.reveal-hidden[data-reveal="up"],
+.reveal-hidden[data-reveal] {
+  transform: translateY(var(--reveal-distance, 24px));
+}
+
+.reveal-hidden[data-reveal="down"] {
+  transform: translateY(calc(-1 * var(--reveal-distance, 24px)));
+}
+
+.reveal-hidden[data-reveal="left"] {
+  transform: translateX(calc(-1 * var(--reveal-distance, 24px)));
+}
+
+.reveal-hidden[data-reveal="right"] {
+  transform: translateX(var(--reveal-distance, 24px));
+}
+
+.reveal-hidden[data-reveal="fade"] {
+  transform: none;
+}
+
+.reveal-hidden[data-reveal="scale"] {
+  transform: scale(0.95);
+}
+
+.reveal-hidden[data-reveal="rotate"] {
+  transform: rotate(-2deg) scale(0.98);
+}
+
+/* --- Reduced motion: skip animation, show immediately --- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-hidden {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .reveal-visible {
+    transition: none;
+  }
+}

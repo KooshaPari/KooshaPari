@@ -1,0 +1,694 @@
+{
+  "id": "netweave-local-rules-v1",
+  "project": "netweave",
+  "mode": "system",
+  "created": "2026-09-05T10:17:10.925Z",
+  "rights": "Original procedural geometry; no third-party inputs; no license grant asserted",
+  "boundary": "Illustrative local-spacing study, not recorded NetWeave output; no congestion-aware rerouting implemented",
+  "tools": {
+    "blender": "4.4.3 direct application binary",
+    "ffmpeg": "8.1.2",
+    "encoder": "cwebp"
+  },
+  "reviewer": "asset_production_readiness self-review; independent review pending",
+  "disposition": "LOCAL-VERIFIED production files v3; independent acceptance pending",
+  "fallback": "poster-mobile.webp and caption transcript",
+  "iterations": {
+    "v1": {
+      "label": "Original illustrative specimen",
+      "created": "2026-09-05T10:17:10.925Z",
+      "boundary": "Illustrative local-spacing study, not recorded NetWeave output; no congestion-aware rerouting implemented",
+      "generator": "asset-sources/netweave-local-rules-v1/build_scene.py"
+    },
+    "v2": {
+      "label": "Precision-object visual treatment (blind draft)",
+      "created": "2026-09-10T16:38:00.000Z",
+      "boundary": "Illustrative local-spacing study, not recorded NetWeave output; no congestion-aware rerouting implemented; hand-authored poses identical to v1 (vehicle D stationary at cell 7); only materials, geometry sharpness, framing, and lane/vehicle semantics changed",
+      "generator": "asset-sources/netweave-local-rules-v1/build_scene_v2.py",
+      "diff_from_v1": [
+        "Brushed-graphite road plate with anisotropic sheen vs v1 dark tile",
+        "CNC-milled aluminum cell pockets with slim bevel and etched center ticks",
+        "Lead vehicle D uses brushed dark-steel material with anchored base skirt",
+        "Selected follower C remains amber; other followers cool mineral blue (lighter cool)",
+        "Teal pinstripe divider between lanes; teal approach-vector wedge at left edge of upper lane",
+        "Tighter desktop ortho scale; mobile camera raised and narrowed to reduce top/bottom margin",
+        "Sharpened chamfer on plate and vehicles with weighted-normals shading"
+      ],
+      "evidence_boundary": "Original illustrative artwork, not recorded NetWeave output",
+      "review": "Pending independent review"
+    },
+    "v3": {
+      "label": "Overhead precision traffic-instrument treatment",
+      "created": "2026-09-10T17:02:00.000Z",
+      "boundary": "Illustrative local-spacing study, not recorded NetWeave output; no congestion-aware rerouting implemented; hand-authored poses identical to v1/v2; road plate flattened to thin asphalt slab, cells demoted from raised CNC pockets to subtle ticks, vehicles elongated to ~2.25:1 with visible wheels and windshield hint",
+      "generator": "asset-sources/netweave-local-rules-v1/build_scene_v3.py",
+      "diff_from_v2": [
+        "Thin asphalt slab replaces thick CNC-machined road plate",
+        "Cell positions marked by subtle perpendicular ticks instead of raised pockets",
+        "Vehicles elongated to ~2.25:1 length:width with four visible wheel cylinders",
+        "Teal approach chevrons painted on road surface at left edge of upper lane",
+        "Small cream directional chevrons under each occupied cell",
+        "Lead vehicle gets dark-steel lower body skirt",
+        "Windshield glass panel and front bumper accent on each vehicle",
+        "Three-point lighting with rim light added",
+        "Camera framing tightened to minimize blank margin"
+      ],
+      "evidence_boundary": "Original illustrative artwork, not recorded NetWeave output",
+      "review": "Pending independent review"
+    }
+  },
+  "entries": [
+    {
+      "path": "asset-sources/netweave-local-rules-v1/build_scene.py",
+      "bytes": 4294,
+      "sha256": "61ab5e10e545ca9fc7f2292e59deba265cec553fe6556754db789ad98ffb0c38"
+    },
+    {
+      "path": "asset-sources/netweave-local-rules-v1/scene.blend",
+      "bytes": 787297,
+      "sha256": "a1666753a4eb828245cd1ce84ee8d92b2f3758c28efb2da015b2d497c469e580"
+    },
+    {
+      "path": "output/netweave-local-rules-v1/desktop-01.png",
+      "bytes": 1814257,
+      "sha256": "8461f8aa826e991cb8677200172fc19b6d28646e23f84f867c158fb3cf21f2e6",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 1600,
+            "height": 1100
+          }
+        ],
+        "format": {
+          "size": "1814257"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/desktop-02.png",
+      "bytes": 1811798,
+      "sha256": "024af6dea60ec50fb6337a275a98c777049c268786a966b1a3511394283293c4",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 1600,
+            "height": 1100
+          }
+        ],
+        "format": {
+          "size": "1811798"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/desktop-03.png",
+      "bytes": 1812938,
+      "sha256": "9be1984cb3325f48a646dfd3d43422fcaed308023a27f691d850574f4a615d00",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 1600,
+            "height": 1100
+          }
+        ],
+        "format": {
+          "size": "1812938"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/mobile-01.png",
+      "bytes": 887049,
+      "sha256": "9ec35f5448cb367c894616f5917aa24e466ee1d4f5868f5994831221299f3663",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 800,
+            "height": 1000
+          }
+        ],
+        "format": {
+          "size": "887049"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/mobile-02.png",
+      "bytes": 886810,
+      "sha256": "face5aea3ad0a870408f70665d3a07070ec1a04f493a8ff880cbef418c361cff",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 800,
+            "height": 1000
+          }
+        ],
+        "format": {
+          "size": "886810"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/mobile-03.png",
+      "bytes": 887509,
+      "sha256": "1533f877d0ecb3ae150d7af3677ba6bb5734d99af8b078b193b9f3d6d442a613",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 800,
+            "height": 1000
+          }
+        ],
+        "format": {
+          "size": "887509"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/poster-mobile.webp",
+      "bytes": 12458,
+      "sha256": "9e1cfa32f6106dc9452d865924c2171d29fc9905ca1a22c92a3a4a724ee6e54a",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "webp",
+            "width": 800,
+            "height": 1000
+          }
+        ],
+        "format": {
+          "size": "12458"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/poster.webp",
+      "bytes": 20236,
+      "sha256": "5f1120c081abfa0fb8851be7fd7e7ccc1cfec2798b819742a6b8482af3b16d08",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "webp",
+            "width": 1600,
+            "height": 1100
+          }
+        ],
+        "format": {
+          "size": "20236"
+        }
+      }
+    },
+    {
+      "path": "output/netweave-local-rules-v1/sequence.mp4",
+      "bytes": 163720,
+      "sha256": "8e035988615e40196f481e9708b75754a3c0bd2bdba2444ac48b377583e3820b",
+      "media": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1600,
+            "height": 1100
+          }
+        ],
+        "format": {
+          "duration": "6.000000",
+          "size": "163720"
+        }
+      }
+    },
+    {
+      "iteration": "v2",
+      "path": "asset-sources/netweave-local-rules-v1/build_scene_v2.py",
+      "bytes": 13114,
+      "sha256": "19581e40f19a26a17fb15676a93e8a4d9a3361e8d156819f1e53699f6f8e1e59"
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/desktop-01-v2.png",
+      "bytes": 1939623,
+      "sha256": "dd85160fc82a7f2655947c2ebfa130218797352d71337f0db3f1856b538f2bd6",
+      "media": {
+        "codec": "png",
+        "width": 1600,
+        "height": 1100
+      }
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/desktop-02-v2.png",
+      "bytes": 1939107,
+      "sha256": "e5f2f749331444908a22e8bc20fb3ef36ad9e0ac63a6889f4ec03a77d74fde2c",
+      "media": {
+        "codec": "png",
+        "width": 1600,
+        "height": 1100
+      }
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/desktop-03-v2.png",
+      "bytes": 1941415,
+      "sha256": "aec032c18abe61e9788207f228c961b3917c61aad32719dc4c7cdd5c0899705f",
+      "media": {
+        "codec": "png",
+        "width": 1600,
+        "height": 1100
+      }
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/mobile-01-v2.png",
+      "bytes": 941160,
+      "sha256": "b12477fa296e1d9191cd38257f4d824b43fb266ac2c28f13817e1acf42d55653",
+      "media": {
+        "codec": "png",
+        "width": 800,
+        "height": 1000
+      }
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/mobile-02-v2.png",
+      "bytes": 940813,
+      "sha256": "bb582fd9e4b3b885015852e60698f64eeecb58d1c3c15c84ba6ca6c0b22381d1",
+      "media": {
+        "codec": "png",
+        "width": 800,
+        "height": 1000
+      }
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/mobile-03-v2.png",
+      "bytes": 941767,
+      "sha256": "cf325712eca880bac803c161f9b2b0fdcb6679ceef377559558325a88e8d3e02",
+      "media": {
+        "codec": "png",
+        "width": 800,
+        "height": 1000
+      }
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/webp/desktop-01-v2.webp",
+      "bytes": 29208,
+      "sha256": "4bb76971aa7a5c8652576e9692cfb6466c43ba840585e159f722475c9ef5c10a",
+      "media": {
+        "codec": "webp",
+        "width": 1600,
+        "height": 1100
+      }
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/webp/desktop-02-v2.webp",
+      "bytes": 29066,
+      "sha256": "9c8ab955aff820a9f9fb3e3d5243cd3bbad3f47a6e9a070e798e4658f42cce63",
+      "media": {
+        "codec": "webp",
+        "width": 1600,
+        "height": 1100
+      }
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/webp/desktop-03-v2.webp",
+      "bytes": 29060,
+      "sha256": "9e1d8050123c8096780f18ee13a1ef132e312dd23ab4d6aabb44f0dde264b7f2",
+      "media": {
+        "codec": "webp",
+        "width": 1600,
+        "height": 1100
+      }
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/webp/mobile-01-v2.webp",
+      "bytes": 17294,
+      "sha256": "3c0d23d38fe3342faf75d28c1e0297c1c0c8a5d3b951616e3d486240dc660ea8",
+      "media": {
+        "codec": "webp",
+        "width": 800,
+        "height": 1000
+      }
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/webp/mobile-02-v2.webp",
+      "bytes": 17238,
+      "sha256": "ac39fd0fc53ab735df63218182d7b6747b6f929f4b1cce61b2bf3838bfffca6f",
+      "media": {
+        "codec": "webp",
+        "width": 800,
+        "height": 1000
+      }
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/webp/mobile-03-v2.webp",
+      "bytes": 17492,
+      "sha256": "9b700430c45b4c31de7356c986452d2683f4883da3954ae31b4db57b587370cf",
+      "media": {
+        "codec": "webp",
+        "width": 800,
+        "height": 1000
+      }
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/state-01-v2.json",
+      "bytes": 382,
+      "sha256": "3034426910d1eaba7f6ba1aeae4b45c0bb6bfff3844bbb3343ae51a325044559"
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/state-02-v2.json",
+      "bytes": 382,
+      "sha256": "5276368ae336fefa886c374ce17f67d9d878aa5f9406a40db5f2d714b1499d43"
+    },
+    {
+      "iteration": "v2",
+      "path": "output/netweave-local-rules-v1/v2/state-03-v2.json",
+      "bytes": 382,
+      "sha256": "de1b46b202d8ce0b68d5972f49ba8b727c024ceed165177cacb3af3e1adee472"
+    },
+    {
+      "iteration": "v2",
+      "path": "public/projects/netweave/desktop-01-v2.webp",
+      "bytes": 29208,
+      "sha256": "4bb76971aa7a5c8652576e9692cfb6466c43ba840585e159f722475c9ef5c10a",
+      "media": {
+        "codec": "webp",
+        "width": 1600,
+        "height": 1100
+      },
+      "note": "Public derivative; identical bytes to output/netweave-local-rules-v1/v2/webp/desktop-01-v2.webp."
+    },
+    {
+      "iteration": "v2",
+      "path": "public/projects/netweave/desktop-02-v2.webp",
+      "bytes": 29066,
+      "sha256": "9c8ab955aff820a9f9fb3e3d5243cd3bbad3f47a6e9a070e798e4658f42cce63",
+      "media": {
+        "codec": "webp",
+        "width": 1600,
+        "height": 1100
+      },
+      "note": "Public derivative; identical bytes to output/netweave-local-rules-v1/v2/webp/desktop-02-v2.webp."
+    },
+    {
+      "iteration": "v2",
+      "path": "public/projects/netweave/desktop-03-v2.webp",
+      "bytes": 29060,
+      "sha256": "9e1d8050123c8096780f18ee13a1ef132e312dd23ab4d6aabb44f0dde264b7f2",
+      "media": {
+        "codec": "webp",
+        "width": 1600,
+        "height": 1100
+      },
+      "note": "Public derivative; identical bytes to output/netweave-local-rules-v1/v2/webp/desktop-03-v2.webp."
+    },
+    {
+      "iteration": "v2",
+      "path": "public/projects/netweave/mobile-01-v2.webp",
+      "bytes": 17294,
+      "sha256": "3c0d23d38fe3342faf75d28c1e0297c1c0c8a5d3b951616e3d486240dc660ea8",
+      "media": {
+        "codec": "webp",
+        "width": 800,
+        "height": 1000
+      },
+      "note": "Public derivative; identical bytes to output/netweave-local-rules-v1/v2/webp/mobile-01-v2.webp."
+    },
+    {
+      "iteration": "v2",
+      "path": "public/projects/netweave/mobile-02-v2.webp",
+      "bytes": 17238,
+      "sha256": "ac39fd0fc53ab735df63218182d7b6747b6f929f4b1cce61b2bf3838bfffca6f",
+      "media": {
+        "codec": "webp",
+        "width": 800,
+        "height": 1000
+      },
+      "note": "Public derivative; identical bytes to output/netweave-local-rules-v1/v2/webp/mobile-02-v2.webp."
+    },
+    {
+      "iteration": "v2",
+      "path": "public/projects/netweave/mobile-03-v2.webp",
+      "bytes": 17492,
+      "sha256": "9b700430c45b4c31de7356c986452d2683f4883da3954ae31b4db57b587370cf",
+      "media": {
+        "codec": "webp",
+        "width": 800,
+        "height": 1000
+      },
+      "note": "Public derivative; identical bytes to output/netweave-local-rules-v1/v2/webp/mobile-03-v2.webp."
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/desktop-01-v3.png",
+      "bytes": 1857789,
+      "sha256": "2cf3559bace5e695ead5aadbf7d53c43ec90ea43d5ee9e7cf56707902b72879d",
+      "media": {
+        "codec": "png",
+        "width": 1600,
+        "height": 1100
+      }
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/desktop-02-v3.png",
+      "bytes": 1857706,
+      "sha256": "722c1249e79cd31027315581a03f17ac75809d773d4f7a39ae0d535db68c9ba4",
+      "media": {
+        "codec": "png",
+        "width": 1600,
+        "height": 1100
+      }
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/desktop-03-v3.png",
+      "bytes": 1851788,
+      "sha256": "f51918ed2c02fbde0ec43ca152dbbff5488e7ecead79cea471e2bcccb13e0d95",
+      "media": {
+        "codec": "png",
+        "width": 1600,
+        "height": 1100
+      }
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/mobile-01-v3.png",
+      "bytes": 865778,
+      "sha256": "009bef89b271e3607a2a8e73f53a8c0fdb564c5397924cc4a629795334786a5e",
+      "media": {
+        "codec": "png",
+        "width": 800,
+        "height": 1000
+      }
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/mobile-02-v3.png",
+      "bytes": 868142,
+      "sha256": "dc8382a056dc239d0c5f2367163561a3f2c97c7fc9589435e18afefa6a3a5ede",
+      "media": {
+        "codec": "png",
+        "width": 800,
+        "height": 1000
+      }
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/mobile-03-v3.png",
+      "bytes": 863856,
+      "sha256": "28bcd8ef36c0623e7826a62d74dc7794ff5ea766971df9591c506d7c1a728fec",
+      "media": {
+        "codec": "png",
+        "width": 800,
+        "height": 1000
+      }
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/webp/desktop-01-v3.webp",
+      "bytes": 23516,
+      "sha256": "1f58aece32d287eb5c2235d00d32a1be18f6b07a1bef10aa799c8b25da4e45d6",
+      "media": {
+        "codec": "webp",
+        "width": 1600,
+        "height": 1100
+      }
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/webp/desktop-02-v3.webp",
+      "bytes": 23758,
+      "sha256": "ae5bc9a03d441084faadc64a44390fdbf1310867782257e8e92e063869e14ffd",
+      "media": {
+        "codec": "webp",
+        "width": 1600,
+        "height": 1100
+      }
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/webp/desktop-03-v3.webp",
+      "bytes": 23668,
+      "sha256": "654f7ed1017fb72857acc90b10d2ac1389c61bc31ebbdca1b4522a8a69e83ea6",
+      "media": {
+        "codec": "webp",
+        "width": 1600,
+        "height": 1100
+      }
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/webp/mobile-01-v3.webp",
+      "bytes": 12894,
+      "sha256": "04d17a408a62478ffa017c1d3ec1ba68547bbf6dff5bb639369c24a4f2be24db",
+      "media": {
+        "codec": "webp",
+        "width": 800,
+        "height": 1000
+      }
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/webp/mobile-02-v3.webp",
+      "bytes": 13122,
+      "sha256": "cddd5315b7aa449788b2847d96b4ba1f89a111c623c8dd5260e2d19cc14286c3",
+      "media": {
+        "codec": "webp",
+        "width": 800,
+        "height": 1000
+      }
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/webp/mobile-03-v3.webp",
+      "bytes": 13170,
+      "sha256": "02261e85e0cf06c0260756f22375d10334efd5b70f2876ad9b35ebd39a8c7487",
+      "media": {
+        "codec": "webp",
+        "width": 800,
+        "height": 1000
+      }
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/state-01-v3.json",
+      "bytes": 578,
+      "sha256": "a5178884a8202d5f5b08c5c0b84f6658f268bbfbdc9458aa1822143e5914d87a"
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/state-02-v3.json",
+      "bytes": 578,
+      "sha256": "f42e55c9918559f2ccd0d74acc0b4aab4bdc624da526b62b7fc41d5b56572f66"
+    },
+    {
+      "iteration": "v3",
+      "path": "output/netweave-local-rules-v1/v3/state-03-v3.json",
+      "bytes": 578,
+      "sha256": "9967a729e0e103ef87acf22a67d55b2399295f76ec8053bf4bb423343ba7118a"
+    },
+    {
+      "iteration": "v3",
+      "path": "public/projects/netweave/desktop-01-v3.webp",
+      "bytes": 25376,
+      "sha256": "0a2aac4cd856d1d496d0bc2c5c20b471768dc7777c1be1ac3a4b9522bf904e41",
+      "media": {
+        "codec": "webp",
+        "width": 1600,
+        "height": 1100
+      },
+      "note": "Public derivative; identical bytes to output/netweave-local-rules-v1/v3/webp/desktop-01-v3.webp."
+    },
+    {
+      "iteration": "v3",
+      "path": "public/projects/netweave/desktop-02-v3.webp",
+      "bytes": 25484,
+      "sha256": "16ad2faa468b19cdf59b5ea7632e3c6653caf7e79fbb825dab34de5331cb1aa8",
+      "media": {
+        "codec": "webp",
+        "width": 1600,
+        "height": 1100
+      },
+      "note": "Public derivative; identical bytes to output/netweave-local-rules-v1/v3/webp/desktop-02-v3.webp."
+    },
+    {
+      "iteration": "v3",
+      "path": "public/projects/netweave/desktop-03-v3.webp",
+      "bytes": 25494,
+      "sha256": "a39398103207a4a89fe2b7be7107023ab887f442765ded201bc0074ad287f4b1",
+      "media": {
+        "codec": "webp",
+        "width": 1600,
+        "height": 1100
+      },
+      "note": "Public derivative; identical bytes to output/netweave-local-rules-v1/v3/webp/desktop-03-v3.webp."
+    },
+    {
+      "iteration": "v3",
+      "path": "public/projects/netweave/mobile-01-v3.webp",
+      "bytes": 7736,
+      "sha256": "3cdfd29f3f17594e4b5edff8e84d363e97ed090cc8d7cf55ec8e0b129bc21031",
+      "media": {
+        "codec": "webp",
+        "width": 800,
+        "height": 1000
+      },
+      "note": "Public derivative; identical bytes to output/netweave-local-rules-v1/v3/webp/mobile-01-v3.webp."
+    },
+    {
+      "iteration": "v3",
+      "path": "public/projects/netweave/mobile-02-v3.webp",
+      "bytes": 7886,
+      "sha256": "700d636604dc6baad269d5c54a19c65d40b5471c08ab4c77457953000afabd88",
+      "media": {
+        "codec": "webp",
+        "width": 800,
+        "height": 1000
+      },
+      "note": "Public derivative; identical bytes to output/netweave-local-rules-v1/v3/webp/mobile-02-v3.webp."
+    },
+    {
+      "iteration": "v3",
+      "path": "public/projects/netweave/mobile-03-v3.webp",
+      "bytes": 7728,
+      "sha256": "2c6e0be3f04124b1942d5c118a6c7780e18be13d9cc5ecfb33c5466604b18b5d",
+      "media": {
+        "codec": "webp",
+        "width": 800,
+        "height": 1000
+      },
+      "note": "Public derivative; identical bytes to output/netweave-local-rules-v1/v3/webp/mobile-03-v3.webp."
+    }
+  ]
+}

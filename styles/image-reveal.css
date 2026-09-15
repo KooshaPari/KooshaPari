@@ -1,0 +1,137 @@
+/* ============================================================
+   image-reveal.css — Image load choreography styles
+   Design tokens: accent teal #7EBAB5, paper #f3f0e8
+   Easing: cubic-bezier(0.16, 1, 0.3, 1)
+   ============================================================ */
+
+:root {
+  --reveal-accent: #7EBAB5;
+  --reveal-paper: #f3f0e8;
+  --reveal-easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --reveal-duration: 800ms;
+}
+
+/* ---- Container ---- */
+
+.image-reveal-container {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--reveal-paper);
+  aspect-ratio: var(--reveal-aspect, 16 / 9);
+}
+
+/* ---- Placeholder ---- */
+
+.image-reveal-placeholder {
+  position: absolute;
+  inset: 0;
+  background-color: var(--reveal-paper);
+  background-size: cover;
+  background-position: center;
+  filter: blur(20px);
+  transform: scale(1.1);
+  transition: opacity var(--reveal-duration) var(--reveal-easing);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.image-reveal-placeholder.loaded {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---- Image base ---- */
+
+.image-reveal-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================================
+   Reveal style: wipe-right
+   clip-path inset slides from right-edge inward to full reveal
+   ============================================================ */
+
+.image-reveal-img[data-reveal-style="wipe-right"] {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--reveal-duration) var(--reveal-easing);
+}
+
+.image-reveal-img[data-reveal-style="wipe-right"].revealed,
+.image-reveal-img[data-reveal-style="wipe-right"]:not([data-reveal-style]) {
+  clip-path: inset(0);
+}
+
+/* ============================================================
+   Reveal style: zoom-fade
+   Starts zoomed + blurred + transparent, resolves to normal
+   ============================================================ */
+
+.image-reveal-img[data-reveal-style="zoom-fade"] {
+  transform: scale(1.05);
+  filter: blur(10px);
+  opacity: 0;
+  transition:
+    transform var(--reveal-duration) var(--reveal-easing),
+    filter var(--reveal-duration) var(--reveal-easing),
+    opacity var(--reveal-duration) var(--reveal-easing);
+}
+
+.image-reveal-img[data-reveal-style="zoom-fade"].revealed {
+  transform: scale(1);
+  filter: blur(0);
+  opacity: 1;
+}
+
+/* ============================================================
+   Reveal style: curtain
+   Clip-path polygon expands from a central point
+   ============================================================ */
+
+.image-reveal-img[data-reveal-style="curtain"] {
+  clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+  transition: clip-path var(--reveal-duration) var(--reveal-easing);
+}
+
+.image-reveal-img[data-reveal-style="curtain"].revealed {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* ============================================================
+   Reveal style: pixelate
+   High contrast + desaturation + blur simulates pixelation
+   ============================================================ */
+
+.image-reveal-img[data-reveal-style="pixelate"] {
+  filter: contrast(20) saturate(0) blur(6px);
+  opacity: 0;
+  transition:
+    filter var(--reveal-duration) var(--reveal-easing),
+    opacity var(--reveal-duration) var(--reveal-easing);
+}
+
+.image-reveal-img[data-reveal-style="pixelate"].revealed {
+  filter: contrast(1) saturate(1) blur(0);
+  opacity: 1;
+}
+
+/* ============================================================
+   Reduced motion — instant reveal, no animation
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .image-reveal-img {
+    clip-path: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  .image-reveal-placeholder {
+    display: none !important;
+  }
+}

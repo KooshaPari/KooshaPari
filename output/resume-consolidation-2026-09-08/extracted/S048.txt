@@ -1,0 +1,53 @@
+                                        KOOSHA PARIDEHPOUR
+                         Santa Monica, CA | kooshapari@kooshapari.com | LinkedIn | GitHub
+             SOFTWARE ENGINEER | REAL-TIME SYSTEMS | SIMULATION | AUTONOMY | INFRASTRUCTURE
+EDUCATION
+Arizona State University | Tempe, AZ
+M.S. Computer Science | GPA: 4.0/4.0                                                                                              May 2026
+B.S. Computer Science | Barrett Honors College | TGPA: 3.65/4.0 | 3x Dean's List                                                  Dec 2025
+ENGINEERING EXPERIENCE
+Stealth Startup - AI Requirements | Lead Software Engineer / TPM | Tempe, AZ                                      May 2025 - Jan 2026
+• Led engineering execution across five teams building an AI-driven requirements and traceability platform; defined architecture,
+  interfaces, development standards, and cross-team delivery workflows.
+• Built an MCP service, CI/CD and QA infrastructure, and Discord/Coda/GitHub/Jira integrations that automated task flow and
+  knowledge sharing.
+• Designed versioning and traceability workflows informed by SysML; translated sponsor needs into testable platform features while
+  coordinating IP, legal, and stakeholder constraints.
+CVS Health | Development Engineer, AI Innovation (DDAT / InnoTech) | Scottsdale, AZ                                May 2025 - Aug 2025
+• Won the company-wide intern innovation challenge with a patient ePA automation proposal and delivered the prototype ahead of
+  schedule; selected for an organizational pilot.
+• Mapped a manual process into an agentic workflow with explicit human validation, operational guardrails, data requirements, and
+  rollout criteria.
+• Presented architecture, operational risks, and expected ROI to executive leaders across Digital, Data, Analytics & Technology and
+  Innovation teams.
+Mouser Technologies | Software Engineer | Santa Ana, CA                                                              Dec 2023 - Aug 2024
+• Built a responsive dealership website and vehicle-listing inventory interface, translating product requirements into production web
+  workflows.
+Stealth Startup - Offline-First ERP | Lead Software Engineer | Ithaca, NY                                        Oct 2023 - Jan 2024
+• Led development of an offline-first React Native ERP/accounting application and coordinated product delivery across the
+  development team.
+SELECTED PROJECTS
+Civis | Rust, hecs ECS, WebSockets, JSON-RPC, Bevy
+ • Developed a deterministic fixed-step simulation engine with replay and BLAKE3 hash-chain validation; exposed state and
+    commands over WebSocket JSON-RPC and compact binary frames.
+ • Implemented and maintained 28+ Tokio server integration tests covering health, RPC, spawning, role gates, and replay
+    import/export.
+Project Spyn | MATLAB, LEGO EV3, PID control
+ • Programmed gyro-based PID turning and lane centering, ultrasonic obstacle avoidance, route scanning, color-zone behaviors, and
+    manual-control handoff for an autonomous EV3 vehicle.
+Substrate | Rust, Axum, Prometheus
+ • Built a resilient dispatch gateway with token-bucket rate limiting, full-jitter retries, circuit-breaker/fallback logic, hot-reloadable
+    configuration, per-session budgets, and P50/P95/P99 telemetry.
+Tracera | Rust, REST APIs, WebSockets, observability
+ • Architected a traceability and audit ledger for agent workflows with evidence, impact, coverage, governance, health/readiness, and
+    GitHub/Jira ingestion surfaces.
+ADDITIONAL LEADERSHIP
+Phenotype | Product Manager | Santa Monica, CA                                                                   Oct 2020 - Present
+• Owned product, operations, supply chain, e-commerce, and 10+ international vendors for joint ventures; generated more than
+  $400K in revenue in 30 days and reduced manufacturing costs by over 25%.
+TECHNICAL SKILLS
+Languages: Rust, Go, Python, C/C++, Java, TypeScript/JavaScript, SQL, MATLAB
+Systems / Infrastructure: Linux, AWS, Docker, Kubernetes, GitHub Actions, CI/CD, REST, WebSockets, OpenTelemetry,
+Prometheus
+Frameworks / Data: Axum, Gin/Fiber, React, Svelte, PostgreSQL, Redis
+

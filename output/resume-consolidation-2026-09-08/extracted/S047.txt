@@ -1,0 +1,15 @@
+
+SELECTED PROJECTS
+Civis  |  Rust, hecs ECS, WebSockets, JSON-RPC, Bevy
+•  Developed a deterministic fixed-step simulation engine with replay and BLAKE3 hash-chain validation; exposed state and commands over WebSocket JSON-RPC and compact binary frames.
+•  Implemented and maintained 28+ Tokio server integration tests covering health, RPC, spawning, role gates, and replay import/export.
+
+Substrate  |  Rust, Axum, Prometheus
+•  Built a resilient dispatch gateway with token-bucket rate limiting, full-jitter retries, circuit-breaker/fallback logic, hot-reloadable configuration, per-session budgets, and P50/P95/P99 telemetry.
+Tracera  |  Rust, REST APIs, WebSockets, observability
+•  Architected a traceability and audit ledger for agent workflows with evidence, impact, coverage, governance, health/readiness, and GitHub/Jira ingestion surfaces.
+
+TECHNICAL SKILLS
+Languages: Rust, Go, Python, C/C++, Java, TypeScript/JavaScript, SQL, MATLAB
+Systems / Infrastructure: Linux, AWS, Docker, Kubernetes, GitHub Actions, CI/CD, REST, WebSockets, OpenTelemetry, Prometheus
+Frameworks / Data: Axum, Gin/Fiber, React, Svelte, PostgreSQL, Redis

@@ -1,6 +1,40 @@
+/* ================================================================
+   Phenotype tokens — precision-object design system.
+
+   Anchored by the four canonical seed colors from the Phenotype
+   Material Lab source packet:
+       #0F1012  Obsidian   (Foundation 900 — quiet shell)
+       #353A40  Slate      (Foundation 700 — structural alloy)
+       #F6F5F5  Ceramic    (Surface 0    — readable substrate)
+       #7EBAB5  Teal       (Signal       — optical guidance)
+
+   The existing graphite/paper/olive/arch/acid token families remain
+   as derived expressions of these seeds; the canonical four seeds
+   are now exposed alongside them so designers can compose from the
+   source rather than a downstream palette.
+
+   Motion is intentionally short — short 120ms, standard 180ms,
+   none of the dashboard-style ambient loops. Geometry is sharp:
+   control corners 6px, panel corners 10px, studio 12px.
+   ================================================================ */
+
 :root {
   color-scheme: light;
 
+  /* Canonical seed colors (Material Lab packet, OKLab-derived) ---------- */
+  --seed-obsidian: #0F1012;
+  --seed-slate:    #353A40;
+  --seed-ceramic:  #F6F5F5;
+  --seed-teal:     #7EBAB5;
+
+  /* Surface family expressed from the seeds ----------------------------- */
+  --surface-obsidian: var(--seed-obsidian);
+  --surface-slate:    var(--seed-slate);
+  --surface-ceramic:  var(--seed-ceramic);
+  --surface-teal:     var(--seed-teal);
+  --surface-ceramic-raised: color-mix(in oklch, var(--seed-ceramic) 92%, var(--seed-slate));
+
+  /* Existing derived families retained for compatibility --------------- */
   --graphite-950: #171a18;
   --graphite-900: #20231f;
   --graphite-800: #30332e;
@@ -13,36 +47,55 @@
   --arch-500: #3f8795;
   --arch-300: #76aeb5;
   --acid-500: #b6d448;
+
   --ink: var(--graphite-950);
   --ink-muted: #555a52;
   --surface: var(--paper-100);
   --surface-raised: #faf7ef;
   --rule: color-mix(in oklch, var(--graphite-950) 24%, transparent);
 
+  /* Precision rules and accents ---------------------------------------- */
+  --precision-rule: color-mix(in oklch, var(--ink) 18%, transparent);
+  --precision-rule-strong: color-mix(in oklch, var(--ink) 36%, transparent);
+  --eyebrow-line: 1.125rem; /* visual length of the mono hairline before each eyebrow */
+
+  /* Typography ---------------------------------------------------------- */
   --font-display: "Space Grotesk", "Avenir Next", "Helvetica Neue", sans-serif;
   --font-reading: "Inter", "Avenir Next", "Helvetica Neue", sans-serif;
-  --font-meta: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  --font-meta:    "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  --type-display: var(--font-display);
+  --type-reading: var(--font-reading);
+  --type-mono:    var(--font-meta);
 
+  /* Type scale (clamp) — tighter on display, restrained on body --------- */
   --step--1: clamp(0.75rem, 0.71rem + 0.16vw, 0.84rem);
-  --step-0: clamp(0.96rem, 0.9rem + 0.25vw, 1.08rem);
-  --step-1: clamp(1.18rem, 1.07rem + 0.48vw, 1.42rem);
-  --step-2: clamp(1.48rem, 1.25rem + 0.93vw, 1.95rem);
-  --step-3: clamp(1.88rem, 1.48rem + 1.63vw, 2.7rem);
-  --step-4: clamp(2.45rem, 1.73rem + 2.9vw, 3.9rem);
+  --step-0:  clamp(0.96rem, 0.9rem  + 0.25vw, 1.08rem);
+  --step-1:  clamp(1.18rem, 1.07rem + 0.48vw, 1.42rem);
+  --step-2:  clamp(1.48rem, 1.25rem + 0.93vw, 1.95rem);
+  --step-3:  clamp(1.88rem, 1.48rem + 1.63vw, 2.7rem);
+  --step-4:  clamp(2.45rem, 1.73rem + 2.9vw,  3.9rem);
 
-  --space-1: 0.375rem;
-  --space-2: 0.625rem;
-  --space-3: 1rem;
-  --space-4: 1.5rem;
-  --space-5: 2.25rem;
-  --space-6: 3.5rem;
-  --space-7: 5.5rem;
+  /* Spacing scale (Material Lab 4..64) --------------------------------- */
+  --space-0: 0.25rem;   /* 4  */
+  --space-1: 0.375rem;  /* 6  */
+  --space-2: 0.625rem;  /* 10 */
+  --space-3: 1rem;      /* 16 */
+  --space-4: 1.5rem;    /* 24 */
+  --space-5: 2.25rem;   /* 36 */
+  --space-6: 3.5rem;    /* 56 */
+  --space-7: 5.5rem;    /* 88 */
   --gutter: clamp(1rem, 3vw, 3.75rem);
   --measure: 68ch;
   --focus-ring: 0 0 0 3px var(--surface), 0 0 0 6px var(--arch-500);
 
-  /* Depth layer (canvas only) */
-  --shadow-card: 0 2px 4px rgba(0,0,0,0.05);
+  /* Precision radii (sharp instrument, not plush) ---------------------- */
+  --radius-control: 6px;   /* buttons, inputs, pills */
+  --radius-panel:   10px;  /* cards, panels, callouts */
+  --radius-studio:  12px;  /* hero/feature surfaces only */
+
+  /* Depth layer (precision, not glow) --------------------------------- */
+  --shadow-card: 0 1px 0 var(--precision-rule);
+  --shadow-specimen: 0.65rem 0.65rem 0 color-mix(in oklch, var(--ink) 14%, transparent);
   --z-chrome: 10;
   --z-canvas: 5;
   --z-overlay: 1;
@@ -53,20 +106,64 @@
   --accent-engineering: var(--arch-500);
   --accent-product: var(--olive-500);
 
-  /* Motion system */
+  /* Motion system — short, purposeful, no ambient loops ---------------- */
   --motion-fast: 160ms;
-  --motion-normal: 280ms;
-  --motion-slow: 380ms;
-  --motion-glacial: 600ms;
+  --motion-normal: 220ms;
+  --motion-slow: 280ms;
+  --motion-glacial: 380ms;
+  --motion-short: 120ms;
+  --motion-standard: 180ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Family accent colors — engineering lens (default) --------------- */
+  --family-netweave: #3f8795;
+  --family-sharecli: #c76a3a;
+  --family-omniroute: #457b9d;
+  --family-physical: #b8962e;
+  --family-substrate: #5a7a6e;
+  --family-omlx: #7a6aad;
+
+  /* Family accent colors — product lens (shifted warmer) ------------ */
+  --family-netweave-product: #4ecdc4;
+  --family-sharecli-product: #e07a5f;
+  --family-omniroute-product: #577590;
+  --family-physical-product: #daa520;
+  --family-substrate-product: #6a8f7e;
+  --family-omlx-product: #9a8acd;
+
+  /* Surfaces — additions -------------------------------------------- */
+  --surface-inset: #eae8e4;
+
+  /* Structure line — left-edge content frame ----------------------- */
+  --structure-line: 1px solid var(--precision-rule);
 }
 
-/* --- Motion Keyframes (referenced via motion tokens) --- */
+/* --- Lens-scoped accent overrides ---------------------------------- */
+html[data-lens="engineering"] {
+  --accent: var(--accent-engineering);
+  --family-netweave-active: var(--family-netweave);
+  --family-sharecli-active: var(--family-sharecli);
+  --family-omniroute-active: var(--family-omniroute);
+  --family-physical-active: var(--family-physical);
+  --family-substrate-active: var(--family-substrate);
+  --family-omlx-active: var(--family-omlx);
+}
+html[data-lens="product"] {
+  --accent: var(--accent-product);
+  --family-netweave-active: var(--family-netweave-product);
+  --family-sharecli-active: var(--family-sharecli-product);
+  --family-omniroute-active: var(--family-omniroute-product);
+  --family-physical-active: var(--family-physical-product);
+  --family-substrate-active: var(--family-substrate-product);
+  --family-omlx-active: var(--family-omlx-product);
+}
+
+/* --- Motion Keyframes (referenced via motion tokens) ------------------- */
 
 @keyframes page-enter {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes page-exit {
@@ -77,21 +174,23 @@
   from   { opacity: 1; }
   to     { opacity: 0; }
 }
+/* Precision press feedback — 1px settle, no bounce */
 @keyframes button-press {
-  from { transform: scale(1); }
-  to   { transform: scale(0.97); }
+  from { transform: translateY(0); }
+  to   { transform: translateY(1px); }
 }
 @keyframes button-release {
-  from { transform: scale(0.97); }
-  to   { transform: scale(1); }
+  from { transform: translateY(1px); }
+  to   { transform: translateY(0); }
 }
 @keyframes toast-slide {
   from { transform: translateY(-80px); opacity: 0; }
   to   { transform: translateY(0); opacity: 1; }
 }
+/* Hover lift restrained to 1px instead of 2px (precision, not plush) */
 @keyframes hover-lift {
   from { transform: translateY(0); }
-  to   { transform: translateY(-2px); }
+  to   { transform: translateY(-1px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -100,4 +199,33 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Dark mode overrides — activated by data-theme="dark" on <html> */
+[data-theme="dark"] {
+  --surface: var(--graphite-950);
+  --surface-raised: var(--graphite-900);
+  --surface-ceramic-raised: var(--graphite-800);
+  --ink: var(--paper-100);
+  --ink-muted: var(--concrete-500);
+  --rule: color-mix(in oklch, var(--paper-100) 18%, transparent);
+  --precision-rule: color-mix(in oklch, var(--paper-100) 12%, transparent);
+  --precision-rule-strong: color-mix(in oklch, var(--paper-100) 24%, transparent);
+  color-scheme: dark;
+}
+
+[data-theme="dark"] .atelier-header {
+  background: color-mix(in oklch, var(--graphite-950) 95%, transparent);
+}
+
+[data-theme="dark"] .artifact {
+  background: var(--graphite-900);
+  border-color: color-mix(in oklch, var(--paper-100) 12%, transparent);
+}
+
+[data-theme="dark"] .skeleton-line,
+[data-theme="dark"] .skeleton-heading,
+[data-theme="dark"] .skeleton-card,
+[data-theme="dark"] .skeleton-image {
+  background: linear-gradient(90deg, var(--graphite-900) 25%, var(--graphite-800) 50%, var(--graphite-900) 75%);
 }

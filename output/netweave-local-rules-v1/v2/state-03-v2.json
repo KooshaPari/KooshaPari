@@ -1,0 +1,15 @@
+{
+  "state": 3,
+  "lane_0": [
+    2,
+    4,
+    6,
+    7
+  ],
+  "lane_1": [],
+  "seed": 0,
+  "asset_version": "v2-precision-object",
+  "boundary": "Original illustrative artwork, not recorded NetWeave output",
+  "poses_source": "hand-authored, identical to v1; visual treatment only differs",
+  "notes": "Geometry, materials and framing differ from v1; lane_0 poses are unchanged"
+}

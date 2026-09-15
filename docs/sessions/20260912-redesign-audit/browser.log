@@ -1,0 +1,22 @@
+
+> test:e2e
+> npm run stage:publication && npx playwright test
+
+
+> stage:publication
+> node scripts/stage-publication.js
+
+
+Running 9 tests using 1 worker
+
+  ✓  1 tests/browser/acceptance.spec.js:10:1 › fresh visitor sees the gate, dismisses for the session, and no-JS keeps native Continue (2.3s)
+  ✓  2 tests/browser/acceptance.spec.js:30:1 › all public routes show the gate to a fresh visitor (4.0s)
+  ✓  3 tests/browser/acceptance.spec.js:44:1 › native no-JS Continue exposes the page without blocking content (381ms)
+  ✓  4 tests/browser/acceptance.spec.js:56:1 › Reader shortcut, persistence, reduced motion and focus (759ms)
+  ✓  5 tests/browser/acceptance.spec.js:78:1 › clean navigation and saved lens (955ms)
+  ✓  6 tests/browser/acceptance.spec.js:99:1 › all project pages have no-JavaScript content and downloads (1.7s)
+  ✓  7 tests/browser/acceptance.spec.js:122:1 › top-level navigation pages have no-JavaScript content and clean links (914ms)
+  ✓  8 tests/browser/acceptance.spec.js:147:1 › published blog posts have no-JavaScript content and clean navigation (370ms)
+  ✓  9 tests/browser/acceptance.spec.js:164:1 › ShareCLI desktop and mobile accessibility (14.0s)
+
+  9 passed (40.5s)

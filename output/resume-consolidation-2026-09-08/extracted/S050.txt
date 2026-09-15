@@ -1,0 +1,96 @@
+                                   CSE 578: Data Visualization
+
+                                   Milestone 1 Progress Report
+                                            Koosha Paridehpour
+
+                     Ira A. Fulton Schools of Engineering – Arizona State University
+
+                                             kparideh@asu.edu
+
+
+
+Abstract
+
+This progress report aims to document all work completed for the first half of the CSE 578 Data
+Visualization culminating project. We aim to analyze demographic factors from the United States Census
+Bureau data to develop marketing profiles for enrollment initiatives in planning at UVW College. Initial
+work includes base exploration, data cleaning, and preparation of the 32k record Adult Income dataset for
+comprehensive analysis and generation of intuitive visualizations.
+
+1. Problem Statement
+
+XYZ Corporation provides demographic marketing profiles to various organizations, including UVW
+College. In partnership, XYZ aims to develop marketing profiles that supports UVW College’s
+enrollment strategies by analyzing Census Bureau data to identify key characteristics distinguishing low
+and high-income individuals. The analysis encompasses a variety of variables such as age, gender,
+education level, marital status, and other factors. Understanding the distinctions between each enables the
+development of optimal marketing efforts tailored exactly to each demographic segment. The key goal is
+to develop visualizations and predictive insights that inform UVW College’s initiatives by identifying
+which demographics are most likely to benefit from their various offerings.
+
+2. Progress Summary
+
+- Reviewed all course materials as provided in the project overview and developed the necessary
+understanding of project goals, dataset shape, and customer requirements.
+
+- Downloaded and examined the UCI provided Adult Income dataset.
+
+- Performed initial exploration to understand data types, quirks, distributions, and other quality issues.
+
+- Began initial data cleaning process, which involved identification and handling of missing and outlier
+values.
+
+- Analyzed Income distribution and initial patterns that distinguished individuals above or below $50K
+annual income.
+
+3. Tasks Completed
+
+1. Data Preparation & Initial Exploration: Performed initial inspection of schema and data provided as
+well as building the necessary base code to load and use the data programmatically.
+2. Data Cleaning: Implemented data cleaning logic such as missing values handling and value
+removal\imputation.
+
+3. Exploratory Data Analysis: Performed basic univariate analyses on key demographic variables and
+generated initial distributions for age, education level, gender, and occupation to understand basic
+characteristics among the population.
+
+4. Issues and Challenges Encountered
+
+1. Missing Data Representations: The provided dataset uses “?” to represent missing values, which is not
+natively handled and requires explicit logic to gracefully clean rather than automatic pandas
+interpretations. Custom pre-processing logic was inserted prior to data analysis to prepare and “garden”
+the data provided.
+
+2: Education redundancies: Initially treated education and education-num as independent attributes,
+despite encoding effectively identical information. Using both together can inflate attribute coverage
+without adding utility for analyses.
+
+5. Resolution Plan
+
+1. Missing Data: Implemented explicit pre-processing logic to replace “?” with None\NaN,
+(na_values=[”?”]) then applied the correct imputation or exclusion step based on variable type and
+missingness patterns (dropna() for col w\ low missingness rates).
+
+2: Education: Excluded education-num from all analyses, and retained the categorical education as it
+maps perfectly to marketing relevant degree labels.
+
+6. Tasks Remaining and Plan
+
+A large amount of work remains to complete all remaining deliverables \ objectives. These include:
+
+1. Visualization Development: Create targeted visualizations to display income-demographic
+relationships, with both univariate and multivariate analyses.
+
+2. Demographic Analysis: Conduct more in-depth analysis and research into the dataset and its
+demographics to identify key characteristics that distinguish and correlate between income-grades in
+population. The core focus will be on variables with the most predictive value, or otherwise most
+informative for marketing segmentation as UVW requires.
+
+3. Marketing Insights: Develop clear insights from the derived findings for UVW’s marketing
+department, translating patterns present in the data to formal demographic profiles suitable for marketing
+and other business use cases.
+
+4. Final Report Preparation: Compile all findings and research, visualizations, and work-product\code into
+a comprehensive and formalized report addressing customer ask and providing data-driven and feasible
+recommendations for UVW marketing strategies.
+

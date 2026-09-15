@@ -1,0 +1,189 @@
+Paridehpour, Koosha                                               2025 Summer Intern Performance Form
+College Intern Associate                                         Organization: Adjudication Govt. Services Regulatory Affairs,
+                                                                          Pricing, and Cloud Initiatives- PM (Sanjeev Kumar)
+Leader: Sanjeev Kumar                                                               Location: Scottsdale-9501 East Shea Blvd
+Evaluated By: Sanjeev Kumar                                                                          05/01/2025 - 09/12/2025
+
+
+Overall Performance
+Leader Overall Evaluation
+  Rating:             3 - Successful Performance (SP)
+  Comment:            Koosha demonstrated technical aptitude and proficiency. In a short window of ten weeks he
+                      successfully completed assigned project. He proactively explored options, design pattern, learned
+                      fundamentals of the RPG and PySpark. He is a great innovator and has exceptional technical prowess,
+                      Koosha should work on his communication and story telling capabilities. It will help him manyfold.
+
+Colleague Overall Evaluation
+  Comment:            Throughout my time in CVS' Innotech program and my RPGEvolver project, I contributed both
+                      technically and strategically to the successful development and extension of a AI based tool to
+                      modernize legacy RPG systems into PySpark. I engaged deeply with both comprehensive learnings in
+                      both areas, as well as technical challenges and alignment to stakeholder needs & desires.
+                      As the program progressed, I explored and tested alternative approaches, such as Langchain based
+                      variations and insights from relevant research regarding similar processes to our project. These led to
+                      meaningful improvement in tool performance, usability, and adaptability. This experience allowed me to
+                      grown in my ability to balance innovation with practicality, and gave me a mix of independent and team-
+                      based development experiences, culminating in a project to support both regulatory compliance and
+                      technological advancement.
+
+
+Goals
+  Build or Enhance RPG to Pyspark conversion Capability in RPGEvolver Product to aid engineers and
+  accelerate the migration of legacy systems.
+
+  S I am enhancing RPGEvolver through adding the RPG-PySpark conversion capability as an additional option
+  M: Simplify development effort, save coding effort and time, >90% accuracy on test dataset, minimal or no introduced bugs
+  and side effects, both for target and tool itself.
+  A: Leverage Daily Connects as well as Team members for guidance and alignment to timeline and vision,
+  R: This product will be used in TIC-MRF (Transparency in Coverage Machine Readable Files), which will ensure timely
+  compliance for regulation.
+  T: Testing and Staging by Week 2, Finalized to Production and Presentation by Week 4
+
+
+  Due Date:    06/27/2025        Status:   Completed           Completion Date:     08/01/2025
+
+  Weight:      25
+
+
+
+  Demonstrate proficiency in communicating complex technical projects and concepts to stakeholders,
+  executives, and non-technical members.
+
+
+  S Demonstrate proficiency in communicating complex topics to un-optimized audiences
+M Deliver 3 presentations w/ 4.5/5 avg feedback score or similar metric
+A Practice in Safe environments, use CVS presentation templates, get mentor coaching
+R Essential skill for any engineer to hold, especially for leadership.
+T First Pres by Week 4, last Week 9
+
+Due Date:    08/01/2025        Status:   Completed             Completion Date:      07/31/2025
+
+Weight:      25
+
+
+
+Identify Team Pain points and build 3 resources to support (stretch goal)
+
+
+S Create reusable resources to enhance productivity and knowledge sharing
+M Develop 3 resources actively used by 5+ members
+A Identify pain points at mtgs and daily work, alloc Fri afternoon for development
+R Demo initiative lasting value
+T First by wk5 last by wk8
+
+Due Date:    07/26/2025        Status:   Completed             Completion Date:      08/01/2025
+
+Weight:      0
+
+
+
+Propose and develop new feature, best practice, or enterprise AI use case
+
+
+S Propose and Prototype a innovative new AI feature or use case for CVS enterprise needs
+M Deliver Design Document and Prototype
+A focus on POC, deeply learn internal tooling and current traditional processes
+R Shows ability Past IC, System level thinking
+T Proposal by week 4, proto by week 8
+
+Due Date:    07/25/2025        Status:   Completed             Completion Date:      07/04/2025
+
+Weight:      25
+
+
+
+
+Study CVS AI Innovation and propose a new data-driven business case
+
+
+
+S Analyze how AI supports CVS business value, develop data-driven new business case for new AI app
+M ROI analysis with 3yr projection, cost-benefit breakdown, 5 KPIs
+A Shadow business meetings. Analyze existing impls and initiatives, traditional methods, use CVS financial frameworks
+R Bridge Technical Work with Product/Leadership orientated work
+T Initial Research by week 5, presentation by week 8
+
+Due Date:    07/31/2025        Status:   Completed             Completion Date:      07/31/2025
+
+Weight:      25
+
+
+
+     Section Summary
+Leader Evaluation                                               Colleague Evaluation
+Rating:                3 - Successful Performance (SP)
+Comment:        Koosha has developed the RPGRevolver            Comment:       Goal:
+                RPG to PySpark conversion Project on time.                     Communication Skills: Many presentations
+                He proposed a new winning business case:                       given in addition to networking and
+                Under the DDAT Innovation Challenge                            communication courses to strengthen and
+                Umbrella, Prior Authorization Solutions to                     apply my skills.
+                connect Patients to Providers and PA Team,                     Develop Given Project: Stakeholder review &
+                Additionally he explored multiple AI based                     refinement stage.
+                solutions in healthcare space, one of which                    Develop a New Technical Solution:
+                was a winning use case at organization level.                  RPValidate - Test Case Generation for RPG
+                Koosha has a bright future.                                    Outputs with A\B comparison, stopped due to
+                                                                               change in focus on tool development, and
+                                                                               core limitations.
+                                                                               Propose a new Business Case: Under the
+                                                                               DDAT Innovation Challenge Umbrella, Prior
+                                                                               Authorization Solutions to connect Patients to
+                                                                               Providers and PA Team.
+                                                                               Develop tools and documentation to assist
+                                                                               team: As majority of work was not team-
+                                                                               oriented, especially from the lack of a formal
+                                                                               methodology e.g. Agile, identifying such
+                                                                               issues was difficult and often there were more
+                                                                               valuable ways to spend my time.
+
+Heart At Work Behaviors™
+Put people first
+  We are customer obsessed. We walk in others’ shoes to improve the customer and colleague experience. We create an
+  engaging and inclusive work environment where our colleagues reflect the diversity of our customers.
+
+
+Rise to the challenge
+  We boldly innovate to care for our customers. We act swiftly and adapt to feedback. We think big and are willing to take
+  smart risks to innovate. We welcome different points of view and learn from mistakes.
+
+
+Join forces
+  We unite around our goal of serving the customer. We work across teams to provide the best care possible. We listen and
+  learn from each other. We are conscious of our impact on customers, colleagues, and the company.
+
+
+Create simplicity
+  We design for our customers. We continuously simplify by removing extra steps and innovating to create streamlined
+  solutions. We focus on what matters most to our customers and empower those colleagues closest to the work to make the
+  right call.
+
+
+Inspire trust
+  We work to earn the trust of our customers and colleagues by meeting our commitments and acting with integrity. We
+  bravely do the right thing, even when it is hard. We speak up to challenge ideas and do so with heart.
+Champion safety and quality
+  We are relentless in our pursuit of the safest and highest quality care. We know that in order to keep patients and
+  consumers safe, our colleagues must also feel safe and protected. We ensure safety is at the heart of every decision we
+  make and everything we do.
+
+
+
+
+          Section Summary
+
+Leader Evaluation                                                Colleague Evaluation
+Rating:                4 - High Performance (HP)
+Comment:        Koosha boldly innovates and designed the         Comment:     Put people first: Focused on optimizing
+                system to create simplicity. He demonstrated                  Developer experience and Migration Process
+                leadership quality and lead a group of interns
+                to win the Innovation challenge.
+                                                                              Create simplicity: Designing systems that
+                                                                              streamline legacy logic into maintainable,
+                                                                              modern code.
+
+                                                                              Inspire trust: Maintained transparency through
+                                                                              continuous communication with stakeholders
+                                                                              and departments.
+
+                                                                              Champion safety and quality: Supporting
+                                                                              compliance and ensuring high standards in
+                                                                              design & delivery.
+

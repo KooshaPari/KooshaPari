@@ -1,5 +1,6 @@
 import { createArtifact, physicalPlate } from '../components/artifact.js';
 import { el } from '../components/dom.js';
+import { IDENTITY } from '../../data/phenotype.js';
 
 const LENS_PRIORITY = {
   engineering: ['witf', 'sharecli', 'substrate', 'phenotype-omlx', 'netweave', 'gmk-arch'],
@@ -23,7 +24,7 @@ function identityBlock(lens) {
   return el(
     'div',
     { class: 'home-identity' },
-    el('p', { class: 'atelier-label' }, 'Koosha Paridehpour / Technical Atelier'),
+    el('p', { class: 'atelier-label' }, `${IDENTITY.legalName} / Technical Atelier`),
     el('h1', {}, 'Software systems, technical products, and the infrastructure between them.'),
     el(
       'p',
@@ -36,6 +37,9 @@ function identityBlock(lens) {
       { class: 'home-primary-links', 'aria-label': 'Portfolio readings' },
       el('a', { href: '/engineering' }, 'Read Engineering'),
       el('a', { href: '/product' }, 'Read Product'),
+    ),
+    el('p', { class: 'home-contact' },
+      el('a', { href: `mailto:${IDENTITY.email}` }, IDENTITY.email),
     ),
   );
 }

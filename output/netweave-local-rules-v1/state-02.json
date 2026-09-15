@@ -1,0 +1,12 @@
+{
+  "state": 2,
+  "lane_0": [
+    1,
+    3,
+    5,
+    7
+  ],
+  "lane_1": [],
+  "seed": 0,
+  "boundary": "Original illustrative artwork, not recorded NetWeave output"
+}

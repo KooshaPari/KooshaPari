@@ -1,0 +1,35 @@
+KOOSHA PARIDEHPOUR
+Santa Monica, CA  |  kooshapari@kooshapari.com  |  linkedin.com/in/kooshapari  |  github.com/KooshaPari
+GO SOFTWARE ENGINEER  |  LINUX SYSTEMS  |  DISTRIBUTED INFRASTRUCTURE  |  REAL-TIME SERVICES
+Go-focused software engineer with a long-running systems background in Linux administration, virtualization, networking, game development, and self-hosted infrastructure. Built distributed APIs, process-control services, real-time WebSocket systems, CI/CD, and traceability platforms.
+ENGINEERING EXPERIENCE
+Stealth Startup - AI Requirements  |  Lead Software Engineer / Technical Program Manager  |  Tempe, AZMay 2025 - Jan 2026
+•  Led engineering execution across five teams building an AI-driven requirements and systems-traceability platform; defined architecture, service interfaces, development standards, and cross-team delivery workflows.
+•  Built an MCP service, CI/CD and QA infrastructure, and Discord/Coda/GitHub/Jira integrations; designed versioning and traceability workflows using SysML concepts.
+CVS Health  |  Development Engineer, AI Innovation (DDAT / InnoTech)  |  Scottsdale, AZMay 2025 - Aug 2025
+•  Won a company-wide innovation challenge with a patient electronic prior authorization (ePA) solution; delivered the prototype ahead of schedule and advanced it to an organizational pilot.
+•  Converted a manual process into an AI-assisted workflow with explicit human validation, operational guardrails, data requirements, and rollout criteria; presented architecture, risks, and expected ROI to executives.
+Mouser Technologies  |  Software Engineer  |  Santa Ana, CADec 2023 - Aug 2024
+•  Built a responsive dealership site and vehicle-listing inventory interface, translating product requirements into production web workflows.
+Stealth Startup - Offline-First ERP  |  Lead Software Engineer  |  Ithaca, NYOct 2023 - Jan 2024
+•  Led development of an offline-first React Native ERP/accounting application and coordinated product delivery across the development team.
+Phenotype  |  Product Manager  |  Santa Monica, CAOct 2020 - Present
+•  Owned product, operations, supply chain, e-commerce, and 10+ international vendors; generated more than $400K in revenue in 30 days and reduced manufacturing costs by over 25%.
+SELECTED PROJECTS & SYSTEMS
+AgentAPI++  |  Go, HTTP, SSE, terminal/process control
+•  Extended an open-source Go control plane for 11 agent CLIs, covering terminal and process sessions, message parsing, streaming events, health endpoints, and operational diagnostics.
+CLIProxyAPI++  |  Go, routing, authentication, operations
+•  Extended an OpenAI-compatible multi-provider proxy with unified auth and token handling, provider-aware request translation and routing, quota/cooldown controls, management APIs, and CI tooling.
+BytePort  |  Go, AWS, SvelteKit, Tauri, OpenTelemetry
+•  Built a manifest-driven deployment platform with a Go API/runtime, GitHub OAuth, AWS provisioning, PASETO sessions, encrypted credential storage, and OpenTelemetry instrumentation.
+Independent Systems Lab  |  Linux, QEMU/KVM, VFIO, Docker
+•  Built and troubleshot Linux/Windows virtualization and self-hosted compute environments across custom hardware; configured GPU passthrough, storage, networking, drivers, containers, and multi-host services.
+Project Spyn  |  MATLAB, LEGO EV3, PID control
+•  Programmed an autonomous EV3 vehicle with gyro-based PID turning, lane centering, ultrasonic obstacle detection, route scanning, and color-zone behavior.
+EDUCATION
+Arizona State University  |  M.S. Computer Science  |  GPA: 4.0/4.0  |  Tempe, AZMay 2026
+Arizona State University  |  B.S. Computer Science  |  Barrett Honors  |  TGPA: 3.65/4.0  |  3x Dean's List  |  Tempe, AZDec 2025
+TECHNICAL SKILLS
+Languages: Go (primary), Rust, Python, C/C++, TypeScript/JavaScript, Java, SQL, Bash, MATLAB
+Systems: Linux, QEMU/KVM, VFIO, virtual machines, networking, process/service management, hardware troubleshooting
+Backend / Infrastructure: REST/HTTP, WebSockets, SSE, PostgreSQL, Redis, AWS, Docker, Kubernetes, GitHub Actions, CI/CD, OpenTelemetry, Prometheus

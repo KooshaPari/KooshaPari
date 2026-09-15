@@ -14,13 +14,15 @@
   <meta name="twitter:title" content="Koosha Paridehpour — Software systems and technical products" />
   <meta name="twitter:description" content="Software engineering and technical product/program work across distributed systems, agent infrastructure, and physical products." />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/styles/tokens.css" />
-  <link rel="stylesheet" href="/styles/base.css" />
-  <link rel="stylesheet" href="/styles/shell.css" />
-  <link rel="stylesheet" href="/styles/artifacts.css" />
-  <link rel="stylesheet" href="/styles/case-studies.css" />
-  <link rel="stylesheet" href="/styles/work-catalog.css" />
-  <link rel="stylesheet" href="/styles/responsive.css" />
+  <link rel="preload" as="image" href="/public/projects/witf/hero-01.webp" fetchpriority="high" />
+  <link rel="preload" href="/styles/bundled/core.css" as="style" />
+  <link rel="stylesheet" href="/styles/bundled/core.css" />
+  <link rel="stylesheet" href="/styles/bundled/components.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/styles/bundled/pages.css" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="/styles/bundled/components.css" />
+    <link rel="stylesheet" href="/styles/bundled/pages.css" />
+  </noscript>
 </head>
 <body>
   <a class="skip-link" href="#view-root">Skip to content</a>
@@ -30,7 +32,25 @@
     <main id="view-root"></main>
   </div>
 
-  <script type="module" src="/scripts/app.js"></script>
+  <noscript>
+    <div style="max-width:640px;margin:12vh auto;padding:2rem;font-family:system-ui,-apple-system,sans-serif;color:#e8e8e8;background:#111;border-radius:8px;line-height:1.6;">
+      <h1 style="font-size:1.5rem;margin-top:0;">Koosha Paridehpour</h1>
+      <p style="font-size:1.05rem;">
+        This site requires JavaScript to render its interactive portfolio experience.
+      </p>
+      <p style="font-size:0.95rem;">
+        In the meantime, you can reach me via email at
+        <a href="mailto:koosha@kooshapari.com" style="color:#7eb8ff;">koosha@kooshapari.com</a>
+        or find me on
+        <a href="https://www.linkedin.com/in/koosha-paridehpour-1079b61b5/" style="color:#7eb8ff;" rel="noopener">LinkedIn</a>
+        and
+        <a href="https://github.com/KooshaPari" style="color:#7eb8ff;" rel="noopener">GitHub</a>.
+      </p>
+    </div>
+  </noscript>
+
+  <script type="module" src="/bundled/app.bundle.js"></script>
+  <script type="module">import('/scripts/cursor.js').then(m => m.initCursor());</script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Person","name":"Koosha Paridehpour","url":"https://kooshapari.com/","sameAs":["https://github.com/KooshaPari","https://www.linkedin.com/in/koosha-paridehpour-1079b61b5/"]}
   </script>

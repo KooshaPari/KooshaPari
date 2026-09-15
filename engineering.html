@@ -12,12 +12,14 @@
   <meta property="og:url" content="https://kooshapari.com/engineering">
   <meta name="twitter:card" content="summary" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/styles/tokens.css" />
-  <link rel="stylesheet" href="/styles/base.css" />
-  <link rel="stylesheet" href="/styles/shell.css" />
-  <link rel="stylesheet" href="/styles/artifacts.css" />
-  <link rel="stylesheet" href="/styles/case-studies.css" />
-  <link rel="stylesheet" href="/styles/responsive.css" />
+  <link rel="preload" href="/styles/bundled/core.css" as="style" />
+  <link rel="stylesheet" href="/styles/bundled/core.css" />
+  <link rel="stylesheet" href="/styles/bundled/components.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/styles/bundled/pages.css" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="/styles/bundled/components.css" />
+    <link rel="stylesheet" href="/styles/bundled/pages.css" />
+  </noscript>
 </head>
 <body>
   <a class="skip-link" href="#view-root">Skip to content</a>

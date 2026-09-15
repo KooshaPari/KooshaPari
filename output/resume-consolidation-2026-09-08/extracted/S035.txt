@@ -1,0 +1,52 @@
+                                                 Koosha Paridehpour
+  Santa Monica, CA ● +1 (424) 330-5106 ● kooshapari@kooshapari.com ● kooshapari.com ● GitHub.com/kooshapari
+ Go-focused Software Engineer and M.S. Computer Science candidate with experience building backend services, distributed APIs, real-time systems,
+ data and retrieval pipelines, CI/CD, and observability across Linux and cloud environments. Delivered a piloted AI workflow by completing a planned
+ 10-week scope in 3 weeks and led architecture and execution across five teams building a requirements and traceability platform. Strong in Go,
+ Rust, Python, Linux, AWS, networking, databases, automated testing, and debugging across application, infrastructure, and hardware boundaries.
+
+ENGINEERING EXPERIENCE
+Development Engineer - CVS Health - AI Innovation (DDAT) | Scottsdale, AZ ​                       May 2025 - August 2025
+    ●​  Won company-wide innovation challenge with a patient electronic prior authorization (ePA) proposal.
+    ●​  Architected and delivered an AI workflow-transpilation system that converted a manual, rules-driven process into an
+        executable agent workflow with human-in-the-loop validation, and operational guardrails.
+    ●​  Defined data and control-flow requirements and rollout risks; presented architecture, implementation, and
+        expected ROI to senior leadership. Completed a planned 10-week scope by week 3, system subsequently piloted.
+Lead Software Engineer & Technical Program Manager - Atoms.Tech | Tempe, AZ​               ​      May 2025 - January 2026
+    ●​  Architected and coordinated eng. across five teams building an AI-assisted requirements and systems-traceability
+        platform; defined service interfaces, development standards, and stakeholder, IP, and legal coordination.
+    ●​  Built an MCP service, Product Agentic features, CI/CD and QA infrastructure, and Discord/GitHub/Jira integrations
+    ●​  Designed versioning and traceability workflows informed by SysML; translated sponsor needs into testable platform
+        features while coordinating IP, legal, and stakeholder constraints.
+Lead Software Engineer - Akoma | Ithaca, NY​                                                 October 2023 - January 2024
+    ●​  Led dev. of an offline-first React Native ERP/accounting app and coordinated product delivery across the dev team.
+Product Manager - Phenotype. | Santa Monica, CA​                                                   October 2020 - Present
+    ●​  Owned operations, supply chain, product, fulfillment, e-commerce, and international vendor management (10+
+        vendors) for joint ventures; Generated over $400,000 in revenue in 30 days; reduced COGS by >40%
+PROJECTS
+Byteport​
+    ●​  Manifest-driven deployment platform with Go runtime, AWS provisioning, PASETO sessions, and OTel.
+Chatta!​
+    ●​  WebRTC + WebSockets Go Fiber \ Svelte realtime Chat application modeled on Discord/Slack w\ Private DMs and
+        Threading across browser and user sessions.
+Independent Systems Lab | Linux, QEMU/KVM, VFIO, Docker ​ ​                ​      ​
+    ●​  Maintained and Developed Linux development and virtualization environments; GPU passthrough, storage,
+        networking, drivers, containers, and self-hosted services across custom hardware.
+Project Spyn | MATLAB, Lego EV3, Python​
+    ●​  EV3 unit as autonomous vehicle to navigate a maze w\ ultrasonic sensor + software PID controller for
+        acceleration\turn control, lane centering, ultrasonic obstacle detection, route scanning, and color-zone behavior.
+AgentAPI++ | Go, HTTP, SSE, terminal/process control
+    ●​  Extended an open-source Go control plane for 11 agent CLIs, covering terminal and process sessions, message
+        parsing, streaming events, health endpoints, and operational diagnostics.
+Tracera | Rust, REST APIs, WebSockets, observability
+    ●​  Architected a traceability and audit ledger for agent workflows with evidence, impact, coverage, and governance.
+    ●​  Implemented a hybrid data-processing and retrieval pipeline across PostgreSQL full-text search, pgvector semantic
+        search, fuzzy matching, Redis caching, and reciprocal-rank fusion for requirement discovery and impact analysis.
+EDUCATION
+Arizona State University | Computer Science B.S. (Dec 2025 - 3.65 GPA) | Computer Science M.S. (Dec 2026 - 3.75 GPA)
+SKILLS
+Languages: Go (primary), Rust, Python, TypeScript, C/C++, Java, SQL, Bash, MATLAB, C#, Mojo, Zig, Farsi (5/5) , Mandarin (⅗)
+Technologies: QEMU/KVM, VFIO/IOMMU Gin, Fiber, Axum, Tokio, JSON-RPC, WebSockets, WebRTC, SSE, MCP, LSP, OAuth,
+AWS\GCP\Azure, Kubernetes, CI/CD, Git, YAML, WASM/Spin, PostgreSQL, pgvector, Redis, NATS, SQLite, Neo4j, GORM,
+OpenTelemetry, Prometheus, Svelte/SvelteKit, React, React Native, Tauri, Electron, Proxmox, Electrobun, Swift, WinUI.
+

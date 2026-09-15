@@ -1,0 +1,44 @@
+                                      KOOSHA PARIDEHPOUR
+            Santa Monica, CA | kooshapari@kooshapari.com | linkedin.com/in/kooshapari | github.com/KooshaPari | kooshapari.com
+         GO SOFTWARE ENGINEER | LINUX SYSTEMS | DISTRIBUTED INFRASTRUCTURE | REAL-TIME SERVICES
+Go-focused software engineer with a long-running background in Linux administration, virtual machines, networking, game development, and
+self-hosted infrastructure. Hands-on work spans Go APIs, WebRTC/WebSocket services, AWS deployment tooling, CI/CD and QA systems,
+and requirements-traceability platforms.
+EXPERIENCE
+Atoms.Tech | Lead Software Engineer & Technical Program Manager | Tempe, AZ                                               May 2025 - Jan 2026
+ • Architected and coordinated engineering across five teams building an AI-assisted requirements and systems-traceability platform; defined
+   service interfaces, delivery workflows, development standards, and stakeholder, IP, and legal coordination.
+ • Directed delivery of an MCP server, project infrastructure, CI/CD and QA suites, platform features, and Discord/Coda/GitHub/Jira
+   integrations; designed versioning and traceability workflows using SysML concepts.
+CVS Health | Development Engineer, AI Innovation (DDAT / InnoTech) | Scottsdale, AZ                                       May 2025 - Aug 2025
+ • Won a company-wide innovation challenge with a patient electronic prior authorization (ePA) solution; delivered an AI-assisted prototype
+   ahead of schedule and advanced it to an organizational pilot.
+ • Led technical discovery and solution architecture for workflow automation with human validation, operational guardrails, data requirements,
+   and rollout criteria; presented architecture, risk, and expected ROI to executives.
+Akoma | Lead Software Engineer | Ithaca, NY                                                                                Oct 2023 - Jan 2024
+ • Led development of an offline-first React Native ERP/accounting application and coordinated product delivery across the development team.
+Phenotype | Product Manager | Santa Monica, CA                                                                               Oct 2020 - Present
+ • Owned product, operations, supply chain, e-commerce, and 10+ international vendors; generated more than $400K in revenue in 30 days
+   and reduced manufacturing costs by more than 25%.
+SELECTED PROJECTS & SYSTEMS
+BytePort | Go, AWS, deployment automation
+ • Built a manifest-driven platform for deploying personal projects to AWS and generating portfolio metadata from YAML configuration;
+   integrated backend services, repository workflows, and LLM-assisted project-page generation.
+Chatta | Go Fiber, WebRTC, WebSockets, Svelte
+ • Built a real-time Discord/Slack-style chat application with private messaging, threaded conversations, and browser-to-browser
+   communication.
+Independent Systems Lab | Linux, QEMU/KVM, VFIO, Docker
+ • Built and administered Linux/Windows development and virtualization environments; configured GPU passthrough, storage, networking,
+   drivers, containers, and self-hosted services across custom hardware.
+Project Spyn | MATLAB, LEGO EV3, PID control
+ • Programmed an autonomous EV3 vehicle to navigate a maze using gyro-based PID control for smooth turns and acceleration, with sensor-
+   driven obstacle and route handling.
+EDUCATION
+Arizona State University | M.S. Computer Science | GPA: 3.75/4.0 | Tempe, AZ                                              Expected Dec 2026
+Arizona State University | B.S. Computer Science | Barrett Honors College | GPA: 3.65/4.0 | Tempe, AZ                              Dec 2025
+TECHNICAL SKILLS
+Languages: Go (primary), Rust, Python, C/C++, TypeScript/JavaScript, Java, SQL, Bash, MATLAB, C#
+Systems / Infrastructure: Linux, QEMU/KVM, VFIO, virtual machines, networking, AWS, Docker, Kubernetes, Git, GitHub Actions, CI/CD,
+hardware troubleshooting
+Backend / Real-Time: REST/HTTP, WebSockets, WebRTC, SSE, Fiber, Gin, PostgreSQL, Redis, React, Svelte, React Native
+

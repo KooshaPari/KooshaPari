@@ -63,20 +63,80 @@ function projectMeta(project) {
   return el('p', { class: 'work-catalog__meta' }, `${project.category} / ${project.status}`);
 }
 
+const FAMILY_MAP = {
+  netweave: 'netweave',
+  sharecli: 'sharecli',
+  omniroute: 'omniroute',
+  'gmk-arch': 'physical',
+  witf: 'physical',
+  'dss-cipher': 'physical',
+  substrate: 'substrate',
+  'phenotype-omlx': 'omlx',
+};
+
+const CARD_IMAGES = {
+  netweave: { src: '/public/projects/netweave/desktop-01-v3.webp', alt: 'NetWeave traffic simulation showing directed-graph routing and cellular automata lane behavior across a road network.' },
+  'gmk-arch': { src: '/public/projects/gmk-arch/hero.png', alt: 'Transparent GMK Arch wordmark with a pale ARCH letterform and teal Arch Linux and GMK marks.' },
+  witf: { src: '/public/projects/witf/hero-01.webp', alt: 'Black WITF Board keyboard shown from above on a warm concrete-colored surface, revealing its split Alice layout.' },
+  sharecli: { src: '/public/projects/sharecli/card.webp', alt: 'ShareCLI runtime and resource observation interface for coding-agent concurrency.' },
+  omniroute: { src: '/public/projects/omniroute/card.webp', alt: 'OmniRoute policy-aware multi-provider routing topology.' },
+  substrate: { src: '/public/projects/substrate/card.webp', alt: 'Substrate AI execution and provider-routing boundary.' },
+  'phenotype-omlx': { src: '/public/projects/phenotype-omlx/card.webp', alt: 'phenotype-omlx MLX inference research stack with Rust performance cores.' },
+};
+
 function featuredProject(project) {
-  return el(
-    'article',
-    { class: 'work-catalog__featured-project' },
-    el('h3', {}, projectLink(project)),
-    projectMeta(project),
-    el('p', { class: 'work-catalog__summary' }, project.summary),
+  const family = FAMILY_MAP[project.slug];
+  const image = CARD_IMAGES[project.slug];
+  const href = `/work/${encodeURIComponent(project.slug)}`;
+  const attrs = {
+    class: 'work-catalog__featured-project',
+    href,
+    'aria-label': `${project.title}, ${project.category}, ${project.status}`,
+  };
+  if (family) {
+    attrs['data-family'] = family;
+    attrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family}))`;
+  }
+
+  const children = [
+    el('p', { class: 'work-catalog__featured-status' }, `${project.category} / ${project.status}`),
+  ];
+
+  if (image) {
+    children.push(
+      el('div', { class: 'work-catalog__featured-image' },
+        el('img', { src: image.src, alt: image.alt, loading: 'lazy', decoding: 'async' }),
+      ),
+    );
+  }
+
+  children.push(
+    el('h3', {}, project.title),
+    el('p', { class: 'work-catalog__featured-summary' }, project.summary),
   );
+
+  if (project.technologies?.length) {
+    children.push(
+      el('div', { class: 'work-catalog__featured-tech' },
+        project.technologies.slice(0, 5).map((t) => el('span', {}, t)),
+      ),
+    );
+  }
+
+  return el('a', attrs, ...children);
 }
 
 function compactProject(project) {
+  const family = FAMILY_MAP[project.slug];
+  const attrs = { class: 'work-catalog__specimen' };
+  if (family) {
+    attrs['data-family'] = family;
+    attrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family}))`;
+  }
+
   return el(
     'li',
-    { class: 'work-catalog__specimen' },
+    attrs,
     el('p', { class: 'work-catalog__specimen-code' }, project.slug),
     el('h3', {}, projectLink(project)),
     projectMeta(project),
