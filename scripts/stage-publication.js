@@ -8,7 +8,7 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const publication = join(root, 'dist');
 const topLevelFiles = [
   'index.html', 'engineering.html', 'product.html', 'work.html', 'resume.html',
-  'contact.html', 'blog.html', 'archive.html', 'favicon.svg', 'robots.txt', 'sitemap.xml',
+  'contact.html', 'blog.html', 'archive.html', 'favicon.svg', 'og-image.png', 'robots.txt', 'sitemap.xml',
 ];
 const directories = ['styles', 'scripts', 'data', 'public', 'work', 'blog'];
 

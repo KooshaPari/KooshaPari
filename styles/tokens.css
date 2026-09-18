@@ -49,7 +49,7 @@
   --acid-500: #b6d448;
 
   --ink: var(--graphite-950);
-  --ink-muted: #555a52;
+  --ink-muted: #3d4239;
   --surface: var(--paper-100);
   --surface-raised: #faf7ef;
   --rule: color-mix(in oklch, var(--graphite-950) 24%, transparent);
@@ -134,7 +134,7 @@
   --family-omlx-product: #9a8acd;
 
   /* Surfaces — additions -------------------------------------------- */
-  --surface-inset: #eae8e4;
+  --surface-inset: #e2dfd8;
 
   /* Structure line — left-edge content frame ----------------------- */
   --structure-line: 1px solid var(--precision-rule);
@@ -207,8 +207,8 @@ html[data-lens="product"] {
   --surface-raised: var(--graphite-900);
   --surface-ceramic-raised: var(--graphite-800);
   --ink: var(--paper-100);
-  --ink-muted: var(--concrete-500);
-  --rule: color-mix(in oklch, var(--paper-100) 18%, transparent);
+  --ink-muted: #b0b5a8;
+  --rule: color-mix(in oklch, var(--paper-100) 22%, transparent);
   --precision-rule: color-mix(in oklch, var(--paper-100) 12%, transparent);
   --precision-rule-strong: color-mix(in oklch, var(--paper-100) 24%, transparent);
   color-scheme: dark;
@@ -221,6 +221,45 @@ html[data-lens="product"] {
 [data-theme="dark"] .artifact {
   background: var(--graphite-900);
   border-color: color-mix(in oklch, var(--paper-100) 12%, transparent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .artifact:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.15);
+  border-color: color-mix(in oklch, var(--paper-100) 24%, transparent);
+}
+
+[data-theme="dark"] .artifact:active {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .systems-diagram,
+[data-theme="dark"] .experiment-sheet {
+  background:
+    linear-gradient(90deg, transparent 0 49.88%, color-mix(in oklch, var(--paper-100) 5%, transparent) 50%, transparent 50.12%),
+    var(--graphite-800);
+  border-color: color-mix(in oklch, var(--paper-100) 10%, transparent);
+}
+
+[data-theme="dark"] .systems-node {
+  background: var(--graphite-900);
+  border-color: color-mix(in oklch, var(--paper-100) 15%, transparent);
+}
+
+[data-theme="dark"] .artifact-header h2 a:hover {
+  text-decoration-color: var(--seed-teal);
+}
+
+[data-theme="dark"] .home-primary-links a {
+  color: var(--seed-teal);
+}
+
+[data-theme="dark"] .home-primary-links a:last-child {
+  color: var(--ink-muted);
+}
+
+[data-theme="dark"] .dark-mode-toggle {
+  color: var(--paper-100);
 }
 
 [data-theme="dark"] .skeleton-line,

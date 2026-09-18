@@ -104,6 +104,11 @@ function applyRevealStyle(img, style) {
  */
 function cleanupAfterReveal(img) {
   setTimeout(() => {
+    // Add .revealed so CSS rules override the hidden state.
+    // Without this, CSS selectors like
+    //   .image-reveal-img[data-reveal-style="zoom-fade"] { opacity: 0 }
+    // keep the image invisible after inline styles are cleared.
+    img.classList.add('revealed');
     img.style.clipPath = '';
     img.style.transform = '';
     img.style.filter = '';
@@ -195,6 +200,7 @@ function observeImage(img) {
     img.removeEventListener('load', onLoad);
     wrapImage(img);
     img.classList.add('image-reveal-img');
+    img.classList.add('revealed');
     const container = img.closest('.image-reveal-container');
     const ph = container?.querySelector('.image-reveal-placeholder');
     if (ph) ph.classList.add('loaded');

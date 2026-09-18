@@ -272,6 +272,9 @@ function createPlayer(container) {
 
   /* --- load & parse --- */
 
+  // Skip fetch during prerender (Node has no relative-URL fetch)
+  if (typeof window === 'undefined') return;
+
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
   fetch(src, { signal: controller.signal })

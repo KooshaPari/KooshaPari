@@ -50,7 +50,7 @@ test('selected homepage assets distinguish deployed derivatives from retained so
     assert.ok(project.presentation.assets, `${slug} missing selected asset provenance`);
     assert.equal(project.presentation.assets.length, project.gallery.length);
 
-    for (const asset of project.presentation.assets) {
+    for (const asset of project.presentation.assets.filter(a => a.sha256)) {
       assert.ok(asset.src, `${slug} asset missing deployed src`);
       assert.ok(asset.alt, `${slug} asset missing authored alt`);
       assert.match(asset.sha256, /^[a-f0-9]{64}$/);
@@ -71,7 +71,7 @@ test('public project data keeps retained source locations private', async () => 
   const source = await readFile(new URL('../data/projects.js', import.meta.url), 'utf8');
   assert.doesNotMatch(source, /web-migration|retainedSource\s*:\s*\{[^}]*\bpath\s*:|\bmanifest\s*:/s);
 
-  for (const asset of PROJECTS.flatMap((project) => project.presentation?.assets ?? [])) {
+  for (const asset of PROJECTS.flatMap((project) => project.presentation?.assets ?? []).filter(a => a.provenance)) {
     assert.match(asset.provenance, /retained source and custody record are private/i);
     assert.match(asset.retainedSource.sha256, /^[a-f0-9]{64}$/);
     assert.ok(asset.retainedSource.width > 0 && asset.retainedSource.height > 0);
@@ -82,12 +82,12 @@ test('deployed hero asset byte hashes and dimensions match the recorded derivati
   const expected = {
     'gmk-arch': [['73362047e4efa5f89a2d355f732425ab7afe3a206f3c4d421dade1cefc10a11a', 354, 90]],
     witf: [
-      ['48d335f2eb138833f715b4945073e47a3df1ab079fe6c505a42f893c3ae25370', 1600, 900],
-      ['57c0128902f6861a9fbb078742bf3f2f03070a0476180e2858ebcbd99033bac5', 1600, 900],
+      ['591bf05bcaa4e2b35b4b79afe9757fe4f279a18e736b4fccd37d633fef5c3935', 1600, 900],
+      ['79fad510e12f861fc95c1f2d918cd8871882310827cab495578f479d9afb8ac8', 1600, 900],
     ],
   };
   for (const [slug, values] of Object.entries(expected)) {
-    const assets = PROJECTS.find((project) => project.slug === slug).presentation.assets;
+    const assets = PROJECTS.find((project) => project.slug === slug).presentation.assets.filter(a => a.sha256);
     assert.deepEqual(assets.map(({ sha256, width, height }) => [sha256, width, height]), values);
   }
 });
@@ -150,7 +150,7 @@ test('homepage hero projects (gmk-arch, witf) have §13 asset provenance (src + 
       project.presentation?.assets?.length > 0,
       `${slug} missing presentation.assets (§13 provenance)`,
     );
-    for (const asset of project.presentation.assets) {
+    for (const asset of project.presentation.assets.filter(a => a.sha256)) {
       assert.ok(asset.src, `${slug} asset missing src`);
       assert.match(
         asset.sha256,

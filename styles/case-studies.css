@@ -18,6 +18,9 @@
 }
 .case-study .case-gallery { display: grid; gap: var(--space-3); margin-block: var(--space-4) var(--space-5); }
 .case-study .case-gallery img { width: 100%; height: auto; border: 1px solid var(--rule); background: var(--surface-raised); }
+.case-study .case-gallery-item { margin: 0; overflow: hidden; border: 1px solid var(--rule); border-radius: var(--precision-radius-control); background: var(--surface-raised); }
+.case-study .case-gallery-item img { border: none; border-radius: 0; }
+.case-study .case-gallery-item figcaption { padding: var(--space-2) var(--space-3); color: var(--ink-muted); font: var(--step--1) var(--font-meta); border-top: 1px solid var(--rule); }
 .case-study .case-hero { position: relative; overflow: hidden; border: 1px solid var(--rule); border-radius: var(--precision-radius-control); margin: 0; background: var(--surface-inset); }
 .case-study .case-hero img { display: block; width: 100%; height: auto; object-fit: cover; }
 .case-study .case-hero figcaption { padding: var(--space-2) var(--space-3); color: var(--ink-muted); font: var(--step--1) var(--font-meta); border-top: 1px solid var(--rule); }
@@ -33,10 +36,12 @@
 .case-study .evidence-list dd { margin: 0; overflow-wrap: anywhere; }
 
 /* Case-study intro and media components. */
-.case-svg-diagram { width: 100%; height: auto; border: 1px solid var(--rule); background: var(--surface-raised); }
-.case-svg-diagram__edge { stroke: var(--arch-500); stroke-width: 2; }
-.case-svg-diagram__node rect { fill: var(--surface); stroke: var(--rule); }
-.case-svg-diagram__node text { fill: var(--ink); font: 0.85rem var(--font-meta); }
+.case-svg-diagram { width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 8px; background: linear-gradient(135deg, var(--surface-raised) 0%, var(--surface) 100%); }
+.case-svg-diagram__edge { stroke: var(--arch-500); stroke-width: 1.5; }
+.case-svg-diagram__node rect { fill: var(--surface); stroke: var(--rule); stroke-width: 1.25; rx: 6; transition: stroke .15s ease, filter .15s ease; }
+.case-svg-diagram__node:hover rect { stroke: var(--arch-500); filter: drop-shadow(0 2px 8px rgba(0,0,0,.08)); }
+.case-svg-diagram__node text { fill: var(--ink); font: 500 0.85rem var(--font-meta); }
+.case-svg-diagram__node .node-index { fill: var(--ink-muted); font: 400 0.78rem var(--font-meta); }
 .case-diagram-figure figcaption, .netweave-field__summary, .model-slot__status { color: var(--ink-muted); font: var(--step--1) var(--font-meta); }
 .case-study .case-copy .case-section > p { min-width: 0; overflow-wrap: anywhere; }
 .omniroute-topology { margin: var(--space-3) 0; min-width: 0; }

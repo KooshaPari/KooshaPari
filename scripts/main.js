@@ -122,7 +122,7 @@ function renderPortfolioHome(root) {
   const featured = PROJECTS.filter(p => p.featured);
   root.append(el('section', { class:'view active portfolio-view' },
     el('div', { class:'portfolio-hero' }, el('p', { class:'eyebrow' }, 'KOOSHA PARIDEHPOUR'), el('h1', {}, 'Software systems and technical products, built with intent.'), el('p', { class:'lede' }, 'Software engineer and technical product/program leader working across distributed systems, agent and ML infrastructure, developer tooling, cloud platforms, and technically complex physical products.'), el('div', { class:'cta-row' }, el('a', { href:'#engineering', class:'cta cta-eng' }, 'Engineering work'), el('a', { href:'#product', class:'cta cta-prod' }, 'Product work'))),
-    el('div', { class:'proof-grid' }, PROOF_POINTS.map(([value,label]) => el('div', { class:'proof-point' }, el('strong', {}, value), el('span', {}, label)))),
+    el('div', { class:'proof-grid' }, PROOF_POINTS.map(([value,label]) => el('div', { class:'proof-point' }, el('strong', { 'data-count-to': value }, value), el('span', {}, label)))),
     el('div', { class:'section-head' }, el('div', {}, el('h2', { class:'section-title' }, 'Selected work'), el('p', { class:'section-sub' }, 'A curated set of systems and products.'))),
     el('div', { class:'project-grid' }, featured.map(projectCard))
   ));

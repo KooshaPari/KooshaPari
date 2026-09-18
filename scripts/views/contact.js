@@ -226,7 +226,7 @@ export function renderContact(root) {
         class: 'lede',
         'data-reveal': 'up',
         'data-reveal-delay': '120',
-      }, 'For engineering, technical product, and program conversations:'),
+      }, 'For engineering, technical product, and infrastructure conversations:'),
 
       el('div', { class: 'contact-layout', 'data-reveal': 'up', 'data-reveal-delay': '180' },
         form,
@@ -238,7 +238,7 @@ export function renderContact(root) {
             // Email
             el('a', {
               class: 'contact-info__link',
-              href: 'mailto:inquiry@ramdesigns.xyz',
+              href: 'mailto:koosha@kooshapari.com',
               'aria-label': 'Email Koosha Paridehpour',
               'data-reveal': 'up',
               'data-reveal-delay': '240',
@@ -246,7 +246,7 @@ export function renderContact(root) {
               el('span', { class: 'contact-info__link-icon', html: ICONS.email }),
               el('span', { class: 'contact-info__link-text' },
                 el('span', { class: 'contact-info__link-label' }, 'Email'),
-                el('span', { class: 'contact-info__link-value' }, 'inquiry@ramdesigns.xyz'),
+                el('span', { class: 'contact-info__link-value' }, 'koosha@kooshapari.com'),
               ),
             ),
             // GitHub

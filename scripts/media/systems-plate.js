@@ -31,6 +31,15 @@ export function createSubstratePlateDefinition() {
 
 function nodeById(definition, id) { return definition.nodes.find((node) => node.id === id); }
 
+function svgElement(tag, attributes = {}, ...children) {
+  const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const [key, value] of Object.entries(attributes)) node.setAttribute(key, value);
+  for (const child of children.flat(Infinity)) {
+    if (child != null) node.append(child.nodeType ? child : document.createTextNode(String(child)));
+  }
+  return node;
+}
+
 export function renderSubstratePlate(documentRef = document, { forceMobile = null } = {}) {
   const definition = createSubstratePlateDefinition();
   const titleId = 'substrate-plate-title';
@@ -53,11 +62,17 @@ export function renderSubstratePlate(documentRef = document, { forceMobile = nul
     return figure;
   }
 
-  // Desktop: SVG diagram.
+  // Desktop: SVG diagram with arrow marker definition.
+  const defs = svgElement('defs', {},
+    svgElement('marker', { id: 'systems-plate-arrow', viewBox: '0 0 10 7', refX: 10, refY: 3.5, markerWidth: 10, markerHeight: 7, orient: 'auto-start-reverse' },
+      svgElement('polygon', { points: '0 0, 10 3.5, 0 7', fill: 'var(--arch-500)' })
+    )
+  );
   const svg = el('svg', {
     class: 'systems-plate__svg', viewBox: '0 0 700 210', role: 'img',
     'aria-labelledby': `${titleId} ${descId}`,
   },
+    defs,
     el('title', { id: titleId }, definition.title),
     el('desc', { id: descId }, definition.summary),
     definition.edges.map((edge) => {
@@ -66,6 +81,7 @@ export function renderSubstratePlate(documentRef = document, { forceMobile = nul
         class: 'systems-plate__edge',
         x1: from.x + from.width, y1: from.y + T.node.height / 2,
         x2: to.x, y2: to.y + T.node.height / 2,
+        markerEnd: 'url(#systems-plate-arrow)',
       });
     }),
     definition.nodes.map((node, index) => el('g', { class: 'systems-plate__node', transform: `translate(${node.x} ${node.y})` },

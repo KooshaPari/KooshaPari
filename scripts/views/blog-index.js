@@ -16,7 +16,7 @@ function postCard(post) {
         el('span', {}, post.readingTime ?? ''),
       ),
     ),
-    el('h2', {}, el('a', { href: '#blog/' + post.slug, class: 'card-title-link' }, post.title)),
+    el('h2', {}, el('a', { href: '/blog/' + post.slug, class: 'card-title-link' }, post.title)),
     el('p', { class: 'post-card-excerpt' }, post.excerpt),
     tags,
   );

@@ -6,12 +6,12 @@ import { PROJECTS } from '../data/projects.js';
 import { POSTS } from '../data/posts.js';
 
 const TOP_LEVEL_PAGES = [
-  ['index', 'Software systems, technical products, and the infrastructure between them.'],
-  ['engineering', 'Software systems, technical products, and the infrastructure between them.'],
-  ['product', 'Software systems, technical products, and the infrastructure between them.'],
+  ['index', 'OS-adjacent runtimes, agent infrastructure, distributed backends, and compiler-/kernel-aware engineering.'],
+  ['engineering', 'OS-adjacent runtimes, agent infrastructure, distributed backends, and compiler-/kernel-aware engineering.'],
+  ['product', 'Leads cross-functional execution, ships commercial outcomes, owns product economics end-to-end.'],
   ['work', 'Work'],
-  ['resume', 'Two ways to read the work'],
-  ['contact', 'Let’s build something consequential.'],
+  ['resume', 'Experience'],
+  ['contact', 'Let’s build something.'],
   ['blog', 'Writing'],
 ];
 

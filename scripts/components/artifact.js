@@ -1,5 +1,4 @@
 import { el } from './dom.js';
-import { createLayeredImage } from '../media/layered-image.js';
 import { renderOmniRouteTopology } from '../media/omniroute-topology.js';
 import {
   createEvidenceLabel,
@@ -44,21 +43,14 @@ export function physicalPlate(record, lens) {
 
   return el(
     'article',
-    { class: `artifact artifact--physical artifact--${record.slug}`, 'data-artifact': record.slug },
+    { class: `artifact artifact--physical artifact--${record.slug}`, 'data-artifact': record.slug, 'data-reveal': 'up', 'data-reveal-delay': '0' },
     artifactHeader(record, 'Material artifact'),
     image
       ? el(
           'figure',
-          { class: 'artifact-media artifact-media--physical' },
+          { class: 'artifact-media artifact-media--physical', 'data-tilt': '', 'data-tilt-max': '8', 'data-tilt-glare': 'true', 'data-tilt-scale': '1.015' },
           record.slug === 'witf'
-            ? createLayeredImage({
-                src: image,
-                alt: record.presentation.alt,
-                width: selectedAsset?.width ?? media.width,
-                height: selectedAsset?.height ?? media.height,
-                layers: [{ label: 'shadow', className: 'layered-image__layer--shadow' }],
-                className: 'artifact-media__layered',
-              })
+            ? el('div', { class: 'witf-viewer-container', id: 'witf-viewer' })
             : el('img', {
             src: image,
             alt: record.presentation.alt,
@@ -76,7 +68,6 @@ export function physicalPlate(record, lens) {
       { class: 'artifact-context' },
       annotationBlock(record, lens),
       metricAnnotation(record, lens),
-      evidenceLabel(record, lens),
     ),
   );
 }
@@ -94,7 +85,7 @@ export function systemsSheet(record, lens) {
 
   return el(
     'article',
-    { class: `artifact artifact--systems artifact--${record.slug}`, 'data-artifact': record.slug },
+    { class: `artifact artifact--systems artifact--${record.slug}`, 'data-artifact': record.slug, 'data-reveal': 'up', 'data-reveal-delay': '100' },
     artifactHeader(record, record.slug === 'omniroute' ? 'Upstream routing overview' : record.slug === 'substrate' ? 'Policy routing sheet' : 'Runtime topology'),
     record.slug === 'omniroute' ? renderOmniRouteTopology(lens) : el(
       'div',
@@ -122,7 +113,6 @@ export function systemsSheet(record, lens) {
       { class: 'artifact-context' },
       annotationBlock(record, lens),
       metricAnnotation(record, lens),
-      evidenceLabel(record, lens),
     ),
   );
 }
@@ -148,7 +138,7 @@ export function experimentNote(record, lens) {
   const summaryId = `artifact-${record.slug}-summary`;
   return el(
     'article',
-    { class: `artifact artifact--experiment artifact--${record.slug}`, 'data-artifact': record.slug },
+    { class: `artifact artifact--experiment artifact--${record.slug}`, 'data-artifact': record.slug, 'data-reveal': 'up', 'data-reveal-delay': '200' },
     artifactHeader(record, record.slug === 'netweave' ? 'Simulation field note' : 'Fork-delta experiment'),
     el(
       'div',
@@ -174,7 +164,6 @@ export function experimentNote(record, lens) {
       { class: 'artifact-context' },
       annotationBlock(record, lens),
       metricAnnotation(record, lens),
-      evidenceLabel(record, lens),
     ),
   );
 }

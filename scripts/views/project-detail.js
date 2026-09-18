@@ -57,7 +57,7 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
     ? el('div', { class: 'metric-grid' },
         project.metrics.map(([value, label, source]) =>
           el('div', { class: 'metric-card' },
-            el('strong', {}, value), el('span', {}, label), el('small', {}, source))))
+            el('strong', { 'data-count-to': value }, value), el('span', {}, label), el('small', {}, source))))
     : null;
 
   const defaultSections = project.category === 'physical-product'
@@ -142,10 +142,17 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
   const heroLede = el('p', { class: 'lede' }, project.summary);
   const heroMeta = el('div', { class: 'hero-meta' }, heroEyebrow, heroTitle, heroLede, techPills, metrics);
 
+  const isWitf = project.slug === 'witf';
+
   const heroImage = project.gallery?.[0]
     ? (() => {
         const asset = project.presentation?.assets?.find((entry) => entry.src === project.gallery[0]);
-        return el('figure', { class: 'case-hero' },
+        if (isWitf) {
+          return el('figure', { class: 'case-hero case-hero--witf' },
+            el('div', { class: 'witf-viewer-container', id: 'witf-detail-viewer' }),
+          );
+        }
+        return el('figure', { class: 'case-hero', 'data-tilt': '', 'data-tilt-max': '6', 'data-tilt-glare': 'true', 'data-tilt-scale': '1.01' },
           el('img', {
             src: project.gallery[0],
             alt: asset?.alt ?? project.presentation?.alt ?? `${project.title} project visual`,
@@ -179,13 +186,16 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
         ? el('div', { class: 'case-gallery' },
             project.gallery.map((src) => {
               const asset = project.presentation?.assets?.find((entry) => entry.src === src);
-              return el('img', {
-                src,
-                alt: asset?.alt ?? project.presentation?.alt ?? `${project.title} project visual`,
-                loading: 'lazy',
-                width: asset?.width ?? project.presentation?.media?.width ?? 1600,
-                height: asset?.height ?? project.presentation?.media?.height ?? 900,
-              });
+              return el('figure', { class: 'case-gallery-item', 'data-tilt': '', 'data-tilt-max': '5', 'data-tilt-scale': '1.01' },
+                el('img', {
+                  src,
+                  alt: asset?.alt ?? project.presentation?.alt ?? `${project.title} project visual`,
+                  loading: 'lazy',
+                  width: asset?.width ?? project.presentation?.media?.width ?? 1600,
+                  height: asset?.height ?? project.presentation?.media?.height ?? 900,
+                }),
+                asset?.alt ? el('figcaption', {}, asset.alt) : null,
+              );
             }))
         : null,
       lensAnnotation,

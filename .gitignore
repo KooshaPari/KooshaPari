@@ -7,3 +7,5 @@ node_modules/
 bundled/
 dist/
 tests/
+output/
+docs/qa-screenshots/

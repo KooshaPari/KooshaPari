@@ -38,6 +38,28 @@
 
 .atelier-nav a {
   text-decoration: none;
+  position: relative;
+  padding-block: 0.3rem;
+  transition: color 0.2s ease;
+}
+
+.atelier-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--arch-500);
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.atelier-nav a:hover::after {
+  width: 100%;
+}
+
+.atelier-nav a:hover {
+  color: var(--arch-500);
 }
 
 .atelier-nav a[aria-current="page"] {
@@ -65,6 +87,12 @@
 
 .lens-control button {
   padding-inline: var(--space-3);
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.lens-control button:active {
+  transform: scale(0.96);
+  transition-duration: 0.06s;
 }
 
 .lens-control button[aria-pressed="true"] {
@@ -93,6 +121,13 @@
 
 .dark-mode-toggle:hover {
   color: var(--arch-500);
+  background: color-mix(in oklch, var(--ink) 8%, transparent);
+  border-radius: var(--radius-control);
+}
+
+.dark-mode-toggle:active {
+  transform: scale(0.92);
+  transition-duration: 0.08s;
 }
 
 .dark-mode-toggle svg {
@@ -138,6 +173,13 @@
     align-items: flex-end;
     flex-direction: column-reverse;
     gap: var(--space-2);
+  }
+
+  /* At 320px the lens pill (Engineering + Product) is 223px wide and forces
+     the header grid tracks past the viewport (70px overflow). flex-wrap lets
+     the pill stack so the tools column shrinks to its narrowest row. */
+  .lens-control {
+    flex-wrap: wrap;
   }
 
   .lens-control button {

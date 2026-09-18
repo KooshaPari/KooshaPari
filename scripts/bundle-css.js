@@ -119,6 +119,7 @@ const bundles = {
   ],
   'components.css': [
     'artifacts.css',
+    'witf-viewer.css',
     'responsive.css',
     'cards.css',
     'cursor.css',
@@ -127,12 +128,14 @@ const bundles = {
     'parallax.css',
     'image-reveal.css',
     'image-slider.css',
+    'lightbox.css',
     'skeleton.css',
     'project-index.css',
     'work-catalog.css',
     'radar.css',
     'timeline.css',
     'resume-timeline.css',
+    'perspective-tilt.css',
   ],
   'pages.css': [
     'hero.css',

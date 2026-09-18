@@ -46,9 +46,16 @@ export function renderDiagram(definition, { title = 'System diagram', forceMobil
     return el('figure', { class: 'case-diagram-figure' }, reader, el('figcaption', {}, definition.summary ?? 'Static diagram summary.'));
   }
 
-  // Desktop: SVG diagram.
+  // Desktop: SVG diagram with arrow marker definition.
   const nodeHeight = T.node.height;
-  const svg = svgElement('svg', { class: 'case-svg-diagram', viewBox: `0 0 640 ${Math.max(180, nodes.length * 88)}`, role: 'img', 'aria-labelledby': `${descriptionId}-title ${descriptionId}-desc` },
+  const totalHeight = Math.max(180, nodes.length * 88);
+  const defs = svgElement('defs', {},
+    svgElement('marker', { id: 'diagram-arrow', viewBox: '0 0 10 7', refX: 10, refY: 3.5, markerWidth: 10, markerHeight: 7, orient: 'auto-start-reverse' },
+      svgElement('polygon', { points: '0 0, 10 3.5, 0 7', fill: 'var(--arch-500)' })
+    )
+  );
+  const svg = svgElement('svg', { class: 'case-svg-diagram', viewBox: `0 0 640 ${totalHeight}`, role: 'img', 'aria-labelledby': `${descriptionId}-title ${descriptionId}-desc` },
+    defs,
     svgElement('title', { id: `${descriptionId}-title` }, title),
     svgElement('desc', { id: `${descriptionId}-desc` }, definition.summary ?? ''),
     edges.map(({ from, to }) => {
@@ -56,7 +63,11 @@ export function renderDiagram(definition, { title = 'System diagram', forceMobil
       const target = nodes.findIndex((node) => node.id === to);
       return svgElement('line', { x1: 320, y1: 44 + source * 88, x2: 320, y2: 44 + target * 88, class: 'case-svg-diagram__edge' });
     }),
-    nodes.map((node, index) => svgElement('g', { class: 'case-svg-diagram__node', transform: `translate(80 ${20 + index * 88})` }, svgElement('rect', { width: 480, height: nodeHeight, rx: T.node.rx }), svgElement('text', { x: 18, y: 30 }, node.label))),
+    nodes.map((node, index) => svgElement('g', { class: 'case-svg-diagram__node', transform: `translate(80 ${20 + index * 88})` },
+      svgElement('rect', { width: 480, height: nodeHeight, rx: T.node.rx }),
+      svgElement('text', { x: 18, y: 30, class: 'node-index' }, String(index + 1).padStart(2, '0')),
+      svgElement('text', { x: 60, y: 30 }, node.label)
+    )),
   );
   const reader = el('div', { class: 'case-diagram-reader' },
     el('p', {}, title),

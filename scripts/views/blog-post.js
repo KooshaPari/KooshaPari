@@ -37,7 +37,7 @@ export function renderBlogPost(root, slug) {
         el('p', { class: 'eyebrow' }, 'WRITING'),
         el('h1', {}, 'Post not found'),
         el('p', { class: 'lede' },
-          el('a', { href: '#blog', class: 'text-link' }, 'Back to writing'),
+          el('a', { href: '/blog', class: 'text-link' }, 'Back to writing'),
         ),
       ),
     );
@@ -62,7 +62,7 @@ export function renderBlogPost(root, slug) {
   const article = el('article', { class: 'post-article' },
     ...post.body.map(renderBlock),
     el('footer', { class: 'post-footer' },
-      el('a', { href: '#blog', class: 'text-link' }, '← All writing'),
+      el('a', { href: '/blog', class: 'text-link' }, '← All writing'),
     ),
   );
 

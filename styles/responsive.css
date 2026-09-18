@@ -31,6 +31,10 @@
     padding-block: var(--space-3) var(--space-4);
   }
 
+  .home-opening__artifact-row {
+    grid-column: auto;
+  }
+
   .home-identity {
     max-width: none;
   }

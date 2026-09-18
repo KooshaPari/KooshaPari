@@ -406,3 +406,70 @@ ul.list li::before {
   border-top: 1px solid var(--line);
   margin-top: 30px;
 }
+
+/* ---------- engineering domains (engineering lens page) ---------- */
+.engineering-domains {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--precision-rule);
+}
+
+.engineering-domains__label {
+  grid-column: 1 / -1;
+  /* Element is h2 (axe heading-order fix); these three override the global
+     h2 styles so the rendered label stays identical to the previous p. */
+  font-weight: 400;
+  line-height: 1.6;
+  text-wrap: initial;
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: var(--space-3);
+}
+
+.engineering-domain {
+  padding: var(--space-3);
+  border: 1px solid var(--precision-rule);
+  background: var(--surface-raised);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.engineering-domain:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: var(--arch-500);
+}
+
+.engineering-domain__name {
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-1);
+}
+
+.engineering-domain__desc {
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* product lens intro */
+.home-identity--product h1 {
+  max-width: 22ch;
+}
+
+@media (max-width: 760px) {
+  .engineering-domains {
+    grid-template-columns: 1fr;
+  }
+}

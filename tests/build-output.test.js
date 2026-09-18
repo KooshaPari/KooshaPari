@@ -22,7 +22,15 @@ test('Vercel static output contains only staged publication assets and matches s
     'scripts/reader-state.js',
     'scripts/router.js',
     'scripts/work-filters.js',
+    'scripts/cursor.js',
+    'scripts/dark-mode.js',
+    'scripts/image-reveal.js',
+    'scripts/magnetic.js',
+    'scripts/parallax.js',
+    'scripts/scroll-reveal.js',
+    'scripts/transitions.js',
     'scripts/media/diagrams.js',
+    'scripts/media/diagram-tokens.js',
     'scripts/media/netweave-field.js',
     'scripts/media/netweave-workbench.js',
     'scripts/media/sharecli-workbench.js',
@@ -30,6 +38,12 @@ test('Vercel static output contains only staged publication assets and matches s
     'scripts/media/systems-plate.js',
     'scripts/media/layered-image.js',
     'scripts/media/model-slot.js',
+    'scripts/media/ambient-field.js',
+    'scripts/media/card-composer.js',
+    'scripts/media/cast-player.js',
+    'scripts/media/code-annotate.js',
+    'scripts/media/image-slider.js',
+    'scripts/media/tech-illustrations.js',
     'scripts/views/blog-index.js',
     'scripts/views/blog-post.js',
     'scripts/views/contact.js',
@@ -41,21 +55,25 @@ test('Vercel static output contains only staged publication assets and matches s
     'scripts/views/work.js',
     'data/projects.js',
     'data/posts.js',
-    'styles/base.css',
-    'styles/construction-gate.css',
-    'styles/artifacts.css',
-    'styles/case-studies.css',
-    'styles/responsive.css',
-    'styles/shell.css',
-    'styles/tokens.css',
-    'styles/work-catalog.css',
+    'styles/bundled/core.css',
+    'styles/bundled/components.css',
+    'styles/bundled/pages.css',
   ];
-  for (const file of files) {
+  // JS files are minified in dist/ (comments stripped) — verify they exist,
+  // but don't byte-compare against unminified source.
+  for (const file of files.filter(f => f.endsWith('.js'))) {
+    const built = await readFile(`.vercel/output/static/${file}`).catch(() => null);
+    assert.ok(built, `missing JS in Vercel output: ${file}`);
+    assert.ok(built.length > 0, `empty JS in Vercel output: ${file}`);
+  }
+  // CSS bundles are minified in styles/bundled/ — verify they exist and are non-empty.
+  for (const file of files.filter(f => f.endsWith('.css'))) {
     const [source, built] = await Promise.all([
       readFile(file),
       readFile(`.vercel/output/static/${file}`),
     ]);
-    assert.deepEqual(built, source, `stale Vercel output: ${file}`);
+    assert.ok(built.length > 0, `empty CSS in Vercel output: ${file}`);
+    assert.deepEqual(built, source, `stale CSS in Vercel output: ${file}`);
   }
   for (const file of ['index.html', 'engineering.html', 'product.html', 'work.html', 'resume.html', 'contact.html', 'blog.html']) {
     const [staged, built] = await Promise.all([

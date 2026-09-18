@@ -148,6 +148,17 @@ export function renderResume(root) {
         'data-reveal': 'up',
         'data-reveal-delay': '100',
       }, `${ROLES.length} roles, one thread: building systems that let teams move faster and ship with confidence.`),
+      el('p', {
+        class: 'resume-download',
+        'data-reveal': 'up',
+        'data-reveal-delay': '150',
+      },
+        el('a', {
+          href: '/koosha-paridehpour-resume.pdf',
+          download: 'Koosha_Paridehpour_Resume.pdf',
+          class: 'resume-download__link',
+        }, 'Download PDF resume'),
+      ),
 
       /* --- Experience Timeline --- */
       buildSection('Experience', 'Timeline', [

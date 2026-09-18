@@ -20,12 +20,17 @@ import { initTransitions } from './transitions.js';
 import { initMagnetic } from './magnetic.js';
 import { initParallax, refreshParallax } from './parallax.js';
 import { initImageReveal } from './image-reveal.js';
+import { initLightbox } from './lightbox.js';
+import { initCounterAnimate } from './counter-animate.js';
+import { initPerspectiveTilt } from './perspective-tilt.js';
+import { initScrollChoreography } from './scroll-choreography.js';
 import { initCardComposer } from './media/card-composer.js';
 import { initAmbientField } from './media/ambient-field.js';
 import { initCastPlayers } from './media/cast-player.js';
 import { initImageSliders } from './media/image-slider.js';
 import { initCodeAnnotation } from './media/code-annotate.js';
 import { initTechIllustrations } from './media/tech-illustrations.js';
+import { initWitfViewer, destroyWitfViewer } from './media/witf-viewer.js';
 
 const shellRoot = $('#shell-root');
 const viewRoot = $('#view-root');
@@ -49,7 +54,7 @@ function setPageMetadata(route) {
   const labels = {
     home: 'Technical Atelier',
     engineering: 'Engineering Work',
-    product: 'Product / Program Work',
+    product: 'Product Work',
     work: 'Work Index',
     resume: 'Resume',
     contact: 'Contact',
@@ -57,7 +62,7 @@ function setPageMetadata(route) {
   };
   const title = project?.title ?? post?.title ?? labels[route.view] ?? 'Page not found';
   const description = project?.summary ?? post?.excerpt
-    ?? 'Software systems, technical products, and the infrastructure between them.';
+    ?? 'Software engineer and technical product leader building systems, shipping hardware, and running AI workloads.';
 
   document.title = `${title} — Koosha Paridehpour`;
   const canonicalPath = project
@@ -71,6 +76,11 @@ function setPageMetadata(route) {
   document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title);
   document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
   document.querySelector('meta[property="og:url"]')?.setAttribute('content', canonicalUrl);
+  const ogImageUrl = project?.hero?.startsWith('/')
+    ? `https://kooshapari.com${project.hero}`
+    : 'https://kooshapari.com/og-image.png';
+  document.querySelector('meta[property="og:image"]')?.setAttribute('content', ogImageUrl);
+  document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', ogImageUrl);
   document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', document.title);
   document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
 }
@@ -78,6 +88,7 @@ function setPageMetadata(route) {
 function render() {
   const route = routeFromLocation();
   if (route.lens) lensState.set(route.lens);
+  destroyWitfViewer();
 
   const lens = lensState.get();
   const reader = readerState.get();
@@ -124,13 +135,24 @@ function render() {
   setPageMetadata(route);
   refreshObserver();
   refreshParallax();
-  initImageSliders();
-  initCastPlayers();
-  initCodeAnnotation();
-  if (route.view === 'home') {
-    const heroEl = viewRoot.querySelector('.home-opening');
-    if (heroEl) initAmbientField(heroEl);
-  }
+
+  // Defer heavy render-time inits to reduce TBT
+  rIC(() => {
+    initImageSliders();
+    initCastPlayers();
+    initCodeAnnotation();
+    initLightbox(viewRoot);
+    initCounterAnimate();
+    initPerspectiveTilt(viewRoot);
+    initScrollChoreography();
+    if (route.view === 'home') {
+      const heroEl = viewRoot.querySelector('.home-opening');
+      if (heroEl) initAmbientField(heroEl);
+      initWitfViewer();
+    } else if (route.view === 'project' && route.slug === 'witf') {
+      initWitfViewer('witf-detail-viewer');
+    }
+  });
 }
 
 window.addEventListener('hashchange', render);
@@ -154,12 +176,19 @@ readerState.subscribe(() => {
 
 initScrollReveal();
 
-// Initialize all UI/UX modules
-initMagnetic();
-initParallax();
-initImageReveal();
-initCardComposer(PROJECTS);
-initTechIllustrations();
+// Defer non-critical UI initializers to avoid blocking main thread
+const rIC = typeof requestIdleCallback === 'function'
+  ? requestIdleCallback
+  : (fn) => setTimeout(fn, 0);
+
+function initNonCritical() {
+  initMagnetic();
+  initParallax();
+  initImageReveal();
+  initCardComposer(PROJECTS);
+  initTechIllustrations();
+}
+rIC(initNonCritical);
 
 if (!location.hash && location.pathname.replace(/\/+$/, '') === '') {
   history.replaceState(null, '', '/');

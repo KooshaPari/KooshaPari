@@ -12,7 +12,7 @@ export const IDENTITY = {
   handle: "kooshapari",
   email: "kooshapari@kooshapari.com",
   website: "kooshapari.com",
-  github: "github.com/kooshapari",
+  github: "github.com/KooshaPari",
   phone: "+1 (424) 330-5106",
   currentCity: "Santa Monica, CA",
   inferredRegion: "424 → West LA / South Bay (greater Los Angeles)",

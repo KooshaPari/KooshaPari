@@ -91,7 +91,10 @@ function featuredProject(project) {
   const attrs = {
     class: 'work-catalog__featured-project',
     href,
-    'aria-label': `${project.title}, ${project.category}, ${project.status}`,
+    /* No aria-label: the link's accessible name comes from content (title,
+       category, status are all visible). An aria-label in a different format
+       ("A, B, C" vs visible "B / C A ...") fails axe label-content-name-mismatch,
+       which requires the accessible name to contain the visible label. */
   };
   if (family) {
     attrs['data-family'] = family;
@@ -128,7 +131,7 @@ function featuredProject(project) {
 
 function compactProject(project) {
   const family = FAMILY_MAP[project.slug];
-  const attrs = { class: 'work-catalog__specimen' };
+  const attrs = { class: 'work-catalog__specimen', 'data-reveal': 'up' };
   if (family) {
     attrs['data-family'] = family;
     attrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family}))`;

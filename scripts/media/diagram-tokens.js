@@ -11,8 +11,8 @@ export const DIAGRAM_TOKENS = {
   node: {
     fill: 'var(--surface)',
     stroke: 'var(--rule)',
-    strokeWidth: 1,
-    rx: 2,
+    strokeWidth: 1.25,
+    rx: 6,
     height: 48,
   },
 
@@ -21,6 +21,7 @@ export const DIAGRAM_TOKENS = {
     fill: 'var(--ink)',
     fontSize: '0.85rem',
     fontFamily: 'var(--font-meta)',
+    fontWeight: '500',
   },
 
   /** Node index prefix (01, 02, ...) */
@@ -28,12 +29,14 @@ export const DIAGRAM_TOKENS = {
     fill: 'var(--ink-muted)',
     fontSize: '0.78rem',
     fontFamily: 'var(--font-meta)',
+    fontWeight: '400',
   },
 
   /** Edge lines between nodes */
   edge: {
     stroke: 'var(--arch-500)',
-    strokeWidth: 2,
+    strokeWidth: 1.5,
+    markerEnd: 'url(#diagram-arrow)',
   },
 
   /** Fallback paragraph when SVG is hidden */

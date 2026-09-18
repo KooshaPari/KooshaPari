@@ -1,0 +1,42 @@
+/* ================================================================
+   perspective-tilt.css — Glare overlay for perspective-tilt.js
+   ================================================================ */
+
+/* Glare overlay — positioned absolute inside the tilted element */
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+  mix-blend-mode: overlay;
+}
+
+/* Tilt-ready elements get a subtle perspective hint on hover */
+[data-tilt] {
+  transform-style: preserve-3d;
+}
+
+/* Ensure tilted children don't break layout */
+[data-tilt] > * {
+  transform: translateZ(0);
+}
+
+/* ================================================================
+   Artifact parallax depth — subtle scroll-linked transforms
+   ================================================================ */
+
+/* Parallax depth on artifact cards */
+.artifact {
+  --parallax-y: 0px;
+  --parallax-scale: 1;
+  transform: translateY(var(--parallax-y)) scale(var(--parallax-scale));
+  transition: transform 0.15s ease-out;
+}
+
+/* Hero plate clip-path reveal */
+.home-opening-artifact .artifact-media {
+  will-change: clip-path;
+}

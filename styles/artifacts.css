@@ -14,6 +14,12 @@
   border-bottom: 1px solid var(--rule);
 }
 
+/* Artifact row spans the full grid width below the identity/artifact columns */
+.home-opening__artifact-row {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
 .home-identity {
   align-self: start;
   max-width: 34rem;
@@ -55,6 +61,23 @@
   min-height: 2.75rem;
   padding: 0.8rem 0;
   text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.home-primary-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: currentColor;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-primary-links a:hover::after {
+  width: 100%;
 }
 
 .home-primary-links a:last-child {
@@ -74,16 +97,59 @@
   padding: clamp(1.2rem, 2.5vw, 2.5rem);
   border: 1px solid var(--rule);
   background: var(--surface-raised);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease;
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+  transform-origin: center center;
+}
+
+.artifact:hover {
+  transform: perspective(800px) rotateX(-0.5deg) rotateY(0.3deg) translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
+  border-color: var(--precision-rule-strong);
+}
+
+.artifact::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--family-accent, var(--arch-500)) 25%, transparent);
+  transition: opacity var(--motion-normal) var(--ease-out);
+}
+
+.artifact:hover::after {
+  opacity: 1;
+}
+
+.artifact:active {
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg) translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  transition-duration: 0.08s;
 }
 
 .artifact::before {
   position: absolute;
   top: 0;
   left: 0;
-  width: 3.5rem;
-  height: 3px;
-  background: var(--arch-500);
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    var(--family-accent, var(--arch-500)) 0%,
+    color-mix(in oklch, var(--family-accent, var(--arch-500)) 40%, transparent) 100%
+  );
   content: '';
+  border-radius: 0 1px 1px 0;
+  opacity: 0.9;
+  transition: opacity var(--motion-normal) var(--ease-out);
+}
+
+.artifact:hover::before {
+  opacity: 1;
 }
 
 .artifact[data-family]::before {
@@ -97,13 +163,28 @@
   z-index: 1;
   display: inline-flex;
   align-items: center;
-  font: 600 0.65rem/1 var(--font-meta);
-  letter-spacing: 0.06em;
+  font: 600 0.6rem/1 var(--font-meta);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.3rem 0.55rem;
-  border-radius: var(--radius-control);
-  background: color-mix(in oklch, var(--ink) 8%, transparent);
+  padding: 0.35rem 0.7rem;
+  border-radius: 100px;
+  background: color-mix(in oklch, var(--paper-100) 72%, transparent);
   color: var(--ink-muted);
+  backdrop-filter: blur(12px) saturate(1.2);
+  border: 1px solid color-mix(in oklch, var(--ink) 6%, transparent);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: background var(--motion-normal) var(--ease-out),
+              color var(--motion-normal) var(--ease-out),
+              box-shadow var(--motion-normal) var(--ease-out);
+}
+
+.artifact[data-family] .artifact-badge {
+  background: color-mix(in oklch, var(--family-accent, var(--arch-500)) 12%, var(--paper-100));
+  color: color-mix(in oklch, var(--family-accent, var(--arch-500)) 85%, var(--ink));
+}
+
+.artifact[data-family]:hover .artifact-badge {
+  box-shadow: 0 1px 4px color-mix(in oklch, var(--family-accent, var(--arch-500)) 20%, transparent);
 }
 
 .artifact-header {
@@ -137,6 +218,28 @@
   margin: 0;
   border: 1px solid color-mix(in oklch, var(--ink) 16%, transparent);
   background: var(--graphite-900);
+  overflow: hidden;
+}
+
+/* Physical product cards get enhanced framing */
+.artifact--physical .artifact-media {
+  position: relative;
+  border: none;
+  background: linear-gradient(135deg, var(--graphite-950) 0%, var(--graphite-800) 100%);
+}
+
+.artifact--physical .artifact-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Subtle inner glow on physical product images */
+.artifact--physical .artifact-media img {
+  filter: contrast(1.02) saturate(1.05);
 }
 
 .artifact-media img {
@@ -157,7 +260,6 @@
 .home-opening-artifact .artifact-media {
   height: auto;
   aspect-ratio: 16 / 9;
-  max-height: 27rem;
   overflow: hidden;
   box-shadow: 1rem 1rem 0 color-mix(in oklch, var(--olive-500) 18%, transparent);
 }
@@ -173,8 +275,9 @@
   grid-template-columns: minmax(0, 1fr) minmax(9rem, 0.44fr);
   gap: var(--space-4);
   align-items: start;
-  padding-top: var(--space-3);
-  border-top: 1px solid var(--rule);
+  padding: var(--space-3) var(--space-3) 0;
+  border-top: 1px solid color-mix(in oklch, var(--ink) 8%, transparent);
+  background: color-mix(in oklch, var(--paper-100) 40%, transparent);
 }
 
 .artifact-annotation {
@@ -185,13 +288,15 @@
 
 .artifact-annotation > span {
   display: grid;
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 1.6rem;
+  height: 1.6rem;
   place-items: center;
-  background: var(--graphite-950);
+  background: color-mix(in oklch, var(--family-accent, var(--graphite-950)) 90%, var(--ink));
   color: var(--paper-100);
   font-family: var(--font-meta);
-  font-size: var(--step--1);
+  font-size: 0.6rem;
+  font-weight: 600;
+  border-radius: 2px;
 }
 
 .artifact-annotation p,
@@ -202,15 +307,17 @@
 
 .metric-annotation {
   display: grid;
-  gap: 0.1rem;
-  padding-left: var(--space-3);
-  border-left: 1px solid var(--rule);
+  gap: 0.15rem;
+  padding: var(--space-2) var(--space-3);
+  border-left: 2px solid color-mix(in oklch, var(--family-accent, var(--arch-500)) 40%, transparent);
+  background: color-mix(in oklch, var(--family-accent, var(--arch-500)) 5%, transparent);
 }
 
 .metric-annotation strong {
   font-family: var(--font-display);
-  font-size: var(--step-2);
+  font-size: var(--step-1);
   line-height: 1;
+  color: var(--family-accent, var(--arch-500));
 }
 
 .metric-annotation span,
@@ -221,25 +328,27 @@
 }
 
 .metric-annotation small {
-  margin-top: var(--space-1);
+  margin-top: 0;
 }
 
 .evidence-label {
   display: grid;
-  gap: var(--space-1);
+  gap: 0.2rem;
   grid-column: 1 / -1;
-  padding: var(--space-3);
-  border-top: 1px solid var(--rule);
-  background: color-mix(in oklch, var(--paper-100) 72%, var(--concrete-300));
+  padding: var(--space-2) var(--space-3);
+  border-top: 1px solid color-mix(in oklch, var(--ink) 8%, transparent);
+  background: color-mix(in oklch, var(--graphite-950) 4%, transparent);
   font-family: var(--font-meta);
-  font-size: var(--step--1);
-  line-height: 1.45;
+  font-size: 0.65rem;
+  line-height: 1.4;
+  color: var(--ink-muted);
 }
 
 .evidence-label span {
-  color: var(--olive-500);
-  letter-spacing: 0.07em;
+  color: var(--family-accent, var(--olive-500));
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-weight: 600;
 }
 
 .home-featured {

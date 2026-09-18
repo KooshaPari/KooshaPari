@@ -100,8 +100,8 @@ export function renderShell(
   const footer = el(
     'footer',
     { class: 'footer' },
-    el('span', {}, 'Koosha Paridehpour · canonical portfolio preview'),
-    el('span', {}, 'Evidence-led · legacy sources preserved'),
+    el('span', {}, 'Koosha Paridehpour · kooshapari.com'),
+    el('span', {}, 'Koosha Paridehpour — Systems engineer, product builder, keyboard enthusiast.'),
   );
 
   const appRoot = document.getElementById('app');
