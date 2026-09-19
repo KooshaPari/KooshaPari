@@ -10,14 +10,28 @@
  * Output: dist/bundled/app.bundle.js
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync, existsSync } from 'node:fs';
 import { resolve, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const ROOT = resolve(dirname(__filename), '..');
 const ENTRY = resolve(ROOT, 'scripts/app.js');
-const OUT = resolve(ROOT, 'dist/bundled/app.bundle.js');
+const OUT_DIR = resolve(ROOT, 'bundled');
+const ENTRY_BASE = 'app.bundle.js';
+
+// --- Content-hash suffix helpers (shared contract with bundle-css.js) ---
+
+function shortHash(content) {
+  return createHash('sha256').update(content).digest('hex').slice(0, 8);
+}
+
+function hashedName(base, hash) {
+  // "app.bundle.js" -> "app.bundle.<hash>.js"
+  const dot = base.lastIndexOf('.');
+  return `${base.slice(0, dot)}.${hash}${base.slice(dot)}`;
+}
 
 // --- Dependency graph walker ---
 
@@ -144,8 +158,17 @@ const rawKB = (Buffer.byteLength(rawBundle) / 1024).toFixed(1);
 const minKB = (Buffer.byteLength(bundle) / 1024).toFixed(1);
 console.log(`Minified: ${rawKB} KB -> ${minKB} KB`);
 
-// Write output
-mkdirSync(dirname(OUT), { recursive: true });
+// Compute content hash and write hashed output. Remove stale bundles first
+// so leftover hashes from previous builds don't leak into the served site.
+const hash = shortHash(bundle);
+const hashedFile = hashedName(ENTRY_BASE, hash);
+const OUT = resolve(OUT_DIR, hashedFile);
+
+mkdirSync(OUT_DIR, { recursive: true });
+for (const entry of readdirSync(OUT_DIR)) {
+  if (entry === 'manifest.json') continue;
+  rmSync(resolve(OUT_DIR, entry), { force: true });
+}
 writeFileSync(OUT, bundle);
 
 if (!existsSync(OUT)) {
@@ -153,5 +176,15 @@ if (!existsSync(OUT)) {
   process.exit(1);
 }
 
+// Manifest maps logical entry name -> hashed filename. JSON, not hashed —
+// vercel.json serves it `public, max-age=300, must-revalidate` so consumers
+// see fresh hashed names after every deploy.
+const manifest = { [ENTRY_BASE]: hashedFile };
+writeFileSync(
+  resolve(OUT_DIR, 'manifest.json'),
+  JSON.stringify(manifest, null, 2) + '\n',
+);
+
 const sizeKB = (Buffer.byteLength(bundle) / 1024).toFixed(1);
 console.log(`Bundled ${loadOrder.length} modules -> ${relative(ROOT, OUT)} (${sizeKB} KB)`);
+console.log(`Manifest written to ${relative(ROOT, resolve(OUT_DIR, 'manifest.json'))}`);

@@ -13,9 +13,28 @@
  * A comment header with the original file list is kept in a banner.
  */
 
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+// --- Content-hash suffix helpers ---
+//
+// Each bundle is emitted as `<base>.<hash>.css` where `<hash>` is the first
+// 8 hex chars of SHA-256 over the minified output. A `manifest.json` file
+// maps logical name -> hashed filename so consumers can resolve without
+// hard-coding. The unhashed legacy `<base>.css` is removed at the end —
+// there is no backwards-compat shim.
+
+function shortHash(content) {
+  return createHash('sha256').update(content).digest('hex').slice(0, 8);
+}
+
+function hashedName(base, hash) {
+  // base is "core.css" -> "core.<hash>.css"
+  const dot = base.lastIndexOf('.');
+  return `${base.slice(0, dot)}.${hash}${base.slice(dot)}`;
+}
 
 // --- CSS Minifier (zero-dependency) ---
 
@@ -197,7 +216,16 @@ if (dupes.length > 0) {
 
 await mkdir(outDir, { recursive: true });
 
+// Remove any stale hashed bundles + unhashed legacy outputs from a prior run.
+// Only files we own are touched — `manifest.json` itself is the only non-hash
+// artefact under styles/bundled/, and it gets rewritten below.
+for (const entry of await readdir(outDir)) {
+  if (entry === 'manifest.json') continue;
+  await rm(join(outDir, entry), { force: true });
+}
+
 const stats = [];
+const manifest = {};
 
 for (const [bundleName, files] of Object.entries(bundles)) {
   const parts = [];
@@ -232,28 +260,43 @@ for (const [bundleName, files] of Object.entries(bundles)) {
 
   const rawContent = parts.join('\n');
   const bundleContent = minifyCss(rawContent);
-  const outPath = join(outDir, bundleName);
+  const hash = shortHash(bundleContent);
+  const hashedFile = hashedName(bundleName, hash);
+  const outPath = join(outDir, hashedFile);
   await writeFile(outPath, bundleContent);
+
+  // Logical name -> hashed filename. `bundleName` is e.g. "core.css"; consumers
+  // resolve `${prefix}/${manifest[bundleName]}` from this.
+  manifest[bundleName] = hashedFile;
 
   const rawBytes = Buffer.byteLength(rawContent);
   const bytes = Buffer.byteLength(bundleContent);
-  stats.push({ name: bundleName, files: files.length, bytes, rawBytes });
+  stats.push({ name: bundleName, hashedFile, files: files.length, bytes, rawBytes });
 }
+
+// Write the manifest. JSON, not hashed — vercel.json serves it
+// `public, max-age=300, must-revalidate` so consumers see fresh hashed names
+// after every deploy.
+await writeFile(
+  join(outDir, 'manifest.json'),
+  JSON.stringify(manifest, null, 2) + '\n',
+);
 
 // --- Report ---
 
 console.log('\nCSS Bundle Results:');
-console.log('─'.repeat(60));
+console.log('─'.repeat(72));
 for (const s of stats) {
   const kb = (s.bytes / 1024).toFixed(1);
   const rawKb = (s.rawBytes / 1024).toFixed(1);
   const savings = ((1 - s.bytes / s.rawBytes) * 100).toFixed(0);
-  console.log(`  ${s.name.padEnd(20)} ${String(s.files).padStart(3)} files  ${kb.padStart(7)} KB  (was ${rawKb}, -${savings}%)`);
+  console.log(`  ${s.name.padEnd(20)} ${s.hashedFile.padEnd(28)} ${String(s.files).padStart(3)} files  ${kb.padStart(7)} KB  (was ${rawKb}, -${savings}%)`);
 }
-console.log('─'.repeat(60));
+console.log('─'.repeat(72));
 const totalBytes = stats.reduce((sum, s) => sum + s.bytes, 0);
 const totalRawBytes = stats.reduce((sum, s) => sum + s.rawBytes, 0);
 const totalFiles = stats.reduce((sum, s) => sum + s.files, 0);
 const totalSavings = ((1 - totalBytes / totalRawBytes) * 100).toFixed(0);
-console.log(`  ${'TOTAL'.padEnd(20)} ${String(totalFiles).padStart(3)} files  ${(totalBytes / 1024).toFixed(1).padStart(7)} KB  (was ${(totalRawBytes / 1024).toFixed(1)}, -${totalSavings}%)`);
-console.log(`\nBundles written to ${outDir}`);
+console.log(`  ${'TOTAL'.padEnd(20)} ${''.padEnd(28)} ${String(totalFiles).padStart(3)} files  ${(totalBytes / 1024).toFixed(1).padStart(7)} KB  (was ${(totalRawBytes / 1024).toFixed(1)}, -${totalSavings}%)`);
+console.log(`\nManifest written to ${join(outDir, 'manifest.json')}`);
+console.log(`Bundles written to ${outDir}`);

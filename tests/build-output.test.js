@@ -55,10 +55,21 @@ test('Vercel static output contains only staged publication assets and matches s
     'scripts/views/work.js',
     'data/projects.js',
     'data/posts.js',
-    'styles/bundled/core.css',
-    'styles/bundled/components.css',
-    'styles/bundled/pages.css',
+    // CSS + JS bundles are content-hashed; the test resolves their on-disk
+    // filenames through the manifests written by scripts/bundle-css.js and
+    // scripts/bundle-js.js instead of hard-coding the hash.
+    'styles/bundled/manifest.json',
+    'bundled/manifest.json',
   ];
+  // Load hashed bundle filenames from the manifests. The build emits them at
+  // both the source and the Vercel output root, so we resolve to whichever
+  // exists when we need to read the staged file.
+  const cssManifest = JSON.parse(await readFile('styles/bundled/manifest.json', 'utf8'));
+  const jsManifest = JSON.parse(await readFile('bundled/manifest.json', 'utf8'));
+  const cssHashed = Object.values(cssManifest).map((name) => `styles/bundled/${name}`);
+  const jsHashed = Object.values(jsManifest).map((name) => `bundled/${name}`);
+  const hashedFiles = new Set([...cssHashed, ...jsHashed]);
+
   // JS files are minified in dist/ (comments stripped) — verify they exist,
   // but don't byte-compare against unminified source.
   for (const file of files.filter(f => f.endsWith('.js'))) {
@@ -66,14 +77,32 @@ test('Vercel static output contains only staged publication assets and matches s
     assert.ok(built, `missing JS in Vercel output: ${file}`);
     assert.ok(built.length > 0, `empty JS in Vercel output: ${file}`);
   }
-  // CSS bundles are minified in styles/bundled/ — verify they exist and are non-empty.
-  for (const file of files.filter(f => f.endsWith('.css'))) {
+  // CSS bundles are minified in styles/bundled/ — verify hashed files exist
+  // and are byte-identical to the source-of-truth copies in styles/bundled/.
+  for (const rel of cssHashed) {
     const [source, built] = await Promise.all([
-      readFile(file),
-      readFile(`.vercel/output/static/${file}`),
+      readFile(rel),
+      readFile(`.vercel/output/static/${rel}`),
     ]);
-    assert.ok(built.length > 0, `empty CSS in Vercel output: ${file}`);
-    assert.deepEqual(built, source, `stale CSS in Vercel output: ${file}`);
+    assert.ok(built.length > 0, `empty CSS in Vercel output: ${rel}`);
+    assert.deepEqual(built, source, `stale CSS in Vercel output: ${rel}`);
+  }
+  // JS bundle in bundled/ — verify it exists, non-empty, and matches source.
+  for (const rel of jsHashed) {
+    const [source, built] = await Promise.all([
+      readFile(rel),
+      readFile(`.vercel/output/static/${rel}`),
+    ]);
+    assert.ok(built.length > 0, `empty JS bundle in Vercel output: ${rel}`);
+    assert.deepEqual(built, source, `stale JS bundle in Vercel output: ${rel}`);
+  }
+  // Manifests themselves must be in Vercel output and byte-identical to source.
+  for (const rel of ['styles/bundled/manifest.json', 'bundled/manifest.json']) {
+    const [source, built] = await Promise.all([
+      readFile(rel),
+      readFile(`.vercel/output/static/${rel}`),
+    ]);
+    assert.deepEqual(built, source, `stale manifest in Vercel output: ${rel}`);
   }
   for (const file of ['index.html', 'engineering.html', 'product.html', 'work.html', 'resume.html', 'contact.html', 'blog.html']) {
     const [staged, built] = await Promise.all([
