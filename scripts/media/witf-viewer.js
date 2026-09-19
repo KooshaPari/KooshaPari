@@ -31,6 +31,28 @@ const POSTER_ALT = 'Blender 3D render of WITF Board split Alice keyboard with te
  */
 const VIEWER_GATE_MARGIN = '300px';
 
+/**
+ * How long to wait for the three.js CDN before giving up and showing the
+ * poster. Without this the viewer sat on "Loading 3D model…" for as long as
+ * the CDN took to fail — on a slow or blocked jsDelivr that was up to ~30s of
+ * empty black rectangle above the fold with no way for the visitor to tell
+ * whether anything was happening.
+ */
+const THREE_LOAD_TIMEOUT_MS = 6000;
+
+/**
+ * Reject if `promise` has not settled within `ms`.
+ * The timer is always cleared so a late rejection cannot surface as an
+ * unhandled one after the race has already resolved.
+ */
+function withTimeout(promise, ms, label) {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`${label} timed out after ${ms}ms`)), ms);
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
+
 /* ------------------------------------------------------------------ */
 /*  WebGL feature detection                                           */
 /* ------------------------------------------------------------------ */
@@ -167,14 +189,16 @@ async function startWitfViewer(container) {
   const loadingEl = createLoadingIndicator(container);
 
   try {
-    // Dynamic imports via importmap
+    // Dynamic imports via importmap. Any page hosting this viewer must declare
+    // the importmap (scripts/stage-publication.js injects it from index.html);
+    // a bare specifier with no map resolves nowhere and lands in the catch.
     const [{ Scene, PerspectiveCamera, WebGLRenderer, AmbientLight, DirectionalLight, Color, Vector3 },
             { OrbitControls },
-            { GLTFLoader }] = await Promise.all([
+            { GLTFLoader }] = await withTimeout(Promise.all([
       import('three'),
       import('three/addons/controls/OrbitControls.js'),
       import('three/addons/loaders/GLTFLoader.js'),
-    ]);
+    ]), THREE_LOAD_TIMEOUT_MS, 'three.js CDN');
 
     if (_destroyed) return;
 

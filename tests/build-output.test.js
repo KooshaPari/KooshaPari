@@ -9,6 +9,34 @@ test('publication outputs exclude macOS Finder metadata at every depth', async (
   }
 });
 
+// An importmap is document-scoped. Only index.html declared one, so the five
+// other pages that host the WITF viewer could not resolve the bare `three`
+// specifier and every 3D viewer outside the homepage degraded to a static
+// poster. The build now copies the map into every staged page.
+test('every staged page declares the importmap before its bundle script', async () => {
+  const manifest = JSON.parse(await readFile('bundled/manifest.json', 'utf8'));
+  const bundleRef = `/bundled/${manifest['app.bundle.js']}`;
+  const pages = (await readdir('dist', { recursive: true }))
+    .filter((name) => name.endsWith('.html'));
+
+  assert.ok(pages.length > 0, 'expected staged HTML pages in dist/');
+  for (const page of pages) {
+    const html = await readFile(`dist/${page}`, 'utf8');
+    const mapAt = html.indexOf('type="importmap"');
+    assert.ok(mapAt !== -1, `${page} must declare an importmap`);
+    // The map has to be parsed before any module that imports a bare specifier.
+    const scriptAt = html.indexOf(bundleRef);
+    if (scriptAt !== -1) {
+      assert.ok(mapAt < scriptAt, `${page} must declare the importmap before the bundle script`);
+    }
+    assert.match(
+      html.slice(mapAt, mapAt + 400),
+      /"three"\s*:/,
+      `${page} importmap must resolve the "three" specifier`,
+    );
+  }
+});
+
 test('Vercel static output contains only staged publication assets and matches source', async () => {
   const files = [
     'scripts/app.js',

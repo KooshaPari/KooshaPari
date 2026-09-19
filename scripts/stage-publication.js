@@ -93,9 +93,23 @@ const cssRewrites = Object.entries(cssManifest).map(([logical, hashed]) => ({
   to: `/styles/bundled/${hashed}`,
 }));
 const jsRewrites = [JS_ENTRY_LOGICAL, JS_BUNDLE_LOGICAL];
+
+// An importmap is scoped to the document that declares it. Only index.html
+// declared one, so every other page that hosts the WITF viewer failed its
+// `import('three')` with "Failed to resolve module specifier" and silently
+// degraded to the static poster — the 3D viewer could not work on
+// /work/witf, /engineering or /product at all. index.html stays the single
+// source of truth; the same block is copied verbatim into any staged page that
+// lacks it, so adding a new viewer page needs no extra step.
+const importmap = (await readFile(join(publication, 'index.html'), 'utf8'))
+  .match(/<script type="importmap">[\s\S]*?<\/script>/)?.[0];
+if (!importmap) {
+  throw new Error('index.html must declare the importmap: it is the source of truth for pages that import bare specifiers.');
+}
 let rewrittenHtml = 0;
 let rewrittenCss = 0;
 let rewrittenJs = 0;
+let injectedImportmaps = 0;
 
 async function walkHtml(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -111,6 +125,13 @@ async function walkHtml(dir) {
 for (const file of await walkHtml(publication)) {
   let html = await readFile(file, 'utf8');
   let changed = false;
+  // Inject before the module script that consumes it; `<head>` open tag is the
+  // earliest safe slot and every page has exactly one.
+  if (!html.includes('type="importmap"') && html.includes('<head>')) {
+    html = html.replace('<head>', `<head>\n  ${importmap}`);
+    injectedImportmaps++;
+    changed = true;
+  }
   for (const from of jsRewrites) {
     if (html.includes(from)) {
       html = html.replaceAll(from, JS_ENTRY_HASHED);
@@ -134,6 +155,7 @@ console.log(
   `Hashed bundle references applied to ${rewrittenHtml} page(s) ` +
   `(${rewrittenCss} CSS, ${rewrittenJs} JS reference rewrites)`,
 );
+console.log(`Importmap injected into ${injectedImportmaps} page(s)`);
 
 
 
