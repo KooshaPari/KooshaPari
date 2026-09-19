@@ -19,7 +19,7 @@
   --line-2:  var(--precision-rule-strong);
   --fg:      var(--ink);
   --fg-mute: var(--ink-muted);
-  --fg-dim:  color-mix(in oklch, var(--ink-muted) 78%, transparent);
+  --fg-dim:  color-mix(in srgb, var(--ink-muted) 78%, transparent);
 
   --accent-prod:    var(--accent-product);
   --accent-prod-2:  var(--olive-300);
@@ -66,8 +66,8 @@ section.view {
 }
 section.view.active { display: block; }
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { transform: translateY(6px); }
+  to   { transform: translateY(0); }
 }
 
 h1, h2, h3, h4 { margin: 0; }
@@ -92,7 +92,7 @@ h2.section-title {
 .portfolio-hero { padding: clamp(28px,6vw,76px) 0 34px; max-width: 900px; }
 .portfolio-hero h1, .portfolio-view > h1 { font: 700 clamp(2.3rem,6vw,5rem)/.98 var(--display); letter-spacing:-.04em; margin:10px 0 18px; }
 .lede { color:var(--fg-mute); font-size:clamp(1rem,1.8vw,1.25rem); line-height:1.6; max-width:760px; }
-.eyebrow { color:var(--accent-pheno); font:700 .72rem/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; }
+.eyebrow { color:var(--eyebrow-ink); font:700 .72rem/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; }
 .cta-row, .contact-links, .project-links, .tag-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
 .cta { display:inline-flex; padding:11px 16px; border-radius:999px; color:#0a0d14; font-weight:700; text-decoration:none; }
 .cta-eng { background:var(--accent-eng); } .cta-prod { background:var(--accent-prod); }
@@ -123,7 +123,7 @@ h2.section-title {
 .project-card-image { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:10px; margin:-2px 0 16px; background:var(--bg-2); }
 .project-card h2 { font:700 1.35rem var(--display); margin:12px 0 8px; } .project-card p { color:var(--fg-mute); line-height:1.5; font-size:.92rem; }
 .project-card-top { display:flex; justify-content:space-between; gap:8px; } .status-pill,.tag { color:var(--fg-dim); font:600 .68rem var(--mono); border:1px solid var(--line-2); border-radius:999px; padding:4px 7px; }
-.text-link,.project-links a,.contact-links a { color:var(--accent-eng); font-weight:600; } .muted { color:var(--fg-dim); font-size:.85rem; }
+.text-link,.project-links a,.contact-links a { color:var(--link-ink); font-weight:600; } .muted { color:var(--fg-dim); font-size:.85rem; }
 .resume-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; margin-top:28px; } .resume-card h2 { font:700 1.5rem var(--display); margin-bottom:8px; }
 @media (max-width:760px) { .proof-grid { grid-template-columns:repeat(2,1fr); } .resume-grid { grid-template-columns:1fr; } }
 

@@ -22,6 +22,53 @@ test.describe('Homepage', () => {
     const critical = result.violations.filter(v => v.impact === 'critical' || v.impact === 'serious');
     expect(critical.map(v => ({ id: v.id, nodes: v.nodes.length }))).toEqual([]);
   });
+
+  // A gate that cannot fail is not a gate. The design system resolves nearly
+  // every translucent colour through color-mix(); when those mixed in oklch
+  // they serialised with a `none` component and axe threw on every node, so
+  // the colour-contrast rule reported 0 passes and 0 violations on a site
+  // whose headings measured 1.14:1. Asserting "no violations" alone would have
+  // passed in that state.
+  //
+  // Two separate invariants, because they fail for different reasons:
+  //   - violations must be zero: a real readability regression
+  //   - the rule must actually evaluate, and the number of nodes it cannot
+  //     decide must not grow past the recorded ceiling: a coverage regression
+  //
+  // The residual "incomplete" nodes are axe limitations, not defects. Its own
+  // reasons, measured 2026-09-19, are only three: the element is overlapped by
+  // a decorative element, the element contains an image node (an inline icon
+  // next to text), or a pseudo-element sits over it. None of those can be
+  // decided from computed colour, and none of them mean the text is unreadable.
+  // The ceilings below are the counts measured on 2026-09-19 at 1440x900 after
+  // every fix in this pass; raising one should be a deliberate, justified edit.
+  const INCOMPLETE_CEILING = { '/': 22, '/work': 16, '/blog': 15 };
+
+  test('colour contrast is evaluated, and reported violations are zero', async ({ page }) => {
+    for (const [path, ceiling] of Object.entries(INCOMPLETE_CEILING)) {
+      await page.goto(path);
+      const result = await new AxeBuilder({ page }).withTags(['wcag2aa']).analyze();
+      const contrast = result.violations.find(v => v.id === 'color-contrast');
+      const passed = result.passes.find(v => v.id === 'color-contrast');
+      const incomplete = result.incomplete.find(v => v.id === 'color-contrast');
+
+      expect(
+        contrast?.nodes.map(n => n.target.join(' ')) ?? [],
+        `${path}: contrast violations`,
+      ).toEqual([]);
+
+      expect(
+        passed?.nodes.length ?? 0,
+        `${path}: axe evaluated no element for colour contrast — the rule is blind`,
+      ).toBeGreaterThan(0);
+
+      expect(
+        incomplete?.nodes.length ?? 0,
+        `${path}: contrast coverage regressed; more nodes are undecidable than the recorded ceiling. `
+        + 'A colour may have started serialising with a "none" component again.',
+      ).toBeLessThanOrEqual(ceiling);
+    }
+  });
 });
 
 test.describe('Navigation', () => {

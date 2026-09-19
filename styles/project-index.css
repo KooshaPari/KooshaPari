@@ -31,7 +31,7 @@
 }
 
 .project-index::backdrop {
-  background: color-mix(in oklch, var(--graphite-950) 70%, transparent);
+  background: color-mix(in srgb, var(--graphite-950) 70%, transparent);
 }
 
 .project-index-head {
@@ -43,7 +43,7 @@
   justify-content: space-between;
   gap: var(--space-4);
   padding-bottom: var(--space-4);
-  border-bottom: 1px solid color-mix(in oklch, var(--paper-100) 28%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--paper-100) 28%, transparent);
   background: var(--graphite-950);
 }
 
@@ -91,7 +91,7 @@
 }
 
 .project-index-group li {
-  border-top: 1px solid color-mix(in oklch, var(--paper-100) 20%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--paper-100) 20%, transparent);
 }
 
 .project-index-group a {

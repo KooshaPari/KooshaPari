@@ -302,9 +302,9 @@
 
 /* Success pulse */
 @keyframes success-pulse {
-  0%   { box-shadow: 0 0 0 0 color-mix(in oklch, var(--seed-teal) 40%, transparent); }
-  70%  { box-shadow: 0 0 0 10px color-mix(in oklch, var(--seed-teal) 0%, transparent); }
-  100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--seed-teal) 0%, transparent); }
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--seed-teal) 40%, transparent); }
+  70%  { box-shadow: 0 0 0 10px color-mix(in srgb, var(--seed-teal) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--seed-teal) 0%, transparent); }
 }
 
 .contact-form__submit.is-success {

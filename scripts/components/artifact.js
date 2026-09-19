@@ -187,6 +187,7 @@ export function createArtifact(record, lens) {
   if (family) {
     artifact.setAttribute('data-family', family);
     artifact.style.setProperty('--family-accent', `var(--family-${family}-active, var(--family-${family}))`);
+    artifact.style.setProperty('--family-accent-ink', `var(--family-${family}-ink-active, var(--family-${family}-ink, var(--family-${family}-active, var(--family-${family}))))`);
   }
 
   // Category badge overlay on the media area

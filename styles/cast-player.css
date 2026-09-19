@@ -10,7 +10,7 @@
   --cp-bg:       #0d0f0e;
   --cp-text:     var(--seed-teal, #7EBAB5);
   --cp-dim:      #4a5250;
-  --cp-rule:     var(--rule, color-mix(in oklch, #171a18 24%, transparent));
+  --cp-rule:     var(--rule, color-mix(in srgb, #171a18 24%, transparent));
   --cp-radius:   var(--radius-control, 6px);
   --cp-font:     var(--font-meta, "JetBrains Mono", "SFMono-Regular", Consolas, monospace);
   --cp-font-size: clamp(0.68rem, 0.62rem + 0.18vw, 0.78rem);
@@ -21,7 +21,7 @@
   border-radius: var(--cp-radius);
   background: var(--cp-bg);
   overflow: hidden;
-  box-shadow: 0 2px 12px color-mix(in oklch, #000 35%, transparent);
+  box-shadow: 0 2px 12px color-mix(in srgb, #000 35%, transparent);
 }
 
 /* --- Title bar ------------------------------------------------ */
@@ -101,7 +101,7 @@
 
 /* Subtle text glow on teal content */
 .cast-player__line:not(:empty) {
-  text-shadow: 0 0 8px color-mix(in oklch, var(--cp-text) 18%, transparent);
+  text-shadow: 0 0 8px color-mix(in srgb, var(--cp-text) 18%, transparent);
 }
 
 /* --- Block cursor --------------------------------------------- */
@@ -160,7 +160,7 @@
 .cast-player__btn:hover {
   color: var(--cp-text);
   border-color: var(--cp-dim);
-  background: color-mix(in oklch, var(--cp-text) 8%, transparent);
+  background: color-mix(in srgb, var(--cp-text) 8%, transparent);
 }
 
 .cast-player__btn--play {
@@ -170,7 +170,7 @@
 .cast-player__btn--active {
   color: var(--cp-text);
   border-color: var(--cp-dim);
-  background: color-mix(in oklch, var(--cp-text) 10%, transparent);
+  background: color-mix(in srgb, var(--cp-text) 10%, transparent);
 }
 
 /* Speed group */
@@ -204,7 +204,7 @@
 .cast-player__speed-btn--active {
   color: var(--cp-text);
   border-color: var(--cp-dim);
-  background: color-mix(in oklch, var(--cp-text) 8%, transparent);
+  background: color-mix(in srgb, var(--cp-text) 8%, transparent);
 }
 
 /* --- Command hint --------------------------------------------- */

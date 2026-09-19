@@ -175,7 +175,7 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
   const caseStudyAttrs = { class: 'view active portfolio-view case-study' };
   if (family) {
     caseStudyAttrs['data-family'] = family;
-    caseStudyAttrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family}))`;
+    caseStudyAttrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family})); --family-accent-ink: var(--family-${family}-ink-active, var(--family-${family}-ink, var(--family-${family}-active, var(--family-${family}))));`;
   }
 
   root.replaceChildren(

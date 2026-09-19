@@ -8,7 +8,7 @@
 :root {
   --slider-accent: var(--seed-teal, #7EBAB5);
   --slider-ink: var(--ink, #171a18);
-  --slider-rule: var(--rule, color-mix(in oklch, #171a18 24%, transparent));
+  --slider-rule: var(--rule, color-mix(in srgb, #171a18 24%, transparent));
   --slider-font: var(--font-meta, "JetBrains Mono", "SFMono-Regular", Consolas, monospace);
   --slider-easing: cubic-bezier(0.16, 1, 0.3, 1);
   --slider-transition: 300ms var(--slider-easing);
@@ -145,7 +145,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--surface, #f3f0e8);
-  background: color-mix(in oklch, var(--slider-ink) 72%, transparent);
+  background: color-mix(in srgb, var(--slider-ink) 72%, transparent);
   padding: 0.3em 0.65em;
   border-radius: 3px;
   pointer-events: none;

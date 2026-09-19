@@ -17,11 +17,32 @@ body {
   color: var(--ink);
   min-width: 320px;
   min-height: 100vh;
-  background:
-    linear-gradient(90deg, transparent 0 49.96%, color-mix(in oklch, var(--ink) 3%, transparent) 50%, transparent 50.04%),
-    var(--surface);
+  /* No background of its own. html paints the solid --surface and the
+     decorative hairlines are painted by body::before below. A background-image
+     on body makes the effective background of every text node indeterminate,
+     so axe-core cannot evaluate colour contrast at all and reports each node
+     as "incomplete" — neither pass nor fail — which is how a page with 1.14:1
+     headings reported zero contrast violations. */
+  background: transparent;
   font-size: var(--step-0);
   line-height: 1.6;
+}
+
+/* Decorative fold line at the horizontal centre, painted over html's solid
+   --surface and behind all content. Kept to the 1px line itself rather than a
+   full-viewport box: a fixed element covering the viewport is reported to
+   axe-core as "overlapped by another element", which makes the effective
+   background of anything it covers indeterminate again. */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  z-index: -1;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--ink) 3%, transparent);
 }
 
 button,
@@ -116,7 +137,7 @@ button { transition: border-color .12s ease, box-shadow .12s ease, background .1
 
 /* Card hover lift */
 .work-catalog__featured-project { transition: box-shadow var(--motion-normal) var(--ease-out), border-color .12s ease; }
-.work-catalog__featured-project:hover { box-shadow: 0 4px 12px color-mix(in oklch, var(--ink) 8%, transparent); border-color: var(--family-accent, var(--ink-muted)); }
+.work-catalog__featured-project:hover { box-shadow: 0 4px 12px color-mix(in srgb, var(--ink) 8%, transparent); border-color: var(--family-accent, var(--ink-muted)); }
 
 /* Image hover scale on case study hero */
 .case-hero { overflow: hidden; }
@@ -125,10 +146,10 @@ button { transition: border-color .12s ease, box-shadow .12s ease, background .1
 
 /* Artifact hover */
 .home-artifact-sequence article { transition: box-shadow var(--motion-normal) var(--ease-out), transform var(--motion-normal) var(--ease-out); }
-.home-artifact-sequence article:hover { box-shadow: 0 3px 8px color-mix(in oklch, var(--ink) 6%, transparent); }
+.home-artifact-sequence article:hover { box-shadow: 0 3px 8px color-mix(in srgb, var(--ink) 6%, transparent); }
 
 ::selection {
-  background: color-mix(in oklch, var(--seed-teal) 28%, transparent);
+  background: color-mix(in srgb, var(--seed-teal) 28%, transparent);
   color: var(--ink);
 }
 
@@ -370,7 +391,7 @@ body[data-lens="product"] {
   background: linear-gradient(
     90deg,
     transparent,
-    color-mix(in oklch, var(--ink) 6%, transparent),
+    color-mix(in srgb, var(--ink) 6%, transparent),
     transparent
   );
   animation: state-loading-shimmer var(--motion-slow) linear infinite;

@@ -53,7 +53,7 @@ function parseCast(raw) {
  * @param {Array<{ dt: number, type: string, data: string }>} events
  * @returns {Array<{ time: number, type: string, data: string }>}
  */
-function buildTimeline(events) {
+function buildCastTimeline(events) {
   const timeline = [];
   let t = 0;
   for (const ev of events) {
@@ -285,7 +285,7 @@ function createPlayer(container) {
     })
     .then(text => {
       parsed = parseCast(text);
-      timeline = buildTimeline(parsed.events);
+      timeline = buildCastTimeline(parsed.events);
 
       // Use header terminal width if no explicit width set
       if (parsed.header?.term?.cols && !container.style.width) {

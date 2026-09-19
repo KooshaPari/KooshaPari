@@ -24,7 +24,7 @@
   justify-content: space-between;
   padding: var(--space-0) var(--space-2);
   background: color-mix(in oklch, var(--graphite-950) 80%, #0d0f0e);
-  border-bottom: 1px solid color-mix(in oklch, var(--seed-teal) 8%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--seed-teal) 8%, transparent);
   min-height: 2rem;
 }
 
@@ -42,7 +42,7 @@
 /* Copy button */
 .code-block__copy-btn {
   background: none;
-  border: 1px solid color-mix(in oklch, var(--seed-teal) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--seed-teal) 18%, transparent);
   border-radius: var(--radius-control);
   color: var(--seed-teal);
   font-family: var(--font-meta);
@@ -59,12 +59,12 @@
 }
 
 .code-block__copy-btn:hover {
-  background: color-mix(in oklch, var(--seed-teal) 12%, transparent);
+  background: color-mix(in srgb, var(--seed-teal) 12%, transparent);
 }
 
 .code-block__copy-btn--copied {
   color: var(--acid-500);
-  border-color: color-mix(in oklch, var(--acid-500) 24%, transparent);
+  border-color: color-mix(in srgb, var(--acid-500) 24%, transparent);
 }
 
 /* ---- Code scroll container ----------------------------------- */
@@ -82,7 +82,7 @@
 }
 
 .code-block__scroll::-webkit-scrollbar-thumb {
-  background: color-mix(in oklch, var(--seed-teal) 16%, transparent);
+  background: color-mix(in srgb, var(--seed-teal) 16%, transparent);
   border-radius: 3px;
 }
 
@@ -103,7 +103,7 @@
   text-align: right;
   vertical-align: top;
   user-select: none;
-  border-right: 1px solid color-mix(in oklch, var(--seed-teal) 8%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--seed-teal) 8%, transparent);
   font-family: var(--font-meta);
   font-size: 0.75rem;
   line-height: 1.7;
@@ -174,7 +174,7 @@
   max-width: 260px;
   padding: var(--space-1) var(--space-2);
   background: #1a1d1b;
-  border: 1px solid color-mix(in oklch, var(--seed-teal) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--seed-teal) 20%, transparent);
   border-radius: var(--radius-control);
   color: var(--paper-200);
   font-family: var(--font-reading);
@@ -195,7 +195,7 @@
   top: 50%;
   transform: translateY(-50%);
   border: 5px solid transparent;
-  border-right-color: color-mix(in oklch, var(--seed-teal) 20%, transparent);
+  border-right-color: color-mix(in srgb, var(--seed-teal) 20%, transparent);
 }
 
 .code-block__annotation-line:hover .code-block__annotation {

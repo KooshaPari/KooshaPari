@@ -98,7 +98,7 @@ function featuredProject(project) {
   };
   if (family) {
     attrs['data-family'] = family;
-    attrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family}))`;
+    attrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family})); --family-accent-ink: var(--family-${family}-ink-active, var(--family-${family}-ink, var(--family-${family}-active, var(--family-${family}))));`;
   }
 
   const children = [
@@ -134,7 +134,7 @@ function compactProject(project) {
   const attrs = { class: 'work-catalog__specimen', 'data-reveal': 'up' };
   if (family) {
     attrs['data-family'] = family;
-    attrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family}))`;
+    attrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family})); --family-accent-ink: var(--family-${family}-ink-active, var(--family-${family}-ink, var(--family-${family}-active, var(--family-${family}))));`;
   }
 
   return el(

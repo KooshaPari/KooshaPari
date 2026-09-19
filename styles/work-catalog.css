@@ -65,7 +65,7 @@
 .work-catalog__featured-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 200ms ease; }
 .work-catalog__featured-project:hover .work-catalog__featured-image img { transform: scale(1.02); }
 @media (prefers-reduced-motion: reduce) { .work-catalog__featured-image img { transform: none; transition: none; } }
-.work-catalog__featured-badge { display: inline-flex; align-items: center; gap: 0.35rem; font: 600 0.7rem/1 var(--font-meta); letter-spacing: 0.06em; text-transform: uppercase; padding: 0.35rem 0.6rem; border-radius: var(--radius-control); background: color-mix(in oklch, var(--family-accent, var(--arch-500)) 12%, transparent); color: var(--family-accent, var(--arch-500)); width: fit-content; margin-bottom: var(--space-2); }
+.work-catalog__featured-badge { display: inline-flex; align-items: center; gap: 0.35rem; font: 600 0.7rem/1 var(--font-meta); letter-spacing: 0.06em; text-transform: uppercase; padding: 0.35rem 0.6rem; border-radius: var(--radius-control); background: color-mix(in srgb, var(--family-accent, var(--arch-500)) 12%, transparent); color: var(--family-accent-ink, var(--family-accent, var(--arch-500))); width: fit-content; margin-bottom: var(--space-2); }
 .work-catalog__featured-status { font: 600 0.7rem/1 var(--font-meta); color: var(--ink-muted); margin-bottom: var(--space-1); }
 .work-catalog__featured-project h3 { margin: 0 0 var(--space-1); font: 650 clamp(1.05rem, 2vw, 1.45rem)/1.08 var(--font-display); color: inherit; }
 .work-catalog__featured-summary { max-width: 38rem; color: var(--ink-muted); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
