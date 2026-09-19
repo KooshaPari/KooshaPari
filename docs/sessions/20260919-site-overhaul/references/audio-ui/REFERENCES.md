@@ -1,14 +1,27 @@
 # Audio / Podcast Player UI References
 
-Curated reference corpus of **197 verified** audio and podcast player interfaces, widgets, libraries and accessibility patterns.
+Curated reference corpus of **194 verified** audio and podcast player interfaces, widgets, libraries and accessibility patterns.
 
 Collected 2026-09-19 for the `koosha-phenotype` site overhaul (cast-player / audio-surface work).
 
 Every entry below was fetched during collection. The `Verification` line records the HTTP status observed and, where available, the page title returned at fetch time. Entries whose URL returned 404, timed out, or could not be verified were dropped, not guessed at.
 
-Denominators: **198 candidates submitted -> 197 verified (99%) -> 1 dropped.**
+Pipeline denominators (this is the whole funnel, not just the survivors):
 
-Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. Entries marked as verified via a rendering fetch are noted explicitly. Bot-blocked (403) and connection-failed (000) URLs are excluded rather than asserted to exist.
+| Stage | Count |
+|---|---|
+| Raw candidate URLs submitted to fetch | 666 |
+| Distinct candidate URLs | 597 |
+| Distinct URLs that resolved (HTTP 2xx/3xx) at least once | 485 |
+| Candidate entries authored from the resolved set | 433 |
+| Kept after curation (relevance cut to the requested 100-200 band) | 195 |
+| Shipped entries, each fetched successfully at least once | 194 |
+| Shipped entries that also pass a *fresh* independent fetch | 185 |
+| Shipped entries needing a rendering fetch (bot-blocked to a plain fetch) | 9 |
+
+The 9 rendering-fetch entries are the W3C/WAI pages (5), `audirvana.com`, `podcastaddict.com`, `deadbeef.sourceforge.io` and `www.avid.com/pro-tools`. Each states its own evidence in the `Verification` line. Nothing in this file is asserted to exist without a recorded fetch.
+
+Legend for `Verification`: `Resolved, HTTP 2xx` = live and served content to a plain fetch. A small number of entries could only be confirmed with a rendering fetch because the host blocks automated clients; those say so explicitly in their own `Verification` line rather than claiming a 200. Anything that 404ed, timed out, served an interstitial instead of the page, or could not be confirmed at all was dropped, and the drops are listed at the end of this document.
 
 ---
 
@@ -329,7 +342,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Year: 2002
 - What it does well: Live-radio directory with a persistent player, station recall and schedule surfaces.
 - Why we care: Reference for live/linear audio, which behaves differently from on-demand playback.
-- Verification: Resolved, HTTP 200. Page title: "Play Button".
+- Verification: Resolved, HTTP 200. Direct re-fetch served title "TuneIn | Free Internet Radio | Live News, Sports, Music, Audiobooks".
 
 ## 38. NTS Radio
 - URL: https://www.nts.live/
@@ -597,7 +610,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Year: 2018
 - What it does well: A pixel-faithful Winamp 2 reimplementation in the browser, including skins.
 - Why we care: Extreme skeuomorphism executed with total fidelity; the definitive 'overengineered' reference.
-- Verification: Resolved, HTTP 200. Page title: "GitHub icon".
+- Verification: Resolved, HTTP 200. Direct re-fetch served title "Webamp - Winamp 2 in your browser".
 
 ## 71. Web Audio API specification
 - URL: https://www.w3.org/TR/webaudio/
@@ -803,23 +816,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Directly relevant to any grid/pattern UI - and proof a niche paradigm can be polished, not just retro.
 - Verification: Resolved, HTTP 200. Page title: "Home | Renoise".
 
-## 96. Adobe Audition
-- URL: https://www.adobe.com/products/audition.html
-- Author: Adobe
-- Year: 2003
-- What it does well: Waveform and multitrack views of the same audio, with spectral frequency display for repair work.
-- Why we care: Spectral view is a genuinely useful alternative representation for speech audio problems.
-- Verification: Resolved, HTTP 200. Page title: "Audio recording and editing software | Adobe Audition".
-
-## 97. iZotope RX
-- URL: https://www.izotope.com/en/products/rx.html
-- Author: iZotope
-- Year: 2007
-- What it does well: Repair suite with a spectrogram-centric editor and per-module selection workflow.
-- Why we care: The strongest example of spectrogram-as-editor; relevant if we ever show audio internals.
-- Verification: Resolved, HTTP 200. Page title: "Visa".
-
-## 98. Celemony Melodyne
+## 96. Celemony Melodyne
 - URL: https://www.celemony.com/
 - Author: Celemony
 - Year: 2001
@@ -827,7 +824,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The canonical example of editing a semantic layer above the waveform.
 - Verification: Resolved, HTTP 200. Page title: "Celemony Melodyne and Tonalic".
 
-## 99. FabFilter
+## 97. FabFilter
 - URL: https://www.fabfilter.com/
 - Author: FabFilter
 - Year: 2002
@@ -835,7 +832,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Best-in-class example of direct manipulation on a graph - the pattern our waveform editor needs.
 - Verification: Resolved, HTTP 200. Page title: "FabFilter - Quality Audio Plug-Ins for Mixing, Mastering and Recording - VST VST3 AU CLAP AAX AudioSuite".
 
-## 100. Sound on Sound
+## 98. Sound on Sound
 - URL: https://www.soundonsound.com/
 - Author: SOS Publications
 - Year: 1985
@@ -843,7 +840,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Exceptional writing model for our own product/technical documentation.
 - Verification: Resolved, HTTP 200. Page title: "Sound On Sound | The World's Premier Music Recording Technology Magazine".
 
-## 101. Synthtopia
+## 99. Synthtopia
 - URL: https://www.synthtopia.com/
 - Author: Synthtopia
 - Year: 1997
@@ -851,15 +848,15 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Archive of interface evolution across decades of instruments.
 - Verification: Resolved, HTTP 200. Page title: "Synthtopia &#8211; Synthesizer and electronic music news, synth and music software reviews and more!".
 
-## 102. Lines (llllllll.co)
+## 100. Lines (llllllll.co)
 - URL: https://llllllll.co/
 - Author: Monome community
 - Year: 2014
 - What it does well: Community forum for experimental instruments and grid interfaces.
 - Why we care: The single best source for unconventional grid/step-sequence interface ideas.
-- Verification: Resolved, HTTP 200. Page title: "lines".
+- Verification: Resolved, HTTP 200. Direct re-fetch served title "lines".
 
-## 103. Elektronauts
+## 101. Elektronauts
 - URL: https://www.elektronauts.com/
 - Author: Elektron community
 - Year: 2013
@@ -867,7 +864,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Practical evidence about how users build muscle memory on complex hardware.
 - Verification: Resolved, HTTP 200. Page title: "Elektronauts".
 
-## 104. OP Forums
+## 102. OP Forums
 - URL: https://op-forums.com/
 - Author: OP-1 community
 - Year: 2011
@@ -877,7 +874,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 
 ### Hardware and instrument UIs
 
-## 105. Teenage Engineering OP-1
+## 103. Teenage Engineering OP-1
 - URL: https://teenage.engineering/products/op-1
 - Author: Teenage Engineering
 - Year: 2011
@@ -885,7 +882,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The best case study in iconography: a complex state machine communicated with colour and glyphs alone.
 - Verification: Resolved, HTTP 200. Page title: "OP–1 field - teenage engineering".
 
-## 106. Teenage Engineering OP-Z
+## 104. Teenage Engineering OP-Z
 - URL: https://teenage.engineering/products/op-z
 - Author: Teenage Engineering
 - Year: 2018
@@ -893,7 +890,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Radical example of removing a display and still remaining usable - a constraint worth studying.
 - Verification: Resolved, HTTP 200. Page title: "OP–Z - teenage engineering".
 
-## 107. Teenage Engineering TX-6
+## 105. Teenage Engineering TX-6
 - URL: https://teenage.engineering/products/tx-6
 - Author: Teenage Engineering
 - Year: 2022
@@ -901,7 +898,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Dense-control design in an extremely small footprint; excellent micro-interaction reference.
 - Verification: Resolved, HTTP 200. Page title: "TX–6 - teenage engineering".
 
-## 108. Teenage Engineering OB-4
+## 106. Teenage Engineering OB-4
 - URL: https://teenage.engineering/products/ob-4
 - Author: Teenage Engineering
 - Year: 2020
@@ -909,7 +906,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The clearest example of delight through physical behaviour; relevant to 'overengineered is the point'.
 - Verification: Resolved, HTTP 200. Page title: "OB–4 magic radio - teenage engineering".
 
-## 109. Teenage Engineering
+## 107. Teenage Engineering
 - URL: https://teenage.engineering/
 - Author: Teenage Engineering
 - Year: 2005
@@ -917,7 +914,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Design-values reference for a company that treats industrial design as the interface.
 - Verification: Resolved, HTTP 200. Page title: "teenage engineering".
 
-## 110. Elektron
+## 108. Elektron
 - URL: https://www.elektron.se/
 - Author: Elektron
 - Year: 1998
@@ -925,7 +922,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Study how a shared interaction grammar across products reduces relearning.
 - Verification: Resolved, HTTP 200. Page title: "We Are Elektron".
 
-## 111. Elektron Octatrack MKII
+## 109. Elektron Octatrack MKII
 - URL: https://www.elektron.se/en/octatrack-mkii
 - Author: Elektron
 - Year: 2010
@@ -933,7 +930,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Reference for paging a large parameter space onto a small control surface.
 - Verification: Resolved, HTTP 200. Page title: "Octatrack MKII | 8 Track Dynamic Performance Sampler | Buy from Elektron".
 
-## 112. Elektron Digitakt
+## 110. Elektron Digitakt
 - URL: https://www.elektron.se/en/digitakt
 - Author: Elektron
 - Year: 2017
@@ -941,15 +938,15 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Excellent example of a reduced scope producing a clearer interface than its bigger sibling.
 - Verification: Resolved, HTTP 200. Page title: "Digitakt - Elektron".
 
-## 113. Polyend Tracker
+## 111. Polyend Tracker
 - URL: https://polyend.com/tracker/
 - Author: Polyend
 - Year: 2020
 - What it does well: Hardware tracker that renders the vertical-pattern paradigm on a small screen with a jog wheel.
 - Why we care: Proof that a dense text-grid interface works on physical hardware - relevant for TUI design.
-- Verification: Resolved, HTTP 200. Page title: "TikTok".
+- Verification: Resolved, HTTP 200. Direct re-fetch served title "Tracker - Polyend".
 
-## 114. Akai MPC
+## 112. Akai MPC
 - URL: https://www.akaipro.com/mpc
 - Author: Akai Professional (inMusic)
 - Year: 1988
@@ -957,7 +954,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Historical authority for pad-grid interaction still used everywhere.
 - Verification: Resolved, HTTP 200. Page title: "MPC Series | Akai Professional".
 
-## 115. Akai Force
+## 113. Akai Force
 - URL: https://www.akaipro.com/force
 - Author: Akai Professional (inMusic)
 - Year: 2019
@@ -965,7 +962,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Hybrid touch/physical interaction reference; useful for touchscreen-plus-knob patterns.
 - Verification: Resolved, HTTP 200. Page title: "Force | Akai Professional".
 
-## 116. Korg synthesizers
+## 114. Korg synthesizers
 - URL: https://www.korg.com/us/products/synthesizers/
 - Author: Korg
 - Year: 1962
@@ -973,7 +970,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Long-horizon archive of interface design; useful for identifying which affordances persist.
 - Verification: Resolved, HTTP 200. Page title: "Synthesizers / Keyboards | KORG (USA)".
 
-## 117. Moog Music
+## 115. Moog Music
 - URL: https://www.moogmusic.com/
 - Author: Moog Music
 - Year: 1953
@@ -981,7 +978,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The canonical skeuomorphic source: every synth plugin UI is a descendant of this panel.
 - Verification: Resolved, HTTP 200. Page title: "Moog Music".
 
-## 118. Sequential
+## 116. Sequential
 - URL: https://www.sequential.com/
 - Author: Sequential (Dave Smith)
 - Year: 1974
@@ -989,31 +986,31 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Study the transition from knob-per-function to menu-driven interfaces and the user reaction.
 - Verification: Resolved, HTTP 200 (no <title> returned; content served successfully).
 
-## 119. Native Instruments Maschine
+## 117. Native Instruments Maschine
 - URL: https://www.native-instruments.com/en/products/maschine/
 - Author: Native Instruments
 - Year: 2009
 - What it does well: Hardware-plus-software groove production where the controller drives and reflects the app.
 - Why we care: One of the strongest examples of tightly coupled hardware/software UI state.
-- Verification: Resolved, HTTP 200. Page title: "Visa".
+- Verification: Resolved, HTTP 200. Direct re-fetch served title "MASCHINE - Native Instruments".
 
-## 120. Native Instruments Traktor
+## 118. Native Instruments Traktor
 - URL: https://www.native-instruments.com/en/products/traktor/
 - Author: Native Instruments
 - Year: 2000
 - What it does well: DJ software with a deck metaphor, waveform displays and library browsing built for speed.
 - Why we care: The DJ deck model is a direct source for many waveform/scrub interactions we need.
-- Verification: Resolved, HTTP 200. Page title: "Visa".
+- Verification: Resolved, HTTP 200. Direct re-fetch served title "Traktor Pro 4 - Native Instruments".
 
-## 121. Serato
+## 119. Serato
 - URL: https://www.serato.com/
 - Author: Serato
 - Year: 1999
 - What it does well: DJ software whose UI prioritises glanceable deck state and huge, forgiving hit targets.
 - Why we care: Strong reference for legibility under stage conditions (distance, low light, time pressure).
-- Verification: Resolved, HTTP 200. Page title: "Facebook icon".
+- Verification: Resolved, HTTP 200. Direct re-fetch served title "Serato | The world's best DJ and music production software".
 
-## 122. Rekordbox
+## 120. Rekordbox
 - URL: https://www.rekordbox.com/
 - Author: AlphaTheta (Pioneer DJ)
 - Year: 2009
@@ -1021,7 +1018,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Excellent example of the same library serving a preparation and a performance context.
 - Verification: Resolved, HTTP 200. Page title: "rekordbox｜DJ software for professional DJs".
 
-## 123. Mixxx
+## 121. Mixxx
 - URL: https://mixxx.org/
 - Author: Mixxx contributors
 - Year: 2001
@@ -1029,7 +1026,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Outstanding reference for a declarative controller-mapping format, which is a real design decision.
 - Verification: Resolved, HTTP 200. Page title: "Mixxx - Free DJ Mixing Software App".
 
-## 124. Roli
+## 122. Roli
 - URL: https://roli.com/
 - Author: Roli
 - Year: 2009
@@ -1037,7 +1034,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Reference for visualising continuous, per-note expression rather than discrete events.
 - Verification: Resolved, HTTP 200. Page title: "Home | ROLI".
 
-## 125. Playtronica Synth
+## 123. Playtronica Synth
 - URL: https://synth.playtronica.com/
 - Author: Playtronica
 - Year: 2016
@@ -1047,7 +1044,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 
 ### Visualizers and audio-reactive interfaces
 
-## 126. MilkDrop
+## 124. MilkDrop
 - URL: https://www.geisswerks.com/milkdrop/
 - Author: Ryan Geiss
 - Year: 2000
@@ -1055,7 +1052,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The high-water mark for audio-reactive visuals; study preset interpolation as a UI concept.
 - Verification: Resolved, HTTP 200. Page title: "MilkDrop plug-in for Winamp".
 
-## 127. projectM
+## 125. projectM
 - URL: https://projectm-visualizer.org/
 - Author: projectM contributors
 - Year: 2003
@@ -1063,7 +1060,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Documents the preset format, which is effectively a declarative visual language.
 - Verification: Resolved, HTTP 200. Page title: "Visualize your Music your way".
 
-## 128. projectM (GitHub)
+## 126. projectM (GitHub)
 - URL: https://github.com/projectM-visualizer/projectm
 - Author: projectM contributors
 - Year: 2003
@@ -1071,7 +1068,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Study the parser/evaluator design for a declarative visual DSL.
 - Verification: Resolved, HTTP 200. Page title: "GitHub - projectM-visualizer/projectm: projectM - Cross-platform Music Visualization Library. Open-source a...".
 
-## 129. Butterchurn
+## 127. Butterchurn
 - URL: https://butterchurnviz.com/
 - Author: Jordan Berg
 - Year: 2017
@@ -1079,7 +1076,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Directly reusable: MilkDrop-grade visuals driven by our own audio graph.
 - Verification: Resolved, HTTP 200. Page title: "Butterchurn Visualizer".
 
-## 130. Butterchurn (GitHub)
+## 128. Butterchurn (GitHub)
 - URL: https://github.com/jberg/butterchurn
 - Author: Jordan Berg
 - Year: 2017
@@ -1087,7 +1084,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The analyser-to-visualiser interface is exactly the seam we need to design.
 - Verification: Resolved, HTTP 200. Page title: "GitHub - jberg/butterchurn: Butterchurn is a WebGL implementation of the Milkdrop Visualizer · GitHub".
 
-## 131. Butterchurn presets
+## 129. Butterchurn presets
 - URL: https://github.com/jberg/butterchurn-presets
 - Author: Jordan Berg
 - Year: 2017
@@ -1095,7 +1092,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Content-plus-engine split; a good model for shipping presets separately.
 - Verification: Resolved, HTTP 200. Page title: "GitHub - jberg/butterchurn-presets: Presets for Butterchurn Visualizer, converted from Milkdrop presets · G...".
 
-## 132. spectralizer (GitHub)
+## 130. spectralizer (GitHub)
 - URL: https://github.com/univrsal/spectralizer
 - Author: univrsal
 - Year: 2019
@@ -1103,7 +1100,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Readable implementation of FFT-to-visual mapping with user-exposed parameters.
 - Verification: Resolved, HTTP 200. Page title: "GitHub - univrsal/spectralizer: Audio visualizer plugin for obs-studio · GitHub".
 
-## 133. cava
+## 131. cava
 - URL: https://github.com/karlstav/cava
 - Author: Karl Stavestrand
 - Year: 2015
@@ -1111,7 +1108,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Directly relevant to TUI work: a real-time audio spectrum in a terminal, configurable via a plain text file.
 - Verification: Resolved, HTTP 200. Page title: "GitHub - karlstav/cava: Cross-platform Audio Visualizer · GitHub".
 
-## 134. Synesthesia
+## 132. Synesthesia
 - URL: https://synesthesia.live/
 - Author: Synesthesia
 - Year: 2013
@@ -1119,7 +1116,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Deep reference for audio-reactive scene composition.
 - Verification: Resolved, HTTP 200. Page title: "Synesthesia - Live Music Visualizer - VJ Software".
 
-## 135. Resolume
+## 133. Resolume
 - URL: https://resolume.com/
 - Author: Resolume
 - Year: 2002
@@ -1127,7 +1124,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Grid-plus-layer model that maps well onto audio timeline concepts.
 - Verification: Resolved, HTTP 200 (no <title> returned; content served successfully).
 
-## 136. TouchDesigner
+## 134. TouchDesigner
 - URL: https://www.touchdesigner.com/
 - Author: Derivative
 - Year: 2000
@@ -1135,7 +1132,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The most rigorous example of a node-graph authoring UI, including its type system.
 - Verification: Resolved, HTTP 200. Page title: "Derivative |".
 
-## 137. vvvv
+## 135. vvvv
 - URL: https://vvvv.org/
 - Author: vvvv group
 - Year: 2002
@@ -1143,7 +1140,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: A second, simpler node-graph reference to compare against TouchDesigner.
 - Verification: Resolved, HTTP 200. Page title: "vvvv - visual live-programming for .NET".
 
-## 138. openFrameworks
+## 136. openFrameworks
 - URL: https://openframeworks.cc/
 - Author: openFrameworks community
 - Year: 2005
@@ -1151,7 +1148,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Reference for accessible audio-analysis primitives.
 - Verification: Resolved, HTTP 200. Page title: "openFrameworks".
 
-## 139. Processing
+## 137. Processing
 - URL: https://processing.org/
 - Author: Processing Foundation
 - Year: 2001
@@ -1159,7 +1156,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Pedagogical reference: minimal boilerplate, immediate visual feedback.
 - Verification: Resolved, HTTP 200. Page title: "Design Systems International".
 
-## 140. p5.js
+## 138. p5.js
 - URL: https://p5js.org/
 - Author: Processing Foundation
 - Year: 2013
@@ -1167,7 +1164,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Reference for a beginner-friendly audio-visual API surface.
 - Verification: Resolved, HTTP 200. Page title: "p5.js".
 
-## 141. p5.sound reference
+## 139. p5.sound reference
 - URL: https://p5js.org/reference/#/libraries/p5.sound
 - Author: Processing Foundation
 - Year: 2013
@@ -1175,7 +1172,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Compare this API's naming with the raw Web Audio API for insight into abstraction design.
 - Verification: Resolved, HTTP 200. Page title: "Reference".
 
-## 142. three.js audio examples
+## 140. three.js audio examples
 - URL: https://threejs.org/examples/?q=audio
 - Author: three.js contributors
 - Year: 2011
@@ -1183,7 +1180,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Starting points for 3D audio-reactive rendering.
 - Verification: Resolved, HTTP 200. Page title: "three.js examples".
 
-## 143. three.js
+## 141. three.js
 - URL: https://threejs.org/
 - Author: three.js contributors
 - Year: 2011
@@ -1191,7 +1188,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Reference for how a large library organises and showcases examples.
 - Verification: Resolved, HTTP 200. Page title: "Three.js – JavaScript 3D Library".
 
-## 144. Chrome Experiments
+## 142. Chrome Experiments
 - URL: https://www.chromeexperiments.com/
 - Author: Google
 - Year: 2009
@@ -1199,7 +1196,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Curatorial reference and a source of delight-oriented interaction ideas.
 - Verification: Resolved, HTTP 200. Page title: "Chrome Experiments - Experiments with Google".
 
-## 145. OBS Studio
+## 143. OBS Studio
 - URL: https://obsproject.com/
 - Author: OBS Project
 - Year: 2012
@@ -1209,7 +1206,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 
 ### Accessible audio and media interfaces
 
-## 146. WAI: Making Audio and Video Media Accessible
+## 144. WAI: Making Audio and Video Media Accessible
 - URL: https://www.w3.org/WAI/media/av/
 - Author: W3C WAI (ed. Shawn Lawton Henry)
 - Year: 2019
@@ -1217,7 +1214,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The authoritative checklist for our player's accessibility scope; it names the player as a first-class accessibility component.
 - Verification: HTTP 200 via webfetch; 'Making Audio and Video Media Accessible' (WAI), First published Sept 2019, updated 17 Sept 2024, ed. Shawn Lawton Henry - covers transcripts, captions, description, sign language and choosing an accessible media player.
 
-## 147. APG: Slider Pattern
+## 145. APG: Slider Pattern
 - URL: https://www.w3.org/WAI/ARIA/apg/patterns/slider/
 - Author: W3C WAI (ARIA Authoring Practices)
 - Year: 2017
@@ -1225,7 +1222,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Our scrubber is a slider. This is the normative contract, including the required aria-valuetext behaviour.
 - Verification: HTTP 200 via webfetch; ARIA Authoring Practices 'Slider Pattern' page, listing keyboard interaction (arrows/Home/End/PageUp/PageDown) and required slider properties.
 
-## 148. APG: Media Seek Slider Example
+## 146. APG: Media Seek Slider Example
 - URL: https://www.w3.org/WAI/ARIA/apg/patterns/slider/examples/slider-seek/
 - Author: W3C WAI (ARIA Authoring Practices)
 - Year: 2017
@@ -1233,7 +1230,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The single most directly applicable accessibility reference in this corpus. Copy its valuetext strategy and keyboard map.
 - Verification: HTTP 200 via webfetch; 'Media Seek Slider Example' - a seek control for moving play position in media, using aria-valuetext to announce position as minutes and seconds; page last updated 20 January 2026.
 
-## 149. WCAG 2.1 SC 1.4.2 Audio Control
+## 147. WCAG 2.1 SC 1.4.2 Audio Control
 - URL: https://www.w3.org/WAI/WCAG21/Understanding/audio-control.html
 - Author: W3C WAI
 - Year: 2018
@@ -1241,7 +1238,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: A hard constraint on our first-load experience: never autoplay, or always provide an independent mute.
 - Verification: HTTP 200 via webfetch; 'Understanding SC 1.4.2: Audio Control (Level A)' - autoplaying audio over 3 seconds must be stoppable or independently volume-controllable; listed techniques G60/G170/G171 and failures F23/F93.
 
-## 150. ARIA slider role (MDN)
+## 148. ARIA slider role (MDN)
 - URL: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/slider_role
 - Author: MDN contributors
 - Year: 2017
@@ -1249,7 +1246,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Shorter, implementation-oriented companion to the APG pattern.
 - Verification: Resolved, HTTP 200. Page title: "Mozilla".
 
-## 151. MDN: Media Session API
+## 149. MDN: Media Session API
 - URL: https://developer.mozilla.org/en-US/docs/Web/API/Media_Session_API
 - Author: MDN contributors
 - Year: 2018
@@ -1257,7 +1254,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: How a web player participates in system Now Playing - required for parity with native apps.
 - Verification: Resolved, HTTP 200. Page title: "Mozilla".
 
-## 152. MDN: HTMLMediaElement
+## 150. MDN: HTMLMediaElement
 - URL: https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement
 - Author: MDN contributors
 - Year: 2015
@@ -1265,7 +1262,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The primitives behind speed control and the buffered-range display on our scrubber.
 - Verification: Resolved, HTTP 200. Page title: "Mozilla".
 
-## 153. MDN: AnalyserNode
+## 151. MDN: AnalyserNode
 - URL: https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode
 - Author: MDN contributors
 - Year: 2015
@@ -1273,7 +1270,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The exact API that drives our visualisers and any audio-reactive UI.
 - Verification: Resolved, HTTP 200. Page title: "Mozilla".
 
-## 154. MDN: AudioWorklet
+## 152. MDN: AudioWorklet
 - URL: https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet
 - Author: MDN contributors
 - Year: 2018
@@ -1281,7 +1278,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Where any real-time processing must live; important if we implement speed/pitch client-side.
 - Verification: Resolved, HTTP 200. Page title: "Mozilla".
 
-## 155. MDN: Visualizations with Web Audio API
+## 153. MDN: Visualizations with Web Audio API
 - URL: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
 - Author: MDN contributors
 - Year: 2015
@@ -1289,7 +1286,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Shortest correct path from analyser data to a rendered visual.
 - Verification: Resolved, HTTP 200. Page title: "Mozilla".
 
-## 156. MDN: Web audio spatialization basics
+## 154. MDN: Web audio spatialization basics
 - URL: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Web_audio_spatialization_basics
 - Author: MDN contributors
 - Year: 2017
@@ -1297,7 +1294,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Reference for the browser-side half of the spatial-audio coverage in this corpus.
 - Verification: Resolved, HTTP 200. Page title: "Mozilla".
 
-## 157. A11Y Project checklist
+## 155. A11Y Project checklist
 - URL: https://www.a11yproject.com/checklist/
 - Author: The A11Y Project
 - Year: 2016
@@ -1305,7 +1302,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Use as the working checklist; reference APG/WCAG for the normative detail.
 - Verification: Resolved, HTTP 200. Page title: "The A11Y Project".
 
-## 158. Inclusive Components
+## 156. Inclusive Components
 - URL: https://inclusive-components.design/
 - Author: Heydon Pickering
 - Year: 2016
@@ -1313,7 +1310,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The right mindset reference: design the accessible interaction first, then style it.
 - Verification: Resolved, HTTP 200. Page title: "Inclusive Components".
 
-## 159. Adrian Roselli
+## 157. Adrian Roselli
 - URL: https://adrianroselli.com/
 - Author: Adrian Roselli
 - Year: 2006
@@ -1321,7 +1318,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Where to verify a claim before shipping an unusual control pattern.
 - Verification: Resolved, HTTP 200. Page title: "Adrian Roselli — Consultant, Writer, Speaker".
 
-## 160. NVDA (GitHub)
+## 158. NVDA (GitHub)
 - URL: https://github.com/nvaccess/nvda
 - Author: NV Access and contributors
 - Year: 2006
@@ -1329,7 +1326,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Search here first when a control works in VoiceOver but not NVDA.
 - Verification: Resolved, HTTP 200. Page title: "GitHub - nvaccess/nvda: NVDA, the free and open source Screen Reader for Microsoft Windows · GitHub".
 
-## 161. WebAIM articles
+## 159. WebAIM articles
 - URL: https://webaim.org/articles/
 - Author: WebAIM (Utah State University)
 - Year: 1999
@@ -1337,7 +1334,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Their screen-reader user survey is the best empirical data on real AT usage.
 - Verification: Resolved, HTTP 200. Page title: "WebAIM: Articles".
 
-## 162. WebAIM: auditory disabilities
+## 160. WebAIM: auditory disabilities
 - URL: https://webaim.org/articles/auditory/
 - Author: WebAIM
 - Year: 1999
@@ -1345,7 +1342,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Directly frames who our transcript and caption features are actually for.
 - Verification: Resolved, HTTP 200. Page title: "WebAIM: Auditory Disabilities - Introduction".
 
-## 163. Apple: Use VoiceOver on iPhone
+## 161. Apple: Use VoiceOver on iPhone
 - URL: https://support.apple.com/guide/iphone/use-voiceover-iph3e2e415f/ios
 - Author: Apple
 - Year: 2009
@@ -1353,7 +1350,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Test script source: follow this to reproduce how a VoiceOver user would operate our scrubber.
 - Verification: Resolved, HTTP 200. Page title: "Turn on and practice VoiceOver on iPhone - Apple Support".
 
-## 164. Apple HIG: Playing audio
+## 162. Apple HIG: Playing audio
 - URL: https://developer.apple.com/design/human-interface-guidelines/playing-audio
 - Author: Apple
 - Year: 2022
@@ -1361,7 +1358,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The closest thing to an official Apple spec for the player behaviours we are imitating.
 - Verification: Resolved, HTTP 200. Page title: "Playing audio | Apple Developer Documentation".
 
-## 165. Apple Human Interface Guidelines
+## 163. Apple Human Interface Guidelines
 - URL: https://developer.apple.com/design/human-interface-guidelines/
 - Author: Apple
 - Year: 1987
@@ -1369,7 +1366,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The origin of the conventions our player must respect to feel native on Apple platforms.
 - Verification: Resolved, HTTP 200. Page title: "Human Interface Guidelines | Apple Developer Documentation".
 
-## 166. MPNowPlayingInfoCenter
+## 164. MPNowPlayingInfoCenter
 - URL: https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter
 - Author: Apple
 - Year: 2017
@@ -1377,7 +1374,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The exact API contract for 'our metadata appears in the system player'.
 - Verification: Resolved, HTTP 200. Page title: "MPNowPlayingInfoCenter | Apple Developer Documentation".
 
-## 167. MPRemoteCommandCenter
+## 165. MPRemoteCommandCenter
 - URL: https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter
 - Author: Apple
 - Year: 2017
@@ -1385,7 +1382,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Reference for which transport actions the OS expects a player to support, and with what granularity.
 - Verification: Resolved, HTTP 200. Page title: "MPRemoteCommandCenter | Apple Developer Documentation".
 
-## 168. AVFAudio
+## 166. AVFAudio
 - URL: https://developer.apple.com/documentation/avfaudio
 - Author: Apple
 - Year: 2019
@@ -1395,7 +1392,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 
 ### Game audio middleware
 
-## 169. FMOD
+## 167. FMOD
 - URL: https://www.fmod.com/
 - Author: Firelight Technologies
 - Year: 1995
@@ -1403,7 +1400,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Shows a parameter-driven audio model - a different, powerful way to think about player state.
 - Verification: Resolved, HTTP 200 (no <title> returned; content served successfully).
 
-## 170. FMOD Studio
+## 168. FMOD Studio
 - URL: https://www.fmod.com/studio
 - Author: Firelight Technologies
 - Year: 2010
@@ -1411,7 +1408,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The timeline-plus-parameter authoring UI is a strong reference for our own automation surfaces.
 - Verification: Resolved, HTTP 200 (no <title> returned; content served successfully).
 
-## 171. Wwise
+## 169. Wwise
 - URL: https://www.audiokinetic.com/products/wwise/
 - Author: Audiokinetic (Sony)
 - Year: 2006
@@ -1421,7 +1418,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 
 ### Spatial and immersive audio
 
-## 172. Dolby Atmos
+## 170. Dolby Atmos
 - URL: https://www.dolby.com/technologies/dolby-atmos/
 - Author: Dolby Laboratories
 - Year: 2012
@@ -1429,7 +1426,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Explains why spatial audio UIs cannot be a channel-count dropdown; position is the primitive.
 - Verification: Resolved, HTTP 200. Page title: "Dolby Atmos - Official Site - Dolby".
 
-## 173. Dolby Atmos for content creation
+## 171. Dolby Atmos for content creation
 - URL: https://professional.dolby.com/content-creation/dolby-atmos/
 - Author: Dolby Laboratories
 - Year: 2012
@@ -1437,15 +1434,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Reference for what a spatial-audio authoring UI must let a user control.
 - Verification: Resolved, HTTP 200. Page title: "Dolby Atmos for Content Creators - Dolby Professional".
 
-## 174. Sony 360 Reality Audio
-- URL: https://www.sony.com/electronics/360-reality-audio
-- Author: Sony
-- Year: 2019
-- What it does well: Object-based spatial audio for music, with a listener-position model.
-- Why we care: A music-first (not film-first) spatial format; closer to our use case than Atmos.
-- Verification: HTTP 200, but the address resolves to the generic Sony Electronics landing page rather than dedicated 360 Reality Audio product content. Kept with this caveat: the domain resolves, the specific page content is NOT confirmed.
-
-## 175. IEM (Institut für Elektronische Musik und Akustik)
+## 172. IEM (Institut für Elektronische Musik und Akustik)
 - URL: https://www.iem.at/
 - Author: IEM, Graz
 - Year: 1965
@@ -1453,7 +1442,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The research-grade reference for spatial audio rendering and evaluation.
 - Verification: Resolved, HTTP 200. Page title: "Institut 17 Elektronische Musik und Akustik".
 
-## 176. IEM Plug-in Suite
+## 173. IEM Plug-in Suite
 - URL: https://plugins.iem.at/
 - Author: IEM, Graz
 - Year: 2016
@@ -1461,7 +1450,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Reference for visualising spatial audio fields without a full 3D scene.
 - Verification: Resolved, HTTP 200. Page title: "IEM Plug-in Suite".
 
-## 177. Audioscenic
+## 174. Audioscenic
 - URL: https://www.audioscenic.com/
 - Author: Audioscenic
 - Year: 2016
@@ -1469,7 +1458,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Shows a spatial audio UI whose feedback surface is user position, not a mixer.
 - Verification: Resolved, HTTP 200. Page title: "Audioscenic - The New Dimension In Sound".
 
-## 178. Immersive Audio Album
+## 175. Immersive Audio Album
 - URL: https://immersiveaudioalbum.com/
 - Author: Immersive Audio Album
 - Year: 2019
@@ -1479,7 +1468,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 
 ### Music education and browser synthesis
 
-## 179. Ableton Learning Music
+## 176. Ableton Learning Music
 - URL: https://learningmusic.ableton.com/
 - Author: Ableton (with Dennis DeSantis)
 - Year: 2017
@@ -1487,7 +1476,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The best example in the corpus of teaching through direct manipulation, and of an audio UI with no transport bar at all.
 - Verification: Resolved, HTTP 200. Page title: "Get started | Learning Music".
 
-## 180. Learning Music: Make Beats
+## 177. Learning Music: Make Beats
 - URL: https://learningmusic.ableton.com/make-beats/make-beats.html
 - Author: Ableton
 - Year: 2017
@@ -1495,7 +1484,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: A grid sequencer that is immediately learnable; study the default state and the affordance hints.
 - Verification: Resolved, HTTP 200. Page title: "Make beats | Learning Music".
 
-## 181. Learning Music: Notes and Scales
+## 178. Learning Music: Notes and Scales
 - URL: https://learningmusic.ableton.com/notes-and-scales/notes-and-scales.html
 - Author: Ableton
 - Year: 2017
@@ -1503,7 +1492,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Reference for showing theory visually instead of describing it.
 - Verification: Resolved, HTTP 200. Page title: "Explore pitch | Learning Music".
 
-## 182. Learning Music: Chords
+## 179. Learning Music: Chords
 - URL: https://learningmusic.ableton.com/chords/chords.html
 - Author: Ableton
 - Year: 2017
@@ -1511,7 +1500,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Instant-audition-on-edit is the key pattern; our editor should behave the same way.
 - Verification: Resolved, HTTP 200. Page title: "Make some chords | Learning Music".
 
-## 183. Learning Music: Song Structure
+## 180. Learning Music: Song Structure
 - URL: https://learningmusic.ableton.com/song-structure/song-structure.html
 - Author: Ableton
 - Year: 2017
@@ -1519,7 +1508,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Direct precedent for a section/chapter arrangement UI over an audio timeline.
 - Verification: Resolved, HTTP 200. Page title: "Play with song structures | Learning Music".
 
-## 184. Ableton Learning Synths
+## 181. Ableton Learning Synths
 - URL: https://learningsynths.ableton.com/
 - Author: Ableton
 - Year: 2019
@@ -1527,7 +1516,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Masterclass in progressive disclosure of a complex parameter space.
 - Verification: Resolved, HTTP 200. Page title: "Learning Synths".
 
-## 185. Chrome Music Lab
+## 182. Chrome Music Lab
 - URL: https://musiclab.chromeexperiments.com/
 - Author: Google (with Google Creative Lab)
 - Year: 2016
@@ -1535,7 +1524,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: The strongest 'experiment as UI' reference in the corpus: tiny scope, real interaction, high delight.
 - Verification: Resolved, HTTP 200. Page title: "Chrome Music Lab".
 
-## 186. Song Maker
+## 183. Song Maker
 - URL: https://musiclab.chromeexperiments.com/Song-Maker/
 - Author: Google
 - Year: 2016
@@ -1543,7 +1532,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Reference for a shareable state encoded entirely in a URL.
 - Verification: Resolved, HTTP 200. Page title: "Chrome Music Lab - Song Maker".
 
-## 187. Rhythm
+## 184. Rhythm
 - URL: https://musiclab.chromeexperiments.com/Rhythm/
 - Author: Google
 - Year: 2016
@@ -1551,7 +1540,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Shows how to make a timing concept legible visually.
 - Verification: Resolved, HTTP 202. Page title: "Chrome Music Lab".
 
-## 188. Spectrogram
+## 185. Spectrogram
 - URL: https://musiclab.chromeexperiments.com/Spectrogram/
 - Author: Google
 - Year: 2016
@@ -1559,7 +1548,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Spectrogram-as-input rather than read-only display; a genuinely novel audio control.
 - Verification: Resolved, HTTP 202. Page title: "Chrome Music Lab".
 
-## 189. Sound Waves
+## 186. Sound Waves
 - URL: https://musiclab.chromeexperiments.com/Sound-Waves/
 - Author: Google
 - Year: 2016
@@ -1567,7 +1556,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Clearest small example of audio parameters mapped to a visual model.
 - Verification: Resolved, HTTP 202. Page title: "Chrome Music Lab".
 
-## 190. Oscillators
+## 187. Oscillators
 - URL: https://musiclab.chromeexperiments.com/Oscillators/
 - Author: Google
 - Year: 2016
@@ -1575,7 +1564,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Minimal-delay feedback loop; the interaction is one knob and one visual.
 - Verification: Resolved, HTTP 202. Page title: "Chrome Music Lab".
 
-## 191. Harmonics
+## 188. Harmonics
 - URL: https://musiclab.chromeexperiments.com/Harmonics/
 - Author: Google
 - Year: 2016
@@ -1583,7 +1572,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Excellent example of visualising the spectral composition directly.
 - Verification: Resolved, HTTP 202. Page title: "Chrome Music Lab".
 
-## 192. Strings
+## 189. Strings
 - URL: https://musiclab.chromeexperiments.com/Strings/
 - Author: Google
 - Year: 2016
@@ -1591,7 +1580,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Physics-as-interface; delight from faithful simulation.
 - Verification: Resolved, HTTP 202. Page title: "Chrome Music Lab".
 
-## 193. Kandinsky
+## 190. Kandinsky
 - URL: https://musiclab.chromeexperiments.com/Kandinsky/
 - Author: Google
 - Year: 2016
@@ -1599,7 +1588,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Direct precedent for drawing-based audio composition.
 - Verification: Resolved, HTTP 202. Page title: "Chrome Music Lab".
 
-## 194. Piano Roll
+## 191. Piano Roll
 - URL: https://musiclab.chromeexperiments.com/Piano-Roll/
 - Author: Google
 - Year: 2016
@@ -1607,7 +1596,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Baseline reference for grid note editing, useful when comparing to hardware trackers.
 - Verification: Resolved, HTTP 202. Page title: "Chrome Music Lab".
 
-## 195. musictheory.net
+## 192. musictheory.net
 - URL: https://www.musictheory.net/
 - Author: Tenuto (Ricci Adams)
 - Year: 2000
@@ -1615,7 +1604,7 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Best-in-class educational content structure with a clean, dependency-free renderer.
 - Verification: Resolved, HTTP 200. Page title: "musictheory.net".
 
-## 196. musictheory.net exercises
+## 193. musictheory.net exercises
 - URL: https://www.musictheory.net/exercises
 - Author: Ricci Adams
 - Year: 2000
@@ -1623,19 +1612,19 @@ Legend for `Verification`: `Resolved, HTTP 2xx/3xx` = live and served content. E
 - Why we care: Reference for exposing exercise configuration without overwhelming the learner.
 - Verification: Resolved, HTTP 200. Page title: "musictheory.net - Exercises".
 
-## 197. Hooktheory
+## 194. Hooktheory
 - URL: https://www.hooktheory.com/
 - Author: Hooktheory
 - Year: 2010
 - What it does well: Analyzes real songs into chord progressions with a distinctive colour-coded notation system.
 - Why we care: Their progression visual language is a genuinely novel notation and worth studying closely.
-- Verification: Resolved, HTTP 200. Page title: "Facebook".
+- Verification: Resolved, HTTP 200. A direct re-fetch served title "Hooktheory: Create Amazing Music." - (the title captured during the parallel sweep was a misleading response, so this entry is recorded against the direct re-fetch).
 
 ---
 
 ## Missing-source coverage: what was not found, and what I want
 
-Verified ceiling reached **197 entries**. The following gaps are real and unresolved, not silently filled.
+Verified ceiling reached **194 entries**. The following gaps are real and unresolved, not silently filled.
 
 **1. Bot-blocked but almost certainly live (excluded, not asserted).** These returned HTTP 403 to every automated fetch attempt (including a rendering fetch), so they are absent from the corpus despite being credible references. A human-browser pass would recover them:
 
@@ -1647,6 +1636,9 @@ Verified ceiling reached **197 entries**. The following gaps are real and unreso
 - `www.avid.com/pro-tools` and `www.w3.org/TR/webaudio/` also 403 to automated fetch; both were confirmed with a rendering fetch and are included with that noted in their `Verification` line.
 - `www.unrealengine.com` - engine audio documentation; 403.
 - `gearspace.com` and `www.gearspace.com` - 403 on repeat attempts (Cloudflare), so the practitioner forum evidence is excluded even though the community is clearly active.
+- `www.sony.com/electronics/360-reality-audio` - returned HTTP 200 once, then HTTP 403 'Access Denied' on every later attempt, and even the 200 served a generic Sony Electronics landing page. Dropped: the specific 360 Reality Audio page could not be confirmed.
+- `www.adobe.com/products/audition.html` - one transient HTTP 200 with a correct title, then connection failure on four further attempts. Dropped rather than relied on.
+- `www.elektron.se` and `www.elektron.se/en/digitakt` initially returned connection failures under load, then HTTP 200 with correct titles on a slower retry; they are included on the strength of the successful retries.
 - `magicmusicvisuals.com`, `www.vsxu.com`, `www.shadertoy.com`, `www.kvraudio.com`, `vocalremover.org`, `www.jango.com`, `www.shoutcast.com` (partially), `dearvr.com` (402).
 - `musikcube.com` returned HTTP 500 on repeated attempts; the GitHub project page is included instead.
 
