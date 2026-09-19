@@ -20,39 +20,39 @@ export const POSTS = [
     tags: ['AI Infrastructure', 'Open Source', 'Forks'],
     provenance: 'External OSS contribution note',
     body: [
-      { type: 'para', text: "If you've worked on AI infrastructure at any non-trivial scale, you've probably hit the same wall we did: there are dozens of model providers, each with its own quirks, rate limits, and failure modes, and no single vendor handles all of them gracefully. That's the gap OmniRoute fills. It's a single API surface that fronts the long tail of providers — Anthropic, OpenAI, Gemini, Groq, Mistral, OpenRouter, plus a growing list of community adapters — with retries, fallbacks, and routing intelligence layered on top. As of this writing, it has roughly 60,000 stars and is one of the most active AI routing projects on GitHub." },
-      { type: 'para', text: "I spent the month of June 2026 contributing to OmniRoute as an external contributor. By July 18th I'd shipped 101 merged pull requests and was ranked #5 in the upstream contributor census, with work referenced in 21 upstream release notes. That alone is the kind of signal most teams would treat as 'good enough — keep working upstream.' So the natural follow-up question is: why fork it at all?" },
-      { type: 'para', text: "The answer isn't 'OmniRoute is broken' or 'the maintainer is unresponsive.' Diego Souza has been consistently responsive, the project's velocity is high, and the upstream architecture is well-thought-through. The answer is a much narrower one about how production deployments of AI infrastructure eventually diverge from a general-purpose open-source project, and what to do about it when they do." },
+      { type: 'para', text: "Every model provider carries its own quirks, rate limits, and failure modes, and no single vendor handles all of them gracefully. OmniRoute fills that gap: one API surface in front of the long tail — Anthropic, OpenAI, Gemini, Groq, Mistral, OpenRouter, plus community adapters — with retries, fallbacks, and routing on top. It has roughly 60,000 stars and is one of the most active AI routing projects on GitHub." },
+      { type: 'para', text: "I contributed to OmniRoute as an external contributor across a focused 28-day window ending July 18, 2026: 101 merged pull requests, work referenced in 21 upstream release notes, and a #5 rank in the upstream contributor census. That is the signal most teams read as 'good enough — keep working upstream.' So why fork it?" },
+      { type: 'para', text: "The answer isn't that OmniRoute is broken or its maintainer unresponsive. Diego Souza has been consistently responsive, velocity is high, and the upstream architecture is sound. The answer is narrower: how production deployments of AI infrastructure diverge from a general-purpose open-source project, and what to do when they do." },
 
       { type: 'heading', level: 2, text: 'What broke for us at scale' },
-      { type: 'para', text: "Phenotype runs OmniRoute in production in front of roughly a dozen model providers. By mid-2026 we had a few specific operational needs that didn't quite fit the upstream shape:" },
+      { type: 'para', text: "Phenotype runs OmniRoute in production in front of roughly a dozen model providers. By mid-2026 we had specific operational needs that didn't fit the upstream shape:" },
       { type: 'list', items: [
-        "Provider-specific rate limit semantics. Upstream has a generic 'cooldown' model that works for 90% of providers. We needed different cooldown curves per provider family — Anthropic's TPM behavior differs from OpenAI's RPM behavior, which differs from Groq's burst handling, which differs from the OpenRouter pass-through. None of these distinctions are upstream anti-patterns; they're just not yet modeled in upstream.",
-        "Multi-tenant fallback chaining. We route traffic across multiple upstream accounts and need predictable degradation semantics when one account burns out. Upstream's fallback cache scoping is correct as a default but doesn't expose enough hooks for our workload pattern.",
-        "Audit trails. Our compliance posture requires per-request forensic logging of routing decisions: which provider was tried first, why the fallback fired, what the latency profile looked like, what token cost was incurred. Upstream's logging is good; our requirements are stricter than upstream's policy.",
-        "CI surface. Our CI runs roughly 12,000 unit tests across 40 packages and needs stable, predictable test runs in a fork-only environment. Upstream's CI is fine for upstream's release cadence but doesn't have the gating we need for our internal pre-merge cycle.",
+        "Provider-specific rate limit semantics. Upstream's generic cooldown model covers most providers; we needed curves per provider family, because Anthropic's TPM behavior, OpenAI's RPM behavior, Groq's burst handling, and the OpenRouter pass-through all differ. Those are not upstream anti-patterns — they are simply not modeled yet.",
+        "Multi-tenant fallback chaining. Traffic spans multiple upstream accounts, so degradation has to be predictable when one burns out. Upstream's fallback cache scoping is a correct default but exposes too few hooks for our workload.",
+        "Audit trails. Compliance requires per-request forensics on routing decisions: provider tried first, why the fallback fired, the latency profile, the token cost. Upstream's logging is good; our requirements are stricter.",
+        "CI surface. Roughly 12,000 unit tests across 40 packages must run predictably in a fork-only environment. Upstream's CI fits upstream's release cadence; it lacks the gating our pre-merge cycle needs.",
         "Internal tooling. We have home-grown tools — agileplus, phenodag, a custom dockerized runner — that are meaningless to upstream but necessary for our engineering velocity.",
       ] },
-      { type: 'para', text: "None of these are blockers. Each one is a small adaptation. Collectively, they made a fork the right call." },
+      { type: 'para', text: "None of these is a blocker. Each is a small adaptation. Together they made a fork the right call." },
 
       { type: 'heading', level: 2, text: 'How we keep the fork aligned' },
       { type: 'para', text: "The single biggest mistake you can make with a fork of an active upstream is letting it drift. A fork that hasn't rebased in six months is a fork that has to be re-merged by hand, and at that point you've stopped maintaining a fork and started maintaining a competing project." },
       { type: 'para', text: 'We use a simple set of disciplines:' },
       { type: 'list', items: [
-        "Daily git fetch upstream and weekly rebase cycles. All our feature branches rebase onto upstream/release/v3.8.x before merge into fork main. We pin the current upstream SHA in a .upstream-ref file and have a CI check that fails if that file is stale (more than 30 days old).",
-        "Linear history enforced on main. No merge commits. Each fork commit is either (a) a cherry-pick of upstream, (b) a fork-only change on top of upstream HEAD, or (c) a back-port of a future-upstream change we needed early. The linear history keeps the diff against upstream trivial to compute and review.",
-        "Upstream-first PRs. Every fix that could plausibly benefit upstream gets sent upstream first as a PR. We then either wait for merge or carry the patch as a fork-only commit with a stable identifier in the commit message. Out of the 101 PRs I'd already merged upstream before we forked, the pattern continued — roughly 85% of our fork-only commits end up as upstream PRs within 60 days.",
-        "Branch protection as a tripwire. The fork's main requires 1 PR review, dismisses stale approvals on push, and disallows force-pushes. Upstream itself has no branch protection (single-maintainer pattern), but the fork's stricter setting has caught two of our own mistakes before they hit the trunk.",
-        "A divergence manifest. A machine-readable JSON file enumerates every fork-only commit with its rationale, upstream-equivalent status (sent / awaiting-review / declined / not-applicable), and merge-odds estimate. This file is read by our CI on every PR and used to gate 'this fork-only commit should have been upstream first' warnings.",
+        "Daily git fetch upstream, weekly rebase. Feature branches rebase onto upstream/release/v3.8.x before merging into fork main. The current upstream SHA is pinned in .upstream-ref, and CI fails when that file is more than 30 days stale.",
+        "Linear history on main, no merge commits. Every fork commit is a cherry-pick of upstream, a fork-only change on upstream HEAD, or a back-port of a future-upstream change we needed early. That keeps the diff against upstream trivial to compute and review.",
+        "Upstream-first PRs. Any fix that could plausibly benefit upstream goes upstream first; otherwise we wait for merge or carry the patch as a fork-only commit with a stable identifier. The 101 PRs I merged upstream before the fork set the pattern: roughly 85% of fork-only commits become upstream PRs within 60 days.",
+        "Branch protection as a tripwire. Fork main requires one PR review, dismisses stale approvals on push, and blocks force-pushes. Upstream has none (single-maintainer pattern). The stricter setting has caught two of our own mistakes before they reached trunk.",
+        "A divergence manifest. A machine-readable JSON file lists every fork-only commit with its rationale, upstream-equivalent status (sent / awaiting-review / declined / not-applicable), and merge-odds estimate. CI reads it on every PR to warn when a fork-only commit should have gone upstream first.",
       ] },
 
       { type: 'heading', level: 2, text: "What we're contributing back, not carrying" },
       { type: 'para', text: 'The bulk of our fork-only commits are things like:' },
       { type: 'list', items: [
-        "Provider-specific cooldown curves (these are now in flight upstream as standalone PRs)",
+        "Provider-specific cooldown curves (now in flight upstream as standalone PRs)",
         "An additional audit-log schema (sent upstream, awaiting review)",
-        "A small handful of test-suite reorganizations (some already merged, some declined as overly opinionated)",
-        "Internal-only tooling files in directories like .agileplus/ and worklogs/ — these are explicitly not upstream-portable and are git-ignored from the public mirror",
+        "A handful of test-suite reorganizations (some merged, some declined as overly opinionated)",
+        "Internal-only tooling in .agileplus/ and worklogs/ — not upstream-portable, git-ignored from the public mirror",
       ] },
       { type: 'para', text: 'We carry roughly 700–800 fork-only commits ahead of upstream main at any given time. About 75% of them are CI/build tooling, ~15% are provider-specific behavior, ~10% are internal-only artifacts that never go upstream.' },
 
@@ -60,9 +60,9 @@ export const POSTS = [
       { type: 'para', text: "It's worth being explicit about what our fork isn't:" },
       { type: 'list', items: [
         "Not a competing product. OmniRoute is the product. We're heavy users of it and depend on it. The fork is an extension, not a replacement.",
-        "Not a long-term divergence. The whole point of the fork is to converge with upstream as fast as possible. Branches in our fork that aren't on a path to upstream get retired on a 90-day clock.",
-        "Not an opinionated re-architecture. When upstream's architecture doesn't fit our needs, we work around it in the fork rather than re-designing it. Upstream's design choices are upstream's call.",
-        "Not a candidate for a separate brand. We don't ship a 'PhenRoute' or similar. The whole point is to keep the fork's relationship to upstream legible: fork → upstream → fork → upstream.",
+        "Not a long-term divergence. The point is to converge with upstream as fast as possible; branches not on a path to upstream retire on a 90-day clock.",
+        "Not an opinionated re-architecture. Where upstream's architecture doesn't fit, we work around it rather than redesign it. Upstream's design choices are upstream's call.",
+        "Not a candidate for a separate brand. No 'PhenRoute'. The point is keeping the fork's relationship to upstream legible: fork → upstream → fork → upstream.",
       ] },
 
       { type: 'heading', level: 2, text: "If you're considering a fork yourself" },
@@ -71,12 +71,12 @@ export const POSTS = [
         "Fork when you have 3+ concrete operational needs that don't fit upstream. One quirk is a patch. Two quirks is a configuration. Three is a fork.",
         "Fork when your CI/audit/security posture is meaningfully stricter than upstream's default. If you just need a feature, send a PR upstream. If you need a guarantee upstream can't make, fork.",
         "Don't fork if you're going to rebrand or re-architect. That's a competing project, not a fork. Use a different name and a different namespace.",
-        "Don't fork if you can't commit to the discipline. A fork that drifts is a tax you'll pay forever. If you can't commit to weekly rebase cycles and upstream-first PRs, you'll end up rewriting the fork in two years.",
+        "Don't fork without the discipline. A drifting fork is a tax you pay forever: without weekly rebases and upstream-first PRs, you rewrite the fork in two years.",
       ] },
 
       { type: 'heading', level: 2, text: "What's next" },
-      { type: 'para', text: "The longer-term question — and one we don't have a perfect answer to — is whether the right end-state is 'fork forever' or 'upstream absorbs fork-only features and we deprecate the fork in a year or two.' Diego and I have discussed this and the working hypothesis is that we'll converge: most of what we're carrying is upstream-portable, and a year from now the fork will be roughly 50 commits deep instead of 700+. We'll see." },
-      { type: 'para', text: "For now, the fork exists because it has to, and it's small enough that it costs us very little to maintain. The 101 PRs I shipped upstream before we forked weren't wasted — they're the social capital that makes the fork relationship healthy. Upstream knows us, trusts us, and accepts most of what we send. That's a much better state than 'random external fork with no shared history.'" },
+      { type: 'para', text: "The open question is whether the end-state is 'fork forever' or 'upstream absorbs the fork-only features and we deprecate the fork.' Diego and I have discussed it; the working hypothesis is convergence. Most of what we carry is upstream-portable, so a year from now the fork should be roughly 50 commits deep instead of 700+." },
+      { type: 'para', text: "For now the fork exists because it has to, and it costs us very little to maintain. The 101 PRs I shipped upstream first were not wasted — they are the social capital that keeps the fork relationship healthy. Upstream knows us and accepts most of what we send, which beats an anonymous fork with no shared history." },
 
       { type: 'hr' },
 
@@ -87,14 +87,14 @@ export const POSTS = [
     slug: 'what-keycaps-taught-me-about-systems',
     title: 'What 4,900 keycap sets taught me about systems engineering',
     excerpt:
-      'I ran a mechanical keyboard group buy that sold 4,900 units across 10 countries in 30 days. The operational lessons map directly to how I build software systems.',
+      'I ran a mechanical keyboard group buy: ~4,900 line items across 10 regions in 30 days. Its operational lessons carry straight into software systems.',
     date: '2026-09-10',
     readingTime: '7 min',
     tags: ['Systems Engineering', 'Physical Products', 'Lessons'],
     provenance: 'Personal experience',
     body: [
-      { type: 'para', text: "In 2021 I launched GMK Arch, a mechanical keyboard keycap set designed around Arch Linux visual language. It sold approximately 4,900 units across roughly 10 countries in 30 days, generating approximately $432K in revenue. The project involved supplier coordination, demand forecasting, pricing strategy, and international fulfillment logistics — all managed by one person with no prior hardware shipping experience." },
-      { type: 'para', text: "That experience shaped how I think about software systems more than any single engineering project. Here's why." },
+      { type: 'para', text: "In 2021 I launched GMK Arch, a keycap set built around Arch Linux visual language. It sold approximately 4,900 line items across roughly 10 regions in 30 days for approximately $432K. Supplier coordination, demand forecasting, pricing, and international fulfillment were one person's job, with no prior hardware shipping experience." },
+      { type: 'para', text: "It shaped how I think about software systems more than any single engineering project. Here's why." },
 
       { type: 'heading', level: 2, text: 'Demand forecasting is a systems problem' },
       { type: 'para', text: "When you run a group buy, you don't know the final demand until orders close. You commit to manufacturing quantities weeks before you know the real number. I started with an expectation of approximately 15 units for WITF (a later project), watched interest climb toward approximately 100, then watched it settle back to approximately 50 as timing and market conditions shifted." },
@@ -102,20 +102,20 @@ export const POSTS = [
       { type: 'para', text: "When I built Substrate's provider routing layer, I applied the same principle: design for the capacity you expect, but make the degradation path explicit when reality diverges from the plan. Circuit breakers, fallback chains, and budget enforcement are the software equivalent of renegotiating with your supplier mid-production." },
 
       { type: 'heading', level: 2, text: 'Supplier coordination is dependency management' },
-      { type: 'para', text: "GMK Arch required coordinating with GMK (the manufacturer), 10+ regional vendors across US, Canada, South America, EU, Oceania, Southeast Asia, UK, Korea, China, and Norway, plus designers, material suppliers, and logistics providers. Each had their own timeline, constraints, and failure modes." },
+      { type: 'para', text: "GMK Arch required coordinating with GMK (the manufacturer), 10+ regional vendors across US, Canada, South America, EU, Oceania, Southeast Asia, UK, Korea, China, and Norway, plus designers, material suppliers, and logistics providers. Each had its own timeline, constraints, and failure modes." },
       { type: 'para', text: "The software parallel is dependency management in a multi-service system. Each provider (Anthropic, OpenAI, Gemini, Groq) has different rate limits, different failure modes, different cooldown semantics. When I built OmniRoute's routing intelligence, the lessons from supplier coordination were immediately applicable: map the failure modes of each dependency, build explicit fallback paths, and don't assume one provider's behavior generalizes to all." },
 
       { type: 'heading', level: 2, text: 'Cost reduction is architecture optimization' },
-      { type: 'para', text: "Through supplier negotiation and manufacturing process optimization, I reduced the per-unit cost of the WITF Board from over $500 to approximately $350 all-in — a reduction of more than 40%. The savings came from understanding the manufacturing process deeply enough to identify where costs could be reduced without compromising quality." },
-      { type: 'para', text: "This maps directly to performance optimization in software. The biggest gains come from understanding the system deeply enough to find the real bottlenecks, not from applying generic optimizations. When I optimized ShareCLI's process observation layer, the 40% reduction in overhead came from understanding the Linux kernel's process accounting well enough to avoid redundant syscalls — the same principle as understanding your supplier's cost structure well enough to negotiate effectively." },
+      { type: 'para', text: "Through supplier negotiation and process optimization I cut the WITF Board's per-unit cost from over $500 to approximately $350 all-in, more than 40%. The savings came from knowing the manufacturing process well enough to find the costs that could move without hurting quality." },
+      { type: 'para', text: "This maps directly to performance work in software. The biggest gains come from knowing the system deeply enough to find the real bottlenecks, not from generic optimizations. When I optimized ShareCLI's process observation layer, the 40% overhead reduction came from knowing the Linux kernel's process accounting well enough to avoid redundant syscalls — the same principle as knowing a supplier's cost structure well enough to negotiate." },
 
       { type: 'heading', level: 2, text: 'Fulfillment is deployment' },
       { type: 'para', text: "Getting 4,900 units from a factory in China to 10 countries with different customs regulations, shipping carriers, and delivery expectations is a logistics problem that parallels software deployment. You need rollback paths (what happens when a shipment is delayed?), monitoring (tracking numbers, delivery confirmations), and graceful degradation (what happens when one region's customs process blocks imports?)." },
-      { type: 'para', text: "The WITF Board taught me this more viscerally. When our external pick-and-pack provider changed terms mid-fulfillment, I had to adapt the distribution model in real time. That's the same as a cloud provider changing their API mid-deployment — you need the architecture to absorb the change without failing the entire release." },
+      { type: 'para', text: "The WITF Board taught me this more viscerally. When our external pick-and-pack provider changed terms mid-fulfillment, I had to adapt the distribution model in real time. That is the same as a cloud provider changing its API mid-deployment — the architecture has to absorb the change without failing the release." },
 
       { type: 'heading', level: 2, text: 'The durable lesson' },
       { type: 'para', text: "The durable lesson from physical product work is that systems engineering isn't just about code. It's about understanding constraints, mapping failure modes, building explicit fallback paths, and designing for graceful degradation — whether the system is a keycap group buy or a multi-provider AI routing layer." },
-      { type: 'para', text: "The 4,900 units shipped. The 10-region retail network held. The $432K in revenue arrived. And the engineering lessons from that process continue to shape how I build software systems today." },
+      { type: 'para', text: "The 4,900 line items shipped. The 10-region retail network held. The $432K arrived. The engineering lessons from that process still shape how I build software." },
 
       { type: 'hr' },
       { type: 'note', text: "All figures are approximate and sourced from canonical user facts documented in the project evidence ledger. Line items are not customers." },
@@ -149,7 +149,7 @@ export const POSTS = [
 
       { type: 'heading', level: 2, text: 'Why I choose this work' },
       { type: 'para', text: "Working at the boundary is harder than working above it. The failure modes are more complex. The verification is more difficult. The debugging requires understanding multiple layers of the stack simultaneously." },
-      { type: 'para', text: "But the work is more interesting, and the engineering decisions are more consequential. A well-designed routing layer affects every request that passes through it. A well-designed process observer affects every agent that runs on the system. The leverage is higher, and the lessons transfer across projects." },
+      { type: 'para', text: "But the work is more interesting, and the decisions are more consequential. A well-designed routing layer affects every request that passes through it. A well-designed process observer affects every agent that runs on the system. Decisions there carry further, and the lessons transfer across projects." },
       { type: 'para', text: "That's where I build. At the boundary. Where the abstractions stop and the real behavior begins." },
 
       { type: 'hr' },
@@ -166,8 +166,8 @@ export const POSTS = [
     tags: ['Deployment', 'Go', 'Infrastructure'],
     provenance: 'Project experience',
     body: [
-      { type: 'para', text: "Most deployment tools are imperative. You tell them what to do: push this container, rotate that DNS record, drain the old instance. The tool executes the steps in order and hopes nothing goes wrong in between. This works until it doesn't — and it stops working the moment you need to change something mid-deployment, roll back partially, or understand what a deployment actually did after the fact." },
-      { type: 'para', text: "BytePort takes a different approach. It models deployment as intent — a declarative description of what the system should look like — rather than a sequence of commands. The runtime figures out how to get from the current state to the desired state, and it does so in a way that's observable, reversible, and composable." },
+      { type: 'para', text: "Most deployment tools are imperative: you list the steps — push this container, rotate that DNS record, drain the old instance — and the tool runs them in order, hoping nothing breaks in between. That stops working the moment you need to change something mid-deployment, roll back partially, or reconstruct what a deployment actually did." },
+      { type: 'para', text: "BytePort models deployment as intent — a declarative description of the system's target state — instead of a command sequence. The runtime computes the path from current state to desired state, and does it observably, reversibly, and composably." },
 
       { type: 'heading', level: 2, text: 'Why declarative matters' },
       { type: 'para', text: "The Kubernetes community learned this lesson a decade ago: declarative state is easier to reason about than imperative commands. But most deployment tooling outside Kubernetes is still imperative. You run a script, the script does things, and you hope the script is idempotent." },
@@ -180,11 +180,11 @@ export const POSTS = [
       ] },
 
       { type: 'heading', level: 2, text: 'The Go/AWS fit' },
-      { type: 'para', text: "Go is a good fit for deployment tooling because it compiles to a single binary, has excellent concurrency primitives for managing parallel infrastructure operations, and the standard library covers most of what you need for AWS API interaction. The AWS SDK for Go is mature and well-documented." },
+      { type: 'para', text: "Go fits deployment tooling: it compiles to a single binary, its concurrency primitives suit parallel infrastructure operations, and the standard library plus a mature AWS SDK cover most AWS API work." },
       { type: 'para', text: "The challenge isn't the language — it's the state management. Computing the delta between current and desired state requires understanding every AWS resource's lifecycle, idempotency characteristics, and failure modes. EC2 instances behave differently from RDS instances, which behave differently from Lambda functions, which behave differently from S3 buckets. A deployment tool that treats them all the same will break on the edge cases." },
 
       { type: 'heading', level: 2, text: 'What we learned' },
-      { type: 'para', text: "The most valuable insight from building BytePort wasn't technical. It was that deployment safety comes from separating current delivery from planned features. Most deployment failures happen because teams bundle 'what I need now' with 'what I'll need later' into a single deployment. BytePort's model makes these independent: you can declare a current delivery that's safe and tested, and a planned feature that's experimental, and deploy them through the same system without coupling their risk." },
+      { type: 'para', text: "The most valuable insight from BytePort wasn't technical: deployment safety comes from separating current delivery from planned features. Most failures happen when teams bundle 'what I need now' with 'what I'll need later' into one deployment. BytePort's model makes them independent — a tested current delivery and an experimental planned feature ship through the same system without coupling their risk." },
       { type: 'para', text: "This principle — separating intent from execution, separating delivery from features — is the kind of architectural decision that seems obvious in retrospect but shapes every system built after it." },
 
       { type: 'hr' },
@@ -216,10 +216,10 @@ export const POSTS = [
 
       { type: 'heading', level: 2, text: 'Thermal awareness' },
       { type: 'para', text: "When you run hundreds of concurrent processes on Apple Silicon, thermal pressure becomes a real constraint. The CPU throttles under sustained load, and the throttle behavior is non-obvious: it's not a simple temperature threshold, it's a power-envelope model that considers sustained power draw, instantaneous power, and thermal dissipation." },
-      { type: 'para', text: "ShareCLI monitors thermal pressure through the powermetrics interface and adjusts its scheduling recommendations accordingly. When thermal pressure is high, it suggests deferring non-urgent agents and prioritizing the ones closest to completion. This isn't强制throttling — it's visibility. The human operator makes the scheduling decision, armed with thermal data." },
+      { type: 'para', text: "ShareCLI monitors thermal pressure through the powermetrics interface and adjusts its scheduling recommendations. When thermal pressure is high it suggests deferring non-urgent agents and prioritizing the ones closest to completion. This isn't forced throttling — it's visibility: the human operator decides, with thermal data in hand." },
 
       { type: 'heading', level: 2, text: 'What we built for ourselves' },
-      { type: 'para', text: "ShareCLI grew out of a practical need: running multi-repo engineering work across several harnesses simultaneously. Each harness (Jcode, Codex, ForgeCode) manages its own agents, but there was no unified view of what was happening across all of them. ShareCLI provides that view." },
+      { type: 'para', text: "ShareCLI grew out of a practical need: running multi-repo engineering work across multiple harnesses at once. Each harness (Jcode, Codex, ForgeCode) manages its own agents, but nothing gave a unified view across all of them. ShareCLI provides that view." },
       { type: 'para', text: "The structured session recording is the most valuable feature for our workflow. Every agent session produces a record with timestamps, file changes, test results, and resource consumption. When something goes wrong — a test failure, a merge conflict, a resource exhaustion — the session record provides the evidence needed to diagnose the issue without reproducing it." },
 
       { type: 'heading', level: 2, text: 'The durable lesson' },
