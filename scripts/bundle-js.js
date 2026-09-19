@@ -124,12 +124,19 @@ loadModule(ENTRY);
 // with no exports, so an inlined copy could never satisfy that import — it was
 // pure dead weight duplicated on the wire.
 
-// Gather every unique export symbol across all modules, deduplicated
+// Gather every unique export symbol across all modules, deduplicated.
+// `importers` records who asked for each symbol so an unresolvable symbol can be
+// reported with its origin instead of shipping as a silent `undefined`.
 const seen = new Set();
 const hoistedVars = [];
+const importers = new Map();
 for (const absPath of loadOrder) {
   const mod = registry.get(absPath);
-  for (const { local } of mod.exports) {
+  for (const { local, source } of mod.exports) {
+    if (!importers.has(local)) importers.set(local, []);
+    importers
+      .get(local)
+      .push({ from: relative(ROOT, absPath), module: relative(ROOT, source) });
     if (!seen.has(local)) {
       seen.add(local);
       hoistedVars.push(local);
@@ -142,6 +149,40 @@ const bodies = loadOrder.map((absPath) => {
   const mod = registry.get(absPath);
   return stripDeclarations(mod.code);
 });
+
+// --- Hoisted-export guard ---
+//
+// The bundle flattens every module into one IIFE scope and declares the union
+// of imported names as `var`s. That only works when the imported name matches
+// the name the exporting module actually defines. An `import { a as b }` alias
+// whose source defines `a` leaves `b` declared but never assigned, so the call
+// site throws `TypeError: b is not a function` in the browser while every static
+// check stays green. Fail the build instead.
+const allBodies = bodies.join('\n');
+const unresolved = hoistedVars.filter((name) => {
+  // Export names are arbitrary identifiers (`$` and `$$` are real ones in this
+  // codebase), so escape them before interpolating into a pattern.
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const defined = new RegExp(
+    `(?:^|[^\\w$.])(?:(?:async\\s+)?function|class)\\s+${escaped}\\s*[(<]|(?:^|[^\\w$.])${escaped}\\s*=`,
+  );
+  return !defined.test(allBodies);
+});
+if (unresolved.length > 0) {
+  console.error('\nBundle aborted: imported names are never defined.');
+  console.error('Each name below is declared in the IIFE but no module body assigns it,');
+  console.error('so its call site would throw at runtime. Import the exporting module\'s');
+  console.error('own export name instead of aliasing a generic one.\n');
+  for (const name of unresolved) {
+    for (const site of importers.get(name) ?? []) {
+      console.error(`  ${name}`);
+      console.error(`    imported by ${site.from}`);
+      console.error(`    resolved to ${site.module}`);
+    }
+  }
+  console.error('');
+  process.exit(1);
+}
 
 // Assemble the final bundle wrapped in an IIFE, then minify
 const rawBundle = `(function () {

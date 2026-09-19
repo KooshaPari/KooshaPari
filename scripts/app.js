@@ -11,7 +11,7 @@ import { renderWorkCatalog } from './views/work.js';
 import { renderProjectDetail } from './views/project-detail.js';
 import { renderResume } from './views/resume.js';
 import { renderContact } from './views/contact.js';
-import { render as renderNotFoundHTML, initCanvas } from './views/not-found.js';
+import { renderNotFound, initCanvas } from './views/not-found.js';
 import { renderBlogIndex } from './views/blog-index.js';
 import { renderBlogPost } from './views/blog-post.js';
 
@@ -128,7 +128,7 @@ function render() {
   } else if (route.view === 'post') {
     renderBlogPost(viewRoot, route.slug);
   } else if (route.view === 'not-found') {
-    viewRoot.innerHTML = renderNotFoundHTML();
+    viewRoot.innerHTML = renderNotFound();
     initCanvas();
   } else {
     renderHome(viewRoot, { projects: PROJECTS, lens });

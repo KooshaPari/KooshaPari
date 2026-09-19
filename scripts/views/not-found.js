@@ -124,8 +124,14 @@ export function initCanvas() {
 /**
  * Return the full 404 page markup.
  * Include a <style> block scoped to the not-found view.
+ *
+ * Exported as `renderNotFound` (not a bare `render`) so it matches the
+ * project-wide convention that every view exports a uniquely named render
+ * function. A bare `render` collides with the dispatcher `render()` in
+ * scripts/app.js in the flattened bundle scope, which made the 404 route a
+ * no-op and left #view-root empty.
  */
-export function render() {
+export function renderNotFound() {
   return `
 <style>
   .not-found {

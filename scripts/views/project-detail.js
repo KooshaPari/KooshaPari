@@ -6,7 +6,7 @@ import { renderNetWeaveWorkbench } from '../media/netweave-workbench.js';
 import { renderShareCliWorkbench } from '../media/sharecli-workbench.js';
 import { renderShareCliRecordings } from '../media/sharecli-recording.js';
 import { renderSubstratePlate } from '../media/systems-plate.js';
-import { render as renderNotFound } from './not-found.js';
+import { renderNotFound } from './not-found.js';
 
 const COMPACT_SECTIONS = {
   byteport: [
