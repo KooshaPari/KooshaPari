@@ -8,78 +8,191 @@
     {
       "source": "/(.*)",
       "headers": [
-        {"key": "X-Frame-Options", "value": "DENY"},
-        {"key": "X-Content-Type-Options", "value": "nosniff"},
-        {"key": "Referrer-Policy", "value": "strict-origin-when-cross-origin"},
-        {"key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()"}
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
       ]
     },
     {
       "source": "/assets/(.*)",
       "headers": [
-        {"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
       ]
     },
     {
       "source": "/bundled/(.*)",
       "headers": [
-        {"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, must-revalidate"
+        }
       ]
     },
     {
       "source": "/public/(.*)",
       "headers": [
-        {"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
       ]
     },
     {
       "source": "/styles/(.*)",
       "headers": [
-        {"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, must-revalidate"
+        }
       ]
     },
     {
       "source": "/data/(.*)",
       "headers": [
-        {"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, must-revalidate"
+        }
       ]
     },
     {
       "source": "/scripts/(.*)",
       "headers": [
-        {"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, must-revalidate"
+        }
       ]
     }
   ],
   "rewrites": [
-    {"source": "/engineering", "destination": "/engineering.html"},
-    {"source": "/product", "destination": "/product.html"},
-    {"source": "/work", "destination": "/work.html"},
-    {"source": "/work/sharecli", "destination": "/work/sharecli.html"},
-    {"source": "/work/gmk-arch", "destination": "/work/gmk-arch.html"},
-    {"source": "/work/witf", "destination": "/work/witf.html"},
-    {"source": "/work/substrate", "destination": "/work/substrate.html"},
-    {"source": "/work/phenotype-omlx", "destination": "/work/phenotype-omlx.html"},
-    {"source": "/work/netweave", "destination": "/work/netweave.html"},
-    {"source": "/work/byteport", "destination": "/work/byteport.html"},
-    {"source": "/work/tracera", "destination": "/work/tracera.html"},
-    {"source": "/work/omniroute", "destination": "/work/omniroute.html"},
-    {"source": "/work/dss-cipher", "destination": "/work/dss-cipher.html"},
-    {"source": "/work/frostify", "destination": "/work/frostify.html"},
-    {"source": "/work/forgecode", "destination": "/work/forgecode.html"},
-    {"source": "/work/mcpforge", "destination": "/work/mcpforge.html"},
-    {"source": "/work/agentapi-plusplus", "destination": "/work/agentapi-plusplus.html"},
-    {"source": "/work/cliproxyapi-plusplus", "destination": "/work/cliproxyapi-plusplus.html"},
-    {"source": "/resume", "destination": "/resume.html"},
-    {"source": "/contact", "destination": "/contact.html"},
-    {"source": "/blog", "destination": "/blog.html"},
-    {"source": "/blog/why-we-forked-omniroute", "destination": "/blog/why-we-forked-omniroute.html"},
-    {"source": "/blog/what-keycaps-taught-me-about-systems", "destination": "/blog/what-keycaps-taught-me-about-systems.html"},
-    {"source": "/blog/building-at-the-systems-boundary", "destination": "/blog/building-at-the-systems-boundary.html"},
-    {"source": "/blog/declarative-deployment-separating-intent-from-execution", "destination": "/blog/declarative-deployment-separating-intent-from-execution.html"},
-    {"source": "/blog/running-hundreds-of-ai-agents-without-losing-your-mind", "destination": "/blog/running-hundreds-of-ai-agents-without-losing-your-mind.html"},
-    {"source": "/archive", "destination": "/archive.html"},
-    {"source": "/((?!index\\.html|sitemap\\.xml|robots\\.txt|favicon\\.ico|assets/|asset-sources/|styles/|bundled/|scripts/|data/|public/|tests/|docs/|output/|\\.playwright-cli/|.*\\.md|.*\\.html|.*\\.css|.*\\.js|.*\\.webp|.*\\.png|.*\\.jpg|.*\\.svg|.*\\.gif|.*\\.ico|.*\\.woff|.*\\.woff2|.*\\.ttf|.*\\.eot|.*\\.glb).*)", "destination": "/root.html"}
+    {
+      "source": "/engineering",
+      "destination": "/engineering.html"
+    },
+    {
+      "source": "/product",
+      "destination": "/product.html"
+    },
+    {
+      "source": "/work",
+      "destination": "/work.html"
+    },
+    {
+      "source": "/work/sharecli",
+      "destination": "/work/sharecli.html"
+    },
+    {
+      "source": "/work/gmk-arch",
+      "destination": "/work/gmk-arch.html"
+    },
+    {
+      "source": "/work/witf",
+      "destination": "/work/witf.html"
+    },
+    {
+      "source": "/work/substrate",
+      "destination": "/work/substrate.html"
+    },
+    {
+      "source": "/work/phenotype-omlx",
+      "destination": "/work/phenotype-omlx.html"
+    },
+    {
+      "source": "/work/netweave",
+      "destination": "/work/netweave.html"
+    },
+    {
+      "source": "/work/byteport",
+      "destination": "/work/byteport.html"
+    },
+    {
+      "source": "/work/tracera",
+      "destination": "/work/tracera.html"
+    },
+    {
+      "source": "/work/omniroute",
+      "destination": "/work/omniroute.html"
+    },
+    {
+      "source": "/work/dss-cipher",
+      "destination": "/work/dss-cipher.html"
+    },
+    {
+      "source": "/work/frostify",
+      "destination": "/work/frostify.html"
+    },
+    {
+      "source": "/work/forgecode",
+      "destination": "/work/forgecode.html"
+    },
+    {
+      "source": "/work/mcpforge",
+      "destination": "/work/mcpforge.html"
+    },
+    {
+      "source": "/work/agentapi-plusplus",
+      "destination": "/work/agentapi-plusplus.html"
+    },
+    {
+      "source": "/work/cliproxyapi-plusplus",
+      "destination": "/work/cliproxyapi-plusplus.html"
+    },
+    {
+      "source": "/resume",
+      "destination": "/resume.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog.html"
+    },
+    {
+      "source": "/blog/why-we-forked-omniroute",
+      "destination": "/blog/why-we-forked-omniroute.html"
+    },
+    {
+      "source": "/blog/what-keycaps-taught-me-about-systems",
+      "destination": "/blog/what-keycaps-taught-me-about-systems.html"
+    },
+    {
+      "source": "/blog/building-at-the-systems-boundary",
+      "destination": "/blog/building-at-the-systems-boundary.html"
+    },
+    {
+      "source": "/blog/declarative-deployment-separating-intent-from-execution",
+      "destination": "/blog/declarative-deployment-separating-intent-from-execution.html"
+    },
+    {
+      "source": "/blog/running-hundreds-of-ai-agents-without-losing-your-mind",
+      "destination": "/blog/running-hundreds-of-ai-agents-without-losing-your-mind.html"
+    },
+    {
+      "source": "/archive",
+      "destination": "/archive.html"
+    },
+    {
+      "source": "/((?!index\\.html|sitemap\\.xml|robots\\.txt|favicon\\.ico|assets/|asset-sources/|styles/|bundled/|scripts/|data/|public/|tests/|docs/|output/|\\.playwright-cli/|.*\\.md|.*\\.html|.*\\.css|.*\\.js|.*\\.webp|.*\\.png|.*\\.jpg|.*\\.svg|.*\\.gif|.*\\.ico|.*\\.woff|.*\\.woff2|.*\\.ttf|.*\\.eot|.*\\.glb).*)",
+      "destination": "/root.html"
+    }
   ]
 }
-

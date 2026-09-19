@@ -47,21 +47,7 @@ const BADGE_CLASS = {
   Leadership:  'resume-badge--leadership',
 };
 
-/* ================================================================
-   Helper — build the resume <style> tag (injected once).
-   ================================================================ */
-
-const STYLE_ID = 'resume-timeline-css';
-
-function ensureStyles() {
-  if (document.getElementById(STYLE_ID)) return;
-
-  const link = document.createElement('link');
-  link.id = STYLE_ID;
-  link.rel = 'stylesheet';
-  link.href = '/styles/resume-timeline.css';
-  document.head.appendChild(link);
-}
+/* Styles: resume-timeline.css ships in components.css (no runtime injection). */
 
 /* ================================================================
    Component builders (return DOM elements).
@@ -137,8 +123,6 @@ function buildEducation(data) {
    ================================================================ */
 
 export function renderResume(root) {
-  ensureStyles();
-
   root.replaceChildren(
     el('section', { class: 'view active portfolio-view' },
       el('p', { class: 'eyebrow eyebrow--precision', 'data-reveal': 'fade' }, 'RESUME'),
