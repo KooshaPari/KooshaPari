@@ -267,3 +267,27 @@ At 18:37 during this audit, `dist/` contained **shell-only** HTML (`dist/index.h
 - `/blog/running-hundreds-of-ai-agents-without-losing-your-mind`
 
 — are prerendered to `dist/blog/<slug>.html` (634–777 words each, real content) **but have no rewrite**, so they fall through `vercel.json`'s catch-all to `/root.html`. `dist/root.html` is a copy of `index.html` (`scripts/stage-publication.js:36-37`) whose `<link rel="canonical" href="https://kooshapari.com/" />` **claims to be the homepage**. Google is told four substantial posts are duplicates of `/`. The prerendered files are only reachable at their `.html` URLs, which the sitemap does not list.
+
+---
+
+## POST-FIX STATUS (coordinator, 2026-09-19)
+
+All findings resolved and deployed to kooshapari.com:
+
+| Finding | Fix | Commit |
+|---|---|---|
+| 1.1/2.1/2.2 typographic collapse + dark-on-black | Legacy :root palette replaced with alias bridge onto tokens.css SSOT; dark html,body removed | 4c0af43 |
+| 1.2 two design systems | One SSOT; dead .topbar/.tab cluster and no-op @imports removed | 4c0af43 |
+| 1.4 motion | Glass tokens, scrolled-state shadow, spring choreography (fish) | 4c0af43 |
+| 2.3 duplicate artifact summary | artifactTextSummary export removed (flamingo) | 4c0af43 |
+| 2.5 dark mode structurally unsound | data-theme="dark" overrides inherit via alias bridge | 4c0af43 |
+| 3.1 bundle optimizes one page | stage-publication rewrites all 27 pages to /bundled/app.bundle.js (mosquito) | 4c0af43 |
+| 3.1 cache-invalidation time bomb | immutable replaced with max-age=300 must-revalidate (styles/scripts/data/bundled), 86400 (assets/public) | 1a1bc04 |
+| 3.1 duplicate resume-timeline.css | Runtime injection removed from resume.js | 1a1bc04 |
+| 3.2 unused witf hero-01.webp preload | Removed (mosquito) | 4c0af43 |
+| 3.3 hero SPOF | gmk-arch hero.webp recompressed 583KB→148KB (mosquito) | 4c0af43 |
+| 3.5 non-atomic publication | Minifier OOM fixed (\u0001 sentinels); dist completeness verified after every build | 4c0af43 |
+| 3.6 SEO/routing: 4 blog posts unreachable | 4 rewrites added; all 5 sitemap posts HTTP 200 | 4c0af43 |
+
+CSS bundles 165.4KB → 124.4KB (−25%). 83/83 unit, 9/9 e2e. Visual verification
+via Playwright on preview and live. Deploy log: 4c0af43 (14s), 1a1bc04 (29s).
