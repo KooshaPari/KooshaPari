@@ -60,6 +60,35 @@ await prerenderPosts(publication);
 // Runs after prerender so it doesn't affect Node-side parsing.
 await execFileAsync('node', [join(root, 'scripts', 'minify-js.js')]);
 
+// Every page must load the single prebuilt bundle, not the module graph.
+// Only index.html referenced /bundled/app.bundle.js; the other top-level pages
+// and every prerendered project/post page referenced /scripts/app.js, which the
+// browser resolved into 47 separate module requests (308 KB unminified versus
+// 225 KB minified in one request). Rewriting here keeps the per-page HTML
+// authors' source untouched and covers prerender output in one pass.
+const UNBUNDLED_ENTRY = 'src="/scripts/app.js"';
+const BUNDLED_ENTRY = 'src="/bundled/app.bundle.js"';
+let rewrittenPages = 0;
+
+async function walkHtml(dir) {
+  const entries = await readdir(dir, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) files.push(...await walkHtml(full));
+    else if (entry.name.endsWith('.html')) files.push(full);
+  }
+  return files;
+}
+
+for (const file of await walkHtml(publication)) {
+  const html = await readFile(file, 'utf8');
+  if (!html.includes(UNBUNDLED_ENTRY)) continue;
+  await writeFile(file, html.replaceAll(UNBUNDLED_ENTRY, BUNDLED_ENTRY));
+  rewrittenPages++;
+}
+console.log(`Bundled entry point applied to ${rewrittenPages} page(s)`);
+
 
 
 // Sync to Vercel static output directory for build-output test parity.

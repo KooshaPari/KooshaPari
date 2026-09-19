@@ -32,10 +32,6 @@ function annotationBlock(record, lens) {
   );
 }
 
-export function artifactTextSummary(record) {
-  return record.presentation?.alt ?? record.summary;
-}
-
 export function physicalPlate(record, lens) {
   const media = record.presentation?.media ?? {};
   const selectedAsset = record.presentation?.assets?.[0];
@@ -81,7 +77,6 @@ function topologyLabels(record) {
 
 export function systemsSheet(record, lens) {
   const labels = topologyLabels(record);
-  const summaryId = `artifact-${record.slug}-summary`;
 
   return el(
     'article',
@@ -91,9 +86,11 @@ export function systemsSheet(record, lens) {
       'div',
       {
         class: 'systems-diagram',
+        /* The diagram's accessible name is the only description it needs.
+           A second described-by paragraph repeated this exact sentence as
+           visible copy under the diagram, so it was removed. */
         role: 'img',
         'aria-label': record.presentation.alt,
-        'aria-describedby': summaryId,
       },
       labels.map((label, index) => [
         el(
@@ -107,7 +104,6 @@ export function systemsSheet(record, lens) {
           : null,
       ]),
     ),
-    el('p', { class: 'artifact-text-summary', id: summaryId }, artifactTextSummary(record)),
     el(
       'div',
       { class: 'artifact-context' },
@@ -135,7 +131,6 @@ function experimentRows(record) {
 }
 
 export function experimentNote(record, lens) {
-  const summaryId = `artifact-${record.slug}-summary`;
   return el(
     'article',
     { class: `artifact artifact--experiment artifact--${record.slug}`, 'data-artifact': record.slug, 'data-reveal': 'up', 'data-reveal-delay': '200' },
@@ -144,9 +139,10 @@ export function experimentNote(record, lens) {
       'div',
       {
         class: 'experiment-sheet',
+        /* Accessible name only — the removed described-by paragraph
+           duplicated this sentence as visible copy. */
         role: 'img',
         'aria-label': record.presentation.alt,
-        'aria-describedby': summaryId,
       },
       experimentRows(record).map(([term, detail], index) =>
         el(
@@ -158,7 +154,6 @@ export function experimentNote(record, lens) {
         ),
       ),
     ),
-    el('p', { class: 'artifact-text-summary', id: summaryId }, artifactTextSummary(record)),
     el(
       'div',
       { class: 'artifact-context' },

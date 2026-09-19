@@ -25,7 +25,7 @@ import { initCounterAnimate } from './counter-animate.js';
 import { initPerspectiveTilt } from './perspective-tilt.js';
 import { initScrollChoreography } from './scroll-choreography.js';
 import { initCardComposer } from './media/card-composer.js';
-import { initAmbientField } from './media/ambient-field.js';
+import { initAmbientField, destroyAmbientField } from './media/ambient-field.js';
 import { initCastPlayers } from './media/cast-player.js';
 import { initImageSliders } from './media/image-slider.js';
 import { initCodeAnnotation } from './media/code-annotate.js';
@@ -89,6 +89,7 @@ function render() {
   const route = routeFromLocation();
   if (route.lens) lensState.set(route.lens);
   destroyWitfViewer();
+  destroyAmbientField();
 
   const lens = lensState.get();
   const reader = readerState.get();

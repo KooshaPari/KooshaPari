@@ -136,6 +136,11 @@
   /* Surfaces — additions -------------------------------------------- */
   --surface-inset: #e2dfd8;
 
+  /* Premium glass surface tokens (Apple-grade) -------------------- */
+  --glass-surface: color-mix(in oklch, var(--surface-raised) 72%, transparent);
+  --glass-border: color-mix(in oklch, var(--ink) 8%, transparent);
+  --glass-highlight: inset 0 1px 0 color-mix(in oklch, var(--surface) 50%, transparent);
+
   /* Structure line — left-edge content frame ----------------------- */
   --structure-line: 1px solid var(--precision-rule);
 }
@@ -211,26 +216,44 @@ html[data-lens="product"] {
   --rule: color-mix(in oklch, var(--paper-100) 22%, transparent);
   --precision-rule: color-mix(in oklch, var(--paper-100) 12%, transparent);
   --precision-rule-strong: color-mix(in oklch, var(--paper-100) 24%, transparent);
+  --glass-surface: color-mix(in oklch, var(--graphite-800) 65%, transparent);
+  --glass-border: color-mix(in oklch, var(--paper-100) 10%, transparent);
+  --glass-highlight: inset 0 1px 0 color-mix(in oklch, var(--paper-100) 8%, transparent);
   color-scheme: dark;
 }
 
 [data-theme="dark"] .atelier-header {
-  background: color-mix(in oklch, var(--graphite-950) 95%, transparent);
+  background: color-mix(in oklch, var(--graphite-950) 82%, transparent);
+  border-bottom-color: color-mix(in oklch, var(--paper-100) 10%, transparent);
+}
+
+[data-theme="dark"] .atelier-header--scrolled {
+  box-shadow: 0 1px 0 color-mix(in oklch, var(--paper-100) 6%, transparent),
+              0 4px 24px rgba(0, 0, 0, 0.3);
+  border-bottom-color: color-mix(in oklch, var(--paper-100) 14%, transparent);
 }
 
 [data-theme="dark"] .artifact {
-  background: var(--graphite-900);
-  border-color: color-mix(in oklch, var(--paper-100) 12%, transparent);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklch, var(--paper-100) 6%, transparent),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="dark"] .artifact:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklch, var(--paper-100) 8%, transparent),
+    0 12px 32px rgba(0, 0, 0, 0.35),
+    0 4px 8px rgba(0, 0, 0, 0.2),
+    0 1px 3px rgba(0, 0, 0, 0.15);
   border-color: color-mix(in oklch, var(--paper-100) 24%, transparent);
 }
 
 [data-theme="dark"] .artifact:active {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklch, var(--paper-100) 5%, transparent),
+    0 4px 12px rgba(0, 0, 0, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="dark"] .systems-diagram,
@@ -267,4 +290,12 @@ html[data-lens="product"] {
 [data-theme="dark"] .skeleton-card,
 [data-theme="dark"] .skeleton-image {
   background: linear-gradient(90deg, var(--graphite-900) 25%, var(--graphite-800) 50%, var(--graphite-900) 75%);
+}
+
+/* Theme transition smoothing (toggled by dark-mode.js) */
+.theme-transitioning,
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
 }

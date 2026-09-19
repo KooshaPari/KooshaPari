@@ -112,5 +112,22 @@ export function renderShell(
   // must be re-inserted on every navigation.
   initDarkMode({ toolbar: header.querySelector('.atelier-tools') });
 
+  // Glass header: add scrolled state on scroll for elevated shadow
+  // Guard for Node.js prerender (stage-publication) where window is undefined
+  if (typeof window !== 'undefined') {
+    let scrollTicking = false;
+    function onScroll() {
+      if (scrollTicking) return;
+      scrollTicking = true;
+      requestAnimationFrame(() => {
+        header.classList.toggle('atelier-header--scrolled', window.scrollY > 10);
+        scrollTicking = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Apply initial state in case page loads scrolled
+    if (window.scrollY > 10) header.classList.add('atelier-header--scrolled');
+  }
+
   return header;
 }

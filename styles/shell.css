@@ -5,8 +5,22 @@
   gap: clamp(1rem, 3vw, 3rem);
   min-height: 6.5rem;
   padding: var(--space-3) var(--gutter);
-  border-bottom: 1px solid var(--rule);
-  background: color-mix(in oklch, var(--surface) 95%, transparent);
+  border-bottom: 1px solid color-mix(in oklch, var(--ink) 10%, transparent);
+  background: color-mix(in oklch, var(--surface) 78%, transparent);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-chrome, 10);
+  transition: background var(--motion-normal) var(--ease-out),
+              box-shadow var(--motion-normal) var(--ease-out),
+              border-color var(--motion-normal) var(--ease-out);
+}
+
+.atelier-header--scrolled {
+  box-shadow: 0 1px 0 color-mix(in oklch, var(--ink) 8%, transparent),
+              0 4px 24px color-mix(in oklch, var(--ink) 6%, transparent);
+  border-bottom-color: color-mix(in oklch, var(--ink) 14%, transparent);
 }
 
 .atelier-identity {
@@ -40,7 +54,7 @@
   text-decoration: none;
   position: relative;
   padding-block: 0.3rem;
-  transition: color 0.2s ease;
+  transition: color var(--motion-normal) var(--ease-out);
 }
 
 .atelier-nav a::after {
@@ -51,7 +65,7 @@
   width: 0;
   height: 1.5px;
   background: var(--arch-500);
-  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .atelier-nav a:hover::after {
@@ -87,7 +101,9 @@
 
 .lens-control button {
   padding-inline: var(--space-3);
-  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  transition: background var(--motion-normal) var(--ease-out),
+              color var(--motion-normal) var(--ease-out),
+              transform var(--motion-fast) var(--ease-spring);
 }
 
 .lens-control button:active {

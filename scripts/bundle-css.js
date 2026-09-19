@@ -58,6 +58,28 @@ function minifyCss(css) {
   // Collapse runs of spaces to a single space
   output = output.replace(/ +/g, ' ');
 
+  // Protect arithmetic inside functional notation (clamp/calc/min/max).
+  // CSS Values §10.1: inside these functions `+` and `-` require whitespace on
+  // BOTH sides (e.g. `clamp(2.45rem, 1.73rem + 2.9vw, 3.9rem)`). The adjacent-
+  // combinator collapse below would strip it, invalidating every clamp()-based
+  // type token (51 font-size declarations). Bodies are parked in placeholders
+  // in one innermost-first pass (nested functions handled by outer passes
+  // seeing the placeholder body), minified safely, then restored verbatim.
+  // The \u0001 sentinel never appears in source CSS, so placeholders cannot be
+  // rematched.
+  const mathBodies = [];
+  let prevProtected = null;
+  while (prevProtected !== output) {
+    prevProtected = output;
+    output = output.replace(
+      /\b(clamp|calc|min|max)\(([^()]*)\)/g,
+      (match, fn, body) => {
+        mathBodies.push(body);
+        return `\u0001${fn}\u0001(\u0001${mathBodies.length - 1}\u0001)`;
+      },
+    );
+  }
+
   // Remove spaces inside function parentheses: calc( 100% - 20px ) → calc(100%-20px)
   output = output.replace(/\(\s+/g, '(');
   output = output.replace(/\s+\)/g, ')');
@@ -98,6 +120,12 @@ function minifyCss(css) {
 
   // Remove empty rule blocks left over after stripping
   output = output.replace(/[^{}]*\{\}/g, '');
+
+  // Restore protected clamp/calc math bodies verbatim (whitespace intact)
+  output = output.replace(
+    /\u0001(clamp|calc|min|max)\u0001\(\u0001(\d+)\u0001\)/g,
+    (match, fn, index) => `${fn}(${mathBodies[Number(index)]})`,
+  );
 
   // Final cleanup: leading/trailing spaces on each remaining token
   output = output.replace(/^ +| +$/gm, '');

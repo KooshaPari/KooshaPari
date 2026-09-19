@@ -87,7 +87,7 @@ function choreographHeroPlate(heroPlate) {
 
   // Apply clip-path reveal to hero media
   media.style.clipPath = 'inset(8% 8% 8% 8% round 12px)';
-  media.style.transition = 'clip-path 1s cubic-bezier(0.16, 1, 0.3, 1)';
+  media.style.transition = 'clip-path 0.85s cubic-bezier(0.34, 1.56, 0.64, 1)';
 
   const observer = new IntersectionObserver(
     (entries) => {

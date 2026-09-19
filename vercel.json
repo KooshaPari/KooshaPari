@@ -37,6 +37,18 @@
       "headers": [
         {"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}
       ]
+    },
+    {
+      "source": "/data/(.*)",
+      "headers": [
+        {"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}
+      ]
+    },
+    {
+      "source": "/scripts/(.*)",
+      "headers": [
+        {"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}
+      ]
     }
   ],
   "rewrites": [
@@ -62,6 +74,10 @@
     {"source": "/contact", "destination": "/contact.html"},
     {"source": "/blog", "destination": "/blog.html"},
     {"source": "/blog/why-we-forked-omniroute", "destination": "/blog/why-we-forked-omniroute.html"},
+    {"source": "/blog/what-keycaps-taught-me-about-systems", "destination": "/blog/what-keycaps-taught-me-about-systems.html"},
+    {"source": "/blog/building-at-the-systems-boundary", "destination": "/blog/building-at-the-systems-boundary.html"},
+    {"source": "/blog/declarative-deployment-separating-intent-from-execution", "destination": "/blog/declarative-deployment-separating-intent-from-execution.html"},
+    {"source": "/blog/running-hundreds-of-ai-agents-without-losing-your-mind", "destination": "/blog/running-hundreds-of-ai-agents-without-losing-your-mind.html"},
     {"source": "/archive", "destination": "/archive.html"},
     {"source": "/((?!index\\.html|sitemap\\.xml|robots\\.txt|favicon\\.ico|assets/|asset-sources/|styles/|bundled/|scripts/|data/|public/|tests/|docs/|output/|\\.playwright-cli/|.*\\.md|.*\\.html|.*\\.css|.*\\.js|.*\\.webp|.*\\.png|.*\\.jpg|.*\\.svg|.*\\.gif|.*\\.ico|.*\\.woff|.*\\.woff2|.*\\.ttf|.*\\.eot|.*\\.glb).*)", "destination": "/root.html"}
   ]

@@ -1,145 +1,54 @@
 /* ================================================================
-   Phenotype Design System
-   - Dark, dense, fighter-card inspired
-   - Two main accents: amber (product), blue (engineering)
-   - One combined accent: lime (phenotype synthesis)
-   - Respects file-size mandates; modular files split below
+   Phenotype pages layer (portfolio, hero, lens pages)
+   - Colors resolve through the legacy alias bridge below, which
+     maps pre-tokens names onto the canonical tokens.css palette
+   - base.css owns html/body and the core element styles
    ================================================================ */
-@import url("./radar.css");
-@import url("./timeline.css");
-@import url("./cards.css");
-@import url("./hero.css");
+/* radar.css, timeline.css, cards.css, hero.css: bundled once in components.css. */
 
+/* Legacy alias bridge: pre-tokens names -> canonical tokens.css
+   palette (loaded first in core bundle). One SSOT, dark mode via
+   data-theme="dark". No hardcoded legacy colors remain. */
 :root {
-  --bg-0:      #07080c;
-  --bg-1:      #0c0f17;
-  --bg-2:      #11151f;
-  --bg-3:      #1a2030;
-  --bg-4:      #232a3d;
-  --line:      #1f2638;
-  --line-2:    #2b344b;
-  --fg:        #e8edf7;
-  --fg-mute:   #98a3b9;
-  --fg-dim:    #67738c;
+  --bg-0:    var(--paper-100);
+  --bg-1:    var(--surface-raised);
+  --bg-2:    var(--surface-ceramic-raised);
+  --bg-3:    var(--surface-inset);
+  --bg-4:    var(--surface-inset);
+  --line:    var(--rule);
+  --line-2:  var(--precision-rule-strong);
+  --fg:      var(--ink);
+  --fg-mute: var(--ink-muted);
+  --fg-dim:  color-mix(in oklch, var(--ink-muted) 78%, transparent);
 
-  --accent-prod:    #ffb95c;
-  --accent-prod-2:  #ff7a3d;
-  --accent-eng:     #5fb4ff;
-  --accent-eng-2:   #4a7dff;
-  --accent-pheno:   #b6f06b;
-  --accent-pheno-2: #5edc8a;
+  --accent-prod:    var(--accent-product);
+  --accent-prod-2:  var(--olive-300);
+  --accent-eng:     var(--accent-engineering);
+  --accent-eng-2:   var(--arch-300);
+  --accent-pheno:   var(--arch-500);
+  --accent-pheno-2: var(--arch-300);
 
-  --good:  #5edc8a;
-  --warn:  #ffbf3d;
-  --bad:   #ff5c6b;
+  --good: var(--acid-500);
+  --warn: var(--acid-500);
+  --bad:  #c0452c;
 
-  --r-md: 10px;
-  --r-lg: 16px;
-  --r-xl: 22px;
+  --r-md: 6px;
+  --r-lg: 10px;
+  --r-xl: 12px;
 
-  --shadow-1: 0 2px 8px rgba(0,0,0,.4);
-  --shadow-2: 0 18px 60px -10px rgba(0,0,0,.6),
-              0  6px 18px rgba(0,0,0,.45);
-
-  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --sans:    var(--font-reading);
+  --mono:    var(--font-meta);
+  --display: var(--font-display);
 }
 
 * { box-sizing: border-box; }
 
-html, body {
-  margin: 0; padding: 0;
-  background:
-    radial-gradient(1200px 600px at 85% -10%, rgba(95,180,255,.06), transparent 60%),
-    radial-gradient(1000px 500px at 0% 10%,   rgba(182,240,107,.05), transparent 60%),
-    radial-gradient(900px 500px at 50% 110%,  rgba(255,185,92,.05),  transparent 60%),
-    var(--bg-0);
-  font-family: var(--sans);
-  font-feature-settings: "ss01", "cv11";
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
+/* html,body base styles: owned by base.css (tokens.css palette). */
 
 #app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
-
-/* ---------- top bar ---------- */
-.topbar {
-  position: sticky; top: 0; z-index: 30;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 18px;
-  align-items: center;
-  padding: 14px 28px;
-  background: rgba(7, 8, 12, 0.85);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--line);
-}
-
-.brand { display: flex; align-items: center; gap: 12px; }
-.logo svg { display: block; }
-.brand-title {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 17px;
-  letter-spacing: 0.5px;
-  background: linear-gradient(135deg, var(--accent-pheno), var(--accent-eng));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.brand-sub {
-  font-size: 11px;
-  color: var(--fg-mute);
-  letter-spacing: 0.3px;
-}
-
-.nav {
-  display: flex; gap: 4px;
-  justify-content: center;
-  background: var(--bg-1);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 4px;
-  width: max-content;
-  margin: 0 auto;
-}
-.tab {
-  appearance: none;
-  background: transparent;
-  border: none;
-  color: var(--fg-mute);
-  padding: 7px 14px;
-  font: 600 12.5px/1 var(--sans);
-  letter-spacing: 0.3px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: color .15s, background .15s;
-}
-.tab:hover { color: var(--fg); }
-.tab.active {
-  background: linear-gradient(135deg, var(--accent-pheno), var(--accent-eng));
-  color: #0a0d14;
-}
-
-.meta {
-  font: 500 11.5px/1 var(--mono);
-  color: var(--fg-mute);
-  display: flex; align-items: center; gap: 6px;
-}
-.dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--good);
-  box-shadow: 0 0 0 3px rgba(94,220,138,.15);
-}
-.dot.live { animation: pulse 2.4s ease-in-out infinite; }
-@keyframes pulse {
-  0%,100% { box-shadow: 0 0 0 3px rgba(94,220,138,.10); }
-  50%     { box-shadow: 0 0 0 6px rgba(94,220,138,.22); }
 }
 
 /* ---------- main ---------- */
@@ -216,7 +125,7 @@ h2.section-title {
 .project-card-top { display:flex; justify-content:space-between; gap:8px; } .status-pill,.tag { color:var(--fg-dim); font:600 .68rem var(--mono); border:1px solid var(--line-2); border-radius:999px; padding:4px 7px; }
 .text-link,.project-links a,.contact-links a { color:var(--accent-eng); font-weight:600; } .muted { color:var(--fg-dim); font-size:.85rem; }
 .resume-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; margin-top:28px; } .resume-card h2 { font:700 1.5rem var(--display); margin-bottom:8px; }
-@media (max-width:760px) { .proof-grid { grid-template-columns:repeat(2,1fr); } .resume-grid { grid-template-columns:1fr; } .topbar { grid-template-columns:1fr auto; } .nav { grid-column:1/-1; grid-row:2; width:100%; overflow:auto; justify-content:flex-start; } .meta { display:none; } }
+@media (max-width:760px) { .proof-grid { grid-template-columns:repeat(2,1fr); } .resume-grid { grid-template-columns:1fr; } }
 
 /* ---------- hero ---------- */
 .hero {

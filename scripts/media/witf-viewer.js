@@ -16,20 +16,49 @@ let _hintEl = null;
 let _hintFaded = false;
 let _cleanupFns = [];
 let _destroyed = false;
+let _frameEnabled = true;
+let _gateObserver = null;
+let _viewObservers = [];
 
 const GLB_PATH = '/public/projects/witf/witf-keyboard.glb';
 const POSTER_SRC = '/public/projects/witf/hero-blender.webp';
 const POSTER_ALT = 'Blender 3D render of WITF Board split Alice keyboard with teal accent keys and brass weight.';
 
+/**
+ * How close the container must come before the model payload is fetched.
+ * The viewer sits roughly 1100 px down on desktop and 1565 px down at 390x844,
+ * so this keeps the whole three.js + GLB fetch off the first paint.
+ */
+const VIEWER_GATE_MARGIN = '300px';
+
 /* ------------------------------------------------------------------ */
 /*  WebGL feature detection                                           */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Cached WebGL capability probe. `null` until the first probe.
+ * @type {boolean | null}
+ */
+let _webglSupport = null;
+
+/**
+ * Probe once per session and release the probe context.
+ *
+ * This used to build a fresh WebGL context on every home render (measured: 7
+ * contexts after 7 in-app navigations) and never release them. Browsers cap
+ * live WebGL contexts per page, so the probe both cost a context creation per
+ * render and eventually forced the oldest context to be dropped.
+ */
 function webglSupported() {
+  if (_webglSupport !== null) return _webglSupport;
+
   try {
     const canvas = document.createElement('canvas');
-    return !!(canvas.getContext('webgl2') || canvas.getContext('webgl'));
-  } catch { return false; }
+    const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+    _webglSupport = !!gl;
+    gl?.getExtension('WEBGL_lose_context')?.loseContext();
+  } catch { _webglSupport = false; }
+  return _webglSupport;
 }
 
 function prefersReducedMotion() {
@@ -93,6 +122,14 @@ function fadeHint() {
 export function destroyWitfViewer() {
   _destroyed = true;
 
+  // Cancel a pending lazy-load gate so a route change cannot start the fetch.
+  _gateObserver?.disconnect();
+  _gateObserver = null;
+
+  for (const observer of _viewObservers) observer.disconnect();
+  _viewObservers = [];
+  _frameEnabled = true;
+
   if (_animationId != null) {
     cancelAnimationFrame(_animationId);
     _animationId = null;
@@ -121,19 +158,11 @@ export function destroyWitfViewer() {
 /*  Main init                                                         */
 /* ------------------------------------------------------------------ */
 
-export async function initWitfViewer(containerId = 'witf-viewer') {
-  if (_destroyed) _destroyed = false;
-
-  const container = document.getElementById(containerId);
-  if (!container) return;
+async function startWitfViewer(container) {
+  // The gate may fire after a route change destroyed the viewer.
+  if (_destroyed) return;
 
   _container = container;
-
-  // Guard: WebGL + motion
-  if (!webglSupported() || prefersReducedMotion()) {
-    showPoster(container);
-    return;
-  }
 
   const loadingEl = createLoadingIndicator(container);
 
@@ -261,9 +290,25 @@ export async function initWitfViewer(containerId = 'witf-viewer') {
     _scene.add(model);
 
     // ---- Animation loop ----
+    // Skip the draw whenever the viewer is offscreen. The scene auto-rotates,
+    // so an unpaused loop keeps burning GPU for the rest of the session after
+    // the visitor scrolls past the model.
+    if (typeof IntersectionObserver !== 'undefined') {
+      const view = new IntersectionObserver((entries) => {
+        for (const entry of entries) _frameEnabled = entry.isIntersecting;
+      }, { rootMargin: '100px' });
+      view.observe(container);
+      _viewObservers.push(view);
+      _cleanupFns.push(() => {
+        view.disconnect();
+        _viewObservers = _viewObservers.filter((observer) => observer !== view);
+      });
+    }
+
     const animate = () => {
       if (_destroyed) return;
       _animationId = requestAnimationFrame(animate);
+      if (!_frameEnabled) return;
       _controls.update();
       _renderer.render(_scene, _camera);
     };
@@ -293,4 +338,42 @@ export async function initWitfViewer(containerId = 'witf-viewer') {
     loadingEl.remove();
     showPoster(container);
   }
+}
+
+/**
+ * Initialise the WITF viewer for a container, deferring the model payload.
+ *
+ * three.js is ~1.31 MB raw (~265 KB gzip), OrbitControls + GLTFLoader add
+ * ~30 KB gzip, and the GLB is 2.67 MB. That is ~3 MB of third-party payload
+ * that the landing page used to fetch during the first idle callback, before
+ * the visitor had scrolled anywhere near the model. The imports now wait until
+ * the container is within VIEWER_GATE_MARGIN of the viewport.
+ */
+export async function initWitfViewer(containerId = 'witf-viewer') {
+  if (_destroyed) _destroyed = false;
+
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  _container = container;
+
+  // Guard: WebGL + motion
+  if (!webglSupported() || prefersReducedMotion()) {
+    showPoster(container);
+    return;
+  }
+
+  if (typeof IntersectionObserver !== 'undefined') {
+    const gate = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      gate.disconnect();
+      if (_gateObserver === gate) _gateObserver = null;
+      startWitfViewer(container);
+    }, { rootMargin: VIEWER_GATE_MARGIN });
+    _gateObserver = gate;
+    gate.observe(container);
+    return;
+  }
+
+  await startWitfViewer(container);
 }

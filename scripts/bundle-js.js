@@ -105,8 +105,10 @@ function stripDeclarations(source) {
 // --- Build ---
 
 loadModule(ENTRY);
-// Also bundle cursor.js (dynamically imported in HTML) for fewer HTTP requests
-loadModule(resolve(ROOT, 'scripts/cursor.js'));
+// cursor.js is deliberately NOT bundled. It is loaded by an explicit
+// `import('/scripts/cursor.js')` in the HTML, and this bundler emits an IIFE
+// with no exports, so an inlined copy could never satisfy that import — it was
+// pure dead weight duplicated on the wire.
 
 // Gather every unique export symbol across all modules, deduplicated
 const seen = new Set();
