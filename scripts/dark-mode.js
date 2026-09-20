@@ -33,8 +33,16 @@
  * ============================================================
  */
 
-const STORAGE_KEY = 'koosha-atelier-theme';
-const TRANSITION_MS = 300;
+import {
+  STORAGE_KEY,
+  TRANSITION_MS,
+  validateStored,
+  resolveTheme,
+  nextTheme,
+  iconForTheme,
+  ariaPressedFor,
+  dataThemeAttribute,
+} from './dark-mode-helpers.js';
 
 /** @type {'light' | 'dark' | null} Manual override (null = follow system). */
 let manualOverride = null;
@@ -48,26 +56,23 @@ let cleanupListener = null;
 
 function readStored() {
   try {
-    const v = localStorage.getItem(STORAGE_KEY);
-    if (v === 'light' || v === 'dark') return v;
+    return validateStored(localStorage.getItem(STORAGE_KEY));
   } catch { /* SSR / private-browsing */ }
   return null;
 }
 
 function systemPreference() {
-  if (typeof window === 'undefined') return 'light';
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark'
-    : 'light';
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
 
-function resolvedTheme() {
-  return manualOverride ?? systemPreference();
+function activeTheme() {
+  return resolveTheme(manualOverride, systemPreference());
 }
 
 function applyToDOM(theme) {
   const root = document.documentElement;
-  root.setAttribute('data-theme', theme);
+  root.setAttribute('data-theme', dataThemeAttribute(theme));
 
   // Smooth transition — add class, remove after TRANSITION_MS
   root.classList.add('theme-transitioning');
@@ -82,37 +87,9 @@ function persist(theme) {
 
 function updateButton(btn, theme) {
   if (!btn) return;
-  const isDark = theme === 'dark';
-  btn.setAttribute('aria-pressed', String(isDark));
-  btn.innerHTML = isDark ? MOON_SVG : SUN_SVG;
+  btn.setAttribute('aria-pressed', ariaPressedFor(theme));
+  btn.innerHTML = iconForTheme(theme);
 }
-
-/* ------------------------------------------------------------------ */
-/*  SVG icons — inline, 20px viewBox, no emoji                         */
-/* ------------------------------------------------------------------ */
-
-const SUN_SVG = /*html*/ `<svg width="20" height="20" viewBox="0 0 24 24"
-  fill="none" stroke="currentColor" stroke-width="2"
-  stroke-linecap="round" stroke-linejoin="round"
-  aria-hidden="true">
-  <circle cx="12" cy="12" r="5"/>
-  <line x1="12" y1="1" x2="12" y2="3"/>
-  <line x1="12" y1="21" x2="12" y2="23"/>
-  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-  <line x1="1" y1="12" x2="3" y2="12"/>
-  <line x1="21" y1="12" x2="23" y2="12"/>
-  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-</svg>`;
-
-const MOON_SVG = /*html*/ `<svg width="20" height="20" viewBox="0 0 24 24"
-  fill="none" stroke="currentColor" stroke-width="2"
-  stroke-linecap="round" stroke-linejoin="round"
-  aria-hidden="true">
-  <path d="M21 12.79A9 9 0 1 1 11.21 3
-           7 7 0 0 0 21 12.79z"/>
-</svg>`;
 
 /* ------------------------------------------------------------------ */
 /*  Public API                                                         */
@@ -133,19 +110,19 @@ export function initDarkMode({ toolbar, insertBefore } = {}) {
   manualOverride = readStored();
 
   // 2. Apply initial theme before first paint (attribute must exist early)
-  const initial = resolvedTheme();
-  document.documentElement.setAttribute('data-theme', initial);
+  const initial = activeTheme();
+  document.documentElement.setAttribute('data-theme', dataThemeAttribute(initial));
 
   // 3. Build toggle button
   const btn = document.createElement('button');
   btn.type = 'button';
   btn.className = 'dark-mode-toggle';
   btn.setAttribute('aria-label', 'Toggle dark mode');
-  btn.setAttribute('aria-pressed', String(initial === 'dark'));
-  btn.innerHTML = initial === 'dark' ? MOON_SVG : SUN_SVG;
+  btn.setAttribute('aria-pressed', ariaPressedFor(initial));
+  btn.innerHTML = iconForTheme(initial);
 
   btn.addEventListener('click', () => {
-    const next = resolvedTheme() === 'dark' ? 'light' : 'dark';
+    const next = nextTheme(activeTheme());
     setTheme(next);
   });
 
@@ -193,5 +170,5 @@ export function setTheme(theme) {
  * @returns {'light' | 'dark'}
  */
 export function getTheme() {
-  return resolvedTheme();
+  return activeTheme();
 }
