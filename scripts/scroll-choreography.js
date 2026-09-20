@@ -16,9 +16,30 @@
  * Export: initScrollChoreography()
  */
 
+import {
+  SEQUENCE_OBSERVER_THRESHOLD,
+  SEQUENCE_OBSERVER_ROOT_MARGIN,
+  HERO_OBSERVER_THRESHOLD,
+  HERO_CLIP_INSET,
+  HERO_CLIP_EXPANDED,
+  HERO_CLIP_TRANSITION,
+  HERO_ANIMATION_CLEANUP_MS,
+  HIDDEN_TRANSFORM,
+  HIDDEN_OPACITY,
+  CLASS_REVEAL_HIDDEN,
+  CLASS_REVEAL_VISIBLE,
+  SELECTOR_ARTIFACT,
+  SELECTOR_HERO_MEDIA,
+  SELECTOR_ARTIFACT_SEQUENCE,
+  SELECTOR_HERO_PLATE,
+  revealDelayFor,
+  parallaxOffsetFor,
+  parallaxScaleFor,
+  normalizedDistance,
+  parallaxVarsFor,
+} from './scroll-choreography-helpers.js';
+
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)');
-const STAGGER_BASE = 120; // ms between each card's entrance
-const BEAT_DURATION = 800; // ms for each animation beat
 
 /**
  * Apply staggered reveal delays to artifact sequence children.
@@ -26,17 +47,18 @@ const BEAT_DURATION = 800; // ms for each animation beat
 function choreographArtifactSequence(container) {
   if (REDUCED_MOTION.matches) return;
 
-  const cards = container.querySelectorAll('.artifact');
+  const cards = container.querySelectorAll(SELECTOR_ARTIFACT);
   cards.forEach((card, index) => {
-    // Set stagger delay based on position
-    const delay = index * STAGGER_BASE;
+    const delay = revealDelayFor(index);
     card.style.transitionDelay = `${delay}ms`;
 
-    // Apply initial hidden state if not already set
-    if (!card.classList.contains('reveal-visible') && !card.classList.contains('reveal-hidden')) {
-      card.classList.add('reveal-hidden');
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(32px) scale(0.97)';
+    if (
+      !card.classList.contains(CLASS_REVEAL_VISIBLE) &&
+      !card.classList.contains(CLASS_REVEAL_HIDDEN)
+    ) {
+      card.classList.add(CLASS_REVEAL_HIDDEN);
+      card.style.opacity = HIDDEN_OPACITY;
+      card.style.transform = HIDDEN_TRANSFORM;
     }
   });
 }
@@ -51,12 +73,12 @@ function observeArtifactSequence(container) {
     (entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
-          const cards = entry.target.querySelectorAll('.artifact');
+          const cards = entry.target.querySelectorAll(SELECTOR_ARTIFACT);
           cards.forEach((card, index) => {
-            const delay = index * STAGGER_BASE;
+            const delay = revealDelayFor(index);
             setTimeout(() => {
-              card.classList.remove('reveal-hidden');
-              card.classList.add('reveal-visible');
+              card.classList.remove(CLASS_REVEAL_HIDDEN);
+              card.classList.add(CLASS_REVEAL_VISIBLE);
               card.style.opacity = '';
               card.style.transform = '';
               card.style.transitionDelay = '';
@@ -67,8 +89,8 @@ function observeArtifactSequence(container) {
       }
     },
     {
-      threshold: 0.1,
-      rootMargin: '0px 0px -60px 0px',
+      threshold: SEQUENCE_OBSERVER_THRESHOLD,
+      rootMargin: SEQUENCE_OBSERVER_ROOT_MARGIN,
     }
   );
 
@@ -82,31 +104,28 @@ function observeArtifactSequence(container) {
 function choreographHeroPlate(heroPlate) {
   if (REDUCED_MOTION.matches) return;
 
-  const media = heroPlate.querySelector('.artifact-media');
+  const media = heroPlate.querySelector(SELECTOR_HERO_MEDIA);
   if (!media) return;
 
-  // Apply clip-path reveal to hero media
-  media.style.clipPath = 'inset(8% 8% 8% 8% round 12px)';
-  media.style.transition = 'clip-path 0.85s cubic-bezier(0.34, 1.56, 0.64, 1)';
+  media.style.clipPath = HERO_CLIP_INSET;
+  media.style.transition = HERO_CLIP_TRANSITION;
 
   const observer = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
-          // Reveal: expand clip-path to full
           requestAnimationFrame(() => {
-            media.style.clipPath = 'inset(0% 0% 0% 0% round 0px)';
+            media.style.clipPath = HERO_CLIP_EXPANDED;
           });
-          // Clean up after animation
           setTimeout(() => {
             media.style.clipPath = '';
             media.style.transition = '';
-          }, BEAT_DURATION + 200);
+          }, HERO_ANIMATION_CLEANUP_MS);
           observer.unobserve(entry.target);
         }
       }
     },
-    { threshold: 0.2 }
+    { threshold: HERO_OBSERVER_THRESHOLD }
   );
 
   observer.observe(heroPlate);
@@ -119,7 +138,7 @@ function choreographHeroPlate(heroPlate) {
 function addArtifactParallax(container) {
   if (REDUCED_MOTION.matches) return;
 
-  const artifacts = container.querySelectorAll('.artifact');
+  const artifacts = container.querySelectorAll(SELECTOR_ARTIFACT);
   let ticking = false;
 
   function onScroll() {
@@ -129,17 +148,9 @@ function addArtifactParallax(container) {
     requestAnimationFrame(() => {
       artifacts.forEach((artifact) => {
         const rect = artifact.getBoundingClientRect();
-        const viewportCenter = window.innerHeight / 2;
-        const artifactCenter = rect.top + rect.height / 2;
-        const distance = (artifactCenter - viewportCenter) / window.innerHeight;
-
-        // Subtle Y parallax: cards move slightly slower than scroll
-        const parallaxY = distance * -15;
-        // Subtle scale: cards slightly larger when centered
-        const scale = 1 + Math.abs(distance) * -0.01;
-
-        artifact.style.setProperty('--parallax-y', `${parallaxY}px`);
-        artifact.style.setProperty('--parallax-scale', `${Math.max(0.98, scale)}`);
+        const { parallaxY, parallaxScale } = parallaxVarsFor(rect, window.innerHeight);
+        artifact.style.setProperty('--parallax-y', parallaxY);
+        artifact.style.setProperty('--parallax-scale', parallaxScale);
       });
       ticking = false;
     });
@@ -155,17 +166,24 @@ function addArtifactParallax(container) {
 export function initScrollChoreography() {
   if (REDUCED_MOTION.matches) return;
 
-  // Find artifact sequences on home page
-  const sequences = document.querySelectorAll('.home-artifact-sequence');
+  const sequences = document.querySelectorAll(SELECTOR_ARTIFACT_SEQUENCE);
   sequences.forEach((container) => {
     choreographArtifactSequence(container);
     observeArtifactSequence(container);
     addArtifactParallax(container);
   });
 
-  // Find hero plates
-  const heroPlates = document.querySelectorAll('.home-opening-artifact');
+  const heroPlates = document.querySelectorAll(SELECTOR_HERO_PLATE);
   heroPlates.forEach((plate) => {
     choreographHeroPlate(plate);
   });
 }
+
+// Re-export helpers for callers that import the orchestrator module.
+export {
+  revealDelayFor,
+  parallaxOffsetFor,
+  parallaxScaleFor,
+  normalizedDistance,
+  parallaxVarsFor,
+};
