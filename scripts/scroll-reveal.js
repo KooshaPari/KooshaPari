@@ -16,8 +16,14 @@
      refreshObserver();   // call after SPA route change to rescan DOM
    ================================================================ */
 
-const SELECTOR = '[data-reveal]';
-const DEFAULT_DISTANCE = 24;
+import {
+  SELECTOR,
+  DEFAULT_OPTIONS,
+  parseRevealDistance,
+  parseRevealDelay,
+  distanceCssVar,
+  delayStyle,
+} from './scroll-reveal-helpers.js';
 
 let _observer = null;
 let _mutationObserver = null;
@@ -35,11 +41,12 @@ function prefersReducedMotion() {
    Apply initial hidden state to an element based on its data-reveal
    ------------------------------------------------------------------ */
 function applyHiddenState(el) {
-  const distance = parseInt(el.dataset.revealDistance, 10) || DEFAULT_DISTANCE;
+  const distance = parseRevealDistance(el.dataset);
 
   // Set custom distance as CSS custom property so CSS can use it
-  if (distance !== DEFAULT_DISTANCE) {
-    el.style.setProperty('--reveal-distance', `${distance}px`);
+  const cssVar = distanceCssVar(distance);
+  if (cssVar !== null) {
+    el.style.setProperty('--reveal-distance', cssVar);
   }
 }
 
@@ -47,9 +54,10 @@ function applyHiddenState(el) {
    Apply stagger delay from data-reveal-delay
    ------------------------------------------------------------------ */
 function applyDelay(el) {
-  const delay = parseInt(el.dataset.revealDelay, 10);
-  if (!isNaN(delay) && delay > 0) {
-    el.style.transitionDelay = `${delay}ms`;
+  const delay = parseRevealDelay(el.dataset);
+  const style = delayStyle(delay);
+  if (style !== null) {
+    el.style.transitionDelay = style;
   }
 }
 
@@ -127,10 +135,7 @@ function createObserver() {
         }
       }
     },
-    {
-      threshold: 0.1,
-      rootMargin: '0px 0px -40px 0px',
-    }
+    DEFAULT_OPTIONS
   );
 }
 
