@@ -141,3 +141,6 @@ echo ""
 echo "[detector] Fix all violations before opening a PR. See:"
 echo "  .claude/skills/phenotype-design-constitution/SKILL.md Section D"
 exit 1
+
+# deliberate violation for hook test
+setTimeout(() => { doBad(); }, 1000);
