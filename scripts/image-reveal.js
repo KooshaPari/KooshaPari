@@ -8,9 +8,32 @@
  * Export: initImageReveal()
  */
 
-const REVEAL_STYLES = ['wipe-right', 'zoom-fade', 'curtain', 'pixelate'];
-const TRANSITION_DURATION = 800;
-const EASING = 'cubic-bezier(0.16, 1, 0.3, 1)';
+import {
+  PLACEHOLDER_FADE_DELAY_MS,
+  CLASS_REVEALED,
+  CLASS_IMG,
+  CLASS_CONTAINER,
+  CLASS_PLACEHOLDER,
+  ATTR_REVEAL_STYLE,
+  ATTR_REVEAL_PROCESSED,
+  ATTR_DATA_SRC,
+  VAR_REVEAL_ASPECT,
+  pickRevealStyle,
+  isValidRevealStyle,
+  aspectRatioVar,
+  backgroundImageFor,
+  cleanupDelayMs,
+  wipeRightInitialClipPath,
+  wipeRightFinalClipPath,
+  zoomFadeInitial,
+  zoomFadeFinal,
+  curtainInitialClipPath,
+  curtainFinalClipPath,
+  pixelateInitial,
+  pixelateFinal,
+  transitionFor,
+  transitionsFor,
+} from './image-reveal-helpers.js';
 
 /**
  * Check whether the user prefers reduced motion.
@@ -25,10 +48,8 @@ function prefersReducedMotion() {
  * @param {HTMLImageElement} img
  * @returns {string}
  */
-function pickRevealStyle(img) {
-  const attr = img.getAttribute('data-reveal-style');
-  if (attr && REVEAL_STYLES.includes(attr)) return attr;
-  return REVEAL_STYLES[Math.floor(Math.random() * REVEAL_STYLES.length)];
+function pickRevealStyleForImg(img) {
+  return pickRevealStyle(img.getAttribute(ATTR_REVEAL_STYLE));
 }
 
 /**
@@ -37,64 +58,64 @@ function pickRevealStyle(img) {
  * @param {string} style
  */
 function applyRevealStyle(img, style) {
-  img.setAttribute('data-reveal-style', style);
+  img.setAttribute(ATTR_REVEAL_STYLE, style);
 
   switch (style) {
-    case 'wipe-right':
+    case 'wipe-right': {
       // Start hidden: inset from left
-      img.style.clipPath = 'inset(0 100% 0 0)';
+      img.style.clipPath = wipeRightInitialClipPath();
       img.style.transition = 'none';
       // Force reflow
       void img.offsetHeight;
-      img.style.transition = `clip-path ${TRANSITION_DURATION}ms ${EASING}`;
+      img.style.transition = transitionFor('clip-path');
       requestAnimationFrame(() => {
-        img.style.clipPath = 'inset(0)';
+        img.style.clipPath = wipeRightFinalClipPath();
       });
       break;
+    }
 
-    case 'zoom-fade':
-      img.style.transform = 'scale(1.05)';
-      img.style.filter = 'blur(10px)';
-      img.style.opacity = '0';
+    case 'zoom-fade': {
+      const init = zoomFadeInitial();
+      const fin = zoomFadeFinal();
+      img.style.transform = init.transform;
+      img.style.filter = init.filter;
+      img.style.opacity = init.opacity;
       img.style.transition = 'none';
       void img.offsetHeight;
-      img.style.transition = [
-        `transform ${TRANSITION_DURATION}ms ${EASING}`,
-        `filter ${TRANSITION_DURATION}ms ${EASING}`,
-        `opacity ${TRANSITION_DURATION}ms ${EASING}`,
-      ].join(', ');
+      img.style.transition = transitionsFor(['transform', 'filter', 'opacity']);
       requestAnimationFrame(() => {
-        img.style.transform = 'scale(1)';
-        img.style.filter = 'blur(0)';
-        img.style.opacity = '1';
+        img.style.transform = fin.transform;
+        img.style.filter = fin.filter;
+        img.style.opacity = fin.opacity;
       });
       break;
+    }
 
-    case 'curtain':
-      img.style.clipPath = 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)';
+    case 'curtain': {
+      img.style.clipPath = curtainInitialClipPath();
       img.style.transition = 'none';
       void img.offsetHeight;
-      img.style.transition = `clip-path ${TRANSITION_DURATION}ms ${EASING}`;
+      img.style.transition = transitionFor('clip-path');
       requestAnimationFrame(() => {
-        img.style.clipPath = 'polygon(0 0, 100% 0, 100% 100%, 0 100%)';
+        img.style.clipPath = curtainFinalClipPath();
       });
       break;
+    }
 
-    case 'pixelate':
-      // Simulate pixelate via contrast + saturate filter stepping
-      img.style.filter = 'contrast(20) saturate(0) blur(6px)';
-      img.style.opacity = '0';
+    case 'pixelate': {
+      const init = pixelateInitial();
+      const fin = pixelateFinal();
+      img.style.filter = init.filter;
+      img.style.opacity = init.opacity;
       img.style.transition = 'none';
       void img.offsetHeight;
-      img.style.transition = [
-        `filter ${TRANSITION_DURATION}ms ${EASING}`,
-        `opacity ${TRANSITION_DURATION}ms ${EASING}`,
-      ].join(', ');
+      img.style.transition = transitionsFor(['filter', 'opacity']);
       requestAnimationFrame(() => {
-        img.style.filter = 'contrast(1) saturate(1) blur(0)';
-        img.style.opacity = '1';
+        img.style.filter = fin.filter;
+        img.style.opacity = fin.opacity;
       });
       break;
+    }
   }
 }
 
@@ -105,16 +126,13 @@ function applyRevealStyle(img, style) {
 function cleanupAfterReveal(img) {
   setTimeout(() => {
     // Add .revealed so CSS rules override the hidden state.
-    // Without this, CSS selectors like
-    //   .image-reveal-img[data-reveal-style="zoom-fade"] { opacity: 0 }
-    // keep the image invisible after inline styles are cleared.
-    img.classList.add('revealed');
+    img.classList.add(CLASS_REVEALED);
     img.style.clipPath = '';
     img.style.transform = '';
     img.style.filter = '';
     img.style.opacity = '';
     img.style.transition = '';
-  }, TRANSITION_DURATION + 50);
+  }, cleanupDelayMs());
 }
 
 /**
@@ -124,19 +142,21 @@ function cleanupAfterReveal(img) {
  */
 function wrapImage(img) {
   // Already wrapped
-  if (img.parentElement && img.parentElement.classList.contains('image-reveal-container')) {
+  if (img.parentElement && img.parentElement.classList.contains(CLASS_CONTAINER)) {
     return img.parentElement;
   }
 
   const container = document.createElement('div');
-  container.className = 'image-reveal-container';
+  container.className = CLASS_CONTAINER;
 
   // Propagate intrinsic dimensions so the container reserves space
   // before the image loads (prevents CLS).
-  const w = parseInt(img.getAttribute('width'), 10);
-  const h = parseInt(img.getAttribute('height'), 10);
-  if (w > 0 && h > 0) {
-    container.style.setProperty('--reveal-aspect', `${w} / ${h}`);
+  const aspect = aspectRatioVar(
+    img.getAttribute('width'),
+    img.getAttribute('height')
+  );
+  if (aspect) {
+    container.style.setProperty(VAR_REVEAL_ASPECT, aspect);
   }
 
   // Insert container before the image, then move image into it
@@ -145,17 +165,18 @@ function wrapImage(img) {
 
   // Build placeholder — sample the image's current colour or use paper
   const placeholder = document.createElement('div');
-  placeholder.className = 'image-reveal-placeholder';
+  placeholder.className = CLASS_PLACEHOLDER;
   placeholder.setAttribute('aria-hidden', 'true');
   container.insertBefore(placeholder, img);
 
   // If image has an immediate src, use it as blurred backdrop
-  if (img.src && !img.src.startsWith('data:')) {
-    placeholder.style.backgroundImage = `url(${img.src})`;
+  const bgImage = backgroundImageFor(img.src);
+  if (bgImage) {
+    placeholder.style.backgroundImage = bgImage;
   }
 
   // Mark image for styling
-  img.classList.add('image-reveal-img');
+  img.classList.add(CLASS_IMG);
 
   return container;
 }
@@ -168,7 +189,7 @@ function observeImage(img) {
   // Handle data-src lazy-load pattern
   if (img.dataset.src && !img.src) {
     const realSrc = img.dataset.src;
-    img.removeAttribute('data-src');
+    img.removeAttribute(ATTR_DATA_SRC);
 
     // Create a temporary Image to preload the real source
     const preloader = new Image();
@@ -199,10 +220,10 @@ function observeImage(img) {
   img.addEventListener('error', () => {
     img.removeEventListener('load', onLoad);
     wrapImage(img);
-    img.classList.add('image-reveal-img');
-    img.classList.add('revealed');
-    const container = img.closest('.image-reveal-container');
-    const ph = container?.querySelector('.image-reveal-placeholder');
+    img.classList.add(CLASS_IMG);
+    img.classList.add(CLASS_REVEALED);
+    const container = img.closest(`.${CLASS_CONTAINER}`);
+    const ph = container?.querySelector(`.${CLASS_PLACEHOLDER}`);
     if (ph) ph.classList.add('loaded');
   }, { once: true });
 }
@@ -212,23 +233,23 @@ function observeImage(img) {
  * @param {HTMLImageElement} img
  */
 function revealImage(img) {
-  const container = img.closest('.image-reveal-container');
-  const placeholder = container?.querySelector('.image-reveal-placeholder');
+  const container = img.closest(`.${CLASS_CONTAINER}`);
+  const placeholder = container?.querySelector(`.${CLASS_PLACEHOLDER}`);
 
   if (prefersReducedMotion()) {
     // Instant show — no animation
-    img.classList.add('image-reveal-img');
+    img.classList.add(CLASS_IMG);
     if (placeholder) placeholder.classList.add('loaded');
     return;
   }
 
-  const style = pickRevealStyle(img);
+  const style = pickRevealStyleForImg(img);
   applyRevealStyle(img, style);
 
   // Fade out placeholder after a short stagger
   setTimeout(() => {
     if (placeholder) placeholder.classList.add('loaded');
-  }, 80);
+  }, PLACEHOLDER_FADE_DELAY_MS);
 
   cleanupAfterReveal(img);
 }
@@ -238,9 +259,9 @@ function revealImage(img) {
  * @param {Element} [root=document.body]
  */
 function scanImages(root = document.body) {
-  const images = root.querySelectorAll('img:not([data-reveal-processed])');
+  const images = root.querySelectorAll(`img:not([${ATTR_REVEAL_PROCESSED}])`);
   images.forEach((img) => {
-    img.setAttribute('data-reveal-processed', 'true');
+    img.setAttribute(ATTR_REVEAL_PROCESSED, 'true');
     observeImage(img);
   });
 }
@@ -273,9 +294,9 @@ export function initImageReveal() {
       // Re-scan on attribute changes (e.g. src updated for lazy load)
       if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
         const el = mutation.target;
-        if (el.tagName === 'IMG' && el.getAttribute('data-reveal-processed')) {
+        if (el.tagName === 'IMG' && el.getAttribute(ATTR_REVEAL_PROCESSED)) {
           // Re-trigger reveal for src changes (lazy load swap)
-          el.removeAttribute('data-reveal-processed');
+          el.removeAttribute(ATTR_REVEAL_PROCESSED);
           observeImage(el);
         }
       }
@@ -286,7 +307,7 @@ export function initImageReveal() {
     childList: true,
     subtree: true,
     attributes: true,
-    attributeFilter: ['src', 'data-src'],
+    attributeFilter: ['src', ATTR_DATA_SRC],
   });
 
   return {
@@ -295,3 +316,11 @@ export function initImageReveal() {
     },
   };
 }
+
+// Re-export for callers that import the orchestrator module.
+export {
+  pickRevealStyle,
+  aspectRatioVar,
+  backgroundImageFor,
+  isValidRevealStyle,
+};
