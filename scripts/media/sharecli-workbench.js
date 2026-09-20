@@ -134,6 +134,20 @@ export function createShareCliWorkbench(initial = {}) {
         primitive: entry.objectPrimitive,
       };
     },
+    // Explicit state graph: each state names its `next` and `previous` successors so a renderer
+    // can build a transition table, surface it in the parity block, and verify reachability.
+    // Mirrors how TUI state machines (ratatui, charm) expose transitions as a first-class
+    // observable rather than inferring them from controller methods.
+    getStateGraph() {
+      const n = SHARECLI_STATES.length;
+      return SHARECLI_STATES.map((entry, index) => ({
+        index,
+        id: entry.id,
+        label: entry.label,
+        next: (index + 1) % n,
+        previous: (index - 1 + n) % n,
+      }));
+    },
     // Parity text covers the four contexts a precision artifact must
     // respect: static rendering, no-JavaScript fallback, reduced-motion
     // fallback, and the provenance boundary between this Workbench and the
@@ -150,6 +164,19 @@ function renderReaderSequence() {
     SHARECLI_STATES.map((state) => el('li', {},
       el('strong', {}, `${state.label}: `), state.readerSequence)),
   );
+}
+
+// APG listbox-style option label: "State N of M — Label, M highlighted roles, L pushers, R stationary bases".
+// Announced by screen readers on selection. Mirrors how MUBI and YouTube expose their option
+// labels without animation.
+function listboxOptionLabel(stateIndex) {
+  const state = SHARECLI_STATES[stateIndex];
+  const pushers = state.objectRoles.filter((role) => role === 'pusher').length;
+  const stationary = state.objectRoles.filter((role) => role === 'stationary-base').length;
+  const roleTotal = state.objectRoles.length;
+  const highlightedCount = Math.max(0, roleTotal - pushers - stationary);
+  const ordinal = stateIndex + 1;
+  return `State ${ordinal} of ${SHARECLI_STATES.length}: ${state.label}. ${state.materialLabel}. ${highlightedCount} highlighted ${highlightedCount === 1 ? 'artifact' : 'artifacts'}, ${pushers} ${pushers === 1 ? 'pusher' : 'pushers'}, ${stationary} stationary base.`;
 }
 
 function objectIllustrationDataUrl(selected, state) {
@@ -176,7 +203,17 @@ export function renderShareCliWorkbench(documentRef = document) {
   root.setAttribute('aria-labelledby', 'sharecli-workbench-title');
   const title = el('h3', { id: 'sharecli-workbench-title' }, 'Reader / Explore Runtime Workbench');
   const summary = el('p', { class: 'sharecli-workbench__intro' }, workbench.parityText());
-  const controls = el('div', { class: 'sharecli-workbench__controls', role: 'group', 'aria-label': 'Illustrative ShareCLI runtime states' });
+  // APG listbox pattern: a single tab stop with roving tabindex drives a list of options.
+  // Arrow keys move selection (without changing the active descendant visually yet), Home/End
+  // jump, Space/Enter activates, Tab moves focus to the next tab stop. The listbox is a single
+  // tab stop so screen readers and keyboard users only enter the picker once per visit.
+  const controls = el('div', {
+    class: 'sharecli-workbench__controls',
+    role: 'listbox',
+    'aria-label': 'Illustrative ShareCLI runtime states',
+    'aria-activedescendant': 'sharecli-workbench-option-0',
+    tabindex: '0',
+  });
   const panel = el('section', { class: 'sharecli-workbench__panel', 'aria-live': 'polite', tabindex: '0' });
   const reader = el('section', { class: 'sharecli-workbench__reader', 'aria-labelledby': 'sharecli-reader-title' },
     el('h4', { id: 'sharecli-reader-title' }, 'Reader sequence'), renderReaderSequence());
@@ -194,10 +231,19 @@ export function renderShareCliWorkbench(documentRef = document) {
 
   const render = ({ state, motion }) => {
     const selected = SHARECLI_STATES[state];
-    controls.replaceChildren(...SHARECLI_STATES.map((entry, index) => el('button', {
-      type: 'button', 'aria-pressed': String(index === state), class: index === state ? 'is-active' : '',
+    // Roving tabindex: only the currently-selected option has tabindex=0; the rest have
+    // tabindex=-1. The listbox itself has tabindex=0 so focus lands on the picker as a whole
+    // (one tab stop), and arrow keys move focus between options without leaving the listbox.
+    controls.replaceChildren(...SHARECLI_STATES.map((entry, index) => el('div', {
+      id: `sharecli-workbench-option-${index}`,
+      role: 'option',
+      class: index === state ? 'is-active sharecli-workbench__option' : 'sharecli-workbench__option',
+      'aria-selected': String(index === state),
+      tabindex: index === state ? '0' : '-1',
+      'aria-label': listboxOptionLabel(index),
       onclick: () => workbench.selectState(index),
     }, entry.label)));
+    controls.setAttribute('aria-activedescendant', `sharecli-workbench-option-${state}`);
     // Precision-object presentation: surface the material label, the
     // object-first description, the role vocabulary, and the alt text so
     // every state names the artifact as an object, never as a frame or
@@ -222,7 +268,40 @@ export function renderShareCliWorkbench(documentRef = document) {
     motionButton.setAttribute('aria-pressed', String(motion));
   };
 
+  // True when the event originated inside the listbox (the listbox container itself, or any
+  // of its options). Used to scope arrow-key handling so visitors cycling through options do
+  // not double-step via the document-level handlers at the bottom of this listener.
+  const eventIsInsideListbox = (event) => controls.contains(event.target);
+
   root.addEventListener('keydown', (event) => {
+    if (eventIsInsideListbox(event) && (event.key === 'ArrowRight' || event.key === 'ArrowDown')) {
+      // Arrow keys within the listbox move focus between options (APG listbox contract).
+      event.preventDefault();
+      workbench.next();
+      // Move focus to the now-selected option without leaving the listbox.
+      const active = controls.querySelector(`#sharecli-workbench-option-${workbench.get().state}`);
+      if (active) active.focus();
+      return;
+    }
+    if (eventIsInsideListbox(event) && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
+      event.preventDefault();
+      workbench.previous();
+      const active = controls.querySelector(`#sharecli-workbench-option-${workbench.get().state}`);
+      if (active) active.focus();
+      return;
+    }
+    if (eventIsInsideListbox(event) && (event.key === 'Home' || event.key === 'End')) {
+      event.preventDefault();
+      workbench.selectState(event.key === 'Home' ? 0 : SHARECLI_STATES.length - 1);
+      const active = controls.querySelector(`#sharecli-workbench-option-${workbench.get().state}`);
+      if (active) active.focus();
+      return;
+    }
+    if (eventIsInsideListbox(event)) {
+      // Any other key (Tab, Space, Enter, PageUp, PageDown, etc.) is left alone while focus is
+      // inside the listbox. Tab is the natural way to leave the picker.
+      return;
+    }
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') { event.preventDefault(); workbench.next(); }
     if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') { event.preventDefault(); workbench.previous(); }
     if (event.key === 'Escape') { event.preventDefault(); workbench.reset(); }

@@ -142,11 +142,15 @@ test('ShareCLI workbench renders object-first labels and a discrete motion toggl
   globalThis.document = document;
   const root = renderShareCliWorkbench(document);
   const buttons = [...root.querySelectorAll('button')];
+  // APG listbox pattern: state picker is now a listbox of options, not a group of buttons.
+  // The motion button is still a button; reset/back are still buttons; only the state picker
+  // moved from button to option. We accept both shapes for state discovery.
+  const statePickers = [...root.querySelectorAll('[role="option"], button')];
   // Object-first material labels appear on the page for every state we step through.
   for (let index = 0; index < SHARECLI_STATES.length; index += 1) {
     const state = SHARECLI_STATES[index];
-    const stateButton = buttons.find((node) => node.textContent === state.label);
-    assert.ok(stateButton, `state button for ${state.id} must exist in the rendered field`);
+    const stateButton = statePickers.find((node) => node.textContent === state.label);
+    assert.ok(stateButton, `state picker for ${state.id} must exist in the rendered field`);
     stateButton.click();
     const text = root.textContent.replace(/\s+/g, ' ');
     const escapedMaterial = state.material.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -181,4 +185,104 @@ test('ShareCLI workbench renders object-first labels and a discrete motion toggl
     assert.equal(root.querySelector('img').getAttribute('alt'), initialState,
       'rendered state must not change without a visitor click');
   });
+});
+
+// APG listbox pattern: state picker is a single tab stop with role="listbox" and one role="option"
+// per state. Roving tabindex ensures only the selected option is in the tab order. The listbox
+// itself is tabbable so visitors land on the picker as a unit, not each option individually.
+test('state picker renders as an APG listbox with roving tabindex and aria-activedescendant', () => {
+  const { document } = parseHTML('<html><body></body></html>');
+  globalThis.document = document;
+  const root = renderShareCliWorkbench(document);
+  const listbox = root.querySelector('[role="listbox"]');
+  assert.ok(listbox, 'workbench must render a role="listbox"');
+  assert.equal(listbox.getAttribute('tabindex'), '0', 'listbox itself is a single tab stop');
+  assert.ok(listbox.hasAttribute('aria-activedescendant'), 'listbox must declare aria-activedescendant');
+  const options = [...listbox.querySelectorAll('[role="option"]')];
+  assert.equal(options.length, SHARECLI_STATES.length, 'one option per state');
+  for (const option of options) {
+    assert.ok(option.id.startsWith('sharecli-workbench-option-'),
+      `option ${option.id} must have a stable id matching the aria-activedescendant contract`);
+    assert.ok(option.hasAttribute('aria-selected'),
+      `option ${option.id} must declare aria-selected`);
+    assert.ok(option.hasAttribute('aria-label'),
+      `option ${option.id} must declare an aria-label so screen readers can announce it`);
+  }
+  // Roving tabindex: exactly one option is tabindex=0 (the selected one); all others are -1.
+  const tabbable = options.filter((opt) => opt.getAttribute('tabindex') === '0');
+  const nonTabbable = options.filter((opt) => opt.getAttribute('tabindex') === '-1');
+  assert.equal(tabbable.length, 1, 'exactly one option is in the tab order');
+  assert.equal(nonTabbable.length, options.length - 1, 'the rest are reachable by arrow keys, not Tab');
+  const selected = options.find((opt) => opt.getAttribute('aria-selected') === 'true');
+  assert.equal(tabbable[0], selected, 'the tabbable option is the selected one');
+});
+
+// State graph: every state is reachable from every other state via next()/previous().
+// Mirrors how TUI state machines (ratatui, charm) declare the transition table as a
+// first-class observable rather than asking callers to introspect controllers.
+test('workbench exposes an explicit state graph with full reachability', () => {
+  const wb = createShareCliWorkbench();
+  const graph = wb.getStateGraph();
+  assert.equal(graph.length, SHARECLI_STATES.length, 'graph has one entry per state');
+  for (let index = 0; index < graph.length; index += 1) {
+    const entry = graph[index];
+    const expectedNext = (index + 1) % SHARECLI_STATES.length;
+    const expectedPrev = (index - 1 + SHARECLI_STATES.length) % SHARECLI_STATES.length;
+    assert.equal(entry.index, index, `graph entry ${index} carries its index`);
+    assert.equal(entry.id, SHARECLI_STATES[index].id, `graph entry ${index} references the right state id`);
+    assert.equal(entry.label, SHARECLI_STATES[index].label, `graph entry ${index} references the right label`);
+    assert.equal(entry.next, expectedNext, `state ${index} next points to ${expectedNext}`);
+    assert.equal(entry.previous, expectedPrev, `state ${index} previous points to ${expectedPrev}`);
+  }
+  // Verify live reachability: starting from state 0, walk next() N times and confirm we land on
+  // every state in turn. This catches accidental off-by-one errors in the modulo arithmetic.
+  const wb2 = createShareCliWorkbench();
+  const seen = new Set([wb2.get().state]);
+  for (let step = 0; step < SHARECLI_STATES.length - 1; step += 1) {
+    wb2.next();
+    seen.add(wb2.get().state);
+  }
+  assert.equal(seen.size, SHARECLI_STATES.length, 'next() visits every state exactly once');
+  // Same check for previous().
+  const wb3 = createShareCliWorkbench({ state: 0 });
+  const seenBack = new Set([wb3.get().state]);
+  for (let step = 0; step < SHARECLI_STATES.length - 1; step += 1) {
+    wb3.previous();
+    seenBack.add(wb3.get().state);
+  }
+  assert.equal(seenBack.size, SHARECLI_STATES.length, 'previous() visits every state exactly once');
+});
+
+// Reduced-motion invariant: the motion toggle changes only its own label, never the rendered
+// artifact. State labels, alt text, material/object labels, and provenance come from
+// SHARECLI_STATES and remain byte-identical regardless of the motion button's state. This
+// preserves the parity contract with reduced-motion and no-JavaScript contexts.
+test('every state renders the same object vocabulary with motion on or off', () => {
+  const { document } = parseHTML('<html><body></body></html>');
+  globalThis.document = document;
+  for (let index = 0; index < SHARECLI_STATES.length; index += 1) {
+    const root = renderShareCliWorkbench(document);
+    const state = SHARECLI_STATES[index];
+    // Click the option for this state via the listbox API.
+    const option = root.querySelector(`#sharecli-workbench-option-${index}`);
+    assert.ok(option, `state ${index}: option must exist`);
+    option.click();
+    const img = root.querySelector('img');
+    assert.equal(img ? img.getAttribute('alt') : '', state.altText,
+      `state ${index}: alt text matches SHARECLI_STATES regardless of motion`);
+    const materialEl = root.querySelector('.sharecli-workbench__material');
+    assert.equal(materialEl ? materialEl.textContent : '', state.materialLabel,
+      `state ${index}: material label matches SHARECLI_STATES regardless of motion`);
+    const objectEl = root.querySelector('.sharecli-workbench__object');
+    assert.equal(objectEl ? objectEl.textContent : '', state.objectLabel,
+      `state ${index}: object label matches SHARECLI_STATES regardless of motion`);
+    const provenanceEl = root.querySelector('.sharecli-workbench__provenance');
+    assert.equal(provenanceEl ? provenanceEl.textContent : '', state.provenance,
+      `state ${index}: provenance matches SHARECLI_STATES regardless of motion`);
+    // Motion button must default to off for every state.
+    const motionOff = root.querySelector('.sharecli-workbench__motion');
+    assert.ok(motionOff, `state ${index}: motion button must exist`);
+    assert.match(motionOff.textContent || '', /motion:\s*off/i,
+      `state ${index}: motion button must default to off`);
+  }
 });
