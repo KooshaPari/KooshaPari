@@ -221,7 +221,8 @@ body[data-reader="true"] * {
 }
 
 /* Live region for announcements */
-#announcements {
+#announcements,
+.visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;

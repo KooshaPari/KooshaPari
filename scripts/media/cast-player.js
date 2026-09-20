@@ -1,9 +1,9 @@
 /* ================================================================
    Cast Player — asciinema .cast file terminal replay engine.
 
-   Parses the .cast format (JSON header + event lines), renders
-   output into a terminal-like viewport with typewriter animation,
-   and exposes play/pause/speed/restart controls.
+   Parses .cast recordings and renders them into a terminal-like
+   viewport with typewriter playback: transport controls, a
+   seekable scrubber, a clock readout, and keyboard operation.
 
    Usage:
      import { initCastPlayers } from './media/cast-player.js';
@@ -14,253 +14,271 @@
           data-src="/path/to/recording.cast"
           data-title="Terminal session">
      </div>
+
+   Modules
+     cast-timeline.js       pure .cast parsing, timeline math, clock format
+     cast-player-chrome.js  markup construction
+     cast-scrubber.js       APG media seek-slider interaction
+
+   Accessibility
+     The scrubber is a role="slider" with aria-valuemin/max/now plus a
+     minute:second aria-valuetext, driven by Arrow/Home/End/PageUp/
+     PageDown keys and pointer drag. Transport controls are real
+     <button> elements and the player reports state through a polite
+     live region, so the whole surface is operable without a pointer.
    ================================================================ */
 
-import { el } from '../components/dom.js';
-
-/* ---- .cast format parser ------------------------------------ */
-
-/**
- * Parse a .cast file string into a structured playback object.
- *
- * Format:
- *   Line 1  — JSON header { version, term: { cols, rows }, title, command, ... }
- *   Line N  — JSON array [relative_seconds, event_type, data]
- *
- * @param {string} raw  Raw .cast file contents
- * @returns {{ header: object, events: Array<{ dt: number, type: string, data: string }> }}
- */
-function parseCast(raw) {
-  const lines = raw.split('\n').filter(l => l.trim());
-  const header = JSON.parse(lines[0]);
-
-  const events = [];
-  for (let i = 1; i < lines.length; i++) {
-    const arr = JSON.parse(lines[i]);
-    events.push({ dt: arr[0], type: arr[1], data: arr[2] || '' });
-  }
-
-  return { header, events };
-}
-
-/* ---- Playback scheduler ------------------------------------- */
-
-/**
- * Flatten cast events into a timeline of absolute timestamps with
- * accumulated output buffers, suitable for requestAnimationFrame
- * driven playback.
- *
- * @param {Array<{ dt: number, type: string, data: string }>} events
- * @returns {Array<{ time: number, type: string, data: string }>}
- */
-function buildCastTimeline(events) {
-  const timeline = [];
-  let t = 0;
-  for (const ev of events) {
-    t += ev.dt;
-    timeline.push({ time: t, type: ev.type, data: ev.data });
-  }
-  return timeline;
-}
-
-/* ---- DOM construction --------------------------------------- */
-
-function buildDOM(title, command) {
-  const root = el('div', { class: 'cast-player' });
-
-  // Title bar with traffic-light dots
-  const header = el('div', { class: 'cast-player__header' },
-    el('div', { class: 'cast-player__dots' },
-      el('span', { class: 'cast-player__dot cast-player__dot--close' }),
-      el('span', { class: 'cast-player__dot cast-player__dot--min' }),
-      el('span', { class: 'cast-player__dot cast-player__dot--max' }),
-    ),
-    el('span', { class: 'cast-player__title' }, title || 'Terminal'),
-  );
-
-  // Terminal viewport
-  const terminal = el('div', { class: 'cast-player__terminal' });
-  const output = el('span', { class: 'cast-player__output' });
-  const cursor = el('span', { class: 'cast-player__cursor' });
-  output.append(cursor);
-  terminal.append(output);
-
-  // Controls
-  const playBtn = el('button', {
-    class: 'cast-player__btn cast-player__btn--play',
-    type: 'button',
-    'aria-label': 'Play',
-  }, '\u25b6');
-
-  const restartBtn = el('button', {
-    class: 'cast-player__btn',
-    type: 'button',
-    'aria-label': 'Restart',
-  }, '\u21ba');
-
-  const speeds = [0.5, 1, 2];
-  const speedBtns = speeds.map(s => el('button', {
-    class: `cast-player__speed-btn${s === 1 ? ' cast-player__speed-btn--active' : ''}`,
-    type: 'button',
-    'data-speed': String(s),
-    'aria-label': `${s}x speed`,
-  }, `${s}x`));
-
-  const controls = el('div', { class: 'cast-player__controls' },
-    playBtn,
-    restartBtn,
-    el('div', { class: 'cast-player__speed-group' }, ...speedBtns),
-  );
-
-  root.append(header, terminal, controls);
-
-  if (command) {
-    root.append(el('span', { class: 'cast-player__command' }, `$ ${command}`));
-  }
-
-  return { root, terminal, output, cursor, playBtn, restartBtn, speedBtns };
-}
+import { buildChrome } from './cast-player-chrome.js';
+import { createScrubber } from './cast-scrubber.js';
+import {
+  buildCastTimeline,
+  formatClock,
+  formatPosition,
+  indexAt,
+  parseCast,
+  SEEK_STEP_MS,
+  timelineDuration,
+} from './cast-timeline.js';
 
 /* ---- Player controller -------------------------------------- */
+
+/**
+ * Locate a polite live region for transport announcements, creating a
+ * visually hidden fallback inside the player when the shared site
+ * region (scripts/reader-state.js) has not been installed.
+ *
+ * @param {HTMLElement} root
+ * @returns {HTMLElement|null}
+ */
+function resolveAnnounceRegion(root) {
+  const shared = document.getElementById('announcements');
+  if (shared) return shared;
+
+  const local = document.createElement('span');
+  local.className = 'visually-hidden';
+  local.setAttribute('role', 'status');
+  local.setAttribute('aria-live', 'polite');
+  root.append(local);
+  return local;
+}
 
 function createPlayer(container) {
   const src = container.getAttribute('data-src');
   const title = container.getAttribute('data-title') || '';
   if (!src) return null;
 
-  const { root, terminal, output, cursor, playBtn, restartBtn, speedBtns } =
-    buildDOM(title);
+  const dom = buildChrome(title);
+  const {
+    root, terminal, output, cursor, scrubber, fill, thumb,
+    clockNow, clockTotal, playBtn, restartBtn, speedBtns,
+  } = dom;
 
   container.appendChild(root);
 
-  let parsed = null;
+  // Announce through the site-wide live region when it exists, so we
+  // never stack a second status region per player instance.
+  const announceRegion = resolveAnnounceRegion(root);
+
   let timeline = [];
+  let durationMs = 0;
   let speed = 1;
   let playing = false;
   let finished = false;
   let startTime = 0;
-  let elapsed = 0;        // accumulated time in ms (at current speed)
+  let elapsed = 0;        // accumulated playing time in ms at 1x
   let rafId = null;
   let eventIdx = 0;
 
-  /* --- helpers --- */
+  /* --- scrubber controller --- */
+
+  const seekBar = createScrubber({
+    element: scrubber,
+    fill,
+    thumb,
+    getDurationMs: () => durationMs,
+    getElapsedMs: () => elapsed,
+    onSeek: seek,
+    onToggle: togglePlay,
+  });
+
+  /* --- rendering --- */
+
+  function clearOutput() {
+    output.textContent = '';
+    output.append(cursor);
+    terminal.scrollTop = 0;
+  }
+
+  function appendEvent(ev) {
+    if (ev.type !== 'o' && ev.type !== 'i') return;
+
+    // Strip carriage returns so progress-bar redraws collapse cleanly.
+    const lines = ev.data.replace(/\r/g, '').split('\n');
+
+    for (let li = 0; li < lines.length; li += 1) {
+      if (li > 0) {
+        const lineEl = document.createElement('div');
+        lineEl.className = 'cast-player__line';
+        lineEl.append(cursor);
+        output.append(lineEl);
+      }
+      if (lines[li]) {
+        // Insert before the cursor wherever it currently lives.
+        cursor.parentNode.insertBefore(document.createTextNode(lines[li]), cursor);
+      }
+    }
+  }
+
+  /**
+   * Render every event at or before `upToMs` from a clean slate.
+   *
+   * Seeking backwards is indistinguishable from a very fast replay,
+   * so rather than maintaining a rewind path we re-render. The pass
+   * is O(events) and runs at most once per seek.
+   */
+  function renderAt(upToMs) {
+    clearOutput();
+    for (let i = 0; i < timeline.length; i += 1) {
+      if (timeline[i].time * 1000 > upToMs) break;
+      appendEvent(timeline[i]);
+    }
+    eventIdx = indexAt(timeline, upToMs);
+    terminal.scrollTop = terminal.scrollHeight;
+  }
+
+  /** Flush only the events that became due since the last frame. */
+  function flushTo(upToMs) {
+    while (eventIdx < timeline.length && timeline[eventIdx].time * 1000 <= upToMs) {
+      appendEvent(timeline[eventIdx]);
+      eventIdx += 1;
+    }
+    terminal.scrollTop = terminal.scrollHeight;
+  }
+
+  /* --- status --- */
+
+  function syncPosition() {
+    seekBar.sync();
+    scrubber.setAttribute('aria-valuetext', formatPosition(elapsed, durationMs));
+    clockNow.textContent = formatClock(elapsed);
+  }
+
+  function setPlayIcon(isPlaying) {
+    playBtn.textContent = isPlaying ? '\u23f8' : '\u25b6';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  }
+
+  function announce(message) {
+    if (announceRegion) announceRegion.textContent = message;
+  }
+
+  /* --- transport --- */
 
   function applySpeed(s) {
-    // Adjust elapsed to reflect the speed change without losing position
     speed = s;
     for (const btn of speedBtns) {
-      btn.classList.toggle(
-        'cast-player__speed-btn--active',
-        parseFloat(btn.dataset.speed) === s,
-      );
+      const active = parseFloat(btn.dataset.speed) === s;
+      btn.classList.toggle('cast-player__speed-btn--active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     }
   }
 
   function resetPlayback() {
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = null;
+    stopFrame();
     playing = false;
     finished = false;
     elapsed = 0;
     eventIdx = 0;
-    output.textContent = '';
-    output.append(cursor);
+    clearOutput();
     root.classList.remove('cast-player--paused', 'cast-player--finished');
-    playBtn.textContent = '\u25b6';
-    playBtn.setAttribute('aria-label', 'Play');
-    terminal.scrollTop = 0;
+    setPlayIcon(false);
+    syncPosition();
   }
 
-  function flushEvents(upToMs) {
-    const visibleTerminal = terminal;
+  function markFinished() {
+    elapsed = durationMs;
+    finished = true;
+    playing = false;
+    stopFrame();
+    root.classList.remove('cast-player--paused');
+    root.classList.add('cast-player--finished');
+    setPlayIcon(false);
+    syncPosition();
+  }
 
-    while (eventIdx < timeline.length && timeline[eventIdx].time * 1000 <= upToMs) {
-      const ev = timeline[eventIdx];
-      eventIdx++;
+  function seek(targetMs, { announce: shouldAnnounce = true } = {}) {
+    if (!timeline.length) return;
 
-      if (ev.type === 'o' || ev.type === 'i') {
-        // Strip \r and split on \n for clean rendering
-        const text = ev.data.replace(/\r/g, '');
-        const lines = text.split('\n');
+    elapsed = Math.max(0, Math.min(durationMs, targetMs));
+    finished = false;
+    root.classList.remove('cast-player--finished');
+    renderAt(elapsed);
+    syncPosition();
 
-        for (let li = 0; li < lines.length; li++) {
-          if (li > 0) {
-            // Insert a new line element
-            const lineEl = document.createElement('div');
-            lineEl.className = 'cast-player__line';
-            // Move cursor after the new line
-            lineEl.append(cursor);
-            output.append(lineEl);
-          }
-          if (lines[li]) {
-            // Insert text before the cursor
-            const textNode = document.createTextNode(lines[li]);
-            output.insertBefore(textNode, cursor);
-          }
-        }
-      } else if (ev.type === 'w') {
-        // Window resize event — could update terminal width; skip for now
-      }
+    if (shouldAnnounce) announce(formatPosition(elapsed, durationMs));
+    if (elapsed >= durationMs) markFinished();
+  }
 
-      // Auto-scroll
-      visibleTerminal.scrollTop = visibleTerminal.scrollHeight;
-    }
+  function stopFrame() {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
   }
 
   function tick(timestamp) {
     if (!playing) return;
 
     if (startTime === 0) startTime = timestamp;
-    const delta = (timestamp - startTime) * speed;
-    elapsed += delta;
+    elapsed += (timestamp - startTime) * speed;
     startTime = timestamp;
 
-    flushEvents(elapsed);
-
-    if (eventIdx >= timeline.length) {
-      // Playback finished
-      finished = true;
-      playing = false;
-      root.classList.add('cast-player--finished');
-      playBtn.textContent = '\u25b6';
-      playBtn.setAttribute('aria-label', 'Play');
+    if (elapsed >= durationMs) {
+      flushTo(durationMs);
+      markFinished();
+      announce('Playback finished');
       return;
     }
 
+    flushTo(elapsed);
+    syncPosition();
     rafId = requestAnimationFrame(tick);
   }
 
   function play() {
-    if (finished) resetPlayback();
+    if (!timeline.length) return;
+
+    if (finished) {
+      elapsed = 0;
+      eventIdx = 0;
+      clearOutput();
+      root.classList.remove('cast-player--finished');
+    }
+
     playing = true;
     startTime = 0;
     root.classList.remove('cast-player--paused');
-    root.classList.remove('cast-player--finished');
-    playBtn.textContent = '\u23f8';
-    playBtn.setAttribute('aria-label', 'Pause');
+    setPlayIcon(true);
+    announce('Playing');
     rafId = requestAnimationFrame(tick);
   }
 
   function pause() {
     playing = false;
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = null;
+    stopFrame();
     root.classList.add('cast-player--paused');
-    playBtn.textContent = '\u25b6';
-    playBtn.setAttribute('aria-label', 'Play');
+    setPlayIcon(false);
+    announce('Paused');
   }
 
   function togglePlay() {
     if (playing) pause(); else play();
   }
 
-  /* --- event wiring --- */
+  /* --- transport wiring --- */
 
   playBtn.addEventListener('click', togglePlay);
 
   restartBtn.addEventListener('click', () => {
     resetPlayback();
-    // Start playing immediately after restart
     play();
   });
 
@@ -270,41 +288,72 @@ function createPlayer(container) {
     });
   }
 
+  // Player-level shortcuts, active only while focus is inside the
+  // player itself so we never hijack page scrolling.
+  root.addEventListener('keydown', (event) => {
+    if (event.defaultPrevented || event.target !== root) return;
+
+    if (event.key === ' ') {
+      event.preventDefault();
+      togglePlay();
+    } else if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      seek(elapsed - SEEK_STEP_MS);
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      seek(elapsed + SEEK_STEP_MS);
+    }
+  });
+
+  // Shift+wheel scrubs the recording without hijacking plain scroll.
+  terminal.addEventListener('wheel', (event) => {
+    if (!event.shiftKey || !timeline.length) return;
+    event.preventDefault();
+    seek(elapsed + Math.sign(event.deltaY) * SEEK_STEP_MS, { announce: false });
+  }, { passive: false });
+
   /* --- load & parse --- */
 
   // Skip fetch during prerender (Node has no relative-URL fetch)
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {
+    return { el: root, play, pause, resetPlayback, seek };
+  }
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
   fetch(src, { signal: controller.signal })
-    .then(r => {
+    .then((r) => {
       clearTimeout(timeout);
       if (!r.ok) throw new Error(`Failed to load cast file: ${r.status}`);
       return r.text();
     })
-    .then(text => {
-      parsed = parseCast(text);
+    .then((text) => {
+      const parsed = parseCast(text);
       timeline = buildCastTimeline(parsed.events);
+      durationMs = timelineDuration(timeline);
 
-      // Use header terminal width if no explicit width set
+      seekBar.setEnabled(true);
+      scrubber.setAttribute('aria-valuemax', String(durationMs));
+      clockTotal.textContent = formatClock(durationMs);
+      syncPosition();
+
+      // Match the recorded terminal width when the container is unpinned.
       if (parsed.header?.term?.cols && !container.style.width) {
-        const charWidth = 0.6; // approximate em-width of a monospace char
-        const cols = parsed.header.term.cols;
-        const estimated = cols * charWidth;
-        // Don't override if it would be too small or too large
+        const estimated = parsed.header.term.cols * 0.6; // em-width of one cell
         if (estimated > 30 && estimated < 90) {
           terminal.style.width = `${estimated}em`;
           terminal.style.maxWidth = '100%';
         }
       }
     })
-    .catch(err => {
+    .catch((err) => {
       console.error('[cast-player]', err);
       output.textContent = `Error loading recording: ${err.message}`;
+      seekBar.setEnabled(false);
+      announce('Recording unavailable');
     });
 
-  return { el: root, play, pause, resetPlayback };
+  return { el: root, play, pause, resetPlayback, seek };
 }
 
 /* ---- Public API --------------------------------------------- */

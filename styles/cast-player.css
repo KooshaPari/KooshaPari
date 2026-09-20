@@ -207,6 +207,90 @@
   background: color-mix(in srgb, var(--cp-text) 8%, transparent);
 }
 
+/* --- Scrubber (APG media seek-slider) -------------------------- */
+.cast-player__scrubber {
+  --cp-scrub: var(--cp-text);
+
+  position: relative;
+  padding: 0.5rem 0.75rem 0.4rem;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cast-player__scrubber:focus-visible {
+  outline: 2px solid var(--cp-scrub);
+  outline-offset: -2px;
+  border-radius: var(--cp-radius);
+}
+
+.cast-player__scrubber[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.cast-player__scrubber-track {
+  position: relative;
+  height: 4px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--cp-dim) 45%, transparent);
+}
+
+.cast-player__scrubber-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--cp-scrub) 55%, transparent),
+    var(--cp-scrub)
+  );
+  transition: width var(--motion-short, 120ms) linear;
+}
+
+.cast-player__scrubber-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border-radius: 50%;
+  background: var(--cp-scrub);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cp-scrub) 18%, transparent);
+  transform: translateY(-50%) scale(0.75);
+  transition: transform var(--motion-short, 120ms) ease,
+              left var(--motion-short, 120ms) linear;
+}
+
+.cast-player__scrubber:hover .cast-player__scrubber-thumb,
+.cast-player__scrubber:focus-visible .cast-player__scrubber-thumb {
+  transform: translateY(-50%) scale(1);
+}
+
+/* --- Clock readout -------------------------------------------- */
+.cast-player__clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 0.15rem;
+  padding: 0 0.15rem;
+  color: var(--cp-dim);
+  font: 500 0.62rem/1 var(--cp-font);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.cast-player__clock-now {
+  color: var(--cp-text);
+}
+
+.cast-player__clock-sep {
+  opacity: 0.45;
+}
+
 /* --- Command hint --------------------------------------------- */
 .cast-player__command {
   display: block;
@@ -223,6 +307,12 @@
     animation: none;
     opacity: 1;
   }
+
+  /* Progress still needs to track playback, but it should not ease. */
+  .cast-player__scrubber-fill,
+  .cast-player__scrubber-thumb {
+    transition: none;
+  }
 }
 
 /* --- Responsive ------------------------------------------------ */
@@ -230,6 +320,10 @@
   .cast-player__terminal {
     height: 240px;
     padding: 0.5rem 0.65rem;
+  }
+
+  .cast-player__scrubber {
+    padding: 0.6rem 0.65rem 0.45rem;
   }
 
   .cast-player__controls {
