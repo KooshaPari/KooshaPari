@@ -12,11 +12,21 @@
  * Transitions API is available, the appropriate path is taken.
  */
 
-/* ── Timing constants ──────────────────────────────────────────────── */
-
-const DURATION_OUT = 180;   // ms  –  fade / slide out
-const DURATION_IN = 250;    // ms  –  fade / slide in
-const DEBOUNCE_MS = 100;    // ms  –  rapid-navigation guard
+import {
+  DURATION_OUT_MS,
+  DURATION_IN_MS,
+  DEBOUNCE_MS,
+  SAFETY_NET_BUFFER_MS,
+  CLASS_PREPARING,
+  CLASS_OUT,
+  CLASS_IN,
+  CLASS_VISIBLE,
+  SELECTOR_VIEW_ROOT,
+  VIEW_ROOT_ID,
+  transitionPlan,
+  safetyNetMs,
+  shouldReplaceQueue,
+} from './transitions-helpers.js';
 
 /* ── Lifecycle hooks ───────────────────────────────────────────────── */
 
@@ -69,19 +79,19 @@ export function transitionOut(container) {
       return resolve();
     }
 
-    container.classList.add('view-transition-preparing', 'view-transition-out');
+    container.classList.add(CLASS_PREPARING, CLASS_OUT);
 
     // Listen for the transition end, but fall back to timeout so we
     // never get stuck.
     const onEnd = () => {
       container.removeEventListener('transitionend', onEnd);
       container.innerHTML = '';
-      container.classList.remove('view-transition-out');
+      container.classList.remove(CLASS_OUT);
       resolve();
     };
 
     container.addEventListener('transitionend', onEnd, { once: true });
-    setTimeout(onEnd, DURATION_OUT + 30);   // safety net
+    setTimeout(onEnd, safetyNetMs(DURATION_OUT_MS));
   });
 }
 
@@ -97,27 +107,27 @@ export function transitionIn(container, newHTML) {
   return new Promise(async (resolve) => {
     if (prefersReducedMotion()) {
       container.innerHTML = newHTML;
-      container.classList.remove('view-transition-preparing', 'view-transition-in');
+      container.classList.remove(CLASS_PREPARING, CLASS_IN);
       return resolve();
     }
 
     // Inject content in the invisible state
     container.innerHTML = newHTML;
-    container.classList.remove('view-transition-out');
-    container.classList.add('view-transition-in');
+    container.classList.remove(CLASS_OUT);
+    container.classList.add(CLASS_IN);
 
     // Let the browser paint the initial invisible state, then flip
     await nextFrame();
-    container.classList.add('is-visible');
+    container.classList.add(CLASS_VISIBLE);
 
     const onEnd = () => {
       container.removeEventListener('transitionend', onEnd);
-      container.classList.remove('view-transition-in', 'is-visible', 'view-transition-preparing');
+      container.classList.remove(CLASS_IN, CLASS_VISIBLE, CLASS_PREPARING);
       resolve();
     };
 
     container.addEventListener('transitionend', onEnd, { once: true });
-    setTimeout(onEnd, DURATION_IN + 30);    // safety net
+    setTimeout(onEnd, safetyNetMs(DURATION_IN_MS));
   });
 }
 
@@ -152,9 +162,9 @@ let _timerId = null;
  * @returns {{ destroy: () => void }} – teardown handle
  */
 export function initTransitions(_router, { render: renderFn, viewRoot } = {}) {
-  const root = viewRoot || document.getElementById('view-root');
+  const root = viewRoot || document.getElementById(VIEW_ROOT_ID);
   if (!root || typeof renderFn !== 'function') {
-    console.warn('[transitions] initTransitions requires a render function and a #view-root');
+    console.warn('[transitions] initTransitions requires a render function and a ' + SELECTOR_VIEW_ROOT);
     return { destroy() {} };
   }
 
@@ -167,8 +177,7 @@ export function initTransitions(_router, { render: renderFn, viewRoot } = {}) {
    * animations.
    */
   async function handleNavigation(route) {
-    // If a transition is already in flight, just record the latest route
-    if (_transitionQueue) {
+    if (shouldReplaceQueue(_transitionQueue != null)) {
       _pendingRoute = route;
       return;
     }
@@ -179,13 +188,15 @@ export function initTransitions(_router, { render: renderFn, viewRoot } = {}) {
     await runCallbacks(_beforeCallbacks, route);
 
     // Choose transition strategy
-    if (prefersReducedMotion() || !viewTransitionsSupported()) {
-      // Manual path
+    const plan = transitionPlan({
+      prefersReducedMotion: prefersReducedMotion(),
+      viewTransitionsSupported: viewTransitionsSupported(),
+    });
+    if (plan === 'manual') {
       await transitionOut(root);
       renderFn();
       await transitionIn(root, '');
     } else {
-      // Native view-transition path
       nativeTransition(root, () => {
         renderFn();
       });
@@ -245,3 +256,6 @@ export function onBeforeNavigate(callback) {
 export function onAfterNavigate(callback) {
   _afterCallbacks.push(callback);
 }
+
+// Re-export for callers that import the orchestrator module.
+export { transitionPlan, safetyNetMs, shouldReplaceQueue };
