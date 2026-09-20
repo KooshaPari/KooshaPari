@@ -5,6 +5,12 @@
    Behavior: clip-path inset on top image, drag/touch/keyboard control
    ================================================================ */
 
+import { clamp, nextSliderPct, slideValue } from './image-slider-helpers.js';
+
+const SLIDER_STEP = 2;
+const SLIDER_BIG_STEP = 10;
+const SLIDER_DURATION_MS = 420;
+
 /** @returns {boolean} True if user prefers reduced motion. */
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -92,20 +98,10 @@ function attachSlider(root) {
 
   // -- Keyboard -----------------------------------------------------------
   root.addEventListener('keydown', (e) => {
-    const step = e.shiftKey ? 10 : 2;
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-      e.preventDefault();
-      render(pct + step);
-    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-      e.preventDefault();
-      render(pct - step);
-    } else if (e.key === 'Home') {
-      e.preventDefault();
-      render(0);
-    } else if (e.key === 'End') {
-      e.preventDefault();
-      render(100);
-    }
+    const next = nextSliderPct(pct, e, { step: SLIDER_STEP, bigStep: SLIDER_BIG_STEP });
+    if (next == null) return;
+    e.preventDefault();
+    render(next);
   });
 
   // -- Entrance animation -------------------------------------------------
@@ -137,7 +133,7 @@ function attachSlider(root) {
 
   // Smooth slide from current pct to target using requestAnimationFrame
   function smoothSlideTo(target, onDone) {
-    const duration = prefersReducedMotion() ? 0 : 420;
+    const duration = prefersReducedMotion() ? 0 : SLIDER_DURATION_MS;
     if (duration === 0) {
       render(target);
       if (onDone) onDone();
@@ -146,11 +142,8 @@ function attachSlider(root) {
     const start = performance.now();
     const from = pct;
     function tick(now) {
-      const t = clamp((now - start) / duration, 0, 1);
-      // ease-out cubic
-      const eased = 1 - Math.pow(1 - t, 3);
-      render(from + (target - from) * eased);
-      if (t < 1) {
+      render(slideValue(from, target, now - start, duration));
+      if (now - start < duration) {
         requestAnimationFrame(tick);
       } else {
         if (onDone) onDone();
@@ -180,10 +173,6 @@ function mkLabel(cls, text) {
   span.textContent = text;
   span.setAttribute('aria-hidden', 'true');
   return span;
-}
-
-function clamp(v, min, max) {
-  return Math.max(min, Math.min(max, v));
 }
 
 // ---- Public API ----------------------------------------------------------
