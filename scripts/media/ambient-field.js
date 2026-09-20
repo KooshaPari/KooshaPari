@@ -20,22 +20,18 @@
  *     the rest of the session.
  */
 
-const PARTICLE_COLOR = 'rgba(126, 186, 181, 0.3)';
-const LINE_COLOR     = 'rgba(126, 186, 181, 0.08)';
-const NODE_COLOR     = 'rgba(126, 186, 181, 0.6)';
-
-const DESKTOP_COUNT  = 60;
-const MOBILE_COUNT   = 30;
-const MIN_COUNT      = 4;
-
-const LINE_DISTANCE  = 120;
-const NODE_RADIUS    = { min: 3, max: 4 }; // half of 6-8px
-const DUST_RADIUS    = 1;
-
-const SPEED_MIN      = 0.1;
-const SPEED_MAX      = 0.3;
-const SINE_AMPLITUDE = 0.15;
-const SINE_PERIOD    = 0.003;
+import {
+  PARTICLE_COLOR,
+  LINE_COLOR,
+  NODE_COLOR,
+  DUST_RADIUS,
+  NODE_RADIUS,
+  LINE_DISTANCE,
+  buildParticles,
+  ambientStep,
+  splitParticles,
+  staticPositions,
+} from './ambient-field-helpers.js';
 
 const RESIZE_DEBOUNCE_MS = 200;
 
@@ -69,63 +65,6 @@ export function destroyAmbientField() {
   const teardown = activeTeardown;
   activeTeardown = null;
   if (teardown) teardown();
-}
-
-/**
- * Create a single particle with deterministic-ish initial state.
- */
-function createParticle(width, height, index, isNode) {
-  const angle = (index * 2.39996) % (2 * Math.PI); // golden angle spread
-  const radius = 0.15 + ((index * 7 + 3) % 100) / 100 * 0.7; // 0.15–0.85 of bounds
-  return {
-    x: width * 0.5 + Math.cos(angle) * width * radius * 0.5,
-    y: height * 0.5 + Math.sin(angle) * height * radius * 0.5,
-    vx: SPEED_MIN + ((index * 13 + 7) % 100) / 100 * (SPEED_MAX - SPEED_MIN),
-    vy: SPEED_MIN + ((index * 17 + 11) % 100) / 100 * (SPEED_MAX - SPEED_MIN),
-    phase: (index * 1.7) % (2 * Math.PI),
-    isNode,
-    nodePulse: 0,
-    nodePulseDir: 1,
-  };
-}
-
-/**
- * Build the particle array based on viewport width.
- */
-function buildParticles(width, height, lowEnd) {
-  const isMobile = width < 768;
-  const count = lowEnd ? MIN_COUNT : (isMobile ? MOBILE_COUNT : DESKTOP_COUNT);
-  const particles = [];
-  for (let i = 0; i < count; i++) {
-    const isNode = !isMobile && i % 8 === 0 && !lowEnd;
-    particles.push(createParticle(width, height, i, isNode));
-  }
-  return particles;
-}
-
-/**
- * Advance particle positions by one frame.
- */
-function ambientStep(particles, width, height, frame, step) {
-  for (const p of particles) {
-    const sineOffset = Math.sin(frame * SINE_PERIOD + p.phase) * SINE_AMPLITUDE;
-    p.x += (p.vx + sineOffset) * step;
-    p.y += p.vy * step;
-
-    // Wrap around edges with padding
-    const pad = LINE_DISTANCE;
-    if (p.x > width + pad) p.x = -pad;
-    if (p.x < -pad) p.x = width + pad;
-    if (p.y > height + pad) p.y = -pad;
-    if (p.y < -pad) p.y = height + pad;
-
-    // Node pulse
-    if (p.isNode) {
-      p.nodePulse += 0.008 * p.nodePulseDir * step;
-      if (p.nodePulse >= 1) { p.nodePulse = 1; p.nodePulseDir = -1; }
-      if (p.nodePulse <= 0) { p.nodePulse = 0; p.nodePulseDir = 1; }
-    }
-  }
 }
 
 /**
@@ -184,12 +123,7 @@ function draw(ctx, particles, dust, width, height) {
 function drawStatic(ctx, width, height) {
   ctx.clearRect(0, 0, width, height);
   ctx.fillStyle = PARTICLE_COLOR;
-  const positions = [
-    { x: width * 0.25, y: height * 0.35 },
-    { x: width * 0.55, y: height * 0.6 },
-    { x: width * 0.78, y: height * 0.28 },
-  ];
-  for (const pos of positions) {
+  for (const pos of staticPositions(width, height)) {
     ctx.beginPath();
     ctx.arc(pos.x, pos.y, DUST_RADIUS, 0, 2 * Math.PI);
     ctx.fill();
@@ -268,7 +202,7 @@ export function initAmbientField(container) {
     canvas.style.height = height + 'px';
     ctx.setTransform(scale, 0, 0, scale, 0, 0);
     particles = buildParticles(width, height, lowEnd);
-    dust = particles.filter((p) => !p.isNode);
+    dust = splitParticles(particles).dust;
 
     if (prefersReducedMotion) {
       drawStatic(ctx, width, height);
