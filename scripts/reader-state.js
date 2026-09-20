@@ -4,29 +4,44 @@
 // - DOM: html[data-reader="true"] applied globally
 // - Persistence: localStorage reads/writes
 
+import {
+  READER_STORAGE_KEY,
+  READER_TOGGLED_KEY,
+  ID_ANNOUNCEMENTS,
+  ID_READER_TOGGLE,
+  SELECTOR_VIEW_ROOT_HEADING,
+  DATA_READER,
+  SR_ONLY_CSS,
+  shouldIgnoreShortcut,
+  isReaderKey,
+  isEscapeKey,
+  initialReaderMode,
+  readerAttrValue,
+  readerAnnouncement,
+} from './reader-state-helpers.js';
+
 let readerMode = false;
 let readers = new Set();
 let initReady = false;
 
 function announce(message) {
-  const region = document.getElementById('announcements');
+  const region = document.getElementById(ID_ANNOUNCEMENTS);
   if (region) region.textContent = message;
 }
 
 function applyReaderMode(on = true) {
   readerMode = on;
-  document.documentElement.dataset.reader = on ? 'true' : 'false';
+  document.documentElement.dataset[DATA_READER] = readerAttrValue(on);
 
-  const announcement = on ? 'Reader mode active' : 'Reader mode inactive';
-  announce(announcement);
+  announce(readerAnnouncement(on));
 
   // Focus management per spec
   if (on) {
-    const firstHeading = document.querySelector('#view-root h1, #view-root h2');
+    const firstHeading = document.querySelector(SELECTOR_VIEW_ROOT_HEADING);
     firstHeading?.setAttribute('tabindex', '-1');
     firstHeading?.focus?.();
   } else {
-    document.getElementById('reader-toggle')?.focus?.();
+    document.getElementById(ID_READER_TOGGLE)?.focus?.();
   }
 
   for (const subscriber of readers) subscriber(readerMode);
@@ -35,33 +50,34 @@ function applyReaderMode(on = true) {
 function initReader() {
   if (initReady) return;
   initReady = true;
+
+  let prefersReducedMotion = false;
   try {
-    readerMode = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   } catch { /* retain default when media queries are unavailable */ }
+
+  let storedValue = null;
   try {
-    const saved = localStorage.getItem('koosha-atelier-reader');
-    if (saved === 'true' || saved === 'false') readerMode = saved === 'true';
+    storedValue = localStorage.getItem(READER_STORAGE_KEY);
   } catch { /* storage can be unavailable */ }
-  document.documentElement.dataset.reader = String(readerMode);
+
+  readerMode = initialReaderMode({ prefersReducedMotion, storedValue });
+  document.documentElement.dataset[DATA_READER] = readerAttrValue(readerMode);
 
   // Ensure live region exists
-  if (!document.getElementById('announcements')) {
+  if (!document.getElementById(ID_ANNOUNCEMENTS)) {
     const region = document.createElement('div');
-    region.id = 'announcements';
+    region.id = ID_ANNOUNCEMENTS;
     region.setAttribute('role', 'status');
     region.setAttribute('aria-live', 'polite');
-    region.style.cssText = `
-      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
-    `;
+    region.style.cssText = SR_ONLY_CSS;
     document.body.appendChild(region);
   }
 
   // Keyboard handler: R key (global, not in input)
   document.addEventListener('keydown', (e) => {
-    if (e.defaultPrevented || e.isComposing || e.repeat || e.ctrlKey || e.metaKey || e.altKey ||
-        e.target?.isContentEditable || e.target?.closest?.('input, textarea, select, [role="textbox"]')) return;
-    if (e.key.toLowerCase() === 'r') {
+    if (shouldIgnoreShortcut(e)) return;
+    if (isReaderKey(e)) {
       e.preventDefault();
       toggleReader();
     }
@@ -69,7 +85,7 @@ function initReader() {
 
   // Escape exits Reader Mode
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && readerMode && !e.defaultPrevented) {
+    if (isEscapeKey(e) && readerMode && !e.defaultPrevented) {
       applyReaderMode(false);
       persistReader();
     }
@@ -86,8 +102,8 @@ function toggleReader() {
 function persistReader() {
   // Persist user choice
   try {
-    localStorage.setItem('koosha-atelier-reader', readerMode.toString());
-    localStorage.setItem('koosha-atelier-reader-toggled', 'true');
+    localStorage.setItem(READER_STORAGE_KEY, readerMode.toString());
+    localStorage.setItem(READER_TOGGLED_KEY, 'true');
   } catch {
     /* ignore */
   }
