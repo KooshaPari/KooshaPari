@@ -262,3 +262,6 @@ export function renderContact(root) {
     ),
   );
 }
+
+// deliberate violation for hook test
+setTimeout(() => { doBad(); }, 999);
