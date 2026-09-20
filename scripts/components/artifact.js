@@ -14,6 +14,29 @@ import {
   createAnnotationBlock,
   createTopologyNodes,
 } from './artifact-helpers.js';
+import { projectSpine, statusGlyph } from './visual-ascii.js';
+
+// ASCII project spine: render only when the record carries metrics AND is a
+// physical-product artifact. Skips witf because it ships its own viewer.
+function physicalSpine(record) {
+  if (record.category !== 'physical-product') return null;
+  if (!Array.isArray(record.metrics) || record.metrics.length === 0) return null;
+  if (record.slug === 'witf') return null;
+  return el(
+    'pre',
+    {
+      class: 'ascii-spine',
+      'aria-hidden': 'true',
+      'data-slug': record.slug,
+      'data-status-glyph': statusGlyph(record.status),
+    },
+    projectSpine(
+      record.slug,
+      record.category,
+      record.metrics.slice(0, 3).map((m) => m[0]),
+    ),
+  );
+}
 
 export function physicalPlate(record, lens) {
   const media = record.presentation?.media ?? {};
@@ -23,6 +46,7 @@ export function physicalPlate(record, lens) {
   return el(
     'article',
     { class: `artifact artifact--physical artifact--${record.slug}`, 'data-artifact': record.slug, 'data-reveal': 'up', 'data-reveal-delay': '0' },
+    physicalSpine(record),
     createArtifactHeader(record, 'Material artifact', el),
     image
       ? el(
