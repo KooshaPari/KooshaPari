@@ -13,6 +13,15 @@
  * Exports: initParallax(), refreshParallax()
  */
 
+import {
+  clampValue,
+  isInViewport,
+  calculateTranslateY,
+  transformFor,
+  parseParallaxAttrs,
+  REDUCED_TRANSFORM,
+} from './parallax-helpers.js';
+
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 let ticking = false;
@@ -26,11 +35,11 @@ function scanElements() {
   const raw = document.querySelectorAll('[data-parallax]');
   elements = Array.from(raw).map((el) => ({
     el,
-    speed: parseFloat(el.getAttribute('data-parallax')) || 0,
-    offset: parseFloat(el.getAttribute('data-parallax-offset')) || 0,
-    clamp:
-      parseFloat(el.getAttribute('data-parallax-clamp')) ||
-      window.innerHeight,
+    ...parseParallaxAttrs({
+      speed: el.getAttribute('data-parallax'),
+      offset: el.getAttribute('data-parallax-offset'),
+      clamp: el.getAttribute('data-parallax-clamp'),
+    }, window.innerHeight),
     lastApplied: null,
   }));
 
@@ -39,23 +48,6 @@ function scanElements() {
     el.classList.add('parallax-layer');
     el.style.willChange = 'transform';
   });
-}
-
-/**
- * Check whether an element is within the viewport + margin.
- */
-function isInViewport(rect, margin) {
-  return (
-    rect.bottom >= -margin &&
-    rect.top <= window.innerHeight + margin
-  );
-}
-
-/**
- * Clamp a value between -max and +max.
- */
-function clampValue(value, max) {
-  return Math.max(-max, Math.min(max, value));
 }
 
 /**
@@ -69,22 +61,20 @@ function applyParallax() {
 
     // Skip elements not in viewport (+ 200px margin)
     const rect = el.getBoundingClientRect();
-    if (!isInViewport(rect, 200)) {
+    if (!isInViewport(rect, window.innerHeight)) {
       continue;
     }
 
     // Calculate displacement: scroll distance * speed factor + offset
-    let translateY = (scrollY * speed) + offset;
-
-    // Clamp to prevent elements going off-screen
-    translateY = clampValue(translateY, clamp);
+    const translateY = calculateTranslateY(scrollY, speed, offset, clamp);
 
     // Skip no-op transforms
     if (translateY === item.lastApplied) {
       continue;
     }
 
-    el.style.transform = `translateY(${translateY}px)`;
+    const css = transformFor(translateY);
+    if (css !== null) el.style.transform = css;
     item.lastApplied = translateY;
   }
 
@@ -116,7 +106,7 @@ function onMotionPreferenceChange() {
 function disableParallax() {
   window.removeEventListener('scroll', onScroll, { passive: true });
   elements.forEach(({ el }) => {
-    el.style.transform = 'none';
+    el.style.transform = REDUCED_TRANSFORM;
     el.style.willChange = 'auto';
   });
 }
@@ -137,7 +127,7 @@ export function initParallax() {
     // but don't apply transforms.
     scanElements();
     elements.forEach(({ el }) => {
-      el.style.transform = 'none';
+      el.style.transform = REDUCED_TRANSFORM;
     });
     return;
   }
@@ -177,7 +167,7 @@ export function refreshParallax() {
 
   if (REDUCED_MOTION.matches) {
     elements.forEach(({ el }) => {
-      el.style.transform = 'none';
+      el.style.transform = REDUCED_TRANSFORM;
     });
     return;
   }
