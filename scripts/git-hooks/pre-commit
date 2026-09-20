@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# scripts/git-hooks/pre-commit
+# Activated via: git config core.hooksPath scripts/git-hooks
+# Skip with:    git commit --no-verify
+#
+# Runs the constitution's anti-pattern detector when files under scripts/
+# are staged, and the full test suite when files under tests/ or scripts/
+# are staged. Either gate failing aborts the commit.
+
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+STAGED=$(git diff --cached --name-only --diff-filter=ACMR)
+
+if [[ -z "$STAGED" ]]; then
+  exit 0
+fi
+
+SCAN_SCRIPTS=0
+SCAN_TESTS=0
+for f in $STAGED; do
+  case "$f" in
+    scripts/*) SCAN_SCRIPTS=1 ;;
+    tests/*)   SCAN_TESTS=1 ;;
+  esac
+done
+
+FAILED=0
+
+if [[ "$SCAN_SCRIPTS" -eq 1 ]]; then
+  echo "[pre-commit] running anti-pattern detector (scripts/ staged)"
+  if ! bash scripts/anti-pattern-detector.sh; then
+    echo "[pre-commit] detector failed — fix violations or use --no-verify"
+    FAILED=1
+  fi
+fi
+
+if [[ "$SCAN_TESTS" -eq 1 || "$SCAN_SCRIPTS" -eq 1 ]]; then
+  echo "[pre-commit] running test suite (tests/ or scripts/ staged)"
+  if ! node --test tests/*.test.js >/dev/null 2>&1; then
+    echo "[pre-commit] tests failed — fix failures or use --no-verify"
+    echo "[pre-commit] (run 'node --test tests/*.test.js' for details)"
+    FAILED=1
+  fi
+fi
+
+if [[ "$FAILED" -ne 0 ]]; then
+  exit 1
+fi
+
+echo "[pre-commit] ok"
