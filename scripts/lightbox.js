@@ -6,8 +6,30 @@
    caption display. Touch/reduced-motion safe.
    ================================================================ */
 
-const OVERLAY_CLASS = 'lightbox-overlay';
-const ACTIVE_CLASS = 'lightbox-active';
+import {
+  OVERLAY_CLASS,
+  ACTIVE_CLASS,
+  CLASS_IMG,
+  CLASS_CAPTION,
+  CLASS_FIGURE,
+  CLASS_CLOSE_BTN,
+  CLASS_PREV_BTN,
+  CLASS_NEXT_BTN,
+  CLASS_COUNTER,
+  SELECTOR_IMAGES,
+  ICON_CLOSE,
+  ICON_PREV,
+  ICON_NEXT,
+  KEY_ESCAPE,
+  KEY_ARROW_LEFT,
+  KEY_ARROW_RIGHT,
+  ZOOM_CURSOR,
+  nextIndex,
+  prevIndex,
+  counterText,
+  swipeDirection,
+  shouldShowNav,
+} from './lightbox-helpers.js';
 
 /** @returns {boolean} */
 function prefersReducedMotion() {
@@ -30,34 +52,34 @@ function createOverlay() {
   overlay.tabIndex = -1;
 
   const img = document.createElement('img');
-  img.className = 'lightbox-img';
+  img.className = CLASS_IMG;
   img.alt = '';
 
   const caption = document.createElement('figcaption');
-  caption.className = 'lightbox-caption';
+  caption.className = CLASS_CAPTION;
 
   const figure = document.createElement('figure');
-  figure.className = 'lightbox-figure';
+  figure.className = CLASS_FIGURE;
   figure.appendChild(img);
   figure.appendChild(caption);
 
   const closeBtn = document.createElement('button');
-  closeBtn.className = 'lightbox-close';
+  closeBtn.className = CLASS_CLOSE_BTN;
   closeBtn.setAttribute('aria-label', 'Close lightbox');
-  closeBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+  closeBtn.innerHTML = ICON_CLOSE;
 
   const prevBtn = document.createElement('button');
-  prevBtn.className = 'lightbox-nav lightbox-prev';
+  prevBtn.className = CLASS_PREV_BTN;
   prevBtn.setAttribute('aria-label', 'Previous image');
-  prevBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>';
+  prevBtn.innerHTML = ICON_PREV;
 
   const nextBtn = document.createElement('button');
-  nextBtn.className = 'lightbox-nav lightbox-next';
+  nextBtn.className = CLASS_NEXT_BTN;
   nextBtn.setAttribute('aria-label', 'Next image');
-  nextBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>';
+  nextBtn.innerHTML = ICON_NEXT;
 
   const counter = document.createElement('div');
-  counter.className = 'lightbox-counter';
+  counter.className = CLASS_COUNTER;
 
   overlay.appendChild(figure);
   overlay.appendChild(closeBtn);
@@ -74,16 +96,14 @@ function createOverlay() {
  * @param {Element} [root=document]
  */
 export function initLightbox(root = document) {
-  const images = root.querySelectorAll(
-    '.case-gallery img, .case-hero img, .project-card-image'
-  );
+  const images = root.querySelectorAll(SELECTOR_IMAGES);
   if (!images.length) return;
 
   const overlay = createOverlay();
-  const overlayImg = overlay.querySelector('.lightbox-img');
-  const overlayCaption = overlay.querySelector('.lightbox-caption');
-  const overlayCounter = overlay.querySelector('.lightbox-counter');
-  const closeBtn = overlay.querySelector('.lightbox-close');
+  const overlayImg = overlay.querySelector(`.${CLASS_IMG}`);
+  const overlayCaption = overlay.querySelector(`.${CLASS_CAPTION}`);
+  const overlayCounter = overlay.querySelector(`.${CLASS_COUNTER}`);
+  const closeBtn = overlay.querySelector(`.${CLASS_CLOSE_BTN}`);
   const prevBtn = overlay.querySelector('.lightbox-prev');
   const nextBtn = overlay.querySelector('.lightbox-next');
 
@@ -100,12 +120,12 @@ export function initLightbox(root = document) {
     overlayImg.src = src;
     overlayImg.alt = alt;
     overlayCaption.textContent = alt;
-    overlayCounter.textContent = `${index + 1} / ${galleryImages.length}`;
+    overlayCounter.textContent = counterText(index, galleryImages.length);
 
-    // Show/hide nav buttons based on gallery size
-    prevBtn.style.display = galleryImages.length > 1 ? '' : 'none';
-    nextBtn.style.display = galleryImages.length > 1 ? '' : 'none';
-    overlayCounter.style.display = galleryImages.length > 1 ? '' : 'none';
+    const visible = shouldShowNav(galleryImages.length);
+    prevBtn.style.display = visible ? '' : 'none';
+    nextBtn.style.display = visible ? '' : 'none';
+    overlayCounter.style.display = visible ? '' : 'none';
   }
 
   function open(index) {
@@ -123,45 +143,39 @@ export function initLightbox(root = document) {
   }
 
   function next() {
-    showImage((currentIndex + 1) % galleryImages.length);
+    showImage(nextIndex(currentIndex, galleryImages.length));
   }
 
   function prev() {
-    showImage((currentIndex - 1 + galleryImages.length) % galleryImages.length);
+    showImage(prevIndex(currentIndex, galleryImages.length));
   }
 
-  // Click on images to open
   images.forEach((img, i) => {
-    img.style.cursor = 'zoom-in';
+    img.style.cursor = ZOOM_CURSOR;
     img.addEventListener('click', (e) => {
       e.preventDefault();
       open(i);
     });
   });
 
-  // Close button
   closeBtn.addEventListener('click', close);
 
-  // Click overlay background to close
   overlay.addEventListener('click', (e) => {
-    if (e.target === overlay || e.target.classList.contains('lightbox-figure')) {
+    if (e.target === overlay || e.target.classList.contains(CLASS_FIGURE)) {
       close();
     }
   });
 
-  // Keyboard navigation
   document.addEventListener('keydown', (e) => {
     if (!overlay.classList.contains(ACTIVE_CLASS)) return;
-    if (e.key === 'Escape') close();
-    if (e.key === 'ArrowRight') next();
-    if (e.key === 'ArrowLeft') prev();
+    if (e.key === KEY_ESCAPE) close();
+    if (e.key === KEY_ARROW_RIGHT) next();
+    if (e.key === KEY_ARROW_LEFT) prev();
   });
 
-  // Nav buttons
   prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
   nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); });
 
-  // Touch swipe
   overlay.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
@@ -170,9 +184,17 @@ export function initLightbox(root = document) {
   overlay.addEventListener('touchend', (e) => {
     const dx = e.changedTouches[0].clientX - touchStartX;
     const dy = e.changedTouches[0].clientY - touchStartY;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-      if (dx < 0) next();
-      else prev();
-    }
+    const direction = swipeDirection(dx, dy);
+    if (direction === 'next') next();
+    else if (direction === 'prev') prev();
   }, { passive: true });
 }
+
+// Re-export for callers that import the orchestrator module.
+export {
+  nextIndex,
+  prevIndex,
+  counterText,
+  swipeDirection,
+  shouldShowNav,
+};
