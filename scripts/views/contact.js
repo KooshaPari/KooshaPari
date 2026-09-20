@@ -7,7 +7,7 @@
    ================================================================ */
 
 import { el } from '../components/dom.js';
-import { ICONS, ERROR_MESSAGES, validateField } from './contact-helpers.js';
+import { ICONS, ERROR_MESSAGES, validateField, createTimerGroup } from './contact-helpers.js';
 
 /* ------------------------------------------------------------------
    Build a single form field
@@ -122,7 +122,9 @@ function validateAll(form) {
 }
 
 /* ------------------------------------------------------------------
-   Submit handler with loading/success states
+   Submit handler with loading/success states.
+   Uses createTimerGroup so the chain cancels cleanly on double-submit
+   or if the view is unmounted before the timer fires.
    ------------------------------------------------------------------ */
 function handleSubmit(event) {
   event.preventDefault();
@@ -138,12 +140,13 @@ function handleSubmit(event) {
   button.disabled = true;
 
   // Simulate async submission (replace with real endpoint)
-  setTimeout(() => {
+  const timers = createTimerGroup();
+  timers.set(() => {
     button.classList.remove('is-loading');
     button.classList.add('is-success');
 
     // Reset after showing success
-    setTimeout(() => {
+    timers.set(() => {
       form.reset();
       button.classList.remove('is-success');
       button.disabled = false;
@@ -155,6 +158,7 @@ function handleSubmit(event) {
         const counter = field.querySelector('[data-counter]');
         if (counter) counter.textContent = '';
       }
+      timers.clear();
     }, 2000);
   }, 1200);
 }

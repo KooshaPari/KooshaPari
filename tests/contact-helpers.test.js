@@ -76,3 +76,58 @@ test('validateField returns "empty" for null / undefined / empty input', () => {
 test('validateField returns "invalid" for unknown field names (no validator)', () => {
   assert.equal(validateField('mystery', 'whatever'), 'invalid');
 });
+
+import { createTimerGroup } from '../scripts/views/contact-helpers.js';
+
+test('createTimerGroup.set schedules a callback after the delay', async () => {
+  const tg = createTimerGroup();
+  let called = 0;
+  tg.set(() => { called += 1; }, 10);
+  assert.equal(tg.size(), 1);
+  await new Promise((r) => setTimeout(r, 25));
+  assert.equal(called, 1);
+  assert.equal(tg.size(), 0, 'completed timers are removed from the group');
+});
+
+test('createTimerGroup.set tracks multiple pending timers independently', async () => {
+  const tg = createTimerGroup();
+  const order = [];
+  tg.set(() => order.push('a'), 30);
+  tg.set(() => order.push('b'), 10);
+  tg.set(() => order.push('c'), 20);
+  assert.equal(tg.size(), 3);
+  await new Promise((r) => setTimeout(r, 60));
+  assert.deepEqual(order, ['b', 'c', 'a']);
+  assert.equal(tg.size(), 0);
+});
+
+test('createTimerGroup.clear cancels every pending timer', async () => {
+  const tg = createTimerGroup();
+  let called = 0;
+  tg.set(() => { called += 1; }, 10);
+  tg.set(() => { called += 1; }, 50);
+  tg.clear();
+  assert.equal(tg.size(), 0, 'clear empties the group immediately');
+  await new Promise((r) => setTimeout(r, 80));
+  assert.equal(called, 0, 'cleared timers never fire');
+});
+
+test('createTimerGroup.clear is idempotent (safe on empty group)', () => {
+  const tg = createTimerGroup();
+  tg.clear();
+  tg.clear();
+  assert.equal(tg.size(), 0);
+});
+
+test('createTimerGroup supports double-submit pattern (clear on next schedule)', async () => {
+  const tg = createTimerGroup();
+  let firstChain = 0;
+  let secondChain = 0;
+  tg.set(() => { firstChain += 1; }, 50);
+  // simulate user clicking again before the first chain resolves
+  tg.clear();
+  tg.set(() => { secondChain += 1; }, 10);
+  await new Promise((r) => setTimeout(r, 80));
+  assert.equal(firstChain, 0, 'cleared chain never fires');
+  assert.equal(secondChain, 1, 'new chain fires');
+});

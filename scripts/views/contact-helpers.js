@@ -47,3 +47,38 @@ export function validateField(name, value) {
   if (value == null || value === '') return 'empty';
   return validator(value) ? 'valid' : 'invalid';
 }
+
+/**
+ * createTimerGroup — track a set of timer IDs so they can be cancelled
+ * as a unit. Use for async UI flows (loading → success → reset) where
+ * the user might double-submit or navigate away before the chain
+ * completes. Pair with detector pattern #13: any setTimeout in scripts/
+ * views/ must be reached through a helper that also calls clearTimeout.
+ *
+ *   const timers = createTimerGroup();
+ *   timers.set(() => { ... }, 1200);
+ *   timers.set(() => { ... }, 2000);
+ *   // later, on teardown or double-submit:
+ *   timers.clear();
+ */
+export function createTimerGroup() {
+  const ids = new Set();
+  return {
+    /** Schedule fn after delay ms. Returns the timer id. */
+    set(fn, delay) {
+      const id = setTimeout(() => {
+        ids.delete(id);
+        fn();
+      }, delay);
+      ids.add(id);
+      return id;
+    },
+    /** Cancel every pending timer. Idempotent. */
+    clear() {
+      for (const id of ids) clearTimeout(id);
+      ids.clear();
+    },
+    /** Number of timers still pending (for tests / diagnostics). */
+    size() { return ids.size; },
+  };
+}

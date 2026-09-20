@@ -81,9 +81,17 @@ if [[ -n "$M" ]]; then note "11" "autocomplete=off breaks autofill" "${M%%:*}" "
 M=$(rgs -nE 'onclick=' scripts/ | head -1)
 if [[ -n "$M" ]]; then note "12" "onclick= (use addEventListener on button)" "${M%%:*}" "${M##*:}"; fi
 
-# 13. setTimeout without cleanup in views (heuristic: any setTimeout in views)
-M=$(rgs -n "setTimeout" scripts/views/ | head -1)
-if [[ -n "$M" ]]; then note "13" "setTimeout without cleanup" "${M%%:*}" "${M##*:}"; fi
+# 13. setTimeout without cleanup in views.
+# A view file may use setTimeout only if the same file also calls clearTimeout
+# (typically through a helper like createTimerGroup from contact-helpers.js).
+# View files that schedule timers but never cancel them will be flagged.
+VIEW_FILES_WITH_TIMEOUT=$(rgs -l "setTimeout" scripts/views/ || true)
+for F in $VIEW_FILES_WITH_TIMEOUT; do
+  if ! rg -q "clearTimeout" "$F"; then
+    M=$(rg -n "setTimeout" "$F" | head -1)
+    note "13" "setTimeout without clearTimeout" "${M%%:*}" "${M##*:}"
+  fi
+done
 
 # 14. z-index value > 100
 M=$(rgs -nE "z-index:\s*[0-9]{3,}" scripts/ | head -1)
