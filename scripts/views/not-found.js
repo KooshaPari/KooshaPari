@@ -1,30 +1,4 @@
-const TEAL = '#7EBAB5';
-const SHAPE_COUNT = 18;
-const SPEED = 0.05;
-
-/**
- * Generate an array of drifting geometric shapes.
- */
-function createShapes(width, height) {
-  const types = ['triangle', 'circle', 'line'];
-  const shapes = [];
-
-  for (let i = 0; i < SHAPE_COUNT; i++) {
-    shapes.push({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      type: types[i % 3],
-      size: 20 + Math.random() * 80,
-      rotation: Math.random() * Math.PI * 2,
-      rotationSpeed: (Math.random() - 0.5) * 0.002,
-      vx: (Math.random() - 0.5) * SPEED * 2,
-      vy: (Math.random() - 0.5) * SPEED * 2,
-      opacity: 0.1 + Math.random() * 0.1,
-    });
-  }
-
-  return shapes;
-}
+import { TEAL, createShapes, tickShapes } from './not-found-helpers.js';
 
 /**
  * Draw a single geometric shape on the canvas context.
@@ -60,23 +34,11 @@ function drawShape(ctx, shape) {
   ctx.restore();
 }
 
-/**
- * Frame loop: drift, rotate, and redraw all shapes.
- * Wraps shapes across viewport edges.
- */
 function tick(ctx, shapes, width, height) {
   ctx.clearRect(0, 0, width, height);
+  tickShapes(shapes, width, height);
 
   for (const shape of shapes) {
-    shape.x += shape.vx;
-    shape.y += shape.vy;
-    shape.rotation += shape.rotationSpeed;
-
-    if (shape.x < -shape.size) shape.x = width + shape.size;
-    if (shape.x > width + shape.size) shape.x = -shape.size;
-    if (shape.y < -shape.size) shape.y = height + shape.size;
-    if (shape.y > height + shape.size) shape.y = -shape.size;
-
     drawShape(ctx, shape);
   }
 

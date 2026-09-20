@@ -7,47 +7,7 @@ import { renderShareCliWorkbench } from '../media/sharecli-workbench.js';
 import { renderShareCliRecordings } from '../media/sharecli-recording.js';
 import { renderSubstratePlate } from '../media/systems-plate.js';
 import { renderNotFound } from './not-found.js';
-
-const COMPACT_SECTIONS = {
-  byteport: [
-    ['Context', 'Declarative Go/AWS deployment tooling with a deliberately explicit boundary between current behavior and planned delivery.'],
-    ['Current boundary', 'The record does not claim Firecracker, microVM, or live public deployment delivery without repository evidence.'],
-    ['Why it matters', 'The useful contribution is making deployment intent reviewable before infrastructure is provisioned.'],
-  ],
-  tracera: [
-    ['Context', 'Traceability and audit infrastructure for software and agent workflows.'],
-    ['Focus', 'The project organizes provenance and operational evidence without claiming unsupported adoption or deployment scale.'],
-    ['Current boundary', 'Repository status is the source of truth; production rollout claims are intentionally omitted.'],
-  ],
-  'dss-cipher': [
-    ['Context', 'Historical keyset concept preserved as a compact visual/product entry.'],
-    ['Evidence', 'Renders, kitting, collaborations, and community-interest links are retained where captured.'],
-    ['Current boundary', 'Unavailable external destinations and limited outcome evidence keep this out of the full case-study tier.'],
-  ],
-  'cliproxyapi-plusplus': [
-    ['Context', 'A forked multi-provider AI proxy focused on routing, auth, quotas, diagnostics, and operational controls.'],
-    ['Upstream boundary', 'Attributed to router-for-me/CLIProxyAPI; only KooshaPari\u2019s extension scope is presented here.'],
-    ['Current boundary', 'Upstream popularity is not imported as local adoption evidence.'],
-  ],
-  'agentapi-plusplus': [
-    ['Context', 'Agent API extension work built on an upstream agent interface.'],
-    ['Upstream boundary', 'Attributed to coder/agentapi; this entry describes extension scope only.'],
-    ['Current boundary', 'No unsupported deployment or adoption claim is made.'],
-  ],
-  mcpforge: [
-    ['Context', 'Historical MCP tooling entry preserved for provenance and archive discoverability.'],
-    ['Upstream boundary', 'Attribution to isaacphi/mcp-language-server remains visible.'],
-  ],
-  forgecode: [
-    ['Context', 'Historical agent-tooling entry retained as an archive record.'],
-    ['Upstream boundary', 'Attribution to tailcallhq/forgecode remains visible.'],
-  ],
-  frostify: [
-    ['Context', 'Historical, unmaintained Spicetify theme fork with transparent/frosted styling.'],
-    ['Evidence', 'GitHub records 3,350+ release-asset downloads; this is not a user count.'],
-    ['Upstream boundary', 'Fork attribution to gwennlbh/Frostify remains explicit.'],
-  ],
-};
+import { sectionLookupFor } from './project-detail-helpers.js';
 
 export function renderProjectDetail(root, slug, lens = 'engineering') {
   const project = PROJECTS.find(p => p.slug === slug);
@@ -60,19 +20,7 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
             el('strong', { 'data-count-to': value }, value), el('span', {}, label), el('small', {}, source))))
     : null;
 
-  const defaultSections = project.category === 'physical-product'
-    ? [
-        ['Context', 'A technically complex physical product shaped by constraints, suppliers, and real-world demand.'],
-        ['Decisions', 'Presented as an evidence-led product narrative; historical facts retain their qualifiers.'],
-        ['Outcome', 'Commercial and launch claims are labeled in the evidence ledger rather than inflated in prose.'],
-      ]
-    : [
-        ['Problem', 'A concrete engineering problem is framed before implementation details.'],
-        ['Architecture', 'The system boundary, runtime choices, and operational constraints are kept explicit.'],
-        ['Verification', 'Current status and limitations follow the reconciled GitHub evidence.'],
-      ];
-
-  const sections = project.caseStudy?.sections || COMPACT_SECTIONS[project.slug] || defaultSections;
+  const sections = sectionLookupFor(project);
 
   const overview = project.caseStudy?.overview
     ? el('div', { class: 'case-section case-overview' }, el('h2', {}, 'Overview'), el('p', {}, project.caseStudy.overview))

@@ -1,32 +1,6 @@
 import { POSTS } from '../../data/posts.js';
 import { el } from '../components/dom.js';
-
-function renderBlock(block) {
-  switch (block.type) {
-    case 'heading': {
-      const level = block.level ?? 2;
-      const tag = 'h' + Math.min(Math.max(level, 2), 3);
-      return el(tag, { class: 'post-heading' }, block.text);
-    }
-    case 'para':
-      return el('p', { class: 'post-para' }, block.text);
-    case 'list':
-      return el('ul', { class: 'post-list-block' },
-        block.items.map((item) => el('li', {}, item)),
-      );
-    case 'quote':
-      return el('blockquote', { class: 'post-quote' }, block.text);
-    case 'code':
-      return el('pre', { class: 'post-code' },
-        el('code', {}, block.text));
-    case 'hr':
-      return el('hr', { class: 'post-divider' });
-    case 'note':
-      return el('aside', { class: 'post-note' }, block.text);
-    default:
-      return null;
-  }
-}
+import { renderBlock } from './blog-post-helpers.js';
 
 export function renderBlogPost(root, slug) {
   const post = POSTS.find((entry) => entry.slug === slug);
@@ -60,7 +34,7 @@ export function renderBlogPost(root, slug) {
   );
 
   const article = el('article', { class: 'post-article' },
-    ...post.body.map(renderBlock),
+    ...post.body.map((block) => renderBlock(block, el)),
     el('footer', { class: 'post-footer' },
       el('a', { href: '/blog', class: 'text-link' }, '← All writing'),
     ),

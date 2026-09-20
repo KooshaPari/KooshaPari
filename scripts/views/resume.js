@@ -5,22 +5,11 @@ import {
   ROLES,
   PERSONAS,
 } from '../../data/phenotype.js';
-
-/* ================================================================
-   Resume data — sourced from phenotype profile.
-   ================================================================ */
-
-/** Format a YYYY-MM date string to a display year (or 'Present'). */
-function formatYear(dateStr) {
-  if (!dateStr || dateStr === 'present') return 'Present';
-  return dateStr.split('-')[0];
-}
-
-/** Map ROLES (phenotype) into the timeline format resume expects. */
+import { formatYear, formatYearRange } from './resume-helpers.js';
 const EXPERIENCE = ROLES.map((r) => ({
   company: r.company,
   role: r.title,
-  dates: `${formatYear(r.start)} \u2013 ${formatYear(r.end)}`,
+  dates: formatYearRange(r.start, r.end),
   badge: r.framing[0] ?? 'Engineering',
   desc: r.highlights,
 }));
