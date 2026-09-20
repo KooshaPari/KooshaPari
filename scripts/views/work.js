@@ -1,5 +1,4 @@
-import { filterWorkProjects } from '../work-filters.js';
-import { WORK_FILTERS } from '../work-filters.js';
+import { filterWorkProjects, WORK_FILTERS } from '../work-filters.js';
 import { el } from '../components/dom.js';
 
 export const CATALOG_GROUPS = [
@@ -84,8 +83,39 @@ const CARD_IMAGES = {
   'phenotype-omlx': { src: '/public/projects/phenotype-omlx/card.webp', alt: 'phenotype-omlx MLX inference research stack with Rust performance cores.' },
 };
 
+/**
+ * Resolve the family for a project slug. Returns null when the slug is not in
+ * FAMILY_MAP; the caller decides whether to skip the family-specific styling.
+ *
+ * @param {string} slug
+ * @returns {string | null}
+ */
+export function familyForSlug(slug) {
+  return FAMILY_MAP[slug] ?? null;
+}
+
+/**
+ * Return the inline style snippet that maps a family to its accent CSS custom
+ * properties. Centralised so featuredProject() and compactProject() do not
+ * duplicate the var(--family-...-active, var(--family-...)) fallback chain.
+ *
+ * @param {string} family
+ * @returns {string}
+ */
+export function familyStyle(family) {
+  return `--family-accent: var(--family-${family}-active, var(--family-${family})); --family-accent-ink: var(--family-${family}-ink-active, var(--family-${family}-ink, var(--family-${family}-active, var(--family-${family}))));`;
+}
+
+function familyAttrs(project) {
+  const family = familyForSlug(project.slug);
+  if (!family) return {};
+  return {
+    'data-family': family,
+    style: familyStyle(family),
+  };
+}
+
 function featuredProject(project) {
-  const family = FAMILY_MAP[project.slug];
   const image = CARD_IMAGES[project.slug];
   const href = `/work/${encodeURIComponent(project.slug)}`;
   const attrs = {
@@ -95,11 +125,8 @@ function featuredProject(project) {
        category, status are all visible). An aria-label in a different format
        ("A, B, C" vs visible "B / C A ...") fails axe label-content-name-mismatch,
        which requires the accessible name to contain the visible label. */
+    ...familyAttrs(project),
   };
-  if (family) {
-    attrs['data-family'] = family;
-    attrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family})); --family-accent-ink: var(--family-${family}-ink-active, var(--family-${family}-ink, var(--family-${family}-active, var(--family-${family}))));`;
-  }
 
   const children = [
     el('p', { class: 'work-catalog__featured-status' }, `${project.category} / ${project.status}`),
@@ -130,16 +157,9 @@ function featuredProject(project) {
 }
 
 function compactProject(project) {
-  const family = FAMILY_MAP[project.slug];
-  const attrs = { class: 'work-catalog__specimen', 'data-reveal': 'up' };
-  if (family) {
-    attrs['data-family'] = family;
-    attrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family})); --family-accent-ink: var(--family-${family}-ink-active, var(--family-${family}-ink, var(--family-${family}-active, var(--family-${family}))));`;
-  }
-
   return el(
     'li',
-    attrs,
+    { class: 'work-catalog__specimen', 'data-reveal': 'up', ...familyAttrs(project) },
     el('p', { class: 'work-catalog__specimen-code' }, project.slug),
     el('h3', {}, projectLink(project)),
     projectMeta(project),

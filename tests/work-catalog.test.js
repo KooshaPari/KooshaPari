@@ -5,6 +5,8 @@ import {
   CATALOG_GROUPS,
   buildWorkCatalog,
   classifyCatalogProject,
+  familyForSlug,
+  familyStyle,
 } from '../scripts/views/work.js';
 
 const projects = [
@@ -52,4 +54,24 @@ test('archive drawers sort dated records newest first and retain undated source 
     catalog.groups.find(({ kind }) => kind === 'archive').projects.map(({ slug }) => slug),
     ['newest', 'oldest', 'undated'],
   );
+});
+
+test('familyForSlug resolves known slugs to their accent family', () => {
+  assert.equal(familyForSlug('netweave'), 'netweave');
+  assert.equal(familyForSlug('sharecli'), 'sharecli');
+  assert.equal(familyForSlug('witf'), 'physical');
+  assert.equal(familyForSlug('gmk-arch'), 'physical');
+  assert.equal(familyForSlug('phenotype-omlx'), 'omlx');
+});
+
+test('familyForSlug returns null for unknown slugs so callers can skip family styling', () => {
+  assert.equal(familyForSlug('not-a-real-project'), null);
+  assert.equal(familyForSlug(''), null);
+});
+
+test('familyStyle emits the active-then-rest fallback chain for accent and ink', () => {
+  const style = familyStyle('netweave');
+
+  assert.match(style, /--family-accent: var\(--family-netweave-active, var\(--family-netweave\)\)/);
+  assert.match(style, /--family-accent-ink: var\(--family-netweave-ink-active, var\(--family-netweave-ink, var\(--family-netweave-active, var\(--family-netweave\)\)\)/);
 });
