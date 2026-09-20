@@ -5,29 +5,25 @@
  *  Max displacement: 12px X, 8px Y.
  * ============================================================ */
 
-const STIFFNESS = 150;
-const DAMPING = 15;
-const MASS = 1;
-const MAX_X = 12;
-const MAX_Y = 8;
-const REDUCED_SCALE = 1.04;
+import {
+  MAX_X,
+  MAX_Y,
+  REDUCED_SCALE,
+  AUTO_SELECTORS,
+  clamp,
+  createState,
+  step,
+  transformString,
+  chooseDt,
+  INITIAL_TRANSFORM,
+} from './magnetic-helpers.js';
 
-const AUTO_SELECTORS = [
-  ".atelier-nav a",
-  ".home-primary-links a",
-  ".lens-control button",
-];
-
-/** @type {Map<Element, import("./magnetic.js").MagneticState>} */
+/** @type {Map<Element, ReturnType<typeof createState>>} */
 const instances = new Map();
-
-/**
- * @typedef {{ x: number, y: number, vx: number, vy: number, targetX: number, targetY: number }} MagneticState
- */
 
 /** True when the user prefers minimal motion. */
 function prefersReduced() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 /** Get element center relative to viewport. */
@@ -43,8 +39,7 @@ function center(el) {
 function attach(el) {
   if (instances.has(el)) return;
 
-  /** @type {MagneticState} */
-  const s = { x: 0, y: 0, vx: 0, vy: 0, targetX: 0, targetY: 0 };
+  const s = createState();
 
   const reduced = prefersReduced();
 
@@ -73,45 +68,24 @@ function attach(el) {
 
   function onLeave() {
     if (reduced) {
-      el.style.transform = "";
+      el.style.transform = INITIAL_TRANSFORM;
       return;
     }
     s.targetX = 0;
     s.targetY = 0;
   }
 
-  el.addEventListener("mouseenter", onEnter);
-  el.addEventListener("mousemove", onMove);
-  el.addEventListener("mouseleave", onLeave);
+  el.addEventListener('mouseenter', onEnter);
+  el.addEventListener('mousemove', onMove);
+  el.addEventListener('mouseleave', onLeave);
 
   instances.set(el, s);
 }
 
-/** Clamp value to [-max, max]. */
-function clamp(v, max) {
-  return Math.max(-max, Math.min(max, v));
-}
-
 /** Apply transform from state. */
 function applyTransform(el, s) {
-  if (Math.abs(s.x) < 0.01 && Math.abs(s.y) < 0.01 &&
-      Math.abs(s.vx) < 0.01 && Math.abs(s.vy) < 0.01) {
-    el.style.transform = "";
-    return;
-  }
-  el.style.transform = `translate(${s.x.toFixed(2)}px, ${s.y.toFixed(2)}px)`;
-}
-
-/** Step one frame of spring physics for a single state. */
-function step(s, dt) {
-  // Damped harmonic oscillator: F = k*(target - pos) - c*vel
-  const fx = STIFFNESS * (s.targetX - s.x) - DAMPING * s.vx;
-  const fy = STIFFNESS * (s.targetY - s.y) - DAMPING * s.vy;
-
-  s.vx += (fx / MASS) * dt;
-  s.vy += (fy / MASS) * dt;
-  s.x += s.vx * dt;
-  s.y += s.vy * dt;
+  const next = transformString(s);
+  el.style.transform = next === null ? INITIAL_TRANSFORM : next;
 }
 
 /** Main rAF loop — drives all attached elements. */
@@ -119,7 +93,7 @@ let rafId = 0;
 let lastTime = 0;
 
 function tick(now) {
-  const dt = lastTime ? Math.min((now - lastTime) / 1000, 0.064) : 0.016;
+  const dt = chooseDt(now, lastTime);
   lastTime = now;
 
   for (const [el, s] of instances) {
@@ -143,21 +117,21 @@ function tick(now) {
 export function initMagnetic() {
   if (prefersReduced()) {
     // Reduced-motion: apply scale on hover only, no spring loop.
-    const reducedSelectors = [".magnetic", ...AUTO_SELECTORS];
-    const els = document.querySelectorAll(reducedSelectors.join(", "));
+    const reducedSelectors = ['.magnetic', ...AUTO_SELECTORS];
+    const els = document.querySelectorAll(reducedSelectors.join(', '));
     for (const el of els) {
-      el.addEventListener("mouseenter", () => {
+      el.addEventListener('mouseenter', () => {
         el.style.transform = `scale(${REDUCED_SCALE})`;
       });
-      el.addEventListener("mouseleave", () => {
-        el.style.transform = "";
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = INITIAL_TRANSFORM;
       });
     }
     return;
   }
 
-  const selectors = [".magnetic", ...AUTO_SELECTORS];
-  const els = document.querySelectorAll(selectors.join(", "));
+  const selectors = ['.magnetic', ...AUTO_SELECTORS];
+  const els = document.querySelectorAll(selectors.join(', '));
   for (const el of els) attach(el);
 
   if (!rafId) {
