@@ -15,14 +15,16 @@
  * Export: initPerspectiveTilt()
  */
 
-const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)');
+import {
+  normalizeClientPoint,
+  tiltFromPointer,
+  resetTransformString,
+  glareBackground,
+  parseTiltAttrs,
+  tiltTransition,
+} from './perspective-tilt-helpers.js';
 
-/**
- * Clamp a value between min and max.
- */
-function clamp(val, min, max) {
-  return Math.min(max, Math.max(min, val));
-}
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 /**
  * Create the glare overlay element.
@@ -43,10 +45,8 @@ function setupTilt(el) {
   if (el._tiltSetup) return;
   el._tiltSetup = true;
 
-  const maxTilt = parseFloat(el.dataset.tiltMax) || 12;
-  const scale = parseFloat(el.dataset.tiltScale) || 1.02;
-  const speed = parseInt(el.dataset.tiltSpeed, 10) || 400;
-  const enableGlare = el.dataset.tiltGlare === 'true';
+  const opts = parseTiltAttrs(el.dataset);
+  const { maxTilt, scale, speed, perspective, enableGlare } = opts;
 
   let glareEl = null;
   if (enableGlare) {
@@ -54,7 +54,7 @@ function setupTilt(el) {
   }
 
   // Set base transition
-  el.style.transition = `transform ${speed}ms cubic-bezier(0.03, 0.98, 0.52, 0.99)`;
+  el.style.transition = tiltTransition(speed);
   el.style.transformStyle = 'preserve-3d';
   el.style.willChange = 'transform';
 
@@ -62,33 +62,25 @@ function setupTilt(el) {
     if (REDUCED_MOTION.matches) return;
 
     const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+    const { normalX, normalY } = normalizeClientPoint(
+      e.clientX - rect.left,
+      e.clientY - rect.top,
+      rect
+    );
 
-    // Normalize to -1..1
-    const normalX = (x - centerX) / centerX;
-    const normalY = (y - centerY) / centerY;
-
-    // Calculate tilt (invert Y so top-tilts-forward)
-    const tiltX = clamp(normalY * maxTilt, -maxTilt, maxTilt);
-    const tiltY = clamp(-normalX * maxTilt, -maxTilt, maxTilt);
-
-    el.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(${scale}, ${scale}, 1)`;
+    el.style.transform = tiltFromPointer(normalX, normalY, maxTilt, scale, perspective);
 
     if (glareEl) {
-      // Position glare based on pointer
-      const glareX = (x / rect.width) * 100;
-      const glareY = (y / rect.height) * 100;
-      glareEl.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.15) 0%, transparent 60%)`;
+      const pointerX = e.clientX - rect.left;
+      const pointerY = e.clientY - rect.top;
+      glareEl.style.background = glareBackground(pointerX, pointerY, rect);
       glareEl.style.opacity = '1';
     }
   }
 
   function onLeave() {
-    el.style.transition = `transform ${speed}ms cubic-bezier(0.03, 0.98, 0.52, 0.99)`;
-    el.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    el.style.transition = tiltTransition(speed);
+    el.style.transform = resetTransformString(perspective);
     if (glareEl) {
       glareEl.style.opacity = '0';
     }
