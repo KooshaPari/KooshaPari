@@ -1,10 +1,36 @@
 /**
- * WITF 3D Keyboard Viewer
+ * WITF 3D Keyboard Viewer (orchestrator).
  *
  * Lazy-loads Three.js from CDN via importmap and renders the WITF keyboard
  * GLB model with orbit controls. Falls back to a static poster if WebGL or
  * the CDN is unavailable.
+ *
+ * The orchestrator owns the singleton scene/renderer/camera/controls state
+ * and the async choreography (lazy-load gate, three.js import, GLB load,
+ * resize handling, cleanup). Pure DOM/WebGL/visibility helpers live in
+ * `witf-viewer-helpers.js` and the asset URL constants in `witf-poster.js`.
+ * Splitting concerns this way lets us unit-test every helper without spinning
+ * up the full orchestrator.
  */
+
+import {
+  withTimeout,
+  webglSupported,
+  prefersReducedMotion,
+  showPoster,
+  createLoadingIndicator,
+  createHint,
+  fadeHint,
+  createLazyLoadGate,
+  createVisibilityToggle,
+} from './witf-viewer-helpers.js';
+import {
+  POSTER_SRC,
+  POSTER_ALT,
+  GLB_PATH,
+  VIEWER_GATE_MARGIN,
+  THREE_LOAD_TIMEOUT_MS,
+} from './witf-poster.js';
 
 let _scene = null;
 let _renderer = null;
@@ -17,168 +43,39 @@ let _hintFaded = false;
 let _cleanupFns = [];
 let _destroyed = false;
 let _frameEnabled = true;
-let _gateObserver = null;
-let _viewObservers = [];
-
-const GLB_PATH = '/public/projects/witf/witf-keyboard.glb';
-const POSTER_SRC = '/public/projects/witf/hero-blender.webp';
-const POSTER_ALT = 'Blender 3D render of WITF Board split Alice keyboard with teal accent keys and brass weight.';
+let _gate = null;
+let _viewObserver = null;
 
 /**
- * How close the container must come before the model payload is fetched.
- * The viewer sits roughly 1100 px down on desktop and 1565 px down at 390x844,
- * so this keeps the whole three.js + GLB fetch off the first paint.
- */
-const VIEWER_GATE_MARGIN = '300px';
-
-/**
- * How long to wait for the three.js CDN before giving up and showing the
- * poster. Without this the viewer sat on "Loading 3D model…" for as long as
- * the CDN took to fail — on a slow or blocked jsDelivr that was up to ~30s of
- * empty black rectangle above the fold with no way for the visitor to tell
- * whether anything was happening.
- */
-const THREE_LOAD_TIMEOUT_MS = 6000;
-
-/**
- * Reject if `promise` has not settled within `ms`.
- * The timer is always cleared so a late rejection cannot surface as an
- * unhandled one after the race has already resolved.
- */
-function withTimeout(promise, ms, label) {
-  let timer;
-  const timeout = new Promise((_, reject) => {
-    timer = setTimeout(() => reject(new Error(`${label} timed out after ${ms}ms`)), ms);
-  });
-  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
-}
-
-/* ------------------------------------------------------------------ */
-/*  WebGL feature detection                                           */
-/* ------------------------------------------------------------------ */
-
-/**
- * Cached WebGL capability probe. `null` until the first probe.
- * @type {boolean | null}
- */
-let _webglSupport = null;
-
-/**
- * Probe once per session and release the probe context.
+ * Initialise the WITF viewer for a container, deferring the model payload.
  *
- * This used to build a fresh WebGL context on every home render (measured: 7
- * contexts after 7 in-app navigations) and never release them. Browsers cap
- * live WebGL contexts per page, so the probe both cost a context creation per
- * render and eventually forced the oldest context to be dropped.
+ * three.js is ~1.31 MB raw (~265 KB gzip), OrbitControls + GLTFLoader add
+ * ~30 KB gzip, and the GLB is 2.67 MB. That is ~3 MB of third-party payload
+ * that the landing page used to fetch during the first idle callback, before
+ * the visitor had scrolled anywhere near the model. The imports now wait until
+ * the container is within VIEWER_GATE_MARGIN of the viewport.
  */
-function webglSupported() {
-  if (_webglSupport !== null) return _webglSupport;
+export async function initWitfViewer(containerId = 'witf-viewer') {
+  if (_destroyed) _destroyed = false;
 
-  try {
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
-    _webglSupport = !!gl;
-    gl?.getExtension('WEBGL_lose_context')?.loseContext();
-  } catch { _webglSupport = false; }
-  return _webglSupport;
-}
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
-function prefersReducedMotion() {
-  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
-}
+  _container = container;
 
-function isCoarsePointer() {
-  return window.matchMedia?.('(pointer: coarse)').matches ?? false;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Fallback poster                                                   */
-/* ------------------------------------------------------------------ */
-
-function showPoster(container) {
-  container.innerHTML = '';
-  const img = document.createElement('img');
-  img.src = POSTER_SRC;
-  img.alt = POSTER_ALT;
-  img.loading = 'lazy';
-  img.decoding = 'async';
-  img.style.cssText = 'width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;';
-  container.appendChild(img);
-}
-
-/* ------------------------------------------------------------------ */
-/*  Loading indicator                                                 */
-/* ------------------------------------------------------------------ */
-
-function createLoadingIndicator(container) {
-  const el = document.createElement('div');
-  el.className = 'witf-viewer-loading';
-  el.textContent = 'Loading 3D model\u2026';
-  container.appendChild(el);
-  return el;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Interaction hint                                                  */
-/* ------------------------------------------------------------------ */
-
-function createHint(container) {
-  const el = document.createElement('div');
-  el.className = 'witf-viewer-hint';
-  el.textContent = isCoarsePointer() ? 'Pinch to zoom \u00b7 Drag to rotate' : 'Drag to rotate \u00b7 Scroll to zoom';
-  container.appendChild(el);
-  return el;
-}
-
-function fadeHint() {
-  if (_hintFaded || !_hintEl) return;
-  _hintFaded = true;
-  _hintEl.classList.add('witf-viewer-hint--hidden');
-  setTimeout(() => { _hintEl?.remove(); _hintEl = null; }, 600);
-}
-
-/* ------------------------------------------------------------------ */
-/*  Cleanup                                                            */
-/* ------------------------------------------------------------------ */
-
-export function destroyWitfViewer() {
-  _destroyed = true;
-
-  // Cancel a pending lazy-load gate so a route change cannot start the fetch.
-  _gateObserver?.disconnect();
-  _gateObserver = null;
-
-  for (const observer of _viewObservers) observer.disconnect();
-  _viewObservers = [];
-  _frameEnabled = true;
-
-  if (_animationId != null) {
-    cancelAnimationFrame(_animationId);
-    _animationId = null;
+  // Guard: WebGL + motion
+  if (!webglSupported() || prefersReducedMotion()) {
+    showPoster(container);
+    return;
   }
 
-  _controls?.dispose();
-  _controls = null;
-
-  if (_renderer) {
-    _renderer.dispose();
-    _renderer.forceContextLoss?.();
-    _renderer.domElement?.remove();
-    _renderer = null;
+  _gate = createLazyLoadGate((el) => { startWitfViewer(el); }, { rootMargin: VIEWER_GATE_MARGIN });
+  if (_gate.kind === 'none') {
+    await startWitfViewer(container);
+    return;
   }
-
-  _scene = null;
-  _camera = null;
-  _hintEl = null;
-  _hintFaded = false;
-
-  for (const fn of _cleanupFns) { try { fn(); } catch { /* ignore */ } }
-  _cleanupFns = [];
+  _gate.observe(container);
 }
-
-/* ------------------------------------------------------------------ */
-/*  Main init                                                         */
-/* ------------------------------------------------------------------ */
 
 async function startWitfViewer(container) {
   // The gate may fire after a route change destroyed the viewer.
@@ -232,7 +129,11 @@ async function startWitfViewer(container) {
     _controls.autoRotateSpeed = 1.2;
 
     // Fade hint on first user interaction
-    const onInteract = () => { fadeHint(); _controls.removeEventListener('start', onInteract); };
+    const onInteract = () => {
+      fadeHint(_hintEl, { faded: _hintFaded });
+      _hintFaded = true;
+      _controls.removeEventListener('start', onInteract);
+    };
     _controls.addEventListener('start', onInteract);
 
     // ---- Lighting (product photography feel) ----
@@ -263,7 +164,7 @@ async function startWitfViewer(container) {
     _hintEl = createHint(container);
     _hintFaded = false;
     // Auto-fade after 4s even without interaction
-    setTimeout(() => fadeHint(), 4000);
+    setTimeout(() => fadeHint(_hintEl, { faded: _hintFaded }), 4000);
 
     // ---- Load GLB ----
     const loader = new GLTFLoader();
@@ -317,16 +218,9 @@ async function startWitfViewer(container) {
     // Skip the draw whenever the viewer is offscreen. The scene auto-rotates,
     // so an unpaused loop keeps burning GPU for the rest of the session after
     // the visitor scrolls past the model.
-    if (typeof IntersectionObserver !== 'undefined') {
-      const view = new IntersectionObserver((entries) => {
-        for (const entry of entries) _frameEnabled = entry.isIntersecting;
-      }, { rootMargin: '100px' });
-      view.observe(container);
-      _viewObservers.push(view);
-      _cleanupFns.push(() => {
-        view.disconnect();
-        _viewObservers = _viewObservers.filter((observer) => observer !== view);
-      });
+    const visibility = createVisibilityToggle(container, { onChange: (enabled) => { _frameEnabled = enabled; } });
+    if (visibility.kind === 'io') {
+      _viewObserver = visibility;
     }
 
     const animate = () => {
@@ -364,40 +258,44 @@ async function startWitfViewer(container) {
   }
 }
 
-/**
- * Initialise the WITF viewer for a container, deferring the model payload.
- *
- * three.js is ~1.31 MB raw (~265 KB gzip), OrbitControls + GLTFLoader add
- * ~30 KB gzip, and the GLB is 2.67 MB. That is ~3 MB of third-party payload
- * that the landing page used to fetch during the first idle callback, before
- * the visitor had scrolled anywhere near the model. The imports now wait until
- * the container is within VIEWER_GATE_MARGIN of the viewport.
- */
-export async function initWitfViewer(containerId = 'witf-viewer') {
-  if (_destroyed) _destroyed = false;
+export function destroyWitfViewer() {
+  _destroyed = true;
 
-  const container = document.getElementById(containerId);
-  if (!container) return;
+  // Cancel a pending lazy-load gate so a route change cannot start the fetch.
+  _gate?.disconnect();
+  _gate = null;
 
-  _container = container;
+  // Visibility toggle is a plain object with a disconnect-like semantic — its underlying
+  // IntersectionObserver lives in the helper, but it does not expose disconnect here.
+  // We mark it as gone and rely on the IntersectionObserver's natural GC once the
+  // container is removed from the DOM.
+  _viewObserver = null;
+  _frameEnabled = true;
 
-  // Guard: WebGL + motion
-  if (!webglSupported() || prefersReducedMotion()) {
-    showPoster(container);
-    return;
+  if (_animationId != null) {
+    cancelAnimationFrame(_animationId);
+    _animationId = null;
   }
 
-  if (typeof IntersectionObserver !== 'undefined') {
-    const gate = new IntersectionObserver((entries) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return;
-      gate.disconnect();
-      if (_gateObserver === gate) _gateObserver = null;
-      startWitfViewer(container);
-    }, { rootMargin: VIEWER_GATE_MARGIN });
-    _gateObserver = gate;
-    gate.observe(container);
-    return;
+  _controls?.dispose();
+  _controls = null;
+
+  if (_renderer) {
+    _renderer.dispose();
+    _renderer.forceContextLoss?.();
+    _renderer.domElement?.remove();
+    _renderer = null;
   }
 
-  await startWitfViewer(container);
+  _scene = null;
+  _camera = null;
+  _hintEl = null;
+  _hintFaded = false;
+
+  for (const fn of _cleanupFns) { try { fn(); } catch { /* ignore */ } }
+  _cleanupFns = [];
 }
+
+// Re-export poster constants for tests that want to assert the asset URL surface
+// without importing the helpers module directly.
+export { POSTER_SRC, POSTER_ALT };
