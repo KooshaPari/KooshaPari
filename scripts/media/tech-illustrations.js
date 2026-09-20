@@ -281,7 +281,7 @@ function dataFlow() {
 /*  Registry                                                           */
 /* ------------------------------------------------------------------ */
 
-const ILLUSTRATIONS = {
+export const ILLUSTRATIONS = {
   networkTopology,
   apiGateway,
   agentPipeline,

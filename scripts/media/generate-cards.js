@@ -22,31 +22,10 @@ import { chromium } from 'playwright';
 import { readFileSync, existsSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { CARD_WIDTH, CARD_HEIGHT, PROJECTS, projectsNeedingCards } from './generate-cards-tokens.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
-
-/* ─── Projects that already have real images ─── */
-
-const SKIP = new Set([
-  'netweave', 'witf', 'gmk-arch', 'dss-cipher',
-  'substrate', 'phenotype-omlx', 'omniroute', 'sharecli',
-]);
-
-/* ─── Project metadata (subset needed for card generation) ─── */
-
-const PROJECTS = [
-  { slug: 'agentapi-plusplus', title: 'AgentAPI++', technologies: ['TypeScript'], category: 'developer-tools' },
-  { slug: 'byteport', title: 'BytePort', technologies: ['Go', 'AWS', 'Deployment'], category: 'cloud' },
-  { slug: 'cliproxyapi-plusplus', title: 'CLIProxyAPI++', technologies: ['TypeScript'], category: 'developer-tools' },
-  { slug: 'forgecode', title: 'ForgeCode', technologies: ['TypeScript'], category: 'developer-tools' },
-  { slug: 'frostify', title: 'Frostify', technologies: ['TypeScript', 'Design'], category: 'design' },
-  { slug: 'mcpforge', title: 'MCPForge', technologies: ['TypeScript'], category: 'developer-tools' },
-  { slug: 'tracera', title: 'Tracera', technologies: ['Rust', 'Traceability', 'Audit'], category: 'developer-tools' },
-];
-
-const CARD_WIDTH = 800;
-const CARD_HEIGHT = 450;
 
 /* ─── Card rendering function (runs in browser context) ─── */
 
@@ -276,14 +255,7 @@ async function main() {
   // Wait for font to load
   await page.waitForTimeout(1500);
 
-  let generated = 0;
-  let skipped = 0;
-
-  for (const project of PROJECTS) {
-    if (SKIP.has(project.slug)) {
-      skipped++;
-      continue;
-    }
+  for (const project of projectsNeedingCards()) {
 
     const outDir = join(ROOT, 'public', 'projects', project.slug);
     const outPath = join(outDir, 'card.png');
@@ -309,7 +281,7 @@ async function main() {
   await browser.close();
 
   console.log('');
-  console.log('Generated %d card PNGs, skipped %d (have real images)', generated, skipped);
+  console.log('Generated %d card PNGs (%d have real images already)', generated, PROJECTS.length - generated);
   console.log('Card dimensions: %d x %d px', CARD_WIDTH, CARD_HEIGHT);
 }
 
