@@ -1,37 +1,39 @@
-const LENSES = new Set(['engineering', 'product']);
-const LENS_STORAGE_KEY = 'koosha-atelier-lens';
-const LENS_PROMPT_KEY = 'koosha-atelier-lens-prompted';
+import {
+  LENSES,
+  LENS_SET,
+  DEFAULT_LENS,
+  LENS_STORAGE_KEY,
+  LENS_PROMPT_KEY,
+  isValidLens,
+  resolveInitialLens,
+} from './lens-state-helpers.js';
 
-/**
- * Read the initial lens from URL, localStorage, or default.
- * Priority: URL ?lens= > localStorage > 'engineering'.
- * First-time visitors see a prompt (tracked via LENS_PROMPT_KEY).
- */
+function readUrlSearch() {
+  try {
+    return window.location.search;
+  } catch {
+    return '';
+  }
+}
+
+function readStoredLens() {
+  try {
+    return localStorage.getItem(LENS_STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
+
 function initialLens() {
-  if (typeof window === 'undefined') return 'engineering';
-
-  // 1. URL ?lens=
-  try {
-    const urlLens = new URLSearchParams(window.location.search).get('lens');
-    if (LENSES.has(urlLens)) return urlLens;
-  } catch {
-    /* ignore */
-  }
-
-  // 2. localStorage
-  try {
-    const stored = localStorage.getItem(LENS_STORAGE_KEY);
-    if (LENSES.has(stored)) return stored;
-  } catch {
-    /* ignore */
-  }
-
-  // 3. Default
-  return 'engineering';
+  if (typeof window === 'undefined') return DEFAULT_LENS;
+  return resolveInitialLens({
+    urlSearch: readUrlSearch(),
+    storedValue: readStoredLens(),
+  });
 }
 
 export function createLensState(initial) {
-  let current = LENSES.has(initial) ? initial : initialLens();
+  let current = isValidLens(initial) ? initial : initialLens();
   const subscribers = new Set();
 
   function persist(value) {
@@ -42,7 +44,7 @@ export function createLensState(initial) {
     }
   }
 
-  if (LENSES.has(initial)) persist(current);
+  if (isValidLens(initial)) persist(current);
 
   return {
     get() {
@@ -50,7 +52,7 @@ export function createLensState(initial) {
     },
 
     set(next) {
-      if (!LENSES.has(next)) return false;
+      if (!isValidLens(next)) return false;
       if (next === current) return true;
 
       current = next;
