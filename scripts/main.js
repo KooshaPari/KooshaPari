@@ -17,6 +17,12 @@ import {
   PUBLIC_RECORD,
 } from "../data/phenotype.js";
 import { PROJECTS, PROOF_POINTS } from "../data/projects.js";
+import {
+  extractWorkSlug,
+  findProjectBySlug,
+  buildPageTitle,
+  buildPageDescription,
+} from './main-helpers.js';
 
 /* ---------- tiny DOM helpers ---------- */
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -92,11 +98,10 @@ function navigate(view) {
 }
 
 function setPageMetadata(view) {
-  const slug = view.startsWith('work/') ? view.slice(5) : null;
-  const project = slug ? PROJECTS.find((p) => p.slug === slug) : null;
-  const labels = { home:'Home', engineering:'Engineering work', product:'Product / Program work', work:'Selected work', resume:'Resume', contact:'Contact' };
-  const title = project ? `${project.title} — Koosha Paridehpour` : `${labels[view] || 'Portfolio'} — Koosha Paridehpour`;
-  const description = project?.summary || 'Koosha Paridehpour — software engineer and technical product/program leader across systems, agent infrastructure, and physical products.';
+  const slug = extractWorkSlug(view);
+  const project = findProjectBySlug(slug, PROJECTS);
+  const title = buildPageTitle(view, project);
+  const description = buildPageDescription(project);
   document.title = title;
   const meta = document.querySelector('meta[name="description"]');
   if (meta) meta.setAttribute('content', description);
