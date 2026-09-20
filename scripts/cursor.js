@@ -8,18 +8,22 @@
  * @module cursor
  */
 
-const INTERACTIVE_SELECTOR =
-  'a, button, [role="button"], input, textarea, select, .clickable, .interactive';
+import {
+  INTERACTIVE_SELECTOR,
+  IMAGE_SELECTOR,
+  TRAIL_COUNT,
+  LERP_SPEED,
+  LERP_REDUCED,
+  cursorStateFor,
+  cursorIsTextInput,
+  cursorFramePositions,
+  cursorTransform,
+  trailOpacity,
+  advanceTrails,
+} from './cursor-helpers.js';
 
-const IMAGE_SELECTOR =
-  '.artifact, figure, .project-card img';
-
-const TRAIL_COUNT = 3;
-const LERP_SPEED = 0.15;
-const LERP_REDUCED = 0.35;
-
-/** Speed threshold (px/frame) above which trail dots appear. */
-const TRAIL_SPEED_THRESHOLD = 8;
+// Re-export so any caller that pulls `cursorIsTextInput` from cursor.js still works
+export { cursorIsTextInput, INTERACTIVE_SELECTOR, IMAGE_SELECTOR };
 
 /** Whether the device supports fine pointer input. */
 function hasFinePointer() {
@@ -29,13 +33,6 @@ function hasFinePointer() {
 /** Whether the user prefers reduced motion. */
 function prefersReducedMotion() {
   return matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
-
-/**
- * Linearly interpolate between `a` and `b` by factor `t`.
- */
-function lerp(a, b, t) {
-  return a + (b - a) * t;
 }
 
 /**
@@ -67,37 +64,8 @@ function createDOM() {
 }
 
 /**
- * Determine cursor state from the element under the pointer.
- *
- * @param {Element} target - The deepest element under the cursor.
- * @returns {'default'|'hover'|'text'|'image'}
- */
-function stateForTarget(target) {
-  if (!target || !target.closest) return 'default';
-
-  // Image containers get magnify state
-  if (target.closest(IMAGE_SELECTOR)) return 'image';
-
-  // Text inputs get I-beam
-  if (
-    target.matches('input:not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"])') ||
-    target.matches('textarea') ||
-    target.matches('[contenteditable="true"]')
-  ) {
-    return 'text';
-  }
-
-  // Interactive elements
-  if (target.closest(INTERACTIVE_SELECTOR)) return 'hover';
-
-  return 'default';
-}
-
-/**
  * Initialise the custom cursor system.
  * Safe to call multiple times; subsequent calls are no-ops.
- *
- * @returns {void}
  */
 export function initCursor() {
   if (!hasFinePointer()) return;
@@ -116,8 +84,9 @@ export function initCursor() {
   let ringX = -100;
   let ringY = -100;
   let currentState = 'default';
-  let isClicking = false;
   let raf = null;
+  let prevMouseX = -100;
+  let prevMouseY = -100;
 
   // ---- event handlers ----
 
@@ -127,12 +96,10 @@ export function initCursor() {
   }
 
   function onMouseDown() {
-    isClicking = true;
     ring.classList.add('cursor-ring--click');
   }
 
   function onMouseUp() {
-    isClicking = false;
     ring.classList.remove('cursor-ring--click');
   }
 
@@ -147,8 +114,7 @@ export function initCursor() {
   }
 
   function onPointerOver(e) {
-    const nextState = stateForTarget(e.target);
-    applyState(nextState);
+    applyState(cursorStateFor(e.target));
   }
 
   function applyState(next) {
@@ -178,36 +144,35 @@ export function initCursor() {
   // ---- animation loop ----
 
   function tick() {
-    // Lerp dot toward mouse
-    dotX = lerp(dotX, mouseX, lerpSpeed);
-    dotY = lerp(dotY, mouseY, lerpSpeed);
+    const next = cursorFramePositions(
+      { mouseX, mouseY, dotX, dotY, ringX, ringY },
+      lerpSpeed
+    );
+    dotX = next.dotX;
+    dotY = next.dotY;
+    ringX = next.ringX;
+    ringY = next.ringY;
 
-    // Ring follows slightly behind dot for depth
-    ringX = lerp(ringX, dotX, lerpSpeed * 0.85);
-    ringY = lerp(ringY, dotY, lerpSpeed * 0.85);
-
-    dot.style.transform = `translate(${dotX}px, ${dotY}px)`;
-    ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
+    dot.style.transform = cursorTransform(dotX, dotY);
+    ring.style.transform = cursorTransform(ringX, ringY);
 
     // Trail: store position history and update trail dots
     if (!reduced) {
-      const speed = Math.hypot(mouseX - (trails[0]?.prevX ?? mouseX), mouseY - (trails[0]?.prevY ?? mouseY));
-      trails[0].prevX = mouseX;
-      trails[0].prevY = mouseY;
+      const speed = Math.hypot(mouseX - prevMouseX, mouseY - prevMouseY);
+      prevMouseX = mouseX;
+      prevMouseY = mouseY;
 
-      for (let i = trails.length - 1; i > 0; i--) {
-        trails[i].x = trails[i - 1].x;
-        trails[i].y = trails[i - 1].y;
-      }
-      trails[0].x = dotX;
-      trails[0].y = dotY;
+      const trailPositions = advanceTrails(
+        trails.map((t) => ({ x: t.x, y: t.y })),
+        { x: dotX, y: dotY }
+      );
 
       for (let i = 0; i < trails.length; i++) {
-        const opacity = speed > TRAIL_SPEED_THRESHOLD
-          ? [0.18, 0.10, 0.05][i] * Math.min(speed / 40, 1)
-          : 0;
-        trails[i].el.style.transform = `translate(${trails[i].x}px, ${trails[i].y}px)`;
-        trails[i].el.style.opacity = String(opacity);
+        const tr = trailPositions[i] || { x: 0, y: 0 };
+        trails[i].x = tr.x;
+        trails[i].y = tr.y;
+        trails[i].el.style.transform = cursorTransform(trails[i].x, trails[i].y);
+        trails[i].el.style.opacity = String(trailOpacity(i, speed));
       }
     }
 
@@ -226,7 +191,6 @@ export function initCursor() {
   raf = requestAnimationFrame(tick);
 
   // ---- cleanup export (for SPA route changes or teardown) ----
-  // Attaches a once-listener so the module can be reinitialised after cleanup.
   window.__cursorCleanup = () => {
     cancelAnimationFrame(raf);
     document.removeEventListener('mousemove', onMouseMove);
