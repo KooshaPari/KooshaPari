@@ -6,57 +6,17 @@
    Supports prefixes/suffixes, comma formatting, and easing.
    ================================================================ */
 
+import {
+  DEFAULT_DURATION,
+  easingOut,
+  parseMetricText,
+  formatNumber,
+  counterFrameText,
+} from './counter-animate-helpers.js';
+
 const SELECTOR = '[data-count-to]';
-const DURATION = 1200; // ms
-const EASING_OUT = (t) => 1 - Math.pow(1 - t, 3); // ease-out cubic
 
 let _observer = null;
-
-/**
- * Parse a display string to extract numeric value and formatting.
- * Handles: "~4,900", "101", "~$432K", "28 days"
- * @param {string} text
- * @returns {{ value: number, prefix: string, suffix: string, format: string }}
- */
-function parseMetricText(text) {
-  const cleaned = text.trim();
-  // Match optional prefix (~, $), number (with commas), optional suffix (K, %, etc.)
-  const match = cleaned.match(/^([^0-9]*?)([0-9,]+\.?[0-9]*)(.*)$/);
-  if (!match) return { value: 0, prefix: '', suffix: '', format: 'none' };
-
-  const prefix = match[1];
-  const numStr = match[2].replace(/,/g, '');
-  const suffix = match[3];
-  const value = parseFloat(numStr);
-
-  // Detect format: integer, decimal, with commas
-  const hasCommas = match[2].includes(',');
-  const hasDecimals = match[2].includes('.');
-
-  return {
-    value,
-    prefix,
-    suffix,
-    format: hasCommas ? 'comma' : hasDecimals ? 'decimal' : 'integer',
-  };
-}
-
-/**
- * Format a number with commas and/or decimals.
- * @param {number} num
- * @param {string} format
- * @returns {string}
- */
-function formatNumber(num, format) {
-  if (format === 'decimal') {
-    return num.toFixed(1);
-  }
-  const rounded = Math.round(num);
-  if (format === 'comma') {
-    return rounded.toLocaleString('en-US');
-  }
-  return String(rounded);
-}
 
 /**
  * Animate a single element's text from 0 to its target value.
@@ -75,12 +35,10 @@ function animateCounter(el) {
 
   function tick(now) {
     const elapsed = now - start;
-    const progress = Math.min(elapsed / DURATION, 1);
-    const easedProgress = EASING_OUT(progress);
-    const current = parsed.value * easedProgress;
+    const progress = Math.min(elapsed / DEFAULT_DURATION, 1);
+    const easedProgress = easingOut(progress);
 
-    const formatted = formatNumber(current, parsed.format);
-    el.textContent = `${parsed.prefix}${formatted}${parsed.suffix}`;
+    el.textContent = counterFrameText(parsed, easedProgress);
 
     if (progress < 1) {
       requestAnimationFrame(tick);
