@@ -16,9 +16,10 @@
      </div>
 
    Modules
-     cast-timeline.js       pure .cast parsing, timeline math, clock format
-     cast-player-chrome.js  markup construction
-     cast-scrubber.js       APG media seek-slider interaction
+     cast-timeline.js              pure .cast parsing, timeline math, clock format
+     cast-player-chrome.js         markup construction
+     cast-scrubber.js              APG media seek-slider interaction
+     cast-player-helpers.js        DOM/transport constants + pure helpers
 
    Accessibility
      The scrubber is a role="slider" with aria-valuemin/max/now plus a
@@ -39,6 +40,39 @@ import {
   SEEK_STEP_MS,
   timelineDuration,
 } from './cast-timeline.js';
+import {
+  ATTR_DATA_SRC,
+  ATTR_DATA_TITLE,
+  ATTR_DATA_SPEED,
+  CLASS_LINE,
+  CLASS_SPEED_BTN_ACTIVE,
+  CLASS_STATE_PAUSED,
+  CLASS_STATE_FINISHED,
+  CLASS_VISUALLY_HIDDEN,
+  PLAY_GLYPH,
+  PAUSE_GLYPH,
+  LABEL_PLAY,
+  LABEL_PAUSE,
+  ANNOUNCE_PLAYING,
+  ANNOUNCE_PAUSED,
+  ANNOUNCE_FINISHED,
+  ANNOUNCE_UNAVAILABLE,
+  ID_ANNOUNCEMENTS,
+  KEY_SPACE,
+  KEY_ARROW_LEFT,
+  KEY_ARROW_RIGHT,
+  LOAD_TIMEOUT_MS,
+  SELECTOR_PLAYER,
+  isOutputEvent,
+  splitCastFrame,
+  clampElapsed,
+  computeElapsedDelta,
+  estimatedTerminalWidth,
+  isPlaybackShortcut,
+  isScrubWheel,
+  wheelSeekDelta,
+  initialPlayerState,
+} from './cast-player-helpers.js';
 
 /* ---- Player controller -------------------------------------- */
 
@@ -51,11 +85,11 @@ import {
  * @returns {HTMLElement|null}
  */
 function resolveAnnounceRegion(root) {
-  const shared = document.getElementById('announcements');
+  const shared = document.getElementById(ID_ANNOUNCEMENTS);
   if (shared) return shared;
 
   const local = document.createElement('span');
-  local.className = 'visually-hidden';
+  local.className = CLASS_VISUALLY_HIDDEN;
   local.setAttribute('role', 'status');
   local.setAttribute('aria-live', 'polite');
   root.append(local);
@@ -63,8 +97,8 @@ function resolveAnnounceRegion(root) {
 }
 
 function createPlayer(container) {
-  const src = container.getAttribute('data-src');
-  const title = container.getAttribute('data-title') || '';
+  const src = container.getAttribute(ATTR_DATA_SRC);
+  const title = container.getAttribute(ATTR_DATA_TITLE) || '';
   if (!src) return null;
 
   const dom = buildChrome(title);
@@ -81,13 +115,7 @@ function createPlayer(container) {
 
   let timeline = [];
   let durationMs = 0;
-  let speed = 1;
-  let playing = false;
-  let finished = false;
-  let startTime = 0;
-  let elapsed = 0;        // accumulated playing time in ms at 1x
-  let rafId = null;
-  let eventIdx = 0;
+  const state = initialPlayerState();
 
   /* --- scrubber controller --- */
 
@@ -96,7 +124,7 @@ function createPlayer(container) {
     fill,
     thumb,
     getDurationMs: () => durationMs,
-    getElapsedMs: () => elapsed,
+    getElapsedMs: () => state.elapsed,
     onSeek: seek,
     onToggle: togglePlay,
   });
@@ -110,15 +138,15 @@ function createPlayer(container) {
   }
 
   function appendEvent(ev) {
-    if (ev.type !== 'o' && ev.type !== 'i') return;
+    if (!isOutputEvent(ev)) return;
 
     // Strip carriage returns so progress-bar redraws collapse cleanly.
-    const lines = ev.data.replace(/\r/g, '').split('\n');
+    const lines = splitCastFrame(ev.data);
 
     for (let li = 0; li < lines.length; li += 1) {
       if (li > 0) {
         const lineEl = document.createElement('div');
-        lineEl.className = 'cast-player__line';
+        lineEl.className = CLASS_LINE;
         lineEl.append(cursor);
         output.append(lineEl);
       }
@@ -142,15 +170,15 @@ function createPlayer(container) {
       if (timeline[i].time * 1000 > upToMs) break;
       appendEvent(timeline[i]);
     }
-    eventIdx = indexAt(timeline, upToMs);
+    state.eventIdx = indexAt(timeline, upToMs);
     terminal.scrollTop = terminal.scrollHeight;
   }
 
   /** Flush only the events that became due since the last frame. */
   function flushTo(upToMs) {
-    while (eventIdx < timeline.length && timeline[eventIdx].time * 1000 <= upToMs) {
-      appendEvent(timeline[eventIdx]);
-      eventIdx += 1;
+    while (state.eventIdx < timeline.length && timeline[state.eventIdx].time * 1000 <= upToMs) {
+      appendEvent(timeline[state.eventIdx]);
+      state.eventIdx += 1;
     }
     terminal.scrollTop = terminal.scrollHeight;
   }
@@ -159,13 +187,13 @@ function createPlayer(container) {
 
   function syncPosition() {
     seekBar.sync();
-    scrubber.setAttribute('aria-valuetext', formatPosition(elapsed, durationMs));
-    clockNow.textContent = formatClock(elapsed);
+    scrubber.setAttribute('aria-valuetext', formatPosition(state.elapsed, durationMs));
+    clockNow.textContent = formatClock(state.elapsed);
   }
 
   function setPlayIcon(isPlaying) {
-    playBtn.textContent = isPlaying ? '\u23f8' : '\u25b6';
-    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+    playBtn.textContent = isPlaying ? PAUSE_GLYPH : PLAY_GLYPH;
+    playBtn.setAttribute('aria-label', isPlaying ? LABEL_PAUSE : LABEL_PLAY);
   }
 
   function announce(message) {
@@ -175,33 +203,33 @@ function createPlayer(container) {
   /* --- transport --- */
 
   function applySpeed(s) {
-    speed = s;
+    state.speed = s;
     for (const btn of speedBtns) {
       const active = parseFloat(btn.dataset.speed) === s;
-      btn.classList.toggle('cast-player__speed-btn--active', active);
+      btn.classList.toggle(CLASS_SPEED_BTN_ACTIVE, active);
       btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     }
   }
 
   function resetPlayback() {
     stopFrame();
-    playing = false;
-    finished = false;
-    elapsed = 0;
-    eventIdx = 0;
+    state.playing = false;
+    state.finished = false;
+    state.elapsed = 0;
+    state.eventIdx = 0;
     clearOutput();
-    root.classList.remove('cast-player--paused', 'cast-player--finished');
+    root.classList.remove(CLASS_STATE_PAUSED, CLASS_STATE_FINISHED);
     setPlayIcon(false);
     syncPosition();
   }
 
   function markFinished() {
-    elapsed = durationMs;
-    finished = true;
-    playing = false;
+    state.elapsed = durationMs;
+    state.finished = true;
+    state.playing = false;
     stopFrame();
-    root.classList.remove('cast-player--paused');
-    root.classList.add('cast-player--finished');
+    root.classList.remove(CLASS_STATE_PAUSED);
+    root.classList.add(CLASS_STATE_FINISHED);
     setPlayIcon(false);
     syncPosition();
   }
@@ -209,68 +237,68 @@ function createPlayer(container) {
   function seek(targetMs, { announce: shouldAnnounce = true } = {}) {
     if (!timeline.length) return;
 
-    elapsed = Math.max(0, Math.min(durationMs, targetMs));
-    finished = false;
-    root.classList.remove('cast-player--finished');
-    renderAt(elapsed);
+    state.elapsed = clampElapsed(targetMs, durationMs);
+    state.finished = false;
+    root.classList.remove(CLASS_STATE_FINISHED);
+    renderAt(state.elapsed);
     syncPosition();
 
-    if (shouldAnnounce) announce(formatPosition(elapsed, durationMs));
-    if (elapsed >= durationMs) markFinished();
+    if (shouldAnnounce) announce(formatPosition(state.elapsed, durationMs));
+    if (state.elapsed >= durationMs) markFinished();
   }
 
   function stopFrame() {
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = null;
+    if (state.rafId) cancelAnimationFrame(state.rafId);
+    state.rafId = null;
   }
 
   function tick(timestamp) {
-    if (!playing) return;
+    if (!state.playing) return;
 
-    if (startTime === 0) startTime = timestamp;
-    elapsed += (timestamp - startTime) * speed;
-    startTime = timestamp;
+    if (state.startTime === 0) state.startTime = timestamp;
+    state.elapsed += computeElapsedDelta(timestamp, state.startTime, state.speed);
+    state.startTime = timestamp;
 
-    if (elapsed >= durationMs) {
+    if (state.elapsed >= durationMs) {
       flushTo(durationMs);
       markFinished();
-      announce('Playback finished');
+      announce(ANNOUNCE_FINISHED);
       return;
     }
 
-    flushTo(elapsed);
+    flushTo(state.elapsed);
     syncPosition();
-    rafId = requestAnimationFrame(tick);
+    state.rafId = requestAnimationFrame(tick);
   }
 
   function play() {
     if (!timeline.length) return;
 
-    if (finished) {
-      elapsed = 0;
-      eventIdx = 0;
+    if (state.finished) {
+      state.elapsed = 0;
+      state.eventIdx = 0;
       clearOutput();
-      root.classList.remove('cast-player--finished');
+      root.classList.remove(CLASS_STATE_FINISHED);
     }
 
-    playing = true;
-    startTime = 0;
-    root.classList.remove('cast-player--paused');
+    state.playing = true;
+    state.startTime = 0;
+    root.classList.remove(CLASS_STATE_PAUSED);
     setPlayIcon(true);
-    announce('Playing');
-    rafId = requestAnimationFrame(tick);
+    announce(ANNOUNCE_PLAYING);
+    state.rafId = requestAnimationFrame(tick);
   }
 
   function pause() {
-    playing = false;
+    state.playing = false;
     stopFrame();
-    root.classList.add('cast-player--paused');
+    root.classList.add(CLASS_STATE_PAUSED);
     setPlayIcon(false);
-    announce('Paused');
+    announce(ANNOUNCE_PAUSED);
   }
 
   function togglePlay() {
-    if (playing) pause(); else play();
+    if (state.playing) pause(); else play();
   }
 
   /* --- transport wiring --- */
@@ -282,34 +310,35 @@ function createPlayer(container) {
     play();
   });
 
+  function speedHandler(btn) {
+    return () => applySpeed(parseFloat(btn.dataset.speed));
+  }
+
   for (const btn of speedBtns) {
-    btn.addEventListener('click', () => {
-      applySpeed(parseFloat(btn.dataset.speed));
-    });
+    btn.addEventListener('click', speedHandler(btn));
   }
 
   // Player-level shortcuts, active only while focus is inside the
   // player itself so we never hijack page scrolling.
   root.addEventListener('keydown', (event) => {
     if (event.defaultPrevented || event.target !== root) return;
+    if (!isPlaybackShortcut(event)) return;
 
-    if (event.key === ' ') {
-      event.preventDefault();
+    event.preventDefault();
+    if (event.key === KEY_SPACE) {
       togglePlay();
-    } else if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      seek(elapsed - SEEK_STEP_MS);
-    } else if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      seek(elapsed + SEEK_STEP_MS);
+    } else if (event.key === KEY_ARROW_LEFT) {
+      seek(state.elapsed - SEEK_STEP_MS);
+    } else if (event.key === KEY_ARROW_RIGHT) {
+      seek(state.elapsed + SEEK_STEP_MS);
     }
   });
 
   // Shift+wheel scrubs the recording without hijacking plain scroll.
   terminal.addEventListener('wheel', (event) => {
-    if (!event.shiftKey || !timeline.length) return;
+    if (!isScrubWheel(event) || !timeline.length) return;
     event.preventDefault();
-    seek(elapsed + Math.sign(event.deltaY) * SEEK_STEP_MS, { announce: false });
+    seek(state.elapsed + wheelSeekDelta(event.deltaY), { announce: false });
   }, { passive: false });
 
   /* --- load & parse --- */
@@ -320,7 +349,7 @@ function createPlayer(container) {
   }
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 5000);
+  const timeout = setTimeout(() => controller.abort(), LOAD_TIMEOUT_MS);
   fetch(src, { signal: controller.signal })
     .then((r) => {
       clearTimeout(timeout);
@@ -339,8 +368,8 @@ function createPlayer(container) {
 
       // Match the recorded terminal width when the container is unpinned.
       if (parsed.header?.term?.cols && !container.style.width) {
-        const estimated = parsed.header.term.cols * 0.6; // em-width of one cell
-        if (estimated > 30 && estimated < 90) {
+        const estimated = estimatedTerminalWidth(parsed.header.term.cols);
+        if (estimated !== null) {
           terminal.style.width = `${estimated}em`;
           terminal.style.maxWidth = '100%';
         }
@@ -350,7 +379,7 @@ function createPlayer(container) {
       console.error('[cast-player]', err);
       output.textContent = `Error loading recording: ${err.message}`;
       seekBar.setEnabled(false);
-      announce('Recording unavailable');
+      announce(ANNOUNCE_UNAVAILABLE);
     });
 
   return { el: root, play, pause, resetPlayback, seek };
@@ -366,7 +395,7 @@ function createPlayer(container) {
  * @returns {Array<object>}  Array of player instances
  */
 export function initCastPlayers(scope = document) {
-  const containers = scope.querySelectorAll('.cast-player[data-src]');
+  const containers = scope.querySelectorAll(SELECTOR_PLAYER);
   const players = [];
   for (const container of containers) {
     players.push(createPlayer(container));
