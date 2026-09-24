@@ -120,25 +120,40 @@ if [[ -n "$M" ]]; then note "18" "console shipped to bundle" "${M%%:*}" "${M##*:
 M=$(rgs -nE "innerHTML\s*=" scripts/components/ | head -1)
 if [[ -n "$M" ]]; then note "19" "innerHTML = (prefer textContent)" "${M%%:*}" "${M##*:}"; fi
 
-# 20. missing <main> landmark in any HTML entry point (index.html, blog.html, etc.)
+# 20-22. Every HTML entry point must ship <main>, lang, and a skip link.
 HTML_FILES=$(find . -maxdepth 2 -name "*.html" -not -path "./node_modules/*" -not -path "./bundled/*" -not -path "./dist/*" 2>/dev/null)
-MAIN_FOUND=0
 for hf in $HTML_FILES; do
-  if rg -q "<main" "$hf" 2>/dev/null; then
-    MAIN_FOUND=1
-    break
+  rg -q "<main" "$hf" 2>/dev/null || note "20" "missing <main> landmark" "$hf" "1"
+  rg -q '<html[^>]*lang=' "$hf" 2>/dev/null || note "21" "missing lang attribute" "$hf" "1"
+  rg -q 'skip-link' "$hf" 2>/dev/null || note "22" "missing skip link" "$hf" "1"
+  IMG_NO_ALT=$(rg -o '<img[^>]*>' "$hf" 2>/dev/null | rg -v 'alt=' | head -1)
+  if [[ -n "$IMG_NO_ALT" ]]; then
+    note "26" "img without alt attribute" "$hf" "1"
   fi
 done
-if [[ "$MAIN_FOUND" -eq 0 ]]; then
-  note "20" "missing <main> landmark in HTML entry points" "(any *.html)" "1"
+
+# 23. viewport must not block zoom (WCAG 1.4.4: user-scalable=no, maximum-scale < 2)
+M=$(rg -nE 'user-scalable\s*=\s*(no|0)|maximum-scale\s*=\s*(0\.[0-9]+|1(\.[0-9]+)?)([^0-9]|$)' "$HTML_FILES" 2>/dev/null | head -1)
+if [[ -n "$M" ]]; then note "23" "viewport blocks pinch zoom" "${M%%:*}" "${M##*:}"; fi
+
+# 24. positive tabindex (breaks natural focus order; tabindex=-1/0 are fine)
+M=$(rgs -nE '(tabindex="|tabindex=)[1-9]' . | head -1)
+if [[ -n "$M" ]]; then note "24" "positive tabindex (breaks focus order)" "${M%%:*}" "${M##*:}"; fi
+
+# 25. global focus ring + reduced-motion kill must exist (constitution Section 3)
+if ! rg -q ':focus-visible' styles/base.css 2>/dev/null; then
+  note "25" "missing global :focus-visible ring" "styles/base.css" "1"
+fi
+if ! rg -q 'prefers-reduced-motion' styles/ 2>/dev/null; then
+  note "25" "missing prefers-reduced-motion guard" "styles/" "1"
 fi
 
 # Report
 if [[ "$VIOLATIONS" -eq 0 ]]; then
-  echo "[detector] 0 violations across 20 patterns."
+  echo "[detector] 0 violations across 26 patterns."
   exit 0
 fi
-echo "[detector] $VIOLATIONS violation(s) found:"
+printf "[detector] %d violation(s) found:\n" "$VIOLATIONS"
 printf "%b\n" "$REPORT"
 echo ""
 echo "[detector] Fix all violations before opening a PR. See:"

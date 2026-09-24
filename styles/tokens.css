@@ -148,21 +148,25 @@
   --family-omlx-product: #9a8acd;
 
   /* Family text-safe ink tokens. The base --family-* values are surface
-     accents (3.6–4.1:1 on paper-100) and fail WCAG AA when used as text.
-     Each engineering variant is darkened, each product variant is lightened,
-     so any family color used as `color:` hits ≥4.5:1 in both themes. */
-  --family-netweave-ink: #35727e;
-  --family-sharecli-ink: #a0542d;
-  --family-omniroute-ink: #3e6e8d;
-  --family-physical-ink: #806920;
-  --family-substrate-ink: #557368;
-  --family-omlx-ink: #7161a8;
-  --family-netweave-product-ink: #5fd2c9;
-  --family-sharecli-product-ink: #e3876f;
-  --family-omniroute-product-ink: #7390aa;
-  --family-physical-product-ink: #e1af32;
-  --family-substrate-product-ink: #789b8a;
-  --family-omlx-product-ink: #a495d2;
+     accents and FAIL WCAG AA when used as text (badge fills, eyebrows).
+     These LIGHT-THEME inks are solved against the worst-case badge
+     background (12% accent tint over surface-raised #faf7ef) to hold
+     >=4.5:1 for small text. The [data-theme="dark"] block below
+     overrides all 12 with dark-surface-solved values. Both sets are
+     enforced by tests/contrast.test.js — do not edit either without
+     re-running it. */
+  --family-netweave-ink: #346f7a;
+  --family-sharecli-ink: #9b532d;
+  --family-omniroute-ink: #3c6b89;
+  --family-physical-ink: #7d661f;
+  --family-substrate-ink: #4f6b61;
+  --family-omlx-ink: #6b5d98;
+  --family-netweave-product-ink: #2c7570;
+  --family-sharecli-product-ink: #9d5543;
+  --family-omniroute-product-ink: #4e6982;
+  --family-physical-product-ink: #856514;
+  --family-substrate-product-ink: #526e61;
+  --family-omlx-product-ink: #6d6292;
 
   /* Surfaces — additions -------------------------------------------- */
   --surface-inset: #e2dfd8;
@@ -257,6 +261,23 @@ html[data-lens="product"] {
   --surface-inset: var(--graphite-800);
   --ink: var(--paper-100);
   --ink-muted: #b0b5a8;
+  /* Family ink overrides — solved for DARK surfaces (worst-case badge bg:
+     12% accent tint over graphite-800 #30332e) at >=4.5:1 small text.
+     These override the light-theme -ink tokens above on <html>, so the
+     --family-*-ink-active -> --family-accent-ink chains resolve dark-safe
+     values automatically. Enforced by tests/contrast.test.js. */
+  --family-netweave-ink: #7eafb8;
+  --family-sharecli-ink: #d89877;
+  --family-omniroute-ink: #88abc0;
+  --family-physical-ink: #c4a852;
+  --family-substrate-ink: #95aaa2;
+  --family-omlx-ink: #aaa0cb;
+  --family-netweave-product-ink: #4ecdc4;
+  --family-sharecli-product-ink: #e6957f;
+  --family-omniroute-product-ink: #93a7b8;
+  --family-physical-product-ink: #daa520;
+  --family-substrate-product-ink: #94aea2;
+  --family-omlx-product-ink: #afa3d8;
   --rule: color-mix(in srgb, var(--paper-100) 22%, transparent);
   --precision-rule: color-mix(in srgb, var(--paper-100) 12%, transparent);
   --precision-rule-strong: color-mix(in srgb, var(--paper-100) 24%, transparent);
