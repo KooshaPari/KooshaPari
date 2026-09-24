@@ -42,7 +42,7 @@ export const CLASS_REVEAL_VISIBLE = 'reveal-visible';
 export const SELECTOR_ARTIFACT = '.artifact';
 export const SELECTOR_HERO_MEDIA = '.artifact-media';
 export const SELECTOR_ARTIFACT_SEQUENCE = '.home-artifact-sequence';
-export const SELECTOR_HERO_PLATE = '.home-opening-artifact';
+export const SELECTOR_HERO_PLATE = '.home-witf-board';
 
 /**
  * Compute the staggered delay for a card at the given index.

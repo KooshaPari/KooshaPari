@@ -36,7 +36,7 @@
   transition: transform 0.15s ease-out;
 }
 
-/* Hero plate clip-path reveal */
-.home-opening-artifact .artifact-media {
+/* Hero WITF board clip-path reveal */
+.home-witf-board .witf-viewer-container {
   will-change: clip-path;
 }

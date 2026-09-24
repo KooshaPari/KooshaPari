@@ -14,10 +14,12 @@
   border-bottom: 1px solid var(--rule);
 }
 
-/* Artifact row spans the full grid width below the identity/artifact columns */
+/* The opening WITF board fills the right gap beside the left-aligned hero text.
+   It stays a single grid item in column 2 rather than spanning both columns. */
 .home-opening__artifact-row {
-  grid-column: 1 / -1;
+  grid-column: 2;
   min-width: 0;
+  align-self: center;
 }
 
 .home-identity {
@@ -86,11 +88,6 @@
 
 .home-primary-links a:last-child {
   color: var(--ink-muted);
-}
-
-.home-opening-artifact {
-  width: 100%;
-  max-width: none;
 }
 
 .artifact {

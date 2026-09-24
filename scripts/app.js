@@ -146,9 +146,14 @@ function render() {
     initCounterAnimate();
     initPerspectiveTilt(viewRoot);
     initScrollChoreography();
-    if (route.view === 'home') {
-      const heroEl = viewRoot.querySelector('.home-opening');
-      if (heroEl) initAmbientField(heroEl);
+    // The hero WITF board is mounted by every view that renders the home hero
+    // (`/`, `/engineering`, `/product`). Key the init off the hero's presence
+    // in the rendered DOM rather than a route list: a route that renders the
+    // hero but is missing from a hard-coded list would silently leave the
+    // board as an empty black rectangle.
+    const heroEl = viewRoot.querySelector('.home-opening');
+    if (heroEl) {
+      initAmbientField(heroEl);
       initWitfViewer();
     } else if (route.view === 'project' && route.slug === 'witf') {
       initWitfViewer('witf-detail-viewer');

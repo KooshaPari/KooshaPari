@@ -14,6 +14,49 @@ test.describe('Homepage', () => {
     }
   });
 
+  test('hero WITF board renders beside the copy on every lens page', async ({ page }) => {
+    for (const path of ['/', '/engineering', '/product']) {
+      await page.goto(path);
+      const row = page.locator('.home-opening__artifact-row');
+      const board = row.locator('.home-witf-board');
+      await expect(board).toBeVisible();
+      // All three hero routes share the desktop two-column grid; only the
+      // <=760px breakpoint stacks them.
+      await expect(row).toHaveCSS('grid-column-start', '2');
+
+      // The board is the artifact, not a framed material card: the full
+      // material chrome stays in the rail below and never returns to the hero.
+      await expect(row.locator('.artifact')).toHaveCount(0);
+      await expect(board.locator('figcaption')).toHaveText('WITF Board / historical');
+
+      const boxes = await page.evaluate(() => {
+        const boardRect = document.querySelector('.home-witf-board').getBoundingClientRect();
+        const identityRect = document.querySelector('.home-identity').getBoundingClientRect();
+        return {
+          boardLeft: boardRect.left,
+          identityRight: identityRect.right,
+          boardWidth: boardRect.width,
+          overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+        };
+      });
+      expect(boxes.boardLeft, `${path}: board must sit right of the hero copy`).toBeGreaterThan(boxes.identityRight);
+      expect(boxes.boardWidth, `${path}: board must be visible in the right column`).toBeGreaterThan(0);
+      expect(boxes.overflow, `${path}: hero must not overflow horizontally`).toBe(false);
+
+      // The viewer gate opens once the board approaches the viewport. The
+      // board must resolve to a live canvas or the static poster, never an
+      // empty container. (The headless gate can be slow, so allow for the
+      // import + GLB load rather than asserting synchronously.)
+      await board.scrollIntoViewIfNeeded();
+      await expect(board.locator('#witf-viewer canvas, #witf-viewer img')).toBeVisible({ timeout: 20000 });
+
+      // A canvas alone is not enough: the board carries data-reveal="up", and
+      // a stuck .reveal-hidden board would still report a visible box because
+      // opacity:0 is laid out. Assert the revealed outcome directly.
+      await expect(board).toHaveCSS('opacity', '1', { timeout: 5000 });
+    }
+  });
+
   test('homepage has no critical accessibility violations', async ({ page }) => {
     await page.goto('/');
     const result = await new AxeBuilder({ page })

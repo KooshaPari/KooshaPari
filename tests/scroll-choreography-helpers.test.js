@@ -182,5 +182,5 @@ test('selectors match the home page markup', () => {
   assert.equal(SELECTOR_ARTIFACT, '.artifact');
   assert.equal(SELECTOR_HERO_MEDIA, '.artifact-media');
   assert.equal(SELECTOR_ARTIFACT_SEQUENCE, '.home-artifact-sequence');
-  assert.equal(SELECTOR_HERO_PLATE, '.home-opening-artifact');
+  assert.equal(SELECTOR_HERO_PLATE, '.home-witf-board');
 });

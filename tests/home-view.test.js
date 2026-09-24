@@ -19,7 +19,7 @@ const dom = () => {
 // Sample project records covering the lens-relevant fields the home view reads.
 // featured + presentation must be true to appear on the rail.
 const sampleProjects = [
-  { slug: 'witf', featured: true, presentation: { hero: 'h' } },
+  { slug: 'witf', title: 'WITF Board', status: 'historical', featured: true, presentation: { hero: 'h' } },
   { slug: 'sharecli', featured: true, presentation: { hero: 'h' } },
   { slug: 'substrate', featured: true, presentation: { hero: 'h' } },
   { slug: 'phenotype-omlx', featured: true, presentation: { hero: 'h' } },
@@ -171,6 +171,41 @@ test('renderHome mounts the featured rail with lens-specific copy', () => {
   const sequenceArtifacts = [...view.querySelectorAll('.home-artifact-sequence > *')];
   assert.equal(sequenceArtifacts.length, 3,
     'four featured records minus one opening artifact = three sequence slots');
+});
+
+test('renderHome renders the opening WITF as an unframed board, not a material card', () => {
+  const document = dom();
+  const root = document.createElement('div');
+  const view = renderHome(root, { projects: sampleProjects, lens: 'engineering' });
+  const board = view.querySelector('.home-opening__artifact-row .home-witf-board');
+  assert.ok(board, 'opening row contains the compact WITF board');
+  assert.equal(board.tagName.toLowerCase(), 'figure');
+  assert.equal(board.getAttribute('data-artifact'), 'witf');
+  // The full material card chrome must not return to the hero: no card frame,
+  // badge, header, summary, tilt hook, or caption inside the media figure.
+  assert.equal(board.classList.contains('artifact'), false, 'board is not an artifact card');
+  assert.equal(board.querySelector('.artifact-badge'), null);
+  assert.equal(board.querySelector('.artifact-header'), null);
+  assert.equal(board.querySelector('[data-tilt]'), null);
+  assert.equal(board.querySelector('.artifact-media figcaption'), null);
+  // The board keeps the viewer's mount id and the hero choreography hook.
+  const viewer = board.querySelector('#witf-viewer.witf-viewer-container.artifact-media');
+  assert.ok(viewer, 'viewer container keeps its mount id, box class, and reveal hook');
+  // The caption is the board's own child, not a material-media figcaption.
+  const caption = board.querySelector(':scope > figcaption');
+  assert.ok(caption, 'board has its own caption');
+  assert.match(caption.textContent, /WITF Board \/ historical/);
+  // The rail below still contains the full material artifacts.
+  assert.equal(view.querySelectorAll('.home-artifact-sequence .artifact').length, 3);
+});
+
+test('renderHome renders the opening WITF board for the product lens too', () => {
+  const document = dom();
+  const root = document.createElement('div');
+  const view = renderHome(root, { projects: sampleProjects, lens: 'product' });
+  const board = view.querySelector('.home-opening__artifact-row .home-witf-board');
+  assert.ok(board, 'product lens also opens with the WITF board on the right');
+  assert.equal(view.querySelector('.home-opening__artifact-row .artifact'), null);
 });
 
 test('renderHome renders an empty section when no featured projects exist', () => {

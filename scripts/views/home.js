@@ -1,4 +1,4 @@
-import { createArtifact, physicalPlate } from '../components/artifact.js';
+import { createArtifact } from '../components/artifact.js';
 import { el } from '../components/dom.js';
 import { IDENTITY } from '../../data/phenotype.js';
 
@@ -105,6 +105,35 @@ export function orderFeaturedProjects(projects, lens) {
     .toSorted((a, b) => (order.get(a.slug) ?? priority.length) - (order.get(b.slug) ?? priority.length));
 }
 
+/**
+ * Compact WITF board for the opening row. The full material artifact in the
+ * rail below carries the header, badge, figcaption, tilt, and offset shadow.
+ * The hero board deliberately drops all of that: one centered interactive
+ * figure plus a small caption, so it reads as the artifact itself rather than
+ * a framed card competing with the hero copy.
+ */
+function witfBoard(record) {
+  return el(
+    'figure',
+    {
+      class: 'home-witf-board',
+      'data-artifact': record.slug,
+      'data-reveal': 'up',
+      'data-reveal-delay': '0',
+    },
+    el(
+      'div',
+      {
+        // witf-viewer-container owns the 16:9 box and interaction cursor.
+        // artifact-media stays as the hero plate choreography hook.
+        class: 'witf-viewer-container artifact-media home-witf-board__viewer',
+        id: 'witf-viewer',
+      },
+    ),
+    el('figcaption', {}, `${record.title} / ${record.status}`),
+  );
+}
+
 function engineeringDomains(profile) {
   if (!profile.domains) return null;
   return el('div', { class: 'engineering-domains', 'data-reveal': 'up', 'data-reveal-delay': '200' },
@@ -177,9 +206,6 @@ export function renderHome(root, { projects, lens = 'engineering' }) {
     return empty;
   }
 
-  const openingArtifact = physicalPlate(witf, lens);
-  openingArtifact.classList.add('home-opening-artifact');
-
   const view = el(
     'div',
     { class: `home-view home-view--${lens}`, 'data-lens': lens },
@@ -187,7 +213,7 @@ export function renderHome(root, { projects, lens = 'engineering' }) {
       'section',
       { class: 'home-opening', 'aria-label': 'Technical Atelier introduction and WITF artifact' },
       identityBlock(lens),
-      el('div', { class: 'home-opening__artifact-row' }, openingArtifact),
+      el('div', { class: 'home-opening__artifact-row' }, witfBoard(witf)),
     ),
     el(
       'section',

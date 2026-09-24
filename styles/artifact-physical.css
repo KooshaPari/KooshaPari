@@ -40,17 +40,31 @@
   text-transform: uppercase;
 }
 
-.home-opening-artifact .artifact-media {
-  height: auto;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  box-shadow: 1rem 1rem 0 color-mix(in srgb, var(--olive-500) 18%, transparent);
+/* The hero WITF board is the board itself, not a framed material card.
+   No border, badge, tilt or offset shadow: a centered figure plus caption
+   lets the artifact fill the right gap without competing with hero copy. */
+.home-witf-board {
+  display: grid;
+  gap: var(--space-2);
+  width: 100%;
+  margin: 0;
 }
 
-.home-opening-artifact .artifact-media img {
-  height: 100%;
-  aspect-ratio: auto;
-  object-fit: contain; object-position: center;
+.home-witf-board .witf-viewer-container {
+  width: 100%;
+  /* The container also carries .artifact-media as the choreography hook, which
+     supplies a 1px border. The hero board is intentionally unframed. */
+  border: 0;
+  box-shadow: none;
+}
+
+.home-witf-board figcaption {
+  text-align: center;
+  color: var(--ink-muted);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .artifact-context {
