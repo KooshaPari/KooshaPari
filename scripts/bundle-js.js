@@ -56,6 +56,9 @@ function loadModule(absPath) {
 
   // Extract all static `import ... from '...'` declarations (single & multi-line)
   const importRe = /import\s+(?:(\{[^}]*\}|[\w*$_]+(?:\s*,\s*\{[^}]*\})?)\s+from\s+)?['"]([^'"]+)['"];?/g;
+  // Re-export form: `export { A, B as C } from '...'`. The target module must be
+  // walked (its body is what defines the names) and the statement stripped later.
+  const reExportRe = /export\s+\{([^}]*)\}\s+from\s+['"]([^'"]+)['"];?/g;
   const exportList = [];
   let m;
   while ((m = importRe.exec(noComments)) !== null) {
@@ -85,6 +88,21 @@ function loadModule(absPath) {
     }
   }
 
+  while ((m = reExportRe.exec(noComments)) !== null) {
+    const spec = m[2];
+    if (spec.startsWith('node:')) continue;
+    const depPath = resolveImportPath(absPath, spec);
+    imports.push({ spec, path: depPath, fullMatch: m[0] });
+
+    m[1].split(',').forEach((s) => {
+      const part = s.trim();
+      if (!part) return;
+      // `B as C` re-exports C, bound to the source's B.
+      const aliasMatch = part.match(/^(\w+)\s+as\s+(\w+)$/);
+      exportList.push({ local: aliasMatch ? aliasMatch[2] : part, source: depPath });
+    });
+  }
+
   // Recurse into dependencies
   for (const imp of imports) {
     loadModule(imp.path);
@@ -107,6 +125,10 @@ function stripDeclarations(source) {
   out = out.replace(/import\s+(?:\{[^}]*\}|[\w*$_]+(?:\s*,\s*\{[^}]*\})?)\s+from\s+['"][^'"]+['"];?\n?/g, '');
   // Remove `export default ...`
   out = out.replace(/export\s+default\s+/g, '');
+  // Remove re-exports `export { A, B as C } from '...';` BEFORE the generic
+  // `export { ... }` rule below, which would otherwise leave the dangling
+  // `from '...'` clause behind and produce a syntax error in the IIFE.
+  out = out.replace(/export\s+\{[^}]*\}\s+from\s+['"][^'"]+['"];?\n?/g, '');
   // Remove `export { ... }` / `export { ... as ... }`
   out = out.replace(/export\s+\{[^}]*\};?\n?/g, '');
   // Remove `export function` / `export const` / `export let` / `export class`
