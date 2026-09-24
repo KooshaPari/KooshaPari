@@ -14,8 +14,11 @@ REPO_ROOT="${1:-$(git rev-parse --show-toplevel 2>/dev/null || pwd)}"
 cd "$REPO_ROOT" || { echo "[detector] cannot cd to $REPO_ROOT" >&2; exit 2; }
 
 # Self-exclusion: do not match this script's own pattern comments.
+# NOTE: no inner single quotes here — bash keeps them as literal characters
+# when this variable is word-split into rg args, which broke every `rgs`
+# pattern (rg returned no matches at all). The quotes must NOT appear.
 SELF="scripts/anti-pattern-detector.sh"
-EXCLUDE_SELF="--glob '!${SELF}'"
+EXCLUDE_SELF="--glob !${SELF}"
 
 VIOLATIONS=0
 REPORT=""
