@@ -148,9 +148,30 @@ if ! rg -q 'prefers-reduced-motion' styles/ 2>/dev/null; then
   note "25" "missing prefers-reduced-motion guard" "styles/" "1"
 fi
 
+# 27. Source files must respect the size mandate: <=350 lines target, <=500 hard
+# limit. Files over the 500 hard limit are violations; files over the 350 target
+# are reported as warnings so the gate reflects the documented contract. Scoped
+# to tracked first-party source (scripts/, data/, styles/) so generated output
+# (bundled/, dist/) and local artifacts (test-screenshots/, output/) are not
+# mistaken for maintained modules. Uses git ls-files rather than a glob sweep so
+# ignored and untracked scratch files cannot cause false hits.
+SIZE_SCAN=$(git ls-files 'scripts/*.js' 'scripts/**/*.js' 'data/*.js' 'styles/*.css' 2>/dev/null \
+  | xargs wc -l 2>/dev/null \
+  | grep -v ' total$' \
+  | awk '$1>350 {print $1" "$2}')
+HARD_SIZE_VIOLATION=$(echo "$SIZE_SCAN" | awk '$1>500 {print; exit}')
+if [[ -n "$HARD_SIZE_VIOLATION" ]]; then
+  note "27" "file exceeds the 500-line hard limit" "${HARD_SIZE_VIOLATION#* }" "$HARD_SIZE_VIOLATION"
+fi
+OVER_TARGET=$(echo "$SIZE_SCAN" | awk '$1<=500')
+if [[ -n "$OVER_TARGET" ]]; then
+  echo "[detector] warning: files over the 350-line target (within the 500 hard limit):" >&2
+  echo "$OVER_TARGET" | awk '{printf "  %s (%s lines)\n", $2, $1}' >&2
+fi
+
 # Report
 if [[ "$VIOLATIONS" -eq 0 ]]; then
-  echo "[detector] 0 violations across 26 patterns."
+  echo "[detector] 0 violations across 27 patterns."
   exit 0
 fi
 printf "[detector] %d violation(s) found:\n" "$VIOLATIONS"

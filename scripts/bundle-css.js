@@ -166,6 +166,7 @@ const bundles = {
   ],
   'components.css': [
     'artifacts.css',
+    'artifact-physical.css',
     'witf-viewer.css',
     'responsive.css',
     'cards.css',

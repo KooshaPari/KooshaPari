@@ -142,7 +142,7 @@ Use in `components/evidence.js:21-50` for every evidence link.
 
 ## 9. Code Conventions (anchored to current files)
 
-- Each file <= 500 lines (target <= 350). Already enforced for helpers; the unreachable `scripts/main.js` island (1829 lines, no importer, absent from the bundle) was deleted rather than decomposed.
+- Each file <= 500 lines (target <= 350). Detector pattern 27 enforces the 500-line hard limit on tracked first-party source (`scripts/`, `data/`, `styles/`) and warns above the 350-line target. The unreachable `scripts/main.js` island (1829 lines, no importer, absent from the bundle) was deleted rather than decomposed, and `styles/artifacts.css` (549 lines) was split into `artifacts.css` + `artifact-physical.css` at the same cascade position.
 - Pure helpers extracted per orchestrator: see `scripts/transitions-helpers.js`, `scripts/lightbox-helpers.js`, `scripts/scroll-reveal-helpers.js`, `scripts/scroll-choreography-helpers.js`, `scripts/image-reveal-helpers.js`, `scripts/counter-animate-helpers.js`, `scripts/dark-mode-helpers.js`, `scripts/cursor-helpers.js`, `scripts/parallax-helpers.js`, `scripts/perspective-tilt-helpers.js`, `scripts/router-helpers.js`. Each helper module is independently testable via `node --test`.
 - Commit format: `tx-agent`, `tx-task`, `tx-parent`, `tx-validated`, `tx-scope`, `tx-intent` trailers (immutable ledger pattern).
 - ASCII widgets go in `scripts/components/visual-ascii.js` (this skill's section 8.1-8.3 ship here).
