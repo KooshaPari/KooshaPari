@@ -137,3 +137,23 @@ export function initialPlayerState() {
     speed: 1,
   };
 }
+
+/**
+ * Locate a polite live region for transport announcements, creating a
+ * visually hidden fallback inside the player when the shared site
+ * region (scripts/reader-state.js) has not been installed.
+ *
+ * @param {HTMLElement} root
+ * @returns {HTMLElement|null}
+ */
+export function resolveAnnounceRegion(root) {
+  const shared = document.getElementById(ID_ANNOUNCEMENTS);
+  if (shared) return shared;
+
+  const local = document.createElement('span');
+  local.className = CLASS_VISUALLY_HIDDEN;
+  local.setAttribute('role', 'status');
+  local.setAttribute('aria-live', 'polite');
+  root.append(local);
+  return local;
+}

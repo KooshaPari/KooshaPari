@@ -45,7 +45,7 @@ await cp(join(root, 'index.html'), join(publication, 'root.html'));
 for (const directory of directories) {
   const entries = await readdir(join(root, directory));
   const blocked = directory === 'scripts'
-    ? new Set(['main.js', 'stage-publication.js', 'prerender.js', 'preview-server.js'])
+    ? new Set(['stage-publication.js', 'prerender.js', 'preview-server.js'])
     : directory === 'data'
       ? new Set()
       : new Set();

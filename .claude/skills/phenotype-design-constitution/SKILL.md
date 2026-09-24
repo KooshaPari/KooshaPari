@@ -142,8 +142,8 @@ Use in `components/evidence.js:21-50` for every evidence link.
 
 ## 9. Code Conventions (anchored to current files)
 
-- Each file <= 500 lines (target <= 350). Already enforced for helpers; `scripts/main.js:1-1829` is legacy/dead and out of scope until next refactor pass.
-- Pure helpers extracted per orchestrator: see `scripts/main-helpers.js`, `scripts/transitions-helpers.js`, `scripts/lightbox-helpers.js`, `scripts/scroll-reveal-helpers.js`, `scripts/scroll-choreography-helpers.js`, `scripts/image-reveal-helpers.js`, `scripts/counter-animate-helpers.js`, `scripts/dark-mode-helpers.js`, `scripts/cursor-helpers.js`, `scripts/parallax-helpers.js`, `scripts/perspective-tilt-helpers.js`, `scripts/router-helpers.js`. Each helper module is independently testable via `node --test`.
+- Each file <= 500 lines (target <= 350). Already enforced for helpers; the unreachable `scripts/main.js` island (1829 lines, no importer, absent from the bundle) was deleted rather than decomposed.
+- Pure helpers extracted per orchestrator: see `scripts/transitions-helpers.js`, `scripts/lightbox-helpers.js`, `scripts/scroll-reveal-helpers.js`, `scripts/scroll-choreography-helpers.js`, `scripts/image-reveal-helpers.js`, `scripts/counter-animate-helpers.js`, `scripts/dark-mode-helpers.js`, `scripts/cursor-helpers.js`, `scripts/parallax-helpers.js`, `scripts/perspective-tilt-helpers.js`, `scripts/router-helpers.js`. Each helper module is independently testable via `node --test`.
 - Commit format: `tx-agent`, `tx-task`, `tx-parent`, `tx-validated`, `tx-scope`, `tx-intent` trailers (immutable ledger pattern).
 - ASCII widgets go in `scripts/components/visual-ascii.js` (this skill's section 8.1-8.3 ship here).
 

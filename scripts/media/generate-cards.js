@@ -15,7 +15,7 @@
  *   npm install (Playwright is already a devDependency)
  *   npx playwright install chromium
  *
- * Card dimensions: 800 x 450 px (matches CARD_WIDTH x CARD_HEIGHT in card-composer.js)
+ * Card dimensions: 800 x 450 px (matches CARD_WIDTH x CARD_HEIGHT in card-canvas.js)
  */
 
 import { chromium } from 'playwright';

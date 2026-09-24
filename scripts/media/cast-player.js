@@ -20,6 +20,7 @@
      cast-player-chrome.js         markup construction
      cast-scrubber.js              APG media seek-slider interaction
      cast-player-helpers.js        DOM/transport constants + pure helpers
+     cast-player-render.js         terminal viewport rendering + frame replay
 
    Accessibility
      The scrubber is a role="slider" with aria-valuemin/max/now plus a
@@ -31,11 +32,11 @@
 
 import { buildChrome } from './cast-player-chrome.js';
 import { createScrubber } from './cast-scrubber.js';
+import { createCastRenderer } from './cast-player-render.js';
 import {
   buildCastTimeline,
   formatClock,
   formatPosition,
-  indexAt,
   parseCast,
   SEEK_STEP_MS,
   timelineDuration,
@@ -44,7 +45,6 @@ import {
   ATTR_DATA_SRC,
   ATTR_DATA_TITLE,
   ATTR_DATA_SPEED,
-  CLASS_LINE,
   CLASS_SPEED_BTN_ACTIVE,
   CLASS_STATE_PAUSED,
   CLASS_STATE_FINISHED,
@@ -63,8 +63,6 @@ import {
   KEY_ARROW_RIGHT,
   LOAD_TIMEOUT_MS,
   SELECTOR_PLAYER,
-  isOutputEvent,
-  splitCastFrame,
   clampElapsed,
   computeElapsedDelta,
   estimatedTerminalWidth,
@@ -72,29 +70,10 @@ import {
   isScrubWheel,
   wheelSeekDelta,
   initialPlayerState,
+  resolveAnnounceRegion,
 } from './cast-player-helpers.js';
 
 /* ---- Player controller -------------------------------------- */
-
-/**
- * Locate a polite live region for transport announcements, creating a
- * visually hidden fallback inside the player when the shared site
- * region (scripts/reader-state.js) has not been installed.
- *
- * @param {HTMLElement} root
- * @returns {HTMLElement|null}
- */
-function resolveAnnounceRegion(root) {
-  const shared = document.getElementById(ID_ANNOUNCEMENTS);
-  if (shared) return shared;
-
-  const local = document.createElement('span');
-  local.className = CLASS_VISUALLY_HIDDEN;
-  local.setAttribute('role', 'status');
-  local.setAttribute('aria-live', 'polite');
-  root.append(local);
-  return local;
-}
 
 function createPlayer(container) {
   const src = container.getAttribute(ATTR_DATA_SRC);
@@ -131,57 +110,11 @@ function createPlayer(container) {
 
   /* --- rendering --- */
 
-  function clearOutput() {
-    output.textContent = '';
-    output.append(cursor);
-    terminal.scrollTop = 0;
-  }
-
-  function appendEvent(ev) {
-    if (!isOutputEvent(ev)) return;
-
-    // Strip carriage returns so progress-bar redraws collapse cleanly.
-    const lines = splitCastFrame(ev.data);
-
-    for (let li = 0; li < lines.length; li += 1) {
-      if (li > 0) {
-        const lineEl = document.createElement('div');
-        lineEl.className = CLASS_LINE;
-        lineEl.append(cursor);
-        output.append(lineEl);
-      }
-      if (lines[li]) {
-        // Insert before the cursor wherever it currently lives.
-        cursor.parentNode.insertBefore(document.createTextNode(lines[li]), cursor);
-      }
-    }
-  }
-
-  /**
-   * Render every event at or before `upToMs` from a clean slate.
-   *
-   * Seeking backwards is indistinguishable from a very fast replay,
-   * so rather than maintaining a rewind path we re-render. The pass
-   * is O(events) and runs at most once per seek.
-   */
-  function renderAt(upToMs) {
-    clearOutput();
-    for (let i = 0; i < timeline.length; i += 1) {
-      if (timeline[i].time * 1000 > upToMs) break;
-      appendEvent(timeline[i]);
-    }
-    state.eventIdx = indexAt(timeline, upToMs);
-    terminal.scrollTop = terminal.scrollHeight;
-  }
-
-  /** Flush only the events that became due since the last frame. */
-  function flushTo(upToMs) {
-    while (state.eventIdx < timeline.length && timeline[state.eventIdx].time * 1000 <= upToMs) {
-      appendEvent(timeline[state.eventIdx]);
-      state.eventIdx += 1;
-    }
-    terminal.scrollTop = terminal.scrollHeight;
-  }
+  const { clearOutput, appendEvent, renderAt, flushTo } = createCastRenderer({
+    output,
+    cursor,
+    terminal,
+  });
 
   /* --- status --- */
 
@@ -240,7 +173,7 @@ function createPlayer(container) {
     state.elapsed = clampElapsed(targetMs, durationMs);
     state.finished = false;
     root.classList.remove(CLASS_STATE_FINISHED);
-    renderAt(state.elapsed);
+    renderAt(timeline, state, state.elapsed);
     syncPosition();
 
     if (shouldAnnounce) announce(formatPosition(state.elapsed, durationMs));
@@ -260,13 +193,13 @@ function createPlayer(container) {
     state.startTime = timestamp;
 
     if (state.elapsed >= durationMs) {
-      flushTo(durationMs);
+      flushTo(timeline, state, durationMs);
       markFinished();
       announce(ANNOUNCE_FINISHED);
       return;
     }
 
-    flushTo(state.elapsed);
+    flushTo(timeline, state, state.elapsed);
     syncPosition();
     state.rafId = requestAnimationFrame(tick);
   }

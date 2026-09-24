@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { parseHTML } from 'linkedom';
+import { resolveAnnounceRegion } from '../scripts/media/cast-player-helpers.js';
 
 import {
   CLASS_LINE,
@@ -188,4 +190,35 @@ test('initialPlayerState: returns fresh object each call', () => {
   assert.notEqual(a, b);
   a.playing = true;
   assert.equal(b.playing, false);
+});
+
+test('resolveAnnounceRegion prefers the shared site-wide region', () => {
+  const previous = globalThis.document;
+  globalThis.document = parseHTML('<html><body><div id="announcements"></div></body></html>').document;
+  try {
+    const shared = document.getElementById('announcements');
+    const root = document.createElement('div');
+    const resolved = resolveAnnounceRegion(root);
+    assert.equal(resolved, shared);
+    assert.equal(root.childNodes.length, 0);
+  } finally {
+    if (previous === undefined) delete globalThis.document;
+    else globalThis.document = previous;
+  }
+});
+
+test('resolveAnnounceRegion appends a polite visually-hidden fallback', () => {
+  const previous = globalThis.document;
+  globalThis.document = parseHTML('<html><body></body></html>').document;
+  try {
+    const root = document.createElement('div');
+    const resolved = resolveAnnounceRegion(root);
+    assert.equal(resolved.className, 'visually-hidden');
+    assert.equal(resolved.getAttribute('role'), 'status');
+    assert.equal(resolved.getAttribute('aria-live'), 'polite');
+    assert.equal(root.firstChild, resolved);
+  } finally {
+    if (previous === undefined) delete globalThis.document;
+    else globalThis.document = previous;
+  }
 });
