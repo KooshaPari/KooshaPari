@@ -58,3 +58,14 @@ Highlights:
 ## Earlier Work
 
 [Frostify](https://github.com/KooshaPari/Frostify) — substantially customized Spicetify theme released in 2020; packaged GitHub release accumulated 3,350+ release-asset downloads.
+
+## Development gates
+
+| Gate | Command | What it enforces |
+|---|---|---|
+| Pre-commit hook | auto on commit (enabled by `npm install`) | Runs the anti-pattern detector + test suite for any commit touching `scripts/` or `tests/` |
+| Anti-pattern detector | `bash scripts/anti-pattern-detector.sh` | 26 UX/WCAG/size patterns (4.5:1 contrast, `<main>` per page, timer cleanup, <=350-line targets, ...) |
+| Test suite | `npm test` | 692+ node:test assertions incl. publication byte-match gates |
+| Production build | `npm run stage:publication` | Content-hashed CSS/JS bundles, prerender, minify into `dist/`, then sync `dist/` -> `.vercel/output/static` |
+
+Fresh-clone setup: `npm install && npm run stage:publication && npm test`.
