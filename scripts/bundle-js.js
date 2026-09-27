@@ -188,14 +188,53 @@ const bodies = loadOrder.map((absPath) => {
 // Identical values (two modules each defining `KEY_ARROW_LEFT = 'ArrowLeft'`)
 // are still a landmine: they work until one side is edited. Fail the build and
 // make the name unique instead.
+//
+// Only column-0 declarations count: those are the ones the shared IIFE scope
+// flattens. Indented declarations are block-scoped inside their module and
+// cannot collide across modules, so they are deliberately not matched.
+//
+// `async` is included because stripDeclarations preserves it, and modules do
+// declare top-level `async function` (code-annotate, witf-viewer,
+// transitions). A multi-declarator statement (`const A = 1, B = 2`) is split so
+// every name on the line is collected, not just the first.
+const TOP_LEVEL_DECL =
+  /^(?:async\s+)?(?:var|function|class)\s+([A-Za-z_$][A-Za-z0-9_$]*)/gm;
+
 const declaredIn = new Map();
 for (const [i, absPath] of loadOrder.entries()) {
   const body = bodies[i];
   const names = new Set();
-  for (const m of body.matchAll(
-    /^(?:var|function|class)\s+([A-Za-z_$][A-Za-z0-9_$]*)/gm,
-  )) {
+  for (const m of body.matchAll(TOP_LEVEL_DECL)) {
     names.add(m[1]);
+    // Collect every declarator on the statement. The scan starts at the match
+    // itself (not after it) so the first name is seen here too rather than
+    // only in the later parts, and it tracks nesting depth so a semicolon
+    // inside a call, array, or object literal does not end the statement early.
+    let depth = 0;
+    let current = '';
+    const parts = [];
+    for (let j = m.index; j < body.length; j += 1) {
+      const ch = body[j];
+      if ('([{'.includes(ch)) depth += 1;
+      else if (')]}'.includes(ch)) depth -= 1;
+      if (ch === ';' && depth <= 0) break;
+      if (ch === ',' && depth === 0) {
+        parts.push(current);
+        current = '';
+      } else {
+        current += ch;
+      }
+    }
+    parts.push(current);
+    for (const part of parts) {
+      // Strip a leading `var`/`let`/`const` so the first declarator matches the
+      // same `name =` shape as the rest.
+      const name = part
+        .trim()
+        .replace(/^(?:var|let|const)\s+/, '')
+        .match(/^([A-Za-z_$][A-Za-z0-9_$]*)\s*=/);
+      if (name) names.add(name[1]);
+    }
   }
   for (const name of names) {
     if (!declaredIn.has(name)) declaredIn.set(name, []);

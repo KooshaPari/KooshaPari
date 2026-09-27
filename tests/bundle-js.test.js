@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, readdirSync, cpSync, rmSync, symlinkSync } from 'node:fs';
+import { mkdtempSync, readFileSync, readdirSync, cpSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
@@ -67,5 +67,92 @@ test('bundle manifest points at the only emitted bundle', () => {
     const manifest = JSON.parse(readFileSync(resolve(root, 'bundled/manifest.json'), 'utf8'));
     const files = readdirSync(resolve(root, 'bundled')).filter(f => f.endsWith('.js'));
     assert.deepEqual(files, [manifest['app.bundle.js']]);
+  });
+});
+
+// Every module body is concatenated into one IIFE and const/let are rewritten to
+// var, so two modules declaring the same top-level name silently share one
+// binding. That shipped once: counter-animate.js declared
+// `const SELECTOR = '[data-count-to]'` while scroll-reveal-helpers.js exports
+// `SELECTOR = '[data-reveal]'`, so the reveal system scanned for counters,
+// matched none of its elements, and never revealed anything on any page.
+//
+// The guard has to see every form a top-level declaration can take after
+// stripDeclarations runs, or it reintroduces the same class of bug quietly.
+// Every module body is concatenated into one IIFE and const/let are rewritten to
+// var, so two modules declaring the same top-level name silently share one
+// binding. That shipped once: counter-animate.js declared
+// `const SELECTOR = '[data-count-to]'` while scroll-reveal-helpers.js exports
+// `SELECTOR = '[data-reveal]'`, so the reveal system scanned for counters,
+// matched none of its elements, and never revealed anything on any page.
+//
+// The guard has to see every form a top-level declaration can take after
+// stripDeclarations runs, or it reintroduces the same class of bug quietly.
+// One repo copy covers every case: the guard exits before minification, so an
+// aborted build is fast, and duplicating the tree per case is the real cost.
+test('build aborts on any cross-module top-level name collision', () => {
+  withRepoCopy(root => {
+    // `clamp` is declared by magnetic-helpers.js. Injecting it into a different
+    // module is a genuine cross-module collision; injecting a second `clamp`
+    // into magnetic-helpers.js itself would not be, since two declarations in
+    // one module body are the same binding, not a collision.
+    const cases = [
+      'const clamp = 1;',
+      'let clamp = 1;',
+      'function clamp() {}',
+      'async function clamp() {}',
+      'class clamp {}',
+      'var clamp = 1;',
+      // Multi-declarator: only the first name is visible to a naive regex, so
+      // the guard has to walk the rest of the statement too.
+      'const alpha = 1, clamp = 2;',
+      // A semicolon inside a nested literal must not be mistaken for the end
+      // of the statement, or the later declarator is missed.
+      'const alpha = [1, 2].map((n) => n), clamp = 2;',
+    ];
+    for (const decl of cases) {
+      const target = resolve(root, 'scripts/perspective-tilt-helpers.js');
+      const original = readFileSync(target, 'utf8');
+      writeFileSync(target, `${original}\n${decl}\n`);
+      try {
+        execFileSync(process.execPath, ['scripts/bundle-js.js'], {
+          cwd: root,
+          encoding: 'utf8',
+          stdio: 'pipe',
+        });
+        assert.fail(`guard missed declaration form: ${decl}`);
+      } catch (e) {
+        if (e instanceof assert.AssertionError) throw e;
+        const output = `${e.stdout ?? ''}${e.stderr ?? ''}`;
+        assert.match(output, /top-level name collision/i, `guard must name the failure mode for: ${decl}`);
+        assert.match(output, /\bclamp\b/, `guard must report clamp for: ${decl}`);
+      } finally {
+        writeFileSync(target, original);
+      }
+    }
+  });
+});
+
+test('collision guard ignores block-scoped declarations', () => {
+  withRepoCopy(root => {
+    // Only column-0 declarations share the IIFE scope. An indented,
+    // block-scoped `clamp` cannot collide across modules, and a guard that
+    // flagged it would make the build unusable.
+    const target = resolve(root, 'scripts/perspective-tilt-helpers.js');
+    const original = readFileSync(target, 'utf8');
+    writeFileSync(
+      target,
+      `${original}\nexport function probe() {\n  const clamp = 1;\n  return clamp;\n}\n`,
+    );
+    try {
+      const out = execFileSync(process.execPath, ['scripts/bundle-js.js'], {
+        cwd: root,
+        encoding: 'utf8',
+        stdio: 'pipe',
+      });
+      assert.match(out, /Bundled \d+ modules/, 'block-scoped names must not abort the build');
+    } finally {
+      writeFileSync(target, original);
+    }
   });
 });
