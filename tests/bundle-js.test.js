@@ -79,15 +79,6 @@ test('bundle manifest points at the only emitted bundle', () => {
 //
 // The guard has to see every form a top-level declaration can take after
 // stripDeclarations runs, or it reintroduces the same class of bug quietly.
-// Every module body is concatenated into one IIFE and const/let are rewritten to
-// var, so two modules declaring the same top-level name silently share one
-// binding. That shipped once: counter-animate.js declared
-// `const SELECTOR = '[data-count-to]'` while scroll-reveal-helpers.js exports
-// `SELECTOR = '[data-reveal]'`, so the reveal system scanned for counters,
-// matched none of its elements, and never revealed anything on any page.
-//
-// The guard has to see every form a top-level declaration can take after
-// stripDeclarations runs, or it reintroduces the same class of bug quietly.
 // One repo copy covers every case: the guard exits before minification, so an
 // aborted build is fast, and duplicating the tree per case is the real cost.
 test('build aborts on any cross-module top-level name collision', () => {
