@@ -10,7 +10,7 @@
  * All illustrations use viewBox 200x150, stroke-based for technical feel.
  */
 
-const TEAL = '#7EBAB5';
+const ILLUSTRATION_TEAL = '#7EBAB5';
 const GRAPHITE = '#353A40';
 const MUTED = '#555a52';
 const FONT = "'JetBrains Mono', var(--font-meta), monospace";
@@ -46,7 +46,7 @@ function networkTopology() {
   }).join('\n    ');
 
   const nodeStr = nodes.map(n => `
-    <circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="none" stroke="${TEAL}" stroke-width="1.5" />
+    <circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="none" stroke="${ILLUSTRATION_TEAL}" stroke-width="1.5" />
     <text x="${n.x}" y="${n.y + n.r + 12}" text-anchor="middle" fill="${GRAPHITE}" font-family="${FONT}" font-size="7">${n.label}</text>`).join('\n    ');
 
   return `<svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="tech-net-topo-title">
@@ -80,7 +80,7 @@ function apiGateway() {
   ];
 
   const boxStr = boxes.map(b => {
-    const stroke = b.accent ? TEAL : GRAPHITE;
+    const stroke = b.accent ? ILLUSTRATION_TEAL : GRAPHITE;
     const sw = b.accent ? 2 : 1.2;
     return `<rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="3" fill="none" stroke="${stroke}" stroke-width="${sw}" />
     <text x="${b.x + b.w / 2}" y="${b.y + b.h / 2 + 3}" text-anchor="middle" fill="${GRAPHITE}" font-size="7">${b.label}</text>`;
@@ -144,11 +144,11 @@ function agentPipeline() {
 
   // Gear/atom icon in center of Process box
   const gear = `
-    <circle cx="100" cy="60" r="4" fill="none" stroke="${TEAL}" stroke-width="1.5" />
-    <line x1="100" y1="53" x2="100" y2="56" stroke="${TEAL}" stroke-width="1.2" />
-    <line x1="100" y1="64" x2="100" y2="67" stroke="${TEAL}" stroke-width="1.2" />
-    <line x1="93" y1="60" x2="96" y2="60" stroke="${TEAL}" stroke-width="1.2" />
-    <line x1="104" y1="60" x2="107" y2="60" stroke="${TEAL}" stroke-width="1.2" />`;
+    <circle cx="100" cy="60" r="4" fill="none" stroke="${ILLUSTRATION_TEAL}" stroke-width="1.5" />
+    <line x1="100" y1="53" x2="100" y2="56" stroke="${ILLUSTRATION_TEAL}" stroke-width="1.2" />
+    <line x1="100" y1="64" x2="100" y2="67" stroke="${ILLUSTRATION_TEAL}" stroke-width="1.2" />
+    <line x1="93" y1="60" x2="96" y2="60" stroke="${ILLUSTRATION_TEAL}" stroke-width="1.2" />
+    <line x1="104" y1="60" x2="107" y2="60" stroke="${ILLUSTRATION_TEAL}" stroke-width="1.2" />`;
 
   const boxStr = boxes.map(b =>
     `<rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="3" fill="none" stroke="${GRAPHITE}" stroke-width="1.2" />
@@ -236,8 +236,8 @@ function dataFlow() {
   ).join('\n    ');
 
   const queueStr = `
-    <rect x="${queue.x}" y="${queue.y}" width="${queue.w}" height="${queue.h}" rx="3" fill="none" stroke="${TEAL}" stroke-width="1.5" />
-    <text x="${queue.x + queue.w / 2}" y="${queue.y + queue.h / 2 - 4}" text-anchor="middle" fill="${TEAL}" font-size="6.5">${queue.label}</text>
+    <rect x="${queue.x}" y="${queue.y}" width="${queue.w}" height="${queue.h}" rx="3" fill="none" stroke="${ILLUSTRATION_TEAL}" stroke-width="1.5" />
+    <text x="${queue.x + queue.w / 2}" y="${queue.y + queue.h / 2 - 4}" text-anchor="middle" fill="${ILLUSTRATION_TEAL}" font-size="6.5">${queue.label}</text>
     <line x1="${queue.x + 6}" y1="${queue.y + queue.h / 2 + 4}" x2="${queue.x + queue.w - 6}" y2="${queue.y + queue.h / 2 + 4}" stroke="${MUTED}" stroke-width="0.8" />
     <line x1="${queue.x + 10}" y1="${queue.y + queue.h / 2 + 8}" x2="${queue.x + queue.w - 10}" y2="${queue.y + queue.h / 2 + 8}" stroke="${MUTED}" stroke-width="0.6" />`;
 

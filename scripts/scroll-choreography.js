@@ -39,13 +39,13 @@ import {
   parallaxVarsFor,
 } from './scroll-choreography-helpers.js';
 
-const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)');
+const CHOREO_REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 /**
  * Apply staggered reveal delays to artifact sequence children.
  */
 function choreographArtifactSequence(container) {
-  if (REDUCED_MOTION.matches) return;
+  if (CHOREO_REDUCED_MOTION.matches) return;
 
   const cards = container.querySelectorAll(SELECTOR_ARTIFACT);
   cards.forEach((card, index) => {
@@ -67,7 +67,7 @@ function choreographArtifactSequence(container) {
  * Set up IntersectionObserver for artifact sequence stagger.
  */
 function observeArtifactSequence(container) {
-  if (REDUCED_MOTION.matches) return;
+  if (CHOREO_REDUCED_MOTION.matches) return;
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -102,7 +102,7 @@ function observeArtifactSequence(container) {
  * Enhance hero plate entrance with clip-path reveal.
  */
 function choreographHeroPlate(heroPlate) {
-  if (REDUCED_MOTION.matches) return;
+  if (CHOREO_REDUCED_MOTION.matches) return;
 
   const media = heroPlate.querySelector(SELECTOR_HERO_MEDIA);
   if (!media) return;
@@ -136,7 +136,7 @@ function choreographHeroPlate(heroPlate) {
  * Add subtle parallax depth to artifact containers on scroll.
  */
 function addArtifactParallax(container) {
-  if (REDUCED_MOTION.matches) return;
+  if (CHOREO_REDUCED_MOTION.matches) return;
 
   const artifacts = container.querySelectorAll(SELECTOR_ARTIFACT);
   let ticking = false;
@@ -164,7 +164,7 @@ function addArtifactParallax(container) {
  * Initialize scroll choreography.
  */
 export function initScrollChoreography() {
-  if (REDUCED_MOTION.matches) return;
+  if (CHOREO_REDUCED_MOTION.matches) return;
 
   const sequences = document.querySelectorAll(SELECTOR_ARTIFACT_SEQUENCE);
   sequences.forEach((container) => {

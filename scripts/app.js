@@ -180,8 +180,6 @@ readerState.subscribe(() => {
 });
 
 
-initScrollReveal();
-
 // Defer non-critical UI initializers to avoid blocking main thread
 const rIC = typeof requestIdleCallback === 'function'
   ? requestIdleCallback
@@ -202,6 +200,13 @@ if (!location.hash && location.pathname.replace(/\/+$/, '') === '') {
 document.documentElement.dataset.lens = lensState.get();
 document.documentElement.dataset.reader = readerState.get() ? 'true' : 'false';
 render();
+// Initialize scroll-reveal AFTER the first render. It scans the document for
+// [data-reveal] nodes when the observer is created, so initializing before
+// render observed an empty document and no reveal element was ever attached:
+// the reveal system silently did nothing on every page. initScrollReveal()
+// also attaches synchronously, so later SPA renders pick up new elements
+// through the refreshObserver() call inside render().
+initScrollReveal();
 
 // Dark mode toggle is initialized inside renderShell (shell.js)
 // so it survives navigation (replaceChildren destroys prior DOM).

@@ -42,7 +42,7 @@ import {
   timelineDuration,
 } from './cast-timeline.js';
 import {
-  ATTR_DATA_SRC,
+  CAST_ATTR_DATA_SRC,
   ATTR_DATA_TITLE,
   ATTR_DATA_SPEED,
   CLASS_SPEED_BTN_ACTIVE,
@@ -57,10 +57,10 @@ import {
   ANNOUNCE_PAUSED,
   ANNOUNCE_FINISHED,
   ANNOUNCE_UNAVAILABLE,
-  ID_ANNOUNCEMENTS,
+  CAST_ID_ANNOUNCEMENTS,
   KEY_SPACE,
-  KEY_ARROW_LEFT,
-  KEY_ARROW_RIGHT,
+  CAST_KEY_ARROW_LEFT,
+  CAST_KEY_ARROW_RIGHT,
   LOAD_TIMEOUT_MS,
   SELECTOR_PLAYER,
   clampElapsed,
@@ -76,7 +76,7 @@ import {
 /* ---- Player controller -------------------------------------- */
 
 function createPlayer(container) {
-  const src = container.getAttribute(ATTR_DATA_SRC);
+  const src = container.getAttribute(CAST_ATTR_DATA_SRC);
   const title = container.getAttribute(ATTR_DATA_TITLE) || '';
   if (!src) return null;
 
@@ -260,9 +260,9 @@ function createPlayer(container) {
     event.preventDefault();
     if (event.key === KEY_SPACE) {
       togglePlay();
-    } else if (event.key === KEY_ARROW_LEFT) {
+    } else if (event.key === CAST_KEY_ARROW_LEFT) {
       seek(state.elapsed - SEEK_STEP_MS);
-    } else if (event.key === KEY_ARROW_RIGHT) {
+    } else if (event.key === CAST_KEY_ARROW_RIGHT) {
       seek(state.elapsed + SEEK_STEP_MS);
     }
   });

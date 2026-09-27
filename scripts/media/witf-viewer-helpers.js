@@ -80,7 +80,7 @@ export function _resetWebglCacheForTests() {
  * @param {MediaQueryList | { matches: boolean } | null | undefined} [mq]
  * @returns {boolean}
  */
-export function prefersReducedMotion(mq) {
+export function witfPrefersReducedMotion(mq) {
   if (mq) return mq.matches;
   return typeof window !== 'undefined' &&
     typeof window.matchMedia === 'function' &&

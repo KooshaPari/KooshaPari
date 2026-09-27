@@ -180,6 +180,14 @@ export function initScrollReveal() {
   createObserver();
   createMutationObserver();
   batchScan();
+  // The first batchScan is coalesced on a single requestAnimationFrame handle.
+  // Any scan scheduled before the observer existed is cancelled by it, so the
+  // DOM present at startup can end up scanned with no observer attached. Attach
+  // synchronously as well, which makes init order-independent: whether the
+  // host renders before or after this call, every [data-reveal] element in the
+  // document ends up observed.
+  scanForRevealElements();
+  attachToObserver();
 }
 
 /**
@@ -188,6 +196,12 @@ export function initScrollReveal() {
  */
 export function refreshObserver() {
   batchScan();
+  // batchScan coalesces onto one requestAnimationFrame handle, so a burst of
+  // route changes inside a single frame keeps only the last scan. Scan and
+  // attach synchronously as well so the new view's elements are observed on the
+  // frame they are rendered rather than one frame later.
+  scanForRevealElements();
+  attachToObserver();
 }
 
 export default initScrollReveal;

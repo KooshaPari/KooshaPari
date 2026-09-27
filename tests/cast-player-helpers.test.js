@@ -9,7 +9,7 @@ import {
   CLASS_STATE_PAUSED,
   CLASS_STATE_FINISHED,
   CLASS_VISUALLY_HIDDEN,
-  ATTR_DATA_SRC,
+  CAST_ATTR_DATA_SRC,
   ATTR_DATA_TITLE,
   ATTR_DATA_SPEED,
   ATTR_DATA_STATE,
@@ -22,10 +22,10 @@ import {
   ANNOUNCE_PAUSED,
   ANNOUNCE_FINISHED,
   ANNOUNCE_UNAVAILABLE,
-  ID_ANNOUNCEMENTS,
+  CAST_ID_ANNOUNCEMENTS,
   KEY_SPACE,
-  KEY_ARROW_LEFT,
-  KEY_ARROW_RIGHT,
+  CAST_KEY_ARROW_LEFT,
+  CAST_KEY_ARROW_RIGHT,
   LOAD_TIMEOUT_MS,
   CELL_EM_WIDTH,
   TERMINAL_WIDTH_MIN_EM,
@@ -46,7 +46,7 @@ test('constants: stable class and attribute names', () => {
   assert.equal(CLASS_SPEED_BTN_ACTIVE, 'cast-player__speed-btn--active');
   assert.equal(CLASS_STATE_PAUSED, 'cast-player--paused');
   assert.equal(CLASS_STATE_FINISHED, 'cast-player--finished');
-  assert.equal(ATTR_DATA_SRC, 'data-src');
+  assert.equal(CAST_ATTR_DATA_SRC, 'data-src');
   assert.equal(ATTR_DATA_TITLE, 'data-title');
   assert.equal(ATTR_DATA_SPEED, 'data-speed');
   assert.equal(SELECTOR_PLAYER, '.cast-player[data-src]');
@@ -60,7 +60,7 @@ test('constants: glyphs and labels', () => {
 });
 
 test('constants: announcements and id', () => {
-  assert.equal(ID_ANNOUNCEMENTS, 'announcements');
+  assert.equal(CAST_ID_ANNOUNCEMENTS, 'announcements');
   assert.ok(ANNOUNCE_PLAYING);
   assert.ok(ANNOUNCE_PAUSED);
   assert.ok(ANNOUNCE_FINISHED);
@@ -149,8 +149,8 @@ test('estimatedTerminalWidth: honors custom cellEm', () => {
 
 test('isPlaybackShortcut: space and arrows only', () => {
   assert.equal(isPlaybackShortcut({ key: KEY_SPACE }), true);
-  assert.equal(isPlaybackShortcut({ key: KEY_ARROW_LEFT }), true);
-  assert.equal(isPlaybackShortcut({ key: KEY_ARROW_RIGHT }), true);
+  assert.equal(isPlaybackShortcut({ key: CAST_KEY_ARROW_LEFT }), true);
+  assert.equal(isPlaybackShortcut({ key: CAST_KEY_ARROW_RIGHT }), true);
   assert.equal(isPlaybackShortcut({ key: 'a' }), false);
   assert.equal(isPlaybackShortcut({ key: 'Enter' }), false);
   assert.equal(isPlaybackShortcut({}), false);

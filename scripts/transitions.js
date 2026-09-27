@@ -38,7 +38,7 @@ const _afterCallbacks = [];
 
 /* ── Helpers ───────────────────────────────────────────────────────── */
 
-function prefersReducedMotion() {
+function transitionsPrefersReducedMotion() {
   return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 }
 
@@ -74,7 +74,7 @@ async function runCallbacks(list, arg) {
  */
 export function transitionOut(container) {
   return new Promise((resolve) => {
-    if (prefersReducedMotion()) {
+    if (transitionsPrefersReducedMotion()) {
       container.innerHTML = '';
       return resolve();
     }
@@ -105,7 +105,7 @@ export function transitionOut(container) {
  */
 export function transitionIn(container, newHTML) {
   return new Promise(async (resolve) => {
-    if (prefersReducedMotion()) {
+    if (transitionsPrefersReducedMotion()) {
       container.innerHTML = newHTML;
       container.classList.remove(CLASS_PREPARING, CLASS_IN);
       return resolve();
@@ -189,7 +189,7 @@ export function initTransitions(_router, { render: renderFn, viewRoot } = {}) {
 
     // Choose transition strategy
     const plan = transitionPlan({
-      prefersReducedMotion: prefersReducedMotion(),
+      transitionsPrefersReducedMotion: transitionsPrefersReducedMotion(),
       viewTransitionsSupported: viewTransitionsSupported(),
     });
     if (plan === 'manual') {

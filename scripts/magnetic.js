@@ -92,7 +92,7 @@ function applyTransform(el, s) {
 let rafId = 0;
 let lastTime = 0;
 
-function tick(now) {
+function magneticTick(now) {
   const dt = chooseDt(now, lastTime);
   lastTime = now;
 
@@ -101,7 +101,7 @@ function tick(now) {
     applyTransform(el, s);
   }
 
-  rafId = requestAnimationFrame(tick);
+  rafId = requestAnimationFrame(magneticTick);
 }
 
 /**
@@ -136,6 +136,6 @@ export function initMagnetic() {
 
   if (!rafId) {
     lastTime = 0;
-    rafId = requestAnimationFrame(tick);
+    rafId = requestAnimationFrame(magneticTick);
   }
 }

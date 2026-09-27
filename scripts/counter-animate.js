@@ -14,9 +14,14 @@ import {
   counterFrameText,
 } from './counter-animate-helpers.js';
 
-const SELECTOR = '[data-count-to]';
+// Named COUNTER_SELECTOR, not SELECTOR: the bundler flattens every module
+// into one IIFE scope, so a module-level name shared with another module can be
+// minified to the same identifier and overwrite it. That previously happened
+// with scroll-reveal-helpers' SELECTOR, which made the reveal system scan
+// '[data-count-to]' and silently do nothing on every page.
+const COUNTER_SELECTOR = '[data-count-to]';
 
-let _observer = null;
+let _counterObserver = null;
 
 /**
  * Animate a single element's text from 0 to its target value.
@@ -56,7 +61,7 @@ function animateCounter(el) {
  * and observes them for viewport entry.
  */
 export function initCounterAnimate() {
-  const elements = document.querySelectorAll(SELECTOR);
+  const elements = document.querySelectorAll(COUNTER_SELECTOR);
   if (!elements.length) return;
 
   // If reduced motion, show final values immediately
@@ -68,13 +73,13 @@ export function initCounterAnimate() {
     return;
   }
 
-  if (!_observer) {
-    _observer = new IntersectionObserver(
+  if (!_counterObserver) {
+    _counterObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
             animateCounter(entry.target);
-            _observer.unobserve(entry.target);
+            _counterObserver.unobserve(entry.target);
           }
         }
       },
@@ -82,5 +87,5 @@ export function initCounterAnimate() {
     );
   }
 
-  elements.forEach((el) => _observer.observe(el));
+  elements.forEach((el) => _counterObserver.observe(el));
 }

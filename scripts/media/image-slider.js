@@ -12,7 +12,7 @@ const SLIDER_BIG_STEP = 10;
 const SLIDER_DURATION_MS = 420;
 
 /** @returns {boolean} True if user prefers reduced motion. */
-function prefersReducedMotion() {
+function imageSliderPrefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
@@ -106,7 +106,7 @@ function attachSlider(root) {
 
   // -- Entrance animation -------------------------------------------------
   function animateEntrance() {
-    if (prefersReducedMotion()) {
+    if (imageSliderPrefersReducedMotion()) {
       render(50);
       return;
     }
@@ -133,7 +133,7 @@ function attachSlider(root) {
 
   // Smooth slide from current pct to target using requestAnimationFrame
   function smoothSlideTo(target, onDone) {
-    const duration = prefersReducedMotion() ? 0 : SLIDER_DURATION_MS;
+    const duration = imageSliderPrefersReducedMotion() ? 0 : SLIDER_DURATION_MS;
     if (duration === 0) {
       render(target);
       if (onDone) onDone();

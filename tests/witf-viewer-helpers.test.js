@@ -12,7 +12,7 @@ import { parseHTML } from 'linkedom';
 import {
   withTimeout,
   webglSupported,
-  prefersReducedMotion,
+  witfPrefersReducedMotion,
   isCoarsePointer,
   showPoster,
   createLoadingIndicator,
@@ -79,11 +79,11 @@ test('webglSupported returns false when getContext throws', () => {
   assert.equal(webglSupported({ createElement: fakeCreate }), false);
 });
 
-// prefersReducedMotion + isCoarsePointer: take a MediaQueryList shape and read
+// witfPrefersReducedMotion + isCoarsePointer: take a MediaQueryList shape and read
 // its `matches` boolean. The matchMedia call only fires when no mq is supplied.
-test('prefersReducedMotion reads from the supplied MediaQueryList', () => {
-  assert.equal(prefersReducedMotion({ matches: true }), true);
-  assert.equal(prefersReducedMotion({ matches: false }), false);
+test('witfPrefersReducedMotion reads from the supplied MediaQueryList', () => {
+  assert.equal(witfPrefersReducedMotion({ matches: true }), true);
+  assert.equal(witfPrefersReducedMotion({ matches: false }), false);
 });
 
 test('isCoarsePointer reads from the supplied MediaQueryList', () => {

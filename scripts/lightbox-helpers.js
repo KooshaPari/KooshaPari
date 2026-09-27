@@ -7,7 +7,7 @@
 export const OVERLAY_CLASS = 'lightbox-overlay';
 export const ACTIVE_CLASS = 'lightbox-active';
 
-export const CLASS_IMG = 'lightbox-img';
+export const LIGHTBOX_CLASS_IMG = 'lightbox-img';
 export const CLASS_CAPTION = 'lightbox-caption';
 export const CLASS_FIGURE = 'lightbox-figure';
 export const CLASS_CLOSE_BTN = 'lightbox-close';

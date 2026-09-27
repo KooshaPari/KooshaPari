@@ -5,7 +5,7 @@
  */
 
 /** Clamp a value to the [min, max] range. */
-export function clamp(v, min, max) {
+export function imageSliderClamp(v, min, max) {
   return Math.max(min, Math.min(max, v));
 }
 
@@ -35,8 +35,8 @@ export function nextSliderPct(pct, event, opts = {}) {
   const bigStep = opts.bigStep ?? 10;
   const move = event.shiftKey ? bigStep : step;
 
-  if (event.key === 'ArrowRight' || event.key === 'ArrowDown') return clamp(pct + move, 0, 100);
-  if (event.key === 'ArrowLeft' || event.key === 'ArrowUp')    return clamp(pct - move, 0, 100);
+  if (event.key === 'ArrowRight' || event.key === 'ArrowDown') return imageSliderClamp(pct + move, 0, 100);
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowUp')    return imageSliderClamp(pct - move, 0, 100);
   if (event.key === 'Home') return 0;
   if (event.key === 'End')  return 100;
   return null;
@@ -80,6 +80,6 @@ export function lerp(a, b, t) {
  */
 export function slideValue(from, to, elapsedMs, durationMs) {
   if (durationMs <= 0) return to;
-  const t = clamp(elapsedMs / durationMs, 0, 1);
+  const t = imageSliderClamp(elapsedMs / durationMs, 0, 1);
   return lerp(from, to, easeOutCubic(t));
 }

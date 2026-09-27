@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 import {
   OVERLAY_CLASS,
   ACTIVE_CLASS,
-  CLASS_IMG,
+  LIGHTBOX_CLASS_IMG,
   CLASS_CAPTION,
   CLASS_FIGURE,
   CLASS_CLOSE_BTN,
@@ -135,7 +135,7 @@ test('keyboard key constants match expected values', () => {
 test('class constants encode the overlay markup', () => {
   assert.equal(OVERLAY_CLASS, 'lightbox-overlay');
   assert.equal(ACTIVE_CLASS, 'lightbox-active');
-  assert.equal(CLASS_IMG, 'lightbox-img');
+  assert.equal(LIGHTBOX_CLASS_IMG, 'lightbox-img');
   assert.equal(CLASS_CAPTION, 'lightbox-caption');
   assert.equal(CLASS_FIGURE, 'lightbox-figure');
   assert.equal(CLASS_CLOSE_BTN, 'lightbox-close');

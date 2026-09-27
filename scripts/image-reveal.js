@@ -39,7 +39,7 @@ import {
  * Check whether the user prefers reduced motion.
  * @returns {boolean}
  */
-function prefersReducedMotion() {
+function imageRevealPrefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
@@ -236,7 +236,7 @@ function revealImage(img) {
   const container = img.closest(`.${CLASS_CONTAINER}`);
   const placeholder = container?.querySelector(`.${CLASS_PLACEHOLDER}`);
 
-  if (prefersReducedMotion()) {
+  if (imageRevealPrefersReducedMotion()) {
     // Instant show — no animation
     img.classList.add(CLASS_IMG);
     if (placeholder) placeholder.classList.add('loaded');

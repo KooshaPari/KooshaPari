@@ -32,7 +32,7 @@ import {
 } from './lightbox-helpers.js';
 
 /** @returns {boolean} */
-function prefersReducedMotion() {
+function lightboxPrefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 

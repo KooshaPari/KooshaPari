@@ -12,7 +12,7 @@ export const CLASS_STATE_FINISHED = 'cast-player--finished';
 export const CLASS_VISUALLY_HIDDEN = 'visually-hidden';
 
 // HTML data attributes that the player reads.
-export const ATTR_DATA_SRC = 'data-src';
+export const CAST_ATTR_DATA_SRC = 'data-src';
 export const ATTR_DATA_TITLE = 'data-title';
 export const ATTR_DATA_SPEED = 'data-speed';
 export const ATTR_DATA_STATE = 'data-state';
@@ -35,12 +35,12 @@ export const ANNOUNCE_FINISHED = 'Playback finished';
 export const ANNOUNCE_UNAVAILABLE = 'Recording unavailable';
 
 // Reused from the site-wide live region.
-export const ID_ANNOUNCEMENTS = 'announcements';
+export const CAST_ID_ANNOUNCEMENTS = 'announcements';
 
 // Keyboard / wheel shortcuts.
 export const KEY_SPACE = ' ';
-export const KEY_ARROW_LEFT = 'ArrowLeft';
-export const KEY_ARROW_RIGHT = 'ArrowRight';
+export const CAST_KEY_ARROW_LEFT = 'ArrowLeft';
+export const CAST_KEY_ARROW_RIGHT = 'ArrowRight';
 
 // Defaults for terminal-width estimation from the asciinema header.
 export const CELL_EM_WIDTH = 0.6;
@@ -104,8 +104,8 @@ export function estimatedTerminalWidth(cols, {
 export function isPlaybackShortcut(event) {
   if (!event) return false;
   return event.key === KEY_SPACE ||
-         event.key === KEY_ARROW_LEFT ||
-         event.key === KEY_ARROW_RIGHT;
+         event.key === CAST_KEY_ARROW_LEFT ||
+         event.key === CAST_KEY_ARROW_RIGHT;
 }
 
 /** True when the wheel event should scrub (Shift+wheel with non-zero delta). */
@@ -147,7 +147,7 @@ export function initialPlayerState() {
  * @returns {HTMLElement|null}
  */
 export function resolveAnnounceRegion(root) {
-  const shared = document.getElementById(ID_ANNOUNCEMENTS);
+  const shared = document.getElementById(CAST_ID_ANNOUNCEMENTS);
   if (shared) return shared;
 
   const local = document.createElement('span');

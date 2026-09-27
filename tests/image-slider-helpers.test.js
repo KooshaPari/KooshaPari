@@ -2,19 +2,19 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
-  clamp,
+  imageSliderClamp,
   nextSliderPct,
   easeOutCubic,
   lerp,
   slideValue,
 } from '../scripts/media/image-slider-helpers.js';
 
-test('clamp pins values to the [min, max] range', () => {
-  assert.equal(clamp(50, 0, 100), 50);
-  assert.equal(clamp(-5, 0, 100), 0);
-  assert.equal(clamp(150, 0, 100), 100);
-  assert.equal(clamp(0, 0, 100), 0);
-  assert.equal(clamp(100, 0, 100), 100);
+test('imageSliderClamp pins values to the [min, max] range', () => {
+  assert.equal(imageSliderClamp(50, 0, 100), 50);
+  assert.equal(imageSliderClamp(-5, 0, 100), 0);
+  assert.equal(imageSliderClamp(150, 0, 100), 100);
+  assert.equal(imageSliderClamp(0, 0, 100), 0);
+  assert.equal(imageSliderClamp(100, 0, 100), 100);
 });
 
 test('nextSliderPct advances forward with ArrowRight and ArrowDown by the configured step', () => {

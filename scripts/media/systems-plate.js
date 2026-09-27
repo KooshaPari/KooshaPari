@@ -31,7 +31,7 @@ export function createSubstratePlateDefinition() {
 
 function nodeById(definition, id) { return definition.nodes.find((node) => node.id === id); }
 
-function svgElement(tag, attributes = {}, ...children) {
+function plateSvgElement(tag, attributes = {}, ...children) {
   const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
   for (const [key, value] of Object.entries(attributes)) node.setAttribute(key, value);
   for (const child of children.flat(Infinity)) {
@@ -63,9 +63,9 @@ export function renderSubstratePlate(documentRef = document, { forceMobile = nul
   }
 
   // Desktop: SVG diagram with arrow marker definition.
-  const defs = svgElement('defs', {},
-    svgElement('marker', { id: 'systems-plate-arrow', viewBox: '0 0 10 7', refX: 10, refY: 3.5, markerWidth: 10, markerHeight: 7, orient: 'auto-start-reverse' },
-      svgElement('polygon', { points: '0 0, 10 3.5, 0 7', fill: 'var(--arch-500)' })
+  const defs = plateSvgElement('defs', {},
+    plateSvgElement('marker', { id: 'systems-plate-arrow', viewBox: '0 0 10 7', refX: 10, refY: 3.5, markerWidth: 10, markerHeight: 7, orient: 'auto-start-reverse' },
+      plateSvgElement('polygon', { points: '0 0, 10 3.5, 0 7', fill: 'var(--arch-500)' })
     )
   );
   const svg = el('svg', {

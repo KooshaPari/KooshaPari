@@ -4,10 +4,10 @@ import assert from 'node:assert/strict';
 import {
   DEFAULT_MAX_TILT,
   DEFAULT_SCALE,
-  DEFAULT_SPEED,
+  TILT_DEFAULT_SPEED,
   DEFAULT_PERSPECTIVE,
   TILT_EASING,
-  clamp,
+  tiltClamp,
   normalizeClientPoint,
   tiltFromPointer,
   resetTransformString,
@@ -19,16 +19,16 @@ import {
 test('defaults are the documented values', () => {
   assert.equal(DEFAULT_MAX_TILT, 12);
   assert.equal(DEFAULT_SCALE, 1.02);
-  assert.equal(DEFAULT_SPEED, 400);
+  assert.equal(TILT_DEFAULT_SPEED, 400);
   assert.equal(DEFAULT_PERSPECTIVE, 800);
   assert.match(TILT_EASING, /cubic-bezier/);
 });
 
-test('clamp restricts to [min, max]', () => {
-  assert.equal(clamp(5, 0, 10), 5);
-  assert.equal(clamp(-5, 0, 10), 0);
-  assert.equal(clamp(15, 0, 10), 10);
-  assert.equal(clamp(-10, -8, 8), -8);
+test('tiltClamp restricts to [min, max]', () => {
+  assert.equal(tiltClamp(5, 0, 10), 5);
+  assert.equal(tiltClamp(-5, 0, 10), 0);
+  assert.equal(tiltClamp(15, 0, 10), 10);
+  assert.equal(tiltClamp(-10, -8, 8), -8);
 });
 
 test('normalizeClientPoint returns (0, 0) at center', () => {
@@ -59,14 +59,14 @@ test('tiltFromPointer applies positive scale by default', () => {
 test('tiltFromPointer inverts Y axis (top tilts forward)', () => {
   // pointer at top: normalY = -1 -> tiltX should be -12 (top forward = positive pitch when inverted)
   const t = tiltFromPointer(0, -1, 12, 1.02);
-  // rotateX uses inverted-Y formula: tiltX = clamp(normalY * maxTilt, ...)
+  // rotateX uses inverted-Y formula: tiltX = tiltClamp(normalY * maxTilt, ...)
   // with normalY = -1, tiltX = -12
   assert.match(t, /rotateX\(-12deg\)/);
   assert.match(t, /rotateY\(0deg\)/);
 });
 
 test('tiltFromPointer inverts X axis', () => {
-  // pointer on the right: normalX = 1 -> tiltY = clamp(-1 * 12, ...) = -12
+  // pointer on the right: normalX = 1 -> tiltY = tiltClamp(-1 * 12, ...) = -12
   const t = tiltFromPointer(1, 0, 12, 1.02);
   assert.match(t, /rotateY\(-12deg\)/);
 });
@@ -127,7 +127,7 @@ test('parseTiltAttrs falls back to defaults for empty values', () => {
   const r = parseTiltAttrs({});
   assert.equal(r.maxTilt, DEFAULT_MAX_TILT);
   assert.equal(r.scale, DEFAULT_SCALE);
-  assert.equal(r.speed, DEFAULT_SPEED);
+  assert.equal(r.speed, TILT_DEFAULT_SPEED);
   assert.equal(r.enableGlare, false);
 });
 
@@ -140,7 +140,7 @@ test('parseTiltAttrs handles non-numeric garbage by falling back', () => {
   const r = parseTiltAttrs({ tiltMax: 'abc', tiltScale: 'xyz', tiltSpeed: 'qrs' });
   assert.equal(r.maxTilt, DEFAULT_MAX_TILT);
   assert.equal(r.scale, DEFAULT_SCALE);
-  assert.equal(r.speed, DEFAULT_SPEED);
+  assert.equal(r.speed, TILT_DEFAULT_SPEED);
 });
 
 test('parseTiltAttrs accepts explicit fallback overrides', () => {
@@ -157,7 +157,7 @@ test('tiltTransition includes speed and easing', () => {
   assert.match(t, /cubic-bezier\(0\.03, 0\.98, 0\.52, 0\.99\)/);
 });
 
-test('tiltTransition defaults to DEFAULT_SPEED', () => {
+test('tiltTransition defaults to TILT_DEFAULT_SPEED', () => {
   const t = tiltTransition();
   assert.match(t, /transform 400ms/);
 });

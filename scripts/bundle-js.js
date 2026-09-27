@@ -172,6 +172,53 @@ const bodies = loadOrder.map((absPath) => {
   return stripDeclarations(mod.code);
 });
 
+// --- Shared-scope collision guard ---
+//
+// Because every module body is concatenated into one IIFE and `const`/`let` are
+// rewritten to `var`, two modules that declare the same top-level name share a
+// single binding: the last body to run wins. That is silent in every static
+// check and catastrophic at runtime.
+//
+// Real instance: counter-animate.js declared a module-level
+// `const SELECTOR = '[data-count-to]'` while scroll-reveal-helpers.js exports
+// `SELECTOR = '[data-reveal]'`. The reveal system's scan then queried
+// '[data-count-to]', matched none of its 13 [data-reveal] elements, and every
+// reveal animation on every page stopped working with no error anywhere.
+//
+// Identical values (two modules each defining `KEY_ARROW_LEFT = 'ArrowLeft'`)
+// are still a landmine: they work until one side is edited. Fail the build and
+// make the name unique instead.
+const declaredIn = new Map();
+for (const [i, absPath] of loadOrder.entries()) {
+  const body = bodies[i];
+  const names = new Set();
+  for (const m of body.matchAll(
+    /^(?:var|function|class)\s+([A-Za-z_$][A-Za-z0-9_$]*)/gm,
+  )) {
+    names.add(m[1]);
+  }
+  for (const name of names) {
+    if (!declaredIn.has(name)) declaredIn.set(name, []);
+    declaredIn.get(name).push(relative(ROOT, absPath));
+  }
+}
+const collisions = [...declaredIn.entries()].filter(
+  ([, sites]) => new Set(sites).size > 1,
+);
+if (collisions.length > 0) {
+  console.error('\nBundle aborted: top-level name collision across modules.');
+  console.error('Every module is concatenated into one IIFE scope, so a name');
+  console.error('declared by two modules resolves to whichever body runs last.');
+  console.error('This fails silently in the browser, so fail the build instead.');
+  console.error('Rename one side to a module-specific name.\n');
+  for (const [name, sites] of collisions) {
+    console.error(`  ${name}`);
+    for (const site of new Set(sites)) console.error(`    ${site}`);
+  }
+  console.error('');
+  process.exit(1);
+}
+
 // --- Hoisted-export guard ---
 //
 // The bundle flattens every module into one IIFE scope and declares the union

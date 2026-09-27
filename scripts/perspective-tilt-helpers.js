@@ -6,8 +6,8 @@
  * preferences. This file encapsulates the math: pointer normalization, angle
  * clamping, transform string formatting, and glare gradient construction.
  *
- *   - DEFAULT_MAX_TILT, DEFAULT_SCALE, DEFAULT_SPEED, DEFAULT_PERSPECTIVE
- *   - clamp(val, min, max): generic numeric clamp
+ *   - DEFAULT_MAX_TILT, DEFAULT_SCALE, TILT_DEFAULT_SPEED, DEFAULT_PERSPECTIVE
+ *   - tiltClamp(val, min, max): generic numeric tiltClamp
  *   - normalizeClientPoint(x, y, rect): -1..1 normalized offset from center
  *   - tiltFromPointer(normalX, normalY, maxTilt, scale): the per-frame
  *     transform-string payload (perspective + rotateX/Y + scale3d)
@@ -20,12 +20,12 @@
 
 export const DEFAULT_MAX_TILT = 12;
 export const DEFAULT_SCALE = 1.02;
-export const DEFAULT_SPEED = 400;
+export const TILT_DEFAULT_SPEED = 400;
 export const DEFAULT_PERSPECTIVE = 800;
 
 export const TILT_EASING = 'cubic-bezier(0.03, 0.98, 0.52, 0.99)';
 
-export function clamp(val, min, max) {
+export function tiltClamp(val, min, max) {
   return Math.min(max, Math.max(min, val));
 }
 
@@ -53,8 +53,8 @@ export function normalizeClientPoint(pointerX, pointerY, rect) {
  * when the cursor is at the top (normalY < 0).
  */
 export function tiltFromPointer(normalX, normalY, maxTilt, scale, perspective = DEFAULT_PERSPECTIVE) {
-  const tiltX = clamp(normalY * maxTilt, -maxTilt, maxTilt);
-  const tiltY = clamp(-normalX * maxTilt, -maxTilt, maxTilt);
+  const tiltX = tiltClamp(normalY * maxTilt, -maxTilt, maxTilt);
+  const tiltY = tiltClamp(-normalX * maxTilt, -maxTilt, maxTilt);
   return `perspective(${perspective}px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(${scale}, ${scale}, 1)`;
 }
 
@@ -89,7 +89,7 @@ export function parseTiltAttrs(dataset, options = {}) {
   const fallback = {
     maxTilt: DEFAULT_MAX_TILT,
     scale: DEFAULT_SCALE,
-    speed: DEFAULT_SPEED,
+    speed: TILT_DEFAULT_SPEED,
     perspective: DEFAULT_PERSPECTIVE,
     ...options,
   };
@@ -108,6 +108,6 @@ export function parseTiltAttrs(dataset, options = {}) {
 /**
  * Build the CSS transition string for the tilt element.
  */
-export function tiltTransition(speed = DEFAULT_SPEED) {
+export function tiltTransition(speed = TILT_DEFAULT_SPEED) {
   return `transform ${speed}ms ${TILT_EASING}`;
 }

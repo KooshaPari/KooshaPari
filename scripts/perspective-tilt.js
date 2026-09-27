@@ -24,7 +24,7 @@ import {
   tiltTransition,
 } from './perspective-tilt-helpers.js';
 
-const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)');
+const TILT_REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 /**
  * Create the glare overlay element.
@@ -59,7 +59,7 @@ function setupTilt(el) {
   el.style.willChange = 'transform';
 
   function onMove(e) {
-    if (REDUCED_MOTION.matches) return;
+    if (TILT_REDUCED_MOTION.matches) return;
 
     const rect = el.getBoundingClientRect();
     const { normalX, normalY } = normalizeClientPoint(
@@ -113,7 +113,7 @@ function scanTiltElements(root = document) {
  * Initialize perspective tilt system.
  */
 export function initPerspectiveTilt(root = document) {
-  if (REDUCED_MOTION.matches) return;
+  if (TILT_REDUCED_MOTION.matches) return;
 
   scanTiltElements(root);
 
