@@ -163,8 +163,48 @@ function createMutationObserver() {
 }
 
 /* ------------------------------------------------------------------
+   Reveal-on-scroll safety net
+   ------------------------------------------------------------------
+   The observer uses rootMargin '0px 0px -40px 0px' and threshold 0.1, so an
+   element only reveals once it has crossed a line 40px ABOVE the bottom of the
+   viewport. An element whose top lands inside that 40px band at the end of the
+   document never crosses the line, so it stays .reveal-hidden forever while
+   being fully on screen. Observed on /resume at 1280x720: the last row of
+   .resume-skill cards settled at top=716 against a 720px viewport and stayed
+   invisible until the user scrolled further.
+
+   Reveal anything currently inside the viewport on each scroll tick. This
+   cannot double-fire: revealElement() is a no-op once .reveal-visible is set.
+   It is also cheap, because the query only matches elements still hidden.
+   ------------------------------------------------------------------ */
+function revealInViewOnScroll() {
+  if (prefersReducedMotion()) return;
+  const hidden = document.querySelectorAll(`${SELECTOR}.reveal-hidden`);
+  if (hidden.length === 0) return;
+  for (const el of hidden) {
+    const rect = el.getBoundingClientRect();
+    // A non-rendering element (display:none, zero-height, collapsed ancestor)
+    // can never legitimately be revealed by scrolling; leave it alone.
+    if (rect.width === 0 || rect.height === 0) continue;
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      revealElement(el);
+    }
+  }
+}
+
+/* ------------------------------------------------------------------
    Public API
    ------------------------------------------------------------------ */
+
+let _scrollBound = false;
+
+function bindScrollSafetyNet() {
+  if (_scrollBound) return;
+  _scrollBound = true;
+  // Passive: this listener never calls preventDefault, so the browser can keep
+  // scrolling on the compositor thread without waiting for it.
+  window.addEventListener('scroll', revealInViewOnScroll, { passive: true });
+}
 
 /**
  * Initialize the scroll-reveal system.
@@ -188,6 +228,7 @@ export function initScrollReveal() {
   // document ends up observed.
   scanForRevealElements();
   attachToObserver();
+  bindScrollSafetyNet();
 }
 
 /**
