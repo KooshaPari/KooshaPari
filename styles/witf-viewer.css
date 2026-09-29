@@ -20,14 +20,21 @@
   height: 100% !important;
 }
 
-/* Loading spinner */
+/* Loading spinner
+   The panel background is --surface (#0F1012) in BOTH themes, so this text is
+   always light-on-dark. Using --ink-muted here is wrong: that token is a dark
+   #3d4239 in the light theme and a light #b0b5a8 in the dark theme, which
+   produced 1.89:1 contrast in dark mode (axe: color-contrast, WCAG AA needs
+   4.5:1) and a different ratio in light mode. The colour is therefore derived
+   from the panel's own background rather than the page ink, so it cannot invert
+   with the theme. The spinner inherits the same value. */
 .witf-viewer-loading {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--ink-muted, #888);
+  color: color-mix(in srgb, var(--paper-100, #f3f0e8) 72%, transparent);
   font-family: var(--font-meta, system-ui, sans-serif);
   font-size: var(--step--1, 0.75rem);
   letter-spacing: 0.04em;
@@ -38,8 +45,8 @@
   width: 1.1em;
   height: 1.1em;
   margin-right: 0.6em;
-  border: 2px solid color-mix(in srgb, var(--ink-muted, #888) 25%, transparent);
-  border-top-color: var(--ink-muted, #888);
+  border: 2px solid color-mix(in srgb, var(--paper-100, #f3f0e8) 30%, transparent);
+  border-top-color: color-mix(in srgb, var(--paper-100, #f3f0e8) 72%, transparent);
   border-radius: 50%;
   animation: witf-spin 0.8s linear infinite;
 }
