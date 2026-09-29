@@ -121,6 +121,11 @@ function loadModule(absPath) {
 
 function stripDeclarations(source) {
   let out = source;
+  // Remove bare side-effect imports `import './setup.js';` FIRST. The rule below
+  // requires an import clause, so without this the statement survives stripping
+  // and is emitted verbatim into the IIFE as a syntax error. Ordering matters:
+  // this pattern's `from` is absent, so it cannot swallow the forms below.
+  out = out.replace(/import\s+['"][^'"]+['"];?\n?/g, '');
   // Remove `import ... from '...';` (single & multi-line)
   out = out.replace(/import\s+(?:\{[^}]*\}|[\w*$_]+(?:\s*,\s*\{[^}]*\})?)\s+from\s+['"][^'"]+['"];?\n?/g, '');
   // Remove `export default ...`

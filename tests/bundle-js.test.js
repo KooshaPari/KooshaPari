@@ -147,3 +147,41 @@ test('collision guard ignores block-scoped declarations', () => {
     }
   });
 });
+
+// stripDeclarations removes `import x from '...'` and `import {a} from '...'`
+// but not the bare side-effect form `import './setup.js'`. A bare import that
+// survives stripping is emitted verbatim into the IIFE, where it is a syntax
+// error, so the whole bundle fails to parse at load time. No current source
+// module used the form, which is exactly why it stayed latent: the defect only
+// appears the day someone adds a side-effect import.
+test('bundle strips bare side-effect imports and still executes', () => {
+  withRepoCopy(root => {
+    const sideEffect = resolve(root, 'scripts/perspective-tilt-helpers.js');
+    const entry = resolve(root, 'scripts/app.js');
+    const sideEffectOriginal = readFileSync(sideEffect, 'utf8');
+    const entryOriginal = readFileSync(entry, 'utf8');
+
+    // A string literal, not a variable name: the output is minified, so an
+    // identifier-based marker would be renamed and could never be matched.
+    // Literals survive minification unchanged.
+    writeFileSync(
+      sideEffect,
+      `${sideEffectOriginal}\nvar BARE_IMPORT_MARKER = 'bare-import-marker-41';\n`,
+    );
+    writeFileSync(entry, `import './perspective-tilt-helpers.js';\n${entryOriginal}`);
+    try {
+      execFileSync(process.execPath, ['scripts/bundle-js.js'], { cwd: root, encoding: 'utf8' });
+      const bundle = currentBundle(root);
+      assert.doesNotMatch(bundle, /import\s+['"]/, 'no bare import may survive into the IIFE');
+      assert.doesNotThrow(() => new Function(bundle), 'bundle must parse as valid JS');
+      assert.match(
+        bundle,
+        /bare-import-marker-41/,
+        'the bare-imported module body is inlined, not dropped',
+      );
+    } finally {
+      writeFileSync(sideEffect, sideEffectOriginal);
+      writeFileSync(entry, entryOriginal);
+    }
+  });
+});

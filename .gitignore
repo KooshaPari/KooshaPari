@@ -6,6 +6,13 @@ node_modules/
 .env*
 bundled/
 dist/
-tests/
+# `tests/` was ignored here while 69 test files were already tracked from the
+# absorb commits. Git honours .gitignore only for untracked paths, so the
+# tracked tests kept committing while every NEW test file was silently dropped:
+# precision-tokens and reader-state-helpers tests existed only on the original
+# machine, and a collaborator or CI checkout never ran them. The suite's pass
+# count was a property of one working tree, not of the repository. The rule is
+# removed so the suite is a property of the repository again. Test output
+# belongs in output/ below, not in the test directory.
 output/
 docs/qa-screenshots/
