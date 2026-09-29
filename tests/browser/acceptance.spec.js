@@ -390,3 +390,47 @@ test.describe('Scroll reveal', () => {
     }
   });
 });
+
+test.describe('Static asset links', () => {
+  // The resume download used to point at /koosha-paridehpour-resume.pdf while
+  // the file is published under /public/. It rendered a perfectly ordinary
+  // download link and returned 404, which no presence-based assertion in this
+  // suite would ever have noticed. This resolves every root-absolute asset URL
+  // that a built page actually emits, so a mistyped or un-staged path fails
+  // loudly instead of shipping.
+  const ASSET_PATTERN =
+    /\.(pdf|png|jpe?g|svg|gif|webp|avif|ico|css|js|json|mp4|webm|wasm|cast|glb|gltf|txt|xml|woff2?)$/i;
+
+  const ROUTES = ['/', '/resume', '/work', '/contact', '/engineering', '/product'];
+
+  for (const path of ROUTES) {
+    test(`${path}: every root-absolute asset link resolves`, async ({ page }) => {
+      const response = await page.goto(`${BASE}${path}`);
+      expect(response?.ok(), `${path}: page itself did not load`).toBeTruthy();
+
+      const urls = await page.evaluate(() => {
+        const found = new Set();
+        for (const node of document.querySelectorAll('[href], [src]')) {
+          const raw = node.getAttribute('href') || node.getAttribute('src') || '';
+          if (!raw.startsWith('/') || raw.startsWith('//')) continue;
+          found.add(raw.split('#')[0].split('?')[0]);
+        }
+        return [...found].filter(Boolean);
+      });
+
+      const assets = urls.filter((u) => ASSET_PATTERN.test(u));
+      expect(
+        assets.length,
+        `${path}: no asset URLs found, so this test cannot fail meaningfully`,
+      ).toBeGreaterThan(0);
+
+      const broken = [];
+      for (const url of assets) {
+        const res = await page.request.get(`${BASE}${url}`);
+        if (!res.ok()) broken.push(`${res.status()} ${url}`);
+      }
+
+      expect(broken, `${path}: asset links that do not resolve`).toEqual([]);
+    });
+  }
+});

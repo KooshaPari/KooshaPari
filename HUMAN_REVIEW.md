@@ -1,29 +1,84 @@
 # Human review
 
+STATUS: NOT READY FOR PRODUCTION REVIEW — local gate green, hosted gate not run
+
+Last reconciled 2026-09-29 against `437dfa8` and the working tree. The previous
+version of this file claimed production readiness and cited a 2026-09-04 review
+gate with 28 Node tests. Both were stale; the counts and the readiness claim have
+been corrected below rather than left in place.
+
+## Why this is not production-ready
+
+`VERCEL_TOKEN` is unset. Hosted verification, Lighthouse on the preview, the
+redirect map destination check, and cutover have all not been run. The local
+gate is green, but no statement here covers how the site behaves on the hosted
+domain, and it should not be read as doing so.
+
+Beyond that, three shipped subsystems (`image-slider`, `cast-player`,
+`lightbox`) have no reachable DOM on any route. They are bundled and cannot be
+verified. Details in `VERIFICATION_REPORT.md`.
+
+## What is verified locally
+
+| Gate | Result |
+|---|---|
+| Unit suite | 707/707 pass across 70 test files |
+| Browser suite | 20 tests, all passing, against the staged `dist/` artifact |
+| axe-core | No critical/serious violations; contrast violations zero |
+| Asset links | Every root-absolute asset URL on the built pages resolves |
+
+Reproduce with `npm run verify` (needs the Vercel CLI for the build step) or
+`npm test && npm run check && npm run test:e2e` for everything except the build.
+If port 4197 is occupied the suite fails on a port error rather than an
+assertion; kill the stale server first.
+
+Chromium only. No Firefox, WebKit, or mobile-device run has been made.
+
+## Defects found and fixed since the last review
+
+- Scroll-reveal elements stranded in the first viewport at `opacity: 0`.
+- `.gitignore` was silently dropping every newly added test file.
+- `.witf-viewer-loading` text at 1.89:1 contrast, below the 4.5:1 AA floor.
+- The resume PDF download returned 404.
+
 ## Preview
 
-- Local: `http://127.0.0.1:4173/index.html`
-- Vercel preview: `https://koosha-phenotype-m9yccemn8-koosha-paridehpours-projects.vercel.app`
-- Deployment: `dpl_6L8ySBj7X8qu3t8gzr1KNsuYYDzo` (preview target, Ready)
+No current preview URL is claimed. The deployment reference in the previous
+version of this file is stale and cannot be re-verified without a Vercel
+credential.
 
-## What changed
+To review locally:
 
-- Replaced generic priority detail copy with project-specific narratives.
-- Added NetWeave as a full engineering candidate; its evidence attachments are explicitly deferred and non-blocking.
-- Added skip link, reduced-motion support, dynamic SPA metadata, and a refreshed final screenshot pack under `output/technical-atelier-review/final/`.
-- The local review gate was refreshed on 2026-09-04: 28/28 Node tests, JavaScript checks, and the Vercel static-output parity contract pass after `vercel build --yes`. Local rewrite-capable browser review covers Home, Engineering, Product, Work, GMK Arch, WITF, ShareCLI, phenotype-omlx, NetWeave, Resume, mobile views, project-detail paths, and the Work filter focus restoration.
+```
+npm run preview
+# then open http://127.0.0.1:4173/index.html
+```
 
 ## Review pages
 
-Home, Engineering, Product, Work, GMK Arch, WITF, ShareCLI, Substrate, phenotype-omlx, NetWeave, Resume, Contact, and 404.
+Home, Engineering, Product, Work, GMK Arch, WITF, ShareCLI, Substrate,
+phenotype-omlx, NetWeave, OmniRoute, BytePort, Tracera, DSS Cipher, CLIProxyAPI++,
+AgentAPI++, MCPForge, ForgeCode, Frostify, Resume, Contact, Blog, and 404.
 
-## Caveats and decisions
+## Caveats and open editorial questions
 
-- NetWeave Doc/MP4/screenshots/simulation/ControlNet artifacts remain deferred.
-- Resume PDFs are not present locally; HTML selection cards remain.
-- The current preview is the locally rebuilt static output, deployed with `vercel deploy --prebuilt --yes --target=preview`. Hosted `/`, `/work`, `/work/sharecli`, and `/resume` return 200; Home and ShareCLI titles were checked in a browser. An unknown project path returns a hosted 404. The previous 404 was fixed by explicitly deploying the repository root rather than the image-only `public/` directory.
-- No DNS, production redirects, or legacy retirement were changed.
+**Narrative copy has not been editorially reviewed.** The previous status marked
+phases 6 and 7 PARTIAL for "narrative pending". That was structurally false: all
+15 projects define `caseStudy.sections`. Whether the prose is accurate and good
+is a separate question and remains unanswered. Someone should read it.
 
-## Gate
+**NetWeave attachments are still deferred** — Doc, MP4, screenshots, simulation,
+and ControlNet artifacts are not present. The project is listed as a full
+engineering candidate with that gap explicitly non-blocking.
 
-STATUS: READY FOR HUMAN PRODUCTION REVIEW
+**Resume PDFs are linked as a single consolidated file**, not per-role variants.
+Variant PDFs exist under `output/resume-consolidation-2026-09-08/variants/` and
+`docs/resume-source/` but are not published. Canonical per-role links are an
+open decision.
+
+**Screenshots are Chromium captures from earlier passes** under
+`output/technical-atelier-review/`. They predate the four fixes above and have
+not been refreshed. A fresh pass should be taken once the hosted preview is
+available, not before.
+
+**No DNS, production redirects, or legacy retirement have been changed.**

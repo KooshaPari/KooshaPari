@@ -127,7 +127,7 @@ export function renderResume(root) {
         'data-reveal-delay': '150',
       },
         el('a', {
-          href: '/koosha-paridehpour-resume.pdf',
+          href: '/public/koosha-paridehpour-resume.pdf',
           download: 'Koosha_Paridehpour_Resume.pdf',
           class: 'resume-download__link',
         }, 'Download PDF resume'),
