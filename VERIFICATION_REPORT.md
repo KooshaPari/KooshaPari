@@ -176,10 +176,16 @@ regenerates the manifest and bundle from scratch and applies hashed references
 to 29 pages, and the unit suite passes 708/708 in that clone. This supersedes
 the single earlier check at `e9955e0`.
 
-**Bundle determinism was checked at `42863b41`, not at `437dfa8`.** The
-bare-import fix in `scripts/bundle-js.js` left the production bundle
-byte-identical at the time. A later bundle-affecting commit has not been
-re-confirmed.
+**Bundle determinism is now confirmed by measurement, and the old citation was
+wrong.** The previous version of this claim attributed the check to commit
+`42863b41`. That object does not exist in this repository, so the claim could
+not be verified or reproduced and has been discarded.
+
+Determinism was instead measured directly at `7270ae4`: staging twice, the
+second time after deleting `dist/` and `bundled/` entirely, produces a
+byte-identical `app.bundle.08d006f1.js` (sha256
+`08d006f1c33a...de737`) both times. This holds from a clean tree, not just
+from an incremental rebuild, which is the stronger of the two checks.
 
 **The hosted gate has not been run.** `VERCEL_TOKEN` is unset, so hosted
 verification, the redirect map, Lighthouse on the preview, and any cutover
