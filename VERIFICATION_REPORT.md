@@ -159,6 +159,24 @@ An earlier draft of this report called `image-slider.js`, `cast-player.js`, and
 - Only `image-slider.js` remains genuinely unexercised. No built page emits
   `.image-slider`, so that claim stands, narrowed to one module.
 
+**`image-slider` is dead code, quantified, and left in place deliberately.**
+The module auto-discovers `.image-slider` and nothing in `data/`, `scripts/views/`,
+or any template emits that class, so `initImageSliders()` runs on every route
+and matches nothing every time. That is 271 lines of JS plus 181 lines of CSS
+that are bundled into the production payload and can never execute.
+
+Its pure helpers do have unit coverage, which is worth stating precisely: the
+helper logic is tested, the DOM wiring is not and cannot be, because no page
+provides an element to wire.
+
+It has been left in place rather than removed, because removal deletes a
+capability and that is a product decision, not a verification finding. The
+repo's own rule says remove dead code, and that rule was not followed here.
+The disposition should be an explicit choice between deleting the module,
+wiring it to an existing gallery so the payload earns its place, or documenting
+it as reserved. Whichever is chosen, this is the last known unexercised
+subsystem in the bundle.
+
 Investigating the cast player surfaced a genuine product defect. Both `app.js`
 and `sharecli-recording.js` call `initCastPlayers`, and because the DOM
 rebuilt view, the same `.cast-player` container was initialised twice. The
