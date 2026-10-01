@@ -14,16 +14,25 @@ redirect map destination check, and cutover have all not been run. The local
 gate is green, but no statement here covers how the site behaves on the hosted
 domain, and it should not be read as doing so.
 
-Beyond that, three shipped subsystems (`image-slider`, `cast-player`,
-`lightbox`) have no reachable DOM on any route. They are bundled and cannot be
-verified. Details in `VERIFICATION_REPORT.md`.
+Beyond that, the browser suite is not currently green. A full run passed 19 of
+22 and timed out on three; all three pass in isolation, and the machine was
+under extreme unrelated load (`syspolicyd` alone at 641% CPU) for the whole
+run. That points to harness contention rather than product defects, but it is
+not a green run and has not been re-confirmed on an idle host.
+
+One subsystem claim was also wrong and has been corrected. An earlier draft
+called `cast-player` and `lightbox` unreachable. Both are live: the lightbox on
+`/work/gmk-arch`, the cast player on `/work/sharecli`. Investigating the cast
+player found a real bug, a double-initialization producing duplicate controls,
+fetches, and animation loops, now fixed and covered. Only `image-slider`
+remains genuinely unexercised. Details in `VERIFICATION_REPORT.md`.
 
 ## What is verified locally
 
 | Gate | Result |
 |---|---|
-| Unit suite | 707/707 pass across 70 test files |
-| Browser suite | 20 tests, all passing, against the staged `dist/` artifact |
+| Unit suite | 708/708 pass across 70 test files |
+| Browser suite | 22 tests, 19 passing / 3 timing out under host load, against the staged `dist/` artifact |
 | axe-core | No critical/serious violations; contrast violations zero |
 | Asset links | Every root-absolute asset URL on the built pages resolves |
 

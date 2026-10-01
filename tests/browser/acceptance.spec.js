@@ -434,3 +434,90 @@ test.describe('Static asset links', () => {
     });
   }
 });
+
+test.describe('Cast player', () => {
+  // The cast player was previously assumed unreachable because nothing outside
+  // a test emits a `.cast-player[data-src]`. It is not unreachable: ShareCLI's
+  // page ships two real recordings. An assertion that only checked the element
+  // existed would pass with an empty terminal, so this one is written against
+  // decoded output instead.
+  test('ShareCLI recordings load and render decoded terminal output', async ({ page }) => {
+    const failures = [];
+    page.on('pageerror', (e) => failures.push(e.message));
+
+    const requested = [];
+    page.on('response', (r) => {
+      if (r.url().endsWith('.cast')) requested.push({ ok: r.ok(), status: r.status(), url: r.url() });
+    });
+
+    await page.goto(`${BASE}/work/sharecli`);
+    await page.waitForSelector('.cast-player', { timeout: 15_000 });
+
+    const players = page.locator('.cast-player');
+    expect(await players.count(), 'no cast players rendered on /work/sharecli').toBeGreaterThan(0);
+
+    // The recording must actually be fetched, not merely referenced.
+    await expect
+      .poll(() => requested.length, { timeout: 15_000, message: 'no .cast recording was requested' })
+      .toBeGreaterThan(0);
+    expect(
+      requested.filter((r) => !r.ok).map((r) => `${r.status} ${r.url}`),
+      'a recording request failed',
+    ).toEqual([]);
+
+    // Empty until playback starts. This is the assertion that would catch a
+    // player which renders its chrome but never decodes the file.
+    // Each recording is its own `article.sharecli-recording` containing a nested
+    // `.cast-player` wrapper, so the player has to be scoped to a single article.
+    // Locating `.cast-player` on its own spans both recordings and matches two
+    // Play controls, which is a strict-mode violation rather than a failure.
+    const first = page.locator('article.sharecli-recording').first();
+    const output = first.locator('.cast-player__output');
+    await first.getByRole('button', { name: 'Play', exact: true }).click();
+
+    await expect
+      .poll(() => output.innerText().then((t) => t.trim().length).catch(() => 0),
+        { timeout: 20_000, message: 'cast player produced no decoded output after play' })
+      .toBeGreaterThan(100);
+
+    expect(failures, 'page errors while the cast player initialised').toEqual([]);
+  });
+});
+
+test.describe('Lightbox', () => {
+  // Same story as the cast player. initLightbox targets
+  // `.case-gallery img, .case-hero img, .project-card-image`, and gmk-arch
+  // ships both gallery and hero images, so the lightbox is live on a real route.
+  test('clicking a case image opens the lightbox, advances, and closes on Escape', async ({ page }) => {
+    await page.goto(`${BASE}/work/gmk-arch`);
+
+    const openables = page.locator('.case-gallery img, .case-hero img, .project-card-image');
+    expect(
+      await openables.count(),
+      'no image matched the lightbox selector on /work/gmk-arch',
+    ).toBeGreaterThan(1);
+
+    // The overlay element is created once at init and revealed with a class, so
+    // "hidden" means "not active" rather than "absent from the DOM".
+    const overlay = page.locator('.lightbox-overlay').first();
+    await expect(overlay, 'lightbox overlay was never created').toHaveCount(1);
+    await expect(overlay, 'lightbox must not be active before a click')
+      .not.toHaveClass(/lightbox-active/);
+
+    await openables.first().click();
+    await expect(overlay).toHaveClass(/lightbox-active/, { timeout: 10_000 });
+
+    const counter = page.locator('.lightbox-counter').first();
+    await expect(counter, 'lightbox shows no position counter').toBeVisible();
+    const initial = (await counter.innerText()).trim();
+    expect(initial, 'counter should read like "n / total"').toMatch(/^\d+\s*\/\s*\d+$/);
+
+    await page.locator('.lightbox-next').first().click();
+    await expect
+      .poll(async () => (await counter.innerText()).trim(), { timeout: 10_000 })
+      .not.toBe(initial);
+
+    await page.keyboard.press('Escape');
+    await expect(overlay).not.toHaveClass(/lightbox-active/, { timeout: 10_000 });
+  });
+});

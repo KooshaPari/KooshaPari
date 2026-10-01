@@ -8,8 +8,9 @@ from an earlier report.
 
 | Gate | Command | Result |
 |---|---|---|
-| Unit suite | `npm test` | 707/707 pass, 0 fail, across 70 `tests/*.test.js` files |
-| Browser suite | `npm run test:e2e` | 20 tests, all passing |
+| Unit suite | `npm test` | 708/708 pass, 0 fail, across 70 `tests/*.test.js` files |
+| Browser suite | `npm run test:e2e` | 22 tests, 19 passing / 3 timing out under host load, see below |
+| Browser suite, prior green run | `npm run test:e2e` | 20 tests, 20 passing |
 | Syntax contract | `npm run check` | pass |
 | Full release gate | `npm run verify` | requires `vercel build`; see limitations |
 
@@ -17,9 +18,27 @@ from an earlier report.
 `scripts/preview-server.js` on `127.0.0.1:4197`. The browser suite therefore
 tests the staged artifact, not the source tree.
 
+**The full suite is not currently green, and the cause is the host, not the code.**
+A full `npm run test:e2e` run passed 19 of 22 and timed out on three: the
+scroll-reveal sweep, the cast player, and the lightbox. Those same three pass in
+isolation (55.0s, 12.7s, 18.4s), and no assertion failed in the full run. Every
+failure was `Test timeout of 120000ms exceeded while setting up "page"`, and
+per-test durations grew monotonically down the suite, from 13s at the start to
+17.1m by test 14.
+
+The machine was under extreme load the whole time: `uptime` reported load
+averages of 456, and the top process was `syspolicyd` at 641% CPU with 3 days
+of elapsed time. That is a macOS Gatekeeper daemon, unrelated to this
+repository and running long before this work started.
+
+So the honest reading is that the three failures are harness contention, not
+product defects, but that is a *diagnosis*, not a green run, and it does not
+justify raising the timeout again to manufacture a pass. The suite needs to be
+re-run on an unloaded host before it can be called green.
+
 ## What the browser suite actually covers
 
-20 tests across eight groups:
+22 tests across nine groups:
 
 | Group | Tests | What it asserts |
 |---|---|---|
@@ -96,12 +115,25 @@ rendered by `project-detail.js` from `project.metrics`, and only `gmk-arch`,
 `witf`, `omniroute`, and `frostify` define metrics. The other 11 project pages
 exercise no counter.
 
-**Three subsystems have no reachable DOM at all.** `image-slider.js` and
-`cast-player.js` are imported by `app.js` and auto-discover `.image-slider` and
-`.cast-player[data-src]`, but no view, component, or data record emits either
-class. `lightbox.js` likewise finds no image to open. All three are shipped,
-bundled, and dead in every route. They are not verified because they cannot be,
-and no test asserts they work.
+**Two of the three suspected-dead subsystems are live, and one had a real bug.**
+An earlier draft of this report called `image-slider.js`, `cast-player.js`, and
+`lightbox.js` unreachable. Browser evidence contradicts two of those three:
+
+- The lightbox is live on `/work/gmk-arch`. Clicking a case image opens it,
+  arrows advance, Escape closes. It now has a browser test.
+- The cast player is live on `/work/sharecli`, and it decodes real recorded
+  terminal output.
+- Only `image-slider.js` remains genuinely unexercised. No built page emits
+  `.image-slider`, so that claim stands, narrowed to one module.
+
+Investigating the cast player surfaced a genuine product defect. Both `app.js`
+and `sharecli-recording.js` call `initCastPlayers`, and because the DOM
+rebuilt view, the same `.cast-player` container was initialised twice. The
+second call appended a full second chrome tree inside the first, which shipped
+two Play controls, two fetch requests, and two animation loops on one
+recording. `scripts/media/cast-player.js` now returns the existing player when
+`container._castPlayer` is set. A unit test covers the idempotent path, and it
+was checked against a negative control: removing the guard turns it red.
 
 **Fresh-clone parity was verified once.** `tests/` now tracks 70 files and 1
 browser spec in both a fresh clone and the working tree. This was checked when

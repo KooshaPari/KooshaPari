@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { parseHTML } from 'linkedom';
 import { buildChrome } from '../scripts/media/cast-player-chrome.js';
+import { initCastPlayers } from '../scripts/media/cast-player.js';
 import { createScrubber } from '../scripts/media/cast-scrubber.js';
 import { SEEK_PAGE_MS, SEEK_STEP_MS, SPEED_LADDER } from '../scripts/media/cast-timeline.js';
 
@@ -219,5 +220,49 @@ test('scrubber setEnabled drives the aria-disabled state both ways', () => {
 
     scrubber.setEnabled(true);
     assert.equal(dom.scrubber.getAttribute('aria-disabled'), 'false');
+  });
+});
+
+test('initCastPlayers does not build a second chrome tree for the same container', () => {
+  // `initCastPlayers` is called from app.js on every render and again from
+  // sharecli-recording.js when it builds the recordings section, so the same
+  // container is discovered twice. Before the guard this appended a second
+  // full chrome tree inside the first, which put two Play controls, two fetch
+  // requests, and two animation loops on one recording.
+  withDOM(() => {
+    const container = globalThis.document.createElement('div');
+    container.className = 'cast-player';
+    container.setAttribute('data-src', '/recording.cast');
+    globalThis.document.body.appendChild(container);
+
+    // The guard reads `window` to decide between prerender and live paths, so
+    // a minimal window stand-in is enough to exercise both calls.
+    const previousWindow = globalThis.window;
+    globalThis.window = globalThis.document.defaultView;
+    try {
+      initCastPlayers(globalThis.document);
+      initCastPlayers(globalThis.document);
+    } finally {
+      if (previousWindow === undefined) delete globalThis.window;
+      else globalThis.window = previousWindow;
+    }
+
+    assert.equal(
+      container.querySelectorAll('.cast-player__controls').length,
+      1,
+      'expected exactly one controls block, found the player was initialised twice',
+    );
+    assert.equal(
+      container.querySelectorAll('.cast-player__output').length,
+      1,
+      'expected exactly one output element',
+    );
+    // The chrome root legitimately carries the `cast-player` class, so exactly
+    // one nested player is correct. Two means a second chrome tree was built.
+    assert.equal(
+      container.querySelectorAll('.cast-player').length,
+      1,
+      'expected one inner player; more means a second chrome tree was built',
+    );
   });
 });

@@ -80,6 +80,15 @@ function createPlayer(container) {
   const title = container.getAttribute(ATTR_DATA_TITLE) || '';
   if (!src) return null;
 
+  // Guard against double-initialisation. `initCastPlayers` is called both by
+  // app.js on render and by sharecli-recording.js when it builds the recordings
+  // section, so the same container is reached twice. Without this guard each
+  // pass appends another full chrome tree, leaving a player nested inside a
+  // player with two independent Play controls, two fetch requests, and two
+  // animation loops driving the same container. image-slider.js already
+  // carries the equivalent `_sliderAttached` check.
+  if (container._castPlayer) return container._castPlayer;
+
   const dom = buildChrome(title);
   const {
     root, terminal, output, cursor, scrubber, fill, thumb,
@@ -278,7 +287,9 @@ function createPlayer(container) {
 
   // Skip fetch during prerender (Node has no relative-URL fetch)
   if (typeof window === 'undefined') {
-    return { el: root, play, pause, resetPlayback, seek };
+    const prerendered = { el: root, play, pause, resetPlayback, seek };
+    container._castPlayer = prerendered;
+    return prerendered;
   }
 
   const controller = new AbortController();
@@ -315,7 +326,9 @@ function createPlayer(container) {
       announce(ANNOUNCE_UNAVAILABLE);
     });
 
-  return { el: root, play, pause, resetPlayback, seek };
+  const instance = { el: root, play, pause, resetPlayback, seek };
+  container._castPlayer = instance;
+  return instance;
 }
 
 /* ---- Public API --------------------------------------------- */
