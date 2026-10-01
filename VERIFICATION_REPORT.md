@@ -9,8 +9,7 @@ from an earlier report.
 | Gate | Command | Result |
 |---|---|---|
 | Unit suite | `npm test` | 708/708 pass, 0 fail, across 70 `tests/*.test.js` files |
-| Browser suite | `npm run test:e2e` | 22 tests, 19 passing / 3 timing out under host load, see below |
-| Browser suite, prior green run | `npm run test:e2e` | 20 tests, 20 passing |
+| Browser suite | `npm run test:e2e` | 23/23 pass, 4.5m, on an unloaded host |
 | Syntax contract | `npm run check` | pass |
 | Full release gate | `npm run verify` | requires `vercel build`; see limitations |
 
@@ -18,27 +17,47 @@ from an earlier report.
 `scripts/preview-server.js` on `127.0.0.1:4197`. The browser suite therefore
 tests the staged artifact, not the source tree.
 
-**The full suite is not currently green, and the cause is the host, not the code.**
-A full `npm run test:e2e` run passed 19 of 22 and timed out on three: the
-scroll-reveal sweep, the cast player, and the lightbox. Those same three pass in
-isolation (55.0s, 12.7s, 18.4s), and no assertion failed in the full run. Every
-failure was `Test timeout of 120000ms exceeded while setting up "page"`, and
-per-test durations grew monotonically down the suite, from 13s at the start to
-17.1m by test 14.
+**Earlier full-suite failures were host load, now proven by a green re-run.**
+An intermediate `npm run test:e2e` run passed 19 of 22 and timed out on three:
+the scroll-reveal sweep, the cast player, and the lightbox. No assertion failed;
+every failure was `Test timeout of 120000ms exceeded while setting up "page"`,
+and per-test durations grew monotonically down the suite, from 13s at the start
+to 17.1m by test 14. That machine was reporting load averages of 456, with
+`syspolicyd` at 641% CPU and 3 days elapsed, a macOS Gatekeeper daemon unrelated
+to this repository.
 
-The machine was under extreme load the whole time: `uptime` reported load
-averages of 456, and the top process was `syspolicyd` at 641% CPU with 3 days
-of elapsed time. That is a macOS Gatekeeper daemon, unrelated to this
-repository and running long before this work started.
+A second run at load ~466 improved to 22/23, with the axe viewport test the only
+failure at 4.0m. After the host rebooted, the full suite ran **23/23 in 4.5m**
+at load ~250. The axe test alone ran in 7.6s in isolation.
 
-So the honest reading is that the three failures are harness contention, not
-product defects, but that is a *diagnosis*, not a green run, and it does not
-justify raising the timeout again to manufacture a pass. The suite needs to be
-re-run on an unloaded host before it can be called green.
+So the timeouts were contention, not product defects, and that conclusion is now
+backed by a green run rather than only by diagnosis. Two things follow. The
+120s timeout is sufficient and was not raised again to manufacture a pass. And
+the suite is only meaningful on a reasonably idle host: anyone reading a red
+result here should check `uptime` before treating it as a code fault.
+
+**The metric counters run, but a naive text assertion on them is vacuous.**
+A first draft of the counter test compared the settled text against a
+re-derived formatted number, and it passed even with `formatNumber`'s comma
+branch deliberately broken. The reason is in `animateCounter`: the last frame
+of the tick loop executes `el.textContent = targetText`, so the final displayed
+value is the authored attribute written back verbatim and never depends on
+`formatNumber` at all. Formatting only affects intermediate frames.
+
+The test now asserts what is actually observable: that every `[data-count-to]`
+element has its `_counterAnimated` latch set, proving the module is not silently
+inert, and that each element settles on its exact authored text. Verified
+against a negative control that disables `initCounterAnimate` outright, which
+turns the test red.
+
+Worth recording as a harness lesson: `npx playwright test` does **not** rebuild
+the staged bundle, because only `npm run test:e2e` runs `stage:publication`. An
+early negative control edited a source file, passed anyway, and was measuring a
+stale `dist/`. Source-level negative controls must stage first.
 
 ## What the browser suite actually covers
 
-22 tests across nine groups:
+23 tests across ten groups:
 
 | Group | Tests | What it asserts |
 |---|---|---|

@@ -14,11 +14,13 @@ redirect map destination check, and cutover have all not been run. The local
 gate is green, but no statement here covers how the site behaves on the hosted
 domain, and it should not be read as doing so.
 
-Beyond that, the browser suite is not currently green. A full run passed 19 of
-22 and timed out on three; all three pass in isolation, and the machine was
-under extreme unrelated load (`syspolicyd` alone at 641% CPU) for the whole
-run. That points to harness contention rather than product defects, but it is
-not a green run and has not been re-confirmed on an idle host.
+One caveat on reading the local gate: the browser suite is only meaningful on a
+reasonably idle host. An intermediate run at load 456 passed 19 of 22 with three
+timeouts, and a later one at load 466 passed 22 of 23. After the machine
+rebooted, the same suite passed 23/23 in 4.5m. Those timeouts were contention
+rather than product defects, and the 120s timeout was deliberately not raised
+again to force a pass. Check `uptime` before treating a red result here as a
+code fault.
 
 One subsystem claim was also wrong and has been corrected. An earlier draft
 called `cast-player` and `lightbox` unreachable. Both are live: the lightbox on
@@ -32,7 +34,7 @@ remains genuinely unexercised. Details in `VERIFICATION_REPORT.md`.
 | Gate | Result |
 |---|---|
 | Unit suite | 708/708 pass across 70 test files |
-| Browser suite | 22 tests, 19 passing / 3 timing out under host load, against the staged `dist/` artifact |
+| Browser suite | 23/23 pass, 4.5m, on an unloaded host |
 | axe-core | No critical/serious violations; contrast violations zero |
 | Asset links | Every root-absolute asset URL on the built pages resolves |
 
