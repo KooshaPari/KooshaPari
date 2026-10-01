@@ -168,9 +168,13 @@ recording. `scripts/media/cast-player.js` now returns the existing player when
 `container._castPlayer` is set. A unit test covers the idempotent path, and it
 was checked against a negative control: removing the guard turns it red.
 
-**Fresh-clone parity was verified once.** `tests/` now tracks 70 files and 1
-browser spec in both a fresh clone and the working tree. This was checked when
-`e9955e0` landed; it has not been re-checked since.
+**Fresh-clone parity was re-verified at `fee99f5`.** A clean clone of the
+current `main` tracks 71 files under `tests/` (70 unit specs plus 1 browser
+spec), and neither the dangling `bundled/manifest.json` nor the Playwright
+`.last-run.json` cache is tracked. After `npm ci`, `stage:publication`
+regenerates the manifest and bundle from scratch and applies hashed references
+to 29 pages, and the unit suite passes 708/708 in that clone. This supersedes
+the single earlier check at `e9955e0`.
 
 **Bundle determinism was checked at `42863b41`, not at `437dfa8`.** The
 bare-import fix in `scripts/bundle-js.js` left the production bundle
