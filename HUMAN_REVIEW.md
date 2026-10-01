@@ -22,6 +22,15 @@ rather than product defects, and the 120s timeout was deliberately not raised
 again to force a pass. Check `uptime` before treating a red result here as a
 code fault.
 
+Two real defects were found and fixed by browser evidence during this pass.
+The ShareCLI cast player was initialised twice, since both `app.js` and
+`sharecli-recording.js` call `initCastPlayers`, producing duplicate Play
+controls, duplicate fetches, and duplicate animation loops. And on `/resume`
+the scroll-reveal safety net only ran on `scroll`, so `div.resume-timeline`
+rendered fully visible at load but stayed hidden until the user happened to
+scroll; it now sweeps once during init. Both are covered by tests that were
+checked against negative controls.
+
 One subsystem claim was also wrong and has been corrected. An earlier draft
 called `cast-player` and `lightbox` unreachable. Both are live: the lightbox on
 `/work/gmk-arch`, the cast player on `/work/sharecli`. Investigating the cast
@@ -34,7 +43,7 @@ remains genuinely unexercised. Details in `VERIFICATION_REPORT.md`.
 | Gate | Result |
 |---|---|
 | Unit suite | 708/708 pass across 70 test files |
-| Browser suite | 23/23 pass, 4.5m, on an unloaded host |
+| Browser suite | 24/24 pass, 3.0m, on an unloaded host |
 | axe-core | No critical/serious violations; contrast violations zero |
 | Asset links | Every root-absolute asset URL on the built pages resolves |
 

@@ -176,6 +176,13 @@ function createMutationObserver() {
    Reveal anything currently inside the viewport on each scroll tick. This
    cannot double-fire: revealElement() is a no-op once .reveal-visible is set.
    It is also cheap, because the query only matches elements still hidden.
+
+   The sweep also runs once during init. Without that, anything already on
+   screen at load depended entirely on the observer, which is precisely the
+   case the net exists to cover: /resume rendered div.resume-timeline at
+   top=565 in a 720px viewport, fully visible, and it stayed hidden until the
+   user happened to scroll. Scroll events do not fire on load, so the net
+   never got the chance.
    ------------------------------------------------------------------ */
 function revealInViewOnScroll() {
   if (prefersReducedMotion()) return;
@@ -229,6 +236,10 @@ export function initScrollReveal() {
   scanForRevealElements();
   attachToObserver();
   bindScrollSafetyNet();
+  // Sweep once up front, and again after the first frame, so elements already
+  // on screen at load are revealed whether or not the user ever scrolls.
+  revealInViewOnScroll();
+  requestAnimationFrame(revealInViewOnScroll);
 }
 
 /**

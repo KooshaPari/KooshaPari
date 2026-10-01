@@ -389,6 +389,52 @@ test.describe('Scroll reveal', () => {
       ).toEqual([]);
     }
   });
+
+  // The test above scrolls the whole page, which makes the IntersectionObserver
+  // fire on its own and therefore cannot tell whether the safety net works.
+  // The bug the safety net exists to fix is different: the observer's
+  // rootMargin keeps a reveal target inside a 40px band at the end of the
+  // document from ever crossing its threshold, so it stays hidden while fully
+  // on screen. That reproduces on a direct load with no scrolling at all.
+  test('reveal elements at the very end of the page are visible without scrolling', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 720 });
+
+    const checked = [];
+    for (const path of REVEAL_ROUTES) {
+      await page.goto(path);
+      await page.waitForLoadState('networkidle');
+      await page.waitForTimeout(400);
+
+      const result = await page.evaluate(() => {
+        const hidden = [...document.querySelectorAll('[data-reveal].reveal-hidden')]
+          .filter(el => {
+            const r = el.getBoundingClientRect();
+            if (r.width === 0 || r.height === 0) return false;
+            if (el.closest('[hidden]') || el.getClientRects().length === 0) return false;
+            // Already inside the viewport on load: the observer should have
+            // caught these on its own.
+            return r.top < window.innerHeight && r.bottom > 0;
+          });
+        return {
+          count: hidden.length,
+          sample: hidden.slice(0, 3).map(el => {
+            const r = el.getBoundingClientRect();
+            return `${el.tagName.toLowerCase()}.${el.className.split(' ')[0]} top=${Math.round(r.top)}`;
+          }),
+        };
+      });
+
+      if (result.count > 0) {
+        checked.push(`${path}: ${result.count} hidden but on screen (${result.sample.join(', ')})`);
+      }
+    }
+
+    expect(
+      checked,
+      'reveal targets rendered inside the viewport on load but still hidden; '
+      + 'the safety net in scroll-reveal.js is not covering them',
+    ).toEqual([]);
+  });
 });
 
 test.describe('Static asset links', () => {

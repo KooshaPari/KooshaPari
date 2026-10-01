@@ -9,7 +9,7 @@ from an earlier report.
 | Gate | Command | Result |
 |---|---|---|
 | Unit suite | `npm test` | 708/708 pass, 0 fail, across 70 `tests/*.test.js` files |
-| Browser suite | `npm run test:e2e` | 23/23 pass, 4.5m, on an unloaded host |
+| Browser suite | `npm run test:e2e` | 24/24 pass, 3.0m, on an unloaded host |
 | Syntax contract | `npm run check` | pass |
 | Full release gate | `npm run verify` | requires `vercel build`; see limitations |
 
@@ -27,8 +27,9 @@ to 17.1m by test 14. That machine was reporting load averages of 456, with
 to this repository.
 
 A second run at load ~466 improved to 22/23, with the axe viewport test the only
-failure at 4.0m. After the host rebooted, the full suite ran **23/23 in 4.5m**
-at load ~250. The axe test alone ran in 7.6s in isolation.
+failure at 4.0m. After the host rebooted, the suite ran 23/23 in 4.5m at load
+~250, and the current 24-test suite passes 24/24 in 3.0m. The axe test alone ran
+in 7.6s in isolation.
 
 So the timeouts were contention, not product defects, and that conclusion is now
 backed by a green run rather than only by diagnosis. Two things follow. The
@@ -55,9 +56,22 @@ the staged bundle, because only `npm run test:e2e` runs `stage:publication`. An
 early negative control edited a source file, passed anyway, and was measuring a
 stale `dist/`. Source-level negative controls must stage first.
 
+**The scroll-reveal safety net was real, but did not cover load.** It was
+flagged for re-audit as possibly unsupported. Auditing it showed the opposite
+problem: the net only ran on `scroll`, so it never fired on page load. The
+existing full-scroll test could not catch this, because scrolling the page
+makes the IntersectionObserver fire on its own.
+
+A new test that loads each reveal route and asserts nothing is hidden while
+already inside the viewport found the live bug. On `/resume`,
+`div.resume-timeline` rendered at top=565 in a 720px viewport, fully visible on
+load, and stayed hidden until the user happened to scroll. `initScrollReveal`
+now sweeps once at init and again on the next frame. Verified against a negative
+control that removes the init sweep, which reproduces the failure exactly.
+
 ## What the browser suite actually covers
 
-23 tests across ten groups:
+24 tests across ten groups:
 
 | Group | Tests | What it asserts |
 |---|---|---|
