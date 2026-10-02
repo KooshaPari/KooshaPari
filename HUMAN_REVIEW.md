@@ -43,8 +43,8 @@ remains genuinely unexercised. Details in `VERIFICATION_REPORT.md`.
 | Gate | Result |
 |---|---|
 | Unit suite | 708/708 pass across 70 test files |
-| Browser suite | 24/24 pass, 3.0m, on an unloaded host |
-| axe-core | No critical/serious violations; contrast violations zero |
+| Browser suite | 24/24 pass, 3.8m, at load average 274 |
+| axe-core | No critical/serious violations; contrast violations zero across 7 routes |
 | Asset links | Every root-absolute asset URL on the built pages resolves |
 
 Reproduce with `npm run verify` (needs the Vercel CLI for the build step) or
@@ -53,6 +53,12 @@ If port 4197 is occupied the suite fails on a port error rather than an
 assertion; kill the stale server first.
 
 Chromium only. No Firefox, WebKit, or mobile-device run has been made.
+
+One caveat worth knowing if you re-run the browser suite on a busy machine. The
+accessibility test measures contrast after a short fixed wait rather than
+waiting for the network to go quiet, so it will not hang, but heavy CPU load
+can still starve it past the per-test timeout. If you see 120-second timeouts
+on unrelated tests, check your load average before investigating the code.
 
 ## Defects found and fixed since the last review
 

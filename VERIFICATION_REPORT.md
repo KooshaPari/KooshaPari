@@ -9,7 +9,7 @@ from an earlier report.
 | Gate | Command | Result |
 |---|---|---|
 | Unit suite | `npm test` | 708/708 pass, 0 fail, across 70 `tests/*.test.js` files |
-| Browser suite | `npm run test:e2e` | 24/24 pass, 3.0m, on an unloaded host |
+| Browser suite | `npm run test:e2e` | 24/24 pass, 3.8m, at load average 274 |
 | Syntax contract | `npm run check` | pass |
 | Full release gate | `npm run verify` | requires `vercel build`; see limitations |
 
@@ -28,8 +28,11 @@ to this repository.
 
 A second run at load ~466 improved to 22/23, with the axe viewport test the only
 failure at 4.0m. After the host rebooted, the suite ran 23/23 in 4.5m at load
-~250, and the current 24-test suite passes 24/24 in 3.0m. The axe test alone ran
-in 7.6s in isolation.
+~250. The current 24-test suite then passed 24/24 in 3.0m unloaded, and again
+24/24 in 3.8m at a load average of 274, once `syspolicyd` had stopped
+saturating the CPU. Two greens at very different loads, rather than one, is
+what makes that a result instead of a coincidence. The axe test alone ran in
+7.6s in isolation.
 
 So the timeouts were contention, not product defects, and that conclusion is now
 backed by a green run rather than only by diagnosis. Two things follow. The
