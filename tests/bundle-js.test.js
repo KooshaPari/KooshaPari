@@ -11,22 +11,81 @@ const ROOT = resolve(import.meta.dirname, '..');
 // real bundled/ tree. Rebuilding in place let the bundler's stale-hash cleanup
 // delete a file another test was reading, failing intermittently with ENOENT.
 // Every rebuild here runs against a throwaway copy of the repo instead.
+//
+// Copy only what the build consumes: the bundler's import graph (scripts/ and
+// data/) plus the package.json that marks .js files as ESM. This is an
+// allowlist, not a denylist — a future dependency outside these paths must fail
+// loudly in the copy instead of silently dragging binary asset trees (the old
+// full-tree copy pulled asset-sources/, output/, test-screenshots/, docs/ …
+// ~180MB per test) into TMPDIR, which on this machine is the shared
+// ~/.jcode/scratch. TMPDIR is shared with other projects; filling it with
+// repeat copies is how the disk hit 100%.
+const COPY_PATHS = new Set(['scripts', 'data', 'package.json']);
+
+// Directories this file created and has not removed yet. Cleanup only ever
+// removes entries from this set, so a sibling path in TMPDIR can never be
+// touched even if it shares the koosha-js-bundle- prefix shape.
+const liveCopies = new Set();
+
+function removeCopy(dir) {
+  if (!liveCopies.delete(dir)) return;
+  rmSync(dir, { recursive: true, force: true });
+}
+
+// Safety net for paths where the `finally` below never runs because the process
+// is torn down mid-test: normal exits (including uncaught exceptions) and
+// interrupt signals (Ctrl+C, harness kills) delivered to this process. Runs
+// synchronously, so `exit` may use rmSync. SIGKILL cannot be caught — that
+// residual case is a platform limit, not something this file can fix.
+function removeAllCopies() {
+  for (const dir of [...liveCopies]) {
+    try {
+      removeCopy(dir);
+    } catch (e) {
+      console.error(`bundle-js.test.js: could not remove ${dir}: ${e.message}`);
+    }
+  }
+}
+process.on('exit', removeAllCopies);
+for (const [signal, code] of [['SIGINT', 130], ['SIGTERM', 143], ['SIGHUP', 129]]) {
+  process.on(signal, () => {
+    removeAllCopies();
+    process.exit(code);
+  });
+}
+
 function withRepoCopy(fn) {
   const dir = mkdtempSync(join(tmpdir(), 'koosha-js-bundle-'));
+  liveCopies.add(dir);
+  let failed = false;
   try {
     cpSync(ROOT, dir, {
       recursive: true,
       filter: (src) => {
-        const rel = src.slice(ROOT.length);
-        return !rel.includes('/node_modules') && !rel.includes('/.git');
+        if (src === ROOT) return true;
+        return COPY_PATHS.has(src.slice(ROOT.length + 1).split('/')[0]);
       },
     });
     // The bundler imports esbuild, so the copy needs the installed dependency
     // tree. Symlinking node_modules resolves it without duplicating it.
     symlinkSync(resolve(ROOT, 'node_modules'), join(dir, 'node_modules'), 'dir');
     return fn(dir);
+  } catch (e) {
+    failed = true;
+    throw e;
   } finally {
-    rmSync(dir, { recursive: true, force: true });
+    // Cleanup runs on pass and on fail. A cleanup failure on an otherwise-green
+    // run must fail the test (the leak is exactly what this exists to prevent);
+    // on a red run it must not mask the original error, so log it instead.
+    try {
+      removeCopy(dir);
+    } catch (rmErr) {
+      if (failed) {
+        console.error(`bundle-js.test.js: cleanup failed after test error: ${rmErr.message}`);
+      } else {
+        throw rmErr;
+      }
+    }
   }
 }
 
