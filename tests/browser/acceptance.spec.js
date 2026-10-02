@@ -83,29 +83,25 @@ test.describe('Homepage', () => {
   // a decorative element, the element contains an image node (an inline icon
   // next to text), or a pseudo-element sits over it. None of those can be
   // decided from computed colour, and none of them mean the text is unreadable.
-  // The ceilings below are the counts measured on 2026-09-19 at 1440x900 after
-  // every fix in this pass; raising one should be a deliberate, justified edit.
-  // Ceilings are measured counts of axe's "incomplete" (undecidable) contrast
-  // nodes, not allowances. Each was recorded from a real run at the current
-  // commit; a regression above one of these means more elements stopped being
-  // decidable, which is how a colour silently regressed before.
+  // Ceilings are counts of axe's "incomplete" (undecidable) contrast nodes, not
+  // allowances. Each was measured from real runs at 1440x900; raising one should
+  // be a deliberate, justified edit.
   const INCOMPLETE_CEILING = {
-    // Left at the previously recorded 22 rather than tightened to the 7 seen
-    // once settled. The tighten could not be re-verified across repeated runs
-    // because the host became too loaded to launch Chrome, and a ceiling that
-    // is too low turns a future settling change into a false failure. Revisit
-    // with a proper repeat measurement on an idle machine.
-    '/': 22,
-    '/work': 16,
-    '/blog': 15,
+    // Each value is the observed incomplete count plus two, measured over three
+    // consecutive runs once syspolicyd had stopped consuming the host. All
+    // three runs returned identical counts per route, so the measurements are
+    // stable and the slack is a deliberate two-node margin rather than a
+    // guess. A regression above one of these means more elements stopped being
+    // decidable, which is how a colour silently regressed before.
+    '/': 9,
+    '/work': 2,
+    '/blog': 17,
     // Previously unswept: a contrast regression on these four routes would not
-    // have been caught at all. Each value is a single settled measurement plus
-    // headroom, not a tight bound, because repeat measurement on an idle host
-    // was not possible. Revisit alongside the '/' ceiling.
-    '/resume': 8,
-    '/contact': 4,
-    '/engineering': 10,
-    '/product': 10,
+    // have been caught at all.
+    '/resume': 7,
+    '/contact': 3,
+    '/engineering': 9,
+    '/product': 9,
   };
 
   test('colour contrast is evaluated, and reported violations are zero', async ({ page }) => {

@@ -92,14 +92,13 @@ this next: the ceilings are counts of axe's *undecidable* nodes, and they only
 mean something if the measurement is taken after the transition. Asserting
 contrast mid-animation produces confident false failures.
 
-The four new ceilings carry deliberate headroom, and the existing three were
-deliberately left loose. Settled measurements gave `/resume` 5, `/contact` 1,
-`/engineering` 7, and `/product` 7, and `/` measured 7 against a recorded 22.
-None of those could be re-measured across repeated runs, because the host
-became too loaded to launch Chrome at all. So the new values were set above
-their single measurement and `/` was left at 22 rather than tightened. A ceiling
-that is too low manufactures false failures; a ceiling that is too loose only
-delays detection. Tightening them is a real follow-up that needs an idle host.
+The ceilings were then measured rather than guessed. Once `syspolicyd` stopped
+consuming the host, three consecutive runs returned identical counts on every
+route: `/` 7, `/work` 0, `/blog` 15, `/resume` 5, `/contact` 1,
+`/engineering` 7, `/product` 7. Each ceiling is that count plus two. The `/`
+value had been sitting at 22 from an earlier pass; it is now 9, which is the
+first time it has been tightened against a repeatable measurement instead of
+left loose out of caution.
 
 ## What the browser suite actually covers
 
@@ -248,8 +247,8 @@ remain unperformed. No statement in this report covers hosted behaviour.
 assumed. Three assertions invoke axe:
 
 - The critical-violation test runs axe on `/` with `wcag2a` and `wcag2aa`.
-- The contrast test walks `INCOMPLETE_CEILING = { '/': 22, '/work': 16, '/blog': 15 }`
-  with `wcag2aa`.
+- The contrast test walks `INCOMPLETE_CEILING`, now seven routes, with
+  `wcag2aa`.
 - The ShareCLI test runs axe on `/work/sharecli` across five viewports with
   `wcag2a`, `wcag2aa`, and `wcag21aa`.
 
@@ -262,7 +261,8 @@ An earlier version of this report claimed a 10-route axe sweep; that claim was
 not reproducible and was removed rather than restated. An intermediate draft
 then said "3 routes", which understated the count by omitting `/work/sharecli`.
 
-The three axe routes are the only pages with a recorded incomplete-node ceiling.
+The seven contrast routes are the only pages with a recorded incomplete-node
+ceiling.
 Those ceilings are coverage thresholds, not quality thresholds: they fail when
 axe becomes *less* able to evaluate contrast, which catches a colour silently
 serialising as `none` again. They do not mean the residual incomplete nodes are
