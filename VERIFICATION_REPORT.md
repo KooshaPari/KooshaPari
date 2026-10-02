@@ -69,6 +69,38 @@ load, and stayed hidden until the user happened to scroll. `initScrollReveal`
 now sweeps once at init and again on the next frame. Verified against a negative
 control that removes the init sweep, which reproduces the failure exactly.
 
+**The contrast test was flaky, and the cause was measuring mid-animation.**
+Extending axe coverage to four previously unswept routes surfaced it. The same
+route reported different contrast failures across runs: 10 violations on
+`/resume` in one, 0 in another, 16 on `/contact` in a third. None were real.
+
+The reveal animation drives `.lede` from opacity 0 to 1 over 0.5s with a 0.1s
+delay. axe reads computed style, so measured mid-transition it blends the
+semi-transparent text against the page background. The reported 1.38:1 for
+`.lede` came from `opacity: 0.49`; once settled the same element computes to
+`rgb(61, 66, 57)`, and every one of the nine routes then reports zero
+violations.
+
+There was a second trap here. `waitForLoadState('networkidle')` fixed the
+timing but introduced a hang under host load, blowing the test timeout at load
+137. The settled state is now reached with a bounded 700ms wait, which covers
+the measured 600ms transition without depending on network quiescence. Verified
+green on three consecutive runs.
+
+Coverage is now seven routes rather than three. A caution for whoever reads
+this next: the ceilings are counts of axe's *undecidable* nodes, and they only
+mean something if the measurement is taken after the transition. Asserting
+contrast mid-animation produces confident false failures.
+
+The four new ceilings carry deliberate headroom, and the existing three were
+deliberately left loose. Settled measurements gave `/resume` 5, `/contact` 1,
+`/engineering` 7, and `/product` 7, and `/` measured 7 against a recorded 22.
+None of those could be re-measured across repeated runs, because the host
+became too loaded to launch Chrome at all. So the new values were set above
+their single measurement and `/` was left at 22 rather than tightened. A ceiling
+that is too low manufactures false failures; a ceiling that is too loose only
+delays detection. Tightening them is a real follow-up that needs an idle host.
+
 ## What the browser suite actually covers
 
 24 tests across ten groups:
@@ -212,13 +244,23 @@ remain unperformed. No statement in this report covers hosted behaviour.
 **Accessibility is verified in Chromium only.** The suite is configured with the
 `chrome` channel. No Firefox, WebKit, or mobile-device run has been made.
 
-**axe covers 3 of the site's routes, not all of them.** The contrast test walks
-`INCOMPLETE_CEILING = { '/': 22, '/work': 16, '/blog': 15 }`, and the
-critical-violation test runs on `/`. Project detail pages, `/resume`,
-`/contact`, `/engineering`, and `/product` are not axe-swept. A contrast
-regression on those routes would not be caught. The previous version of this
-report claimed a 10-route axe sweep; that claim was not reproducible and has
-been removed rather than restated.
+**axe covers 4 routes, not all of them.** Measured from the spec rather than
+assumed. Three assertions invoke axe:
+
+- The critical-violation test runs axe on `/` with `wcag2a` and `wcag2aa`.
+- The contrast test walks `INCOMPLETE_CEILING = { '/': 22, '/work': 16, '/blog': 15 }`
+  with `wcag2aa`.
+- The ShareCLI test runs axe on `/work/sharecli` across five viewports with
+  `wcag2a`, `wcag2aa`, and `wcag21aa`.
+
+The routes touched by axe are `/`, `/work`, `/blog`, and `/work/sharecli`. The
+contrast test now also sweeps `/resume`, `/contact`, `/engineering`, and
+`/product`, bringing it to seven routes. Still not swept: every other project
+detail page, where a contrast regression would not be caught.
+
+An earlier version of this report claimed a 10-route axe sweep; that claim was
+not reproducible and was removed rather than restated. An intermediate draft
+then said "3 routes", which understated the count by omitting `/work/sharecli`.
 
 The three axe routes are the only pages with a recorded incomplete-node ceiling.
 Those ceilings are coverage thresholds, not quality thresholds: they fail when
