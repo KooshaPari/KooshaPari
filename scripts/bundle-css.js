@@ -175,7 +175,6 @@ const bundles = {
     'transitions.css',
     'parallax.css',
     'image-reveal.css',
-    'image-slider.css',
     'lightbox.css',
     'skeleton.css',
     'project-index.css',

@@ -27,7 +27,6 @@ import { initScrollChoreography } from './scroll-choreography.js';
 import { initCardComposer } from './media/card-composer.js';
 import { initAmbientField, destroyAmbientField } from './media/ambient-field.js';
 import { initCastPlayers } from './media/cast-player.js';
-import { initImageSliders } from './media/image-slider.js';
 import { initCodeAnnotation } from './media/code-annotate.js';
 import { initTechIllustrations } from './media/tech-illustrations.js';
 import { initWitfViewer, destroyWitfViewer } from './media/witf-viewer.js';
@@ -139,7 +138,6 @@ function render() {
 
   // Defer heavy render-time inits to reduce TBT
   rIC(() => {
-    initImageSliders();
     initCastPlayers();
     initCodeAnnotation();
     initLightbox(viewRoot);

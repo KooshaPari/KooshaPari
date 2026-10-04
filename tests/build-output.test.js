@@ -72,7 +72,6 @@ test('Vercel static output contains only staged publication assets and matches s
     'scripts/media/cast-player.js',
     'scripts/media/cast-player-render.js',
     'scripts/media/code-annotate.js',
-    'scripts/media/image-slider.js',
     'scripts/media/tech-illustrations.js',
     'scripts/views/blog-index.js',
     'scripts/views/blog-post.js',

@@ -85,8 +85,7 @@ function createPlayer(container) {
   // section, so the same container is reached twice. Without this guard each
   // pass appends another full chrome tree, leaving a player nested inside a
   // player with two independent Play controls, two fetch requests, and two
-  // animation loops driving the same container. image-slider.js already
-  // carries the equivalent `_sliderAttached` check.
+  // animation loops driving the same container.
   if (container._castPlayer) return container._castPlayer;
 
   const dom = buildChrome(title);
