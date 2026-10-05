@@ -5,7 +5,9 @@ STATUS: NOT READY FOR PRODUCTION REVIEW — local gate green, hosted gate not ru
 Last reconciled 2026-09-29 against `437dfa8` and the working tree. The previous
 version of this file claimed production readiness and cited a 2026-09-04 review
 gate with 28 Node tests. Both were stale; the counts and the readiness claim have
-been corrected below rather than left in place.
+been corrected below rather than left in place. Reconciled again 2026-10-04
+against `c298cb1`, which removed the `image-slider` feature; the unit count below
+was re-measured at that commit and the browser figure is marked as predating it.
 
 ## Why this is not production-ready
 
@@ -36,14 +38,15 @@ called `cast-player` and `lightbox` unreachable. Both are live: the lightbox on
 `/work/gmk-arch`, the cast player on `/work/sharecli`. Investigating the cast
 player found a real bug, a double-initialization producing duplicate controls,
 fetches, and animation loops, now fixed and covered. Only `image-slider`
-remains genuinely unexercised. Details in `VERIFICATION_REPORT.md`.
+remained genuinely unexercised, and it was removed in `c298cb1` rather than
+retained. Details in `VERIFICATION_REPORT.md`.
 
 ## What is verified locally
 
 | Gate | Result |
 |---|---|
-| Unit suite | 708/708 pass across 70 test files |
-| Browser suite | 24/24 pass, 3.8m, at load average 274 |
+| Unit suite | 695/695 pass across 69 test files |
+| Browser suite | 24/24 pass, 3.8m, at load average 274 (measured before `c298cb1`; not re-run since) |
 | axe-core | No critical/serious violations; contrast violations zero across 7 routes |
 | Asset links | Every root-absolute asset URL on the built pages resolves |
 

@@ -2,14 +2,16 @@
 
 Last verified: 2026-09-29 at commit `437dfa8` (plus the working-tree changes noted
 below). Every number below was measured in this working tree, not carried over
-from an earlier report.
+from an earlier report. Reconciled 2026-10-04 against `c298cb1`, which removed the
+`image-slider` feature: the unit suite below was re-measured at that commit, and
+the browser figure predates it and has not been re-run.
 
 ## Current state
 
 | Gate | Command | Result |
 |---|---|---|
-| Unit suite | `npm test` | 708/708 pass, 0 fail, across 70 `tests/*.test.js` files |
-| Browser suite | `npm run test:e2e` | 24/24 pass, 3.8m, at load average 274 |
+| Unit suite | `npm test` | 695/695 pass, 0 fail, across 69 `tests/*.test.js` files |
+| Browser suite | `npm run test:e2e` | 24/24 pass, 3.8m, at load average 274 (measured before `c298cb1`; not re-run since) |
 | Syntax contract | `npm run check` | pass |
 | Full release gate | `npm run verify` | requires `vercel build`; see limitations |
 
@@ -182,34 +184,31 @@ rendered by `project-detail.js` from `project.metrics`, and only `gmk-arch`,
 `witf`, `omniroute`, and `frostify` define metrics. The other 11 project pages
 exercise no counter.
 
-**Two of the three suspected-dead subsystems are live, and one had a real bug.**
+**All three suspected-dead subsystems are now resolved: two live, one removed.**
 An earlier draft of this report called `image-slider.js`, `cast-player.js`, and
-`lightbox.js` unreachable. Browser evidence contradicts two of those three:
+`lightbox.js` unreachable. Browser evidence contradicts two of those three, and
+the third was resolved by removal in `c298cb1`:
 
 - The lightbox is live on `/work/gmk-arch`. Clicking a case image opens it,
   arrows advance, Escape closes. It now has a browser test.
 - The cast player is live on `/work/sharecli`, and it decodes real recorded
   terminal output.
-- Only `image-slider.js` remains genuinely unexercised. No built page emits
-  `.image-slider`, so that claim stands, narrowed to one module.
+- The last genuinely-unexercised module was `image-slider.js`. No built page
+  emitted `.image-slider`, so `initImageSliders()` ran on every route and matched
+  nothing every time. Rather than retain it, `c298cb1` removed the module: 271
+  lines of JS, 181 lines of CSS, and `tests/image-slider-helpers.test.js` (13
+  unit tests) deleted. This records the resolution of the finding, not a live
+  claim that the module exists.
 
-**`image-slider` is dead code, quantified, and left in place deliberately.**
-The module auto-discovers `.image-slider` and nothing in `data/`, `scripts/views/`,
-or any template emits that class, so `initImageSliders()` runs on every route
-and matches nothing every time. That is 271 lines of JS plus 181 lines of CSS
-that are bundled into the production payload and can never execute.
-
-Its pure helpers do have unit coverage, which is worth stating precisely: the
-helper logic is tested, the DOM wiring is not and cannot be, because no page
-provides an element to wire.
-
-It has been left in place rather than removed, because removal deletes a
-capability and that is a product decision, not a verification finding. The
-repo's own rule says remove dead code, and that rule was not followed here.
-The disposition should be an explicit choice between deleting the module,
-wiring it to an existing gallery so the payload earns its place, or documenting
-it as reserved. Whichever is chosen, this is the last known unexercised
-subsystem in the bundle.
+**The `image-slider` removal, recorded.** The module auto-discovered
+`.image-slider`, and nothing in `data/`, `scripts/views/`, or any template
+emitted that class, so it was bundled into the production payload and could never
+execute. Its pure helpers did have unit coverage; the DOM wiring could not,
+because no page provided an element to wire. Before `c298cb1` it was left in
+place deliberately, because removal deletes a capability and that is a product
+decision, not a verification finding. That decision has now been taken: `c298cb1`
+deletes the module instead of wiring it to a gallery or documenting it as
+reserved, so the bundle no longer carries unexercised `image-slider` code.
 
 Investigating the cast player surfaced a genuine product defect. Both `app.js`
 and `sharecli-recording.js` call `initCastPlayers`, and because the DOM
@@ -220,13 +219,16 @@ recording. `scripts/media/cast-player.js` now returns the existing player when
 `container._castPlayer` is set. A unit test covers the idempotent path, and it
 was checked against a negative control: removing the guard turns it red.
 
-**Fresh-clone parity was re-verified at `fee99f5`.** A clean clone of the
-current `main` tracks 71 files under `tests/` (70 unit specs plus 1 browser
-spec), and neither the dangling `bundled/manifest.json` nor the Playwright
-`.last-run.json` cache is tracked. After `npm ci`, `stage:publication`
-regenerates the manifest and bundle from scratch and applies hashed references
-to 29 pages, and the unit suite passes 708/708 in that clone. This supersedes
-the single earlier check at `e9955e0`.
+**Fresh-clone parity was re-verified at `fee99f5`** (before the `image-slider`
+removal). A clean clone of the then-current `main` tracks 71 files under
+`tests/` (70 unit specs plus 1 browser spec), and neither the dangling
+`bundled/manifest.json` nor the Playwright `.last-run.json` cache is tracked.
+After `npm ci`, `stage:publication` regenerates the manifest and bundle from
+scratch and applies hashed references to 29 pages, and the unit suite passes
+708/708 in that clone. After `c298cb1` removed `tests/image-slider-helpers.test.js`,
+current `main` tracks 70 files under `tests/` (69 unit specs plus 1 browser spec)
+and `npm test` reports 695/695; the `fee99f5` parity check itself has not been
+re-run at the new count. This supersedes the single earlier check at `e9955e0`.
 
 **Bundle determinism is now confirmed by measurement, and the old citation was
 wrong.** The previous version of this claim attributed the check to commit
