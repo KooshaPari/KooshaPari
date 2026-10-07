@@ -1,8 +1,8 @@
 # 👋
 
-Software engineer working across systems software, distributed and agent infrastructure, ML inference/evaluation, developer tooling, and cloud platforms. I also have a background in technical product/program leadership and physical-product commercialization.
+Early-career software engineer based in Santa Monica, strongest in Go, with experience across backend services, TypeScript/React applications, AI-assisted delivery, developer tooling, and open-source integrations. I also have a background in technical product/program work and physical-product commercialization. Some ecosystem projects use Rust and other languages through agent-assisted development; repository implementation language should not be read as my personal fluency.
 
-[![AI slop inside](https://sladge.net/badge.svg)](https://sladge.net) [![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/KooshaPari/KooshaPari/total)](https://github.com/KooshaPari/KooshaPari/releases)
+[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/KooshaPari/KooshaPari/total)](https://github.com/KooshaPari/KooshaPari/releases)
 
 ## Selected Engineering Work
 
@@ -42,7 +42,7 @@ Extended open-source multi-provider AI proxy work covering provider-aware routin
 
 ### [OmniRoute](https://github.com/diegosouzapw/OmniRoute) — External Contributor
 
-**Rank #5 in published upstream contributor census · 101 merged PRs**
+**Merged upstream contributor** — see the linked live PR history for current contributions and reviewable changes.
 
 Contributed across routing intelligence, provider integrations, reliability hardening, API/protocol compatibility, and operational tooling.
 
