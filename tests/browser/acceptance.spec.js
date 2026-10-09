@@ -118,6 +118,33 @@ test.describe('Homepage', () => {
       await page
         .waitForTimeout(700)
         .catch(() => {});
+      // The 700ms settle covers CSS reveal, but the WITF viewer lazy-loads
+      // three.js from CDN and appends its WebGL canvas + interaction hint on a
+      // network timeline, and the ambient canvas paints in its own frame.
+      // axe's overlap/imgNode verdicts flip depending on whether that has
+      // landed when it samples: '/' incompletes moved 7 -> 10 with no product
+      // change, which is this gate's failure mode. Wait for whichever of those
+      // exist on this route to be laid out, bounded at 3s so a CDN/WebGL
+      // fallback cannot hang the run (empty match on routes without them).
+      await page
+        .waitForFunction(
+          () => {
+            const witf = document.getElementById('witf-viewer');
+            const witfSettled = !witf || witf.childElementCount > 0;
+            const media = [
+              ...document.querySelectorAll(
+                '.ambient-field-canvas, #witf-viewer canvas, #witf-viewer img',
+              ),
+            ];
+            return (
+              witfSettled &&
+              media.every((el) => el.getBoundingClientRect().width > 0)
+            );
+          },
+          null,
+          { timeout: 3000 },
+        )
+        .catch(() => {});
       const result = await new AxeBuilder({ page }).withTags(['wcag2aa']).analyze();
       const contrast = result.violations.find(v => v.id === 'color-contrast');
       const passed = result.passes.find(v => v.id === 'color-contrast');
