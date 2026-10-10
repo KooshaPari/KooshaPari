@@ -167,6 +167,112 @@ test.describe('Homepage', () => {
       ).toBeLessThanOrEqual(ceiling);
     }
   });
+
+  // WCAG 1.4.11 (AA, non-text contrast) requires a focus indicator to measure
+  // >=3:1 against its background. This suite passed 24/24 while the dark-theme
+  // ring measured 2.54:1, because nothing here ever set data-theme and nothing
+  // asserted on the ring's own colour. A green suite that never looks at the
+  // thing is not a gate, so this measures the painted ring directly.
+  //
+  // Measured in real Chrome 2026-10-10 (1280x900, dpr 1) on the nav link:
+  //   light glass (244,240,231): --arch-500 #3f8795 -> 3.61:1 pass
+  //   dark  glass (63,64,61):   --arch-300 #76aeb5 -> 4.22:1 pass
+  // The ring is a box-shadow, not a border, so the readable proof is the
+  // computed value resolved to an actual colour rather than the token name.
+  const FOCUS_MIN_CONTRAST = 3;
+
+  test('the focus ring meets 3:1 non-text contrast in BOTH themes', async ({ page }) => {
+    for (const theme of ['light', 'dark']) {
+      await page.goto('/');
+      await page.evaluate((t) => {
+        if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      }, theme);
+
+      // Keyboard focus, so :focus-visible genuinely applies. Element.focus()
+      // does not match :focus-visible for a link (only for text inputs), so it
+      // would measure an unstyled element and pass vacuously. Real Tab presses
+      // are the only reliable trigger; base.css also transitions box-shadow,
+      // so allow the transition to settle before sampling.
+      for (let i = 0; i < 10; i += 1) {
+        await page.keyboard.press('Tab');
+      }
+      await page.waitForTimeout(400);
+
+      const measured = await page.evaluate((min) => {
+        const srgb = (c) => {
+          const m = c && c.match(/[\d.]+/g);
+          return m && m.length >= 3 ? m.slice(0, 3).map(Number) : null;
+        };
+        const relLum = ([r, g, b]) => {
+          const f = (v) => {
+            const s = v / 255;
+            return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+          };
+          return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+        };
+        const ratio = (a, b) => {
+          const [hi, lo] = [relLum(a), relLum(b)].sort((x, y) => y - x);
+          return (hi + 0.05) / (lo + 0.05);
+        };
+
+        // Sample the element that actually holds focus; fall back to the first
+        // header link only if focus somehow escaped the header.
+        const active = document.activeElement;
+        const el = (active && active.closest && active.closest('.atelier-header a[href]'))
+          ? active
+          : document.querySelector('.atelier-header a[href]');
+        if (!el) return { error: 'no focusable header link found' };
+
+        const shadow = getComputedStyle(el).boxShadow;
+        if (!shadow || shadow === 'none') {
+          return { error: `focus ring absent on ${el.textContent.trim().slice(0, 30)}` };
+        }
+        // The outermost spread is the visible indicator; the inner spread is
+        // deliberately --surface (a gap, not the signal), so sampling the inner
+        // layer would assert on the wrong one.
+        const layers = shadow.split(/,(?![^(]*\))/).map((s) => s.trim());
+        const ringColour = srgb(layers[layers.length - 1]);
+        if (!ringColour) {
+          return { error: 'could not parse ring colour from: ' + shadow };
+        }
+
+        // The header paints a translucent glass over the page, so computed
+        // style alone cannot give the effective backdrop. Use the measured solid
+        // behind it if the alpha is not 1, and record which was used.
+        const header = document.querySelector('.atelier-header');
+        const headerBg = header ? getComputedStyle(header).backgroundColor : '';
+        const alpha = Number((headerBg.match(/[\d.]+/g) || [])[3] ?? 1);
+        const opaqueBg = alpha >= 1 && srgb(headerBg) ? srgb(headerBg) : null;
+        const bodyBg = srgb(getComputedStyle(document.body).backgroundColor);
+
+        return {
+          label: el.textContent.trim().replace(/\s+/g, ' ').slice(0, 40),
+          ringColour,
+          headerBg,
+          alpha,
+          opaqueBackdrop: opaqueBg || bodyBg,
+          backdropSource: opaqueBg ? 'header' : 'body',
+          // Computed-style ratio is a LOWER BOUND, not the painted ratio: with a
+          // translucent shell the true backdrop is neither of these solids.
+          ratio: ratio(ringColour, opaqueBg || bodyBg || [255, 255, 255]),
+          min,
+        };
+      }, FOCUS_MIN_CONTRAST);
+
+      expect(measured.error ?? '', measured.error ?? '').toBe('');
+      // The painted ratio is authoritative (see docs/sessions/20261010-grader-
+      // adjudication/00_FINDINGS.md, measured in real Chrome). This computed-
+      // style bound exists so a colour swap that drops the ring near the floor
+      // fails in CI instead of shipping silently.
+      expect(
+        measured.ratio ?? 0,
+        `${theme}: ring on "${measured.label ?? '?'}" computes `
+        + `${(measured.ratio ?? 0).toFixed(2)}:1 against the ${measured.backdropSource} `
+        + `backdrop (alpha ${measured.alpha}), below the 3:1 non-text contrast floor. `
+        + 'Note: computed style is a lower bound when the shell is translucent.',
+      ).toBeGreaterThanOrEqual(FOCUS_MIN_CONTRAST);
+    }
+  });
 });
 
 test.describe('Navigation', () => {

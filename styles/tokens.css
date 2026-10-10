@@ -283,6 +283,13 @@ html[data-lens="product"] {
   --precision-rule-strong: color-mix(in srgb, var(--paper-100) 24%, transparent);
   --eyebrow-ink: var(--arch-300);
   --link-ink: var(--arch-300);
+  /* Focus ring re-solved for dark. --arch-500 measures 3.61:1 on the light glass
+     header but only 2.54:1 on the dark glass header, failing WCAG 1.4.11's 3:1
+     floor. --arch-300 measures 4.22:1 on the dark glass, so the ring's outer
+     layer is theme-aware rather than one colour stretched across both. The inner
+     3px gap stays --surface so it keeps reading as a gap, not as the indicator.
+     Measured in real Chrome 2026-10-10 (screen 1280x900, dpr 1). */
+  --focus-ring: 0 0 0 3px var(--surface), 0 0 0 6px var(--arch-300);
   --glass-surface: color-mix(in srgb, var(--graphite-800) 65%, transparent);
   --glass-border: color-mix(in srgb, var(--paper-100) 10%, transparent);
   --glass-highlight: inset 0 1px 0 color-mix(in srgb, var(--paper-100) 8%, transparent);
