@@ -75,10 +75,15 @@ which overstates the current position given the blockers above. It needs a
 rewrite before it is shown to anyone; it has been left in place rather than
 silently edited, so the staleness is visible rather than hidden.
 
-**Three shipped subsystems are unreachable.** `image-slider`, `cast-player`, and
-`lightbox` are imported, bundled, and auto-initialised, but no view emits the
-DOM they look for. They cannot be verified until a fixture route or real
-content exists. Details in `VERIFICATION_REPORT.md`.
+**Shipped subsystems all reachable.** `image-slider` was unreachable and was
+removed in `c298cb1` rather than retained. `cast-player` and `lightbox` are live:
+the lightbox on `/work/gmk-arch`, the cast player on `/work/sharecli`, the latter
+covering a real double-initialization bug. Details in `VERIFICATION_REPORT.md`.
+
+Note that the paragraph above, which recorded `HUMAN_REVIEW.md` as still
+describing the site as it was in September, is itself a 2026-09-29 pass.
+`HUMAN_REVIEW.md` has since been rewritten; its current header reads "NOT READY
+FOR PRODUCTION REVIEW" and it names the missing hosted gate directly.
 
 **The counter renders on 4 of 15 projects.** Only `gmk-arch`, `witf`,
 `omniroute`, and `frostify` define `metrics`, so `data-count-to` appears on

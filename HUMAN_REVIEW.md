@@ -7,7 +7,9 @@ version of this file claimed production readiness and cited a 2026-09-04 review
 gate with 28 Node tests. Both were stale; the counts and the readiness claim have
 been corrected below rather than left in place. Reconciled again 2026-10-04
 against `c298cb1`, which removed the `image-slider` feature; the unit count below
-was re-measured at that commit and the browser figure is marked as predating it.
+was re-measured at that commit. A later pass at `debf320` on 2026-10-09
+re-measured the browser suite at that commit too, and stabilized the contrast
+sampling that had made one route flake.
 
 ## Why this is not production-ready
 
@@ -46,7 +48,7 @@ retained. Details in `VERIFICATION_REPORT.md`.
 | Gate | Result |
 |---|---|
 | Unit suite | 695/695 pass across 69 test files |
-| Browser suite | 24/24 pass, 3.8m, at load average 274 (measured before `c298cb1`; not re-run since) |
+| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit |
 | axe-core | No critical/serious violations; contrast violations zero across 7 routes |
 | Asset links | Every root-absolute asset URL on the built pages resolves |
 
