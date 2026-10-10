@@ -190,12 +190,50 @@ test.describe('Homepage', () => {
 
       // Keyboard focus, so :focus-visible genuinely applies. Element.focus()
       // does not match :focus-visible for a link (only for text inputs), so it
-      // would measure an unstyled element and pass vacuously. Real Tab presses
-      // are the only reliable trigger; base.css also transitions box-shadow,
-      // so allow the transition to settle before sampling.
-      for (let i = 0; i < 10; i += 1) {
-        await page.keyboard.press('Tab');
+      // would measure an unstyled element and pass vacuously.
+      //
+      // Tab until focus actually rests on a header LINK. A fixed count is
+      // wrong: the header also holds buttons (theme toggle, lens switch, reader,
+      // index), so N presses can land on one of those and the measurement would
+      // read an unfocused element's box-shadow and fail for the wrong reason.
+      const landed = await page.evaluate(async () => {
+        const isHeaderLink = () => {
+          const el = document.activeElement;
+          if (!el || !el.matches || !el.matches('.atelier-header a[href]')) return false;
+          return el.matches(':focus-visible');
+        };
+        // Focus the document first so repeat Tab presses walk the whole tab
+        // order instead of resuming from whatever held focus before.
+        document.body.focus();
+        for (let i = 0; i < 40 && !isHeaderLink(); i += 1) {
+          document.activeElement && document.activeElement.blur();
+          // A synthetic Tab must be caught by the page's own key handler, so
+          // dispatch a real cancelable keydown rather than calling .focus().
+          document.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true }),
+          );
+          if (isHeaderLink()) break;
+          await new Promise((r) => setTimeout(r, 50));
+        }
+        return isHeaderLink();
+      });
+
+      // If the synthetic walk did not land (some browsers ignore synthetic Tab
+      // for focus movement), fall back to real key presses via the driver.
+      if (!landed) {
+        for (let i = 0; i < 40; i += 1) {
+          await page.keyboard.press('Tab');
+          const ok = await page.evaluate(() => {
+            const el = document.activeElement;
+            return !!el && !!el.matches && el.matches('.atelier-header a[href]')
+              && el.matches(':focus-visible');
+          });
+          if (ok) break;
+        }
       }
+
+      // base.css transitions box-shadow, so allow the transition to settle
+      // before sampling the ring.
       await page.waitForTimeout(400);
 
       const measured = await page.evaluate((min) => {
@@ -215,13 +253,28 @@ test.describe('Homepage', () => {
           return (hi + 0.05) / (lo + 0.05);
         };
 
-        // Sample the element that actually holds focus; fall back to the first
-        // header link only if focus somehow escaped the header.
+        // Sample the element that actually holds focus. There is deliberately
+        // NO fallback to a header link found by selector: doing that measures an
+        // unfocused element, reads its empty box-shadow, and reports a defect
+        // that does not exist. If focus is not on a header link the test fails
+        // with an honest "focus never landed" error instead.
         const active = document.activeElement;
-        const el = (active && active.closest && active.closest('.atelier-header a[href]'))
-          ? active
-          : document.querySelector('.atelier-header a[href]');
-        if (!el) return { error: 'no focusable header link found' };
+        const isHeaderLink = !!active && !!active.matches
+          && active.matches('.atelier-header a[href]')
+          && active.matches(':focus-visible');
+        if (!isHeaderLink) {
+          const where = active
+            ? `${active.tagName}.${active.className || '-'}`
+            : 'none';
+          const visible = active && active.matches
+            ? String(active.matches(':focus-visible'))
+            : 'n/a';
+          return {
+            error: `focus never landed on a header link; activeElement=${where}, `
+              + `:focus-visible=${visible}`,
+          };
+        }
+        const el = active;
 
         const shadow = getComputedStyle(el).boxShadow;
         if (!shadow || shadow === 'none') {
