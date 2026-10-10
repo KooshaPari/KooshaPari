@@ -40,11 +40,12 @@ console.log(`R11: ${slugs.length} project links found: ${slugs.join(', ')}`);
 for (const slug of slugs.slice(0, 6)) {
   await page.goto(`${BASE}/work/${slug}`);
   const hasCast = await page.$('.cast-player');
-  const hasSlider = await page.$('.image-slider, [class*=slider]');
   const hasDiagram = await page.$('canvas, [class*=diagram], [class*=field]');
   const hasWorkbench = await page.$('[class*=workbench]');
   const hasImages = await page.$$('img');
-  const type = hasCast ? 'cast-player' : hasSlider ? 'image-slider' : hasDiagram ? 'diagram/canvas' : hasWorkbench ? 'workbench' : hasImages.length > 1 ? 'image-gallery' : 'text-based';
+  // The `image-slider` branch was dropped in c298cb1 when that component was
+  // removed as dead code; the probe could never match it again.
+  const type = hasCast ? 'cast-player' : hasDiagram ? 'diagram/canvas' : hasWorkbench ? 'workbench' : hasImages.length > 1 ? 'image-gallery' : 'text-based';
   console.log(`R11 ${slug}: ${type}`);
 }
 

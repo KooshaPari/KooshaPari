@@ -14,7 +14,7 @@ uniform, and the original fix commit message overstated two of them.
 | Name | Modules | Proof |
 |---|---|---|
 | `SELECTOR` | `scroll-reveal-helpers.js`, `counter-animate.js` | Bundle binds `ae` to `"[data-reveal]"` at offset 167585, then reassigns the same binding to `"[data-count-to]"` at 195007. Reveal scanned the wrong attribute, so the whole system was inert. **This was the reported bug.** |
-| `clamp` | `magnetic-helpers.js`, `perspective-tilt-helpers.js`, `media/image-slider-helpers.js` | Bundle defines `G(e,t,a){return Math.max(t,Math.min(a,e))}` (3-arg). `magnetic.js` calls `clamp(dx, MAX_X)` with 2 args, which minifies to `G(c,oa)`. `a` is `undefined`, so `Math.min(undefined, e)` is `NaN`. Confirmed by execution: `G(37,24) === NaN`, vs `G(37,-24,24) === 24`. Magnetic pointer tracking produced NaN transforms. |
+| `clamp` | `magnetic-helpers.js`, `perspective-tilt-helpers.js` (and, at the time of this audit, `media/image-slider-helpers.js`, removed later in `c298cb1`) | Bundle defines `G(e,t,a){return Math.max(t,Math.min(a,e))}` (3-arg). `magnetic.js` calls `clamp(dx, MAX_X)` with 2 args, which minifies to `G(c,oa)`. `a` is `undefined`, so `Math.min(undefined, e) === NaN`. Confirmed by execution: `G(37,24) === NaN`, vs `G(37,-24,24) === 24`. Magnetic pointer tracking produced NaN transforms. |
 | `DEFAULT_SPEED` | `parallax-helpers.js` (`0`), `perspective-tilt-helpers.js` (`400`) | Bundle declares `Me=0` at 184925 and reassigns `Me=400` at 195743. Both consumers read `Me`: parallax at 185012 (`speed: Number.isFinite(a)?a:Me`) and perspective-tilt at 196330 (`speed: Me`). Parallax therefore defaulted to 400ms instead of its intended 0. **Not previously reported; found by this audit.** |
 
 ## Structurally dangerous, no behavioral proof
