@@ -12,5 +12,5 @@ export default defineConfig({
   expect: { timeout: 10_000 },
   use: { baseURL: 'http://127.0.0.1:4197', channel: 'chrome', trace: 'retain-on-failure' },
   outputDir: 'output/playwright/acceptance',
-  webServer: { command: 'node scripts/preview-server.js', url: 'http://127.0.0.1:4197', reuseExistingServer: false, timeout: 120_000 },
+  webServer: { command: 'node scripts/preview-server.js', url: 'http://127.0.0.1:4197', reuseExistingServer: !process.env.PW_NO_REUSE ? true : false, timeout: 120_000 },
 });
