@@ -22,7 +22,7 @@ test('published top-level navigation pages retain meaningful static content', as
     assert.equal(main.querySelector('h1').textContent, heading);
     assert.ok(main.textContent.trim().length > heading.length);
     assert.equal(main.querySelectorAll('button').length, 0);
-    for (const href of ['/work', '/blog', '/resume', '/contact']) {
+    for (const href of ['/work', '/resume', '/contact']) {
       assert.ok(document.querySelector(`a[href="${href}"]`), `${name} static navigation misses ${href}`);
     }
   }
@@ -37,7 +37,7 @@ test('every published project has meaningful static content and truthful provena
     for (const [, copy] of project.caseStudy?.sections ?? []) assert.ok(main.textContent.includes(copy));
     assert.equal(main.querySelector('a.back-link').getAttribute('href'), '/work');
     assert.equal(document.querySelectorAll('button').length, 0);
-    for (const href of ['/work', '/blog', '/resume', '/contact']) {
+    for (const href of ['/work', '/resume', '/contact']) {
       assert.ok(document.querySelector(`header a[href="${href}"]`), `${project.slug} static navigation misses ${href}`);
     }
     assert.doesNotMatch(main.textContent, /github-pass1-after\.md|EVIDENCE_LEDGER\.md/);
@@ -56,7 +56,7 @@ test('every published blog post has meaningful static content and clean navigati
     }
     assert.equal(main.querySelector('footer.post-footer a').getAttribute('href'), '/blog');
     assert.equal(document.querySelectorAll('button').length, 0);
-    for (const href of ['/work', '/blog', '/resume', '/contact']) {
+    for (const href of ['/work', '/resume', '/contact']) {
       assert.ok(document.querySelector(`header a[href="${href}"]`), `${post.slug} static navigation misses ${href}`);
     }
     assert.equal(document.title, `${post.title} — Koosha Paridehpour`);

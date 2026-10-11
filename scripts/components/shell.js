@@ -1,9 +1,12 @@
 import { el } from './dom.js';
 import { initDarkMode } from '../dark-mode.js';
 
+// Note: ['/blog', 'Writing'] removed 2026-10-11 — user wants the writing
+// section hidden for now. The /blog route still works for direct-nav; only
+// the top-nav entry is removed. Restore by re-adding the line below.
 const ROUTES = [
   ['/work', 'Work'],
-  ['/blog', 'Writing'],
+  // ['/blog', 'Writing'],
   ['/resume', 'Resume'],
   ['/contact', 'Contact'],
 ];
