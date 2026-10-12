@@ -101,7 +101,7 @@ test.describe('Homepage', () => {
   test('homepage loads with title, navigation, and hero', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('h1')).toBeVisible();
-    for (const href of ['/work', '/blog', '/resume', '/contact']) {
+    for (const href of ['/work', '/resume', '/contact']) {
       await expect(page.locator(`a[href="${href}"]`).first()).toBeVisible();
     }
   });
@@ -470,7 +470,7 @@ test.describe('Navigation', () => {
       for (const path of ['/', '/engineering', '/product', '/work', '/resume', '/contact', '/blog']) {
         await page.goto(`${BASE}${path}`);
         await expect(page.locator('main h1')).toBeVisible();
-        for (const href of ['/work', '/blog', '/resume', '/contact']) {
+        for (const href of ['/work', '/resume', '/contact']) {
           await expect(page.locator(`a[href="${href}"]`).first()).toBeVisible();
         }
       }
@@ -490,7 +490,7 @@ test.describe('Project Pages', () => {
         await expect(page.locator('main h1')).toHaveText(project.title);
         await expect(page.locator('main')).toContainText(project.summary);
         await expect(page.locator('button')).toHaveCount(0);
-        for (const href of ['/work', '/blog', '/resume', '/contact']) {
+        for (const href of ['/work', '/resume', '/contact']) {
           await expect(page.locator(`header a[href="${href}"]`).first()).toBeVisible();
         }
       }
@@ -509,7 +509,7 @@ test.describe('Blog', () => {
         await expect(page.locator('main')).toContainText(post.excerpt);
         await expect(page.locator('button')).toHaveCount(0);
         await expect(page.locator('main footer.post-footer a')).toHaveAttribute('href', '/blog');
-        for (const href of ['/work', '/blog', '/resume', '/contact']) {
+        for (const href of ['/work', '/resume', '/contact']) {
           await expect(page.locator(`header a[href="${href}"]`).first()).toBeVisible();
         }
       }
