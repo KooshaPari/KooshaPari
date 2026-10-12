@@ -135,3 +135,27 @@
 @media (max-width: 480px) { .sharecli-workbench__lanes { grid-template-columns: 1fr; } }
 @media (max-width: 600px) { .sharecli-recordings__grid { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .netweave-workbench button, .sharecli-workbench button { transition: none; } }
+
+/* Dimensional layering — 4-step elevation ladder for card surfaces.
+   Opt-in via class; default card surfaces are unchanged. Uses
+   --precision-rule (theme-aware) so the chip surface contrast holds
+   in both themes. The translateZ(0) on each target forces a stacking
+   context so :hover shadows composite cleanly without z-index hacks. */
+.elev-1,
+.elev-2,
+.elev-3 {
+  transform: translateZ(0);
+  transition: box-shadow var(--motion-normal) var(--ease-out);
+}
+
+.elev-1 { box-shadow: var(--elev-1); }
+.elev-2 { box-shadow: var(--elev-2); }
+.elev-3 { box-shadow: var(--elev-3); }
+
+.elev-1:hover { box-shadow: var(--elev-2); }
+.elev-2:hover { box-shadow: var(--elev-3); }
+
+@media (prefers-reduced-motion: reduce) {
+  .elev-1, .elev-2, .elev-3 { transition: none; }
+  .elev-1:hover, .elev-2:hover { box-shadow: inherit; }
+}
