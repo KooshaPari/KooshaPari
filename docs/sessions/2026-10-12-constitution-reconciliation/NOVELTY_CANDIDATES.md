@@ -2,7 +2,7 @@
 
 **Source.** Scout run 2026-10-12 via `openai-compatible:MiniMax-M3`, effort=medium, scope=88 rows in `ui-ux-pro-max/data/styles.csv` minus deprecated (20-27, 53) minus 5 implicit styles (Minimalism, Soft UI Evolution, Brutalism, Glassmorphism, Aurora UI). Six ranked candidates returned.
 
-**Constraint ledger.** All six honor: WCAG 2.2 AA (4.5:1 normal / 3:1 large), bundle ≤230 KB (current 228.7 KB), animation ≤400 ms transform+opacity only, no new font families, no new color families (6 family accents already live), no third-party scripts, no emoji markers, ASCII recipes are skeleton/fallback only, museum-quiet voice.
+**Constraint ledger.** All six honor: WCAG 2.2 AA (4.5:1 normal / 3:1 large), bundle ≤230 KB (**current 233.4 KB on `main @ 5168b23` — 3.4 KB over from organic drift since the top-3 ships**; restoration ticket recommended before next net-additive novelty), animation ≤400 ms transform+opacity only, no new font families, no new color families (6 family accents already live), no third-party scripts, no emoji markers, ASCII recipes are skeleton/fallback only, museum-quiet voice.
 
 **Implicit-style blacklist** (already in `tokens.css` / constitution Section 13): Minimalism, Soft UI Evolution, Brutalism, Glassmorphism, Aurora UI. **Landing-pattern blacklist** (deprecated 20-27): Hero-Centric, Conversion-Optimized, Feature-Rich Showcase, Minimal & Direct, Social Proof-Focused.
 
@@ -125,3 +125,46 @@ Ship the top 3 in order, one PR each:
 3. PR 3: Dimensional Layering (3 tokens + 1 transform). Extends existing system.
 
 All three are independent and can ship in any order. None require a new font, a new color, a new test framework, or a new deployment surface.
+
+---
+
+## Parking-lot re-evaluation (2026-10-12 23:17Z)
+
+Re-evaluated the 3 parking-lot candidates against the museum-quiet voice established by the top-3 ships. Full review in `PARKING_LOT_REVIEW.md` (382 lines, read-only, evidence-led, opinionated).
+
+| # | Candidate | Voice match | Verdict | Next checkpoint |
+|---|---|---|---|---|
+| 4 | Bento Box Grid | STRETCH (home) / FIT (single surface) | **HOLD (conditional)** | Project-catalog refresh ticket OR 2026-04 novelty review (after Bento is no longer the 2025-26 move) |
+| 5 | Exaggerated Minimalism | STRONG (one-shot, home only) | **READY-TO-SHIP** | Awaiting operator decision: ship via 5-step plan below, or hold |
+| 6 | Neubrutalism (controlled) | FIT (in principle, scope-blocks) | **HOLD (scope-blocker)** | Build `/colophon` page (or re-target an existing surface) first |
+
+### Why these verdicts
+
+- **Bento Box** is the most-saturated 2025-26 move and would either (a) ignore the lens accent collapse and show all 6 family accents in one view (visually loud) or (b) honor the collapse and show 1 (then it's no longer "the 6 as a specimen wall"). The voice-fit hypothesis is restricted to an opt-in catalog surface — which requires a project-catalog refresh ticket that does not exist.
+- **Exaggerated Minimalism** has a STRONG voice match because the museum-quiet voice tolerates a single large move when the surrounding content does the talking. The risk is use-rate; the one-shot discipline test (parses every shipped HTML route, asserts `count(`.statement`) <= 1` per route) is the binding enforcement.
+- **Neubrutalism** is voice-fit but **scope-blocked**: the candidate's parking-lot description specified "only the `/colophon` page", and the deployed repo has no `colophon.html` route. Verified: `ls *.html` lists `archive, blog, contact, engineering, index, product, resume, work` — no `colophon`. The opt-in `[data-style="brutalist"]` attribute has no destination on the current site structure.
+
+### Ready-to-ship plan: Exaggerated Minimalism (5 steps, ~10m each)
+
+1. **add tokens (10m).** Add `--type-statement: clamp(4rem, 12vw, 11rem)` and `--tracking-tight: -0.04em` to `tokens.css` immediately after `--step-4`. Scope comment naming the intent.
+2. **add utility class (10m).** Add `.statement { font: var(--font-display); font-size: var(--type-statement); letter-spacing: var(--tracking-tight); line-height: 0.95; }` plus the one-shot scope comment to `main.css`.
+3. **add home hero application (10m).** Apply `.statement` to the single largest title on `index.html` (typically the lead `<h1>` block of the home hero). Leave the existing title elements as fallbacks for `prefers-reduced-motion` and resize-collapse paths.
+4. **add discipline test (10m).** Add `tests/statement-discipline.test.js` that parses every shipped HTML route and asserts `count(`.statement`) <= 1` per route. Enforces the one-shot invariant across future PRs.
+5. **commit + push + PR (10m).** Per the standard `git-commit` ledger wrapper; `tx-agent: jcode`, `tx-validated: lint,test`. Single PR, squash-merge to `main`. Direct-push if `gh` deferral is still gated (per `00_SESSION_OVERVIEW.md:130-184`).
+
+### Cross-cutting finding: bundle ceiling restoration
+
+`dist/bundled/app.bundle.b913e0fe.js` is now 233.4 KB — 3.4 KB over the 230 KB ceiling. Not caused by the top-3 ships (their net delta is small). Organic drift on `main` since `5168b23`. Restoration candidates identified by the voice-review worker:
+
+- `scripts/dash-mode.js` — investigate whether still loaded
+- `scripts/magnetic-helpers.js` — same
+- `scripts/cursor-helpers.js` — same
+
+This is a separate ticket; not blocking Exaggerated Minimalism (which adds only +0.15 KB raw), but **should be resolved before any future net-additive novelty ships**.
+
+### Bundle ceiling restoration ticket
+
+**Title:** Investigate `dash-mode.js`, `magnetic-helpers.js`, `cursor-helpers.js` for dead code; restore ≤230 KB bundle ceiling before next net-additive novelty.
+**Priority:** medium (not blocking current ship; blocking future ships).
+**Estimated effort:** 2-4 hours investigation, ~30 minutes for the actual removal.
+**Acceptance criteria:** `bundled/app.bundle.*.js` is ≤230,000 B; no visual regression; tests 696/696 still green.
