@@ -21,9 +21,9 @@ metadata:
 
 ## 2. Color and Typography Pairing Rules
 
-- Brand palette: monochrome ink (zinc-9 family) + a single accent per project category. The accent for the portfolio itself is `#2563EB` (Portfolio/Personal row in `ui-ux-pro-max/data/colors.csv`).
-- Per-project accent: chosen by industry row in `ui-ux-pro-max/data/colors.csv`. Mapping lives in `data/projects.js` `theme:` field. See Section 7 for the full matrix.
-- Font pairing: project pages use `Archivo` (body) + `Space Grotesk` (display) -- "Minimalist Portfolio" row #44 in `ui-ux-pro-max/data/typography.csv`. Research and fork pages may swap to JetBrains Mono for technical headers (Developer Mono row #9). Do not introduce a third font without a written reason in the PR description.
+- Brand palette: monochrome ink expressed from four canonical seeds in the Phenotype Material Lab source packet (Obsidian `#0F1012`, Slate `#353A40`, Ceramic `#F6F5F5`, Teal `#7EBAB5`) + a single lens accent (Engineering = teal `#3f8795` `arch-500`, Product = olive `#737c4c` `olive-500`) + a per-family accent per project. The `ui-ux-pro-max/data/colors.csv` "Portfolio/Personal" row (which lists `#2563EB`) is a research reference for tone mapping, not the source of the deployed palette. Source of truth: `styles/tokens.css` and `data/projects.js` `theme:` field. See Section 7 for the per-project mapping and Section 13 for the Material Lab seed rationale.
+- Per-project accent: bespoke per project in `data/projects.js` `theme:` field, chosen against an industry-tone reference in `ui-ux-pro-max/data/colors.csv` (descriptive, not literal). See Section 7 for the matrix and the binding-value rule.
+- Font pairing: project pages use `Inter` (body) + `Space Grotesk` (display) + `JetBrains Mono` (meta, evidence chips, hash digests). The `ui-ux-pro-max/data/typography.csv` "Minimalist Portfolio" row #44 (Archivo + Space Grotesk) is a research reference, not the deployed pairing. `Inter` was chosen for long-form reading legibility and AA contrast on the small-text-heavy card surface; `JetBrains Mono` is the dedicated face for evidence and code. Per-project `theme.fontPair` overrides the portfolio default for project-card typography (e.g., `sharecli` runs JetBrains Mono + IBM Plex Sans to signal a developer-tool voice). Do not introduce a fourth font without a written reason in the PR description.
 - Type scale: clamp-based fluid sizes. Body 16px min, max 18px. H1 32-48px. Mono labels 12-14px.
 
 ## 3. Accessibility Floor (WCAG 2.2 AA, non-negotiable)
@@ -62,7 +62,7 @@ Recipes catalog: see Section 8. Drop-in code lives in `scripts/components/visual
 
 ## 7. Project Type -> Color/Font Matrix
 
-Source of truth: `theme:` field in each project object inside `data/projects.js` (15 projects).
+Source of truth: the `theme:` field in each project object inside `data/projects.js` (15 projects). The accent hex codes and font family names in `theme.accent` / `theme.fontPair` are bespoke per project (Koosha's intentional choice) and are the **binding** values. The "Industry row" column below is the tone reference the project was composed against (descriptive, not literal).
 
 | Slug | Category | Industry row (colors.csv) | Accent | Font pairing (typography.csv) |
 |------|----------|---------------------------|--------|-------------------------------|
@@ -179,6 +179,23 @@ When working on `koosha-phenotype.com`:
 
 1. Read this SKILL.md first.
 2. Read the relevant section(s) of `data/projects.js` for the project(s) touched.
-3. For any new visual: pick the industry row + font pairing from Section 7 and add a `theme:` field if the project doesn't have one yet.
+3. For any new visual: follow the per-project binding-value rule in Section 7 (hex in `theme.accent`, families in `theme.fontPair`, label in `theme.industry`); the Industry row column is descriptive, not binding. Add a `theme:` field if the project doesn't have one yet. For portfolio-level visuals (home, resume, contact, blog), use the lens-accent story in Section 2 + the systems in Section 13.
 4. For any new copy: apply Section 1 (voice/tense).
 5. Before opening a PR: run the anti-pattern detector (`scripts/anti-pattern-detector.sh`) and complete the Section 11 checklist.
+
+## 13. Visual Systems In Code (added 2026-10-12; prior versions were silent)
+
+Several visual systems ship in `styles/tokens.css` but were absent from earlier versions of this constitution. This section is the single place to look for the system, its source file, and the rationale.
+
+| System | Source | What it is | Why it matters |
+|---|---|---|---|
+| Material Lab seed packet (4 canonical) | `styles/tokens.css:25-28` | Obsidian `#0F1012`, Slate `#353A40`, Ceramic `#F6F5F5`, Teal `#7EBAB5` | OKLab-derived source colors; the graphite/paper/olive/arch/acid families are derived from these. Designers compose from the source. |
+| Lens accent state machine | `styles/tokens.css:118-121`, `184-213` | Engineering = teal, Product = olive, swapped via `html[data-lens]` | Lens flips every family accent in one rule; the family-active tokens are the binding surface. |
+| Family accent system (6 families x 2 lenses) | `styles/tokens.css:135-148` | netweave / sharecli / omniroute / physical / substrate / omlx, each in engineering + product | One accent per project family; resolves via `--family-*-active` under the active lens. |
+| Family ink tokens (12 light + 12 dark) | `styles/tokens.css:158-169`, `269-280` | Solved against worst-case badge background for >=4.5:1 | Enforced by `tests/contrast.test.js`; do not edit without re-running the contrast test. |
+| Premium glass surface tokens | `styles/tokens.css:174-177`, `293-295` | Apple-grade backdrop-filter glass with inset highlight, 8-10% ink border | Used by header + spec surfaces; the recipes catalog in Section 8 covers ASCII skeletons, but the glass layer is the actual visual surface for the chrome. |
+| Motion system (8 tokens) | `styles/tokens.css:123-132` | fast 160 / normal 220 / slow 280 / glacial 380 ms + short 120 / standard 180 + 3 eases | Aligns with the Section 6 400ms ceiling; transform + opacity only, no width/height/top/left animations. |
+| Precision radii | `styles/tokens.css:106-108` | 6 / 10 / 12 px (control / panel / studio) | Sharp instrument, not plush. |
+| Precision depth | `styles/tokens.css:111-112` | 1-layer card shadow + 0.65rem specimen offset shadow | No glow; the specimen offset is the only depth move. |
+
+The `ui-ux-pro-max` and `ascii-skill` references remain valid as research corpora (192 industries, 50 active styles, 119 guidelines, recipe catalog). They are **not** the source of the deployed palette, the deployed font pairing, or the per-project accent map. The deployed source is `styles/tokens.css` + `data/projects.js`; everything else is a research reference.
