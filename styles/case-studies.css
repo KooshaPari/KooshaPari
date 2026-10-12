@@ -159,3 +159,41 @@
   .elev-1, .elev-2, .elev-3 { transition: none; }
   .elev-1:hover, .elev-2:hover { box-shadow: inherit; }
 }
+
+/* Editorial grid — multi-column prose flow with column rule and drop cap.
+   Honors the case-study surface in two columns when the container is wide
+   enough; degrades to single column under 760px. Zero new color, zero new
+   font — uses --precision-rule and Inter. */
+.case-study .case-section > p {
+  column-width: 28em;
+  column-gap: var(--gutter);
+  column-rule: var(--column-rule);
+}
+
+.case-study .case-copy .case-section:first-of-type > p::first-letter {
+  font-size: 3.5em;
+  line-height: 0.85;
+  font-weight: 600;
+  float: left;
+  margin: 0.05em 0.12em 0 -0.04em;
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  .case-study .case-section > p {
+    column-width: auto;
+    column-count: 1;
+    column-rule: none;
+  }
+  .case-study .case-copy .case-section:first-of-type > p::first-letter {
+    font-size: 2.2em;
+    line-height: 0.85;
+    margin: 0.05em 0.1em 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-study .case-copy .case-section:first-of-type > p::first-letter {
+    transition: none;
+  }
+}
