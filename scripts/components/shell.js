@@ -1,6 +1,23 @@
 import { el } from './dom.js';
 import { initDarkMode } from '../dark-mode.js';
 
+// Surface toggle — opt-in e-ink / paper register for the long-form case-study
+// surface. Persists to localStorage; ?surface=paper sets it on load.
+const SURFACE_KEY = 'koosha-phenotype:surface';
+function applySurface() {
+  let value = null;
+  try { value = localStorage.getItem(SURFACE_KEY); } catch { /* ignore */ }
+  const params = new URLSearchParams(location.search);
+  if (params.get('surface') === 'paper') value = 'paper';
+  document.documentElement.dataset.surface = value === 'paper' ? 'paper' : '';
+  const btn = document.getElementById('surface-toggle');
+  if (!btn) return;
+  const on = value === 'paper';
+  btn.setAttribute('aria-pressed', String(on));
+  btn.textContent = on ? 'Paper on' : 'Paper';
+  btn.title = on ? 'Restore the default case-study surface' : 'Switch to an e-ink / paper surface (long-form register)';
+}
+
 // Note: ['/blog', 'Writing'] removed 2026-10-11 — user wants the writing
 // section hidden for now. The /blog route still works for direct-nav; only
 // the top-nav entry is removed. Restore by re-adding the line below.
@@ -74,6 +91,23 @@ export function renderShell(
     reader ? 'Exit Reader' : 'Reader',
   );
 
+  const surfaceControl = el(
+    'button',
+    {
+      id: 'surface-toggle',
+      class: 'surface-toggle',
+      type: 'button',
+      'aria-pressed': 'false',
+      title: 'Switch to an e-ink / paper surface (long-form register)',
+      onclick: () => {
+        const on = document.documentElement.dataset.surface !== 'paper';
+        try { localStorage.setItem(SURFACE_KEY, on ? 'paper' : ''); } catch { /* ignore */ }
+        applySurface();
+      },
+    },
+    'Paper',
+  );
+
   const header = el(
     'header',
     {
@@ -92,6 +126,7 @@ export function renderShell(
       { class: 'atelier-tools' },
       lensControl,
       readerControl,
+      surfaceControl,
       el(
         'button',
         { class: 'index-trigger', type: 'button', onclick: onIndexOpen },
@@ -114,6 +149,7 @@ export function renderShell(
   // renderShell uses replaceChildren which destroys prior DOM, so the toggle
   // must be re-inserted on every navigation.
   initDarkMode({ toolbar: header.querySelector('.atelier-tools') });
+  applySurface();
 
   // Glass header: add scrolled state on scroll for elevated shadow
   // Guard for Node.js prerender (stage-publication) where window is undefined
