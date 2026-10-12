@@ -150,3 +150,18 @@ test('focus ring outer stroke holds >=3:1 in both themes (WCAG 2.4.11)', () => {
   const onDark = contrast(ring, T(darkRaw, 'surface'));
   assert.ok(onDark >= 3, `arch-500 vs dark surface = ${onDark.toFixed(2)} (need 3)`);
 });
+
+test('e-ink paper surface (--paper-110) holds >=4.5:1 for ink and ink-muted', () => {
+  const caseStudiesCSS = readFileSync('styles/case-studies.css', 'utf8');
+  const paperBlock = blockOf(caseStudiesCSS, ':root[data-surface="paper"]');
+  const paperOverride = tokensOf(paperBlock);
+  const paperBg = T(rootRaw, 'paper-110');       // #fdfbf7
+  const paperInk = T(paperOverride, 'ink');        // #1a1a1a
+  const paperInkMuted = T(paperOverride, 'ink-muted'); // #4a4a48
+  const ratio1 = contrast(paperInk, paperBg);
+  assert.ok(ratio1 >= 4.5,
+    `paper surface ink: ${paperInk} on ${paperBg} = ${ratio1.toFixed(2)} (need 4.5)`);
+  const ratio2 = contrast(paperInkMuted, paperBg);
+  assert.ok(ratio2 >= 4.5,
+    `paper surface ink-muted: ${paperInkMuted} on ${paperBg} = ${ratio2.toFixed(2)} (need 4.5)`);
+});

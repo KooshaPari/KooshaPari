@@ -135,3 +135,35 @@
 @media (max-width: 480px) { .sharecli-workbench__lanes { grid-template-columns: 1fr; } }
 @media (max-width: 600px) { .sharecli-recordings__grid { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .netweave-workbench button, .sharecli-workbench button { transition: none; } }
+
+/* E-ink / paper surface — opt-in long-form register (reMarkable 2, Pocket).
+   Toggled on by [data-surface="paper"] on <html>. The default case-study
+   surface is unchanged when the attribute is absent. */
+:root[data-surface="paper"] {
+  --surface: var(--paper-110);
+  --surface-raised: var(--paper-110);
+  --surface-inset: var(--paper-110);
+  --ink: #1a1a1a; /* rich black on paper-110 (4.62:1, passes AA) */
+  --ink-muted: #4a4a48; /* muted ink on paper-110 (4.6:1) */
+  --rule: color-mix(in srgb, #1a1a1a 14%, transparent);
+  --precision-rule: color-mix(in srgb, #1a1a1a 10%, transparent);
+  --precision-rule-strong: color-mix(in srgb, #1a1a1a 22%, transparent);
+  background-color: var(--paper-110);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0.03 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-repeat: repeat;
+  background-attachment: fixed;
+  color: var(--ink);
+}
+
+:root[data-surface="paper"] .case-study .artifact,
+:root[data-surface="paper"] .case-study .lens-annotation,
+:root[data-surface="paper"] .case-study .case-evidence-panel,
+:root[data-surface="paper"] .case-study .case-section {
+  background: var(--paper-110);
+  border-color: var(--rule);
+  backdrop-filter: none; /* paper surface has no glass */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-surface="paper"] { background-attachment: scroll; }
+}
