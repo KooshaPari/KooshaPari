@@ -79,3 +79,44 @@ research, not a Jcode blocker — escalating to the operator.
   remaining non-broken route) for this research task.
 - In the meantime, the constitution reconciliation (`b76d324`) and session
   note (`6aa6ca4`) are committed and live.
+
+## Resolution: operator-routed fallback
+
+Operator override 2026-10-12T05:10Z: "pick best path yourself, use
+OpenAI-compatible MiniMax M3 for subagents." Re-spawned the scout on
+`openai-compatible:MiniMax-M3` (provider `openai-compatible:openai-compatible`,
+endpoint `https://api.minimax.io/v1`) — exactly the canonical MiniMax M3
+route per the operator routing policy. Scout completed in 289 s and
+produced a 6-candidate report at `/tmp/design-novelty-report.md`.
+
+## Novelty candidates (delivered)
+
+Six ranked candidates, all honoring every hard constraint (WCAG AA, ≤230 KB,
+≤400 ms, no new font, no new color, no emoji, no third-party, museum-quiet).
+Full integration in `NOVELTY_CANDIDATES.md` (this session).
+
+**Ship queue (top 3 — lowest risk, highest voice match):**
+1. **Editorial Grid / Magazine** (styles.csv #66) — drop caps + column rules
+   on `.case-study`. Cost: 1 token, 1 selector, 0 new assets.
+2. **E-Ink / Paper** (styles.csv #55) — `#fdfbf7` surface, gated per
+   case-study route. Cost: 2 tokens, 1 SVG noise (≤400 B), 1 attr gate.
+3. **Dimensional Layering** (styles.csv #46) — 3-step elevation ladder with
+   `translateZ(0)`. Cost: 3 tokens, 1 transform.
+
+**Parking lot (3 more — distinctive, not yet ship-ready):**
+4. Bento Box Grid (saturated 2025-2026 move; hold for project-catalog refresh)
+5. Exaggerated Minimalism (one-shot ceiling move; hold pending voice review)
+6. Neubrutalism (controlled; hold pending surface-gate review)
+
+**No more viable candidates under these constraints.** Remaining active
+rows are voice conflicts (Cyberpunk, Y2K, Gen Z Chaos, Memphis),
+anti-museum-quiet (Organic Biophilic, Nature Distilled, Biomimetic 2.0),
+vendor design systems (Material 3 Expressive, Adobe Spectrum, Shopify
+Polaris, Fluent 2), or surface-mismatched (Mobile 71-84, 3D / voice /
+cursor / pixel-art variants).
+
+## Files
+
+- `00_SESSION_OVERVIEW.md` — this file (constitution fix + scout dispatch)
+- `NOVELTY_CANDIDATES.md` — 6-candidate integration with ship queue + parking lot
+- `/tmp/design-novelty-report.md` — raw scout output (kept as record)
