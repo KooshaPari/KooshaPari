@@ -49,17 +49,33 @@ Reconciled the constitution in commit `b76d324`:
   does not follow (intentional framing).
 - No tests reference the constitution; the fix is docs-only.
 
-## Next
+## Novelty scout: route outage
 
-Dispatched a focused novelty scout (`opencode-go:mimo-v2.6-flash`, effort
-medium) with the corrected constitution in hand. Scope: 5-7 visual style
-candidates that are NOT in the 5 implicit styles already shipped
-(Minimalism, Soft UI Evolution, Brutalism, Glassmorphism, Aurora UI), fit
-all hard constraints (museum-quiet, WCAG-AA, 400ms ceiling, ≤230KB bundle,
-glass-friendly, no emoji, no 4th font), and have a clear ship path. Stop
-condition: 5-7 ranked candidates OR exhaustive search with explicit
-"no more viable candidates" reason.
+Dispatched 3 novelty scouts back-to-back; all 3 failed with the same
+route-level error against `https://opencode.ai/zen/go/v1/chat/completions`:
 
-Report expected back in 10-15 min. When it arrives: integrate into a small
-"novelty candidates" doc, pick the top 1-2 to ship first, and file the
-remaining as a parking-lot.
+| Attempt | Model | Result |
+|---|---|---|
+| 1 (standing default) | `opencode-go:mimo-v2.6-flash` | failed (operator standing default 2026-09-24) |
+| 2 (fallback #1) | `opencode-go:deepseek-v4.1-flash` | failed (tool-loop verified 2026-09-17) |
+| 3 (fallback #2) | `opencode-go:mimo-v2.5-pro` | failed (tool-loop verified 2026-09-17) |
+
+All three hit the same endpoint within 5-45s of spawn with body matching the
+pattern `OpenAI-compatible chat request failed endpoint: ... model: <name>...`.
+This is a **route-level outage**, not a per-model issue. The same pattern
+matches the 3 visual-language / interactive-layer / trend-research scouts that
+were dispatched ~3h earlier and never reported back through any channel.
+
+Per the operator policy, advancing to native Codex requires explicit
+escalation ("Do not silently fall back to native Codex ... from a Jcode
+worker route for research or implementation work"). The novelty scout is
+research, not a Jcode blocker — escalating to the operator.
+
+## Recommended next
+
+- Wait for `opencode.ai/zen/go/v1/chat/completions` to recover, then re-spawn
+  the novelty scout with the original prompt.
+- OR escalate and get approval to use the Codex route family (the only
+  remaining non-broken route) for this research task.
+- In the meantime, the constitution reconciliation (`b76d324`) and session
+  note (`6aa6ca4`) are committed and live.
