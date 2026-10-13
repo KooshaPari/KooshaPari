@@ -9,13 +9,20 @@ const BUNDLED_DIR = resolve(ROOT, 'bundled');
 // The two project-specific workbenches are dynamically imported from
 // project-detail.js, so their bodies must stay out of the main bundle —
 // otherwise every visitor downloads ~30 KB of code that only the sharecli
-// and netweave project pages actually render. The markers below are unique
-// substrings of each file's source: sharecli-workbench.js carries
-// `// ShareCLI Workbench —` in its header, and netweave-workbench.js carries
-// `// Netweave Workbench —` after the same edit. If either returns to the
-// bundle, these assertions trip before the regression hits the wire.
+// and netweave project pages actually render. The markers below come in two
+// strengths: the header-comment markers catch accidental re-imports under
+// the current esbuild config (which preserves top-of-file `// X Workbench`
+// comments), while the content-string markers catch any re-import that
+// survives esbuild's `minify: true` step (which strips comments by default
+// but preserves string-literal values like the `coalesced-stand` role used
+// inside sharecli-workbench.js and the `following vehicle` text used
+// inside netweave-workbench.js). Both layers are required: a regression
+// that re-bundles the workbenches would put the content strings back into
+// the main bundle even after the header comments are stripped.
 const SHARE_CLI_MARKER = 'ShareCLI Workbench';
 const NETWEAVE_MARKER = 'Netweave Workbench';
+const SHARE_CLI_CONTENT_MARKER = 'coalesced-stand';
+const NETWEAVE_CONTENT_MARKER = 'following vehicle';
 
 function currentBundleSource() {
   // The bundler writes content-hashed filenames and clears stale bundles on
@@ -46,6 +53,33 @@ test('main bundle does not inline the netweave workbench body', () => {
     bundle,
     new RegExp(NETWEAVE_MARKER),
     'netweave-workbench.js must be dynamically imported, not bundled into the IIFE',
+  );
+});
+
+test('main bundle does not inline the sharecli workbench content (string marker)', () => {
+  // `coalesced-stand` is a string-literal value inside sharecli-workbench.js's
+  // `objectRoles` array. esbuild's `minify: true` strips comments (so the
+  // header-marker test above could in principle pass with a false negative),
+  // but it preserves string literals. This test guarantees the workbench
+  // body is genuinely out of the main bundle, not just its header comment.
+  const bundle = currentBundleSource();
+  assert.doesNotMatch(
+    bundle,
+    new RegExp(SHARE_CLI_CONTENT_MARKER),
+    'coalesced-stand role value lives only in sharecli-workbench.js; if it surfaces in the main bundle, the workbench was re-bundled instead of dynamically imported',
+  );
+});
+
+test('main bundle does not inline the netweave workbench content (string marker)', () => {
+  // `following vehicle` is a string-literal value used in netweave-workbench.js's
+  // `objectLabel` and `relationship` fields. Same rationale as the sharecli
+  // content test: this catches a regression that the header-marker test
+  // could miss if esbuild's `legalComments` policy ever changes to `none`.
+  const bundle = currentBundleSource();
+  assert.doesNotMatch(
+    bundle,
+    new RegExp(NETWEAVE_CONTENT_MARKER),
+    'following vehicle text lives only in netweave-workbench.js; if it surfaces in the main bundle, the workbench was re-bundled instead of dynamically imported',
   );
 });
 
