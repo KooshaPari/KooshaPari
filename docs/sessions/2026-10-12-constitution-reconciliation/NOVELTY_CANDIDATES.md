@@ -167,7 +167,7 @@ Original finding (2026-10-12 23:17Z): `dist/bundled/app.bundle.b913e0fe.js` was 
 
 **Real culprit (2026-10-13 investigation):** Two project-specific workbenches were statically imported from `scripts/views/project-detail.js`:
 - `scripts/media/sharecli-workbench.js` — 20,565 B source (only meaningful for the sharecli project)
-- `scripts/media/netweave-workbench.js` — 9,611 B source (only meaningful for the netweave project)
+- `scripts/media/netweave-workbench.js` — 9,681 B source (only meaningful for the netweave project)
 
 **Resolution (commit d6a7a97, 2026-10-13):** Converted both to dynamic `import('/scripts/media/<name>.js')` calls with absolute URLs, so the browser fetches each workbench as its own on-demand chunk. esbuild splits the workbenches out of the main bundle.
 
@@ -178,7 +178,7 @@ Original finding (2026-10-12 23:17Z): `dist/bundled/app.bundle.b913e0fe.js` was 
 | Bundle file | `app.bundle.b913e0fe.js` | `app.bundle.ea9c5f58.js` |
 | Size | 238,974 B (233.4 KB) | 217,348 B (212.3 KB) |
 | Δ | — | **-21,626 B (-21.1 KB, -9.0%)** |
-| vs 230 KB ceiling | +3,454 B over | -18,172 B under (-12.6 KB headroom) |
+| vs 230 KB ceiling | +3,454 B over (+3.4 KB decimal) | -18,172 B under (-17.8 KiB / -18.2 KB decimal headroom) |
 | Test count | 699 green | 705 green (+6 workbench-dynamic tests) |
 
 **Side fix in same commit:** `scripts/prerender.js` — install stubs for `globalThis.document`, `.location`, `.localStorage`, and `.URLSearchParams` before each prerender pass and restore previous values in `finally`. Without the stubs, `prerenderProjects` crashed on the sharecli project (because `scripts/components/shell.js` reads bare `location.search` and `localStorage`), leaving the prerendered HTML's `view-root` empty and breaking 6 pre-existing tests (`build-output`, `static-projects`, `sharecli-recording`) that read the prerendered HTML. The shim is strictly a Node-render harness shim — production code paths do not see it.

@@ -9,7 +9,7 @@ were statically imported from `scripts/views/project-detail.js`.
 ## Approach
 
 Convert `sharecli-workbench.js` (20,565 B) and `netweave-workbench.js`
-(9,611 B) to runtime dynamic imports using absolute URLs:
+(9,681 B) to runtime dynamic imports using absolute URLs:
 
 ```js
 // scripts/views/project-detail.js
@@ -88,7 +88,7 @@ refresh implies restores them.
 | File | `app.bundle.b913e0fe.js` | `app.bundle.ea9c5f58.js` |
 | Size | 238,974 B (233.4 KB) | 217,348 B (212.3 KB) |
 | Δ | — | **-21,626 B (-21.1 KB)** |
-| vs ceiling | +3.5 KB over | -12.6 KB under |
+| vs ceiling | +3,454 B over (+3.4 KB decimal) | -18,172 B under (-17.8 KiB / -18.2 KB decimal headroom) |
 
 ## Off-limits files (not modified)
 
