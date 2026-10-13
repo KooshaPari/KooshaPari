@@ -290,6 +290,16 @@ h2.section-title {
 .chip.blue  { color: var(--accent-eng);  border-color: rgba(95,180,255,.4); background: rgba(95,180,255,.08); }
 .chip.lime  { color: var(--accent-pheno);border-color: rgba(182,240,107,.4);background: rgba(182,240,107,.08); }
 
+/* Single-use display statement. Used at most once per page (verified
+   by tests/statement-discipline.test.js). Do not apply to .case-study
+   or .work-catalog surfaces — that breaks the one-shot discipline. */
+.statement {
+  font-family: var(--font-display);
+  font-size: var(--type-statement);
+  letter-spacing: var(--tracking-tight);
+  line-height: 0.95;
+}
+
 /* ---------- table-like lists ---------- */
 ul.list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 ul.list li {

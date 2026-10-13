@@ -166,7 +166,7 @@ function identityBlock(lens) {
       'div',
       { class: profile.atelierClass },
       el('p', { class: 'atelier-label' }, `${IDENTITY.legalName} / Technical Atelier`),
-      el('h1', {}, profile.heading),
+      el('h1', { class: 'statement' }, profile.heading),
       el('p', { class: 'home-intro' }, profile.intro),
       el('p', { class: 'home-reading', 'aria-live': 'polite' }, profile.reading),
       lensNav(profile),
