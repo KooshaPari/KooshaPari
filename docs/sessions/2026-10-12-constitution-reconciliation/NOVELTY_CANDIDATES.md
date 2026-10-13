@@ -156,19 +156,35 @@ Re-evaluated the 3 parking-lot candidates against the museum-quiet voice establi
 
 **Architecture lesson (stewardship).** The 5-step plan was written assuming a static-HTML site. The actual repo is a JS SPA where the home hero is rendered by `scripts/views/home.js`. Future novelty candidates that touch the home route MUST inspect `scripts/views/home.js` (and other `scripts/views/*.js` files) before writing the test plan, or the test will be testing the wrong file.
 
-### Cross-cutting finding: bundle ceiling restoration
+### Cross-cutting finding: bundle ceiling restoration — RESOLVED
 
-`dist/bundled/app.bundle.b913e0fe.js` is now 233.4 KB — 3.4 KB over the 230 KB ceiling. Not caused by the top-3 ships (their net delta is small). Organic drift on `main` since `5168b23`. Restoration candidates identified by the voice-review worker:
+Original finding (2026-10-12 23:17Z): `dist/bundled/app.bundle.b913e0fe.js` was 233.4 KB — 3.4 KB over the 230 KB ceiling.
 
-- `scripts/dash-mode.js` — investigate whether still loaded
-- `scripts/magnetic-helpers.js` — same
-- `scripts/cursor-helpers.js` — same
+**Original suspects** (proven off-track on further investigation, 2026-10-13):
+- `scripts/dash-mode.js` — does not exist. Closest files are `scripts/dark-mode.js` and `scripts/dark-mode-helpers.js`, both **actively used** by `scripts/components/shell.js` for the theme toggle.
+- `scripts/magnetic-helpers.js` — bundled (imported by `scripts/magnetic.js`), but only 2.4 KB raw.
+- `scripts/cursor-helpers.js` — **not in the bundle**; `scripts/cursor.js` is loaded as a separate runtime module via `index.html`'s dynamic `<script type="module">import('/scripts/cursor.js')</script>` tag.
 
-This is a separate ticket; not blocking Exaggerated Minimalism (which adds only +0.15 KB raw), but **should be resolved before any future net-additive novelty ships**.
+**Real culprit (2026-10-13 investigation):** Two project-specific workbenches were statically imported from `scripts/views/project-detail.js`:
+- `scripts/media/sharecli-workbench.js` — 20,565 B source (only meaningful for the sharecli project)
+- `scripts/media/netweave-workbench.js` — 9,611 B source (only meaningful for the netweave project)
 
-### Bundle ceiling restoration ticket
+**Resolution (commit d6a7a97, 2026-10-13):** Converted both to dynamic `import('/scripts/media/<name>.js')` calls with absolute URLs, so the browser fetches each workbench as its own on-demand chunk. esbuild splits the workbenches out of the main bundle.
 
-**Title:** Investigate `dash-mode.js`, `magnetic-helpers.js`, `cursor-helpers.js` for dead code; restore ≤230 KB bundle ceiling before next net-additive novelty.
-**Priority:** medium (not blocking current ship; blocking future ships).
-**Estimated effort:** 2-4 hours investigation, ~30 minutes for the actual removal.
-**Acceptance criteria:** `bundled/app.bundle.*.js` is ≤230,000 B; no visual regression; tests 696/696 still green.
+**Result:**
+
+| | Before | After |
+|---|---|---|
+| Bundle file | `app.bundle.b913e0fe.js` | `app.bundle.ea9c5f58.js` |
+| Size | 238,974 B (233.4 KB) | 217,348 B (212.3 KB) |
+| Δ | — | **-21,626 B (-21.1 KB, -9.0%)** |
+| vs 230 KB ceiling | +3,454 B over | -18,172 B under (-12.6 KB headroom) |
+| Test count | 699 green | 705 green (+6 workbench-dynamic tests) |
+
+**Side fix in same commit:** `scripts/prerender.js` — install stubs for `globalThis.document`, `.location`, `.localStorage`, and `.URLSearchParams` before each prerender pass and restore previous values in `finally`. Without the stubs, `prerenderProjects` crashed on the sharecli project (because `scripts/components/shell.js` reads bare `location.search` and `localStorage`), leaving the prerendered HTML's `view-root` empty and breaking 6 pre-existing tests (`build-output`, `static-projects`, `sharecli-recording`) that read the prerendered HTML. The shim is strictly a Node-render harness shim — production code paths do not see it.
+
+**Architecture lesson (stewardship).** Two notes for future bundle work:
+1. The bundle is built by the repo's own `scripts/bundle-js.js` (a static-import walker), not esbuild. esbuild only enters the picture at the npm-test boundary for the dynamic-import split. Future bundle-ceiling work should walk the import graph from `app.js` via `bundle-js.js` first, then look for esbuild-splittable dynamic-import candidates.
+2. The original ticket's 3 suspects were off-track. When investigating bundle bloat, always (a) check which files are actually in the bundle by walking the import graph from the entry, and (b) check `index.html` for separate `<script type="module">` tags — those are runtime-loaded, not bundled.
+
+See worker session doc at `docs/sessions/20261013-bundle-ceiling-restoration/00_FINDINGS.md` for full details.
