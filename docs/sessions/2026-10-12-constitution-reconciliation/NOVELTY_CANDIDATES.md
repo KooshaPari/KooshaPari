@@ -135,7 +135,7 @@ Re-evaluated the 3 parking-lot candidates against the museum-quiet voice establi
 | # | Candidate | Voice match | Verdict | Next checkpoint |
 |---|---|---|---|---|
 | 4 | Bento Box Grid | STRETCH (home) / FIT (single surface) | **HOLD (conditional)** | Project-catalog refresh ticket OR 2026-04 novelty review (after Bento is no longer the 2025-26 move) |
-| 5 | Exaggerated Minimalism | STRONG (one-shot, home only) | **READY-TO-SHIP** | Awaiting operator decision: ship via 5-step plan below, or hold |
+| 5 | Exaggerated Minimalism | STRONG (one-shot, home only) | **SHIPPED** (2026-10-13 @ 9db9666) | n/a — see merge commit; one-shot discipline test enforces use-rate |
 | 6 | Neubrutalism (controlled) | FIT (in principle, scope-blocks) | **HOLD (scope-blocker)** | Build `/colophon` page (or re-target an existing surface) first |
 
 ### Why these verdicts
@@ -144,13 +144,17 @@ Re-evaluated the 3 parking-lot candidates against the museum-quiet voice establi
 - **Exaggerated Minimalism** has a STRONG voice match because the museum-quiet voice tolerates a single large move when the surrounding content does the talking. The risk is use-rate; the one-shot discipline test (parses every shipped HTML route, asserts `count(`.statement`) <= 1` per route) is the binding enforcement.
 - **Neubrutalism** is voice-fit but **scope-blocked**: the candidate's parking-lot description specified "only the `/colophon` page", and the deployed repo has no `colophon.html` route. Verified: `ls *.html` lists `archive, blog, contact, engineering, index, product, resume, work` — no `colophon`. The opt-in `[data-style="brutalist"]` attribute has no destination on the current site structure.
 
-### Ready-to-ship plan: Exaggerated Minimalism (5 steps, ~10m each)
+### Ready-to-ship plan: Exaggerated Minimalism (5 steps, ~10m each) — EXECUTED
 
-1. **add tokens (10m).** Add `--type-statement: clamp(4rem, 12vw, 11rem)` and `--tracking-tight: -0.04em` to `tokens.css` immediately after `--step-4`. Scope comment naming the intent.
-2. **add utility class (10m).** Add `.statement { font: var(--font-display); font-size: var(--type-statement); letter-spacing: var(--tracking-tight); line-height: 0.95; }` plus the one-shot scope comment to `main.css`.
-3. **add home hero application (10m).** Apply `.statement` to the single largest title on `index.html` (typically the lead `<h1>` block of the home hero). Leave the existing title elements as fallbacks for `prefers-reduced-motion` and resize-collapse paths.
-4. **add discipline test (10m).** Add `tests/statement-discipline.test.js` that parses every shipped HTML route and asserts `count(`.statement`) <= 1` per route. Enforces the one-shot invariant across future PRs.
-5. **commit + push + PR (10m).** Per the standard `git-commit` ledger wrapper; `tx-agent: jcode`, `tx-validated: lint,test`. Single PR, squash-merge to `main`. Direct-push if `gh` deferral is still gated (per `00_SESSION_OVERVIEW.md:130-184`).
+1. **add tokens (10m).** Add `--type-statement: clamp(4rem, 12vw, 11rem)` and `--tracking-tight: -0.04em` to `tokens.css` immediately after `--step-4`. Scope comment naming the intent. **DONE** in 9db9666.
+2. **add utility class (10m).** Add `.statement { font: var(--font-display); font-size: var(--type-statement); letter-spacing: var(--tracking-tight); line-height: 0.95; }` plus the one-shot scope comment to `main.css`. **DONE** in 9db9666.
+3. **add home hero application (10m).** Apply `.statement` to the single largest title on `index.html` (the lead `<h1>` block of the home hero). **ADJUSTED in 9db9666**: applied to the h1 in the `identityBlock` function in `scripts/views/home.js` (line 166-169) because `index.html` is a 69-line shell — the home hero is rendered by the JS view, not the static HTML. The static-HTML plan was for a non-SPA architecture.
+4. **add discipline test (10m).** Add `tests/statement-discipline.test.js` that parses every shipped HTML route and asserts `count(`.statement`) <= 1` per route. **ADJUSTED in 9db9666**: the test parses `scripts/views/*.js` source files (the design-time intent) and `styles/*.css` files. Three assertions: (a) `.statement` applied at most once across views; (b) `home.js` MUST apply it (>=1); (c) `.statement` has exactly one rule definition across styles. The rendered-HTML plan was for a non-SPA architecture.
+5. **commit + push + PR (10m).** Per the standard `git-commit` ledger wrapper; `tx-agent: jcode`, `tx-validated: test`. Single PR, squash-merge to `main`. **DONE** in 9db9666 via the direct-push path (the `gh pr merge` deferral is still active). Branch `feat/exaggerated-minimalism @ 787eb57` was pushed to origin, then squash-merged into main as 9db9666.
+
+**Test count after ship: 696 -> 699 green.** Pre-commit hook: 0 detector violations across 27 patterns.
+
+**Architecture lesson (stewardship).** The 5-step plan was written assuming a static-HTML site. The actual repo is a JS SPA where the home hero is rendered by `scripts/views/home.js`. Future novelty candidates that touch the home route MUST inspect `scripts/views/home.js` (and other `scripts/views/*.js` files) before writing the test plan, or the test will be testing the wrong file.
 
 ### Cross-cutting finding: bundle ceiling restoration
 
