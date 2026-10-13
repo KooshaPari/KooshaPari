@@ -30,8 +30,33 @@ function removeInertControls(document) {
   });
 }
 
+// Components rendered during prerender sometimes touch `location.search` and
+// `localStorage` (e.g. the e-ink surface opt-in). Node has neither, so we
+// install the barest possible stubs before any `globalThis.document`
+// assignment and restore the previous values on exit. This stays out of
+// the production source — it's strictly a Node-render harness shim.
+const prerenderGlobals = () => {
+  const previousDocument = globalThis.document;
+  const previousLocation = globalThis.location;
+  const previousLocalStorage = globalThis.localStorage;
+  const previousURLSearchParams = globalThis.URLSearchParams;
+  globalThis.document = undefined;
+  globalThis.location = { search: '' };
+  globalThis.localStorage = { getItem: () => null, setItem: () => {} };
+  // URLSearchParams on bare `location.search` would be `undefined`; rebind the
+  // global so shell.js's `new URLSearchParams(location.search)` resolves.
+  globalThis.URLSearchParams = previousURLSearchParams ?? URLSearchParams;
+  return () => {
+    globalThis.document = previousDocument;
+    globalThis.location = previousLocation;
+    globalThis.localStorage = previousLocalStorage;
+    globalThis.URLSearchParams = previousURLSearchParams;
+  };
+};
+
 export async function prerenderTopLevel(publication) {
   const previousDocument = globalThis.document;
+  const restoreGlobals = prerenderGlobals();
   try {
     for (const { file, route, render } of TOP_LEVEL_ROUTES) {
       const { document } = parseHTML(await readFile(join(publication, file), 'utf8'));
@@ -42,13 +67,17 @@ export async function prerenderTopLevel(publication) {
       removeInertControls(document);
       await writeFile(join(publication, file), document.toString());
     }
-  } finally { globalThis.document = previousDocument; }
+  } finally {
+    restoreGlobals();
+    globalThis.document = previousDocument;
+  }
 }
 
 // Render the actual project view at build time. Browser enhancement replaces it.
 export async function prerenderProjects(publication) {
   const template = await readFile(join(publication, 'work/sharecli.html'), 'utf8');
   const previousDocument = globalThis.document;
+  const restoreGlobals = prerenderGlobals();
   try {
     for (const project of PROJECTS) {
       const { document } = parseHTML(template);
@@ -72,13 +101,17 @@ export async function prerenderProjects(publication) {
       removeInertControls(document);
       await writeFile(join(publication, `work/${project.slug}.html`), document.toString());
     }
-  } finally { globalThis.document = previousDocument; }
+  } finally {
+    restoreGlobals();
+    globalThis.document = previousDocument;
+  }
 }
 
 // Render known published posts only. Unknown blog slugs retain the SPA's existing behavior.
 export async function prerenderPosts(publication) {
   const template = await readFile(join(publication, 'blog/why-we-forked-omniroute.html'), 'utf8');
   const previousDocument = globalThis.document;
+  const restoreGlobals = prerenderGlobals();
   try {
     for (const post of POSTS) {
       const { document } = parseHTML(template);
@@ -103,5 +136,8 @@ export async function prerenderPosts(publication) {
       removeInertControls(document);
       await writeFile(join(publication, `blog/${post.slug}.html`), document.toString());
     }
-  } finally { globalThis.document = previousDocument; }
+  } finally {
+    restoreGlobals();
+    globalThis.document = previousDocument;
+  }
 }

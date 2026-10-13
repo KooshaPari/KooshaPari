@@ -2,8 +2,6 @@ import { PROJECTS } from '../../data/projects.js';
 import { el } from '../components/dom.js';
 import { metricAnnotation, evidenceLabel, publicEvidenceSummary } from '../components/evidence.js';
 import { diagramFromCaseStudy, renderDiagram } from '../media/diagrams.js';
-import { renderNetWeaveWorkbench } from '../media/netweave-workbench.js';
-import { renderShareCliWorkbench } from '../media/sharecli-workbench.js';
 import { renderShareCliRecordings } from '../media/sharecli-recording.js';
 import { renderSubstratePlate } from '../media/systems-plate.js';
 import { renderNotFound } from './not-found.js';
@@ -30,10 +28,15 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
     ? el('div', { class: 'case-section case-diagram' }, el('h2', {}, 'Architecture'), renderDiagram(diagramFromCaseStudy(project), { title: `${project.title} architecture` }))
     : null;
   const netweaveField = project.slug === 'netweave'
-    ? el('div', { class: 'case-section case-netweave-field' }, el('h2', {}, 'Traffic field'), renderNetWeaveWorkbench())
+    ? el('div', { class: 'case-section case-netweave-field', 'data-workbench': 'netweave' }, el('h2', {}, 'Traffic field'))
     : null;
   const shareCliWorkbench = project.slug === 'sharecli'
-    ? el('div', { class: 'case-section case-sharecli-workbench' }, el('h2', {}, 'Runtime boundary'), renderShareCliWorkbench(), renderShareCliRecordings())
+    ? el('div', { class: 'case-section case-sharecli-workbench', 'data-workbench': 'sharecli' }, el('h2', {}, 'Runtime boundary'))
+    : null;
+  // Recordings stay in a separate static section so the prerendered HTML keeps
+  // its 2 <a download> links even when the workbench chunk is loaded lazily.
+  const shareCliRecordings = project.slug === 'sharecli'
+    ? el('div', { class: 'case-section case-sharecli-recordings' }, renderShareCliRecordings())
     : null;
   const substratePlate = project.slug === 'substrate'
     ? el('div', { class: 'case-section case-substrate-plate' }, el('h2', {}, 'Execution boundary'), renderSubstratePlate())
@@ -148,7 +151,7 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
         : null,
       lensAnnotation,
       el('div', { class: 'case-copy' },
-        overview, diagram, netweaveField, shareCliWorkbench, substratePlate,
+        overview, diagram, netweaveField, shareCliWorkbench, shareCliRecordings, substratePlate,
         sections.map(([heading, copy]) =>
           el('div', { class: 'case-section' }, el('h2', {}, heading), el('p', {}, copy))),
         disclosure, evidence,
@@ -158,6 +161,34 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
       project.repo ? el('a', { href: project.repo, target: '_blank', rel: 'noreferrer', class: 'text-link' }, 'View repository') : null,
     ),
   );
+
+  // The sharecli and netweave workbenches are dynamically imported so their
+  // bodies stay out of the main bundle. `import('/scripts/media/...')` uses an
+  // absolute URL — a relative specifier would point at /bundled/../media/...,
+  // which resolves to /media/... and 404s in production.
+  if (project.slug === 'netweave') {
+    import('/scripts/media/netweave-workbench.js')
+      .then((m) => {
+        const container = root.querySelector('[data-workbench="netweave"]');
+        if (!container) return;
+        container.replaceChildren(el('h2', {}, 'Traffic field'), m.renderNetWeaveWorkbench());
+      })
+      .catch((err) => {
+        console.error('Failed to load netweave workbench:', err);
+      });
+  } else if (project.slug === 'sharecli') {
+    import('/scripts/media/sharecli-workbench.js')
+      .then((m) => {
+        const container = root.querySelector('[data-workbench="sharecli"]');
+        if (!container) return;
+        // Recordings are rendered as a separate static case section, so
+        // replaceChildren here only needs to add the workbench body.
+        container.replaceChildren(el('h2', {}, 'Runtime boundary'), m.renderShareCliWorkbench());
+      })
+      .catch((err) => {
+        console.error('Failed to load sharecli workbench:', err);
+      });
+  }
 }
 
 

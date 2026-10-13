@@ -1,6 +1,8 @@
 import { el } from '../components/dom.js';
 import { renderNetWeaveField } from './netweave-field.js';
 
+// Netweave Workbench — object-first traffic field presentation.
+//
 // Each state is described object-first: the highlighted object is the
 // following vehicle (the amber block), never the stationary lead vehicle
 // at the rightmost cell. The four vehicles on the lane are enumerated by
