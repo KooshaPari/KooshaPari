@@ -53,3 +53,31 @@ is archival" without losing any content.
 - The repo is in a stable, well-tested state. The remaining open items
   (parking-lot novelty candidates, Firefox --headless env constraint) all
   require operator action or environment changes, not code work.
+
+## Addendum 2026-10-14T07:14Z: novelty-scout dispatch lane unblocked
+
+The "parking-lot novelty candidates" referenced above were paused because the
+`opencode-go:` route was in outage (2026-10-12 confirmation) and the operator
+policy "do not silently fall back to native Codex" bound the dispatch lane.
+Operator instruction 2026-10-14T07:04Z unblocks it:
+
+- **Tier 1 default is now `openai-compatible:MiniMax-M3`** (M3 via
+  `https://api.minimax.io/v1`, NOT the native `https://api.minimaxi.com/v1`).
+  Promoted 2026-10-14T03:47Z after a real `bash` tool-loop test
+  (`wc -l /etc/hosts` -> 9). The harness's `~/.jcode/config.toml` already
+  has `swarm_model = "openai-compatible:MiniMax-M3"`. The novelty-scout
+  novelty-research lane can resume using M3 as the workhorse.
+- **For `opencode-go:` Tier 1.5 / 2 / 3 fallback**, cycle through the 5
+  OpenCode Go keys in `~/ocgo.env.rtf` (`KODEFAULT_OCGO` -> `KOTWO_OCGO`
+  -> `MIKE_OCGO` -> `ASU_OCGO` -> `RAMDESIGNS_OCGO`) to find the one with
+  monthly / weekly / 5-hour headroom. This is a budget-extending move, not
+  a provider switch.
+- Canonical policy record: `~/.jcode/memories/global/harness-agents.md`
+  (Hybrid 3-Tier + Last-Resort Routing, ACTIVE operator 2026-10-14,
+  TIER-0 PROMOTED 2026-10-14T03:47Z; new "opencode-go key-cycling protocol"
+  section added 2026-10-14T07:11Z).
+- Opencode-go route state as of 2026-10-14T07:08Z: `/chat/completions`
+  returned HTTP 404 unauthenticated; `mimo-v2.6-flash` is no longer in the
+  opencode-go catalog. Tier 1.5 is degraded; T2 / T3 still have routable
+  models (mimo 2.5 PRO, deepseek v4.1 flash, glm-5, kimi-k2.5,
+  qwen3.5-plus, minimax-m2.7). M3 + the 5-key cycle is the working config.
