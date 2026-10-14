@@ -311,90 +311,6 @@
   animation: success-pulse 0.6s var(--ease-out);
 }
 
-/* Contact info ---------------------------------------------------------- */
-.contact-info {
-  display: grid;
-  gap: var(--space-4);
-  padding: var(--space-5);
-  border: 1px solid var(--precision-rule);
-  border-radius: var(--radius-panel);
-  background: var(--surface-raised);
-}
-
-.contact-info__heading {
-  font-family: var(--font-display);
-  font-size: var(--step-1);
-  font-weight: 600;
-  letter-spacing: -0.025em;
-}
-
-.contact-info__links {
-  display: grid;
-  gap: var(--space-3);
-}
-
-/* Individual contact link */
-.contact-info__link {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-2) 0;
-  color: var(--ink);
-  text-decoration: none;
-  transition: transform var(--motion-fast) var(--ease-out),
-              color var(--motion-fast) var(--ease-out);
-}
-
-.contact-info__link:hover {
-  transform: translateX(4px);
-  color: var(--seed-teal);
-}
-
-.contact-info__link-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-  border: 1px solid var(--precision-rule);
-  border-radius: var(--radius-control);
-  color: var(--ink-muted);
-  transition: border-color var(--motion-fast) var(--ease-out),
-              color var(--motion-fast) var(--ease-out);
-}
-
-.contact-info__link:hover .contact-info__link-icon {
-  border-color: var(--seed-teal);
-  color: var(--seed-teal);
-}
-
-.contact-info__link-icon svg {
-  width: 16px;
-  height: 16px;
-}
-
-.contact-info__link-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.contact-info__link-label {
-  font-family: var(--font-meta);
-  font-size: var(--step--1);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-}
-
-.contact-info__link-value {
-  font-family: var(--font-reading);
-  font-size: var(--step-0);
-  color: var(--ink);
-}
-
 /* Responsive ------------------------------------------------------------ */
 @media (max-width: 860px) {
   .contact-layout {
@@ -405,8 +321,5 @@
   .contact-form {
     max-width: none;
   }
-
-  .contact-info {
-    padding: var(--space-4);
-  }
 }
+

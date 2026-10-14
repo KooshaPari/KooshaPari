@@ -190,6 +190,7 @@ const bundles = {
     'case-studies.css',
     'blog.css',
     'contact.css',
+    'contact-info.css',
     'code-annotate.css',
     'cast-player.css',
     'recruiter-block.css',
