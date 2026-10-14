@@ -161,6 +161,7 @@ const outDir = join(stylesDir, 'bundled');
 const bundles = {
   'core.css': [
     'tokens.css',
+    'tokens-dark.css',
     'base.css',
     'shell.css',
   ],

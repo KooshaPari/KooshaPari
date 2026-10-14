@@ -14,6 +14,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const CSS = readFileSync('styles/tokens.css', 'utf8');
+const CSS_DARK = readFileSync('styles/tokens-dark.css', 'utf8');
 
 // "--name: <value>;" declarations. First declaration per name wins
 // (matches cascade for same-element resolution within one block).
@@ -62,7 +63,7 @@ function blockOf(source, selector) {
 }
 
 const rootRaw = tokensOf(CSS);
-const darkRaw = { ...rootRaw, ...tokensOf(blockOf(CSS, '[data-theme="dark"]')) };
+const darkRaw = { ...rootRaw, ...tokensOf(blockOf(CSS_DARK, '[data-theme="dark"]')) };
 
 function relLum(hex) {
   const c = hex.replace('#', '').match(/../g).map((x) => parseInt(x, 16) / 255)
@@ -115,7 +116,7 @@ test('every family ink holds >=4.5:1 on its dark-theme badge background', () => 
 });
 
 test('dark block overrides ALL 12 family ink tokens (light values are unsafe on dark)', () => {
-  const darkBlock = blockOf(CSS, '[data-theme="dark"]');
+  const darkBlock = blockOf(CSS_DARK, '[data-theme="dark"]');
   for (const fam of FAMILIES) {
     for (const lens of LENSES) {
       const name = `family-${fam}${lens}-ink`;
