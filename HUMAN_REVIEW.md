@@ -21,7 +21,12 @@ the browser suite was deliberately not re-run again — host load average is 220
 (improved from 344 but still in the same uninterpretable range, since the caveat
 is about the browser suite's per-test timeout being a contention signal rather
 than a precise threshold) — so the 2026-10-09 browser observation continues to be
-the freshest product evidence on file.
+the freshest product evidence on file. Reconciled again 2026-10-14 against
+`184f71f`: the unit suite was re-run at that commit (new count below) for the
+`fix(seo): add noscript internal nav fallback across static pages` change, and
+the browser suite was deliberately not re-run again — same load caveat
+(220) — so the 2026-10-09 browser observation remains the freshest product
+evidence.
 
 ## Why this is not production-ready
 
@@ -59,10 +64,10 @@ retained. Details in `VERIFICATION_REPORT.md`.
 
 | Gate | Result |
 |---|---|
-| Unit suite | 711/711 pass across 72 test files, re-run 2026-10-14 at `02962d5` (up from 707/707 across 71 files at `5a22929`; the delta is one new file — `json-ld`, 4 tests covering canonical Person structured data — and the bug fix it locks in: blog.html + the blog post prerender template carried `koosha-paridehpour/` in `sameAs` while the other 19 source pages used `koosha-paridehpour-1079b61b5/`) |
-| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at either 2026-10-14 pass (load average 344 at `5a22929`, then 220 at `02962d5`; both in the uninterpretable range per the caveat above) |
-| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at either 2026-10-14 pass, same load caveat) |
-| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at either 2026-10-14 pass) |
+| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` (up from 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav) |
+| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the three 2026-10-14 passes (`5a22929`, `02962d5`, `184f71f`; load average 344, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
+| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the three 2026-10-14 passes, same load caveat) |
+| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the three 2026-10-14 passes) |
 
 Reproduce with `npm run verify` (needs the Vercel CLI for the build step) or
 `npm test && npm run check && npm run test:e2e` for everything except the build.
@@ -84,6 +89,7 @@ on unrelated tests, check your load average before investigating the code.
 - `.witf-viewer-loading` text at 1.89:1 contrast, below the 4.5:1 AA floor.
 - The resume PDF download returned 404.
 - JSON-LD `sameAs` LinkedIn slug drift in blog.html + the blog post prerender template (`koosha-paridehpour/` instead of the canonical `koosha-paridehpour-1079b61b5/`); the drift had propagated through prerender to 6 dist files. Fixed in `02962d5` and locked in by `tests/json-ld.test.js` (4 tests cover all 20 source HTML pages).
+- Weak internal linking under no-JS / no-JS-crawler conditions. The portfolio is JavaScript-rendered; without a body-level `<noscript>` fallback in each static page, no-JS users and no-JS crawlers (Googlebot's mobile discovery path, archive.org, link-preview bots) cannot navigate between static routes. Index had a noscript but it exposed only contact links. The other 9 source pages had no body noscript at all. Fixed in `184f71f` by adding a single standardized body `<noscript>` to all 10 source pages (8 top-level routes + the sharecli project template + the blog post template) exposing 5 internal hrefs and canonical contact paths with `rel="noopener"`. Locked in by `tests/internal-nav.test.js` (3 tests; catches registry drift if a new top-level HTML page is added without updating `STATIC_PAGES`).
 
 ## Preview
 
