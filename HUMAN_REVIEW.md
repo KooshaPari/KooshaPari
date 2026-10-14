@@ -34,7 +34,14 @@ commit. That commit is a docs-only change (the `Remediation` column on
 or detector surface, so the unit count below is carried forward from
 `184f71f` unchanged; the 2026-10-14 unit observation at `184f71f`
 remains the freshest product evidence, and the browser-suite caveat
-(220) is unchanged.
+(220) is unchanged. Reconciled again 2026-10-14 against `6ad2a63`, the
+`docs(repo): consolidate 3 routing-slice docs from 2026-09-09 into
+session folder` commit. That commit is also a docs-only change
+(`git mv` of 3 root-level files into
+`docs/sessions/2026-10-14-routing-slice-cleanup/`, plus a new
+`00_SESSION_OVERVIEW.md`); it touches no source, test, or detector
+surface, so the unit count below is again carried forward from
+`184f71f` unchanged.
 
 ## Why this is not production-ready
 
@@ -72,10 +79,10 @@ retained. Details in `VERIFICATION_REPORT.md`.
 
 | Gate | Result |
 |---|---|
-| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37` (docs-only commit, no source/test/detector surface change). The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav |
-| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the four 2026-10-14 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`; load average 344, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
-| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the four 2026-10-14 passes, same load caveat) |
-| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the four 2026-10-14 passes) |
+| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37` and `6ad2a63` (both docs-only commits, no source/test/detector surface change). The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav |
+| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the five 2026-10-14 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`; load average 344, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
+| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the five 2026-10-14 passes, same load caveat) |
+| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the five 2026-10-14 passes) |
 
 Reproduce with `npm run verify` (needs the Vercel CLI for the build step) or
 `npm test && npm run check && npm run test:e2e` for everything except the build.
