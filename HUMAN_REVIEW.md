@@ -9,7 +9,12 @@ been corrected below rather than left in place. Reconciled again 2026-10-04
 against `c298cb1`, which removed the `image-slider` feature; the unit count below
 was re-measured at that commit. A later pass at `debf320` on 2026-10-09
 re-measured the browser suite at that commit too, and stabilized the contrast
-sampling that had made one route flake.
+sampling that had made one route flake. Reconciled again 2026-10-14 against
+`5a22929`: the unit suite was re-run at that commit (result below), while the
+browser suite was deliberately not re-run — host load average was 344, in the
+range where this file's own caveat makes a red result uninterpretable — so its
+2026-10-09 observation is retained with its original date and commit rather than
+restated as fresh evidence.
 
 ## Why this is not production-ready
 
@@ -47,10 +52,10 @@ retained. Details in `VERIFICATION_REPORT.md`.
 
 | Gate | Result |
 |---|---|
-| Unit suite | 695/695 pass across 69 test files |
-| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit |
-| axe-core | No critical/serious violations; contrast violations zero across 7 routes |
-| Asset links | Every root-absolute asset URL on the built pages resolves |
+| Unit suite | 707/707 pass across 71 test files, re-run 2026-10-14 at `5a22929` (up from 695/695 across 69 files at `debf320`; the delta is two new files — `statement-discipline` and `workbench-dynamic` — plus additions to `contrast` and `static-projects`) |
+| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at the 2026-10-14 pass (load average 344, see caveat above) |
+| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run 2026-10-14, same load caveat) |
+| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run 2026-10-14) |
 
 Reproduce with `npm run verify` (needs the Vercel CLI for the build step) or
 `npm test && npm run check && npm run test:e2e` for everything except the build.
