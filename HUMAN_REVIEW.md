@@ -14,7 +14,14 @@ sampling that had made one route flake. Reconciled again 2026-10-14 against
 browser suite was deliberately not re-run — host load average was 344, in the
 range where this file's own caveat makes a red result uninterpretable — so its
 2026-10-09 observation is retained with its original date and commit rather than
-restated as fresh evidence.
+restated as fresh evidence. Reconciled again 2026-10-14 against `02962d5`: the
+unit suite was re-run at that commit (new count below) for the `fix(seo): correct
+JSON-LD LinkedIn slug in blog pages, lock canonical structured data` change, and
+the browser suite was deliberately not re-run again — host load average is 220
+(improved from 344 but still in the same uninterpretable range, since the caveat
+is about the browser suite's per-test timeout being a contention signal rather
+than a precise threshold) — so the 2026-10-09 browser observation continues to be
+the freshest product evidence on file.
 
 ## Why this is not production-ready
 
@@ -52,10 +59,10 @@ retained. Details in `VERIFICATION_REPORT.md`.
 
 | Gate | Result |
 |---|---|
-| Unit suite | 707/707 pass across 71 test files, re-run 2026-10-14 at `5a22929` (up from 695/695 across 69 files at `debf320`; the delta is two new files — `statement-discipline` and `workbench-dynamic` — plus additions to `contrast` and `static-projects`) |
-| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at the 2026-10-14 pass (load average 344, see caveat above) |
-| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run 2026-10-14, same load caveat) |
-| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run 2026-10-14) |
+| Unit suite | 711/711 pass across 72 test files, re-run 2026-10-14 at `02962d5` (up from 707/707 across 71 files at `5a22929`; the delta is one new file — `json-ld`, 4 tests covering canonical Person structured data — and the bug fix it locks in: blog.html + the blog post prerender template carried `koosha-paridehpour/` in `sameAs` while the other 19 source pages used `koosha-paridehpour-1079b61b5/`) |
+| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at either 2026-10-14 pass (load average 344 at `5a22929`, then 220 at `02962d5`; both in the uninterpretable range per the caveat above) |
+| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at either 2026-10-14 pass, same load caveat) |
+| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at either 2026-10-14 pass) |
 
 Reproduce with `npm run verify` (needs the Vercel CLI for the build step) or
 `npm test && npm run check && npm run test:e2e` for everything except the build.
@@ -76,6 +83,7 @@ on unrelated tests, check your load average before investigating the code.
 - `.gitignore` was silently dropping every newly added test file.
 - `.witf-viewer-loading` text at 1.89:1 contrast, below the 4.5:1 AA floor.
 - The resume PDF download returned 404.
+- JSON-LD `sameAs` LinkedIn slug drift in blog.html + the blog post prerender template (`koosha-paridehpour/` instead of the canonical `koosha-paridehpour-1079b61b5/`); the drift had propagated through prerender to 6 dist files. Fixed in `02962d5` and locked in by `tests/json-ld.test.js` (4 tests cover all 20 source HTML pages).
 
 ## Preview
 
