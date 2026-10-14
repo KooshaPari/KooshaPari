@@ -192,6 +192,8 @@ const bundles = {
     'contact.css',
     'code-annotate.css',
     'cast-player.css',
+    'recruiter-block.css',
+    'public-record.css',
     'construction-gate.css',
   ],
 };

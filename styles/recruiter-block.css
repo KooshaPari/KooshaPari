@@ -1,0 +1,83 @@
+/* ================================================================
+   Recruiter: corporate-vehicle / legal-identity block (.rec-*)
+   --------------------------------------------------------------
+   Reserved for the recruiter / corporate-vehicle view. Currently
+   not emitted by any shipped view — preserved here so the design
+   surface is ready when the view lands. Bundled into pages.css so
+   the cascade position matches where the view would render.
+   ================================================================ */
+
+.rec-eyebrow {
+  font: 600 10.5px/1 var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent-pheno);
+  margin-bottom: 6px;
+}
+.rec-title {
+  font: 700 18px/1.2 var(--sans);
+  color: var(--fg);
+  margin: 0 0 4px;
+}
+.rec-sub {
+  font: 400 12.5px/1.55 var(--sans);
+  color: var(--fg-mute);
+  margin: 0 0 14px;
+}
+.rec-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.rec-grid-2 > * { min-width: 0; }
+.rec-big {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 14px 16px;
+  min-width: 0;
+}
+.rec-h {
+  font: 600 10.5px/1 var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  margin-bottom: 8px;
+}
+.rec-big-v {
+  font: 700 16px/1.25 var(--sans);
+  color: var(--fg);
+  word-break: break-word;
+}
+.rec-big-v small {
+  display: block;
+  font: 500 11px/1.4 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  margin-top: 4px;
+  font-weight: 500;
+}
+.rec-reason {
+  font: 400 12px/1.55 var(--sans);
+  color: var(--fg-mute);
+  margin: 10px 0 0;
+}
+.rec-reason strong { color: var(--fg); font-weight: 600; }
+.rec-trademark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 11px/1 var(--mono);
+  letter-spacing: .08em;
+  color: var(--accent-pheno);
+  background: rgba(182,240,107,.08);
+  border: 1px solid rgba(182,240,107,.25);
+  border-radius: var(--r-md);
+  padding: 5px 9px;
+  margin-top: 10px;
+}
+.rec-trademark::before {
+  content: "™";
+  font: 700 12px/1 var(--serif);
+}
