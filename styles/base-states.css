@@ -1,0 +1,149 @@
+/* ================================================================
+   Base state extensions (lens accents, depth, state matrix, motion)
+   --------------------------------------------------------------
+   Split from styles/base.css. Contains:
+     1. LENS ACCENTS — per VISUAL_SYSTEM.md. body[data-lens="..."]
+        swaps --accent; [data-accent] and .lens-toggle use it.
+     2. DEPTH LAYER — per VISUAL_SYSTEM.md. z-index tokens applied
+        to chrome/canvas/wayfinding/footer + [data-elevated] shadow.
+     3. COMPONENT STATE MATRIX — per COMPONENT_STATE_MATRIX.md.
+        9 [data-state] hooks (loading/error/empty/pressed/active/
+        selected/disabled/hidden/unmounted) + state-loading-shimmer
+        keyframe.
+     4. MOTION APPLICATION — references keyframes defined in
+        tokens.css. Applied to #view-root, #canvas, button:active,
+        [data-hover-lift]:hover.
+
+   Loaded after base-content.css in the core.css bundle so the
+   data-state rules can layer on top of the base content types.
+   ================================================================ */
+
+/* ================================================
+   LENS ACCENTS — per VISUAL_SYSTEM.md
+   ================================================ */
+
+body[data-lens="engineering"] {
+  --accent: var(--accent-engineering);
+}
+body[data-lens="product"] {
+  --accent: var(--accent-product);
+}
+
+/* Any element marked [data-accent] uses lens accent */
+[data-accent] {
+  color: var(--accent);
+}
+
+/* Lens toggle active state */
+.lens-toggle[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ================================================
+   DEPTH LAYER — per VISUAL_SYSTEM.md
+   ================================================ */
+
+#chrome,
+.atelier-header {
+  z-index: var(--z-chrome);
+  position: relative;
+}
+#canvas,
+#view-root {
+  z-index: var(--z-canvas);
+  position: relative;
+}
+#wayfinding,
+.overlay {
+  z-index: var(--z-overlay);
+}
+#footer {
+  z-index: var(--z-footer);
+  position: relative;
+}
+[data-elevated] {
+  box-shadow: var(--shadow-card);
+}
+
+/* ================================================
+   COMPONENT STATE MATRIX — per COMPONENT_STATE_MATRIX.md
+   ================================================ */
+
+/* loading state — skeleton-like subtle pulse on children with [data-state] */
+[data-state="loading"] {
+  cursor: progress;
+  opacity: 0.7;
+  pointer-events: none;
+}
+[data-state="loading"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--ink) 6%, transparent),
+    transparent
+  );
+  animation: state-loading-shimmer var(--motion-slow) linear infinite;
+  pointer-events: none;
+}
+@keyframes state-loading-shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+/* error state */
+[data-state="error"] {
+  border: 1px solid color-mix(in oklch, var(--acid-500) 60%, var(--ink));
+  background: color-mix(in oklch, var(--acid-500) 6%, var(--surface));
+}
+
+/* empty state */
+[data-state="empty"] {
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+/* pressed/active/selected/focused are handled by browser pseudo-classes; we add
+   the explicit "data-" state hooks for parity with the 28-state spec. */
+[data-state="pressed"] { transform: scale(0.97); }
+[data-state="active"]  { color: var(--accent); }
+[data-state="selected"] { outline: 2px solid var(--accent); outline-offset: 2px; }
+[data-state="disabled"] { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+/* hidden/unmounted default to display:none only when explicitly set (a11y rule:
+   no default-hidden state on mount). Use aria-controls to expose collapsed sections. */
+[data-state="hidden"],
+[data-state="unmounted"] {
+  display: none;
+}
+
+/* ================================================
+   MOTION APPLICATION — references tokens defined in tokens.css
+   ================================================ */
+
+/* Page enter — applied to #view-root on navigation */
+#view-root[data-motion="enter"] {
+  animation: page-enter var(--motion-normal) var(--ease-out) both;
+}
+#view-root[data-motion="exit"] {
+  animation: page-exit var(--motion-fast) var(--ease-out) both;
+}
+
+/* Lens cross-fade — overlay covers canvas during lens switch */
+#canvas[data-lens-switch="true"] {
+  animation: lens-cross-fade var(--motion-slow) var(--ease-in-out) both;
+}
+
+/* Button press feedback */
+button:active,
+[role="button"]:active {
+  animation: button-press var(--motion-fast) var(--ease-out) both;
+}
+
+/* Hover lift on interactive cards */
+[data-hover-lift]:hover {
+  animation: hover-lift var(--motion-normal) var(--ease-out) both;
+}

@@ -1,0 +1,69 @@
+/* ================================================================
+   Base interaction system (transitions, focus, hover, ::selection)
+   --------------------------------------------------------------
+   Split from styles/base.css. Loaded right after base.css in the
+   core.css bundle so the cascade resolves:
+     reset -> typography -> interaction -> reader -> content ->
+     states -> base -> shell
+   ================================================================ */
+
+/* ---------- INTERACTION SYSTEM ----------------------------- */
+
+/* Global interactive transitions */
+a { transition: color .12s ease; }
+button { transition: border-color .12s ease, box-shadow .12s ease, background .12s ease, color .12s ease; }
+
+/* Focus-visible ring is defined in styles/base.css per detector pattern 25
+   (the design constitution treats the global focus ring as a foundation
+   primitive, not an interaction-system element). */
+
+/* Card hover lift */
+.work-catalog__featured-project { transition: box-shadow var(--motion-normal) var(--ease-out), border-color .12s ease; }
+.work-catalog__featured-project:hover { box-shadow: 0 4px 12px color-mix(in srgb, var(--ink) 8%, transparent); border-color: var(--family-accent, var(--ink-muted)); }
+
+/* Image hover scale on case study hero */
+.case-hero { overflow: hidden; }
+.case-hero img { transition: transform .2s ease; }
+.case-hero:hover img { transform: scale(1.015); }
+
+/* Artifact hover */
+.home-artifact-sequence article { transition: box-shadow var(--motion-normal) var(--ease-out), transform var(--motion-normal) var(--ease-out); }
+.home-artifact-sequence article:hover { box-shadow: 0 3px 8px color-mix(in srgb, var(--ink) 6%, transparent); }
+
+::selection {
+  background: color-mix(in srgb, var(--seed-teal) 28%, transparent);
+  color: var(--ink);
+}
+
+/* Content frame — subtle left-edge structure line */
+#view-root {
+  border-left: var(--structure-line);
+  padding-left: var(--gutter);
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  inset: var(--space-3) auto auto var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--graphite-950);
+  color: var(--paper-100);
+  transform: translateY(-180%);
+  transition: transform var(--motion-fast) var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ---------- prefers-reduced-motion ------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

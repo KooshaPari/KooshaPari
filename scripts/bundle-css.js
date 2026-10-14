@@ -163,6 +163,9 @@ const bundles = {
     'tokens.css',
     'tokens-dark.css',
     'base.css',
+    'base-interaction.css',
+    'base-content.css',
+    'base-states.css',
     'shell.css',
   ],
   'components.css': [
