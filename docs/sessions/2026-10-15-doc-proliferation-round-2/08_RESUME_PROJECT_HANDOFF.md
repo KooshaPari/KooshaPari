@@ -602,13 +602,106 @@ runners, per the CI billing policy.
 
 Two honest limits: CI has never executed on GitHub, so
 it is verified by YAML parse and local step
-equivalence only. And **function coverage is 83.43%,
-already below 85**, which a line-only gate does not
-bound. The docs-3 contract says "85% coverage" without
-naming a metric; picking functions would require tests
-for card-icons (24.46%), systems-plate (34.69%) and
-scroll-reveal (42.86%). That is a contract decision, not
-an implementation detail.
+equivalence only. And the gate bounds **lines only**,
+while function coverage is 83.49% — below the floor.
+See the contract finding below, because it turns
+out this is not a judgement call.
+
+#### RESOLVED by contract research: the 85% floor is NOT a single metric
+
+I had been treating "which metric does 85% mean?" as
+an open judgement call. It is not. The contract
+answers it, and the answer is that **all three are
+required as separate cells.**
+
+`qa/ASSURANCE-CONTRACT.md:7` (docs-3 and docs-5 are
+byte-identical) states: "Line, branch/decision and
+function measurements are distinct" and requires
+**per-family** 85% floors. `qa/METRICS.md:7-18`
+enumerates 9 distinct structural cells, each at 85
+(executable-lines, branches-decisions, functions x
+unit/integration/e2e). `REQUIREMENTS.md:301-305`,
+REQ-05-04: "Keep line, branch/decision, function and
+behavioral metrics distinct where supported", with
+acceptance criterion "High line coverage cannot hide
+required low branch coverage."
+
+So the gate was **incomplete, not merely
+narrow**. Both gaps are now closed at `022b1d1`:
+
+| Metric | Was | Now | Floor |
+|---|---|---|---|
+| Lines | 89.29% PASS | **93.43%** | 85 |
+| Branches | 92.26% PASS | **92.39%** | 85 |
+| Functions | 83.49% **FAIL** | **86.37%** | 85 |
+
+`test:coverage` now passes `--test-coverage-branches=85`
+and `--test-coverage-functions=85` alongside lines, so
+the gate enforces the per-family floors the contract
+actually specifies. Each threshold was proven to fire
+by running it at 100 and confirming exit 1.
+
+The function gap was 9 of 539 functions. Closed with
+real tests in three modules that reached 100% function
+coverage: `card-icons.js`, `systems-plate.js` and
+`dom.js`. `cast-player.js` (19 uncovered) and
+`scroll-reveal.js` (13) were deliberately left alone —
+they need genuine IntersectionObserver/RAF fakes, which
+is a much larger job than the 9 functions required. Suite
+741 -> 765.
+
+Precedent across the fleet is mixed and should not
+override the contract: koosha-phenotype and HeliosLab
+bound lines only; phenoDesign (vitest) and OmniRoute
+(c8) bound all four metrics at 80 and 60; the argis CI
+template declares `MIN_COVERAGE 85 / MIN_BRANCH 75 /
+MIN_FUNCTION 80` but wires only the line bound — the
+same gap this repo had.
+
+**Closed at `022b1d1`.** Both the gate and the
+function gap are done, so the "permanently-red gate
+gets disabled" sequencing problem no longer applies.
+`cast-player.js` and `scroll-reveal.js` remain the
+next coverage targets if the floor ever rises.
+
+#### SEO defects found and fixed
+
+Three, all user- or crawler-visible:
+
+1. **`/parent` shipped a not-found title** (`02ad381`).
+   `setPageMetadata`'s view->label map had no `parent`
+   key, so `/parent` rendered correctly but its document
+   title read "Page not found — Koosha Paridehpour" —
+   what a link preview and a crawler use. One line.
+   Correction: the canonical URL was **not** affected;
+   it is derived independently from `route.view`.
+2. **`archive.html` was a soft-404** (`ef17576`). A
+   3646-byte empty shell with no view, no prerender
+   entry, no route and no inbound link, yet it was
+   **live in the production sitemap** and returned 200
+   while rendering not-found. Deleted along with all
+   five registries referencing it, including a
+   `vercel.json` rewrite that would otherwise have 404'd
+   after the file was deleted. Page count 30 -> 29.
+   The Archive drawer on `/work` is untouched — the
+   concept is fully realized there.
+3. **The sitemap was inverted** (`ef17576`). It listed
+   the dead `/archive` while omitting `/parent`, a real
+   prerendered view linked in the primary nav. Both
+   registries were hand-maintained and had drifted in
+   opposite directions.
+
+`tests/route-coherence.test.js` now prevents the class:
+every sitemap URL must resolve to a non-`not-found`
+route, every staged page must have prerendered
+`#view-root` content unless allow-listed, and sitemap
+and staged pages must agree in **both** directions.
+
+Why the suite never caught it: `internal-nav.test.js`
+listed `archive.html` only as a member of
+`STATIC_PAGES`, which asserts it has a noscript block
+and exists on disk. It never required a link or a view,
+so it passed 3/3 while the page was dead.
 
 #### CRITICAL: every `.html` page URL was broken in the browser — FIXED `d0993df`
 
