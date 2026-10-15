@@ -53,6 +53,7 @@ function setPageMetadata(route) {
     : null;
   const labels = {
     home: 'Technical Atelier',
+    parent: 'Parent',
     engineering: 'Engineering Work',
     product: 'Product Work',
     work: 'Work Index',
