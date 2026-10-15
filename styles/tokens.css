@@ -38,6 +38,10 @@
   --graphite-950: #171a18;
   --graphite-900: #20231f;
   --graphite-800: #30332e;
+  --graphite-600: #5b6472;
+  --graphite-500: #7a8494;
+  --graphite-400: #9aa3b2;
+  --graphite-200: #dfe3ea;
   --paper-100: #f3f0e8;
   --paper-110: #fdfbf7; /* opt-in e-ink surface, cooler off-white */
   --paper-200: #e8e3d8;

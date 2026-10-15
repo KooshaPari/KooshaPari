@@ -32,7 +32,7 @@
 .parent-view__lede {
   margin: 0;
   max-width: 46ch;
-  color: var(--graphite-600, #5b6472);
+  color: var(--graphite-600);
 }
 
 .parent-view__subtitle {
@@ -41,7 +41,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--graphite-500, #7a8494);
+  color: var(--graphite-500);
 }
 
 /* --- agent grid ------------------------------------------------- */
@@ -60,7 +60,7 @@
   align-content: start;
   gap: 0.4rem;
   padding: 0.9rem 1rem 1.1rem;
-  border: 1px solid var(--graphite-200, #dfe3ea);
+  border: 1px solid var(--graphite-200);
   border-radius: 10px;
   background: var(--surface-ceramic, #fff);
   transition: transform 180ms ease, border-color 180ms ease;
@@ -80,8 +80,8 @@
 }
 
 .parent-agent__pill--current { color: var(--parent-accent); }
-.parent-agent__pill--research { color: var(--graphite-500, #7a8494); }
-.parent-agent__pill--historical { color: var(--graphite-400, #9aa3b2); }
+.parent-agent__pill--research { color: var(--graphite-500); }
+.parent-agent__pill--historical { color: var(--graphite-400); }
 
 .parent-agent__name {
   margin: 0;
@@ -94,7 +94,7 @@
 .parent-agent__role {
   margin: 0;
   font-size: 0.85rem;
-  color: var(--graphite-600, #5b6472);
+  color: var(--graphite-600);
 }
 
 /* --- ASCII snapshot frame --------------------------------------- */
@@ -111,14 +111,14 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--graphite-500, #7a8494);
+  color: var(--graphite-500);
 }
 
 .parent-snapshot__frame {
   margin: 0;
   padding: 0.9rem 1rem;
   overflow-x: auto;
-  border: 1px solid var(--graphite-200, #dfe3ea);
+  border: 1px solid var(--graphite-200);
   border-radius: 10px;
   background: var(--surface-obsidian, #0f1012);
   color: var(--seed-ceramic, #f6f5f5);
@@ -131,7 +131,7 @@
   margin: 0;
   font-family: 'JetBrains Mono', var(--font-mono, monospace);
   font-size: 0.75rem;
-  color: var(--graphite-500, #7a8494);
+  color: var(--graphite-500);
 }
 
 /* --- screen-reader-only live region ------------------------------ */
