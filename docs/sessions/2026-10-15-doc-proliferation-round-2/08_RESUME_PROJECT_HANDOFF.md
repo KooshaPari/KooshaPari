@@ -448,41 +448,59 @@ bundle (`resume-badge--eng`, `resume-skill__bar-fill`,
 etc.). `vercel.json` does carry `/resume ->
 /resume.html`.
 
-#### Finding 1 — `aria-live` claim is FALSE as written (a11y)
+#### Finding 1 — `aria-live` claim was FALSE as written (a11y) — FIXED `de5d511`
 
-The handoff's hard-constraint table lists "Skip-link +
-`aria-live`" as satisfied. **The skip-link is real**;
-the aria-live claim is not.
+The handoff's hard-constraint table listed "Skip-link +
+`aria-live`" as satisfied. **The skip-link was real; the
+aria-live claim was not.**
 
 ```
 grep -c "aria-live" scripts/views/resume.js   -> 0
 ```
 
-Every other view has one (`home.js`, `parent.js`,
-`work.js`, `work-index.js` x2). The resume view is the
-only one with none, and the built `dist/resume.html` has
-zero `aria-live` and zero `role="status"`. So the resume
-view does **not** announce dynamic changes.
+Every other view had one (`home.js`, `parent.js`, `work.js`,
+`work-index.js` x2); resume was the only one without, and the
+built `dist/resume.html` had zero `aria-live` and zero
+`role="status"`.
 
-This is a real gap against a stated non-negotiable, and
-it is also an inconsistency: four other views already
-do this, so the fix is to follow an existing pattern
-rather than invent one.
+Fixed at `de5d511` by adding `'aria-live': 'polite'` to the
+lede element. The app convention is a **single** attribute, no
+`role`, no `aria-atomic`, no separate announcer element, and it
+is **content-update** semantics rather than route-change — the
+lede is the element whose text describes the rendered content,
+so it is the correct host. (`parent.js` adds `role="status"` +
+`.parent-sr-only`, but that class is scoped to
+`styles/parent.css:139` and is not available to resume.)
 
-#### Finding 2 — a layout-property animation (perf)
+#### Finding 2 — a layout-property animation (perf) — FIXED `de5d511`
 
 ```
 styles/resume-timeline.css:192
 .resume-skill__bar-fill { transition: width 0.8s var(--ease-out); }
 ```
 
-`width` is a layout property, which contradicts the
-"60fps transform/opacity" constraint. In practice it is
-**dead code** — `resume.js:89` sets the width inline once
-and never mutates it, so no transition ever fires. It is
-also outside the reduced-motion block, so it would animate
-unconditionally if the width ever became dynamic. Low
-severity, real defect, cheap to remove.
+`width` is a layout property, which contradicted the "60fps
+transform/opacity" constraint. The worker proved it was **dead
+before removing it**, rather than assuming:
+
+- `resume.js:87-90` passes the width as an `el()` attribute, so
+  `dom.js:10-20` applies it via `setAttribute` before the node is
+  ever in the document.
+- `resume.js:115` `root.replaceChildren(...)` is the first DOM
+  insertion, after the whole tree is built.
+- The only deferred work is `rAF(initScrollReveal)`, which sets
+  `--reveal-distance` and `transitionDelay` — never `width`.
+- Repo-wide there is exactly one JS site and one CSS site for
+  `.resume-skill__bar-fill`, so there is no second mutation and
+  no prior computed value to transition from.
+
+Removed outright, with no replacement. Removing the declaration
+also dissolves the "sits outside the reduced-motion block"
+problem, since there is nothing left to guard.
+
+**Still open, outside resume scope:** four other stylesheets
+carry the same layout-property pattern — `radar.css:102`,
+`shell.css:68`, `cast-player.css:250`, `artifacts.css:82`.
 
 #### Finding 3 — product persona skills are never rendered
 
@@ -500,22 +518,58 @@ unmet. Flagged as a **decision question**, not a bug.
 |---|---|---|
 | Hex via tokens | PASS | 0 hex in `resume-timeline.css`; 0 of 44 resume rules in the shipped CSS bundle. The 3 inline hex in `data/phenotype.js` are PERSONAS *data* values that `resume.js` never reads. |
 | 0 new font families | PASS | 2 declarations, both token refs (`var(--font-display)`, `var(--font-meta)`). |
-| Bundle cap 230 KB | **FAIL** | 220,028 B = 214.87 KB, 93.4% used, 15.13 KB headroom. In budget but **unenforced** — `bundle-js.js` only `console.log`s the size, `.github/` has no CI at all (only dependabot.yml), and `package.json` has no budget script. |
-| 0 emoji | UNCLEAR | Zero emoji today, but no detector rule forbids them, so this drifts silently. |
+| Bundle cap 230 KB | was FAIL, now GATED | 220,049 B = 93.4% of cap after the `de5d511` fix. **Enforced** since `9380916`: detector check 28 asserts <= 235520 B, fault-injected at 520,049 B to prove it fires. |
+| 0 emoji | was UNCLEAR, now GATED | Zero emoji, and **enforced** since `9380916`: detector check 29 covers U+1F300-1FAFF and U+2600-27BF over the 4 user-facing files, fault-injected to prove it fires. |
 | `prefers-reduced-motion` | PASS | Real rule at `resume-timeline.css:253-258`; `reveal.css:64-73` forces `opacity:1; transform:none; transition:none`. |
-| Skip-link + `aria-live` | **FAIL** | Skip-link PASS. aria-live absent (Finding 1). |
-| 60fps transform/opacity | **FAIL** | Dead `transition: width` (Finding 2). Reveal animation itself is clean. |
+| Skip-link + `aria-live` | was FAIL, now FIXED | Skip-link always real. `aria-live` added at `de5d511`, following the app's single-attribute convention. |
+| 60fps transform/opacity | was FAIL, now FIXED | Dead `transition: width` removed at `de5d511` after the dead-code claim was proven, not assumed. Reveal animation itself was always clean. |
 | 4 ROLES + 2 PERSONAS | PASS | `ROLES.length === 4`, `Object.keys(PERSONAS)` = 2, confirmed by node import. |
-| Tests + 85% coverage floor | **FAIL** | 7 tests, 7 pass, both helpers fully covered — but coverage is **measured nowhere**: no `coverage`/`c8`/`nyc` in `package.json` or `.github/`. The floor is documentation, not a gate. |
+| Tests + 85% coverage floor | **still FAIL** | 7 tests, 7 pass, both helpers fully covered — but coverage is **still measured nowhere**. Deliberately not added to the detector; see the note below. |
 | File size <=350/<=500 | PASS | All 6 files under target; `phenotype.js` is the largest at 322. |
 
+#### The one constraint still ungated: coverage
+
+The 85% floor is the last documented-but-unenforced
+constraint, and it was deliberately **not** bolted onto the
+detector. Node's `--test-coverage-lines=85` only takes effect
+alongside `--experimental-test-coverage` (without it, a 90%
+threshold against 47.89% exits 0 — a silent pass), and
+measuring requires running all 714 tests at 22-31s. The
+detector runs in ~1.5s and runs from the pre-commit hook, so
+embedding it would make every commit 15-20x slower.
+
+The exact change, for whoever picks it up:
+
+```json
+"test:coverage": "node --test --experimental-test-coverage --test-coverage-include='scripts/**/*.js' --test-coverage-lines=85 tests/*.test.js"
+```
+
+Two things to know before adding it:
+
+1. It needs a `.github/workflows/ci.yml`, which **does not
+   exist**. `.github/` contains only `dependabot.yml`, so
+   there is no CI at all today. A coverage gate that only
+   runs locally is not a gate.
+2. The scope choice is consequential and must be deliberate.
+   Loaded-files coverage is **91.89%** and passes. Including
+   never-loaded files via `--test-coverage-include-all` drops
+   it to **47.89%** and fails. Do not pick the second one by
+   accident.
+
 The pattern worth naming: **the constraints that are
-enforced (hex, fonts, file size) hold; the ones that are
-merely documented (bundle cap, coverage floor, emoji) do
+enforced (hex, fonts, file size, and now bundle cap and emoji)
+hold; the ones still merely documented (the coverage floor) do
 not have gates and are one careless commit from
-regressing.** That is the highest-leverage thing for the
-next owner to fix, and it is cheaper than fixing any
-individual violation.
+regressing.** Coverage is now the last one standing.
+
+**Audit totals:** 6 PASS / 3 FAIL / 1 UNCLEAR at audit time.
+After `de5d511` and `9380916`: **7 PASS, 1 FAIL (coverage),
+0 UNCLEAR** — two failures fixed, one UNCLEAR resolved into a
+gate, and one FAIL deliberately left open with the exact fix
+specified below.
+
+**The pattern worth naming: constraints with gates hold;
+constraints without gates drift.**
 
 #### Out of scope but found: broken dynamic imports in /work
 
