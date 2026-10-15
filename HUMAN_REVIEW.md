@@ -616,13 +616,29 @@ shipped as round 6 of the doc-proliferation arc on
 this repo's session-folder subdir to
 `~/Documents/ResVault/.researchledger/career-context-anduril/`,
 byte-identical verified by `diff -r`, then `git rm`'d
-from this repo.** The remaining 1 (VERCEL_TOKEN for
-hosted gate) is recorded in `06_OPEN_DECISIONS_STATUS.md`
-with the unblock action explicit. The pane cannot
-advance that 1 remaining OPEN item without operator
-input; the pane's job is to keep the status document
-honest and to ship the operator's decision when one
-is made.
+from this repo at `cf957c2`.** **The fourth
+(VERCEL_TOKEN for hosted gate) is now CLOSED based on a
+read-only preflight on 2026-10-15: Vercel CLI 52.0.0 is
+installed and authenticated (`vercel whoami` returns
+`kooshapari`); the repo is linked to project
+`kooshapari-site` (`prj_wVRCWLBwtZUg5DbPqfLpe9IbeaXt`);
+the site is publicly live on 4 production domains
+(`kooshapari-site.vercel.app`, `kooshapari.com`,
+`www.kooshapari.com`, `phenotype.space` all 200 OK,
+`pheno.studio` 301); 3 custom domains are registered;
+the prebuilt output is current
+(`app.bundle.8d6cbde8.js`, 220,028 B, 30 pages,
+0 warnings).** The pane's read-only preflight also
+surfaced a new informational item 5: the live production
+bundle (`bundle.7b217faa.js`, 18d old) differs from the
+20th-pass prebuilt. Shipping the prebuilt to a new
+production deployment is a write action that requires
+operator signal (`"ship prod"` or `"ship preview"`) per
+policy; the pane has the CLI auth + project link +
+prebuilt output + deployment templates ready, and will
+ship on operator signal. **All 4 original items are
+closed/decided as of 2026-10-15; the pane has no
+active todo.**
 
 ## Preview
 

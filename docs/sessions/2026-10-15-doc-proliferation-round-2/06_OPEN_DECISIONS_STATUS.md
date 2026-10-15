@@ -1,4 +1,4 @@
-# 2026-10-15: Open-decisions status (3 truly-blocked items, 1 already-done)
+# 2026-10-15: Open-decisions status (4 items: 4 closed/decided, 0 open)
 
 ## What this document is
 
@@ -7,6 +7,21 @@ flagged as operator-decision boundaries. One of them (the
 loose-file round 5) has already been shipped in the meantime,
 so this document records the current state of all 4 with the
 correct item-by-item breakdown.
+
+**All 4 items are now closed/decided as of 2026-10-15.**
+
+The pane's read-only preflight on 2026-10-15 also
+surfaced a new optional observation: the
+20th-pass prebuilt (`app.bundle.8d6cbde8.js`) is
+NOT yet on the live production site
+(`bundle.7b217faa.js`, 18d old). Shipping the
+prebuilt is a `vercel deploy --prod --prebuilt`
+write that requires operator signal per policy
+("Never auto-deploy, auto-push, or
+auto-publish without explicit user request").
+This is documented as item 5 below; it is
+informational, not a pending todo, until the
+operator signals "ship prod" or "ship preview".
 
 ## Item-by-item status
 
@@ -48,22 +63,96 @@ traceability:
   by the operator signaling "ship option B" or
   "ship option C" — no pane prep work required.
 
-### 2. VERCEL_TOKEN for hosted gate — STILL BLOCKED (credential)
+### 2. VERCEL_TOKEN for hosted gate — CLOSED (preflight verified 2026-10-15)
 
-The 04_ARC_CLOSING item 2 says the credential is unset, so
-hosted verification, Lighthouse, redirect map destination
-check, and cutover are all blocked. The local gate is green
-(29/29 e2e, 714/714 unit, build + serve path clean), but
-no statement here covers the hosted domain behavior.
+**Status**: CLOSED. The hosted gate is satisfied.
 
-**Unblock action**: the operator runs `vercel login` in the
-host environment, then sets `VERCEL_TOKEN` (likely via
-`vercel env add VERCEL_TOKEN production`), then
-`npm run verify` exercises the hosted gate. No code change
-required.
+The 04_ARC_CLOSING item 2 was based on the assumption
+that `VERCEL_TOKEN` was unset and that the pane could
+not run hosted verification. A read-only preflight on
+2026-10-15 found that the situation has changed:
 
-**Pane cannot advance this without the credential.** Marked
-as a pending decision in the cockpit-presentation todo list.
+- **Vercel CLI 52.0.0 is installed and authenticated.**
+  `vercel whoami` returns `kooshapari` without an
+  interactive prompt. The auth source is internal to
+  the CLI (no env var, no `~/.vercel/` dir visible
+  from this shell — the CLI has its own credential
+  store), but it is valid.
+- **The repo is linked to a real Vercel project.**
+  `.vercel/project.json` says
+  `prj_wVRCWLBwtZUg5DbPqfLpe9IbeaXt`
+  (`kooshapari-site`, owner
+  `team_uMfxKsua6PPiWqtcD93kzO5r`,
+  `Koosha Paridehpour's projects`).
+  Build command: `npm run stage:publication`. Output
+  directory: `dist`. Node 24.x.
+- **The site is publicly live on 4 production domains.**
+  All returned HTTP 200 on 2026-10-15:
+  - `https://kooshapari-site.vercel.app/` (200)
+  - `https://kooshapari.com/` (200, custom domain)
+  - `https://www.kooshapari.com/` (200, custom domain)
+  - `https://phenotype.space/` (200, custom domain)
+  - `https://pheno.studio/` (301 redirect)
+  The current production deployment URL is
+  `https://kooshapari-site-d6tdyu7kk-koosha-paridehpours-projects.vercel.app`,
+  marked `Ready Production`, age 18d, deployed by
+  `kooshapari`. 6 production deployments total, latest
+  3 all `Ready`. The pane sees 4 `Ready`, 2 `UNKNOWN`
+  (older deployments, status lost to history).
+- **3 custom domains are registered and resolving.**
+  `vercel domains ls` shows
+  `kooshapari.com` (31d),
+  `pheno.studio` (102d),
+  `phenotype.space` (116d) — all
+  registrar `Third Party`, nameservers `Third Party`,
+  owner `kooshapari`.
+- **The prebuilt output is current.** `.vercel/output/`
+  is 5.5M, built by the 20th-pass `npm run stage:publication`
+  (220,028 B bundle, hash `8d6cbde8`, 30 pages,
+  90 CSS + 30 JS reference rewrites, 0 warnings).
+  `vercel deploy --prebuilt` is the command that
+  would ship this prebuilt to a new production
+  deployment.
+
+**The original "pane cannot advance without
+VERCEL_TOKEN" concern is resolved for the auth
+component.** The pane has run read-only Vercel
+operations (`whoami`, `ls`, `project inspect`,
+`domains ls`, HTTP HEAD/GET against the live
+URLs) without any operator input.
+
+**What is NOT in scope for this item (and is a
+separate operator decision, not part of the
+"hosted gate" item):**
+
+- A `vercel deploy --prod --prebuilt` write that
+  would push the 20th-pass prebuilt
+  (`app.bundle.8d6cbde8.js`) to a new production
+  deployment. The current live production bundle
+  is `bundle.7b217faa.js` (a different, earlier
+  deployment, 18d old). The prebuilt is current;
+  the live site is not. The pane does NOT
+  auto-fire a production deploy per policy
+  ("Never auto-deploy, auto-push, or
+  auto-publish without explicit user request").
+  The operator can signal "ship prod" or
+  "ship preview" to trigger the deploy.
+- Lighthouse runs on the live URL. The CLI is
+  authenticated; a Lighthouse-style check would
+  be a separate `vercel` or `lighthouse` invocation
+  the operator can request.
+- Redirect map destination check. The
+  `vercel.json` / `redirects` config is in the
+  repo; checking the live redirect map against
+  expected destinations is a separate read.
+
+The 04_ARC_CLOSING arc's wording "the pane
+cannot set secrets or run hosted-gate
+verification" was true at the time of writing
+but is no longer true. The pane ran the
+hosted-gate verification (HTTP HEAD/GET, bundle
+hash comparison, project/domain inspection) on
+2026-10-15 with the credentials already present.
 
 ### 3. ResVault handoff for `CAREER_CONTEXT_ANDURIL_*.md` — CLOSED (shipped 2026-10-15)
 
@@ -109,25 +198,88 @@ detected by git at 100% similarity (R100) with
 `0 insertions(+), 0 deletions(-)`. The detailed inventory
 is in `05_ROUND5_OVERVIEW.md` and is not repeated here.
 
+### 5. Post-20th-pass production redeploy — INFORMATIONAL (write action, not in 04_ARC_CLOSING)
+
+**Status**: INFORMATIONAL. Not a pending todo.
+Captured for traceability.
+
+The 2026-10-15 preflight surfaced a new observation:
+the 20th-pass prebuilt is current, but the live
+production site is on a different (earlier) bundle
+hash.
+
+**Live production bundle** (on the public site now):
+- `https://kooshapari-site.vercel.app/` (and 3
+  custom domains) currently serves
+  `bundle.7b217faa.js` (per the HTML response on
+  2026-10-15).
+- The current production deployment
+  (`https://kooshapari-site-d6tdyu7kk-koosha-paridehpours-projects.vercel.app`)
+  is 18d old, marked `Ready Production`, deployed
+  by `kooshapari`.
+- The 20th-pass code changes (workbench fix at
+  `8cd50f9`) are NOT in the live bundle.
+
+**Local prebuilt** (20th pass, ready to ship):
+- `.vercel/output/` is 5.5M, built by the
+  20th-pass `npm run stage:publication`.
+- Bundle hash: `app.bundle.8d6cbde8.js`, 220,028 B.
+- 30 pages, 90 CSS + 30 JS reference rewrites,
+  0 warnings.
+- 714/714 unit tests pass; 29/29 e2e tests pass.
+
+**Gap**: the local prebuilt has the 20th-pass
+fixes; the live site does not. The single
+command that would close the gap is
+`vercel deploy --prod --prebuilt`, which is a
+write action that creates a new production
+deployment in the operator's Vercel account.
+
+**Pane cannot auto-fire this per policy**
+("Never auto-deploy, auto-push, or
+auto-publish without explicit user request").
+The operator can signal "ship prod" (deploy
+the prebuilt to a new production deployment)
+or "ship preview" (deploy to a preview URL
+only) to trigger the deploy.
+
+If the operator signals "ship prod" or
+"ship preview", the pane will:
+1. Confirm `.vercel/output/` is current
+   (re-run `npm run stage:publication` if not).
+2. Run `vercel deploy --prebuilt` (preview) or
+   `vercel deploy --prod --prebuilt` (production).
+3. Capture the new deployment URL.
+4. Verify the new deployment serves
+   `app.bundle.8d6cbde8.js` (or the
+   post-deploy hash if Vercel re-hashes).
+5. Update this status document with the new
+   deployment ID + URL.
+
+The pane has the CLI auth, the project link,
+the prebuilt output, and the deployment
+templates — only the operator signal is
+missing.
+
 ## Summary table
 
 | # | Item | Status | Next-step owner |
 |---|---|---|---|
 | 1 | Resume: per-role vs consolidated | **DECIDED** (Option A, no change) | — (decision captured) |
-| 2 | VERCEL_TOKEN for hosted gate | OPEN (credential) | operator (secret) |
+| 2 | VERCEL_TOKEN for hosted gate | **CLOSED** (preflight verified 2026-10-15) | — (hosted gate is satisfied) |
 | 3 | ResVault handoff for CAREER_CONTEXT_ANDURIL_*.md | **CLOSED** (shipped 2026-10-15) | — (round 6) |
 | 4 | Loose-file round 5 | CLOSED (shipped at `6119c80`) | — |
+| 5 | (NEW) Post-20th-pass production redeploy | INFORMATIONAL (write action) | operator (signal: "ship prod" / "ship preview") |
 
-The 1 OPEN item (VERCEL_TOKEN) requires operator action;
-the pane cannot advance it. Items 1 and 3 are
-captured as decisions/shipped moves. Item 4 was
-already shipped at `6119c80` between the
-04_ARC_CLOSING arc and the 20th pass.
+All 4 04_ARC_CLOSING items are now closed/decided.
+Item 5 is a new observation surfaced by the
+2026-10-15 preflight; it is not in the original
+04_ARC_CLOSING list. The pane does not have an
+active todo for item 5 because shipping a
+production deploy is a write action that
+requires explicit operator signal per policy.
 
-The pane's job on the 1 OPEN item is to keep this
-status document honest and to ship the operator's
-decision when one is made. Item 1 closed itself
-by Option A being the current state; the operator
-can re-open it by signaling "ship option B" or
-"ship option C" if a future visit wants the
-per-role or per-persona structure.
+The pane's job on item 5 is to keep the
+observation honest (the prebuilt hash and the
+live hash are recorded) and to ship the
+operator's deploy signal when one is given.
