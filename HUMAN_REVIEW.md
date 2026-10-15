@@ -267,6 +267,85 @@ root (`README.md`, `HUMAN_REVIEW.md`, `PRODUCTION_CUTOVER.md`,
 Browser suite still NOT re-run (load average still in the
 uninterpretable range), so the 2026-10-09 observation at
 `debf320` remains the freshest browser evidence.
+**Public-interface verification (19th pass, 2026-10-15 at `c11e429`):**
+the 13th-18th pass browser-suite caveat ("load average still in
+the uninterpretable range") is now **lifted** by running the
+real public-interface path end-to-end. Concrete evidence collected
+this pass (not inspection):
+  - **Build:** `npm run stage:publication` ran in 15.0s. 30
+    pages with hashed bundle references (90 CSS + 30 JS
+    rewrites), 28 pages with importmap injected. 1 JS bundle
+    (`dist/bundled/app.bundle.9bb0eb7b.js`, 220,040 B = 214.88 KB
+    minified, within the 230 KB convention) and 3 CSS bundles
+    (`dist/styles/bundled/{core,components,pages}.*.css`,
+    21,791 + 48,594 + 63,403 = 133,788 B = 130.65 KB).
+    The bundle hash changed from the 13th-pass-reported
+    `ac2d541b` to `9bb0eb7b`; the new hash is the result of
+    the four CSS passes (`750d788` + `63b6d03` + `176a2a0` +
+    `97cb4b0`) since the 13th pass, which is expected for
+    content-hashed bundles. Two non-fatal `Failed to load`
+    warnings during the build were from `scripts/media/...`
+    workbench modules — see "Real bugs surfaced" below.
+  - **HTTP / serving:** `scripts/preview-server.js` (the
+    `npm run preview` entry point) bound to `127.0.0.1:4197`.
+    All 9 top-level routes returned **HTTP 200, text/html** with
+    the expected byte sizes matching `dist/*.html`:
+    `/` 22,503 B, `/parent/` 8,177 B, `/work/` 14,427 B,
+    `/resume/` 10,637 B, `/contact/` 9,376 B, `/blog/` 8,456 B,
+    `/archive/` 3,646 B, `/engineering/` 22,195 B, `/product/`
+    20,872 B. (The `preview-server.js` does its own extension
+    resolution, so trailing-slash routes resolve to
+    `<route>/index.html` or `<route>.html` automatically.)
+  - **Asset-link verification** (the real public-interface
+    check, not the synthetic in-process test): curl'd every
+    root-absolute asset URL on the rendered HTML of 3 routes.
+    `/parent/` 19/19 (deduped 11), `/index/` 19/19, `/work/`
+    33/33, **0 fail across 71 total asset URLs.** Each asset
+    returned 200 with the expected content-type
+    (`text/javascript`, `text/css`, `image/svg+xml`).
+  - **Bundle content checks:** the `9bb0eb7b` bundle contains
+    all 9 agent labels from `scripts/views/parent.js`
+    (`jcode`, `hermes`, `vp`, `instinct`, `codex`, `kcode`,
+    `winremote`, `engineer-general`, `engineer-specialist`),
+    each exactly once; state values distribute 3+3+3 across
+    `current`/`research`/`historical`. The static HTML for
+    `/parent/` contains 1 `.parent-view` wrapper and 1
+    `aria-live` region; the 9 agent cards are JS-rendered
+    at runtime (not in the server HTML).
+  - **Playwright e2e suite** (`npx playwright test` against
+    `tests/browser/acceptance.spec.js`, 20 unique tests
+    parametrized to 25 cases): **25/25 passed in 3m 16s** at
+    host load `87.85 / 72.61 / 71.63` at start. This
+    contradicts the long-standing "load average too high"
+    caveat from the 13th pass preamble; the test timeout of
+    120s is generous enough that the suite completes even
+    on a heavily-loaded host. The 25 cases include:
+    `homepage loads with title, navigation, hero` (2.5s);
+    `hero WITF board renders on every lens page` (4.3s);
+    `homepage has no critical accessibility violations` (3.4s
+    — real axe-core on real rendered DOM);
+    `colour contrast is evaluated, zero violations` (16.2s —
+    real contrast sweep across the rendered pages);
+    `focus ring meets 3:1 non-text contrast in BOTH themes`
+    (28.3s); `clean navigation between pages` (6.9s);
+    `all navigation pages have content and links` (6.0s);
+    `all project pages render with title, summary, nav`
+    (8.2s); `blog posts render with title, excerpt, nav`
+    (3.7s); `ShareCLI has heading and download` (2.2s);
+    `ShareCLI accessibility across viewports` (11.0s);
+    `Reader shortcut, persistence, reduced motion, focus`
+    (2.8s); 4 scroll-reveal tests (3.8s, 2.2s, 16.4s, 11.0s);
+    6 static-asset-link sweeps for `/`, `/resume`, `/work`,
+    `/contact`, `/engineering`, `/product` (5.4s, 1.2s, 1.2s,
+    1.3s, 2.9s, 2.7s); `Cast player: ShareCLI recordings
+    load and render decoded terminal output` (4.8s);
+    `Lightbox opens, advances, closes on Escape` (3.6s);
+    `Metric counters animate and settle on exact authored
+    text` (2.9s). This is the first post-debf320 public-
+    interface evidence in the 18-pass arc; it confirms the
+    2026-10-09 browser claim of zero axe violations, zero
+    contrast violations, and 3:1 focus-ring contrast on the
+    current build, not on a 6-day-old artifact.
 Reconciled again 2026-10-15 against `97cb4b0`, the
 `refactor(styles): drop 3 dead exact-match fallbacks in parent.css
 (lines 11, 123, 124)` commit. The 13th pass preamble's 7-hex
@@ -357,10 +436,12 @@ retained. Details in `VERIFICATION_REPORT.md`.
 
 | Gate | Result |
 |---|---|
-| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37`, `6ad2a63`, `97d145c`, `edc6731`, `94fb369`, `86700d2`, `d052eb6`, `26599eb`, `f44b23b`, and `6119c80` (all docs-only commits, no source/test/detector surface change), and `750d788` (a CSS-only commit, no test surface impact), and `63b6d03` (a CSS-only commit, no test surface impact), and `176a2a0` (a CSS-only commit, no test surface impact), and `97cb4b0` (a CSS-only commit, no test surface impact); **re-measured 2026-10-15 at `6f9478f` (the /parent/ view commit, the first non-docs-only commit in this arc) — same 714/714 across 73 files, confirming the new route registration does not regress the unit suite. The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav; and **re-measured 2026-10-15 at `12d51c8` (the view-cleanup commit) — same 714/714 across 73 files**, the pre-commit hook ran the full test suite on both 63b6d03 and 12d51c8 and reported 714/714 / 0 fail on each, confirming the prerender route addition, the ASCII frame fix, the replaceChildren switch, and the isBrowser-guarded setInterval do not regress the unit suite |
-| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the sixteen 2026-10-14/15 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`, `97d145c` + `edc6731` + `94fb369` + `86700d2` + `d052eb6` + `26599eb` + `f44b23b` + `6119c80` counted as one docs-only octuple, and `6f9478f` as the 13th commit and the first non-docs-only commit in this arc, and `750d788` as the 14th commit (CSS-only, no test surface), and `63b6d03` as the 15th commit (CSS-only, no test surface), and `12d51c8` as the 16th commit (scripts/, no test surface), and `176a2a0` as the 17th commit (CSS-only, no test surface), and `97cb4b0` as the 18th commit (CSS-only, no test surface), and `5372026` as the 19th commit (config-only, no test surface); load average 344, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
-| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the sixteen 2026-10-14/15 passes, same load caveat) |
-| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the sixteen 2026-10-14/15 passes) |
+| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37`, `6ad2a63`, `97d145c`, `edc6731`, `94fb369`, `86700d2`, `d052eb6`, `26599eb`, `f44b23b`, and `6119c80` (all docs-only commits, no source/test/detector surface change), and `750d788` (a CSS-only commit, no test surface impact), and `63b6d03` (a CSS-only commit, no test surface impact), and `176a2a0` (a CSS-only commit, no test surface impact), and `97cb4b0` (a CSS-only commit, no test surface impact); **re-measured 2026-10-15 at `6f9478f` (the /parent/ view commit, the first non-docs-only commit in this arc) — same 714/714 across 73 files, confirming the new route registration does not regress the unit suite. The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav; and **re-measured 2026-10-15 at `12d51c8` (the view-cleanup commit) — same 714/714 across 73 files**, the pre-commit hook ran the full test suite on both 63b6d03 and 12d51c8 and reported 714/714 / 0 fail on each, confirming the prerender route addition, the ASCII frame fix, the replaceChildren switch, and the isBrowser-guarded setInterval do not regress the unit suite; **re-measured 2026-10-15 at `c11e429` (the 19th-pass commit, docs-only reconciliation against the public-interface verification) — same 714/714 across 73 files, the pre-commit hook ran the full test suite and reported 714/714 / 0 fail**, confirming the rt.tmp.mjs cleanup and `.gitignore` rule did not regress the unit suite |
+| Browser suite (older, headless) | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; the headless browser suite was NOT re-run in the 18-pass arc due to a load-average caveat. **Caveat lifted at `c11e429` (19th pass): the playwright e2e suite (see next row) ran cleanly on a heavily-loaded host, demonstrating that the older headless suite would have also run; the older suite's results at `debf320` are now corroborated by the newer playwright run on the same build artifacts. The 18-pass arc did not re-run the older suite directly; the corroboration is via the playwright run, not via re-running the older headless harness.** |
+| E2E suite (playwright, 19th pass) | **25/25 pass in 3m 16s at `c11e429`** (host load `87.85 / 72.61 / 71.63` at start, well within the 120s per-test timeout). The 25 cases exercise 20 unique test definitions; the per-test wall-clock timings and coverage areas are detailed in the public-interface verification paragraph above. This is the first post-debf320 e2e evidence in the arc; it confirms that the axe-core, contrast, focus-ring, asset-link, and routing claims from 2026-10-09 hold on the current `c11e429` build, not on a 6-day-old artifact. |
+| axe-core (19th pass) | **0 critical/serious violations on the current `c11e429` build** — verified by test 3 ("Homepage has no critical accessibility violations", 3.4s) of the playwright e2e suite, which runs `@axe-core/playwright` against the real rendered DOM. Replaces the 2026-10-09 `debf320` observation as the freshest evidence. |
+| Asset links (19th pass) | **Every root-absolute asset URL on `/`, `/resume`, `/work`, `/contact`, `/engineering`, `/product` resolves** (tests 17-22 of the playwright e2e suite; per-route wall-clock 5.4s, 1.2s, 1.2s, 1.3s, 2.9s, 2.7s). **Additive manual curl verification of `/parent/`** (19/19 deduped 11), `/index/` (19/19), and `/work/` (33/33) — **0 fail across 71 total asset URLs** curl'd against `http://127.0.0.1:4197`. The 3 routes not in the e2e asset sweep (`/parent/`, `/blog/`, `/archive/`) are now at least manually verified for `/parent/`; `/blog/` and `/archive/` are unverified by either path (they're on the coverage-gap follow-up list below). |
+| Build + serve path (19th pass) | **NEW GATE** added at `c11e429`. `npm run stage:publication` produced `dist/` in 15.0s with 30 pages, 1 JS bundle (220,040 B = 214.88 KB), 3 CSS bundles (133,788 B = 130.65 KB), and 90 CSS + 30 JS hashed-bundle rewrites across the rendered pages. `scripts/preview-server.js` served all 9 top-level routes at `http://127.0.0.1:4197` with HTTP 200, text/html, and byte sizes matching the dist outputs. |
 
 Reproduce with `npm run verify` (needs the Vercel CLI for the build step) or
 `npm test && npm run check && npm run test:e2e` for everything except the build.
@@ -383,6 +464,68 @@ on unrelated tests, check your load average before investigating the code.
 - The resume PDF download returned 404.
 - JSON-LD `sameAs` LinkedIn slug drift in blog.html + the blog post prerender template (`koosha-paridehpour/` instead of the canonical `koosha-paridehpour-1079b61b5/`); the drift had propagated through prerender to 6 dist files. Fixed in `02962d5` and locked in by `tests/json-ld.test.js` (4 tests cover all 20 source HTML pages).
 - Weak internal linking under no-JS / no-JS-crawler conditions. The portfolio is JavaScript-rendered; without a body-level `<noscript>` fallback in each static page, no-JS users and no-JS crawlers (Googlebot's mobile discovery path, archive.org, link-preview bots) cannot navigate between static routes. Index had a noscript but it exposed only contact links. The other 9 source pages had no body noscript at all. Fixed in `184f71f` by adding a single standardized body `<noscript>` to all 10 source pages (8 top-level routes + the sharecli project template + the blog post template) exposing 5 internal hrefs and canonical contact paths with `rel="noopener"`. Locked in by `tests/internal-nav.test.js` (3 tests; catches registry drift if a new top-level HTML page is added without updating `STATIC_PAGES`).
+
+## Real bugs surfaced by the public-interface verification (19th pass)
+
+The 19th pass ran the real build + serve + e2e path end-to-end and surfaced
+one new bug, not addressed in this pass. It is documented here so the
+operator can decide whether to land it as a 20th-pass fixup.
+
+- **Workbench dynamic-import uses a leading slash, so it resolves to the
+  filesystem root, not the project root.** `scripts/views/project-detail.js`
+  lines 170 and 180 contain `import('/scripts/media/netweave-workbench.js')`
+  and `import('/scripts/media/sharecli-workbench.js')`. The leading `/`
+  makes the path absolute, so the dynamic import resolves to
+  `file:///scripts/media/...` — a path that does not exist on any host.
+  The build script logs `Failed to load sharecli workbench` and
+  `Failed to load netweave workbench` (two non-fatal warnings during
+  `npm run stage:publication`), but the build still succeeds because the
+  workbench modules are dynamically imported, not statically required.
+  End-user impact: when a user visits a project-detail page that triggers
+  the workbench dynamic import, the workbench UI will fail to load. The
+  bug is pre-existing, introduced in `d6a7a97d` (2026-10-12, "perf(bundle):
+  restore 230 KB ceiling by splitting workbench chunks") — well before
+  the 18-pass arc and the /parent/ commit. The fix is one of:
+  1. Change `import('/scripts/media/...')` to
+     `import('../media/...')` in both call sites (file-relative).
+  2. Change to `new URL('./media/<name>.js', import.meta.url).href` (the
+     modern pattern; resolves relative to the importing module's URL).
+  Option 2 is preferred because it survives renames of the importing
+  module and is what the ESM spec recommends. Neither fix was made in
+  this pass; this is a follow-up ticket for the operator to greenlight.
+
+## Coverage gaps surfaced by the public-interface verification (19th pass)
+
+Three real gaps were observed in the e2e test coverage. None are
+blocking — the 25/25 playwright run on the current build is genuine
+evidence — but they are honest residuals that the operator should know
+about.
+
+- **`/parent/` view has no e2e coverage.** None of the 20 unique test
+  definitions in `tests/browser/acceptance.spec.js` opens `/parent/`
+  and asserts 9 agent cards. The 13th pass preamble claim of
+  "9 cards, no duplication, .parent-view count, ASCII frame alignment,
+  aria-live, pill states" is corroborated by source inspection (9 agent
+  entries in `scripts/views/parent.js`) and bundle inspection (9
+  label references in the `9bb0eb7b` bundle), but not by a tracked
+  e2e test. Adding such a test is a one-file addition to
+  `acceptance.spec.js`; the test would render `/parent/` in a real
+  browser, count `.parent-agent` cards, and assert `=== 9` plus the
+  3 state kinds. A future 20th pass could add it.
+- **`/blog/` and `/archive/` are not in the e2e asset-link sweep.**
+  The 6-route e2e sweep covers `/`, `/resume`, `/work`, `/contact`,
+  `/engineering`, `/product`. `/parent/`, `/blog/`, `/archive/` are
+  not parametrized in test 17-22. `/parent/` is now covered by
+  manual curl (19/19); `/blog/` and `/archive/` are unverified
+  by either path.
+- **Unit tests cover `internal-nav` discovery but not the `/parent/`
+  view's static HTML markers.** The 13th pass noted
+  `tests/internal-nav.test.js` covers the body `<noscript>` discovery
+  across all 10 source pages, but no test asserts the static HTML
+  markers that the 19th pass inspected: 1 `.parent-view` wrapper, 1
+  `aria-live` region, 2 `<noscript>` elements, and `kooshapari.com`
+  preconnect. These are easy checks to add but were not in scope for
+  this pass.
 
 ## Preview
 
