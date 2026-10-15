@@ -163,11 +163,13 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
   );
 
   // The sharecli and netweave workbenches are dynamically imported so their
-  // bodies stay out of the main bundle. The specifier is file-relative to
-  // this module: the bundle is at /bundled/app.bundle.<hash>.js and the
-  // workbench is at /scripts/media/<name>.js, so `../scripts/media/<name>`
-  // resolves to the same URL whether the import is triggered from the
-  // bundle in the browser or from this module during Node prerender.
+  // bodies stay out of the main bundle. The specifier below is deliberately
+  // file-relative to this module: Node's prerender resolves it against the
+  // module's real path on disk, and scripts/bundle-js.js rewrites it to the
+  // absolute `/scripts/media/<name>.js` URL when the modules are concatenated
+  // into the IIFE. Without that rewrite the browser would resolve it relative
+  // to the served bundle at /bundled/app.bundle.<hash>.js — that is
+  // /media/<name>.js, which 404s.
   if (project.slug === 'netweave') {
     import('../media/netweave-workbench.js')
       .then((m) => {
@@ -176,6 +178,10 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
         container.replaceChildren(el('h2', {}, 'Traffic field'), m.renderNetWeaveWorkbench());
       })
       .catch((err) => {
+        // Leave the prerendered heading in place so the section still reads as
+        // a section, and make the failure loud. A workbench that silently fails
+        // to mount is indistinguishable from a page that never had one, which
+        // is exactly how this shipped broken for so long.
         console.error('Failed to load netweave workbench:', err);
       });
   } else if (project.slug === 'sharecli') {
@@ -188,6 +194,10 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
         container.replaceChildren(el('h2', {}, 'Runtime boundary'), m.renderShareCliWorkbench());
       })
       .catch((err) => {
+        // Leave the prerendered heading in place so the section still reads as
+        // a section, and make the failure loud. A workbench that silently fails
+        // to mount is indistinguishable from a page that never had one, which
+        // is exactly how this shipped broken for so long.
         console.error('Failed to load sharecli workbench:', err);
       });
   }
