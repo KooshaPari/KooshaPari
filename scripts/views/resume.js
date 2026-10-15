@@ -118,6 +118,7 @@ export function renderResume(root) {
       el('h1', { 'data-reveal': 'up', 'data-reveal-delay': '50' }, 'Experience'),
       el('p', {
         class: 'lede',
+        'aria-live': 'polite',
         'data-reveal': 'up',
         'data-reveal-delay': '100',
       }, `${ROLES.length} roles, one thread: building systems that let teams move faster and ship with confidence.`),
