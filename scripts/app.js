@@ -120,7 +120,7 @@ function render() {
   } else if (route.view === 'project') {
     renderProjectDetail(viewRoot, route.slug, lens);
   } else if (route.view === 'resume') {
-    renderResume(viewRoot);
+    renderResume(viewRoot, lens);
   } else if (route.view === 'contact') {
     renderContact(viewRoot);
   } else if (route.view === 'parent') {

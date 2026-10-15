@@ -18,7 +18,11 @@ const TOP_LEVEL_ROUTES = [
   { file: 'engineering.html', route: { view: 'engineering', lens: 'engineering' }, render: (root) => renderHome(root, { projects: PROJECTS, lens: 'engineering' }) },
   { file: 'product.html', route: { view: 'product', lens: 'product' }, render: (root) => renderHome(root, { projects: PROJECTS, lens: 'product' }) },
   { file: 'work.html', route: { view: 'work' }, render: (root) => renderWorkCatalog(root, { projects: PROJECTS }) },
-  { file: 'resume.html', route: { view: 'resume' }, render: (root) => renderResume(root) },
+  // Render the default lens explicitly: `route.lens` stays unset so the SPA
+  // still resolves the visitor's stored/URL lens on hydration (app.js reads
+  // `route.lens` and would otherwise pin every returning visitor to
+  // engineering on a lens-agnostic route).
+  { file: 'resume.html', route: { view: 'resume' }, render: (root) => renderResume(root, 'engineering') },
   { file: 'contact.html', route: { view: 'contact' }, render: (root) => renderContact(root) },
   { file: 'parent.html', route: { view: 'parent' }, render: (root) => renderParent(root) },
   { file: 'blog.html', route: { view: 'blog' }, render: (root) => renderBlogIndex(root, { posts: POSTS }) },

@@ -24,11 +24,18 @@ const RESUME_EDUCATION = [
   },
 ];
 
-/** Derive skills from engineering persona competencies. */
-const SKILLS = PERSONAS.engineering.competencies.map((c) => ({
-  name: c.axis,
-  level: c.score,
-}));
+/**
+ * Derive skill rows from the selected persona's competencies.
+ * Falls back to the engineering persona when the lens is unknown or the
+ * persona is missing a competencies array, so the view never throws.
+ */
+function deriveSkills(lens) {
+  const competencies = PERSONAS[lens]?.competencies ?? PERSONAS.engineering.competencies;
+  return competencies.map((c) => ({
+    name: c.axis,
+    level: c.score,
+  }));
+}
 
 const BADGE_CLASS = {
   Engineering: 'resume-badge--eng',
@@ -111,7 +118,8 @@ function buildEducation(data) {
    Public API — called by app.js via import.
    ================================================================ */
 
-export function renderResume(root) {
+export function renderResume(root, lens = 'engineering') {
+  const skills = deriveSkills(lens);
   root.replaceChildren(
     el('section', { class: 'view active portfolio-view' },
       el('p', { class: 'eyebrow eyebrow--precision', 'data-reveal': 'fade' }, 'RESUME'),
@@ -146,7 +154,7 @@ export function renderResume(root) {
 
       /* --- Skills --- */
       buildSection('Skills', 'Skills', [
-        buildSkills(SKILLS),
+        buildSkills(skills),
       ]),
     ),
   );
