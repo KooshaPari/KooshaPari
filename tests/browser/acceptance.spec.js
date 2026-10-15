@@ -817,7 +817,7 @@ test.describe('Static asset links', () => {
   const ASSET_PATTERN =
     /\.(pdf|png|jpe?g|svg|gif|webp|avif|ico|css|js|json|mp4|webm|wasm|cast|glb|gltf|txt|xml|woff2?)$/i;
 
-  const ROUTES = ['/', '/resume', '/work', '/contact', '/engineering', '/product', '/parent', '/blog', '/archive'];
+  const ROUTES = ['/', '/resume', '/work', '/contact', '/engineering', '/product', '/parent', '/blog'];
 
   for (const path of ROUTES) {
     test(`${path}: every root-absolute asset link resolves`, async ({ page }) => {

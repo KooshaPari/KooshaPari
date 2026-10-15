@@ -30,7 +30,6 @@ const STATIC_PAGES = Object.freeze([
   'resume.html',
   'contact.html',
   'blog.html',
-  'archive.html',
   'work/sharecli.html',
   'blog/why-we-forked-omniroute.html',
 ]);
@@ -97,7 +96,7 @@ test('static-page registry matches the files actually on disk', async () => {
   // The 11 individual work/<slug>.html stubs remain excluded (see header).
   const expectedTopLevel = new Set([
     'index.html', 'parent.html', 'engineering.html', 'product.html', 'work.html',
-    'resume.html', 'contact.html', 'blog.html', 'archive.html',
+    'resume.html', 'contact.html', 'blog.html',
   ]);
   const rootEntries = (await readdir(PROJECT_ROOT, { withFileTypes: true }))
     .filter((e) => e.isFile() && e.name.endsWith('.html') && e.name !== '404.html')
