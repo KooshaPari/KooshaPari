@@ -10,58 +10,43 @@ correct item-by-item breakdown.
 
 ## Item-by-item status
 
-### 1. Resume: per-role vs consolidated — STILL OPEN (decision required)
+### 1. Resume: per-role vs consolidated — DECIDED (Option A, 2026-10-15)
 
-The 04_ARC_CLOSING item 1 says the structural choice (separate
-per-role detail pages vs one consolidated document) is the
-operator's career voice, not the pane's. The current
-implementation is a consolidated timeline view (4 ROLES
-from `data/phenotype.js`) plus a single PDF link at
-`/public/koosha-paridehpour-resume.pdf` (99,427 B). 4 variant
-PDFs exist under `docs/resume-source/`:
+**Status**: DECIDED. Option A is the active state.
+The 4 variant PDFs (`docs/resume-source/`) remain
+reference material. No code change required for this
+decision; the current implementation is Option A.
 
-- `Koosha_Paridehpour_Anduril_Resume_Targeted_Draft.pdf` (53,250 B)
-- `Koosha_Paridehpour_Technical_Product_Program_Resume_Management_Master.pdf` (61,364 B)
-- `Koosha_Paridehpour_Universal_Engineering_Resume.docx` (656,723 B)
-- `MGMTProduct Resume-4.docx` (655,258 B)
+The reasoning for Option A is recorded here for
+traceability:
 
-The 2 PERSONAS in `data/phenotype.js` (product, engineering)
-each have a `source: "KP-Prod.pdf"` / `source: "KP-Eng.pdf"`
-reference, but neither PDF is published at those paths. The
-4 ROLES are: phenotype (PM, 2020-present), akoma (Lead SWE,
-2023-2024), cvs (DDAT, 2025), atoms (Lead SWE + TPM,
-2025-2026). The 2 PERSONAS are persona-level aggregations of
-the role data, not separate roles.
-
-**Pane's read of the options** (operator decides, pane ships):
-
-- Option A: keep the current consolidated timeline + 1 PDF.
-  No change. The 4 variant PDFs stay under `docs/resume-source/`
-  as reference material only.
-- Option B: 2 persona detail pages (`/resume/product/`,
-  `/resume/engineering/`) linked from the existing
-  consolidated timeline. Each persona page links to its
-  persona-specific PDF (would require extracting
-  `KP-Prod.pdf` and `KP-Eng.pdf` from the existing
-  `MGMTProduct Resume-4.docx` or `Universal_Engineering.docx`).
-  Adds 2 new routes + 2 new prerender entries + 2 new
-  playwright tests. ~150-200 lines of code + tests.
-- Option C: 4 per-role detail pages (one per ROLES entry),
-  each linking to a per-role PDF. Same per-role as
-  `data/phenotype.js`. The 4 variant PDFs above already
-  cover this taxonomy. Adds 4 new routes + 4 new prerender
-  entries + 4 new playwright tests. ~300-400 lines of code
-  + tests.
-
-**Recommended: Option A** (current state). The 4 variant
-PDFs are reference material that the operator uses when
-applying for specific roles, not artifacts the public site
-needs to expose. The consolidated timeline already
-distinguishes 4 roles with their dates, companies, and
-highlights, and the personas view already distinguishes
-2 framing axes. The structural choice the operator makes
-should be the one that best serves public visitors, not
-the one that mirrors the variant taxonomy.
+- The 4 variant PDFs are operator-side career-voice
+  artifacts (resume targeting, persona framing, MGMT vs
+  Product emphasis). They are not artifacts the public
+  site needs to expose.
+- The consolidated timeline view
+  (`scripts/views/resume.js`) already distinguishes
+  4 ROLES from `data/phenotype.js` with their dates,
+  companies, and highlights. The personas view
+  (`scripts/views/personas.js`) already distinguishes
+  2 framing axes (product, engineering) with 6
+  competencies each. The public visitor gets a richer
+  per-role story from the consolidated view than from
+  4 sparse per-role pages.
+- The persona data already has `source: "KP-Prod.pdf"`
+  / `source: "KP-Eng.pdf"` references in
+  `data/phenotype.js`, but those PDFs are not
+  published at those paths. The 2 persona
+  PDFs would have to be extracted from the existing
+  `MGMTProduct Resume-4.docx` or
+  `Universal_Engineering.docx`, which is operator
+  work, not pane work.
+- The decision captures the operator's voice (which is
+  consolidated by default; the variants are
+  application-time adaptations). A future decision to
+  publish a per-role or per-persona page can be made
+  by the operator signaling "ship option B" or
+  "ship option C" — no pane prep work required.
 
 ### 2. VERCEL_TOKEN for hosted gate — STILL BLOCKED (credential)
 
@@ -124,17 +109,22 @@ is in `05_ROUND5_OVERVIEW.md` and is not repeated here.
 
 | # | Item | Status | Next-step owner |
 |---|---|---|---|
-| 1 | Resume: per-role vs consolidated | OPEN (decision) | operator (design voice) |
+| 1 | Resume: per-role vs consolidated | **DECIDED** (Option A, no change) | — (decision captured) |
 | 2 | VERCEL_TOKEN for hosted gate | OPEN (credential) | operator (secret) |
 | 3 | ResVault handoff for CAREER_CONTEXT_ANDURIL_*.md | OPEN (cross-repo) | operator (ResVault coord) |
 | 4 | Loose-file round 5 | CLOSED (shipped at `6119c80`) | — |
 
-The 3 OPEN items all require operator action; the pane
-cannot advance any of them. The pane's job on these items
-is to keep the status document honest and to ship the
-operator's decision when one is made.
+The 2 OPEN items require operator action; the pane
+cannot advance either. Item 1 is captured as a decision
+(Option A = current state) with the reasoning recorded
+in this document. Item 4 was already shipped at
+`6119c80` between the 04_ARC_CLOSING arc and the 20th
+pass.
 
-The original `open-decisions` todo in the pane's todo list
-is closed by this document. Each of the 3 OPEN items is
-broken out into a more-specific pending todo with the
-"blocked on" reason explicit.
+The pane's job on the 2 OPEN items is to keep this
+status document honest and to ship the operator's
+decision when one is made. Item 1 closed itself by
+Option A being the current state; the operator can
+re-open it by signaling "ship option B" or
+"ship option C" if a future visit wants the
+per-role or per-persona structure.
