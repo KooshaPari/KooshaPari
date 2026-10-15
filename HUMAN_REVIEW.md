@@ -81,10 +81,25 @@ spec, recording that it was authored 2026-09-11 and has not been
 adopted as the active design direction 33 days later; the spec
 body is unchanged. Both commits are docs-only: they touch no
 source, test, or detector surface, so the unit count is again
-carried forward from `184f71f` unchanged. The freshest product
-evidence remains the 2026-10-14 unit observation at `184f71f` and
-the 2026-10-09 browser observation at `debf320` (subject to the
-same load caveat, 220).
+carried forward from `184f71f` unchanged. Reconciled again
+2026-10-14 against `f44b23b`. `f44b23b` is
+`docs(session): add 04_ARC_CLOSING.md` — a 142-line
+terminal-state record for the doc-proliferation arc, tying
+all 8 commits this arc shipped together with the 3
+operator-decision items surfaced at the boundary (resume
+per-role vs consolidated, `VERCEL_TOKEN` for hosted gate,
+ResVault handoff for `CAREER_CONTEXT_ANDURIL_*.md`) and a
+newly-discovered 4th round of loose artifacts at the repo
+root (7 files, 25,244 B, 504 lines) flagged as round 5
+candidates for operator greenlight. The closing overview is
+the canonical place to record what shipped, what the operator
+owns, and what is the next iteration. The commit is docs-only
+(1 new file in the round-2 session folder, 0 source/test/
+detector surface change), so the unit count is again carried
+forward from `184f71f` unchanged. The freshest product
+evidence remains the 2026-10-14 unit observation at `184f71f`
+and the 2026-10-09 browser observation at `debf320` (subject
+to the same load caveat, 220).
 
 ## Why this is not production-ready
 
@@ -122,10 +137,10 @@ retained. Details in `VERIFICATION_REPORT.md`.
 
 | Gate | Result |
 |---|---|
-| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37`, `6ad2a63`, `97d145c`, `edc6731`, `94fb369`, `86700d2`, and `d052eb6` (all docs-only commits, no source/test/detector surface change). The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav |
-| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the eight 2026-10-14 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`, `97d145c` + `edc6731` + `94fb369` + `86700d2` + `d052eb6` counted as one docs-only quintuple; load average 344, 220, 220, 220, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
-| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the eight 2026-10-14 passes, same load caveat) |
-| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the eight 2026-10-14 passes) |
+| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37`, `6ad2a63`, `97d145c`, `edc6731`, `94fb369`, `86700d2`, `d052eb6`, `26599eb`, and `f44b23b` (all docs-only commits, no source/test/detector surface change). The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav |
+| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the nine 2026-10-14 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`, `97d145c` + `edc6731` + `94fb369` + `86700d2` + `d052eb6` + `26599eb` + `f44b23b` counted as one docs-only septuple; load average 344, 220, 220, 220, 220, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
+| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the nine 2026-10-14 passes, same load caveat) |
+| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the nine 2026-10-14 passes) |
 
 Reproduce with `npm run verify` (needs the Vercel CLI for the build step) or
 `npm test && npm run check && npm run test:e2e` for everything except the build.
