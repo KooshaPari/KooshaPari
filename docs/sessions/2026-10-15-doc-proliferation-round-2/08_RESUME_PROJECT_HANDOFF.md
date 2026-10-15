@@ -703,6 +703,36 @@ listed `archive.html` only as a member of
 and exists on disk. It never required a link or a view,
 so it passed 3/3 while the page was dead.
 
+#### Deploy preflight (2026-10-15, no deploy fired)
+
+Everything below is verified ready. Nothing has been
+deployed; that waits on the operator signal.
+
+| Check | State |
+|---|---|
+| Working tree | clean |
+| Prebuilt | `dist/bundled/app.bundle.0403d845.js`, 220,293 B (under the enforced 235,520 B cap) |
+| Pages staged | 29 (9 top-level + 15 `work/` + 5 `blog/`) |
+| Tests | 765/765 |
+| Build | 29 pages, 0 warnings |
+| Coverage gate | lines 93.43%, branches 92.39%, functions 86.37% vs 85 |
+| Detector | 0 violations across 29 patterns |
+| `npm run check` | clean |
+| Vercel CLI | installed |
+| Vercel auth | present at `~/Library/Application Support/com.vercel.cli/auth.json` |
+| Project link | `.vercel/project.json` exists |
+| Residual `/archive` refs | none in source, dist or sitemap |
+
+Note the auth path: `VERCEL_TOKEN` is **not** in a shell
+env, and `~/.vercel/auth.json` does not exist. The CLI's
+credential lives at the macOS-standard
+`~/Library/Application Support/com.vercel.cli/auth.json`.
+Anyone re-running this preflight should not conclude the
+CLI is unauthenticated from `~/.vercel` alone.
+
+Unblock phrases: **"ship prod"**, **"ship preview"**, or
+**"no ship"**.
+
 #### CRITICAL: every `.html` page URL was broken in the browser — FIXED `d0993df`
 
 This is the most serious bug found in the whole arc,
