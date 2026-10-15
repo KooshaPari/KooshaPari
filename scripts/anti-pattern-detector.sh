@@ -169,9 +169,39 @@ if [[ -n "$OVER_TARGET" ]]; then
   echo "$OVER_TARGET" | awk '{printf "  %s (%s lines)\n", $2, $1}' >&2
 fi
 
+# 28. Shipped JS bundle must stay under the 230 KB budget (docs: 235520 B).
+# The bundle is a build artifact under dist/, which .gitignore excludes, so a
+# missing bundle is a fresh-clone / build-not-run state rather than a
+# regression. Report that as a warning (the documented budget simply cannot be
+# evaluated) and only fail the gate when a bundle exists and is over cap.
+BUNDLE_CAP=235520
+BUNDLE=$(find dist/bundled -maxdepth 1 -name "app.bundle.*.js" 2>/dev/null | head -1)
+if [[ -z "$BUNDLE" ]]; then
+  echo "[detector] warning: no bundle found (dist/bundled/app.bundle.*.js);" >&2
+  echo "[detector]          run 'npm run stage:publication' to measure the 230 KB budget." >&2
+else
+  BUNDLE_BYTES=$(wc -c < "$BUNDLE" | tr -d ' ')
+  if [[ "$BUNDLE_BYTES" -gt "$BUNDLE_CAP" ]]; then
+    note "28" "shipped JS bundle exceeds the 230 KB budget" "$BUNDLE" "$BUNDLE_BYTES B > $BUNDLE_CAP B cap"
+  fi
+fi
+
+# 29. Museum-quiet voice: no emoji in shipped resume/user-facing content.
+# Scoped to the resume data, its view + helpers, and the built resume page.
+# Uses rg --pcre2 because BSD grep has no -P. Ranges cover pictographs
+# (U+1F300-1FAFF) and misc symbols/dingbats (U+2600-27BF).
+EMOJI_FILES=""
+for ef in data/phenotype.js scripts/views/resume.js scripts/views/resume-helpers.js dist/resume.html; do
+  if [[ -f "$ef" ]]; then EMOJI_FILES+="$ef "; fi
+done
+if [[ -n "$EMOJI_FILES" ]]; then
+  M=$(rg -n --pcre2 '[\x{1F300}-\x{1FAFF}\x{2600}-\x{27BF}]' $EMOJI_FILES 2>/dev/null | head -1)
+  if [[ -n "$M" ]]; then note "29" "emoji in user-facing content" "${M%%:*}" "${M##*:}"; fi
+fi
+
 # Report
 if [[ "$VIOLATIONS" -eq 0 ]]; then
-  echo "[detector] 0 violations across 27 patterns."
+  echo "[detector] 0 violations across 29 patterns."
   exit 0
 fi
 printf "[detector] %d violation(s) found:\n" "$VIOLATIONS"
