@@ -607,19 +607,30 @@ regressing.** Coverage is now the last one standing.
 
 #### Audit totals
 
-Two passes:
+Recounted from the table itself, because the first
+totals I wrote were wrong.
 
-| | PASS | FAIL | UNCLEAR |
-|---|---|---|---|
-| At audit time | 6 | 3 | 1 |
-| After remediation | 7 | 1 (coverage) | 0 |
+| | PASS | GATED | FIXED | FAIL | UNCLEAR |
+|---|---|---|---|---|---|
+| At audit time | 6 | 0 | 0 | 3 | 1 |
+| After remediation | 5 | 2 | 2 | 1 | 0 |
 
-Two failures fixed (`de5d511`), one UNCLEAR resolved into
-an enforced gate (`9380916`), one FAIL deliberately left
-open with the exact fix specified. Three bugs found
-outside the audit itself: the `/work` dynamic imports
-(`bb59100`), orphaned `radar.css` (`3b8930d`), and the
-inert lens control (`6982683`).
+That is **9 of 10 constraints satisfied** (5 always-passed, 2
+newly gated, 2 fixed), with coverage the single remaining FAIL.
+
+An earlier revision of this document claimed "7 PASS"
+after remediation. That was an undercount: it counted a
+GATED or FIXED constraint as still-failing rather than
+satisfied. The corrected count is 9, and it is stated here
+by recounting the table rows rather than by carrying a
+number forward.
+
+Remediation: two constraints fixed (`de5d511`), one UNCLEAR
+resolved into an enforced gate (`9380916`), one FAIL left open
+with the exact fix specified. Three bugs were found outside
+the audit itself: the `/work` dynamic imports (`bb59100`),
+orphaned `radar.css` (`3b8930d`), and the inert lens control
+(`6982683`).
 
 **The pattern worth naming: constraints with gates hold;
 constraints without gates drift.** Every bug found in
@@ -627,12 +638,29 @@ this arc was invisible to the 7-step curl recipe, because
 that recipe proves identity and availability, not
 behaviour.
 
-#### Standing warning: bundle-js.js is over the size target
+#### Resolved: bundle-js.js size target — REGRESSION I INTRODUCED, `8e6fa31`
 
-`scripts/bundle-js.js` is now 408 lines after the `bb59100`
-dynamic-import fix, over the 350-line target (within the 500
-hard limit). The pre-commit detector warns on this. Decomposing
-it is the obvious next step if that file is touched again.
+This section previously said decomposition was
+deferred. It was not deferred, because the
+over-length file was **my own regression** from
+`bb59100`, not a pre-existing condition.
+
+`bundle-js.js` went 340 -> 408 lines when I added the
+dynamic-import rewrite, making it the only file in
+`scripts/` over the 350 target (the 500 hard limit was
+never breached). The rewrite is one cohesive build-step
+concern, so it moved to `scripts/rewrite-dynamic-imports.js`
+(93 lines) and `bundle-js.js` is back to exactly 350.
+
+Proof it is a pure move: the emitted bundle is
+byte-identical, sha256 `2251bb96...`, confirmed with `cmp`,
+and all 11 lines of the guard's error output were
+diffed against HEAD unchanged. The guard still fires.
+
+Note for the next owner: 350 is exactly at the target, so
+this file will trip the warning again on the next
+substantial addition. Decompose the module walker next
+time it is touched for a real reason.
 
 #### Out of scope but found: broken dynamic imports in /work — FIXED `bb59100`
 
