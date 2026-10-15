@@ -9,6 +9,7 @@ import { renderWorkCatalog } from './views/work.js';
 import { renderProjectDetail } from './views/project-detail.js';
 import { renderResume } from './views/resume.js';
 import { renderContact } from './views/contact.js';
+import { renderParent } from './views/parent.js';
 import { renderBlogIndex } from './views/blog-index.js';
 import { renderBlogPost } from './views/blog-post.js';
 
@@ -19,6 +20,7 @@ const TOP_LEVEL_ROUTES = [
   { file: 'work.html', route: { view: 'work' }, render: (root) => renderWorkCatalog(root, { projects: PROJECTS }) },
   { file: 'resume.html', route: { view: 'resume' }, render: (root) => renderResume(root) },
   { file: 'contact.html', route: { view: 'contact' }, render: (root) => renderContact(root) },
+  { file: 'parent.html', route: { view: 'parent' }, render: (root) => renderParent(root) },
   { file: 'blog.html', route: { view: 'blog' }, render: (root) => renderBlogIndex(root, { posts: POSTS }) },
 ];
 

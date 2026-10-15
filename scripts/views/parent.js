@@ -130,7 +130,7 @@ export function renderParent(root) {
           (a) => `| ${a.label.padEnd(20)} | ${(STATE_LABEL[a.state] ?? a.state).padEnd(12)} |`,
         ),
         '+----------------------+--------------+',
-        `| ${String(AGENTS.length).padStart(2)} agents${' '.repeat(14)}|`,
+        `| ${String(AGENTS.length).padEnd(20)} | ${`${AGENTS.length} agents`.padEnd(12)} |`,
         '+----------------------+--------------+',
       ].join('\n'),
     ),
@@ -163,12 +163,22 @@ export function renderParent(root) {
   const live = el('p', { class: 'parent-sr-only', role: 'status', 'aria-live': 'polite' });
   view.appendChild(live);
 
-  const timer = setInterval(() => {
-    lastRefresh = new Date();
-    paintStamp();
-    live.textContent = `Snapshot refreshed at ${formatTime(lastRefresh)}`;
-  }, REFRESH_MS);
+  // No interval in a prerender/build context: a live timer would keep the Node
+  // process alive after `prerenderTopLevel` finishes, hanging the build. The
+  // page reloads on navigation, so the browser still gets a fresh stamp.
+  const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
 
-  root.appendChild(view);
+  const timer = isBrowser
+    ? setInterval(() => {
+        lastRefresh = new Date();
+        paintStamp();
+        live.textContent = `Snapshot refreshed at ${formatTime(lastRefresh)}`;
+      }, REFRESH_MS)
+    : null;
+
+  // replaceChildren, not appendChild: matches every peer view (contact.js:194 and
+  // friends) and prevents a previous Parent view lingering in the root when the
+  // route is re-rendered, which would duplicate the whole view.
+  root.replaceChildren(view);
   return { refreshMs: REFRESH_MS, timer };
 }
