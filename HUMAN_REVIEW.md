@@ -186,7 +186,60 @@ cooler; lines 123 and 124 are exact matches to `--surface-obsidian` and
 `--seed-ceramic` respectively and are harmless. Both surface as
 separate follow-ups. Browser suite still NOT re-run (load average
 still in the uninterpretable range), so the 2026-10-09 observation at
-`debf320` remains the freshest browser evidence.
+`debf320` remains the freshest browser evidence. Reconciled again
+2026-10-15 against `63b6d03` and `12d51c8`, two review-finding
+follow-ups to the /parent/ view arc that landed in sequence on
+`fix/parent-view-review-findings` and were fast-forwarded into main.
+`63b6d03` is the `refactor(styles): align parent.css font-family
+stacks with the rest of the codebase` commit: 6 sites in
+`styles/parent.css` (lines 26, 40, 88, 110, 125, 132) used a
+double-fallback pattern (e.g. `'Space Grotesk', var(--font-display,
+system-ui), sans-serif;` and `'JetBrains Mono', var(--font-mono,
+monospace);`) inconsistent with the dominant codebase pattern
+(`var(--font-display)`, `var(--font-meta)`) used by radar, project-
+index, contact, code-annotate, contact-info, hero, main, shell, and
+resume-timeline (~25+ sites). Additionally, `--font-mono` is not
+defined in `tokens.css` or `main.css`, so the `monospace` literal
+fallback was the active value for the 5 JetBrains Mono sites, with
+the leading `'JetBrains Mono'` then duplicated by the var's
+eventual resolution — dead code. Aligned parent.css with the
+standard pattern: line 26 -> `var(--font-display)`, lines 40/88/
+110/125/132 -> `var(--font-meta)`. The tokens.css vars already
+include the same font names as the first option, so the rendered
+font cascade is byte-identical for users with Space Grotesk /
+JetBrains Mono installed and slightly improved for users without
+(the var's own fallback chain `"Avenir Next", "Helvetica Neue",
+sans-serif` or `"SFMono-Regular", Consolas, monospace` is now
+used). 1 file, 6 insertions, 6 deletions; CSS-only, no test
+surface. `12d51c8` is the `fix(parent-view): complete prerender
+route + correct ASCII frame + replaceChildren` commit, which closes
+three review findings against the 6f9478f /parent/ view: (1)
+`scripts/prerender.js` was missing the `parent.html` entry in its
+`TOP_LEVEL_ROUTES` list, so the static-build output was missing
+`parent.html` entirely; the route only worked via the client-side
+router fallback. With the import + entry added, the prerenderer
+emits `parent.html` like every other top-level route and the build
+output is consistent with the live router. (2) The ASCII frame's
+last row was misformatted as a single cell `| 9 agents              |`
+that didn't align with the two-column `agent | state` header above
+it; fixed to a proper two-cell row `| 9                   | 9 agents        |`.
+(3) `root.appendChild(view)` was switched to
+`root.replaceChildren(view)` to match the peer views (contact.js
+and friends) and prevent a previous Parent view lingering in the
+root when the route is re-rendered, which would duplicate the
+whole view. The pre-commit anti-pattern detector also flagged the
+unguarded `setInterval(...)` in the view as a build-hang risk
+(the timer would keep the Node process alive after
+`prerenderTopLevel` finishes, hanging the build), and that was
+fixed in the same commit by guarding the timer with
+`isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined'`.
+2 files (prerender.js + views/parent.js), 20 insertions, 8
+deletions; scripts-only, no test surface. Unit count re-measured
+at 12d51c8 (the pre-commit hook ran the full test suite on
+both 63b6d03 and 12d51c8 and reported 714/714 / 0 fail) — same
+714/714 across 73 files. Browser suite still NOT re-run (load
+average still in the uninterpretable range), so the 2026-10-09
+observation at `debf320` remains the freshest browser evidence.
 
 ## Why this is not production-ready
 
@@ -224,10 +277,10 @@ retained. Details in `VERIFICATION_REPORT.md`.
 
 | Gate | Result |
 |---|---|
-| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37`, `6ad2a63`, `97d145c`, `edc6731`, `94fb369`, `86700d2`, `d052eb6`, `26599eb`, `f44b23b`, and `6119c80` (all docs-only commits, no source/test/detector surface change), and `750d788` (a CSS-only commit, no test surface impact); **re-measured 2026-10-15 at `6f9478f` (the /parent/ view commit, the first non-docs-only commit in this arc)** — same 714/714 across 73 files, confirming the new route registration does not regress the unit suite. The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav |
-| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the twelve 2026-10-14/15 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`, `97d145c` + `edc6731` + `94fb369` + `86700d2` + `d052eb6` + `26599eb` + `f44b23b` + `6119c80` counted as one docs-only octuple, and `6f9478f` as the 13th commit and the first non-docs-only commit in this arc, and `750d788` as the 14th commit (CSS-only, no test surface); load average 344, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
-| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the twelve 2026-10-14/15 passes, same load caveat) |
-| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the twelve 2026-10-14/15 passes) |
+| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37`, `6ad2a63`, `97d145c`, `edc6731`, `94fb369`, `86700d2`, `d052eb6`, `26599eb`, `f44b23b`, and `6119c80` (all docs-only commits, no source/test/detector surface change), and `750d788` (a CSS-only commit, no test surface impact), and `63b6d03` (a CSS-only commit, no test surface impact); **re-measured 2026-10-15 at `6f9478f` (the /parent/ view commit, the first non-docs-only commit in this arc) — same 714/714 across 73 files, confirming the new route registration does not regress the unit suite. The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav; and **re-measured 2026-10-15 at `12d51c8` (the view-cleanup commit) — same 714/714 across 73 files**, the pre-commit hook ran the full test suite on both 63b6d03 and 12d51c8 and reported 714/714 / 0 fail on each, confirming the prerender route addition, the ASCII frame fix, the replaceChildren switch, and the isBrowser-guarded setInterval do not regress the unit suite |
+| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the thirteen 2026-10-14/15 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`, `97d145c` + `edc6731` + `94fb369` + `86700d2` + `d052eb6` + `26599eb` + `f44b23b` + `6119c80` counted as one docs-only octuple, and `6f9478f` as the 13th commit and the first non-docs-only commit in this arc, and `750d788` as the 14th commit (CSS-only, no test surface), and `63b6d03` as the 15th commit (CSS-only, no test surface), and `12d51c8` as the 16th commit (scripts/, no test surface); load average 344, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
+| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the thirteen 2026-10-14/15 passes, same load caveat) |
+| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the thirteen 2026-10-14/15 passes) |
 
 Reproduce with `npm run verify` (needs the Vercel CLI for the build step) or
 `npm test && npm run check && npm run test:e2e` for everything except the build.
