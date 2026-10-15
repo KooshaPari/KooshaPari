@@ -764,6 +764,49 @@ test.describe('Scroll reveal', () => {
   });
 });
 
+test.describe('Parent view', () => {
+  // The /parent/ view (added in 6f9478f) is the consolidated cockpit landing
+  // and is fully JS-rendered: the static HTML only carries the wrapper and
+  // the aria-live region. The 9 agent cards, the ASCII snapshot frame, and
+  // the refresh stamp are built at runtime by scripts/views/parent.js once
+  // the bundle hydrates. This test waits for the JS-rendered children, then
+  // asserts the authored roster and its 3+3+3 state distribution.
+  test('renders 9 agent cards across 3 state kinds with a snapshot frame and a refresh stamp', async ({ page }) => {
+    const response = await page.goto(`${BASE}/parent/`);
+    expect(response?.ok(), '/parent/: page itself did not load').toBeTruthy();
+
+    // The agent list is JS-rendered; wait for the first card to appear.
+    const agents = page.locator('.parent-agent');
+    await expect(agents).toHaveCount(9, { timeout: 10_000 });
+
+    // 3+3+3 state distribution: 3 current, 3 research, 3 historical.
+    // The state is encoded in the pill's class as
+    // `parent-agent__pill--<state>` (see scripts/views/parent.js:78).
+    for (const state of ['current', 'research', 'historical']) {
+      await expect(
+        page.locator(`.parent-agent__pill--${state}`),
+        `${state}: expected 3 pills`,
+      ).toHaveCount(3);
+    }
+
+    // The snapshot frame is a <pre> with 9 agent rows + 3 border rows +
+    // 1 summary row = 13 lines.
+    const frame = page.locator('.parent-snapshot__frame');
+    await expect(frame).toBeVisible();
+    await expect(frame).toContainText('9 agents');
+
+    // The refresh stamp is the <p class="parent-stamp"> element painted by
+    // renderParent() on first render and refreshed every 900_000 ms.
+    const stamp = page.locator('.parent-stamp');
+    await expect(stamp).toBeVisible();
+    await expect(stamp).toContainText('Snapshot');
+
+    // The aria-live region announces refreshes; this is the
+    // accessibility hook called out in the 13th-pass preamble.
+    await expect(page.locator('[aria-live]').first()).toBeVisible();
+  });
+});
+
 test.describe('Static asset links', () => {
   // The resume download used to point at /koosha-paridehpour-resume.pdf while
   // the file is published under /public/. It rendered a perfectly ordinary
@@ -774,7 +817,7 @@ test.describe('Static asset links', () => {
   const ASSET_PATTERN =
     /\.(pdf|png|jpe?g|svg|gif|webp|avif|ico|css|js|json|mp4|webm|wasm|cast|glb|gltf|txt|xml|woff2?)$/i;
 
-  const ROUTES = ['/', '/resume', '/work', '/contact', '/engineering', '/product'];
+  const ROUTES = ['/', '/resume', '/work', '/contact', '/engineering', '/product', '/parent', '/blog', '/archive'];
 
   for (const path of ROUTES) {
     test(`${path}: every root-absolute asset link resolves`, async ({ page }) => {
