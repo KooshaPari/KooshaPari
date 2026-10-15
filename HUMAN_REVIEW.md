@@ -124,7 +124,44 @@ test, or detector surface, so the unit count below is again carried
 forward from `184f71f` unchanged. The freshest product evidence
 remains the 2026-10-14 unit observation at `184f71f` and the
 2026-10-09 browser observation at `debf320` (subject to the same
-load caveat, 220).
+load caveat, 220). Reconciled again 2026-10-15 against `6f9478f`, the
+`koosha-phenotype: add /parent/ view as default landing` commit. This is
+the first non-docs-only commit since `184f71f` (or any source/test/detector
+surface change in this arc), so the unit count below is **re-measured** at
+this commit rather than carried forward. `npm test` (the canonical runner,
+`node --test tests/*.test.js`) reports 714/714 pass across 73 test files —
+the same count as `184f71f` — confirming the /parent/ registration in
+`scripts/app.js` (import + dispatch), `scripts/components/shell.js` (top-nav
+ROUTES), `scripts/router-helpers.js` (VIEW_ROUTES), `tests/internal-nav.test.js`
+(STATIC_PAGES, x2), `scripts/stage-publication.js` (the third top-level-page
+enumeration; this is the place the repo's own tests caught the first two
+omissions), and `vercel.json` (`/parent` -> `/parent.html` rewrite) all
+land without breaking existing coverage. The commit adds three new files
+(`parent.html`, `scripts/views/parent.js`, `styles/parent.css`) totaling
+398 lines / 13,501 B, registered eagerly rather than lazy-loaded (the
+bundle is 214.8 KB minified against the 230 KB convention, ~15 KB
+headroom; the new view adds only 2.5 KB). Hard-constraint compliance: 0 new
+third-party scripts (only `/scripts/app.js`), 0 emoji, `prefers-reduced-motion:
+reduce` handled (`@media (prefers-reduced-motion: reduce) { .parent-agent
+{ transition: none; } .parent-agent:hover { transform: none; } }`),
+WCAG-minded (skip-link, aria-live region for the 15-min refresh stamp, the
+ASCII frame carries `aria-label="Agent state as a text frame"`). 7 hex
+fallback values appear inline in `styles/parent.css` (the `--seed-teal`
+accent token is reused; the other 6 are ink/grey values that should ideally
+flow through the existing token system — flagged below as a follow-up, not
+a blocker for this pass). The 15-min `setInterval` is corroborated from two
+independent 2026-10-11 artifacts but the 9-agent static roster is
+NOT live-verified against paperclip's `/api/agents` (the local origin is
+down; the public endpoint sits behind Cloudflare Access, so a public page
+cannot hold those credentials client-side) — the view source labels it as a
+starting point, not truth, so a future reader does not mistake the static
+list for the live registry. Authored by Instinct per the operator's
+directive; the commit is signed off here at 6f9478f with full tx-trailers
+(`tx-agent: jcode`, `tx-validated: test`, `tx-task: cockpit-phase-1`,
+`tx-scope: parent-view`, `tx-intent: land the consolidated cockpit view
+the operator directed`). Browser suite still NOT re-run (load average 220,
+same uninterpretable range per the caveat above), so the 2026-10-09
+observation at `debf320` remains the freshest browser evidence.
 
 ## Why this is not production-ready
 
@@ -162,10 +199,10 @@ retained. Details in `VERIFICATION_REPORT.md`.
 
 | Gate | Result |
 |---|---|
-| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37`, `6ad2a63`, `97d145c`, `edc6731`, `94fb369`, `86700d2`, `d052eb6`, `26599eb`, `f44b23b`, and `6119c80` (all docs-only commits, no source/test/detector surface change). The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav |
-| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the ten 2026-10-14/15 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`, `97d145c` + `edc6731` + `94fb369` + `86700d2` + `d052eb6` + `26599eb` + `f44b23b` + `6119c80` counted as one docs-only octuple; load average 344, 220, 220, 220, 220, 220, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
-| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the ten 2026-10-14/15 passes, same load caveat) |
-| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the ten 2026-10-14/15 passes) |
+| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37`, `6ad2a63`, `97d145c`, `edc6731`, `94fb369`, `86700d2`, `d052eb6`, `26599eb`, `f44b23b`, and `6119c80` (all docs-only commits, no source/test/detector surface change); **re-measured 2026-10-15 at `6f9478f` (the /parent/ view commit, the first non-docs-only commit in this arc)** — same 714/714 across 73 files, confirming the new route registration does not regress the unit suite. The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav |
+| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the eleven 2026-10-14/15 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`, `97d145c` + `edc6731` + `94fb369` + `86700d2` + `d052eb6` + `26599eb` + `f44b23b` + `6119c80` counted as one docs-only octuple, and `6f9478f` as the 13th commit and the first non-docs-only commit in this arc; load average 344, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
+| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the eleven 2026-10-14/15 passes, same load caveat) |
+| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the eleven 2026-10-14/15 passes) |
 
 Reproduce with `npm run verify` (needs the Vercel CLI for the build step) or
 `npm test && npm run check && npm run test:e2e` for everything except the build.
