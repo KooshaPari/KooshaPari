@@ -420,3 +420,113 @@ Note also that `dist/` is gitignored
 (`.gitignore:8`). A clean `git status` therefore says
 nothing about whether the prebuilt is current; only the
 `stage:publication` rebuild does.
+
+### 2026-10-15: deep verification pass (beyond the 7-step recipe)
+
+The 7-step recipe is curl-shaped: it proves *identity*
+and *availability*, not *rendered behaviour*. A second
+pass exercised the rendered page, the JS-enabled path,
+and the claimed hard constraints. Findings below.
+
+#### What the shallow recipe could NOT see
+
+The prerendered `/resume` **does** render the real
+consolidated timeline: all 4 roles present with correct
+company and title (`Phenotype`, `Akoma`, `CVS Health`,
+`Atoms.Tech`), 4 `.resume-node` entries, 4
+`.resume-node__company`, 3 `.resume-section`, 6
+`.resume-skill__bar-fill`, 1 h1, 3 h2. It is a real
+page, not a shell.
+
+The JS-enabled SPA path **works**, proven by driving a
+real browser against a local preview with JS on: the
+router resolves `/resume` -> `renderResume()`, the SPA
+overwrites the prerendered markup in `#view-root`, and
+there were zero console or page errors. 8 distinctive
+`resume.js` literals survive minification into the
+bundle (`resume-badge--eng`, `resume-skill__bar-fill`,
+etc.). `vercel.json` does carry `/resume ->
+/resume.html`.
+
+#### Finding 1 — `aria-live` claim is FALSE as written (a11y)
+
+The handoff's hard-constraint table lists "Skip-link +
+`aria-live`" as satisfied. **The skip-link is real**;
+the aria-live claim is not.
+
+```
+grep -c "aria-live" scripts/views/resume.js   -> 0
+```
+
+Every other view has one (`home.js`, `parent.js`,
+`work.js`, `work-index.js` x2). The resume view is the
+only one with none, and the built `dist/resume.html` has
+zero `aria-live` and zero `role="status"`. So the resume
+view does **not** announce dynamic changes.
+
+This is a real gap against a stated non-negotiable, and
+it is also an inconsistency: four other views already
+do this, so the fix is to follow an existing pattern
+rather than invent one.
+
+#### Finding 2 — a layout-property animation (perf)
+
+```
+styles/resume-timeline.css:192
+.resume-skill__bar-fill { transition: width 0.8s var(--ease-out); }
+```
+
+`width` is a layout property, which contradicts the
+"60fps transform/opacity" constraint. In practice it is
+**dead code** — `resume.js:89` sets the width inline once
+and never mutates it, so no transition ever fires. It is
+also outside the reduced-motion block, so it would animate
+unconditionally if the width ever became dynamic. Low
+severity, real defect, cheap to remove.
+
+#### Finding 3 — product persona skills are never rendered
+
+`SKILLS = PERSONAS.engineering.competencies`
+(`resume.js:28`). Only the engineering persona's 6
+competencies reach the page; 0 of 6 product competencies
+do. This is long-standing, not a regression, and it is
+consistent with "Option A = engineering-first". But if
+Option A was meant to surface both personas, this half is
+unmet. Flagged as a **decision question**, not a bug.
+
+#### Hard-constraint audit: 6 PASS / 3 FAIL / 1 UNCLEAR
+
+| Constraint | Status | Note |
+|---|---|---|
+| Hex via tokens | PASS | 0 hex in `resume-timeline.css`; 0 of 44 resume rules in the shipped CSS bundle. The 3 inline hex in `data/phenotype.js` are PERSONAS *data* values that `resume.js` never reads. |
+| 0 new font families | PASS | 2 declarations, both token refs (`var(--font-display)`, `var(--font-meta)`). |
+| Bundle cap 230 KB | **FAIL** | 220,028 B = 214.87 KB, 93.4% used, 15.13 KB headroom. In budget but **unenforced** — `bundle-js.js` only `console.log`s the size, `.github/` has no CI at all (only dependabot.yml), and `package.json` has no budget script. |
+| 0 emoji | UNCLEAR | Zero emoji today, but no detector rule forbids them, so this drifts silently. |
+| `prefers-reduced-motion` | PASS | Real rule at `resume-timeline.css:253-258`; `reveal.css:64-73` forces `opacity:1; transform:none; transition:none`. |
+| Skip-link + `aria-live` | **FAIL** | Skip-link PASS. aria-live absent (Finding 1). |
+| 60fps transform/opacity | **FAIL** | Dead `transition: width` (Finding 2). Reveal animation itself is clean. |
+| 4 ROLES + 2 PERSONAS | PASS | `ROLES.length === 4`, `Object.keys(PERSONAS)` = 2, confirmed by node import. |
+| Tests + 85% coverage floor | **FAIL** | 7 tests, 7 pass, both helpers fully covered — but coverage is **measured nowhere**: no `coverage`/`c8`/`nyc` in `package.json` or `.github/`. The floor is documentation, not a gate. |
+| File size <=350/<=500 | PASS | All 6 files under target; `phenotype.js` is the largest at 322. |
+
+The pattern worth naming: **the constraints that are
+enforced (hex, fonts, file size) hold; the ones that are
+merely documented (bundle cap, coverage floor, emoji) do
+not have gates and are one careless commit from
+regressing.** That is the highest-leverage thing for the
+next owner to fix, and it is cheaper than fixing any
+individual violation.
+
+#### Out of scope but found: broken dynamic imports in /work
+
+The bundle's dynamic `import("../media/netweave-workbench.js")`
+and `import("../media/sharecli-workbench.js")` resolve to
+`/media/*.js`, but the files live at `dist/scripts/media/`.
+Observed `net::ERR_ABORTED` on `/work/netweave` and
+`/work/sharecli`; the workbench subtree never mounts. The
+error is swallowed by a `.catch` that only logs, so the
+page still renders its heading — a silent failure.
+
+This is **not** a resume defect: resume is slug-gated and
+fires neither import. Recorded here only so it is not
+rediscovered from scratch.
