@@ -502,15 +502,58 @@ problem, since there is nothing left to guard.
 carry the same layout-property pattern — `radar.css:102`,
 `shell.css:68`, `cast-player.css:250`, `artifacts.css:82`.
 
-#### Finding 3 — product persona skills are never rendered
+#### Finding 3 — the lens control on /resume was INERT — FIXED `6982683`
 
-`SKILLS = PERSONAS.engineering.competencies`
-(`resume.js:28`). Only the engineering persona's 6
-competencies reach the page; 0 of 6 product competencies
-do. This is long-standing, not a regression, and it is
-consistent with "Option A = engineering-first". But if
-Option A was meant to surface both personas, this half is
-unmet. Flagged as a **decision question**, not a bug.
+This started as "product persona skills are never
+rendered" and turned out to be a **visible control that
+did nothing**, which is a bug rather than a taste
+question.
+
+The lens switcher is global shell chrome:
+`components/shell.js:59-77` builds it unconditionally and
+injects it into the header on **every** route, so it is
+visible on `/resume`. But `renderResume(root)` took no
+lens argument and `SKILLS` was hardcoded to
+`PERSONAS.engineering.competencies`. Clicking Product on
+`/resume` changed nothing.
+
+`renderResume(root, lens = 'engineering')` now derives via
+`deriveSkills(lens)` -> `PERSONAS[lens].competencies`,
+falling back to engineering via `??` on an unknown lens so
+the view cannot throw. `app.js:123` passes the resolved
+lens, matching the sibling call sites.
+
+One trap worth recording: setting `route.lens` in
+`prerender.js` would have been a **regression**.
+`app.js:90` does `if (route.lens) lensState.set(route.lens)`,
+which would pin every returning visitor to engineering on a
+lens-agnostic route and defeat both localStorage and URL
+resolution. `resume.html` therefore renders the default
+lens explicitly while leaving `route.lens` unset, so
+static output is byte-identical to before.
+
+Also corrected: the skill rows do **not** use
+`BADGE_CLASS` (that map is consumed only by `buildNode`
+for timeline role badges). Timeline badges derive from
+`ROLES[].framing[0]`, not the lens, so they correctly show
+one Product and three Engineering badges in both lens
+states. No CSS change was needed.
+
+Verified across five browser states, 0 console errors
+each: engineering lens, click Product, click back, direct
+`/resume?lens=product`, and default. Now guarded by 6
+mutation-tested tests at `3444968` (suite 714 -> 720).
+
+Competency axes behind the two lenses:
+
+| Engineering (default) | Product |
+|---|---|
+| Systems & Runtime 95 | Product Discovery 92 |
+| Distributed Backends 92 | Roadmap & Prioritization 88 |
+| AI / Agent Infra 90 | Cross-functional Leadership 95 |
+| Performance & Tooling 90 | Commercial / Unit Economics 90 |
+| Code Quality & Lifecycle 85 | Stakeholder & Sponsor Mgmt 92 |
+| Hardware / Virtualization 80 | Risk & Compliance Framing 80 |
 
 #### Hard-constraint audit: 6 PASS / 3 FAIL / 1 UNCLEAR
 
@@ -562,14 +605,27 @@ hold; the ones still merely documented (the coverage floor) do
 not have gates and are one careless commit from
 regressing.** Coverage is now the last one standing.
 
-**Audit totals:** 6 PASS / 3 FAIL / 1 UNCLEAR at audit time.
-After `de5d511` and `9380916`: **7 PASS, 1 FAIL (coverage),
-0 UNCLEAR** — two failures fixed, one UNCLEAR resolved into a
-gate, and one FAIL deliberately left open with the exact fix
-specified below.
+#### Audit totals
+
+Two passes:
+
+| | PASS | FAIL | UNCLEAR |
+|---|---|---|---|
+| At audit time | 6 | 3 | 1 |
+| After remediation | 7 | 1 (coverage) | 0 |
+
+Two failures fixed (`de5d511`), one UNCLEAR resolved into
+an enforced gate (`9380916`), one FAIL deliberately left
+open with the exact fix specified. Three bugs found
+outside the audit itself: the `/work` dynamic imports
+(`bb59100`), orphaned `radar.css` (`3b8930d`), and the
+inert lens control (`6982683`).
 
 **The pattern worth naming: constraints with gates hold;
-constraints without gates drift.**
+constraints without gates drift.** Every bug found in
+this arc was invisible to the 7-step curl recipe, because
+that recipe proves identity and availability, not
+behaviour.
 
 #### Standing warning: bundle-js.js is over the size target
 
@@ -636,7 +692,18 @@ and `!important` wins, so reduced-motion coverage was never the
 problem. So "4 bad width transitions" was wrong — it is 1 dead
 sheet and 3 correct decisions.
 
-Open option: delete `styles/radar.css` and its
-`bundle-css.js:186` entry. Left alone here because it is outside
-the resume scope and the blast radius (a whole sheet plus a
-bundle manifest entry) deserves its own deliberate change.
+Open option: `radar.css` was resolved — deleted at
+`3b8930d` after re-verifying all 9 of its selectors were
+unreferenced. Shipped CSS dropped 2,323 B. Note the same
+prior audit also recommended deleting `cast-player.css`,
+which would have broken a live media scrubber, so its
+list was **not** applied wholesale.
+
+#### Two smaller things found along the way
+
+- `BADGE_CLASS.resume-badge--leadership` is dead: no
+  role's `framing[0]` yields `Leadership`.
+- The SPA router renders the not-found view for any
+  `*.html` path, so `/resume.html` shows "Page not found"
+  while `/resume` works. Pre-existing and unrelated to
+  this arc, but worth its own ticket.
