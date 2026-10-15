@@ -115,7 +115,7 @@ In this repo (`/Users/kooshapari/CodeProjects/Phenotype/repos/koosha-phenotype`)
 
 | Path | Role | Size |
 |---|---|---|
-| `data/phenotype.js` | source of truth (ROLES, PERSONAS, EDUCATION, IDENTITY, TIMELINE, RECRUITER_STATS, PHENOTYPE, SOURCE) | 12,204 B |
+| `data/phenotype.js` | source of truth (ROLES, PERSONAS, EDUCATION, IDENTITY, TIMELINE, RECRUITER_STATS, PHENOTYPE, SOURCE) | 14,360 B source / 12,204 B built |
 | `scripts/views/resume.js` | consolidated timeline view | 4,892 B (157 lines) |
 | `scripts/views/resume-helpers.js` | `formatYear`, `formatYearRange` | 830 B (24 lines) |
 | `scripts/prerender.js` | build-time HTML walker | 7,286 B |
@@ -355,3 +355,68 @@ A fresh context reading this document plus the
 `06_OPEN_DECISIONS_STATUS.md`,
 `07_PUBLIC_INTERFACE_VERIFICATION.md`)
 has full context for the resume full project.
+
+## 2026-10-15: fresh-context ownership verification
+
+A fresh context took ownership by re-running the
+full 7-step recipe above. Result: **7/7 PASS, no
+regressions.** The handoff's recorded state was
+accurate.
+
+| Step | Expected (2026-10-15) | Observed |
+|---|---|---|
+| 1. ROLES count | 4 live / 4 prebuilt | 4 / 4 |
+| 1b. PERSONAS | 2 | 2 (`product`, `engineering`) |
+| 2. live data parity | byte-identical, 12204 B | IDENTICAL, 12204 B |
+| 3. `/resume` | 200 + resume content | HTTP/2 200, markers Koosha / Phenotype / RESUME |
+| 4. live PDF | identical, 99427 B | IDENTICAL, 99427 B |
+| 5. 4 variant PDFs | 404 | 404 x4 |
+| 6. `npm test` | 714/714 | 714/714 in 7.1s |
+| 7. `npm run stage:publication` | 30 pages, 0 warnings | 30 pages, 0 warnings |
+
+Bundle state unchanged: live `7b217faa.js`, prebuilt
+`app.bundle.8d6cbde8.js` (220,028 B). Item 5 remains
+INFORMATIONAL and operator-owned; no deploy was fired.
+
+### Corrections made by this verification pass
+
+Three defects in this document and its neighbours
+were found and fixed in place:
+
+1. **`data/phenotype.js` size was wrong in the table
+   above.** The source is 14,360 B / 316 lines. The
+   12,204 B figure is the *built* size after comment
+   stripping. Verified: the 27-line delta between
+   source and `dist/` is entirely comments; export
+   parity is 9 vs 9 and the non-comment diff is empty.
+   No code is lost in the build. A triage worker
+   initially misread this as a dropped re-export; the
+   re-export is present at `dist/data/phenotype.js:289`.
+2. **`dist/assets/` does not exist.** The hashed bundle
+   is emitted to `dist/bundled/app.bundle.<hash>.js`,
+   not `dist/assets/`. Any verification recipe that
+   looks under `dist/assets/` will report a false
+   UNKNOWN.
+3. **PERSONAS has no `id:` fields.** `PERSONAS` is an
+   object keyed `product` / `engineering`, so a grep for
+   `id: "engineering"` returns 0. Verify by key, not by
+   `id:`. The handoff's own recipe step 1 does not have
+   this bug, but it is an easy trap for the next owner.
+
+### Standing observation, not yet actioned
+
+The comment block at `data/phenotype.js:306-314`
+claims a "Public Record" tab in the SPA consumes
+`PUBLIC_RECORD`. No such view or route exists;
+`PUBLIC_RECORD` has no importer outside
+`tests/phenotype-profile.test.js`, which imports
+`data/phenotype-public-record.js` directly. The module
+is built and served live (11,343 B, HTTP 200) and the
+bundle inlines its body, so nothing is broken — the
+comment is simply stale. Correcting it was out of
+scope for this read-only verification pass.
+
+Note also that `dist/` is gitignored
+(`.gitignore:8`). A clean `git status` therefore says
+nothing about whether the prebuilt is current; only the
+`stage:publication` rebuild does.

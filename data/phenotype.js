@@ -306,9 +306,15 @@ export const SOURCE = {
 // ─────────────────────────────────────────────────────────────────────────────
 // PUBLIC_RECORD — Phase 2 external research, citation-backed
 // Generated 2026-08-25 from sage-agent web research. This object is ADDITIVE:
-// it does NOT replace or overwrite any resume-derived data above. The "Public
-// Record" tab in the SPA consumes this to render the Resume vs. Public-Record
-// contrast table and the citation-backed social/legal/patent findings.
+// it does NOT replace or overwrite any resume-derived data above.
+//
+// Corrected 2026-10-15: this comment previously claimed a "Public Record" tab
+// in the SPA consumed this object to render a Resume vs. Public-Record contrast
+// table. That claim was stale — no view or route consumes PUBLIC_RECORD. As of
+// 2026-10-15 the only importer is tests/phenotype-profile.test.js, which
+// imports data/phenotype-public-record.js directly. The module is built and
+// served live (11,343 B) and its body is inlined into the app bundle, so
+// nothing is broken; only the description was wrong.
 
 // Public record is citation-backed external research, split into its own module
 // to keep this profile file under the 350-line target. Re-exported here so the
