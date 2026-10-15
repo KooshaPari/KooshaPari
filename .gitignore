@@ -6,6 +6,16 @@ node_modules/
 .env*
 bundled/
 dist/
+# Root-only one-shot smoke harnesses. A `rt.tmp.mjs` route-test escape
+# was caught at the 17th 2026-10-15 HUMAN_REVIEW pass post-flight and
+# removed; the rule exists so the next one-shot (whether from a subagent
+# or the orchestrator) is silently dropped from `git status` instead of
+# landing in the repo root and being committed by accident. Subdir
+# `*.tmp.mjs` paths (e.g. `scripts/foo.tmp.mjs`) are NOT matched — the
+# leading `/` anchors the pattern to the repo root only. If you want a
+# permanent route-test harness, promote it to `tests/<name>.test.js` so
+# `node --test` picks it up.
+/*.tmp.mjs
 # `tests/` was ignored here while 69 test files were already tracked from the
 # absorb commits. Git honours .gitignore only for untracked paths, so the
 # tracked tests kept committing while every NEW test file was silently dropped:
