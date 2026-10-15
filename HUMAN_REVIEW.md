@@ -603,6 +603,19 @@ additions are 1 new test + 3 parametrized cases, all
 in `tests/browser/acceptance.spec.js` which is not part
 of the `npm test` run).
 
+The 4 items the 04_ARC_CLOSING document flagged as
+operator-decision boundaries have been re-analyzed in
+`docs/sessions/2026-10-15-doc-proliferation-round-2/06_OPEN_DECISIONS_STATUS.md`.
+**One of them (loose-file round 5) is already shipped at `6119c80`.**
+The other 3 (resume per-role vs consolidated, VERCEL_TOKEN
+for hosted gate, ResVault handoff for
+`CAREER_CONTEXT_ANDURIL_*.md`) are recorded in
+`06_OPEN_DECISIONS_STATUS.md` with the unblock action for
+each. The pane cannot advance any of the 3 OPEN items
+without operator input; the pane's job is to keep the
+status document honest and to ship the operator's decision
+when one is made.
+
 ## Preview
 
 No current preview URL is claimed. The deployment reference in the previous
