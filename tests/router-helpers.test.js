@@ -36,6 +36,52 @@ test('parseSegments strips leading slashes and filters empties', () => {
   assert.deepEqual(parseSegments(''), []);
 });
 
+test('parseSegments strips a trailing .html from the last segment only', () => {
+  assert.deepEqual(parseSegments('/resume.html'), ['resume']);
+  assert.deepEqual(parseSegments('/work/sharecli.html'), ['work', 'sharecli']);
+  assert.deepEqual(parseSegments('/a/b.html'), ['a', 'b']);
+  assert.deepEqual(parseSegments('/a/.html'), ['a', '.html']);
+  // Only the final segment is a document name; inner segments keep any dot.
+  assert.deepEqual(parseSegments('/work.d/mypage'), ['work.d', 'mypage']);
+  // A slug whose extension is not `.html` is untouched.
+  assert.deepEqual(parseSegments('/work/weird.name'), ['work', 'weird.name']);
+});
+
+test('parseRoute resolves a .html path to the same route as its bare twin', () => {
+  // Every page is a real static document on the host, so `/resume.html` is a
+  // reachable URL. It must render the resume view, not the not-found view.
+  assert.deepEqual(parseRoute('/resume.html'), parseRoute('/resume'));
+  assert.deepEqual(parseRoute('/contact.html'), parseRoute('/contact'));
+  assert.deepEqual(parseRoute('/parent.html'), parseRoute('/parent'));
+  assert.deepEqual(parseRoute('/blog.html'), parseRoute('/blog'));
+  assert.deepEqual(parseRoute('/work.html'), parseRoute('/work'));
+  assert.deepEqual(parseRoute('/engineering.html'), parseRoute('/engineering'));
+  assert.deepEqual(parseRoute('/product.html'), parseRoute('/product'));
+});
+
+test('parseRoute strips .html from slug routes too', () => {
+  assert.deepEqual(
+    parseRoute('/work/sharecli.html'),
+    { view: 'project', slug: 'sharecli' },
+  );
+  assert.deepEqual(
+    parseRoute('/blog/why-we-forked-omniroute.html'),
+    { view: 'post', slug: 'why-we-forked-omniroute' },
+  );
+  // URI decoding still applies after the extension is stripped.
+  assert.deepEqual(
+    parseRoute('/work/hello%20world.html'),
+    { view: 'project', slug: 'hello world' },
+  );
+});
+
+test('parseRoute still returns not-found for unknown .html paths', () => {
+  // Stripping the extension must not manufacture a route out of nothing.
+  assert.deepEqual(parseRoute('/totally-unknown.html'), { view: 'not-found' });
+  assert.deepEqual(parseRoute('/unknown/page.html'), { view: 'not-found' });
+  assert.deepEqual(parseRoute('/.html'), { view: 'not-found' });
+});
+
 test('parseRoute returns home for empty input', () => {
   assert.deepEqual(parseRoute(''), { view: 'home' });
   assert.deepEqual(parseRoute('/'), { view: 'home' });

@@ -11,7 +11,8 @@
  *   - routeToHash(route): legacy hash-route representation
  *   - applyLens(route, queryString): extract lens from ?lens=query
  *   - normalizeHash(raw): strip a leading '#' used for legacy hash routes
- *   - parseSegments(pathStr): split and filter a path string into segments
+ *   - parseSegments(pathStr): split a path into segments, dropping a
+ *     trailing '.html' from the last one
  *
  * All helpers are pure given their inputs.
  */
@@ -39,12 +40,38 @@ export function normalizeHash(raw) {
 }
 
 /**
- * Split a path string into non-empty segments with leading slashes stripped.
+ * Strip a trailing `.html` from the final segment.
+ *
+ * The static host serves every page as a real document (`/resume.html`,
+ * `/work/sharecli.html`, ...), so those URLs are reachable directly. Without
+ * this the client router resolved them to `not-found` and replaced the
+ * prerendered markup with the not-found view on hydration. Stripping the
+ * extension on the last segment resolves top-level views and slug routes
+ * alike, which is why it lives here rather than in a per-route branch.
+ *
+ * @param {string[]} segments
+ */
+function stripHtmlExtension(segments) {
+  const last = segments.length - 1;
+  if (last < 0) return segments;
+  const segment = segments[last].replace(/\.html$/i, '');
+  // A bare '.html' (or 'index.html' handled elsewhere) strips to '' and would
+  // leave a phantom empty segment; keep the original so it falls through to
+  // not-found as it always has.
+  if (segment === '' || segment === segments[last]) return segments;
+  return segments.map((value, index) => (index === last ? segment : value));
+}
+
+/**
+ * Split a path string into non-empty segments with leading slashes stripped
+ * and a trailing `.html` removed from the last segment.
  *
  * @param {string} pathStr
  */
 export function parseSegments(pathStr) {
-  return String(pathStr).replace(/^\/+/, '').split('/').filter(Boolean);
+  return stripHtmlExtension(
+    String(pathStr).replace(/^\/+/, '').split('/').filter(Boolean),
+  );
 }
 
 /**
@@ -56,6 +83,7 @@ export function parseSegments(pathStr) {
  *   '/work/my-slug' -> { view: 'project', slug: 'my-slug' }
  *   '/blog/post-name' -> { view: 'post', slug: 'post-name' }
  *   '/resume' -> { view: 'resume' }
+ *   '/resume.html' -> { view: 'resume' } (extension stripped, same as bare)
  *   unknown path -> { view: 'not-found' }
  *
  * @param {string} [input='']
