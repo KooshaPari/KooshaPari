@@ -183,7 +183,6 @@ const bundles = {
     'skeleton.css',
     'project-index.css',
     'work-catalog.css',
-    'radar.css',
     'timeline.css',
     'resume-timeline.css',
     'perspective-tilt.css',
