@@ -722,6 +722,48 @@ deployed; that waits on the operator signal.
 | Vercel auth | present at `~/Library/Application Support/com.vercel.cli/auth.json` |
 | Project link | `.vercel/project.json` exists |
 | Residual `/archive` refs | none in source, dist or sitemap |
+| **Playwright acceptance** | **28/28 passed**, 90s, exit 0 |
+
+The e2e suite is the acceptance-level gate and had
+**not been run at any point earlier in this arc**,
+which was a real gap. It runs unmodified
+(`npm run test:e2e`); `playwright.config.js` already
+pins `channel: 'chrome'`, so no override was needed
+even though Playwright ships no bundled browsers on
+this host.
+
+It confirms the artifact that would ship: 29 staged
+pages (`Hashed bundle references applied to 29
+page(s)`), and no stale 30-page assertion survives
+anywhere in `tests/` or `scripts/`. It also exercises
+the `ef17576` edit that removed `/archive` from the
+suite's ROUTES array.
+
+A separate manual route matrix over real Chrome
+against the preview server, 9 routes, confirms the
+specific fixes:
+
+| Route | Status | Renders | Console/page errors |
+|---|---|---|---|
+| `/resume` | 200 | 4-role timeline, 8 sections | 0 |
+| `/resume.html` | 200 | identical 2772-char body | 0 |
+| `/work` | 200 | Work Index | 0 |
+| `/work/sharecli` | 200 | workbench MOUNTED, 27 controls | 0 |
+| `/work/netweave` | 200 | workbench MOUNTED, 21 controls | 0 |
+| `/parent` | 200 | title "Parent — Koosha Paridehpour" | 0 |
+| `/archive` | 404 | not-found | 1 self-referential 404 |
+| `/definitely-not-a-real-path` | 404 | not-found | 1 self-referential 404 |
+| `/blog` | 200 | Writing | 0 |
+
+Honest limits on this evidence: the two 404 routes log
+one console error each — that is the browser logging its
+own 404 document, not a defect, so "0 console errors" is
+not literally true for those two. Workbench
+*interactivity* is evidenced by mount and control
+counts rather than an observed state transition. And
+this is the local preview server, so Vercel-only
+behaviour (rewrites, headers, CDN) is still unverified
+until a deploy happens.
 
 Note the auth path: `VERCEL_TOKEN` is **not** in a shell
 env, and `~/.vercel/auth.json` does not exist. The CLI's
