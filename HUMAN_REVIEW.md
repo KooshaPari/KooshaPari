@@ -99,7 +99,32 @@ detector surface change), so the unit count is again carried
 forward from `184f71f` unchanged. The freshest product
 evidence remains the 2026-10-14 unit observation at `184f71f`
 and the 2026-10-09 browser observation at `debf320` (subject
-to the same load caveat, 220).
+to the same load caveat, 220). Reconciled again 2026-10-15 against `6119c80`, the
+`chore(docs): doc-proliferation round 5` commit. That commit moves 11
+non-canonical `.md` files from the repository root and the one-deep
+subfolders `recruiting-funnel/` and `output/` into 8 new cluster
+subfolders of the round-2 session folder (`accessibility-report/`,
+`evidence-ledger/`, `migration-status/`, `redirect-parity/`,
+`verification-report/`, `recruiting-funnel/`, `portfolio-handoff/`,
+`output-audit/`). All 11 are R100 renames (0 insertions / 0 deletions
+against HEAD); history is preserved via `git log --follow` (e.g.,
+`recruiting-funnel/profile-calibration.md` -> `5b970c3` "Add
+recruiting funnel audit artifacts",
+`portfolio-handoff/portfolio-implementation-handoff.md` -> `9ac2bdb`
+"absorb(koosha-phenotype)",
+`verification-report/VERIFICATION_REPORT.md` -> `8fec2e5` "docs:
+correct post-slider-removal claims",
+`output-audit/audit-report-2026-09-12.md` -> `9ac2bdb`). The commit
+also adds `05_ROUND5_OVERVIEW.md` (151 lines) documenting the round-5
+rationale, byte/line breakdown, scope boundaries, and reproduction
+sequence, and corrects the `04_ARC_CLOSING.md` byte total from
+25,244 B (the 7-file first-pass count) to 48,751 B (the 11-file
+authoritative count). The commit is docs-only: it touches no source,
+test, or detector surface, so the unit count below is again carried
+forward from `184f71f` unchanged. The freshest product evidence
+remains the 2026-10-14 unit observation at `184f71f` and the
+2026-10-09 browser observation at `debf320` (subject to the same
+load caveat, 220).
 
 ## Why this is not production-ready
 
@@ -137,10 +162,10 @@ retained. Details in `VERIFICATION_REPORT.md`.
 
 | Gate | Result |
 |---|---|
-| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37`, `6ad2a63`, `97d145c`, `edc6731`, `94fb369`, `86700d2`, `d052eb6`, `26599eb`, and `f44b23b` (all docs-only commits, no source/test/detector surface change). The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav |
-| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the nine 2026-10-14 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`, `97d145c` + `edc6731` + `94fb369` + `86700d2` + `d052eb6` + `26599eb` + `f44b23b` counted as one docs-only septuple; load average 344, 220, 220, 220, 220, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
-| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the nine 2026-10-14 passes, same load caveat) |
-| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the nine 2026-10-14 passes) |
+| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37`, `6ad2a63`, `97d145c`, `edc6731`, `94fb369`, `86700d2`, `d052eb6`, `26599eb`, `f44b23b`, and `6119c80` (all docs-only commits, no source/test/detector surface change). The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav |
+| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the ten 2026-10-14/15 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`, `97d145c` + `edc6731` + `94fb369` + `86700d2` + `d052eb6` + `26599eb` + `f44b23b` + `6119c80` counted as one docs-only octuple; load average 344, 220, 220, 220, 220, 220, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
+| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the ten 2026-10-14/15 passes, same load caveat) |
+| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the ten 2026-10-14/15 passes) |
 
 Reproduce with `npm run verify` (needs the Vercel CLI for the build step) or
 `npm test && npm run check && npm run test:e2e` for everything except the build.
