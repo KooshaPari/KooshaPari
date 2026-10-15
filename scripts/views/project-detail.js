@@ -163,11 +163,13 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
   );
 
   // The sharecli and netweave workbenches are dynamically imported so their
-  // bodies stay out of the main bundle. `import('/scripts/media/...')` uses an
-  // absolute URL — a relative specifier would point at /bundled/../media/...,
-  // which resolves to /media/... and 404s in production.
+  // bodies stay out of the main bundle. The specifier is file-relative to
+  // this module: the bundle is at /bundled/app.bundle.<hash>.js and the
+  // workbench is at /scripts/media/<name>.js, so `../scripts/media/<name>`
+  // resolves to the same URL whether the import is triggered from the
+  // bundle in the browser or from this module during Node prerender.
   if (project.slug === 'netweave') {
-    import('/scripts/media/netweave-workbench.js')
+    import('../media/netweave-workbench.js')
       .then((m) => {
         const container = root.querySelector('[data-workbench="netweave"]');
         if (!container) return;
@@ -177,7 +179,7 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
         console.error('Failed to load netweave workbench:', err);
       });
   } else if (project.slug === 'sharecli') {
-    import('/scripts/media/sharecli-workbench.js')
+    import('../media/sharecli-workbench.js')
       .then((m) => {
         const container = root.querySelector('[data-workbench="sharecli"]');
         if (!container) return;

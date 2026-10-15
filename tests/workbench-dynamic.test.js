@@ -107,22 +107,26 @@ test('project-detail.js no longer statically imports either workbench', () => {
   );
 });
 
-test('project-detail.js dynamically imports each workbench by absolute URL', () => {
+test('project-detail.js dynamically imports each workbench by file-relative path', () => {
   const source = readFileSync(resolve(ROOT, 'scripts/views/project-detail.js'), 'utf8');
-  // The bundler concatenates the IIFE and serves it from
-  // `/bundled/app.bundle.<hash>.js`. A relative `import('../media/...')` would
-  // resolve against that URL and 404 in production — the absolute URL keeps
-  // it stable for both dev-server.js (which serves the scripts/ tree) and
-  // the deployed dist/.
+  // The specifier is file-relative to scripts/views/project-detail.js, so
+  // it resolves to scripts/media/<name>.workbench.js in source form and
+  // to /scripts/media/<name>-workbench.js when the bundle is served from
+  // /bundled/app.bundle.<hash>.js in production. The dev-server.js mounts
+  // the scripts/ tree directly, so a relative specifier also works there.
+  // (Prior commits used an absolute URL with a leading `/`, which worked
+  // in the browser but caused Node's prerender walker to log
+  // 'Failed to load <name> workbench' warnings because the leading slash
+  // made Node interpret the path as filesystem-rooted.)
   assert.match(
     source,
-    /import\(\s*['"]\/scripts\/media\/netweave-workbench\.js['"]\s*\)/,
-    'netweave workbench must be dynamically imported via absolute URL',
+    /import\(\s*['"]\.\.\/media\/netweave-workbench\.js['"]\s*\)/,
+    'netweave workbench must be dynamically imported via file-relative path',
   );
   assert.match(
     source,
-    /import\(\s*['"]\/scripts\/media\/sharecli-workbench\.js['"]\s*\)/,
-    'sharecli workbench must be dynamically imported via absolute URL',
+    /import\(\s*['"]\.\.\/media\/sharecli-workbench\.js['"]\s*\)/,
+    'sharecli workbench must be dynamically imported via file-relative path',
   );
 });
 
