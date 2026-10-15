@@ -77,18 +77,22 @@ solved, but in a different location.
 
 | Path | Bytes | Lines | Cluster candidate |
 |---|---|---|---|
-| `ACCESSIBILITY_REPORT.md` | 1,121 | 17 | a11y (report) |
+| `ACCESSIBILITY_REPORT.md` | 1,121 | 17 | accessibility-report/ |
+| `EVIDENCE_LEDGER.md` | 1,820 | UNK | evidence-ledger/ |
+| `MIGRATION_STATUS.md` | 4,893 | 90 | migration-status/ |
+| `REDIRECT_PARITY.md` | 863 | 14 | redirect-parity/ |
+| `VERIFICATION_REPORT.md` | 15,931 | 275 | verification-report/ |
 | `recruiting-funnel/profile-calibration.md` | 3,788 | 66 | recruiting-funnel/ |
 | `recruiting-funnel/weekly-dashboard.md` | 2,513 | 60 | recruiting-funnel/ |
 | `recruiting-funnel/outbound-allocation.md` | 2,983 | 79 | recruiting-funnel/ |
 | `recruiting-funnel/intervention-plan.md` | 3,584 | 85 | recruiting-funnel/ |
-| `portfolio-implementation-handoff.md` | 6,413 | 75 | portfolio-handoff |
-| `output/audit-report-2026-09-12.md` | 4,842 | 122 | output-audit |
-| **TOTAL** | **25,244** | **504** | 6 candidate clusters |
+| `portfolio-implementation-handoff.md` | 6,413 | 75 | portfolio-handoff/ |
+| `output/audit-report-2026-09-12.md` | 4,842 | 122 | output-audit/ |
+| **TOTAL** | **48,751** | **919** | 8 cluster names, 11 files |
 
 Canonical repo docs (NOT loose, NOT in round 5 scope):
 `README.md`, `PROVENANCE.md`, `PRODUCTION_CUTOVER.md`,
-`AGENTS.md`, `CLAUDE.md`.
+`AGENTS.md`, `CLAUDE.md`, `HUMAN_REVIEW.md`.
 
 **Round 5 is a new iteration, not a continuation of rounds 2-4.**
 The pane did not act on it because the previous turn stated
