@@ -8,7 +8,7 @@
    ================================================================ */
 
 .parent-view {
-  --parent-accent: var(--seed-teal, #7ebab5);
+  --parent-accent: var(--seed-teal);
   --parent-gap: 1.5rem;
 
   display: grid;
@@ -120,8 +120,8 @@
   overflow-x: auto;
   border: 1px solid var(--graphite-200);
   border-radius: 10px;
-  background: var(--surface-obsidian, #0f1012);
-  color: var(--seed-ceramic, #f6f5f5);
+  background: var(--surface-obsidian);
+  color: var(--seed-ceramic);
   font-family: var(--font-meta);
   font-size: 0.8rem;
   line-height: 1.45;
