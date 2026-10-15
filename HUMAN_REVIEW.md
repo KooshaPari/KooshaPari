@@ -162,6 +162,31 @@ directive; the commit is signed off here at 6f9478f with full tx-trailers
 the operator directed`). Browser suite still NOT re-run (load average 220,
 same uninterpretable range per the caveat above), so the 2026-10-09
 observation at `debf320` remains the freshest browser evidence.
+Reconciled again 2026-10-15 against `750d788`, the
+`refactor(styles): hoist 4 inline graphite fallbacks in parent.css to
+real tokens` commit. The 13th pass flagged 7 inline hex fallback values
+in `styles/parent.css` as a follow-up; this commit resolves 4 of them.
+Four new tokens (`--graphite-600: #5b6472`, `--graphite-500: #7a8494`,
+`--graphite-400: #9aa3b2`, `--graphite-200: #dfe3ea`) are added to
+`styles/tokens.css` (lines 41-44, inserted directly below
+`--graphite-800` in descending lightness order). The 9
+`var(--graphite-N, #hex)` sites in `parent.css` (lines 35, 44, 63, 83,
+84, 97, 114, 121, 134) lose their inline fallbacks and resolve through
+the new tokens; the rendered output is byte-identical because the
+fallback values were always the active values. This is a CSS-only
+change (2 files, +13/-9, no JS, no HTML, no test surface), so the unit
+count below is carried forward from `6f9478f` unchanged at 714/714
+across 73 test files (re-verified at this commit; the test suite
+remained green throughout the rebase). 3 inline fallbacks remain in
+`parent.css` and are documented in the commit body, not removed:
+line 65 is `var(--surface-ceramic, #fff)` — the fallback IS being used
+today because `--surface-ceramic` resolves to `--seed-ceramic` (#F6F5F5)
+not #fff; dropping it would shift agent card backgrounds ~10 RGB units
+cooler; lines 123 and 124 are exact matches to `--surface-obsidian` and
+`--seed-ceramic` respectively and are harmless. Both surface as
+separate follow-ups. Browser suite still NOT re-run (load average
+still in the uninterpretable range), so the 2026-10-09 observation at
+`debf320` remains the freshest browser evidence.
 
 ## Why this is not production-ready
 
@@ -199,10 +224,10 @@ retained. Details in `VERIFICATION_REPORT.md`.
 
 | Gate | Result |
 |---|---|
-| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37`, `6ad2a63`, `97d145c`, `edc6731`, `94fb369`, `86700d2`, `d052eb6`, `26599eb`, `f44b23b`, and `6119c80` (all docs-only commits, no source/test/detector surface change); **re-measured 2026-10-15 at `6f9478f` (the /parent/ view commit, the first non-docs-only commit in this arc)** — same 714/714 across 73 files, confirming the new route registration does not regress the unit suite. The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav |
-| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the eleven 2026-10-14/15 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`, `97d145c` + `edc6731` + `94fb369` + `86700d2` + `d052eb6` + `26599eb` + `f44b23b` + `6119c80` counted as one docs-only octuple, and `6f9478f` as the 13th commit and the first non-docs-only commit in this arc; load average 344, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
-| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the eleven 2026-10-14/15 passes, same load caveat) |
-| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the eleven 2026-10-14/15 passes) |
+| Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37`, `6ad2a63`, `97d145c`, `edc6731`, `94fb369`, `86700d2`, `d052eb6`, `26599eb`, `f44b23b`, and `6119c80` (all docs-only commits, no source/test/detector surface change), and `750d788` (a CSS-only commit, no test surface impact); **re-measured 2026-10-15 at `6f9478f` (the /parent/ view commit, the first non-docs-only commit in this arc)** — same 714/714 across 73 files, confirming the new route registration does not regress the unit suite. The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav |
+| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the twelve 2026-10-14/15 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`, `97d145c` + `edc6731` + `94fb369` + `86700d2` + `d052eb6` + `26599eb` + `f44b23b` + `6119c80` counted as one docs-only octuple, and `6f9478f` as the 13th commit and the first non-docs-only commit in this arc, and `750d788` as the 14th commit (CSS-only, no test surface); load average 344, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
+| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the twelve 2026-10-14/15 passes, same load caveat) |
+| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the twelve 2026-10-14/15 passes) |
 
 Reproduce with `npm run verify` (needs the Vercel CLI for the build step) or
 `npm test && npm run check && npm run test:e2e` for everything except the build.
