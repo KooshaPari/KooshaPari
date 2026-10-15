@@ -567,43 +567,86 @@ Competency axes behind the two lenses:
 | Skip-link + `aria-live` | was FAIL, now FIXED | Skip-link always real. `aria-live` added at `de5d511`, following the app's single-attribute convention. |
 | 60fps transform/opacity | was FAIL, now FIXED | Dead `transition: width` removed at `de5d511` after the dead-code claim was proven, not assumed. Reveal animation itself was always clean. |
 | 4 ROLES + 2 PERSONAS | PASS | `ROLES.length === 4`, `Object.keys(PERSONAS)` = 2, confirmed by node import. |
-| Tests + 85% coverage floor | **still FAIL** | 7 tests, 7 pass, both helpers fully covered — but coverage is **still measured nowhere**. Deliberately not added to the detector; see the note below. |
+| Tests + 85% coverage floor | **now GATED** `b68f3a1` | Line coverage 89.29% against an enforced 85 floor, verified to exit 1 when unmet. Helper tests plus 6 resume-view tests and 4 router tests. Caveat: function coverage is 83.43% and is NOT bounded by the gate. |
 | File size <=350/<=500 | PASS | All 6 files under target; `phenotype.js` is the largest at 322. |
 
-#### The one constraint still ungated: coverage
+#### Resolved: the 85% coverage floor is now ENFORCED `b68f3a1`
 
-The 85% floor is the last documented-but-unenforced
-constraint, and it was deliberately **not** bolted onto the
-detector. Node's `--test-coverage-lines=85` only takes effect
-alongside `--experimental-test-coverage` (without it, a 90%
-threshold against 47.89% exits 0 — a silent pass), and
-measuring requires running all 714 tests at 22-31s. The
-detector runs in ~1.5s and runs from the pre-commit hook, so
-embedding it would make every commit 15-20x slower.
+This was the last documented-but-unenforced
+constraint. It is now a real gate.
 
-The exact change, for whoever picks it up:
-
-```json
-"test:coverage": "node --test --experimental-test-coverage --test-coverage-include='scripts/**/*.js' --test-coverage-lines=85 tests/*.test.js"
+```
+"test:coverage": node --test --experimental-test-coverage
+  --test-coverage-include='scripts/**/*.js' --test-coverage-lines=85
 ```
 
-Two things to know before adding it:
+`--experimental-test-coverage` is load-bearing, not
+decorative: without it the threshold flag is ignored
+and exits 0 at 89.29%, a silent pass. Verified by
+forcing the threshold to 100, which printed "does not
+meet threshold" and exited 1.
 
-1. It needs a `.github/workflows/ci.yml`, which **does not
-   exist**. `.github/` contains only `dependabot.yml`, so
-   there is no CI at all today. A coverage gate that only
-   runs locally is not a gate.
-2. The scope choice is consequential and must be deliberate.
-   Loaded-files coverage is **91.89%** and passes. Including
-   never-loaded files via `--test-coverage-include-all` drops
-   it to **47.89%** and fails. Do not pick the second one by
-   accident.
+Scope: loaded files (89.29% lines), not include-all
+(49.51%). The include-all figure counts 34 DOM or
+build-entry files exercised by Playwright, which a
+node flag cannot measure; no dead code was in that
+gap. A permanently-red gate gets disabled by whoever
+inherits it, which is worse than no gate.
 
-The pattern worth naming: **the constraints that are
-enforced (hex, fonts, file size, and now bundle cap and emoji)
-hold; the ones still merely documented (the coverage floor) do
-not have gates and are one careless commit from
-regressing.** Coverage is now the last one standing.
+Kept out of `npm test` (still ~24s) and out of the
+detector (still ~1.5s).
+
+`.github/workflows/ci.yml` is the repo's **first CI**:
+ubuntu-latest only, no macOS or Windows or large
+runners, per the CI billing policy.
+
+Two honest limits: CI has never executed on GitHub, so
+it is verified by YAML parse and local step
+equivalence only. And **function coverage is 83.43%,
+already below 85**, which a line-only gate does not
+bound. The docs-3 contract says "85% coverage" without
+naming a metric; picking functions would require tests
+for card-icons (24.46%), systems-plate (34.69%) and
+scroll-reveal (42.86%). That is a contract decision, not
+an implementation detail.
+
+#### CRITICAL: every `.html` page URL was broken in the browser — FIXED `d0993df`
+
+This is the most serious bug found in the whole arc,
+and it was **live in production** until a ship signal.
+
+`parseSegments()` split the path but never stripped a
+trailing `.html`, so `/resume.html` resolved to
+`not-found`. `app.js` `render()` runs at boot and its
+not-found branch does `viewRoot.innerHTML =
+renderNotFound()`, so the SPA **threw away the correct
+prerendered markup the static host had already
+served**.
+
+It was invisible to no-JS checks because the server was
+never wrong, only the client router: `curl /resume.html`
+returned 200 with real resume content, while a browser
+with JS on rendered "Page not found". Live proof:
+`https://kooshapari.com/resume.html` showed title
+"Page not found — Koosha Paridehpour", view-root cut
+to 31 chars, canonical rewritten to `/not-found`.
+
+**All 30 staged pages were affected**, not just resume:
+index, engineering, product, work, contact, blog and
+archive included.
+
+Fixed as one general rule — strip `.html` from the
+last segment — rather than a `/resume` special case,
+so project slugs (`/work/sharecli.html`) and post
+slugs (`/blog/<slug>.html`) are covered too. A bare
+`.html` that would strip to empty is left intact so
+unknown paths still 404. Guarded by 4 new tests
+(`d0993df`, suite 720 -> 724).
+
+**This raises the priority of item 5.** Until the site
+is deployed, production serves a broken not-found page
+for every `.html` URL, including every page a crawler
+or a shared link would use.
 
 #### Audit totals
 
@@ -613,24 +656,27 @@ totals I wrote were wrong.
 | | PASS | GATED | FIXED | FAIL | UNCLEAR |
 |---|---|---|---|---|---|
 | At audit time | 6 | 0 | 0 | 3 | 1 |
-| After remediation | 5 | 2 | 2 | 1 | 0 |
+| After remediation | 5 | 4 | 2 | 0 | 0 |
 
-That is **9 of 10 constraints satisfied** (5 always-passed, 2
-newly gated, 2 fixed), with coverage the single remaining FAIL.
+That is **10 of 10 constraints satisfied** — 5 always-passed,
+4 now gated (bundle cap, emoji, coverage, and the file-size
+target cleared by `8e6fa31`), and 2 fixed. No failures
+remain open. Two caveats survive: a contract question about
+which metric "85% coverage" means, and the fact that CI has
+not yet executed on GitHub.
 
-An earlier revision of this document claimed "7 PASS"
-after remediation. That was an undercount: it counted a
-GATED or FIXED constraint as still-failing rather than
-satisfied. The corrected count is 9, and it is stated here
-by recounting the table rows rather than by carrying a
-number forward.
+Earlier revisions of this line claimed "7 PASS", then "9 of
+10". Both were wrong in different directions because the
+figure was carried forward rather than recounted from the
+table. The row above is derived from the table itself.
 
-Remediation: two constraints fixed (`de5d511`), one UNCLEAR
-resolved into an enforced gate (`9380916`), one FAIL left open
-with the exact fix specified. Three bugs were found outside
-the audit itself: the `/work` dynamic imports (`bb59100`),
-orphaned `radar.css` (`3b8930d`), and the inert lens control
-(`6982683`).
+Remediation: constraints fixed (`de5d511`), three items
+turned into enforced gates (`9380916`, `b68f3a1`), and
+one size regression I introduced was reverted (`8e6fa31`).
+Four bugs were found outside the audit itself: the `/work`
+dynamic imports (`bb59100`), orphaned `radar.css`
+(`3b8930d`), the inert lens control (`6982683`), and the
+`.html` routing break (`d0993df`).
 
 **The pattern worth naming: constraints with gates hold;
 constraints without gates drift.** Every bug found in
