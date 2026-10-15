@@ -634,3 +634,41 @@ All visual changes must:
 - [ ] All new card images have SHA-256, dimensions, and alt text recorded.
 - [ ] Asset production uses documented tools and commands.
 - [ ] No internal filenames exposed in public labels.
+
+---
+
+## Status as of 2026-10-14: DEFERRED INDEFINITELY
+
+This specification was authored 2026-09-11 and has not been adopted as
+the active design direction as of 2026-10-14 (33 days later). The
+spec is preserved here for reference only.
+
+**Why deferred:** the parallel-plate, all-four-anchor-families
+breadth-first approach was a substantially larger rewrite than the
+incremental canonical-portfolio work actually shipped. The operator
+shipped a different direction: the `2026-08-29-canonical-portfolio-design.md`
++ `2026-08-30-technical-atelier-redesign-design.md` path, implemented
+incrementally as 23 working routes (`Home`, `Engineering`, `Product`,
+`Work`, `GMK Arch`, `WITF`, `ShareCLI`, `Substrate`, `phenotype-omlx`,
+`NetWeave`, `OmniRoute`, `BytePort`, `Tracera`, `DSS Cipher`,
+`CLIProxyAPI++`, `AgentAPI++`, `MCPForge`, `ForgeCode`, `Frostify`,
+`Resume`, `Contact`, `Blog`, `404`).
+
+**What this spec contains that is not in the shipped system:** the
+parallel-plate visual treatment, the four-anchor-family depth model,
+and the Substrate / phenotype-omlx as anchor-family entries rather
+than as individual routes. Those remain valid design ideas that
+could be revisited if the operator changes direction.
+
+**To revisit this spec:** the operator would need to (a) restore
+the breadth-first scope to the active plan, (b) replace or layer over
+the current `docs/superpowers/specs/2026-08-30-technical-atelier-redesign-design.md`-driven
+routing, and (c) absorb the 636 lines of this spec into a new
+implementation pass. None of these are scheduled.
+
+**Action taken:** this footer added in commit on 2026-10-14. The
+spec body is unchanged. No code, no tests, no assets, no deployed
+pages were affected. The decision is recorded so future readers do
+not mistake the spec's "Status: Expanded specification for review"
+header for an in-flight design direction.
+
