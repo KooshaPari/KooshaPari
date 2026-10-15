@@ -11,6 +11,7 @@ import { renderWorkCatalog } from './views/work.js';
 import { renderProjectDetail } from './views/project-detail.js';
 import { renderResume } from './views/resume.js';
 import { renderContact } from './views/contact.js';
+import { renderParent } from './views/parent.js';
 import { renderNotFound, initCanvas } from './views/not-found.js';
 import { renderBlogIndex } from './views/blog-index.js';
 import { renderBlogPost } from './views/blog-post.js';
@@ -122,6 +123,8 @@ function render() {
     renderResume(viewRoot);
   } else if (route.view === 'contact') {
     renderContact(viewRoot);
+  } else if (route.view === 'parent') {
+    renderParent(viewRoot);
   } else if (route.view === 'blog') {
     renderBlogIndex(viewRoot, { posts: POSTS });
   } else if (route.view === 'post') {

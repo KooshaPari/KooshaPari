@@ -22,6 +22,7 @@ function applySurface() {
 // section hidden for now. The /blog route still works for direct-nav; only
 // the top-nav entry is removed. Restore by re-adding the line below.
 const ROUTES = [
+  ['/parent', 'Parent'],
   ['/work', 'Work'],
   // ['/blog', 'Writing'],
   ['/resume', 'Resume'],

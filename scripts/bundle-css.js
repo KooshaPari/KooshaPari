@@ -196,6 +196,7 @@ const bundles = {
     'blog.css',
     'contact.css',
     'contact-info.css',
+    'parent.css',
     'code-annotate.css',
     'cast-player.css',
     'recruiter-block.css',

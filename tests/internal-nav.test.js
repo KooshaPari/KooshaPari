@@ -23,6 +23,7 @@ const PROJECT_ROOT = join(__dirname, '..');
 // double-cover the same surface and break the moment a new project is added.
 const STATIC_PAGES = Object.freeze([
   'index.html',
+  'parent.html',
   'engineering.html',
   'product.html',
   'work.html',
@@ -95,7 +96,7 @@ test('static-page registry matches the files actually on disk', async () => {
   // project/post template, this test fails until the registry is updated.
   // The 11 individual work/<slug>.html stubs remain excluded (see header).
   const expectedTopLevel = new Set([
-    'index.html', 'engineering.html', 'product.html', 'work.html',
+    'index.html', 'parent.html', 'engineering.html', 'product.html', 'work.html',
     'resume.html', 'contact.html', 'blog.html', 'archive.html',
   ]);
   const rootEntries = (await readdir(PROJECT_ROOT, { withFileTypes: true }))

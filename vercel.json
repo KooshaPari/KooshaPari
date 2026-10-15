@@ -181,6 +181,10 @@
       "destination": "/contact.html"
     },
     {
+      "source": "/parent",
+      "destination": "/parent.html"
+    },
+    {
       "source": "/blog",
       "destination": "/blog.html"
     },

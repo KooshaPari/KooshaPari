@@ -18,6 +18,7 @@
 
 export const VIEW_ROUTES = new Set([
   'home',
+  'parent',
   'engineering',
   'product',
   'work',
