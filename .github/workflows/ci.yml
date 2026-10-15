@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    # Standard Linux runner only. Per repo billing policy, no macOS, Windows,
+    # large, or self-hosted runners.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          # The coverage gate was verified on Node 26.8.1. Pinned to the major
+          # series that was actually exercised rather than an untested guess.
+          node-version: '26'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Anti-pattern detector
+        run: bash scripts/anti-pattern-detector.sh
+
+      - name: Syntax check
+        run: npm run check
+
+      - name: Test suite
+        run: npm test
+
+      - name: Coverage gate (85% floor)
+        run: npm run test:coverage
