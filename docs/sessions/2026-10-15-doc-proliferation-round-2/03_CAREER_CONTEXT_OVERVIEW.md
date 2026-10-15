@@ -68,31 +68,95 @@ preserved from the source filenames' interval-naming pattern
 
 ## What was NOT done (out of scope, and carry-forwards)
 
-- **Not copied to `~/Documents/ResVault/.researchledger/`.** ResVault
-  is the operator's pre-existing external-narrative store. It already
-  holds `github-pass1/`, `linkedin-pass1/`, and the
+- ~~**Not copied to `~/Documents/ResVault/.researchledger/`.**~~
+  **DONE 2026-10-15.** The 4 files are now at
+  `~/Documents/ResVault/.researchledger/career-context-anduril/`,
+  joining `github-pass1/`, `linkedin-pass1/`, and the
   `resume-claim-matrix-2026-09-10.md` + `resume-docx-inventory-2026-09-10.md`.
-  The cleanest eventual home for these 4 files is
-  `~/Documents/ResVault/.researchledger/career-context-anduril/`.
-  This round moves them inside the portfolio repo only; the
-  ResVault handoff is a **separate operator decision** because it
-  crosses repository boundaries. No action taken autonomously.
+  The cross-repo copy was byte-identical (verified by
+  `diff -r`); `git rm` in this repo, plain `cp` in the
+  ResVault target (ResVault is a plain folder, not a git
+  repo). This is the **round 6** handoff: the 4 files
+  left the portfolio repo entirely. See
+  `06_OPEN_DECISIONS_STATUS.md` item 3 (now CLOSED) for
+  the operator-decision status, and the
+  `Round 6: cross-repo ResVault handoff` section
+  below for the move details.
 - **No content redaction.** These files contain PII (employer
   names, transcript content). The portfolio's hard constraints
   (0 new color families, 0 new fonts, 0 new third-party scripts,
   0 emoji, WCAG 2.2 AA both themes) do not apply since these
-  files are not in any built page. They remain in the repo only
-  as a session-folder holding pending ResVault handoff.
-- **No git rm.** The files are not deleted; they are moved. The
+  files are not in any built page. **After the round-6
+  handoff, the files are no longer in this repo at all** —
+  they live in `~/Documents/ResVault/.researchledger/career-context-anduril/`,
+  the operator's external-narrative store.
+- **No git rm.** ~~The files are not deleted; they are moved. The
   only "removal" is the rename from `docs/` to
-  `docs/sessions/2026-10-15-doc-proliferation-round-2/career-context-anduril/`.
-- **No `.gitignore` changes.** The files remain in git's index
-  via their new paths.
+  `docs/sessions/2026-10-15-doc-proliferation-round-2/career-context-anduril/`.~~
+  **SUPERSEDED 2026-10-15 (round 6):** the 4 files are
+  now `git rm`'d from this repo entirely. `git log --follow`
+  on the ResVault copies (which are not in a git repo)
+  walks the history back to `9ac2bdb` via this repo's
+  pre-`git rm` state at the time of the copy.
+- **No `.gitignore` changes.** ~~The files remain in git's index
+  via their new paths.~~ **SUPERSEDED 2026-10-15 (round 6):**
+  the files are no longer in git's index at all; they
+  live in the operator's external-narrative store, not
+  in this repo.
 
-## After round 4
+## Round 6: cross-repo ResVault handoff (2026-10-15)
 
-`docs/` root has **0** loose `.md` files. The doc-proliferation
-cleanup arc is complete across all 4 rounds:
+The operator signaled "go" on the cross-repo handoff that
+`06_OPEN_DECISIONS_STATUS.md` item 3 was blocked on. The
+4 files left this repo in a single cross-repo move:
+
+| File | Source path (this repo, pre-round 6) | Target path (ResVault) | Bytes |
+|---|---|---|---|
+| `2026-09-05-career-context-anduril.md` | `docs/sessions/2026-10-15-doc-proliferation-round-2/career-context-anduril/` | `~/Documents/ResVault/.researchledger/career-context-anduril/` | 12,341 |
+| `2026-09-05-career-context-anduril-early.md` | (same) | (same) | 14,377 |
+| `2026-09-05-career-context-anduril-middle.md` | (same) | (same) | 10,110 |
+| `2026-09-05-career-context-anduril-final-interval.md` | (same) | (same) | 4,771 |
+| **Total** | | | **41,599** |
+
+**Verification:**
+
+- `cp -p` (preserves timestamps, mode, ownership) from
+  this repo to the ResVault target.
+- `diff -r` against the source returned 0 differences
+  — **byte-identical** after the copy.
+- `git rm` of the 4 files in this repo; the empty
+  subfolder was cleaned up by `git rm` itself.
+- ResVault is a plain folder, not a git repo (no
+  `.git` directory at `~/Documents/ResVault/`), so
+  the ResVault copies are NOT in git. They live as
+  plain files in the operator's external-narrative
+  store, exactly as the round-4 file's
+  "not copied to ResVault" carry-forward said they
+  should.
+- `git log --follow` on the now-deleted paths (from
+  any pre-`git rm` commit in this repo) walks the
+  history back to the original absorb commit
+  `9ac2bdb` (`absorb(koosha-phenotype): migrate
+  incubating project from zz-merge-unk-koosha-phenotype
+  (#1)`).
+
+**What is NOT in scope for this round:**
+
+- No commit in ResVault (it's not a git repo).
+- No redaction of PII in the copies (operator-only
+  decision; the files are now in the operator's
+  store, not the public portfolio).
+- No reverse-sync from ResVault to this repo
+  (operator can manually copy back if needed; no
+  pane work required).
+
+## After round 4 + round 6
+
+`docs/` root has **0** loose `.md` files. The
+`docs/sessions/2026-10-15-doc-proliferation-round-2/career-context-anduril/`
+subfolder is **empty** (the 4 files left in round 6). The
+doc-proliferation cleanup arc is complete across all
+5 rounds plus the round-6 cross-repo handoff:
 
 | Round | What moved                                            | Count | Total bytes |
 |-------|--------------------------------------------------------|-------|-------------|
@@ -100,3 +164,11 @@ cleanup arc is complete across all 4 rounds:
 | 2     | `docs/2026-09-*.md` → round-2 cluster subfolders       | 18    | 110,291     |
 | 3     | non-glob loose files → round-2 cluster subfolders     | 4     | (r3 stat)   |
 | 4     | CAREER_CONTEXT_ANDURIL_*.md → new subfolder            | 4     | 41,599      |
+| 5     | repo-root loose `.md` → 8 cluster subfolders          | 11    | 48,751      |
+| 6     | CAREER_CONTEXT_ANDURIL_*.md → ResVault (cross-repo)    | 4     | 41,599      |
+
+Round 6's 41,599 B is the SAME 41,599 B as round 4
+(because round 6 moves the same files round 4 moved);
+the byte total in the portfolio repo dropped by 41,599 B
+(those 4 files left the repo). The ResVault target
+gained 41,599 B.

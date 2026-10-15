@@ -609,14 +609,20 @@ operator-decision boundaries have been re-analyzed in
 **One of them (loose-file round 5) is already shipped at `6119c80`.**
 **Another (resume per-role vs consolidated) is now DECIDED
 as Option A — no code change, current state is the decision,
-captured at `3cc5b7f` (2026-10-15).** The remaining 2
-(VERCEL_TOKEN for hosted gate, ResVault handoff for
-`CAREER_CONTEXT_ANDURIL_*.md`) are recorded in
-`06_OPEN_DECISIONS_STATUS.md` with the unblock action for
-each. The pane cannot advance either of the 2 remaining
-OPEN items without operator input; the pane's job is to
-keep the status document honest and to ship the operator's
-decision when one is made.
+captured at `3cc5b7f` (2026-10-15).** **A third
+(ResVault handoff for `CAREER_CONTEXT_ANDURIL_*.md`)
+shipped as round 6 of the doc-proliferation arc on
+2026-10-15: 4 files (41,599 B) cross-repo `cp -p` from
+this repo's session-folder subdir to
+`~/Documents/ResVault/.researchledger/career-context-anduril/`,
+byte-identical verified by `diff -r`, then `git rm`'d
+from this repo.** The remaining 1 (VERCEL_TOKEN for
+hosted gate) is recorded in `06_OPEN_DECISIONS_STATUS.md`
+with the unblock action explicit. The pane cannot
+advance that 1 remaining OPEN item without operator
+input; the pane's job is to keep the status document
+honest and to ship the operator's decision when one
+is made.
 
 ## Preview
 

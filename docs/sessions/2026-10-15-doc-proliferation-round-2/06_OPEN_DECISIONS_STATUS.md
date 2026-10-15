@@ -65,25 +65,29 @@ required.
 **Pane cannot advance this without the credential.** Marked
 as a pending decision in the cockpit-presentation todo list.
 
-### 3. ResVault handoff for `CAREER_CONTEXT_ANDURIL_*.md` — STILL BLOCKED (cross-repo)
+### 3. ResVault handoff for `CAREER_CONTEXT_ANDURIL_*.md` — CLOSED (shipped 2026-10-15)
 
-The 04_ARC_CLOSING item 3 says the 4 files now sit in
-`docs/sessions/2026-10-15-doc-proliferation-round-2/career-context-anduril/`
-and the right place for them is
-`~/Documents/ResVault/.researchledger/` so they join
-`linkedin-pass1/`, `github-pass1/`, `resume-claim-matrix`.
+The 4 files (`2026-09-05-career-context-anduril{,-early,-middle,-final-interval}.md`,
+41,599 B total) are now at
+`~/Documents/ResVault/.researchledger/career-context-anduril/`,
+joining `github-pass1/`, `linkedin-pass1/`,
+`resume-claim-matrix-2026-09-10.md`, and
+`resume-docx-inventory-2026-09-10.md` in the
+operator's pre-existing external-narrative store.
+
 The round 4 commit `86700d2` made the move WITHIN the
-koosha-phenotype repo. The cross-repo move is operator-only.
+koosha-phenotype repo. The cross-repo handoff
+(round 6 of the doc-proliferation arc) shipped on
+2026-10-15 after the operator signaled "go":
+`cp -p` from this repo's session-folder subdir to
+the ResVault target, `diff -r` confirmed byte-identical,
+`git rm` removed the 4 files from this repo. ResVault
+is a plain folder (not a git repo), so no ResVault
+commit was needed.
 
-**Unblock action**: the operator runs the cross-repo
-`git mv` from `docs/sessions/2026-10-15-doc-proliferation-round-2/career-context-anduril/`
-to `~/Documents/ResVault/.researchledger/career-context-anduril/`
-(or wherever the canonical ResVault path is). No code change
-required in this repo.
-
-**Pane cannot advance this without operator coordination
-across the two repos.** Marked as a pending decision in the
-cockpit-presentation todo list.
+Full move details are in
+`03_CAREER_CONTEXT_OVERVIEW.md` under the
+`Round 6: cross-repo ResVault handoff` section.
 
 ### 4. Loose-file round 5 — ALREADY SHIPPED (status: closed)
 
@@ -111,20 +115,19 @@ is in `05_ROUND5_OVERVIEW.md` and is not repeated here.
 |---|---|---|---|
 | 1 | Resume: per-role vs consolidated | **DECIDED** (Option A, no change) | — (decision captured) |
 | 2 | VERCEL_TOKEN for hosted gate | OPEN (credential) | operator (secret) |
-| 3 | ResVault handoff for CAREER_CONTEXT_ANDURIL_*.md | OPEN (cross-repo) | operator (ResVault coord) |
+| 3 | ResVault handoff for CAREER_CONTEXT_ANDURIL_*.md | **CLOSED** (shipped 2026-10-15) | — (round 6) |
 | 4 | Loose-file round 5 | CLOSED (shipped at `6119c80`) | — |
 
-The 2 OPEN items require operator action; the pane
-cannot advance either. Item 1 is captured as a decision
-(Option A = current state) with the reasoning recorded
-in this document. Item 4 was already shipped at
-`6119c80` between the 04_ARC_CLOSING arc and the 20th
-pass.
+The 1 OPEN item (VERCEL_TOKEN) requires operator action;
+the pane cannot advance it. Items 1 and 3 are
+captured as decisions/shipped moves. Item 4 was
+already shipped at `6119c80` between the
+04_ARC_CLOSING arc and the 20th pass.
 
-The pane's job on the 2 OPEN items is to keep this
+The pane's job on the 1 OPEN item is to keep this
 status document honest and to ship the operator's
-decision when one is made. Item 1 closed itself by
-Option A being the current state; the operator can
-re-open it by signaling "ship option B" or
+decision when one is made. Item 1 closed itself
+by Option A being the current state; the operator
+can re-open it by signaling "ship option B" or
 "ship option C" if a future visit wants the
 per-role or per-persona structure.
