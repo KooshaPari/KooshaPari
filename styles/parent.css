@@ -62,7 +62,7 @@
   padding: 0.9rem 1rem 1.1rem;
   border: 1px solid var(--graphite-200);
   border-radius: 10px;
-  background: var(--surface-ceramic, #fff);
+  background: var(--surface-ceramic);
   transition: transform 180ms ease, border-color 180ms ease;
 }
 
