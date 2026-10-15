@@ -10,6 +10,20 @@ correct item-by-item breakdown.
 
 **All 4 items are now closed/decided as of 2026-10-15.**
 
+> **Public-interface verification (round 6c, 2026-10-15):**
+> Each item below is also mapped to a concrete
+> public-interface check in
+> `07_PUBLIC_INTERFACE_VERIFICATION.md`. That document
+> fetches the live site, the ResVault target, the
+> workbench JS, the Vercel project state, and the data
+> tree, and reports the observed result for each
+> requirement -- not an aggregate count, not an
+> inspection summary. The 04_ARC_CLOSING's "the pane
+> cannot run hosted verification" claim was the
+> central stale assumption; the preflight on
+> 2026-10-15 found the Vercel CLI authenticated and
+> the live site reachable on 4 production domains.
+
 The pane's read-only preflight on 2026-10-15 also
 surfaced a new optional observation: the
 20th-pass prebuilt (`app.bundle.8d6cbde8.js`) is

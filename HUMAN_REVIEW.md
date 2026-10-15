@@ -640,6 +640,22 @@ ship on operator signal. **All 4 original items are
 closed/decided as of 2026-10-15; the pane has no
 active todo.**
 
+> **Round 6c (2026-10-15): real public-interface
+> verification.** The 04_ARC_CLOSING's "the pane
+> cannot run hosted verification" claim was a
+> stale assumption. A read-only Vercel preflight
+> + curl + grep + git pass on 2026-10-15 mapped
+> each open-decision item to a concrete
+> public-interface check; the observed results
+> (live site serves 4 domains HTTP 200, live PDF
+> is byte-identical to local, live data tree
+> matches prebuilt, workbench JS files served on
+> the live site, ResVault target holds the 4
+> files with byte parity) are recorded in
+> `docs/sessions/2026-10-15-doc-proliferation-round-2/07_PUBLIC_INTERFACE_VERIFICATION.md`.
+> The 714/714 unit pass is a build-time check;
+> the 07 doc is the public-interface check.
+
 ## Preview
 
 No current preview URL is claimed. The deployment reference in the previous
