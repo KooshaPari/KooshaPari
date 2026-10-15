@@ -240,6 +240,33 @@ both 63b6d03 and 12d51c8 and reported 714/714 / 0 fail) — same
 714/714 across 73 files. Browser suite still NOT re-run (load
 average still in the uninterpretable range), so the 2026-10-09
 observation at `debf320` remains the freshest browser evidence.
+Reconciled again 2026-10-15 against the post-flight loose-file
+audit. Two changes: (1) the untracked one-shot `rt.tmp.mjs`
+(2,197 B, linkedom-based /parent/ route smoke harness, mtime
+`2026-10-15T00:56`, surfaced during a root-level `ls` scan) was
+deleted as a one-shot artifact; the test surface it covered
+(9 cards, no duplication, .parent-view count, ASCII frame
+alignment, aria-live, pill states) is already exercised by the
+tracked suite (`tests/internal-nav.test.js`,
+`tests/router-helpers.test.js`, `tests/router.test.js`,
+`tests/omniroute-topology.test.js`, plus the 12d51c8 prerender
+route tests). No promotion to a permanent test file was needed.
+(2) `.gitignore` was extended with `/*.tmp.mjs` (root-only
+pattern) in commit `5372026` to prevent the next one-shot from
+escaping; the rule covers `rt.tmp.mjs`, `route-test.tmp.mjs`, etc.,
+but does NOT match subdir paths like `scripts/foo.tmp.mjs` (leading
+`/` anchors the pattern to the repo root) — if a permanent
+route-test harness is wanted, the convention is to promote it
+to `tests/<name>.test.js` so `node --test` picks it up. After
+both changes, `git status` is clean: 0 untracked files at root,
+1 tracked .mjs file at root (`take-screenshots.mjs`, the
+screenshot harness), 0 .tmp files, 4 canonical .md files at
+root (`README.md`, `HUMAN_REVIEW.md`, `PRODUCTION_CUTOVER.md`,
+`PROVENANCE.md`). Unit count carried forward unchanged at
+714/714 across 73 files; config-only, no test surface impact.
+Browser suite still NOT re-run (load average still in the
+uninterpretable range), so the 2026-10-09 observation at
+`debf320` remains the freshest browser evidence.
 Reconciled again 2026-10-15 against `97cb4b0`, the
 `refactor(styles): drop 3 dead exact-match fallbacks in parent.css
 (lines 11, 123, 124)` commit. The 13th pass preamble's 7-hex
@@ -331,9 +358,9 @@ retained. Details in `VERIFICATION_REPORT.md`.
 | Gate | Result |
 |---|---|
 | Unit suite | 714/714 pass across 73 test files, re-run 2026-10-14 at `184f71f` and carried forward unchanged at `824ab37`, `6ad2a63`, `97d145c`, `edc6731`, `94fb369`, `86700d2`, `d052eb6`, `26599eb`, `f44b23b`, and `6119c80` (all docs-only commits, no source/test/detector surface change), and `750d788` (a CSS-only commit, no test surface impact), and `63b6d03` (a CSS-only commit, no test surface impact), and `176a2a0` (a CSS-only commit, no test surface impact), and `97cb4b0` (a CSS-only commit, no test surface impact); **re-measured 2026-10-15 at `6f9478f` (the /parent/ view commit, the first non-docs-only commit in this arc) — same 714/714 across 73 files, confirming the new route registration does not regress the unit suite. The 714/714 was 711/711 across 72 files at `02962d5`; the delta is one new file — `internal-nav`, 3 tests covering the body `<noscript>` discovery fallback across all 10 source pages — and the fix it locks in: 9 of 10 source pages had no body `<noscript>` at all, so no-JS users and no-JS crawlers could not navigate between static routes; the 10th (index.html) had a noscript but it exposed only contact links, no internal nav; and **re-measured 2026-10-15 at `12d51c8` (the view-cleanup commit) — same 714/714 across 73 files**, the pre-commit hook ran the full test suite on both 63b6d03 and 12d51c8 and reported 714/714 / 0 fail on each, confirming the prerender route addition, the ASCII frame fix, the replaceChildren switch, and the isBrowser-guarded setInterval do not regress the unit suite |
-| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the fifteen 2026-10-14/15 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`, `97d145c` + `edc6731` + `94fb369` + `86700d2` + `d052eb6` + `26599eb` + `f44b23b` + `6119c80` counted as one docs-only octuple, and `6f9478f` as the 13th commit and the first non-docs-only commit in this arc, and `750d788` as the 14th commit (CSS-only, no test surface), and `63b6d03` as the 15th commit (CSS-only, no test surface), and `12d51c8` as the 16th commit (scripts/, no test surface), and `176a2a0` as the 17th commit (CSS-only, no test surface), and `97cb4b0` as the 18th commit (CSS-only, no test surface); load average 344, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
-| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the fifteen 2026-10-14/15 passes, same load caveat) |
-| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the fifteen 2026-10-14/15 passes) |
+| Browser suite | 24/24 pass, two consecutive runs on 2026-10-09 at `debf320`, after contrast sampling was stabilized in that commit; not re-run at any of the sixteen 2026-10-14/15 passes (`5a22929`, `02962d5`, `184f71f`, `824ab37`, `6ad2a63`, `97d145c` + `edc6731` + `94fb369` + `86700d2` + `d052eb6` + `26599eb` + `f44b23b` + `6119c80` counted as one docs-only octuple, and `6f9478f` as the 13th commit and the first non-docs-only commit in this arc, and `750d788` as the 14th commit (CSS-only, no test surface), and `63b6d03` as the 15th commit (CSS-only, no test surface), and `12d51c8` as the 16th commit (scripts/, no test surface), and `176a2a0` as the 17th commit (CSS-only, no test surface), and `97cb4b0` as the 18th commit (CSS-only, no test surface), and `5372026` as the 19th commit (config-only, no test surface); load average 344, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220 respectively; all in the uninterpretable range per the caveat above) |
+| axe-core | No critical/serious violations; contrast violations zero across 7 routes (2026-10-09 browser pass at `debf320`; not re-run at any of the sixteen 2026-10-14/15 passes, same load caveat) |
+| Asset links | Every root-absolute asset URL on the built pages resolves (same 2026-10-09 pass; not re-run at any of the sixteen 2026-10-14/15 passes) |
 
 Reproduce with `npm run verify` (needs the Vercel CLI for the build step) or
 `npm test && npm run check && npm run test:e2e` for everything except the build.
