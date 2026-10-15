@@ -571,16 +571,72 @@ specified below.
 **The pattern worth naming: constraints with gates hold;
 constraints without gates drift.**
 
-#### Out of scope but found: broken dynamic imports in /work
+#### Standing warning: bundle-js.js is over the size target
+
+`scripts/bundle-js.js` is now 408 lines after the `bb59100`
+dynamic-import fix, over the 350-line target (within the 500
+hard limit). The pre-commit detector warns on this. Decomposing
+it is the obvious next step if that file is touched again.
+
+#### Out of scope but found: broken dynamic imports in /work — FIXED `bb59100`
 
 The bundle's dynamic `import("../media/netweave-workbench.js")`
-and `import("../media/sharecli-workbench.js")` resolve to
+and `import("../media/sharecli-workbench.js")` resolved to
 `/media/*.js`, but the files live at `dist/scripts/media/`.
 Observed `net::ERR_ABORTED` on `/work/netweave` and
-`/work/sharecli`; the workbench subtree never mounts. The
-error is swallowed by a `.catch` that only logs, so the
-page still renders its heading — a silent failure.
+`/work/sharecli`; the workbench subtree never mounted. The
+error was swallowed by a `.catch` that only logs, so the
+page still rendered its heading — a silent failure.
 
-This is **not** a resume defect: resume is slug-gated and
-fires neither import. Recorded here only so it is not
-rediscovered from scratch.
+This was **not** a resume defect: resume is slug-gated and
+fires neither import. Fixed anyway because it was a real,
+silently-failing bug in the same bundle.
+
+Cause: the bundler only walks static `import ... from`
+declarations, so a dynamic specifier is copied into the IIFE
+verbatim and the browser resolves it relative to the served
+bundle. Fixed by rewriting the specifier to the absolute
+`/scripts/media/<name>.js` at build time. The guard requires one
+rewrite per workbench and aborts the build naming any missing
+specifier, because a count-only check let a single rename through
+and shipped a 404-ing workbench.
+
+Verified in a real browser: netweave and sharecli both went from
+absent-with-4-errors to mounted-with-0-errors, and both are
+interactive.
+
+#### Width transitions in other stylesheets — triaged, mostly NOT bugs
+
+The 4 remaining `transition: width` sites were triaged rather
+than blindly fixed. Result: **1 dead, 3 intentional, 0 unguarded.**
+
+| Site | Target | Verdict | Action |
+|---|---|---|---|
+| `radar.css:102` | `.ax-row .bar > span` | **DEAD_NO_MUTATION** | Nothing ever sets that width; the sheet is fully orphaned (git grep for all 9 of its classes returns nothing) and ships dead CSS. |
+| `shell.css:68` | `.atelier-nav a::after` | LIVE_INTENTIONAL | CSS hover `0` -> `100%`. A working underline reveal. |
+| `artifacts.css:82` | `.home-primary-links a::after` | LIVE_INTENTIONAL | Same hover-underline pattern. |
+| `cast-player.css:250` | `.cast-player__scrubber-fill` | LIVE_INTENTIONAL | Real media scrubber, width mutated per-frame in `cast-scrubber.js`. Width is the correct property; a transform swap would be a behaviour change. |
+
+The decisive correction to the earlier framing: **a global
+reduced-motion kill switch already covers all four.**
+
+```
+styles/tokens.css:264-271
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+It ships in the core bundle and loads before components/pages,
+and `!important` wins, so reduced-motion coverage was never the
+problem. So "4 bad width transitions" was wrong — it is 1 dead
+sheet and 3 correct decisions.
+
+Open option: delete `styles/radar.css` and its
+`bundle-css.js:186` entry. Left alone here because it is outside
+the resume scope and the blast radius (a whole sheet plus a
+bundle manifest entry) deserves its own deliberate change.
