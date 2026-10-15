@@ -24,6 +24,19 @@ correct item-by-item breakdown.
 > 2026-10-15 found the Vercel CLI authenticated and
 > the live site reachable on 4 production domains.
 
+> **Resume full-project handoff (round 6d, 2026-10-15):**
+> A fresh-context ownership handoff is recorded in
+> `08_RESUME_PROJECT_HANDOFF.md`. It maps the
+> resume full project to its canonical paths,
+> documents the 11 hard constraints, lists the
+> 7 open-work / deferred-decision items with their
+> unblock actions, and provides a public-interface
+> verification recipe the next owner can run before
+> any change. It also corrects the misstatement
+> above about `scripts/views/personas.js` (which
+> does NOT exist; PERSONAS data is consumed inline
+> by `scripts/views/resume.js`).
+
 The pane's read-only preflight on 2026-10-15 also
 surfaced a new optional observation: the
 20th-pass prebuilt (`app.bundle.8d6cbde8.js`) is
@@ -56,10 +69,15 @@ traceability:
 - The consolidated timeline view
   (`scripts/views/resume.js`) already distinguishes
   4 ROLES from `data/phenotype.js` with their dates,
-  companies, and highlights. The personas view
-  (`scripts/views/personas.js`) already distinguishes
-  2 framing axes (product, engineering) with 6
-  competencies each. The public visitor gets a richer
+  companies, and highlights. The same view also
+  derives SKILLS from `PERSONAS.engineering.competencies`
+  in `data/phenotype.js` (the PERSONAS data is
+  consumed inline by `scripts/views/resume.js`;
+  there is no separate `scripts/views/personas.js`
+  view file, no `/personas` route, and no
+  `dist/personas.html` -- Option A does not include
+  a personas view as a separate public surface).
+  The public visitor gets a richer
   per-role story from the consolidated view than from
   4 sparse per-role pages.
 - The persona data already has `source: "KP-Prod.pdf"`

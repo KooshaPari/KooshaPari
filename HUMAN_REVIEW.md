@@ -656,6 +656,24 @@ active todo.**
 > The 714/714 unit pass is a build-time check;
 > the 07 doc is the public-interface check.
 
+> **Round 6d (2026-10-15): resume full-project
+> ownership handoff.** A fresh context (new
+> pane, new agent, new operator session) can
+> read
+> `docs/sessions/2026-10-15-doc-proliferation-round-2/08_RESUME_PROJECT_HANDOFF.md`
+> and take ownership of the resume full
+> project without re-deriving any state. The
+> 08 doc lists the 15 canonical paths, 11 hard
+> constraints, 7 open-work items, the
+> public-interface verification recipe, and
+> corrects the misstatement in item 1 of the
+> 06 doc about `scripts/views/personas.js`
+> (which does NOT exist; PERSONAS data is
+> consumed inline by `scripts/views/resume.js`).
+> Item 1 (Resume Option A) is the highest-leverage
+> decision in the handoff; re-deciding it
+> changes the public surface.
+
 ## Preview
 
 No current preview URL is claimed. The deployment reference in the previous
