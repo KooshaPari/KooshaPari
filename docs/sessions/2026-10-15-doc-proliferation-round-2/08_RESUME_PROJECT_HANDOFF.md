@@ -1211,3 +1211,20 @@ pre-existing, not a phone-fix regression.
 checks. The density defect itself is measured fixed. CSS stays
 uncommitted until `npm test` and `npm run check` pass.
 Test worker: `session_koala_1792115214765_0e31256f0b109169`.
+
+#### 2026-10-16 01:49Z tick: 44px nav targets added, remeasure dispatched
+
+Live `/resume` was HTTP 200. HEAD was `957b34b`. Working tree
+was `styles/shell.css` only.
+
+The 34px nav boxes are pre-existing: `.atelier-nav a` only had
+`padding-block: 0.3rem` and no min-height. Lens and theme
+controls were already `2.75rem`. Added the same min-height on
+`.atelier-nav a` inside `@media (max-width: 860px)` so 320, 360,
+390, and 768 pick it up and desktop at 861px and above stays
+unchanged. The phone density rules are untouched.
+
+That edit invalidates `header-measure-20261016.json`. Remeasure
+is `session_otter_1792115343934_6c77cd6bf2e969b1`, writing
+`~/.jcode/scratch/header-measure-20261016-r2.json` after a CSS
+rebuild. No deploy. CSS still uncommitted.
