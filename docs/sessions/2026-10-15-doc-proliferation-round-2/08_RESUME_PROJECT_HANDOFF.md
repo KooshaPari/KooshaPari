@@ -1129,3 +1129,24 @@ hides the subtitle. Name and all four nav links stay in
 the DOM. Desktop rules were not edited. The CSS is
 uncommitted. Verification and the test gate have not run,
 so this is not a measured fix yet and nothing was deployed.
+
+#### 2026-10-16 01:24Z heartbeat tick 3
+
+Live `/resume` still HTTP 200 (`date: Fri, 16 Oct 2026 01:24:47 GMT`).
+HEAD is `19868c1`. Working tree is still only the phone-header
+CSS: `styles/shell.css` +52/-9, uncommitted. Desktop rules are
+untouched. The scrolled phone rule hides the subtitle, tightens
+padding, and puts tools on one scrolling row. Name and nav links
+stay in the DOM. This is still an unverified candidate.
+
+The earlier viewport worker (shrimp) timed out while reading the
+preview server, which serves `dist/` and would have measured the
+old 349px header. It was stopped. Replacement measurement is
+`session_frog_1792113821900_a10ab5b1591c068e` (MiniMax-M3), still
+running at this tick: it is reading `scripts/bundle-css.js` and
+`scripts/stage-publication.js` so the preview includes the
+uncommitted CSS before measuring 320/360/390/768 at rest and
+after scroll. No test run. No deploy.
+
+Stray untracked file `css-verify-temp.mjs` (120 lines) is in the
+repo root. It is not part of the fix and must not be committed.
