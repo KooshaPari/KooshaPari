@@ -1171,3 +1171,43 @@ script has not executed. No test run. No deploy.
 
 A measurement that skips this rebuilt `dist/styles/shell.css` is
 invalid: the preview serves `dist/`, and the old header was 349px.
+
+#### 2026-10-16 01:46Z measurement collected (frog stopped after the JSON landed)
+
+Frog wrote `~/.jcode/scratch/header-measure-20261016.json` at
+18:36 PDT, then kept running with no further report. Stopped it
+after the second timeout. The JSON is against the rebuilt bundle
+`core.ef35ffab.css` on `127.0.0.1:4197`. Chrome only. No deploy.
+
+| Width | Rest height | Scrolled height | Overflow rest/scroll | Name | Nav | Subtitle when scrolled |
+|---|---|---|---|---|---|---|
+| 320 | 176.7 | 136.3 | 0 / 0 | visible | 4/4 | `display: none` |
+| 360 | 176.7 | 136.3 | 0 / 0 | visible | 4/4 | `display: none` |
+| 390 | 177.0 | 136.6 | 0 / 0 | visible | 4/4 | `display: none` |
+| 768 | 182.3 | 182.3 | 1 / 1 | visible | 4/4 | still visible |
+
+Phone rest height moved 349 to about 177. Scrolled height is
+about 136, under the 220 target and under the old 349 bar.
+At rest, `mainTop` equals `headerBottom` at every phone width,
+so nothing sits under the bar before scroll. Lens buttons stay
+at 44px. Nav link boxes stay 34.2px at rest and after scroll,
+and 35.7px at 768 where the new rules do not apply, so the fix
+did not shrink them. Console errors: none.
+
+Two script checks fail without being regressions:
+
+1. `no_scrolled_overlap` is false because after scroll
+   `mainTop` is about -664 while the sticky header bottom stays
+   near 136. `main.top < header.bottom` is true for any sticky
+   header once the page moves. Rest overlap is false.
+2. Nav `<a>` min-height is under 44px in both scroll states,
+   including at 768 outside `@media (max-width: 560px)`.
+
+The 768 overflow of 1px is also outside that media query.
+Header height there is still the historical 182px. Treated as
+pre-existing, not a phone-fix regression.
+
+`pass_overall` in the JSON is false because of those three
+checks. The density defect itself is measured fixed. CSS stays
+uncommitted until `npm test` and `npm run check` pass.
+Test worker: `session_koala_1792115214765_0e31256f0b109169`.
