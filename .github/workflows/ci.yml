@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           # The coverage gate was verified on Node 26.8.1. Pinned to the major
           # series that was actually exercised rather than an untested guess.
