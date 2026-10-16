@@ -1320,3 +1320,26 @@ Local preview `http://127.0.0.1:4197/resume` on `components.9a1540fc.css`, cards
 `npm test` 765/765. `npm run check` exit 0. Pushed `9aca793..fbe8c3d`. Production alias https://kooshapari.com at 03:01:50Z, deployment `kooshapari-site-3nq0vh9sc`. Live HTML is HTTP 200, cache MISS, and loads `components.9a1540fc.css`, whose rule is `.resume-node--right.reveal-hidden{transform:translateY(var(--reveal-distance,24px))}`. `translateX(24px)` is absent from that sheet.
 
 Live Chrome on https://kooshapari.com/resume, `reveal-hidden` forced on both right-column cards: overflow 0 at 320, 360, 390, and 768. Hidden transform is `translateY(24px)`. At 768 the card right edge is 744.97. After the class is removed, overflow stays 0 and the transform is `none`. Title is Resume, h1 is Experience, 4 `.resume-node`, 0 page errors. Same Chrome-only limit as the header pass.
+
+#### 2026-10-16: live breadth pass `blossom`
+
+Read-only Chrome (`channel: chrome`, Playwright 1.63.0) against https://kooshapari.com from 03:08:33Z to 03:10:17Z. JSON: `~/.jcode/scratch/broad-verify-20261016.json` (54,408 bytes). HEAD at record time `63d9dbe`, working tree clean, `/resume` HTTP 200.
+
+60 route x viewport x scroll cells: `/`, `/work`, `/parent`, `/blog`, `/contact`, `/resume` at 390x844, 560x900, 768x1024, 844x390 landscape, and 860x1000, each at scrollY 0 and 800.
+
+| Check | Result |
+|---|---|
+| Horizontal overflow | 0 on all 60 |
+| Console errors / page errors / HTTP 5xx | 0 / 0 / 0 |
+| Site name visible | 60/60 |
+| Nav links | 4 visible, min height 44px, on all 60 |
+| Phone header, all 6 routes | 186.77px at rest, 146.38px after scroll |
+| 560px header | 188.38 rest, 147.69 scrolled |
+| 768 / 844 landscape / 860 | 190.61 / 173.50 / 174.17, no shrink (above the 560px rule) |
+| Hidden resume cards at 390 and 768 | overflow 0, `translateY(24px)`, tx 0 |
+| Reduced motion at 768 | overflow 0, `transform: none` |
+| JS off `/resume` and `/parent` at 390 | titles and h1 present, view-root 2521 and 1052 chars, overflow 0 |
+
+The 30 `overlap` flags at scrollY 800 are the first heading having scrolled above the sticky bar. All 30 rows at scrollY 0 are `ok` or have no h1. That is sticky behavior, not the header covering the title at load.
+
+Limits: headless Chrome only. No Safari, Firefox, or a physical phone. Touch size is a bounding box, not an observed tap. Workbench controls were not driven.
