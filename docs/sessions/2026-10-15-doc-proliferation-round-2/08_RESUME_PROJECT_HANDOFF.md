@@ -1150,3 +1150,24 @@ after scroll. No test run. No deploy.
 
 Stray untracked file `css-verify-temp.mjs` (120 lines) is in the
 repo root. It is not part of the fix and must not be committed.
+
+#### 2026-10-16 01:36Z heartbeat tick 4
+
+Live `/resume` still HTTP 200 (`date: Fri, 16 Oct 2026 01:35:49 GMT`).
+HEAD is `52490b0`. Working tree is still only `styles/shell.css`
+(+52/-9), uncommitted. `css-verify-temp.mjs` is no longer in
+`git status --porcelain`.
+
+Measurement worker `session_frog_1792113821900_a10ab5b1591c068e`
+(MiniMax-M3) is still running, about 12 minutes in, and has not
+written a result. It did copy source styles into `dist/styles/`
+at 18:31:54 PDT (so a preview measurement can see the uncommitted
+phone rules). It wrote `/tmp/measure-resume.mjs`, which reads
+`http://127.0.0.1:4197/resume` and is supposed to write
+`~/.jcode/scratch/header-measure-20261016.json`. That JSON does
+not exist yet. The preview on :4197 is up (HTTP 200, node pid
+52338). No Playwright process was running at this tick, so the
+script has not executed. No test run. No deploy.
+
+A measurement that skips this rebuilt `dist/styles/shell.css` is
+invalid: the preview serves `dist/`, and the old header was 349px.
