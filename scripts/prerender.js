@@ -94,7 +94,15 @@ export async function prerenderProjects(publication) {
         lens: 'engineering',
         reader: false,
       });
+      // The Prerender template can carry a no-JS fallback block inside
+      // `<main id="view-root">` (work/sharecli.html lists the four runtime
+      // states this way). `renderProjectDetail` calls
+      // `root.replaceChildren(...)`, which would otherwise drop every such
+      // block. Capture each `#view-root > noscript` node before render so a
+      // no-JS reader still sees the static fallback in the emitted document.
+      const fallbackNoscripts = [...root.querySelectorAll(':scope > noscript')];
       renderProjectDetail(root, project.slug);
+      for (const node of fallbackNoscripts) root.appendChild(node);
       document.title = `${project.title} — Koosha Paridehpour`;
       const url = `https://kooshapari.com/work/${project.slug}`;
       document.querySelector('link[rel="canonical"]').setAttribute('href', url);
