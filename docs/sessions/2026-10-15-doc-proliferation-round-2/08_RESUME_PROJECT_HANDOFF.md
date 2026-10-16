@@ -998,3 +998,115 @@ list was **not** applied wholesale.
   `*.html` path, so `/resume.html` shows "Page not found"
   while `/resume` works. Pre-existing and unrelated to
   this arc, but worth its own ticket.
+
+#### 2026-10-16: two worker verification passes on live production
+
+Two scoped read-only workers were dispatched against
+https://kooshapari.com to close the two gaps the
+deploy section itself flagged as honest limits:
+nav-click behaviour and mobile viewports. Both
+returned **PASS**. Neither changed a single repo file
+(`git status --porcelain --untracked-files=all` empty
+for both; all scratch work lived outside the repo).
+
+**Pass 1 - nav clicks (cat).** Concern: the deploy
+verification used direct URL loads only, so client-side
+view-swapping was unexercised and the site could still
+be doing full reloads on every nav click.
+
+Method: a `window.__marker` set before the click and
+read after, in real Chrome (`channel:'chrome'`), run
+identically against the local preview on :4197 and
+against live. A lost marker means a new document.
+
+| Check | Local | Live |
+|---|---|---|
+| marker_survived | NO | NO |
+| framenavigated | YES (3) | YES (3) |
+| console errors | 0 | 0 |
+
+Verdict: **INTENTIONAL_FULL_LOADS, not a defect.**
+`scripts/prerender.js` emits a separate static document
+per route (index / engineering / product / work /
+resume / contact / parent / blog + `work/<slug>` +
+`blog/<slug>`). With JavaScript **disabled**, `/parent`
+still renders fully (title "Parent", h1 "Parent",
+view-root 3757 chars, nav links intact) locally and
+live. An SPA would render nothing. No performance
+problem either: `/resume` live is 3.9 KB, FCP ~272 ms,
+domInteractive 70 ms.
+
+Root cause of the original ambiguity, now recorded:
+`navigateTo()` (router.js:30-37, pushState +
+routechange) has **zero callers** and
+`initTransitions` is imported by app.js:20 but never
+called. `git log -S "closest('a')"` is empty, so click
+interception was never present and nothing regressed.
+No fix applied. The dead code plus docs calling this an
+"SPA" is a real inconsistency (operator decision),
+since wiring click interception would **delete** the
+no-JS guarantee and forfeit prerendered per-route SEO.
+
+**Pass 2 - phone widths on /resume (chipmunk).**
+Viewports: 390x844, 360x800, 320x800 (768x1024 tablet
+also checked, excluded as not phone). HTTP 200, title
+"Resume - Koosha Paridehpour", h1 "Experience", 4
+`.resume-node`, at every width.
+
+| Metric | 390x844 | 360x800 | 320x800 |
+|---|---|---|---|
+| scrollWidth - clientWidth | 0 | 0 | 0 |
+| out-of-bounds elements | 0 | 0 | 0 |
+| nodes at opacity 1 after scroll | 4/4 | 4/4 | 4/4 |
+| `[data-reveal]` at opacity 1 | 19/19 | 19/19 | 19/19 |
+| overlapping node pairs | 0 | 0 | 0 |
+| sub-24px touch targets | 0 | 0 | 0 |
+| console / page errors | 0 | 0 | 0 |
+
+Overflow was checked both at load and after scrolling
+the full document, and cross-checked by enumerating
+every DOM element whose bounding box exceeded the
+viewport width. Timeline columns correctly collapse to
+a single full-width column on phones (the alternating
+two-column layout only appears at >=768px). Header
+`headerBottom == contentTop` (349 == 349) at scrollY
+0 / 400 / 1600, so nothing is hidden under the sticky
+bar.
+
+**The one real finding, in either pass: phone header
+density.** The sticky header is 349px at 390x844
+(**41.3%** of the viewport) and 349px at 360x800
+(**43.6%**), leaving only 495px / 451px of visible
+content. It grows to 393px at 320px. It **does not
+shrink when scrolled** - measured 349px at scrollY 0,
+400 and 1600 - because `.atelier-header--scrolled`
+(styles/shell.css:20-24) only sets `box-shadow` and
+`border-bottom-color` and has no height effect. The
+height itself comes from `@media (max-width:860px)`
+putting nav on `grid-row: 2` with `padding-top:
+var(--space-3)` and `@media (max-width:560px)` stacking
+`.atelier-tools` in `column-reverse`. At 768px the
+header is 182px (17.8%), so this is phone-class only.
+
+This is a defect on the highest-traffic viewport class,
+not a caveat: the top ~40% of a phone screen is
+permanently occupied by chrome. Nothing is broken or
+unreachable, which is why neither worker marked a FAIL.
+Tracked as open work.
+
+Honest limits on this evidence: both passes are
+Chrome-only, headless, `channel:'chrome'`. No
+Safari/iOS WebKit, no Firefox, no real device. Touch
+targets were measured by bounding box, not by observed
+tap behaviour.
+
+**Handoff doc line 109-110 correction.** This document
+still calls `scripts/app.js` an "SPA router" and says
+the page "works both with JS (SPA mode) and without JS
+(prerendered HTML fallback)". Pass 1 shows the SPA mode
+is effectively vestigial for navigation: there is one
+static document per route and nav clicks are full loads
+by design, so the JS path re-renders content into an
+already-correct document rather than swapping views.
+The "prerendered HTML fallback" framing is correct; the
+"SPA mode" framing is not.
