@@ -1110,3 +1110,22 @@ by design, so the JS path re-renders content into an
 already-correct document rather than swapping views.
 The "prerendered HTML fallback" framing is correct; the
 "SPA mode" framing is not.
+
+#### 2026-10-16 01:11Z heartbeat tick 2
+
+Live `/resume` still HTTP 200. HEAD was `22ba965`. Working
+tree was clean. The header-fix worker (lobster) had been
+running ~10 minutes, had written a read-only probe at
+`~/.jcode/scratch/measure-header.mjs`, and had not edited
+`styles/shell.css` (mtime still 2026-09-19). Stopped it.
+
+Applied the phone-header change directly in
+`styles/shell.css` inside `@media (max-width: 560px)` only.
+The 249px tools stack (`column-reverse`) is now one
+horizontal scrolling row (`minmax(0, 1fr)`, `min-width: 0`
+so the row cannot widen the page). The subtitle is one
+line. `.atelier-header--scrolled` now tightens padding and
+hides the subtitle. Name and all four nav links stay in
+the DOM. Desktop rules were not edited. The CSS is
+uncommitted. Verification and the test gate have not run,
+so this is not a measured fix yet and nothing was deployed.
