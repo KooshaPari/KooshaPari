@@ -703,7 +703,59 @@ listed `archive.html` only as a member of
 and exists on disk. It never required a link or a view,
 so it passed 3/3 while the page was dead.
 
-#### Deploy preflight (2026-10-15, no deploy fired)
+#### 2026-10-16: DEPLOYED TO PRODUCTION — VERIFIED
+
+Operator signalled "do it yourself" at 00:33Z.
+`npx vercel deploy --prod --prebuilt --yes` completed and
+aliased to https://kooshapari.com.
+
+| Deployment | Value |
+|---|---|
+| Inspect | `vercel.com/.../kooshapari-site/2SqmHBvwPcyYQytgN5eJESnf3oUu` |
+| Production alias | `https://kooshapari-site-34tfieqek-koosha-paridehpours-projects.vercel.app` |
+| Aliased domain | `https://kooshapari.com` |
+| Live bundle | `app.bundle.0403d845.js`, 220,293 B |
+
+Verified against **live production** in a real browser
+with JS enabled. This was the check that mattered: the
+original bug returned HTTP 200 while rendering not-found,
+so status codes alone prove nothing here.
+
+| Route | Title | Renders | Errors |
+|---|---|---|---|
+| `/resume.html` | Resume | YES - h1 Experience, 4 `.resume-node` | 0 |
+| `/work/sharecli.html` | ShareCLI | YES - workbench mounted, 17 buttons | 0 |
+| `/work/netweave.html` | NetWeave | YES - workbench mounted, 11 buttons, 5 tabs | 0 |
+| `/parent.html` | Parent | YES - h1 Parent | 0 |
+| `/resume` | Resume | YES - 4 `.resume-node` | 0 |
+| `/archive.html` | 404 | not-found, page correctly deleted | expected |
+
+**The `.html` bug is confirmed dead**: `/resume.html`
+carries 4 `.resume-node` in the raw HTML *and* 4 in the
+rendered DOM after JS settles, so the client router no
+longer discards correct prerendered markup. Workbench
+mount was proven by a source-vs-DOM delta — the
+prerendered HTML contains 0 buttons while the rendered
+DOM has 17 and 11 workbench-specific ones, which can
+only come from runtime JS.
+
+Also confirmed live: sitemap has `/parent` and no
+`/archive` (27 entries), and `data/phenotype.js` is
+byte-identical to the local prebuilt (sha256
+`9ca3d36f...`, 12,204 B).
+
+**Honest limits on this verification:** nav-link clicks
+trigger full document navigation, so client-side SPA
+view-swap was not exercised — only direct URL loads.
+Headless Chrome at a single 1440x1000 desktop viewport
+only: no mobile, no Safari, no Firefox. Workbench
+*functionality* was verified by mount, not by driving
+its controls. And `/archive.html` now serves Vercel's
+edge 404 rather than the app's own styled 404 view,
+because the page was deleted; whether that should be a
+soft 404 via a `vercel.json` rewrite is a product call.
+
+#### Deploy preflight (2026-10-15, superseded by the deploy above)
 
 Everything below is verified ready. Nothing has been
 deployed; that waits on the operator signal.
