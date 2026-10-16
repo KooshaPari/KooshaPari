@@ -79,6 +79,28 @@ export async function prerenderTopLevel(publication) {
   }
 }
 
+// A project page may carry its own no-JS fallback as a direct child of
+// `#view-root`. Emission still starts from the ShareCLI template, so read
+// that source page before it is overwritten. ShareCLI is the template.
+async function fallbackNoscriptsFor(publication, slug, templateRoot) {
+  const templateFallbacks = [...templateRoot.querySelectorAll(':scope > noscript')];
+  if (slug === 'sharecli') return templateFallbacks;
+  let source = '';
+  try {
+    source = await readFile(join(publication, `work/${slug}.html`), 'utf8');
+  } catch {
+    return templateFallbacks;
+  }
+  const { document: sourceDocument } = parseHTML(source);
+  const sourceRoot = sourceDocument.getElementById('view-root');
+  const markup = [...(sourceRoot?.querySelectorAll(':scope > noscript') ?? [])]
+    .map((node) => node.toString())
+    .join('');
+  if (!markup) return templateFallbacks;
+  const { document: holder } = parseHTML(`<main id="view-root">${markup}</main>`);
+  return [...holder.getElementById('view-root').querySelectorAll(':scope > noscript')];
+}
+
 // Render the actual project view at build time. Browser enhancement replaces it.
 export async function prerenderProjects(publication) {
   const template = await readFile(join(publication, 'work/sharecli.html'), 'utf8');
@@ -94,13 +116,11 @@ export async function prerenderProjects(publication) {
         lens: 'engineering',
         reader: false,
       });
-      // The Prerender template can carry a no-JS fallback block inside
-      // `<main id="view-root">` (work/sharecli.html lists the four runtime
-      // states this way). `renderProjectDetail` calls
-      // `root.replaceChildren(...)`, which would otherwise drop every such
-      // block. Capture each `#view-root > noscript` node before render so a
-      // no-JS reader still sees the static fallback in the emitted document.
-      const fallbackNoscripts = [...root.querySelectorAll(':scope > noscript')];
+      // `renderProjectDetail` calls `root.replaceChildren(...)`, which drops
+      // every no-JS block. Capture the project's own `#view-root > noscript`
+      // nodes first (ShareCLI's live on the shared template) and append them
+      // again so a no-JS reader still sees that fallback.
+      const fallbackNoscripts = await fallbackNoscriptsFor(publication, project.slug, root);
       renderProjectDetail(root, project.slug);
       for (const node of fallbackNoscripts) root.appendChild(node);
       document.title = `${project.title} — Koosha Paridehpour`;
