@@ -1367,3 +1367,21 @@ A crash-isolated Chrome drive clicked six controls on each live workbench. JSON:
 | `/work/netweave` | yes | 10 | dark mode, Engineering, Product, Exit Reader, Paper on, Index | all LIVE |
 
 No CSS or script change. Tests were not rerun because the tree did not change. Cap was 6 controls per page, so the remaining sharecli buttons and netweave tabs were not driven. Chrome only.
+
+#### 2026-10-16: remaining workbench controls, owned-state PASS
+
+Earlier rows that looked INERT were the scorer watching the wrong field. ShareCLI Back and Reset change the selected state, not the cast speed. NetWeave tabs change the panel `h4` and `aria-selected`, not a missing heading. Approach had already changed `desktop-01` to `desktop-03` in `workbench-remaining-20261016.json`.
+
+A later Chrome pass (`channel: chrome`) clicked the seven controls that were still unscored, against the state each one owns. JSON: `~/.jcode/scratch/workbench-owned-20261016.json`. Finished 2026-10-16T04:49:17Z. 7/7 LIVE. `console_errors` and `page_errors` are empty arrays. HEAD stayed `90a053d`. Both live pages were HTTP 200. No repo source changed.
+
+| Control | Before | After |
+|---|---|---|
+| ShareCLI Back | State 04 / Recover | State 03 / Observe |
+| ShareCLI Reset | State 04 / Recover, Motion on | State 01 / Burst, Motion off |
+| Cast speed 2x | speed class 1 | speed class 2 |
+| Cast speed 1x | speed class 2 | speed class 1 |
+| NetWeave Traffic | h4 "A bounded traffic field", Overview | h4 "Three discrete states", Traffic |
+| NetWeave Evidence | h4 "Three discrete states", Traffic | h4 "Evidence boundary", Evidence |
+| NetWeave Notes | h4 "Evidence boundary", Evidence | h4 "What remains open", Notes |
+
+Limits stay: headless Chrome only. Firefox and WebKit bundles are missing. Six chrome controls per page were already recorded in the prior drive. Not every button on the page was clicked.
