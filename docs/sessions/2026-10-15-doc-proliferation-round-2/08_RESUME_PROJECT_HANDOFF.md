@@ -1385,3 +1385,20 @@ A later Chrome pass (`channel: chrome`) clicked the seven controls that were sti
 | NetWeave Notes | h4 "Evidence boundary", Evidence | h4 "What remains open", Notes |
 
 Limits stay: headless Chrome only. Firefox and WebKit bundles are missing. Six chrome controls per page were already recorded in the prior drive. Not every button on the page was clicked.
+
+#### 2026-10-16: live workbench requirement map
+
+Chrome (`channel: chrome`, headless) drove the ShareCLI and NetWeave requirement rows on the live pages. JSON: `~/.jcode/scratch/workbench-reqmap-20261016.json`. Generated 2026-10-16T04:55:12Z. Console errors and page errors are empty. Both documents returned HTTP 200.
+
+| Row | Observed result |
+|---|---|
+| S1-S8 ShareCLI | PASS. Four states, Back to Coalesce, Reset to Burst with motion off, motion toggle leaves the selection, arrow moves the listbox, cast speed changes and the workbench selection does not |
+| N1-N8 NetWeave | PASS. Five tabs, Traffic image `desktop-01`, gaps then Approach move to `desktop-02` then `desktop-03`, Evidence keeps that image, motion toggle, Back to Traffic, Reset to Overview `desktop-01`, arrow moves the tab |
+| E1 phone 390 | PASS. Overflow 0 on both pages, workbench and a control in view |
+| E2 reduced motion | PASS. ShareCLI motion label still toggles and the image animation is `none`. NetWeave image stays `desktop-01` for 1500ms |
+| E3 JavaScript off | ShareCLI static fallback: view-root 2921 chars, no listbox, body text has none of Burst, Coalesce, Observe, Recover. NetWeave static page mentions Overview, Route, Traffic, Evidence, and Notes. The interactive workbench is absent on both |
+| E4 errors | PASS. HTTP 200 on all four loads, 0 console errors, 0 page errors |
+
+The map's E5 row is FAIL because its fetch used `/bundled/app.bundle.0403d845.js` with no origin, so the body was never read. An independent fetch the same morning got HTTP 200 and 220293 bytes. That bundle contains `/scripts/media/sharecli-workbench.js` and `/scripts/media/netweave-workbench.js`. Those scripts are HTTP 200 (16546 and 9028 bytes). Packaging is present. The E5 FAIL is the checker, not the site.
+
+The ShareCLI no-JS gap is real relative to the JavaScript intro, which says the complete state sequence is available without JavaScript. The prerendered document does not contain those four state names. No source change in this pass.
