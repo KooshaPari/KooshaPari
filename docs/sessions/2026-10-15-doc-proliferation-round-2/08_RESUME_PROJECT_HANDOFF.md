@@ -1228,3 +1228,32 @@ That edit invalidates `header-measure-20261016.json`. Remeasure
 is `session_otter_1792115343934_6c77cd6bf2e969b1`, writing
 `~/.jcode/scratch/header-measure-20261016-r2.json` after a CSS
 rebuild. No deploy. CSS still uncommitted.
+
+#### 2026-10-16 01:53Z: remeasure PASS, CSS committed `8b9f229`
+
+Otter rebuilt `styles/bundled/core.e8b955bf.css`, staged
+publication, and measured `http://127.0.0.1:4197/resume`.
+The served sheet contains
+`.atelier-nav a{display:inline-flex;align-items:center;min-height:2.75rem}`
+inside `@media (max-width:860px)`. Preview pid 52338 was not
+restarted. Otter did not edit source and did not deploy.
+
+| Width | Rest | Scrolled | Overflow | Nav min | Lens min | Name | Nav |
+|---|---|---|---|---|---|---|---|
+| 320 | 186.6 | 146.2 | 0 | 44.0 | 44.0 | yes | 4/4 |
+| 360 | 186.6 | 146.2 | 0 | 44.0 | 44.0 | yes | 4/4 |
+| 390 | 186.8 | 146.4 | 0 | 44.0 | 44.0 | yes | 4/4 |
+| 768 | 190.6 | 190.6 | 1 | 44.0 | 44.0 | yes | 4/4 |
+
+At scrollY 0, `layout_overlap` is N at all four widths.
+Phone scrolled height is about 146, under 220 and under the
+old 349. The 768 overflow of 1px is
+`.resume-node.resume-node--right` at right 768.97, from
+`resume-timeline.css`, present before this rule. Accepted as
+out of scope for the header fix.
+
+`npm test` 765/765 and `npm run check` exit 0 (koala).
+CSS committed at `8b9f229` with `tx-validated: test`.
+Live `/resume` was still HTTP 200 on the previous production
+bundle. Deploy had not run at this note.
+JSON: `~/.jcode/scratch/header-measure-20261016-r2.json`.
