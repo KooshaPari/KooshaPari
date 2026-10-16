@@ -1277,3 +1277,31 @@ The stalled deploy worker `session_lizard_1792116379393_f818ead5085788b6` was st
 The 768px overflow of 1px stays out of scope. It is `.resume-node.resume-node--right` in `resume-timeline.css`, not the phone header rule.
 
 Final state: h1 records done, h2 CSS `8b9f229`, h3 measured, h4 tests green, h5 live on `core.e8b955bf.css`. No successor heartbeat.
+
+#### 2026-10-16 02:15Z: live public layout, not a CSS string match
+
+The sunset above proved the stylesheet URL contained the new rules. It did not prove a visitor's header was shorter. This pass opened https://kooshapari.com/resume in headless Chrome (`channel: chrome`, Playwright 1.63) and read computed geometry. HTTP 200. Stylesheet `/styles/bundled/core.e8b955bf.css`. Zero console errors. JSON: `~/.jcode/scratch/header-live-20261016.json`. Observed 2026-10-16T02:15:43Z.
+
+Baseline is the pre-fix phone header, 349px.
+
+| Surface | Width | Scroll | Header | Overflow | Nav | Name | H1 clear of header |
+|---|---|---|---|---|---|---|---|
+| /resume | 320 | 0 | 186.6 | 0 | 4/4 at 44px | yes | yes, h1 top 263.8 |
+| /resume | 320 | 800 | 146.2 | 0 | 4/4 at 44px | yes | sticky, h1 top -576.5 |
+| /resume | 360 | 0 / 800 | 186.6 / 146.2 | 0 | 4/4 at 44px | yes | yes at rest |
+| /resume | 390 | 0 / 800 | 186.8 / 146.4 | 0 | 4/4 at 44px | yes | yes at rest |
+| /resume | 768 | 0 / 800 | 190.6 / 190.6 | 1 | 4/4 at 44px | yes | yes at rest |
+| /resume | 1440 | 0 / 800 | 104 / 104 | 0 | 4/4 at 37.2px | yes | yes at rest |
+| / | 390 | 0 / 800 | 186.8 / 146.4 | 0 | 4/4 at 44px | yes | yes at rest |
+| /work | 390 | 0 | 186.8 | 0 | 4/4 at 44px | yes | yes, h1 top 245.8 |
+| /resume, JS off | 390 | 0 | 142.8 | 0 | 4/4 at 44px | yes | yes, h1 top 220 |
+
+/resume with JS on still shows h1 Experience and 4 `.resume-node` entries at every width, including JS off. Home and /work share the same phone header heights, so the shell change is not resume-only.
+
+On a 390x844 phone the rest header is 186.8px (22.1% of the screen) and the scrolled header is 146.4px (17.3%). The old bar was 349px (41.3%).
+
+The scrolled `overlap` flag is the h1 moving under the sticky bar (h1 top about -576). At scroll 0 the h1 starts about 77px below the header on the phone widths. That is sticky behavior, not the header covering the title at load.
+
+The 768px overflow of 1px is still `.resume-node.resume-node--right`. It remains out of scope. Desktop 1440px nav height is 37.2px because the 44px rule is inside `max-width: 860px`. This change does not apply there.
+
+Limits: Chrome only, headless, no Safari, Firefox, or a physical phone. Touch size is a bounding box, not an observed tap.
