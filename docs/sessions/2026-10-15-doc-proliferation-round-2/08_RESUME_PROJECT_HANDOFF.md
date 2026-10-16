@@ -1257,3 +1257,23 @@ CSS committed at `8b9f229` with `tx-validated: test`.
 Live `/resume` was still HTTP 200 on the previous production
 bundle. Deploy had not run at this note.
 JSON: `~/.jcode/scratch/header-measure-20261016-r2.json`.
+
+#### 2026-10-16 02:10Z: SUNSET. h1-h5 complete
+
+Reason: every gate has evidence. The heartbeat is not re-armed.
+
+| Gate | Evidence |
+|---|---|
+| CSS | `8b9f229` in `styles/shell.css` |
+| Measure | phone rest ~187px, scrolled ~146px, overflow 0 at 320/360/390, nav and lens 44px, name and 4 links visible. JSON `~/.jcode/scratch/header-measure-20261016-r2.json` |
+| Tests | 765/765 and `npm run check` exit 0 |
+| Docs before deploy | `704dd8c` |
+| Deploy | aliased to https://kooshapari.com. Inspect `https://vercel.com/koosha-paridehpours-projects/kooshapari-site/D7rvatJfKK1ktdMnqPBCMK36gNEg`. Deployment `https://kooshapari-site-np7y222jm-koosha-paridehpours-projects.vercel.app` |
+| Live | HTTP 200, age 0, `x-vercel-cache: MISS`, last-modified `Fri, 16 Oct 2026 02:10:44 GMT`. Stylesheet `https://kooshapari.com/styles/bundled/core.e8b955bf.css` contains `min-height:2.75rem` and `.atelier-header--scrolled` |
+| Push | `origin/main` was already at `704dd8c` when this note was written |
+
+The stalled deploy worker `session_lizard_1792116379393_f818ead5085788b6` was stopped after zero tool calls. One production deploy then ran from the verified prebuilt at HEAD `704dd8c`. `.vercel/output` already referenced `core.e8b955bf.css` and did not contain `core.6a44e08f.css`.
+
+The 768px overflow of 1px stays out of scope. It is `.resume-node.resume-node--right` in `resume-timeline.css`, not the phone header rule.
+
+Final state: h1 records done, h2 CSS `8b9f229`, h3 measured, h4 tests green, h5 live on `core.e8b955bf.css`. No successor heartbeat.
