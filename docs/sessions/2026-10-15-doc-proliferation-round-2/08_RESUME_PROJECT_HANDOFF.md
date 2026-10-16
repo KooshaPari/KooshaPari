@@ -1355,4 +1355,15 @@ A read-only worker (owl) tried `/resume` in Firefox and WebKit without downloadi
 | System Firefox 158.0 | Exits immediately. Mozilla build has no Playwright `-juggler-pipe` shim |
 | System Safari | Times out at 10s. No `--inspector-pipe` protocol |
 
-Chrome results stay the evidence. This host cannot measure Firefox or Safari until a Playwright browser install is allowed. No repo files changed. Workbench control drive is still in flight.
+Chrome results stay the evidence. This host cannot measure Firefox or Safari until a Playwright browser install is allowed. No repo files changed.
+
+#### 2026-10-16: live workbench controls driven, PASS
+
+A crash-isolated Chrome drive clicked six controls on each live workbench. JSON: `~/.jcode/scratch/workbench-drive-r2.json`. Started 2026-10-16T03:49:05Z. Overall PASS: 2 pages, 0 console errors, 0 page errors. An earlier sharecli run died in headless Chrome on the Paper click before writing a result. This rerun recorded Paper as LIVE and continued to netweave, so that crash was the browser session, not an inert control.
+
+| Page | Mount | Buttons | Clicks | Verdict |
+|---|---|---|---|---|
+| `/work/sharecli` | yes | 24 | dark mode, Engineering, Product, Reader, Paper, Index | all LIVE |
+| `/work/netweave` | yes | 10 | dark mode, Engineering, Product, Exit Reader, Paper on, Index | all LIVE |
+
+No CSS or script change. Tests were not rerun because the tree did not change. Cap was 6 controls per page, so the remaining sharecli buttons and netweave tabs were not driven. Chrome only.
