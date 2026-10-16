@@ -1302,6 +1302,21 @@ On a 390x844 phone the rest header is 186.8px (22.1% of the screen) and the scro
 
 The scrolled `overlap` flag is the h1 moving under the sticky bar (h1 top about -576). At scroll 0 the h1 starts about 77px below the header on the phone widths. That is sticky behavior, not the header covering the title at load.
 
-The 768px overflow of 1px is still `.resume-node.resume-node--right`. It remains out of scope. Desktop 1440px nav height is 37.2px because the 44px rule is inside `max-width: 860px`. This change does not apply there.
+The 768px overflow of 1px was `.resume-node.resume-node--right` while `reveal-hidden` applied `translateX(24px)`. Desktop 1440px nav height is 37.2px because the 44px rule is inside `max-width: 860px`. This change does not apply there.
 
 Limits: Chrome only, headless, no Safari, Firefox, or a physical phone. Touch size is a bounding box, not an observed tap.
+
+#### 2026-10-16: 768px overflow shipped `fbe8c3d`
+
+Hidden right-column cards now slide with `translateY`. Reduced motion sets that transform to none. The rule is outside the phone media query, so it also covers the 768px two-column layout.
+
+Local preview `http://127.0.0.1:4197/resume` on `components.9a1540fc.css`, cards still `reveal-hidden`:
+
+| Width | Overflow | Hidden transform |
+|---|---|---|
+| 320 / 360 / 390 / 768 | 0 | `translateY(24px)` |
+| 768 reduced motion | 0 | `none` |
+
+`npm test` 765/765. `npm run check` exit 0. Pushed `9aca793..fbe8c3d`. Production alias https://kooshapari.com at 03:01:50Z, deployment `kooshapari-site-3nq0vh9sc`. Live HTML is HTTP 200, cache MISS, and loads `components.9a1540fc.css`, whose rule is `.resume-node--right.reveal-hidden{transform:translateY(var(--reveal-distance,24px))}`. `translateX(24px)` is absent from that sheet.
+
+Live Chrome on https://kooshapari.com/resume, `reveal-hidden` forced on both right-column cards: overflow 0 at 320, 360, 390, and 768. Hidden transform is `translateY(24px)`. At 768 the card right edge is 744.97. After the class is removed, overflow stays 0 and the transform is `none`. Title is Resume, h1 is Experience, 4 `.resume-node`, 0 page errors. Same Chrome-only limit as the header pass.
