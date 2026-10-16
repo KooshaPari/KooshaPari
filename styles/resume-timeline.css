@@ -82,6 +82,13 @@
 .resume-node--right::before { left: -27px; }
 .resume-node--right::after { left: -25px; }
 
+/* Right-column cards use data-reveal="right", whose hidden state is
+   translateX(24px). At 768px that lands the border box at 768.97 and
+   scrollWidth becomes 769. Slide vertically instead. */
+.resume-node--right.reveal-hidden {
+  transform: translateY(var(--reveal-distance, 24px));
+}
+
 /* --- Node internals --- */
 .resume-node__date {
   font: 700 11px/1 var(--font-meta);
@@ -238,11 +245,8 @@
     width: calc(var(--space-5) - 6px);
   }
   /* Mobile timeline is single-column left-aligned: a data-reveal="right"
-     node slides +24px right while reveal-hidden and overflows the viewport
-     (8px at 390px). Neutralize the horizontal slide; reveal vertically. */
-  .resume-node--right.reveal-hidden {
-    transform: translateY(var(--reveal-distance, 24px));
-  }
+     node would slide +24px right while reveal-hidden. The desktop override
+     above (translateY) also applies here, so no extra rule is needed. */
   .resume-skills {
     grid-template-columns: 1fr;
   }
@@ -253,6 +257,9 @@
   .resume-node,
   .resume-skill {
     transition: none;
+  }
+  .resume-node--right.reveal-hidden {
+    transform: none;
   }
 }
 
