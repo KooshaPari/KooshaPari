@@ -1343,3 +1343,16 @@ Read-only Chrome (`channel: chrome`, Playwright 1.63.0) against https://kooshapa
 The 30 `overlap` flags at scrollY 800 are the first heading having scrolled above the sticky bar. All 30 rows at scrollY 0 are `ok` or have no h1. That is sticky behavior, not the header covering the title at load.
 
 Limits: headless Chrome only. No Safari, Firefox, or a physical phone. Touch size is a bounding box, not an observed tap. Workbench controls were not driven.
+
+#### 2026-10-16: Firefox and WebKit measurement blocked
+
+A read-only worker (owl) tried `/resume` in Firefox and WebKit without downloading browsers. Both failed. JSON: `~/.jcode/scratch/resume-nonchrome-20261016.json`.
+
+| Attempt | Result |
+|---|---|
+| Playwright firefox-1543 | Bundle missing under `~/Library/Caches/ms-playwright` |
+| Playwright webkit-2359 | Bundle missing |
+| System Firefox 158.0 | Exits immediately. Mozilla build has no Playwright `-juggler-pipe` shim |
+| System Safari | Times out at 10s. No `--inspector-pipe` protocol |
+
+Chrome results stay the evidence. This host cannot measure Firefox or Safari until a Playwright browser install is allowed. No repo files changed. Workbench control drive is still in flight.
