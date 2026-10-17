@@ -274,6 +274,14 @@ function createPlayer(container) {
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
+  // Skip the network fetch under Node/linkedom prerender (no `location` global);
+  // the SPA shell injects the real DOM and the player re-initializes on the
+  // client where `location` is defined. This avoids `ERR_INVALID_URL` from
+  // `fetch()` being handed a relative path during static prerender.
+  if (typeof location === 'undefined') {
+    output.textContent = 'Recording unavailable in static preview.';
+    return { el: root, play: () => {}, pause: () => {}, resetPlayback: () => {} };
+  }
   fetch(src, { signal: controller.signal })
     .then(r => {
       clearTimeout(timeout);

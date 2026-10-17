@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 — Koosha Paridehpour</title>
+  <meta name="description" content="The page you are looking for could not be found. Return to the home page or jump to a known section." />
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://kooshapari.com/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <style>
+    :root {
+      --seed-obsidian: #0F1012;
+      --seed-slate:    #353A40;
+      --seed-ceramic:  #F6F5F5;
+      --seed-teal:     #7EBAB5;
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: var(--seed-obsidian);
+      color: var(--seed-ceramic);
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    main {
+      max-width: 36rem;
+      width: 100%;
+    }
+
+    .frame {
+      border: 1px solid color-mix(in oklch, var(--seed-ceramic) 12%, transparent);
+      border-radius: 10px;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      background: color-mix(in oklch, var(--seed-slate) 35%, var(--seed-obsidian));
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--seed-teal);
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-size: clamp(2.25rem, 6vw, 3.5rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin: 0 0 1rem;
+    }
+
+    p.lead {
+      font-size: 1.05rem;
+      color: color-mix(in oklch, var(--seed-ceramic) 78%, transparent);
+      margin: 0 0 1.75rem;
+      max-width: 32rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+    }
+
+    a.btn {
+      display: inline-block;
+      padding: 0.6rem 1.05rem;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      text-decoration: none;
+      border: 1px solid color-mix(in oklch, var(--seed-ceramic) 22%, transparent);
+      color: var(--seed-ceramic);
+      transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+    }
+
+    a.btn:hover,
+    a.btn:focus-visible {
+      border-color: var(--seed-teal);
+      background: color-mix(in oklch, var(--seed-teal) 12%, transparent);
+      color: var(--seed-ceramic);
+      outline: none;
+    }
+
+    a.btn.primary {
+      border-color: var(--seed-teal);
+      background: color-mix(in oklch, var(--seed-teal) 14%, transparent);
+    }
+
+    a.btn.primary:hover,
+    a.btn.primary:focus-visible {
+      background: color-mix(in oklch, var(--seed-teal) 22%, transparent);
+    }
+
+    .meta {
+      font-size: 0.8rem;
+      color: color-mix(in oklch, var(--seed-ceramic) 50%, transparent);
+      border-top: 1px solid color-mix(in oklch, var(--seed-ceramic) 10%, transparent);
+      padding-top: 1.25rem;
+    }
+
+    .meta dt {
+      display: inline;
+      color: color-mix(in oklch, var(--seed-ceramic) 70%, transparent);
+    }
+
+    .meta dd {
+      display: inline;
+      margin: 0 1.25rem 0 0.35rem;
+      color: var(--seed-ceramic);
+    }
+
+    .meta dl { margin: 0; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .frame { animation: settle 480ms ease-out both; }
+      @keyframes settle {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="frame" role="alert" aria-live="polite">
+      <span class="tag">404 / not found</span>
+      <h1>This page is not on the map.</h1>
+      <p class="lead">
+        The address you followed did not match a project, post, or page on this site.
+        The link may be out of date, mistyped, or pointing at a path that was renamed.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="/">Go home</a>
+        <a class="btn" href="/work">See work</a>
+        <a class="btn" href="/writing">Read writing</a>
+        <a class="btn" href="/contact">Get in touch</a>
+      </div>
+
+      <div class="meta">
+        <dl>
+          <dt>Status</dt><dd>404</dd>
+          <dt>Path</dt><dd id="path">unknown</dd>
+        </dl>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      try {
+        var p = window.location.pathname || '/';
+        var el = document.getElementById('path');
+        if (el) el.textContent = p.length > 80 ? p.slice(0, 77) + '...' : p;
+      } catch (_) { /* noop */ }
+    })();
+  </script>
+</body>
+</html>
