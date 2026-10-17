@@ -143,6 +143,7 @@ const bundles = {
     'code-annotate.css',
     'cast-player.css',
     'construction-gate.css',
+    'archive.css',
   ],
 };
 

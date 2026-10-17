@@ -12,10 +12,13 @@
    ================================================================ */
 
 /* --- Hide default cursor on fine-pointer devices ----------------- */
+/* Scoped to body.has-custom-cursor so a JS failure (or prerendered
+   page before hydration) leaves the OS cursor visible. The class is
+   added by initCursor() only after the custom cursor mounts. */
 @media (pointer: fine) {
-  *,
-  *::before,
-  *::after {
+  body.has-custom-cursor *,
+  body.has-custom-cursor *::before,
+  body.has-custom-cursor *::after {
     cursor: none !important;
   }
 }

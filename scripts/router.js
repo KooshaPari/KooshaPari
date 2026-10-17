@@ -54,8 +54,8 @@ export function parseRoute(input = '') {
     return { view: 'blog' };
   }
 
-  // /resume, /contact — static top-level views
-  if (['resume', 'contact'].includes(segments[0])) {
+  // /resume, /contact, /archive — static top-level views
+  if (['resume', 'contact', 'archive'].includes(segments[0])) {
     return { view: segments[0] };
   }
 
@@ -117,6 +117,9 @@ export function navigateTo(route) {
       break;
     case 'blog':
       path = '/blog';
+      break;
+    case 'archive':
+      path = '/archive';
       break;
     default:
       path = route.view ? `/${route.view}` : '/';

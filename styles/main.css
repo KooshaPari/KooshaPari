@@ -1,65 +1,22 @@
 /* ================================================================
-   Phenotype Design System
-   - Dark, dense, fighter-card inspired
-   - Two main accents: amber (product), blue (engineering)
-   - One combined accent: lime (phenotype synthesis)
-   - Respects file-size mandates; modular files split below
+   Phenotype Design System (legacy file)
+   - This file is the OLD dark-theme shell used by the retired
+     hash-router (`scripts/main.js`). The new path-router
+     (`scripts/app.js`) uses the light theme in `tokens.css`,
+     `base.css`, and `shell.css`, and the body/html/`:root` rules
+     below conflict with those tokens (specifically `--bg-0` overriding
+     the new light theme and the dark `var(--bg-0)` background forcing
+     dark text on dark surface). All non-token rules here are retained
+     as dead CSS so the legacy hash router's classes (`.topbar`,
+     `.brand`, `.nav`, etc.) still resolve predictably if the legacy
+     entry is ever re-enabled.
    ================================================================ */
 @import url("./radar.css");
 @import url("./timeline.css");
 @import url("./cards.css");
 @import url("./hero.css");
 
-:root {
-  --bg-0:      #07080c;
-  --bg-1:      #0c0f17;
-  --bg-2:      #11151f;
-  --bg-3:      #1a2030;
-  --bg-4:      #232a3d;
-  --line:      #1f2638;
-  --line-2:    #2b344b;
-  --fg:        #e8edf7;
-  --fg-mute:   #98a3b9;
-  --fg-dim:    #67738c;
-
-  --accent-prod:    #ffb95c;
-  --accent-prod-2:  #ff7a3d;
-  --accent-eng:     #5fb4ff;
-  --accent-eng-2:   #4a7dff;
-  --accent-pheno:   #b6f06b;
-  --accent-pheno-2: #5edc8a;
-
-  --good:  #5edc8a;
-  --warn:  #ffbf3d;
-  --bad:   #ff5c6b;
-
-  --r-md: 10px;
-  --r-lg: 16px;
-  --r-xl: 22px;
-
-  --shadow-1: 0 2px 8px rgba(0,0,0,.4);
-  --shadow-2: 0 18px 60px -10px rgba(0,0,0,.6),
-              0  6px 18px rgba(0,0,0,.45);
-
-  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --display: "Space Grotesk", "Inter", system-ui, sans-serif;
-}
-
 * { box-sizing: border-box; }
-
-html, body {
-  margin: 0; padding: 0;
-  background:
-    radial-gradient(1200px 600px at 85% -10%, rgba(95,180,255,.06), transparent 60%),
-    radial-gradient(1000px 500px at 0% 10%,   rgba(182,240,107,.05), transparent 60%),
-    radial-gradient(900px 500px at 50% 110%,  rgba(255,185,92,.05),  transparent 60%),
-    var(--bg-0);
-  font-family: var(--sans);
-  font-feature-settings: "ss01", "cv11";
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
 
 #app {
   min-height: 100vh;

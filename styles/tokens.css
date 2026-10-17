@@ -105,6 +105,7 @@
   --accent: var(--arch-500); /* default lens accent */
   --accent-engineering: var(--arch-500);
   --accent-product: var(--olive-500);
+  --accent-500: var(--accent); /* lens-aware accent alias */
 
   /* Motion system — short, purposeful, no ambient loops ---------------- */
   --motion-fast: 160ms;

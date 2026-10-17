@@ -1,0 +1,117 @@
+/* Archive view — historical-work record. Long-form, low-chrome, grouped
+   by category. Reuses the global `.view`, `.eyebrow`, `.lede` classes
+   from main.css; component rules are scoped to `.archive-view`. */
+
+.archive-view {
+  display: block;
+  padding-block: clamp(2rem, 4vw, 4rem);
+  max-width: 64rem;
+  margin-inline: auto;
+}
+
+.archive-view .eyebrow {
+  margin-bottom: 0.5rem;
+}
+
+.archive-view h1 {
+  font: 700 clamp(2.3rem, 6vw, 5rem)/0.98 var(--display);
+  letter-spacing: -0.04em;
+  margin: 10px 0 18px;
+}
+
+.archive-view .lede {
+  max-width: 50rem;
+  color: var(--ink-soft);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.archive-groups {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.archive-group {
+  border-top: 1px solid var(--rule);
+  padding-top: clamp(1.2rem, 2.5vw, 2rem);
+}
+
+.archive-group__title {
+  font: 600 0.78rem/1 var(--font-meta);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 1rem;
+}
+
+.archive-group__list {
+  display: grid;
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+}
+
+.archive-row {
+  display: grid;
+  gap: 0.5rem;
+  padding-bottom: clamp(1rem, 2vw, 1.5rem);
+  border-bottom: 1px solid var(--rule);
+}
+
+.archive-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.archive-row__title {
+  font: 600 clamp(1.15rem, 2vw, 1.4rem)/1.2 var(--font-display);
+  margin: 0;
+}
+
+.archive-row__title a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in oklch, var(--ink) 20%, transparent);
+  transition: border-color 0.2s ease;
+}
+
+.archive-row__title a:hover {
+  border-bottom-color: var(--ink);
+}
+
+.archive-row__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  font: 0.78rem/1.4 var(--font-meta);
+  color: var(--ink-faint);
+  margin: 0.2rem 0 0;
+}
+
+.archive-row__provenance,
+.archive-row__evidence {
+  font-style: italic;
+}
+
+.archive-row__summary {
+  margin: 0.3rem 0 0;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.archive-row__links {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  font: 0.8rem/1.4 var(--font-meta);
+}
+
+.archive-row__links a {
+  color: var(--ink);
+  border-bottom: 1px solid color-mix(in oklch, var(--ink) 25%, transparent);
+  text-decoration: none;
+}
+
+.archive-row__links a:hover {
+  border-bottom-color: var(--ink);
+}

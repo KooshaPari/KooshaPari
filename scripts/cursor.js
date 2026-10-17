@@ -108,6 +108,11 @@ export function initCursor() {
 
   const { dot, ring, trails } = createDOM();
 
+  // Once the custom cursor DOM is mounted and the OS cursor is safely
+  // replaced, toggle the body class that drives the scoped `cursor: none`
+  // rule. Prerendered pages without JS keep the OS cursor.
+  document.body.classList.add('has-custom-cursor');
+
   // ---- state ----
   let mouseX = -100;
   let mouseY = -100;

@@ -11,6 +11,7 @@ import { renderWorkCatalog } from './views/work.js';
 import { renderProjectDetail } from './views/project-detail.js';
 import { renderResume } from './views/resume.js';
 import { renderContact } from './views/contact.js';
+import { renderArchive } from './views/archive.js';
 import { render as renderNotFoundHTML, initCanvas } from './views/not-found.js';
 import { renderBlogIndex } from './views/blog-index.js';
 import { renderBlogPost } from './views/blog-post.js';
@@ -26,6 +27,7 @@ import { initCastPlayers } from './media/cast-player.js';
 import { initImageSliders } from './media/image-slider.js';
 import { initCodeAnnotation } from './media/code-annotate.js';
 import { initTechIllustrations } from './media/tech-illustrations.js';
+import { initCursor } from './cursor.js';
 
 const shellRoot = $('#shell-root');
 const viewRoot = $('#view-root');
@@ -54,6 +56,7 @@ function setPageMetadata(route) {
     resume: 'Resume',
     contact: 'Contact',
     blog: 'Writing',
+    archive: 'Archive',
   };
   const title = project?.title ?? post?.title ?? labels[route.view] ?? 'Page not found';
   const description = project?.summary ?? post?.excerpt
@@ -111,6 +114,8 @@ function render() {
     renderResume(viewRoot);
   } else if (route.view === 'contact') {
     renderContact(viewRoot);
+  } else if (route.view === 'archive') {
+    renderArchive(viewRoot);
   } else if (route.view === 'blog') {
     renderBlogIndex(viewRoot, { posts: POSTS });
   } else if (route.view === 'post') {
@@ -160,6 +165,7 @@ initParallax();
 initImageReveal();
 initCardComposer(PROJECTS);
 initTechIllustrations();
+initCursor();
 
 if (!location.hash && location.pathname.replace(/\/+$/, '') === '') {
   history.replaceState(null, '', '/');
