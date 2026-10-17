@@ -4,6 +4,15 @@
   "buildCommand": "npm run stage:publication",
   "outputDirectory": "dist",
   "installCommand": "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install",
+  "redirects": [
+    {"source": "/about", "destination": "/", "statusCode": 301},
+    {"source": "/now", "destination": "/", "statusCode": 301},
+    {"source": "/uses", "destination": "/", "statusCode": 301},
+    {"source": "/colophon", "destination": "/", "statusCode": 301},
+    {"source": "/projects", "destination": "/", "statusCode": 301},
+    {"source": "/writing", "destination": "/", "statusCode": 301},
+    {"source": "/posts", "destination": "/", "statusCode": 301}
+  ],
   "rewrites": [
     {"source": "/engineering", "destination": "/engineering.html"},
     {"source": "/product", "destination": "/product.html"},
