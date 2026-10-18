@@ -685,6 +685,49 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > The 714/714 unit pass is a build-time check;
 > the 07 doc is the public-interface check.
 
+> **Round 6f (2026-10-18): netweave no-JS
+> follow-up.** A 3-day gap between the round 6d
+> handoff and the round 6e deploy left two
+> unstaged NetWeave refinements in the working
+> tree. They were preserved as stash@{0} during
+> the round 6e preflight, then applied and shipped
+> as commit `6ac8662`. The 5 no-JS view
+> descriptions in `work/netweave.html` were
+> tightened from verbose prose to terse
+> single-clause summaries (Overview: A bounded
+> traffic field; Route: Directed graph; Traffic:
+> Three discrete states; Evidence: Evidence
+> boundary; Notes: What remains open) --
+> consistent with the museum-quiet voice. The
+> `tests/netweave-static-names.test.js` was
+> refactored to focus on the single behavioral
+> guarantee the e95e763 fix established (the 5
+> view-name presence) and to read the emission
+> from the sharecli slot rather than the netweave
+> slot, which is the architecturally correct
+> surface. 767/767 unit pass; the affected test
+> logs a structured presence JSON to the operator
+> report.
+
+> **Round 6g (2026-10-18): rebuild prebuilt
+> post-6f.** The 6f source change made
+> `dist/work/netweave.html` stale relative to
+> `work/netweave.html`. `npm run stage:publication`
+> ran in 1.9s; the bundle hash stayed `0403d845`
+> because the JS did not change, but the
+> prerendered `dist/work/netweave.html` was
+> rewritten to include the 6f tightened
+> descriptions. The prebuilt is now source-aligned;
+> live is still pre-6f (deployed at 06:36 UTC
+> with the pre-6f prebuilt); the next production
+> deploy will ship the 6f content to live.
+> `dist/` and `.vercel/` are gitignored, so the
+> rebuild is a local-only state change and has no
+> commit; the audit trail is this paragraph.
+> The pane stays parked on the next production
+> deploy (operator-signal-blocked, per AGENTS.md
+> policy).
+
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new
 > pane, new agent, new operator session) can
