@@ -1,0 +1,401 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-10-17",
+  "site": "https://kooshapari.com/",
+  "manifest_url": "/data/asset-sources.json",
+  "notes": "Every binary asset shipped under /public/ in the staged publication. Self-authored assets carry the SPDX-style identifier 'self' (custom shorthand for the author's own work). Provenance hashes and provenance for project images are tracked separately in data/projects.js (each FEATURED_PRESENTATIONS entry records sha256 + retainedSource).",
+  "assets": [
+    {
+      "id": "favicon",
+      "path": "/public/favicon.svg",
+      "type": "icon",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "og-image-template",
+      "path": "/public/og-image.html",
+      "type": "html",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false,
+      "notes": "Self-authored HTML template for the Open Graph image (1200x630). Loaded at screenshot time only; not served in the production build."
+    },
+    {
+      "id": "og-image-fonts-space-grotesk",
+      "path": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap",
+      "type": "font",
+      "source": "https://fonts.google.com/specimen/Space+Grotesk",
+      "license": "OFL-1.1",
+      "attribution": "Florian Karsten (Space Grotesk)",
+      "modified": false,
+      "notes": "Referenced only by public/og-image.html, which is a screenshot-only template, not served in the live build."
+    },
+    {
+      "id": "og-image-fonts-jetbrains-mono",
+      "path": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap",
+      "type": "font",
+      "source": "https://fonts.google.com/specimen/JetBrains+Mono",
+      "license": "OFL-1.1",
+      "attribution": "JetBrains s.r.o. and Philipp Nurullin (JetBrains Mono)",
+      "modified": false,
+      "notes": "Referenced only by public/og-image.html, which is a screenshot-only template, not served in the live build."
+    },
+    {
+      "id": "agentapi-plusplus-card",
+      "path": "/public/projects/agentapi-plusplus/card.png",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false,
+      "notes": "Self-authored project card for the agentapi-plusplus fork entry. Fork attribution to coder/agentapi remains explicit in the case-study narrative."
+    },
+    {
+      "id": "byteport-card",
+      "path": "/public/projects/byteport/card.png",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "cliproxyapi-plusplus-card",
+      "path": "/public/projects/cliproxyapi-plusplus/card.png",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false,
+      "notes": "Self-authored project card for the cliproxyapi-plusplus fork entry. Fork attribution to router-for-me/CLIProxyAPI remains explicit in the case-study narrative."
+    },
+    {
+      "id": "dss-cipher-hero",
+      "path": "/public/projects/dss-cipher/hero.gif",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false,
+      "notes": "Historical keyset concept renders; preserved as part of the design record."
+    },
+    {
+      "id": "forgecode-card",
+      "path": "/public/projects/forgecode/card.png",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false,
+      "notes": "Self-authored project card. Fork attribution to tailcallhq/forgecode remains explicit in the case-study narrative."
+    },
+    {
+      "id": "frostify-card",
+      "path": "/public/projects/frostify/card.png",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false,
+      "notes": "Self-authored project card for the Frostify Spicetify theme fork. Upstream attribution to gwennlbh/Frostify remains explicit in the case-study narrative."
+    },
+    {
+      "id": "gmk-arch-hero",
+      "path": "/public/projects/gmk-arch/hero.png",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false,
+      "notes": "GMK Arch wordmark specimen; byte-identical to the retained source per data/projects.js provenance record."
+    },
+    {
+      "id": "mcpforge-card",
+      "path": "/public/projects/mcpforge/card.png",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false,
+      "notes": "Historical MCP tooling entry card. Upstream attribution to isaacphi/mcp-language-server remains explicit in the case-study narrative."
+    },
+    {
+      "id": "netweave-mobile-01",
+      "path": "/public/projects/netweave/mobile-01.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "netweave-mobile-02",
+      "path": "/public/projects/netweave/mobile-02.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "netweave-mobile-03",
+      "path": "/public/projects/netweave/mobile-03.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "netweave-desktop-01",
+      "path": "/public/projects/netweave/desktop-01.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "netweave-desktop-02",
+      "path": "/public/projects/netweave/desktop-02.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "netweave-desktop-03",
+      "path": "/public/projects/netweave/desktop-03.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "netweave-mobile-01-v2",
+      "path": "/public/projects/netweave/mobile-01-v2.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true,
+      "notes": "Iterated variant of mobile-01; same self-authored work, retouched for the case-study revision history."
+    },
+    {
+      "id": "netweave-mobile-02-v2",
+      "path": "/public/projects/netweave/mobile-02-v2.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true
+    },
+    {
+      "id": "netweave-mobile-03-v2",
+      "path": "/public/projects/netweave/mobile-03-v2.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true
+    },
+    {
+      "id": "netweave-desktop-01-v2",
+      "path": "/public/projects/netweave/desktop-01-v2.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true
+    },
+    {
+      "id": "netweave-desktop-02-v2",
+      "path": "/public/projects/netweave/desktop-02-v2.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true
+    },
+    {
+      "id": "netweave-desktop-03-v2",
+      "path": "/public/projects/netweave/desktop-03-v2.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true
+    },
+    {
+      "id": "netweave-mobile-01-v3",
+      "path": "/public/projects/netweave/mobile-01-v3.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true
+    },
+    {
+      "id": "netweave-mobile-02-v3",
+      "path": "/public/projects/netweave/mobile-02-v3.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true
+    },
+    {
+      "id": "netweave-mobile-03-v3",
+      "path": "/public/projects/netweave/mobile-03-v3.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true
+    },
+    {
+      "id": "netweave-desktop-01-v3",
+      "path": "/public/projects/netweave/desktop-01-v3.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true
+    },
+    {
+      "id": "netweave-desktop-02-v3",
+      "path": "/public/projects/netweave/desktop-02-v3.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true
+    },
+    {
+      "id": "netweave-desktop-03-v3",
+      "path": "/public/projects/netweave/desktop-03-v3.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true
+    },
+    {
+      "id": "omniroute-card",
+      "path": "/public/projects/omniroute/card.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "phenotype-omlx-card",
+      "path": "/public/projects/phenotype-omlx/card.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "sharecli-card",
+      "path": "/public/projects/sharecli/card.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "sharecli-help-recording",
+      "path": "/public/projects/sharecli/recordings/sharecli-help-real.cast",
+      "type": "recording",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false,
+      "notes": "asciinema v3 cast recording of `sharecli --help` against commit 81c4dfaa208749adfa56ec6bbe07e01b5f80397e. Self-captured terminal session."
+    },
+    {
+      "id": "sharecli-health-recording",
+      "path": "/public/projects/sharecli/recordings/sharecli-health-real.cast",
+      "type": "recording",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false,
+      "notes": "asciinema v3 cast recording of `sharecli version/health/status` against commit 81c4dfaa208749adfa56ec6bbe07e01b5f80397e. Self-captured terminal session."
+    },
+    {
+      "id": "substrate-card",
+      "path": "/public/projects/substrate/card.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "tracera-card",
+      "path": "/public/projects/tracera/card.png",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "witf-hero-01-webp",
+      "path": "/public/projects/witf/hero-01.webp",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true,
+      "notes": "Optimized derivative of the retained 3840x2160 PNG source per data/projects.js provenance record."
+    },
+    {
+      "id": "witf-hero-01-png",
+      "path": "/public/projects/witf/hero-01.png",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "witf-hero-01-jpg",
+      "path": "/public/projects/witf/hero-01.jpg",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true
+    },
+    {
+      "id": "witf-hero-02-png",
+      "path": "/public/projects/witf/hero-02.png",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": false
+    },
+    {
+      "id": "witf-hero-02-jpg",
+      "path": "/public/projects/witf/hero-02.jpg",
+      "type": "image",
+      "source": "self",
+      "license": "self",
+      "attribution": "Koosha Paridehpour",
+      "modified": true
+    }
+  ]
+}

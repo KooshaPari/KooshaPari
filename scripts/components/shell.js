@@ -102,6 +102,7 @@ export function renderShell(
     { class: 'footer' },
     el('span', {}, 'Koosha Paridehpour · canonical portfolio preview'),
     el('span', {}, 'Evidence-led · legacy sources preserved'),
+    el('a', { href: '/data/asset-sources.json', rel: 'noopener' }, 'Asset sources'),
   );
 
   const appRoot = document.getElementById('app');
