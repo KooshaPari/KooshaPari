@@ -301,17 +301,40 @@ missing.
 | 2 | VERCEL_TOKEN for hosted gate | **CLOSED** (preflight verified 2026-10-15) | — (hosted gate is satisfied) |
 | 3 | ResVault handoff for CAREER_CONTEXT_ANDURIL_*.md | **CLOSED** (shipped 2026-10-15) | — (round 6) |
 | 4 | Loose-file round 5 | CLOSED (shipped at `6119c80`) | — |
-| 5 | (NEW) Post-20th-pass production redeploy | INFORMATIONAL (write action) | operator (signal: "ship prod" / "ship preview") |
+| 5 | (NEW) Post-20th-pass production redeploy | **CLOSED** (deployed 2026-10-18) | — (live bundle now matches prebuilt) |
 
-All 4 04_ARC_CLOSING items are now closed/decided.
-Item 5 is a new observation surfaced by the
-2026-10-15 preflight; it is not in the original
-04_ARC_CLOSING list. The pane does not have an
-active todo for item 5 because shipping a
-production deploy is a write action that
-requires explicit operator signal per policy.
+All 5 items (4 04_ARC_CLOSING + 1 preflight-surfaced)
+are now closed/decided. Item 5 was an observation
+surfaced by the 2026-10-15 preflight; it is not in
+the original 04_ARC_CLOSING list.
 
-The pane's job on item 5 is to keep the
-observation honest (the prebuilt hash and the
-live hash are recorded) and to ship the
-operator's deploy signal when one is given.
+**Item 5 deployment record (2026-10-18):**
+- Local commit at deploy: `e95e76367f0ae4c8db98b8ffa344dff43b438777`
+  (subject: "fix(prerender): keep NetWeave no-JS view names
+  in the emitted page")
+- Prebuilt bundle: `app.bundle.0403d845.js` (220,293 B)
+- Live bundle: `app.bundle.0403d845.js` (220,293 B)
+- Live `/data/phenotype.js`: 12,204 B (byte-identical to
+  prebuilt)
+- Live PDF: 99,427 B, `application/pdf`, 1-page
+  (byte-identical to local)
+- Deployment URL:
+  `https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app`
+  (21s old, Ready, Production, 2s duration)
+- All 4 custom domains serve HTTP 200: kooshapari.com,
+  www.kooshapari.com, kooshapari-site.vercel.app,
+  phenotype.space
+- Prior production deployments in 2d, 2d, 2d, 33d windows
+  (someone -- likely the operator or a parallel pane --
+  had deployed during the 3-day gap between the round 6d
+  handoff and the operator's "go" signal at 06:35 UTC;
+  the deploy at 06:36 UTC re-deployed the same prebuilt
+  -- byte-identical content, fresh production
+  deployment record)
+- 767/767 unit pass (was 714/714 at round 6d, +53 new
+  tests in the 3-day gap)
+
+The pane's job on item 5 is now closed: the prebuilt
+hash, the live hash, and the deployment URL are
+recorded; live == prebuilt byte-identical; 4 custom
+domains serve 200.

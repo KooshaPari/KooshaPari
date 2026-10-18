@@ -177,7 +177,7 @@ or a clear unblock action.
 | Remove the 4 variant PDFs from `docs/resume-source/` | DEFERRED under Option A | Same as above. The PDFs are kept as reference, not deleted. |
 | ResVault file sync (claim matrix, docx inventory) | NOT SYNCED | ResVault is a plain folder (not git), so no automatic sync. The 4 transcript files were moved in commit `cf957c2` with `cp -p` + `diff -r` + `git rm`. To move more files, use the same pattern. |
 | The `output/resume-consolidation-2026-09-08/` artifacts | READ-ONLY STATE | the consolidation work is captured at 2026-09-08; subsequent edits go to `data/phenotype.js` and `scripts/views/resume.js`. The `output/` tree is the audit trail. |
-| Post-20th-pass production redeploy (item 5 of 06 doc) | UNRELATED TO RESUME, BUT STILL PENDING | The live bundle is `7b217faa.js` (18d old). The prebuilt is `8d6cbde8.js` (current). The pane is READY to ship; the operator's "ship prod" / "ship preview" / "no ship" signal unblocks it. |
+| Post-20th-pass production redeploy (item 5 of 06 doc) | **CLOSED** (deployed 2026-10-18, e95e763) | Deployment URL: https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app. Live bundle `0403d845.js` byte-identical to prebuilt (220,293 B). All 4 custom domains serve 200. Full record in 06 doc item 5. |
 
 ## How to verify state (the public-interface check recipe)
 

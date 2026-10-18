@@ -640,7 +640,36 @@ ship on operator signal. **All 4 original items are
 closed/decided as of 2026-10-15; the pane has no
 active todo.**
 
-> **Round 6c (2026-10-15): real public-interface
+> **Round 6e (2026-10-18): post-20th-pass production
+redeploy (item 5, CLOSED).** Operator signal `go`
+at 06:35 UTC unblocked the prebuilt-to-production
+deploy. Local commit at deploy was `e95e763`
+(subject: "fix(prerender): keep NetWeave no-JS view
+names in the emitted page"); prebuilt bundle was
+`app.bundle.0403d845.js` (220,293 B). `vercel
+deploy --prod --prebuilt` returned Ready in 2s
+(aliased to https://kooshapari.com). Post-flight
+verification: live bundle `0403d845.js` is
+byte-identical to the prebuilt (220,293 B both);
+live `/data/phenotype.js` is byte-identical to
+prebuilt (12,204 B both); live PDF is
+byte-identical to local (99,427 B, 1-page
+application/pdf); all 4 custom domains serve
+HTTP 200 (kooshapari.com, www.kooshapari.com,
+kooshapari-site.vercel.app, phenotype.space).
+Unit suite 767/767 pass (was 714/714 at round
+6d, +53 new tests in the 3-day gap between the
+two operator signals). The 3-day gap also
+included 3 prior production deployments (2d,
+2d, 2d old), so the live state at deploy was
+already on `0403d845.js`; this deploy is a
+re-deploy of the same prebuilt and creates a
+fresh production deployment record. Item 5 in
+the 06 doc is now CLOSED. Deployment URL:
+https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
+.
+
+**Round 6c (2026-10-15): real public-interface
 > verification.** The 04_ARC_CLOSING's "the pane
 > cannot run hosted verification" claim was a
 > stale assumption. A read-only Vercel preflight
