@@ -1,0 +1,8 @@
+# CODEOWNERS
+
+# Profile repository — single-owner routing. All review requests route
+# to the canonical owner. When collaborators are added, replace this
+# block with one path per scope that maps the right owner to the right
+# area (for example: `/docs/` -> @docs-owner, `/scripts/` -> @eng-owner).
+
+* @KooshaPari
