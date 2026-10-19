@@ -740,27 +740,45 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > in 5s; deployment URL
 > `kooshapari-site-gllx4x2ca-koosha-paridehpours-projects.vercel.app`
 > aliased to `kooshapari.com`. Post-flight
-> confirmed: live bundle `app.bundle.0403d845.js`
-> is 220,293 B (byte-identical to prebuilt --
-> unchanged from round 6e because 6f did not
-> touch JS); live `/work/netweave.html` is
-> 13,426 B (byte-identical to
-> `dist/work/netweave.html` -- the 5 tightened
-> descriptions A bounded traffic field, Directed
-> graph, Three discrete states, Evidence
-> boundary, What remains open are present in
-> live, the 5 pre-6f verbose descriptions are
-> absent); live `/data/phenotype.js` is 12,204 B
+> per-file byte-identity checks (one observation
+> per file, comparing the deployed live file to
+> the prebuilt dist/ copy that was just
+> uploaded): live bundle
+> `app.bundle.0403d845.js` is 220,293 B
+> (byte-identical to prebuilt -- unchanged from
+> round 6e because 6f did not touch JS); live
+> `/work/netweave.html` is 13,426 B
+> (byte-identical to `dist/work/netweave.html` --
+> the 5 tightened descriptions A bounded traffic
+> field, Directed graph, Three discrete states,
+> Evidence boundary, What remains open are
+> present in live, the 5 pre-6f verbose
+> descriptions are absent); live
+> `/data/phenotype.js` is 12,204 B
 > (byte-identical to prebuilt; the 14,721 B
 > source file is build-stripped down to 12,204 B
-> by removing the 7-line comment header); all 4
-> custom domains serve HTTP 200. 767/767 unit
-> pass, 0 working tree changes, 0 stashes. Live
-> == prebuilt == source (post-6f) end-to-end
-> byte-identical at `0403d845`. The 06 doc and
-> 08 doc were updated to record both deploys
-> (round 6e and round 6i); the post-20th-pass
-> arc is closed across two production deploys.
+> by removing the 7-line comment header during
+> the stage build); all 4 custom domains serve
+> HTTP 200. 767/767 unit pass, 0 working tree
+> changes, 0 stashes. **State alignment (post-6f
+> semantic; per-file byte-identity at the
+> prebuilt <-> live boundary only):** the JS
+> bundle hash `0403d845` is byte-identical
+> across source, prebuilt, and live (220,293 B);
+> the prerendered HTML is byte-identical
+> prebuilt <-> live (13,426 B) but is *larger*
+> than the source (3,733 B) because the
+> prerender adds page scaffolding; the data
+> record is byte-identical prebuilt <-> live
+> (12,204 B) but is *smaller* than the source
+> (14,721 B) because the build strips the
+> 7-line comment header. All 3 layers are
+> semantically aligned to post-6f, but only the
+> JS bundle is literally byte-identical across
+> all 3. The 06 doc and 08 doc were updated to
+> record both deploys (round 6e and round 6i);
+> the post-20th-pass arc is closed across two
+> production deploys.
 
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new
