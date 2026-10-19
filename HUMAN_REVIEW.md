@@ -627,9 +627,9 @@ the site is publicly live on 4 production domains
 `www.kooshapari.com`, `phenotype.space` all 200 OK,
 `pheno.studio` 301)
 [corrected 2026-10-19, round 6n: all 5 hostnames
-do answer HTTP 200, but only 3 serve the portfolio;
-`phenotype.space` and `pheno.studio` resolve to a
-separate Cloudflare Pages site]; 3 custom domains are registered;
+answer HTTP, but only 3 serve the portfolio;
+`phenotype.space` (200) and `pheno.studio` (301)
+resolve to a separate Cloudflare Pages site]; 3 custom domains are registered;
 the prebuilt output is current
 (`app.bundle.8d6cbde8.js`, 220,028 B, 30 pages,
 0 warnings).** The pane's read-only preflight also
@@ -686,7 +686,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > the live site, ResVault target holds the 4
 > files with byte parity)
 > [corrected 2026-10-19, round 6n: 5 hostnames
-> answer HTTP 200, 3 serve the portfolio] are recorded in
+> answer HTTP, 3 serve the portfolio] are recorded in
 > `docs/sessions/2026-10-15-doc-proliferation-round-2/07_PUBLIC_INTERFACE_VERIFICATION.md`.
 > The 714/714 unit pass is a build-time check;
 > the 07 doc is the public-interface check.
@@ -988,7 +988,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > portfolio. Its `location:` target is
 > `https://phenotype.space/studio/` — it redirects
 > **into** the separate Cloudflare Pages site. So the
-> round 6l/6m reading of `pheno.studio` as a
+> round 6c reading of `pheno.studio` as a
 > portfolio redirect was also wrong; the two
 > Cloudflare hosts are one separate site, and
 > `pheno.studio` is an alias of it.
@@ -1017,13 +1017,82 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > - `06_OPEN_DECISIONS_STATUS.md` — the preflight
 >   summary line and the "publicly live" bullet
 >
-> `docs/deploy/2026-10-19.md` needed no further
-> change: its round 6m correction already states
-> the 3-domain scope, and the 5th receipt row still
-> reads "All 4 custom domains serve HTTP 200" because
-> all 4 custom domains registered to the Vercel
-> account do answer HTTP 200 — only 3 of them serve
-> the portfolio.
+> `docs/deploy/2026-10-19.md` needed a further
+> change: its 5th receipt row originally read
+> "All 4 custom domains serve HTTP 200" and listed
+> `kooshapari-site.vercel.app` in place of
+> `pheno.studio`. That row was corrected in round 6o
+> to list `pheno.studio` 301 explicitly. The
+> "Lighthouse: NOT RUN" section above the round 6m
+> section was also annotated as superseded, so the
+> document no longer reads as though the proof is
+> still open.
+
+> **Round 6o (2026-10-19 21:07-21:27 UTC): claim
+> provenance audit and residual-error correction.**
+> The round 6n push was followed by a provenance
+> audit: every domain claim in the round 6m and 6n
+> text was traced back to the commit that actually
+> produced it, using `git log` and `git show`. The
+> audit found that the erroneous "serves the
+> portfolio" rows originated in **round 6c**
+> (`c1a13de`, 2026-10-15), not in rounds 6l or 6m.
+> The round 6n text had attributed them to the
+> wrong round.
+>
+> The audit then swept the four documents for
+> residual errors of the same kind and found four
+> classes:
+>
+> - **Wrong round attribution.** The 07 doc's
+>   correction note now names round 6c and commit
+>   `c1a13de` as the origin of the two wrong rows.
+>   The deploy doc's edge-POP correction now names
+>   the 4 hosts it actually sampled and points at
+>   the round 6c 07 doc for the `pheno.studio`
+>   redirect claim.
+> - **Wrong HTTP status.** `pheno.studio` answers
+>   **301**, not 200. Four documents still claimed it
+>   answered 200: the 06 doc's live-domains bullet
+>   and its "All 5 hostnames answer HTTP 200"
+>   clause, the 07 doc's section A intro and its
+>   section H closed list, the deploy doc's 5th
+>   receipt row, and two HUMAN_REVIEW round 6n
+>   annotations. All now state the observed status.
+> - **Stale gap statements.** The deploy doc still
+>   read "**Lighthouse: NOT RUN**" in its first
+>   Lighthouse section, and the 07 doc still listed
+>   "**Lighthouse was not run**" as an open gap in
+>   section H, and the 06 doc still listed the
+>   Lighthouse invocation as an outstanding item.
+>   All three are now annotated as closed in round
+>   6m. The historical text is retained unedited
+>   because it records what those preflights
+>   actually observed.
+> - **Scope count.** The deploy doc's round 6k
+>   performance baseline opened with "the live 4
+>   production domains" and its receipt row listed
+>   `kooshapari-site.vercel.app` among the custom
+>   domains. Both are annotated: the in-scope
+>   portfolio is 3 domains, and the recorded timings
+>   were measured on `kooshapari.com` and its
+>   prebuilt assets, so they are unaffected.
+>
+> **What did not change.** No production deploy was
+> performed or needed. No Lighthouse run was
+> repeated. No score, metric, or probe observation
+> was altered — every edit either corrects an
+> attribution or a status to match a recorded
+> observation, or annotates a superseded statement.
+> The `docs/audits/2026-10-19/lighthouse/` evidence
+> bundle is untouched.
+>
+> **Verification.** Diff is documentation-only:
+> `git diff --name-only` returns 4 files, all
+> `.md`. Unit suite re-run after the edits:
+> **774/774 pass, 0 fail**. A final repo-wide sweep
+> for the four residual inconsistency classes
+> returns zero hits.
 
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new

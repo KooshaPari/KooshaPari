@@ -35,30 +35,39 @@ The hosted site is publicly accessible on 3
 portfolio domains plus 2 further hostnames
 that are registered to the same Vercel
 account but do **not** serve the portfolio.
-All returned HTTP 200 on 2026-10-15.
+All answered HTTP on 2026-10-15 — the 3 portfolio
+domains with 200, `phenotype.space` with 200, and
+`pheno.studio` with a 301 into the separate
+Cloudflare site.
 
-> **Correction (2026-10-19, round 6m).** This
-> section originally read that the site is
-> "publicly accessible on 4 production
-> domains" and that `phenotype.space`
-> "serves the portfolio" with "same title".
-> A direct probe on 2026-10-19 20:54 UTC
-> disproves that: `phenotype.space`
-> returns `server: cloudflare` and
-> `cf-ray: a4d2acfcc852cb83-LAX` (no
-> `x-vercel-id`), its title is **"Phenotype"**, not
-> "Koosha Paridehpour — Technical Atelier", and its
-> `/robots.txt` returns that site's HTML rather than
-> a robots file. It is a **separate Cloudflare Pages
-> site**, not an alias of the `kooshapari-site`
-> Vercel project. The in-scope portfolio is **3
-> domains**: `kooshapari.com`, `www.kooshapari.com`,
+> **Correction (2026-10-19, round 6m).** The
+> round 6c version of this section (commit
+> `c1a13de`, 2026-10-15) carried two rows that
+> were wrong on the evidence:
+>
+> - `phenotype.space` "serves the portfolio" with
+>   "same title". A direct probe on 2026-10-19
+>   20:54 UTC disproves that: `phenotype.space`
+>   returns `server: cloudflare` and
+>   `cf-ray: a4d2acfcc852cb83-LAX` (no
+>   `x-vercel-id`), its title is **"Phenotype"**, not
+>   "Koosha Paridehpour — Technical Atelier", and its
+>   `/robots.txt` returns that site's HTML rather than
+>   a robots file. It is a **separate Cloudflare Pages
+>   site**, not an alias of the `kooshapari-site`
+>   Vercel project.
+> - `pheno.studio` "serves the portfolio" with
+>   "301 (redirect to canonical)" and status PASS.
+>   See the round 6n note below.
+>
+> The in-scope portfolio is **3 domains**:
+> `kooshapari.com`, `www.kooshapari.com`,
 > and `kooshapari-site.vercel.app`.
 >
 > A second probe on 2026-10-19 21:02 UTC
 > (round 6n) re-confirmed this from an
-> independent process and added the
-> `pheno.studio` detail: `pheno.studio`
+> independent process and corrected the
+> `pheno.studio` row: `pheno.studio`
 > answers 301 and its `location:` target is
 > `https://phenotype.space/studio/` — i.e. it
 > redirects **into** the separate Cloudflare
@@ -223,6 +232,16 @@ What is **NOT** closed by this verification:
   Closing this gap is also a `lighthouse` invocation; it is
   read-only and can be run on operator signal.
 
+  > **Closed (2026-10-19, round 6m).** This gap was
+  > closed later the same day. Lighthouse 13.4.1 was run
+  > against the live production domains on 2026-10-19
+  > 20:40-20:46 UTC; all 7 in-scope runs scored
+  > 100 / 100 / 100 / 100. Evidence and the exact
+  > invocation are in
+  > `docs/audits/2026-10-19/lighthouse/`. The bullet
+  > above is retained unedited because it records what
+  > the 2026-10-15 preflight actually observed.
+
 - **The e2e tests are gated by a separate acceptance path** (not
   `npm test`). The 20th-pass added 8 e2e checks for the
   workbench route; running them locally requires a Playwright
@@ -236,9 +255,11 @@ What is **closed** by this verification:
 - 3 portfolio domains are live and serve the portfolio
   (`kooshapari.com`, `www.kooshapari.com`,
   `kooshapari-site.vercel.app`). 2 further registered
-  hostnames (`phenotype.space`, `pheno.studio`)
-  answer HTTP 200 but serve a separate Cloudflare
-  Pages site, not the portfolio.
+  hostnames are **not** the portfolio:
+  `phenotype.space` (HTTP 200) serves a separate
+  Cloudflare Pages site, and `pheno.studio` (HTTP 301)
+  redirects into that same separate site at
+  `https://phenotype.space/studio/`.
 - The live PDF is byte-identical to the local PDF.
 - The live data file is byte-identical to the prebuilt data file.
 - The 4 ROLES + 2 PERSONAS are served (Option A confirmed).

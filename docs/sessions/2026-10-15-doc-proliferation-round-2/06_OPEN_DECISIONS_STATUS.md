@@ -121,7 +121,7 @@ not run hosted verification. A read-only preflight on
   Build command: `npm run stage:publication`. Output
   directory: `dist`. Node 24.x.
 - **The site is publicly live on 3 portfolio domains.**
-  All returned HTTP 200 on 2026-10-15:
+  All answered HTTP on 2026-10-15:
   - `https://kooshapari-site.vercel.app/` (200)
   - `https://kooshapari.com/` (200, custom domain)
   - `https://www.kooshapari.com/` (200, custom domain)
@@ -135,7 +135,8 @@ not run hosted verification. A read-only preflight on
   (title "Phenotype", no `x-vercel-id`); `pheno.studio`
   answers 301 with `location:
   https://phenotype.space/studio/`. All five
-  hostnames answer HTTP 200, which is why the
+  hostnames answer HTTP — four with 200 and
+  `pheno.studio` with 301 — which is why the
   original 2026-10-15 preflight recorded them
   together.
   The current production deployment URL is
@@ -186,6 +187,15 @@ separate operator decision, not part of the
   authenticated; a Lighthouse-style check would
   be a separate `vercel` or `lighthouse` invocation
   the operator can request.
+
+  > **Closed (2026-10-19, round 6m).** The
+  > Lighthouse invocation was run later the same day:
+  > Lighthouse 13.4.1 against the live production
+  > domains on 2026-10-19 20:40-20:46 UTC, all 7
+  > in-scope runs scoring 100 / 100 / 100 / 100.
+  > Evidence at `docs/audits/2026-10-19/lighthouse/`.
+  > The bullet above is retained unedited because it
+  > records what the 2026-10-15 preflight observed.
 - Redirect map destination check. The
   `vercel.json` / `redirects` config is in the
   repo; checking the live redirect map against
@@ -347,10 +357,29 @@ the original 04_ARC_CLOSING list.
 - 767/767 unit pass (was 714/714 at round 6d, +53 new
   tests in the 3-day gap)
 
+> **Correction (2026-10-19, round 6n).** See the
+> matching note under the round 6i list below. The
+> "All 4 custom domains serve HTTP 200" bullet above
+> is kept as written because it records what the round
+> 6e preflight observed; the taxonomy it implies is
+> wrong (`kooshapari-site.vercel.app` is the deployment
+> domain, and `phenotype.space` does not serve the
+> portfolio). The byte-identity, deployment-URL, and
+> unit-pass observations in this block are unaffected.
+
 The pane's job on item 5 is now closed: the prebuilt
 hash, the live hash, and the deployment URL are
 recorded; live == prebuilt byte-identical; 4 custom
 domains serve 200.
+
+> **Correction (2026-10-19, round 6n).** The final
+> clause "4 custom domains serve 200" is the round 6e
+> wording. `pheno.studio` answers 301, and
+> `phenotype.space` — though it answers 200 — does not
+> serve the portfolio. The 3 portfolio domains are
+> `kooshapari.com`, `www.kooshapari.com`, and
+> `kooshapari-site.vercel.app`. The byte-identity and
+> deployment-URL claims are unaffected.
 
 **Item 5 — second deploy (2026-10-19, 00:08 UTC,
 round 6i):** Operator "go" signal at 00:08 UTC
@@ -382,6 +411,28 @@ NetWeave, shipped in commit `6ac8662`) to live.
 - 767/767 unit pass
 - 0 working tree changes, 0 stashes; the deploy was
   pure prebuilt, source-aligned
+
+> **Correction (2026-10-19, round 6n).** The two
+> "All 4 custom domains serve HTTP 200" bullets
+> above — the round 6e one and the round 6i one — are
+> kept as written because each records what that
+> round's preflight actually observed. The taxonomy
+> they imply is wrong on two counts:
+>
+> - `kooshapari-site.vercel.app` is the Vercel
+>   deployment domain, not a custom domain. The 3
+>   custom domains registered to the account are
+>   `kooshapari.com`, `www.kooshapari.com`, and
+>   `phenotype.space` (plus `pheno.studio`, a 4th).
+> - `phenotype.space` answers 200 but does **not**
+>   serve the portfolio; it serves a separate
+>   Cloudflare Pages site. `pheno.studio` 301s into
+>   that same separate site. The 3 portfolio domains
+>   are `kooshapari.com`, `www.kooshapari.com`, and
+>   `kooshapari-site.vercel.app`.
+>
+> The byte-identity, deployment-URL, and unit-pass
+> observations in both blocks are unaffected.
 
 Item 5 status: CLOSED (round 6e and round 6i). The
 post-20th-pass arc is now closed end-to-end across
