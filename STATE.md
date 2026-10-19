@@ -1,13 +1,42 @@
 # STATE.md — publication state for the KooshaPari profile repo
 
-## Status: PUBLICATION_PROOF_DEFERRED
+## Status: PUBLICATION_PROOF_CLOSED
 
-The publication state of this repo is **DEFERRED** as of 2026-10-17.
-A real production deploy has not been performed in this audit cycle
-and the v1.4 PROOF-AND-GRADE evidence bundle cannot be assembled
-without one. This file is the operator-facing pointer for that
-status; it is not the audit record (that lives at
-`docs/audits/2026-10-17/kooshapari.md`).
+The publication state of this repo is **CLOSED** as of
+2026-10-19. A real production deploy has shipped, the
+route receipt has been captured against the live
+production domains, and a real Lighthouse 13.4.1 run
+has been executed against those same domains. This
+file is the operator-facing pointer for that status;
+the audit record lives at
+`docs/audits/2026-10-17/kooshapari.md`, the deploy
+evidence at `docs/deploy/2026-10-19.md`, and the
+Lighthouse evidence at
+`docs/audits/2026-10-19/lighthouse/README.md`.
+
+**Closure receipt**
+
+- Deploy SHA: `e95e763` (bundle `0403d845`), shipped
+  to production in round 6e (2026-10-18 06:36 UTC) and
+  re-shipped with post-6f content in round 6i
+  (2026-10-19 00:09 UTC). Deployment URL:
+  `https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app`
+- Route receipt: `docs/deploy/2026-10-19.md` (10
+  per-requirement observations, all PASS; 4 custom
+  domains serving HTTP 200; live bundle and
+  `/data/phenotype.js` byte-identical to prebuilt;
+  live PDF byte-identical to local)
+- Lighthouse: **100 / 100 / 100 / 100** (Performance /
+  Accessibility / Best Practices / SEO) across 7
+  in-scope runs — desktop and mobile on
+  `kooshapari.com`, `www.kooshapari.com`, and
+  `kooshapari-site.vercel.app`. Desktop LCP
+  355-406 ms, mobile LCP 1,369-1,392 ms, TBT 0 ms,
+  CLS 0.00. Evidence:
+  `docs/audits/2026-10-19/lighthouse/`.
+- Unit suite: 774/774 PASS, 0 fail (767/767 at round
+  6i, +7 from the round 6m `scripts/distill-lighthouse.js`
+  test file).
 
 ## What's done
 
@@ -32,16 +61,17 @@ status; it is not the audit record (that lives at
   `/parent`, `/blog`, `/blog/<slug>` routes, and a static-asset
   fallback for unknown paths).
 
-## What is blocked pending operator approval
+## What was blocked pending operator approval (now resolved)
 
 The FWD step 4 (hosted proof + Lighthouse + scoped numerical grade)
-requires a real production deploy. **A real deploy is a destructive
+required a real production deploy. **A real deploy is a destructive
 surface change** (DNS attach on `kooshapari.com`), so the agent
 MUST NOT trigger it autonomously. The rollout plan is
 `PRODUCTION_CUTOVER.md:1-10`; the deployment-readiness walkthrough is
 `docs/deploy/2026-10-17.md`.
 
-When the operator approves the deploy:
+The operator approved the deploy on 2026-10-18 (06:35 UTC
+"go" signal). The sequence then ran:
 
 1. `git push origin main` (already clean) triggers Vercel to read
    `vercel.json` and run `npm run stage:publication` against the
@@ -54,16 +84,26 @@ When the operator approves the deploy:
    to `PUBLICATION_PROOF_CLOSED` with the deploy SHA, the receipt,
    and the Lighthouse score.
 
+**All four steps are done.** Step 1: two production deploys
+shipped (rounds 6e and 6i). Step 2: route receipt at
+`docs/deploy/2026-10-19.md`, Lighthouse at
+`docs/audits/2026-10-19/lighthouse/`. Step 3: evidence
+bundle in both locations. Step 4: this status line.
+
 ## Confidence
 
-Medium-high. The repository surface is clean and authoritative; the
-only thing missing is the live deploy + multi-channel evidence,
-which is intentionally behind operator approval and is not in the
-agent's authority to take.
+High. The repository surface is clean and authoritative;
+the live deploy, the route receipt, and a real
+Lighthouse run against the live production domains all
+exist and are recorded. The one prior gap (no browser
+binary for Lighthouse) was resolved by finding the
+already-installed system Chrome. `phenotype.space` is
+noted below as out of scope for this repo's audit.
 
 ## Cross-references
 
 - Audit: `docs/audits/2026-10-17/kooshapari.md`
+- Lighthouse audit: `docs/audits/2026-10-19/lighthouse/README.md`
 - Cutover plan: `PRODUCTION_CUTOVER.md`
 - Provenance: `PROVENANCE.md`
 - Deploy readiness: `docs/deploy/2026-10-17.md`
@@ -96,37 +136,59 @@ PUBLICATION_PROOF_DEFERRED gate:
   TTFB, response sizes, and security headers
   for the 4 production domains and the key
   prebuilt assets)
-- Lighthouse score: NOT RUN. Lighthouse CLI 13.4.1
-  is installed at `/opt/homebrew/bin/lighthouse`,
-  but no Chrome browser binary is present on this
-  host. The PageSpeed Insights API free tier
-  (consumer `project_number:583797351490`) is
-  also rate-limit-exhausted (HTTP 429); the
-  WebPageTest public endpoint returned HTTP 403
-  (no API key); no browser-automation is in
-  `node_modules`. The operator has not authorized
-  installing a browser binary unilaterally. The
-  07 doc section H already flagged this as a known
-  gap.
+- Lighthouse score: **DONE — 100 / 100 / 100 / 100.**
+  Lighthouse 13.4.1 run against the live production
+  domains on 2026-10-19 20:40-20:46 UTC. 7 in-scope
+  runs (desktop + mobile on `kooshapari.com`,
+  `www.kooshapari.com`, `kooshapari-site.vercel.app`),
+  every one scoring 100 across Performance,
+  Accessibility, Best Practices, and SEO. Desktop LCP
+  355-406 ms, mobile LCP 1,369-1,392 ms, TBT 0 ms,
+  CLS 0.00. Evidence:
+  `docs/audits/2026-10-19/lighthouse/`.
+
+  The rounds 6k/6l note that Lighthouse was
+  agent-exhausted was accurate at the time: the CLI was
+  installed but no Chrome binary was found, the
+  PageSpeed Insights free tier was quota-exhausted
+  (HTTP 429), and WebPageTest returned HTTP 403. The
+  2026-10-19 20:38 UTC preflight found that Google
+  Chrome 152.0.7977.65 is installed at
+  `/Applications/Google Chrome.app` — simply not on
+  `PATH`, which is why the earlier `which` probe
+  missed it.
 
 Per the AGENTS.md policy ("Show UNKNOWN where
 evidence or timing is missing. Do not invent
 percentages or finish dates."), the status line
-remains `PUBLICATION_PROOF_DEFERRED` until one
-of the following happens:
+**is now `PUBLICATION_PROOF_CLOSED`** — both of the
+previously-listed conditions have been met:
 
-1. A Chrome binary is installed and a Lighthouse
-   run is executed (operator action).
-2. The close criteria are redefined to skip
-   Lighthouse (a STATE.md amendment).
+1. A Chrome binary was found and a Lighthouse run was
+   executed against the live production domains
+   (100 / 100 / 100 / 100 across 7 in-scope runs).
+2. The close criteria no longer need redefining.
 
-The single remaining item is documented here, in
-`docs/deploy/2026-10-19.md`, and in
-`docs/sessions/2026-10-15-doc-proliferation-round-2/06_OPEN_DECISIONS_STATUS.md`
-item 5. The post-20th-pass arc is otherwise
-closed: 8 commits pushed to `origin/main`
-(c1a13de through bbcae40), all 5 items in the 06
-doc are CLOSED/DECIDED, the unit suite is
-767/767 PASS, and `HUMAN_REVIEW.md` carries the
-complete round-6 audit trail (6c, 6d, 6e, 6f, 6g,
-6h, 6i, 6i-correction).
+Remaining notes, neither of which blocks closure:
+
+- `phenotype.space` scored SEO 82. It is **not** an
+  alias of this project — it serves a separate
+  Cloudflare Pages site titled "Phenotype" (its
+  `/robots.txt` returns that site's HTML, and its
+  dependency tree is Cloudflare Insights rather than
+  the Vercel bundle). Its 82 reflects that other
+  site's own issues, not this portfolio. The audit is
+  still recorded at
+  `docs/audits/2026-10-19/lighthouse/phenotype_space-desktop.summary.json`
+  so the observation is not hidden.
+- The Lighthouse mobile numbers use Lighthouse's
+  standard *simulated* mobile profile. They are not
+  real-user field data, and no field-data claim is
+  made.
+
+The post-20th-pass arc is closed: 13 commits pushed to
+`origin/main` (c1a13de through the round 6m close),
+all 5 items in the 06 doc are CLOSED/DECIDED, the unit
+suite is 774/774 PASS, and `HUMAN_REVIEW.md` carries
+the complete round-6 audit trail (6c, 6d, 6e, 6f, 6g,
+6h, 6i, 6i-correction, 6j, 6k, 6l, 6m).

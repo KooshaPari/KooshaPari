@@ -1,0 +1,1013 @@
+{
+  "distilledFrom": "phenotype_space-desktop.json",
+  "distilledAt": "2026-10-19T20:49:35.660Z",
+  "lighthouseVersion": "13.4.1",
+  "fetchTime": "2026-10-19T20:41:34.529Z",
+  "finalUrl": "https://phenotype.space/",
+  "finalDisplayedUrl": "https://phenotype.space/",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+  "environment": {
+    "networkUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+    "network": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36"
+  },
+  "formFactor": "desktop",
+  "throttlingMethod": "simulate",
+  "throttling": {
+    "rttMs": 40,
+    "throughputKbps": 10240,
+    "requestLatencyMs": 0,
+    "downloadThroughputKbps": 0,
+    "uploadThroughputKbps": 0,
+    "cpuSlowdownMultiplier": 1
+  },
+  "screenEmulation": {
+    "mobile": false,
+    "width": 1350,
+    "height": 940,
+    "deviceScaleFactor": 1,
+    "disabled": false
+  },
+  "locale": "en-US",
+  "categoryScores": {
+    "performance": {
+      "title": "Performance",
+      "score": 1
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "score": 1
+    },
+    "best-practices": {
+      "title": "Best Practices",
+      "score": 1
+    },
+    "seo": {
+      "title": "SEO",
+      "score": 0.82
+    }
+  },
+  "metrics": {
+    "first-contentful-paint": {
+      "title": "First Contentful Paint",
+      "numericValue": 275.37,
+      "numericUnit": "millisecond",
+      "score": 1
+    },
+    "largest-contentful-paint": {
+      "title": "Largest Contentful Paint",
+      "numericValue": 275.37,
+      "numericUnit": "millisecond",
+      "score": 1
+    },
+    "speed-index": {
+      "title": "Speed Index",
+      "numericValue": 341.1686333334533,
+      "numericUnit": "millisecond",
+      "score": 1
+    },
+    "interactive": {
+      "title": "Time to Interactive",
+      "numericValue": 275.37,
+      "numericUnit": "millisecond",
+      "score": 1
+    },
+    "total-blocking-time": {
+      "title": "Total Blocking Time",
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "score": 1
+    },
+    "cumulative-layout-shift": {
+      "title": "Cumulative Layout Shift",
+      "numericValue": 0,
+      "numericUnit": "unitless",
+      "score": 1
+    },
+    "max-potential-fid": {
+      "title": "Max Potential First Input Delay",
+      "numericValue": 21,
+      "numericUnit": "millisecond",
+      "score": 1
+    },
+    "server-response-time": {
+      "title": "Initial server response time was short",
+      "numericValue": 55,
+      "numericUnit": "millisecond",
+      "score": 1
+    }
+  },
+  "scoredAuditCount": 83,
+  "failures": [
+    {
+      "id": "meta-description",
+      "title": "Document does not have a meta description",
+      "score": 0,
+      "explanation": null,
+      "detailsItems": []
+    },
+    {
+      "id": "network-dependency-tree-insight",
+      "title": "Network dependency tree",
+      "score": 0,
+      "explanation": null,
+      "detailsItems": [
+        {
+          "type": "list-section",
+          "value": {
+            "type": "network-tree",
+            "chains": {
+              "7FBAAAA923B9D672249A525A6879411A": {
+                "url": "https://phenotype.space/",
+                "navStartToEndTime": 188,
+                "transferSize": 2460,
+                "isLongest": true,
+                "children": {
+                  "26582.2": {
+                    "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+                    "navStartToEndTime": 383,
+                    "transferSize": 10478,
+                    "isLongest": true,
+                    "children": {
+                      "26582.4": {
+                        "url": "https://phenotype.space/cdn-cgi/rum?",
+                        "navStartToEndTime": 444,
+                        "transferSize": 371,
+                        "isLongest": true,
+                        "children": {}
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "longestChain": {
+              "duration": 444
+            }
+          }
+        },
+        {
+          "type": "list-section",
+          "title": "Preconnected origins",
+          "description": "[preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The following are the origins that the page preconnected to.",
+          "value": {
+            "type": "text",
+            "value": "no origins were preconnected"
+          }
+        },
+        {
+          "type": "list-section",
+          "title": "Preconnect candidates",
+          "description": "Add [preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints to your most important origins, but try to use no more than 4.",
+          "value": {
+            "type": "text",
+            "value": "No additional origins are good candidates for preconnecting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "robots-txt",
+      "title": "robots.txt is not valid",
+      "score": 0,
+      "explanation": "158 errors found",
+      "detailsItems": [
+        {
+          "index": "1",
+          "line": "<!doctype html>",
+          "message": "Syntax not understood"
+        },
+        {
+          "index": "2",
+          "line": "<html lang=\"en\">",
+          "message": "Syntax not understood"
+        },
+        {
+          "index": "3",
+          "line": "  <head>",
+          "message": "Syntax not understood"
+        },
+        {
+          "index": "4",
+          "line": "    <meta charset=\"utf-8\" />",
+          "message": "Syntax not understood"
+        },
+        {
+          "index": "5",
+          "line": "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />",
+          "message": "Syntax not understood"
+        }
+      ]
+    },
+    {
+      "id": "cache-insight",
+      "title": "Use efficient cache lifetimes",
+      "score": 0.5,
+      "explanation": "Est savings of 4 KiB",
+      "detailsItems": [
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+          "cacheLifetimeMs": 86400000,
+          "totalBytes": 10478,
+          "wastedBytes": 4191.2
+        }
+      ]
+    },
+    {
+      "id": "legacy-javascript-insight",
+      "title": "Legacy JavaScript",
+      "score": 0.5,
+      "explanation": "Est savings of 10 KiB",
+      "detailsItems": [
+        {
+          "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+          "wastedBytes": 10603,
+          "subItems": {
+            "type": "subitems",
+            "items": [
+              {
+                "signal": "Array.prototype.at",
+                "location": {
+                  "type": "source-location",
+                  "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+                  "urlProvider": "network",
+                  "line": 0,
+                  "column": 1118
+                }
+              },
+              {
+                "signal": "Array.prototype.findLast",
+                "location": {
+                  "type": "source-location",
+                  "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+                  "urlProvider": "network",
+                  "line": 0,
+                  "column": 888
+                }
+              },
+              {
+                "signal": "Array.prototype.includes",
+                "location": {
+                  "type": "source-location",
+                  "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+                  "urlProvider": "network",
+                  "line": 0,
+                  "column": 1359
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "scoredAudits": [
+    {
+      "id": "meta-description",
+      "title": "Document does not have a meta description",
+      "score": 0,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "network-dependency-tree-insight",
+      "title": "Network dependency tree",
+      "score": 0,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "robots-txt",
+      "title": "robots.txt is not valid",
+      "score": 0,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": "158 errors found"
+    },
+    {
+      "id": "cache-insight",
+      "title": "Use efficient cache lifetimes",
+      "score": 0.5,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": "Est savings of 4 KiB"
+    },
+    {
+      "id": "legacy-javascript-insight",
+      "title": "Legacy JavaScript",
+      "score": 0.5,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": "Est savings of 10 KiB"
+    },
+    {
+      "id": "aria-allowed-attr",
+      "title": "`[aria-*]` attributes match their roles",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-conditional-attr",
+      "title": "ARIA attributes are used as specified for the element's role",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-hidden-body",
+      "title": "`[aria-hidden=\"true\"]` is not present on the document `<body>`",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-prohibited-attr",
+      "title": "Elements use only permitted ARIA attributes",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-valid-attr",
+      "title": "`[aria-*]` attributes are valid and not misspelled",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-valid-attr-value",
+      "title": "`[aria-*]` attributes have valid values",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "baseline",
+      "title": "Baseline Features",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "bf-cache",
+      "title": "Page didn't prevent back/forward cache restoration",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "charset",
+      "title": "Properly defines charset",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "clickjacking-mitigation",
+      "title": "Mitigate clickjacking with XFO or CSP",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "cls-culprits-insight",
+      "title": "Layout shift culprits",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "color-contrast",
+      "title": "Background and foreground colors have a sufficient contrast ratio",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "crawlable-anchors",
+      "title": "Links are crawlable",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "csp-xss",
+      "title": "Ensure CSP is effective against XSS attacks",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "cumulative-layout-shift",
+      "title": "Cumulative Layout Shift",
+      "score": 1,
+      "weight": null,
+      "numericValue": 0,
+      "numericUnit": "unitless",
+      "displayValue": "0"
+    },
+    {
+      "id": "deprecations",
+      "title": "Avoids deprecated APIs",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "diagnostics",
+      "title": "Diagnostics",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "doctype",
+      "title": "Page has the HTML doctype",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "document-latency-insight",
+      "title": "Document request latency",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "document-title",
+      "title": "Document has a `<title>` element",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "dom-size-insight",
+      "title": "Optimize DOM size",
+      "score": 1,
+      "weight": null,
+      "numericValue": 33,
+      "numericUnit": "element",
+      "displayValue": null
+    },
+    {
+      "id": "duplicated-javascript-insight",
+      "title": "Duplicated JavaScript",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "errors-in-console",
+      "title": "No browser errors logged to the console",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "final-screenshot",
+      "title": "Final Screenshot",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "first-contentful-paint",
+      "title": "First Contentful Paint",
+      "score": 1,
+      "weight": null,
+      "numericValue": 275.37,
+      "numericUnit": "millisecond",
+      "displayValue": "0.3 s"
+    },
+    {
+      "id": "font-display-insight",
+      "title": "Font display",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "forced-reflow-insight",
+      "title": "Forced reflow",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "geolocation-on-start",
+      "title": "Avoids requesting the geolocation permission on page load",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "has-hsts",
+      "title": "Use a strong HSTS policy",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "heading-order",
+      "title": "Heading elements appear in a sequentially-descending order",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "hreflang",
+      "title": "Document has a valid `hreflang`",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "html-has-lang",
+      "title": "`<html>` element has a `[lang]` attribute",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "html-lang-valid",
+      "title": "`<html>` element has a valid value for its `[lang]` attribute",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "http-status-code",
+      "title": "Page has successful HTTP status code",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "image-aspect-ratio",
+      "title": "Displays images with correct aspect ratio",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "image-delivery-insight",
+      "title": "Improve image delivery",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "image-size-responsive",
+      "title": "Serves images with appropriate resolution",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "inspector-issues",
+      "title": "No issues in the `Issues` panel in Chrome Devtools",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "interactive",
+      "title": "Time to Interactive",
+      "score": 1,
+      "weight": null,
+      "numericValue": 275.37,
+      "numericUnit": "millisecond",
+      "displayValue": "0.3 s"
+    },
+    {
+      "id": "is-crawlable",
+      "title": "Page isn’t blocked from indexing",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "is-on-https",
+      "title": "Uses HTTPS",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "landmark-one-main",
+      "title": "Document has a main landmark.",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "largest-contentful-paint",
+      "title": "Largest Contentful Paint",
+      "score": 1,
+      "weight": null,
+      "numericValue": 275.37,
+      "numericUnit": "millisecond",
+      "displayValue": "0.3 s"
+    },
+    {
+      "id": "lcp-breakdown-insight",
+      "title": "LCP breakdown",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "link-name",
+      "title": "Links have a discernible name",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "link-text",
+      "title": "Links have descriptive text",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "main-thread-tasks",
+      "title": "Tasks",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "mainthread-work-breakdown",
+      "title": "Minimizes main-thread work",
+      "score": 1,
+      "weight": null,
+      "numericValue": 103.37300000000003,
+      "numericUnit": "millisecond",
+      "displayValue": "0.1 s"
+    },
+    {
+      "id": "max-potential-fid",
+      "title": "Max Potential First Input Delay",
+      "score": 1,
+      "weight": null,
+      "numericValue": 21,
+      "numericUnit": "millisecond",
+      "displayValue": "20 ms"
+    },
+    {
+      "id": "meta-viewport",
+      "title": "`[user-scalable=\"no\"]` is not used in the `<meta name=\"viewport\">` element and the `[maximum-scale]` attribute is not less than 5.",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "metrics",
+      "title": "Metrics",
+      "score": 1,
+      "weight": null,
+      "numericValue": 275,
+      "numericUnit": "millisecond",
+      "displayValue": null
+    },
+    {
+      "id": "modern-http-insight",
+      "title": "Modern HTTP",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "network-requests",
+      "title": "Network Requests",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "network-rtt",
+      "title": "Network Round Trip Times",
+      "score": 1,
+      "weight": null,
+      "numericValue": 16.429999999999993,
+      "numericUnit": "millisecond",
+      "displayValue": "20 ms"
+    },
+    {
+      "id": "network-server-latency",
+      "title": "Server Backend Latencies",
+      "score": 1,
+      "weight": null,
+      "numericValue": 50.37,
+      "numericUnit": "millisecond",
+      "displayValue": "50 ms"
+    },
+    {
+      "id": "notification-on-start",
+      "title": "Avoids requesting the notification permission on page load",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "origin-isolation",
+      "title": "Ensure proper origin isolation with COOP",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "paste-preventing-inputs",
+      "title": "Allows users to paste into input fields",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "redirects",
+      "title": "Avoid multiple page redirects",
+      "score": 1,
+      "weight": null,
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": ""
+    },
+    {
+      "id": "render-blocking-insight",
+      "title": "Render-blocking requests",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "resource-summary",
+      "title": "Resources Summary",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "screenshot-thumbnails",
+      "title": "Screenshot Thumbnails",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "script-treemap-data",
+      "title": "Script Treemap Data",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "server-response-time",
+      "title": "Initial server response time was short",
+      "score": 1,
+      "weight": null,
+      "numericValue": 55,
+      "numericUnit": "millisecond",
+      "displayValue": "Root document took 60 ms"
+    },
+    {
+      "id": "speed-index",
+      "title": "Speed Index",
+      "score": 1,
+      "weight": null,
+      "numericValue": 341.1686333334533,
+      "numericUnit": "millisecond",
+      "displayValue": "0.3 s"
+    },
+    {
+      "id": "target-size",
+      "title": "Touch targets have sufficient size and spacing.",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "third-parties-insight",
+      "title": "3rd parties",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "third-party-cookies",
+      "title": "Avoids third-party cookies",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "total-blocking-time",
+      "title": "Total Blocking Time",
+      "score": 1,
+      "weight": null,
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": "0 ms"
+    },
+    {
+      "id": "total-byte-weight",
+      "title": "Avoids enormous network payloads",
+      "score": 1,
+      "weight": null,
+      "numericValue": 15282,
+      "numericUnit": "byte",
+      "displayValue": "Total size was 15 KiB"
+    },
+    {
+      "id": "trusted-types-xss",
+      "title": "Mitigate DOM-based XSS with Trusted Types",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "unminified-css",
+      "title": "Minify CSS",
+      "score": 1,
+      "weight": null,
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": ""
+    },
+    {
+      "id": "unminified-javascript",
+      "title": "Minify JavaScript",
+      "score": 1,
+      "weight": null,
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": ""
+    },
+    {
+      "id": "unsized-images",
+      "title": "Image elements have explicit `width` and `height`",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "unused-css-rules",
+      "title": "Reduce unused CSS",
+      "score": 1,
+      "weight": null,
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": ""
+    },
+    {
+      "id": "unused-javascript",
+      "title": "Reduce unused JavaScript",
+      "score": 1,
+      "weight": null,
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": ""
+    },
+    {
+      "id": "valid-source-maps",
+      "title": "Page has valid source maps",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "viewport-insight",
+      "title": "Optimize viewport for mobile",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    }
+  ]
+}

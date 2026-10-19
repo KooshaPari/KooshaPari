@@ -1,0 +1,1102 @@
+{
+  "distilledFrom": "kooshapari_com-mobile.json",
+  "distilledAt": "2026-10-19T20:49:35.645Z",
+  "lighthouseVersion": "13.4.1",
+  "fetchTime": "2026-10-19T20:44:53.404Z",
+  "finalUrl": "https://kooshapari.com/",
+  "finalDisplayedUrl": "https://kooshapari.com/",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+  "environment": {
+    "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36",
+    "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+    "network": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36"
+  },
+  "formFactor": "mobile",
+  "throttlingMethod": "simulate",
+  "throttling": {
+    "rttMs": 150,
+    "throughputKbps": 1638.4,
+    "requestLatencyMs": 562.5,
+    "downloadThroughputKbps": 1474.5600000000002,
+    "uploadThroughputKbps": 675,
+    "cpuSlowdownMultiplier": 4
+  },
+  "screenEmulation": {
+    "mobile": true,
+    "width": 412,
+    "height": 823,
+    "deviceScaleFactor": 1.75,
+    "disabled": false
+  },
+  "locale": "en-US",
+  "categoryScores": {
+    "performance": {
+      "title": "Performance",
+      "score": 1
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "score": 1
+    },
+    "best-practices": {
+      "title": "Best Practices",
+      "score": 1
+    },
+    "seo": {
+      "title": "SEO",
+      "score": 1
+    }
+  },
+  "metrics": {
+    "first-contentful-paint": {
+      "title": "First Contentful Paint",
+      "numericValue": 1271.017,
+      "numericUnit": "millisecond",
+      "score": 0.98
+    },
+    "largest-contentful-paint": {
+      "title": "Largest Contentful Paint",
+      "numericValue": 1391.517,
+      "numericUnit": "millisecond",
+      "score": 1
+    },
+    "speed-index": {
+      "title": "Speed Index",
+      "numericValue": 1271.017,
+      "numericUnit": "millisecond",
+      "score": 1
+    },
+    "interactive": {
+      "title": "Time to Interactive",
+      "numericValue": 1393.6670000000001,
+      "numericUnit": "millisecond",
+      "score": 1
+    },
+    "total-blocking-time": {
+      "title": "Total Blocking Time",
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "score": 1
+    },
+    "cumulative-layout-shift": {
+      "title": "Cumulative Layout Shift",
+      "numericValue": 0.01753747554984214,
+      "numericUnit": "unitless",
+      "score": 1
+    },
+    "max-potential-fid": {
+      "title": "Max Potential First Input Delay",
+      "numericValue": 43,
+      "numericUnit": "millisecond",
+      "score": 1
+    },
+    "server-response-time": {
+      "title": "Initial server response time was short",
+      "numericValue": 26,
+      "numericUnit": "millisecond",
+      "score": 1
+    }
+  },
+  "scoredAuditCount": 96,
+  "failures": [
+    {
+      "id": "network-dependency-tree-insight",
+      "title": "Network dependency tree",
+      "score": 0,
+      "explanation": null,
+      "detailsItems": [
+        {
+          "type": "list-section",
+          "value": {
+            "type": "network-tree",
+            "chains": {
+              "2F07C5D4973E66816EF883B8B32FC6A0": {
+                "url": "https://kooshapari.com/",
+                "navStartToEndTime": 170,
+                "transferSize": 6536,
+                "isLongest": true,
+                "children": {
+                  "38202.12": {
+                    "url": "https://kooshapari.com/scripts/cursor.js",
+                    "navStartToEndTime": 373,
+                    "transferSize": 1554,
+                    "isLongest": true,
+                    "children": {
+                      "38202.17": {
+                        "url": "https://kooshapari.com/scripts/cursor-helpers.js",
+                        "navStartToEndTime": 401,
+                        "transferSize": 1024,
+                        "isLongest": true,
+                        "children": {}
+                      }
+                    }
+                  },
+                  "38202.4": {
+                    "url": "https://kooshapari.com/bundled/app.bundle.0403d845.js",
+                    "navStartToEndTime": 257,
+                    "transferSize": 73996,
+                    "children": {}
+                  }
+                }
+              }
+            },
+            "longestChain": {
+              "duration": 401
+            }
+          }
+        },
+        {
+          "type": "list-section",
+          "title": "Preconnected origins",
+          "description": "[preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The following are the origins that the page preconnected to.",
+          "value": {
+            "type": "text",
+            "value": "no origins were preconnected"
+          }
+        },
+        {
+          "type": "list-section",
+          "title": "Preconnect candidates",
+          "description": "Add [preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints to your most important origins, but try to use no more than 4.",
+          "value": {
+            "type": "text",
+            "value": "No additional origins are good candidates for preconnecting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "unused-javascript",
+      "title": "Reduce unused JavaScript",
+      "score": 0,
+      "explanation": "Est savings of 26 KiB",
+      "detailsItems": [
+        {
+          "url": "https://kooshapari.com/bundled/app.bundle.0403d845.js",
+          "totalBytes": 73853,
+          "wastedBytes": 26316,
+          "wastedPercent": 35.63299787101724
+        }
+      ]
+    },
+    {
+      "id": "cache-insight",
+      "title": "Use efficient cache lifetimes",
+      "score": 0.5,
+      "explanation": "Est savings of 28 KiB",
+      "detailsItems": [
+        {
+          "url": "https://kooshapari.com/public/projects/gmk-arch/hero-blender.webp",
+          "cacheLifetimeMs": 86400000,
+          "totalBytes": 46337,
+          "wastedBytes": 18534.8
+        },
+        {
+          "url": "https://kooshapari.com/public/projects/witf/hero-blender.webp",
+          "cacheLifetimeMs": 86400000,
+          "totalBytes": 25758,
+          "wastedBytes": 10303.2
+        }
+      ]
+    },
+    {
+      "id": "render-blocking-insight",
+      "title": "Render-blocking requests",
+      "score": 0.5,
+      "explanation": null,
+      "detailsItems": [
+        {
+          "url": "https://kooshapari.com/styles/bundled/core.e8b955bf.css",
+          "totalBytes": 5912
+        }
+      ]
+    },
+    {
+      "id": "unused-css-rules",
+      "title": "Reduce unused CSS",
+      "score": 0.5,
+      "explanation": "Est savings of 12 KiB",
+      "detailsItems": [
+        {
+          "url": "https://kooshapari.com/styles/bundled/pages.1d35d96a.css",
+          "wastedBytes": 12717,
+          "wastedPercent": 92.78560275074526,
+          "totalBytes": 13706
+        }
+      ]
+    },
+    {
+      "id": "first-contentful-paint",
+      "title": "First Contentful Paint",
+      "score": 0.98,
+      "explanation": "1.3 s",
+      "detailsItems": []
+    }
+  ],
+  "scoredAudits": [
+    {
+      "id": "network-dependency-tree-insight",
+      "title": "Network dependency tree",
+      "score": 0,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "unused-javascript",
+      "title": "Reduce unused JavaScript",
+      "score": 0,
+      "weight": null,
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": "Est savings of 26 KiB"
+    },
+    {
+      "id": "cache-insight",
+      "title": "Use efficient cache lifetimes",
+      "score": 0.5,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": "Est savings of 28 KiB"
+    },
+    {
+      "id": "render-blocking-insight",
+      "title": "Render-blocking requests",
+      "score": 0.5,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "unused-css-rules",
+      "title": "Reduce unused CSS",
+      "score": 0.5,
+      "weight": null,
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": "Est savings of 12 KiB"
+    },
+    {
+      "id": "first-contentful-paint",
+      "title": "First Contentful Paint",
+      "score": 0.98,
+      "weight": null,
+      "numericValue": 1271.017,
+      "numericUnit": "millisecond",
+      "displayValue": "1.3 s"
+    },
+    {
+      "id": "aria-allowed-attr",
+      "title": "`[aria-*]` attributes match their roles",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-conditional-attr",
+      "title": "ARIA attributes are used as specified for the element's role",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-deprecated-role",
+      "title": "Deprecated ARIA roles were not used",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-hidden-body",
+      "title": "`[aria-hidden=\"true\"]` is not present on the document `<body>`",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-hidden-focus",
+      "title": "`[aria-hidden=\"true\"]` elements do not contain focusable descendents",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-prohibited-attr",
+      "title": "Elements use only permitted ARIA attributes",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-required-attr",
+      "title": "`[role]`s have all required `[aria-*]` attributes",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-roles",
+      "title": "`[role]` values are valid",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-valid-attr",
+      "title": "`[aria-*]` attributes are valid and not misspelled",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "aria-valid-attr-value",
+      "title": "`[aria-*]` attributes have valid values",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "baseline",
+      "title": "Baseline Features",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "bf-cache",
+      "title": "Page didn't prevent back/forward cache restoration",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "bootup-time",
+      "title": "JavaScript execution time",
+      "score": 1,
+      "weight": null,
+      "numericValue": 167.38400000000016,
+      "numericUnit": "millisecond",
+      "displayValue": "0.2 s"
+    },
+    {
+      "id": "button-name",
+      "title": "Buttons have an accessible name",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "canonical",
+      "title": "Document has a valid `rel=canonical`",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "charset",
+      "title": "Properly defines charset",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "cls-culprits-insight",
+      "title": "Layout shift culprits",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "color-contrast",
+      "title": "Background and foreground colors have a sufficient contrast ratio",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "crawlable-anchors",
+      "title": "Links are crawlable",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "csp-xss",
+      "title": "Ensure CSP is effective against XSS attacks",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "cumulative-layout-shift",
+      "title": "Cumulative Layout Shift",
+      "score": 1,
+      "weight": null,
+      "numericValue": 0.01753747554984214,
+      "numericUnit": "unitless",
+      "displayValue": "0.018"
+    },
+    {
+      "id": "deprecations",
+      "title": "Avoids deprecated APIs",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "diagnostics",
+      "title": "Diagnostics",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "doctype",
+      "title": "Page has the HTML doctype",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "document-latency-insight",
+      "title": "Document request latency",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "document-title",
+      "title": "Document has a `<title>` element",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "dom-size-insight",
+      "title": "Optimize DOM size",
+      "score": 1,
+      "weight": null,
+      "numericValue": 378,
+      "numericUnit": "element",
+      "displayValue": null
+    },
+    {
+      "id": "duplicated-javascript-insight",
+      "title": "Duplicated JavaScript",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "errors-in-console",
+      "title": "No browser errors logged to the console",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "final-screenshot",
+      "title": "Final Screenshot",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "font-display-insight",
+      "title": "Font display",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "forced-reflow-insight",
+      "title": "Forced reflow",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "geolocation-on-start",
+      "title": "Avoids requesting the geolocation permission on page load",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "has-hsts",
+      "title": "Use a strong HSTS policy",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "heading-order",
+      "title": "Heading elements appear in a sequentially-descending order",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "hreflang",
+      "title": "Document has a valid `hreflang`",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "html-has-lang",
+      "title": "`<html>` element has a `[lang]` attribute",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "html-lang-valid",
+      "title": "`<html>` element has a valid value for its `[lang]` attribute",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "http-status-code",
+      "title": "Page has successful HTTP status code",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "image-alt",
+      "title": "Image elements have `[alt]` attributes",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "image-aspect-ratio",
+      "title": "Displays images with correct aspect ratio",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "image-delivery-insight",
+      "title": "Improve image delivery",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "image-size-responsive",
+      "title": "Serves images with appropriate resolution",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "inspector-issues",
+      "title": "No issues in the `Issues` panel in Chrome Devtools",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "interactive",
+      "title": "Time to Interactive",
+      "score": 1,
+      "weight": null,
+      "numericValue": 1393.6670000000001,
+      "numericUnit": "millisecond",
+      "displayValue": "1.4 s"
+    },
+    {
+      "id": "is-crawlable",
+      "title": "Page isn’t blocked from indexing",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "is-on-https",
+      "title": "Uses HTTPS",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "landmark-one-main",
+      "title": "Document has a main landmark.",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "largest-contentful-paint",
+      "title": "Largest Contentful Paint",
+      "score": 1,
+      "weight": null,
+      "numericValue": 1391.517,
+      "numericUnit": "millisecond",
+      "displayValue": "1.4 s"
+    },
+    {
+      "id": "layout-shifts",
+      "title": "Avoid large layout shifts",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": "1 layout shift found"
+    },
+    {
+      "id": "lcp-breakdown-insight",
+      "title": "LCP breakdown",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "legacy-javascript-insight",
+      "title": "Legacy JavaScript",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "link-name",
+      "title": "Links have a discernible name",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "link-text",
+      "title": "Links have descriptive text",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "list",
+      "title": "Lists contain only `<li>` elements and script supporting elements (`<script>` and `<template>`).",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "listitem",
+      "title": "List items (`<li>`) are contained within `<ul>`, `<ol>` or `<menu>` parent elements",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "long-tasks",
+      "title": "Avoid long main-thread tasks",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": "2 long tasks found"
+    },
+    {
+      "id": "main-thread-tasks",
+      "title": "Tasks",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "mainthread-work-breakdown",
+      "title": "Minimizes main-thread work",
+      "score": 1,
+      "weight": null,
+      "numericValue": 1221.6759999999997,
+      "numericUnit": "millisecond",
+      "displayValue": "1.2 s"
+    },
+    {
+      "id": "max-potential-fid",
+      "title": "Max Potential First Input Delay",
+      "score": 1,
+      "weight": null,
+      "numericValue": 43,
+      "numericUnit": "millisecond",
+      "displayValue": "40 ms"
+    },
+    {
+      "id": "meta-description",
+      "title": "Document has a meta description",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "meta-viewport",
+      "title": "`[user-scalable=\"no\"]` is not used in the `<meta name=\"viewport\">` element and the `[maximum-scale]` attribute is not less than 5.",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "metrics",
+      "title": "Metrics",
+      "score": 1,
+      "weight": null,
+      "numericValue": 1394,
+      "numericUnit": "millisecond",
+      "displayValue": null
+    },
+    {
+      "id": "modern-http-insight",
+      "title": "Modern HTTP",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "network-requests",
+      "title": "Network Requests",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "network-rtt",
+      "title": "Network Round Trip Times",
+      "score": 1,
+      "weight": null,
+      "numericValue": 15.143,
+      "numericUnit": "millisecond",
+      "displayValue": "20 ms"
+    },
+    {
+      "id": "network-server-latency",
+      "title": "Server Backend Latencies",
+      "score": 1,
+      "weight": null,
+      "numericValue": 20.017,
+      "numericUnit": "millisecond",
+      "displayValue": "20 ms"
+    },
+    {
+      "id": "non-composited-animations",
+      "title": "Avoid non-composited animations",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": "5 animated elements found"
+    },
+    {
+      "id": "notification-on-start",
+      "title": "Avoids requesting the notification permission on page load",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "origin-isolation",
+      "title": "Ensure proper origin isolation with COOP",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "paste-preventing-inputs",
+      "title": "Allows users to paste into input fields",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "redirects",
+      "title": "Avoid multiple page redirects",
+      "score": 1,
+      "weight": null,
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": ""
+    },
+    {
+      "id": "resource-summary",
+      "title": "Resources Summary",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "robots-txt",
+      "title": "robots.txt is valid",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "screenshot-thumbnails",
+      "title": "Screenshot Thumbnails",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "script-treemap-data",
+      "title": "Script Treemap Data",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "server-response-time",
+      "title": "Initial server response time was short",
+      "score": 1,
+      "weight": null,
+      "numericValue": 26,
+      "numericUnit": "millisecond",
+      "displayValue": "Root document took 30 ms"
+    },
+    {
+      "id": "skip-link",
+      "title": "Skip links are focusable.",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "speed-index",
+      "title": "Speed Index",
+      "score": 1,
+      "weight": null,
+      "numericValue": 1271.017,
+      "numericUnit": "millisecond",
+      "displayValue": "1.3 s"
+    },
+    {
+      "id": "target-size",
+      "title": "Touch targets have sufficient size and spacing.",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "third-parties-insight",
+      "title": "3rd parties",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "third-party-cookies",
+      "title": "Avoids third-party cookies",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "total-blocking-time",
+      "title": "Total Blocking Time",
+      "score": 1,
+      "weight": null,
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": "0 ms"
+    },
+    {
+      "id": "total-byte-weight",
+      "title": "Avoids enormous network payloads",
+      "score": 1,
+      "weight": null,
+      "numericValue": 185794,
+      "numericUnit": "byte",
+      "displayValue": "Total size was 181 KiB"
+    },
+    {
+      "id": "trusted-types-xss",
+      "title": "Mitigate DOM-based XSS with Trusted Types",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "unminified-css",
+      "title": "Minify CSS",
+      "score": 1,
+      "weight": null,
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": ""
+    },
+    {
+      "id": "unminified-javascript",
+      "title": "Minify JavaScript",
+      "score": 1,
+      "weight": null,
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": ""
+    },
+    {
+      "id": "unsized-images",
+      "title": "Image elements have explicit `width` and `height`",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "valid-source-maps",
+      "title": "Page has valid source maps",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    },
+    {
+      "id": "viewport-insight",
+      "title": "Optimize viewport for mobile",
+      "score": 1,
+      "weight": null,
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null
+    }
+  ]
+}

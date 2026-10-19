@@ -880,6 +880,80 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > protocol-level" sub-section added to
 > `docs/deploy/2026-10-19.md`.
 
+> **Round 6m (2026-10-19 20:38-20:55 UTC): real
+> Lighthouse executed; publication proof closed.**
+> The round 6k/6l "agent-exhausted" verdict was
+> accurate when written but was based on an
+> incomplete browser probe: it searched `PATH` only.
+> A fresh preflight found Google Chrome
+> 152.0.7977.65 installed at
+> `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`
+> (plus a Puppeteer-cached Chrome for Testing
+> 155.0.8059.79). A headless smoke test against
+> `https://kooshapari.com/` returned the real
+> portfolio HTML. Lighthouse 13.4.1 then completed
+> against the production domains.
+>
+> **Result: 100 / 100 / 100 / 100** (Performance /
+> Accessibility / Best Practices / SEO) on every
+> in-scope run — desktop and mobile on
+> `kooshapari.com`, `www.kooshapari.com`, and
+> `kooshapari-site.vercel.app` (7 runs including one
+> duplicate desktop run). Desktop LCP 355-406 ms,
+> mobile LCP 1,369-1,392 ms, TBT 0 ms, CLS 0.00
+> (0.02 on one mobile run), server response
+> 24-30 ms. Evidence at
+> `docs/audits/2026-10-19/lighthouse/`.
+>
+> **Scope correction.** `phenotype.space` scored
+> SEO 82 and is **not** an alias of the
+> `kooshapari-site` Vercel project. Direct probe
+> (2026-10-19 20:54 UTC): `server: cloudflare`,
+> `cf-ray: a4d2acfcc852cb83-LAX`, no `x-vercel-id`,
+> `<title>Phenotype</title>`, and its `/robots.txt`
+> returns that site's HTML rather than a robots
+> file. It is a separate Cloudflare Pages site. The
+> in-scope portfolio is 3 domains, not 4. The round
+> 6l claim that "all 4 production domains route to
+> Vercel's `sfo1` edge" was wrong and is corrected
+> in `docs/deploy/2026-10-19.md` with a dated
+> correction note. Its audit is still retained so the
+> observation is not hidden.
+>
+> **State flip.** `STATE.md` moved from
+> `PUBLICATION_PROOF_DEFERRED` to
+> `PUBLICATION_PROOF_CLOSED`, with a closure
+> receipt (deploy SHA `e95e763`, bundle `0403d845`,
+> route receipt pointer, Lighthouse scores, unit
+> suite 767/767). All four steps of the STATE.md
+> close sequence are now complete. No production
+> deploy was needed or performed in this round; it
+> is evidence and documentation work only.
+>
+> **Artifacts.** 8 distilled Lighthouse summaries
+> (248 KB) plus the raw primary report (762 KB) at
+> `docs/audits/2026-10-19/lighthouse/`, produced by
+> `scripts/distill-lighthouse.js`. The distillation
+> was verified lossless: all 95 scored audits in the
+> raw primary report survive, and every metric value
+> round-trips exactly. The 7 remaining raw reports
+> (~700 KB each) are regenerable and are not
+> committed. A second verification re-ran the
+> distiller against every raw report and confirmed
+> each committed summary regenerates identically, and
+> that the committed raw primary report is
+> sha256-identical to the source.
+>
+> **Test suite.** `scripts/distill-lighthouse.js` is a
+> shipped script in a repo with an 85% coverage gate,
+> so it carries its own test file
+> (`tests/distill-lighthouse.test.js`, 7 tests:
+> scored-audit preservation, unscored-audit exclusion,
+> category scores, exact metric round-trip, failure
+> capture, config retention, and non-zero exit with no
+> input). Unit suite is now **774/774 PASS**, 0 fail
+> (767/767 at round 6i, +7 from this file).
+
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new
 > pane, new agent, new operator session) can

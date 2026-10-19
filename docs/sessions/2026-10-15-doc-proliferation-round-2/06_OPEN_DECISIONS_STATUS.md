@@ -374,3 +374,47 @@ Item 5 status: CLOSED (round 6e and round 6i). The
 post-20th-pass arc is now closed end-to-end across
 two production deploys. Live == prebuilt
 byte-identical at `0403d845`.
+
+**Item 5 — publication proof closed (2026-10-19
+20:40-20:55 UTC, round 6m):** A real Lighthouse
+13.4.1 run against the live production domains
+completed, supplying the last piece of evidence the
+state flip needed.
+
+- 7 in-scope runs (desktop + mobile on
+  `kooshapari.com`, `www.kooshapari.com`, and
+  `kooshapari-site.vercel.app`, plus one duplicate
+  `kooshapari.com` desktop run)
+- **Every run scored 100 / 100 / 100 / 100**
+  (Performance / Accessibility / Best Practices /
+  SEO)
+- Desktop LCP 355-406 ms; mobile LCP 1,369-1,392 ms;
+  TBT 0 ms; CLS 0.00 (0.02 on one mobile run);
+  server response 24-30 ms
+- Evidence: `docs/audits/2026-10-19/lighthouse/`
+  (8 distilled summaries + the raw primary report,
+  produced by `scripts/distill-lighthouse.js`)
+
+**Domain-scope correction.** `phenotype.space` is
+**not** an alias of the `kooshapari-site` Vercel
+project. A direct probe on 2026-10-19 20:54 UTC
+shows `server: cloudflare`, `cf-ray: ...-LAX`, no
+`x-vercel-id`, `<title>Phenotype</title>`, and a
+`/robots.txt` that returns that site's HTML rather
+than a robots file. It is a separate Cloudflare
+Pages site. The in-scope portfolio is 3 domains
+(`kooshapari.com`, `www.kooshapari.com`,
+`kooshapari-site.vercel.app`), not 4. Its own
+Lighthouse SEO score of 82 reflects that other site's
+issues; the audit is retained at
+`docs/audits/2026-10-19/lighthouse/phenotype_space-desktop.summary.json`.
+
+The `STATE.md` status line has moved from
+`PUBLICATION_PROOF_DEFERRED` to
+`PUBLICATION_PROOF_CLOSED`, with a closure receipt
+covering the deploy SHA (`e95e763`, bundle
+`0403d845`), the route receipt
+(`docs/deploy/2026-10-19.md`), the Lighthouse
+scores, and the unit suite (774/774). All four steps
+of the STATE.md close sequence are complete. No
+production deploy was required for this round.

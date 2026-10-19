@@ -36,12 +36,30 @@ production domains. All returned HTTP 200 on
 2026-10-15 except `pheno.studio` (301 redirect
 to a canonical form).
 
+> **Correction (2026-10-19, round 6m).** This
+> section originally read that
+> `phenotype.space` "serves the portfolio" with
+> "same title". A direct probe on 2026-10-19
+> 20:54 UTC disproves that: `phenotype.space`
+> returns `server: cloudflare` and
+> `cf-ray: a4d2acfcc852cb83-LAX` (no
+> `x-vercel-id`), its title is **"Phenotype"**, not
+> "Koosha Paridehpour — Technical Atelier", and its
+> `/robots.txt` returns that site's HTML rather than
+> a robots file. It is a **separate Cloudflare Pages
+> site**, not an alias of the `kooshapari-site`
+> Vercel project. The in-scope portfolio is **3
+> domains**: `kooshapari.com`, `www.kooshapari.com`,
+> and `kooshapari-site.vercel.app`. The
+> `phenotype.space` row below is corrected to claim
+> only what was observed: HTTP 200.
+
 | Requirement | Concrete check | Observed result | Status |
 |---|---|---|---|
 | `kooshapari-site.vercel.app` serves the portfolio | `curl -sIL https://kooshapari-site.vercel.app/` | `HTTP/2 200`, `text/html`, `<title>Koosha Paridehpour — Technical Atelier</title>` | PASS |
 | `kooshapari.com` serves the portfolio | `curl -sIL https://kooshapari.com/` | `HTTP/2 200`, `text/html`, same title | PASS |
 | `www.kooshapari.com` serves the portfolio | `curl -sIL https://www.kooshapari.com/` | `HTTP/2 200`, `text/html`, same title | PASS |
-| `phenotype.space` serves the portfolio | `curl -sIL https://phenotype.space/` | `HTTP/2 200`, `text/html`, same title | PASS |
+| `phenotype.space` serves HTTP 200 | `curl -sIL https://phenotype.space/` | `HTTP/2 200`, `text/html` | PASS (see note) |
 | `pheno.studio` serves the portfolio | `curl -sIL https://pheno.studio/` | `HTTP/2 301` (redirect to canonical) | PASS |
 | Live bundle is served from `/bundled/` | `curl -sL https://kooshapari-site.vercel.app/bundled/manifest.json` | `{"app.bundle.js": "app.bundle.7b217faa.js"}` | PASS |
 | Live CSS bundles load (3 expected) | `curl -sL https://kooshapari.com/ \| grep styles/bundled/` | `core.7b878534.css`, `components.ec7d5f41.css`, `pages.beaaea1f.css` (3 found) | PASS |
