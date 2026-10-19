@@ -35,6 +35,21 @@ Lighthouse evidence at
   355-406 ms, mobile LCP 1,369-1,392 ms, TBT 0 ms,
   CLS 0.00. Evidence:
   `docs/audits/2026-10-19/lighthouse/`.
+  **Re-verified 2026-10-19 21:33-22:01 UTC (round
+  6p):** 8 further runs against `kooshapari.com`
+  desktop. Accessibility, Best Practices and SEO
+  stayed at **100 in all 9 observations**. Performance
+  did not: it ranged **52-100** (observed 100, 98, 99,
+  52, 100, 100, 99, 100, 99). The committed result is a
+  true record of its batch (the committed summary was
+  verified against the committed raw report) but
+  Performance 100 is **not reproducible** on this host
+  under the load present during re-verification. The
+  52 outlier kept server response time at 48 ms and
+  all three other categories at 100, so the variance is
+  in the locally-simulated client metrics, not in the
+  site. Evidence:
+  `docs/audits/2026-10-19/lighthouse/reverification-2026-10-19T21Z.json`.
 - Unit suite: 774/774 PASS, 0 fail (767/767 at round
   6i, +7 from the round 6m `scripts/distill-lighthouse.js`
   test file).
@@ -150,6 +165,27 @@ PUBLICATION_PROOF_DEFERRED gate:
   CLS 0.00. Evidence:
   `docs/audits/2026-10-19/lighthouse/`.
 
+  **Corrected 2026-10-19 (round 6p).** The statement
+  above records what the 20:40-20:46 UTC batch
+  observed and is not retracted. It is not, however, a
+  reproducible Performance figure. An independent
+  re-verification on 2026-10-19 21:33-22:01 UTC ran
+  8 more `kooshapari.com` desktop runs on this host and
+  observed Performance **52-100** (100, 98, 99, 52,
+  100, 100, 99, 100, 99) while Accessibility, Best
+  Practices and SEO stayed at 100 in all 9
+  observations. The committed summary was verified
+  against the committed raw report and is a faithful
+  distillation, so the all-100 batch is genuine: it is
+  simply not repeatable here. The measurement host was
+  under heavy load (load average 781-976 on 10 CPUs)
+  throughout; the 52 outlier still returned in 48 ms
+  with the other three categories at 100, which places
+  the variance in the locally-simulated client metrics
+  rather than in the shipped site. No Performance score
+  is claimed as stable. Evidence:
+  `docs/audits/2026-10-19/lighthouse/reverification-2026-10-19T21Z.json`.
+
   The rounds 6k/6l note that Lighthouse was
   agent-exhausted was accurate at the time: the CLI was
   installed but no Chrome binary was found, the
@@ -170,6 +206,15 @@ previously-listed conditions have been met:
 1. A Chrome binary was found and a Lighthouse run was
    executed against the live production domains
    (100 / 100 / 100 / 100 across 7 in-scope runs).
+   Round 6p re-verified the Performance component and
+   found it **not reproducible** on this host (52-100
+   across 9 observations); Accessibility, Best
+   Practices and SEO **were** reproducible at 100.
+   The close criteria concern the existence and quality
+   of the Lighthouse evidence, which stands: the run
+   happened, the artifacts are committed, and the result
+   is faithfully recorded. The Performance number is now
+   reported as a range, not a constant.
 2. The close criteria no longer need redefining.
 
 Remaining notes, neither of which blocks closure:

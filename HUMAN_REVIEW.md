@@ -911,6 +911,28 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > 24-30 ms. Evidence at
 > `docs/audits/2026-10-19/lighthouse/`.
 >
+> **Re-verification (2026-10-19 21:33-22:01 UTC,
+> round 6p) — the Performance score is not
+> reproducible.** 8 further runs against
+> `kooshapari.com` desktop on this host, same URL,
+> same preset, same Chrome binary, same command.
+> Accessibility, Best Practices and SEO stayed at
+> **100 in all 9 observations**. Performance did
+> not: observed **100, 98, 99, 52, 100, 100, 99,
+> 100, 99** — range 52-100. The committed round 6m
+> result is a true record of its batch (the committed
+> summary was verified field-by-field against the
+> committed raw report) and is not retracted; it is
+> simply not repeatable here. The 52 outlier kept
+> server response time at 48 ms and the other three
+> categories at 100, placing the variance in the
+> locally-simulated client metrics rather than in
+> the shipped site. The measurement host ran under
+> heavy load throughout (load average 781-976 on 10
+> CPUs). No Performance score is claimed as stable.
+> Evidence:
+> `docs/audits/2026-10-19/lighthouse/reverification-2026-10-19T21Z.json`.
+>
 > **Scope correction.** `phenotype.space` scored
 > SEO 82 and is **not** an alias of the
 > `kooshapari-site` Vercel project. Direct probe
@@ -1093,6 +1115,141 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > **774/774 pass, 0 fail**. A final repo-wide sweep
 > for the four residual inconsistency classes
 > returns zero hits.
+>
+> **Round 6p (2026-10-19 21:33-22:01 UTC): Lighthouse
+> re-verification — the Performance score is not
+> reproducible.** The round 6o audit corrected what
+> each claim *attributed* to. This round tests what
+> the numbers *are*, by re-running the audit rather
+> than reading it. 8 fresh Lighthouse 13.4.1 runs
+> against `https://kooshapari.com/`, desktop preset,
+> same Chrome binary (152.0.7977.65), same command as
+> round 6m.
+>
+> **Result: the committed all-100 Performance score
+> does not reproduce on this host.**
+>
+> | observation | perf | a11y | bp | seo |
+> |---|---|---|---|---|
+> | committed, 20:41:06Z | 100 | 100 | 100 | 100 |
+> | fresh 21:33:29Z | 98 | 100 | 100 | 100 |
+> | fresh 21:39:43Z | 99 | 100 | 100 | 100 |
+> | fresh 21:41:54Z | **52** | 100 | 100 | 100 |
+> | controlled 21:48:15Z | 100 | 100 | 100 | 100 |
+> | controlled 21:50:41Z | 100 | 100 | 100 | 100 |
+> | controlled 21:52:54Z | 99 | 100 | 100 | 100 |
+> | controlled 21:55:20Z | 100 | 100 | 100 | 100 |
+> | controlled 21:57:52Z | 99 | 100 | 100 | 100 |
+>
+> Accessibility, Best Practices and SEO were **100 in
+> all 9 observations**. Performance ranged **52-100**:
+> 4 at exactly 100, 8 at 98 or above. The 5
+> "controlled" runs were executed one at a time with
+> no other task of this session running.
+>
+> **The committed evidence is not wrong.** The
+> committed summary `kooshapari_com-desktop.summary.json`
+> was verified field-by-field against the committed
+> `RAW-kooshapari.com-desktop.json`: identical
+> `fetchTime`, identical `finalUrl`, all 4 category
+> scores equal, all 8 metric `numericValue`s
+> round-tripping exactly. The all-100 batch is a true
+> record. It is not repeatable *here*.
+>
+> **The variance is measurement-side.** The 52
+> observation kept server response time at **48 ms** —
+> inside the 22-32 ms band of the controlled series —
+> and held the other three categories at 100. The whole
+> loss sat in FCP (2,799 ms), LCP (2,965 ms), TBT
+> (300 ms) and Speed Index (5,914 ms): the
+> client-side metrics Lighthouse *simulates* from
+> observed local Chrome timing. `mainthread-work-breakdown`
+> for that run shows 2,377 ms "other" and 1,654 ms
+> "styleLayout". The host load average across the
+> window was **781-976 on 10 CPUs**, with `rustc`,
+> `node`, `find`, `codex` and `jcode` resident. That is
+> contention in the measurement host. The site itself
+> answered in 22-48 ms throughout.
+>
+> A host-side warning, `Clearing the browser cache
+> timed out.`, is present in all 8 fresh runs and in
+> none of the committed one. It appears equally in the
+> 6 fresh runs that scored 99 or 100, so it is **not**
+> the discriminator; the committed raw report carries an
+> empty `runWarnings` array, which makes it a new
+> condition of this host rather than a change in the
+> shipped site.
+>
+> **Corrections applied.** The audit README's claim
+> that "the score is stable across runs" is withdrawn
+> and replaced with the observed range. The same
+> correction is annotated, dated, into the seven
+> documents that asserted a single all-100 value:
+> `STATE.md` (three sites), `HUMAN_REVIEW.md` (the
+> round 6m record, plus this entry), `docs/deploy/
+> 2026-10-19.md` (two sites), `docs/deploy/2026-10-17.md`,
+> `docs/sessions/2026-10-15-doc-proliferation-round-2/
+> 06_OPEN_DECISIONS_STATUS.md` (two sites) and the
+> same session's `07_PUBLIC_INTERFACE_VERIFICATION.md`.
+> Every historical statement is **annotated, not
+> rewritten** — each records what its batch observed.
+>
+> **New artifact.**
+> `docs/audits/2026-10-19/lighthouse/reverification-2026-10-19T21Z.json`
+> — machine-readable: 9 observations with scores,
+> metrics, `runWarnings`, concurrency notes, host load
+> where sampled, and the SHA-256 of each raw report.
+> The committed round 6m evidence bundle is otherwise
+> untouched.
+>
+> **The 8 fresh raw reports are distilled, not
+> committed.** Each is ~700 KB. Following the convention
+> the round 6m bundle already established — raw reports
+> not committed, distilled summaries committed — each
+> fresh run was distilled by `scripts/distill-lighthouse.js`
+> to `docs/audits/2026-10-19/lighthouse/reverify-raw/`
+> (8 files, 247 KB), and each observation in the JSON
+> names its distilled artifact and the SHA-256 of the raw
+> report behind it. The distillation was verified lossless
+> for all 8: 770 scored audits checked with identical
+> score, weight and `numericValue`; every metric
+> round-tripping exactly; `categoryScores`, `fetchTime`,
+> `finalUrl`, `lighthouseVersion` and `runWarnings`
+> compared field by field. **0 mismatches.**
+>
+> **One code change, in the distiller.**
+> `scripts/distill-lighthouse.js` did not carry
+> `runWarnings`. That field is material to this round: the
+> cache-clearing warning is present in all 8 fresh runs
+> and absent from the committed one, and a reader needs it
+> in the artifact to see why the warning does not
+> discriminate between the 52 and the 100s. The distiller
+> now emits it and the 8 fresh summaries were regenerated
+> with it. The 8 committed round 6m summaries were
+> **not** regenerated — they are the historical artifact of
+> that batch, they predate the field, and the committed
+> `RAW-kooshapari.com-desktop.json` carries the full
+> `runWarnings` data for the primary run. **No committed
+> round 6m file was modified.**
+>
+> **Not claimed.** No field data. No Performance score
+> as a stable property. No Performance figure measured
+> on an unloaded host — that observation was not
+> available, and it is not asserted. The re-verification
+> covers `kooshapari.com` desktop only; the other 6
+> committed in-scope runs were not re-run.
+>
+> **Domain taxonomy re-confirmed.** Two independent
+> first-hop probes (`curl -sI`, no redirect following) at
+> 21:39:03Z and 21:39:26Z returned the same five
+> statuses both times: `kooshapari.com` 200 (Vercel),
+> `www.kooshapari.com` 200 (Vercel),
+> `kooshapari-site.vercel.app` 200 (Vercel),
+> `pheno.studio` **301** (Cloudflare, `location:
+> https://phenotype.space/studio/`), `phenotype.space`
+> 200 (Cloudflare). The three portfolio hosts carry
+> `x-vercel-id`; the other two do not. This matches the
+> taxonomy recorded in rounds 6n and 6o.
 
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new

@@ -241,6 +241,13 @@ What is **NOT** closed by this verification:
   > `docs/audits/2026-10-19/lighthouse/`. The bullet
   > above is retained unedited because it records what
   > the 2026-10-15 preflight actually observed.
+  >
+  > **Re-verified 2026-10-19 21:33-22:01 UTC (round
+  > 6p).** The all-100 result is a faithful record of
+  > its batch, but its Performance component is not
+  > reproducible on this host: 8 further runs observed
+  > 52-100. Accessibility, Best Practices and SEO held
+  > at 100 across all 9 observations.
 
 - **The e2e tests are gated by a separate acceptance path** (not
   `npm test`). The 20th-pass added 8 e2e checks for the

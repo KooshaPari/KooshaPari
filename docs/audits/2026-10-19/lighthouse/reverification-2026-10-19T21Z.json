@@ -1,0 +1,364 @@
+{
+  "recordType": "lighthouse-reverification",
+  "purpose": "Independent re-verification of the round 6m Lighthouse result, run after the round 6o provenance audit, to test whether the committed all-100 performance score is reproducible on this host.",
+  "generatedAtUtc": "2026-10-19T22:06:09.152Z",
+  "target": {
+    "url": "https://kooshapari.com/",
+    "finalUrl": "https://kooshapari.com/",
+    "formFactor": "desktop",
+    "preset": "desktop",
+    "onlyCategories": [
+      "performance",
+      "accessibility",
+      "best-practices",
+      "seo"
+    ]
+  },
+  "tool": {
+    "name": "lighthouse",
+    "version": "13.4.1",
+    "chrome": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "chromeVersion": "152.0.7977.65",
+    "chromeFlags": "--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage",
+    "maxWaitForLoad": 30000
+  },
+  "host": {
+    "platform": "darwin",
+    "cpuCount": 10,
+    "loadAverageObservedRange": [
+      781.15,
+      976.48
+    ],
+    "loadAverageNote": "1-minute load average sampled during the re-verification window; between 78x and 94x the CPU count. Concurrent rustc, node, find, codex and jcode processes were resident. This is measurement-host contention, not a property of the audited site."
+  },
+  "observations": [
+    {
+      "label": "committed round 6m, kooshapari.com desktop",
+      "fetchTime": "2026-10-19T20:41:06.012Z",
+      "lighthouseVersion": "13.4.1",
+      "finalUrl": "https://kooshapari.com/",
+      "formFactor": "desktop",
+      "categoryScores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 307.4875,
+        "largest-contentful-paint": 355.4875,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0,
+        "speed-index": 384.99731219482914,
+        "server-response-time": 28
+      },
+      "runWarnings": [],
+      "rawArtifactSha256": "0b029ec1730357114adcbc550e0b1febe4fd6cab4da74635ee1e700837647865",
+      "committed": true,
+      "rawArtifactCommitted": true,
+      "hostLoadAvg1Min": null,
+      "hostLoadAvgNote": "not recorded during the round 6m batch; no load sampling was performed",
+      "distilledArtifact": "kooshapari_com-desktop.summary.json",
+      "distilledArtifactCommitted": true
+    },
+    {
+      "label": "fresh re-verification A, kooshapari.com desktop",
+      "fetchTime": "2026-10-19T21:33:29.714Z",
+      "lighthouseVersion": "13.4.1",
+      "finalUrl": "https://kooshapari.com/",
+      "formFactor": "desktop",
+      "categoryScores": {
+        "performance": 98,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 469,
+        "largest-contentful-paint": 535,
+        "total-blocking-time": 9,
+        "cumulative-layout-shift": 0.005004269406249598,
+        "speed-index": 1472.0446101933433,
+        "server-response-time": 24
+      },
+      "runWarnings": [
+        "Clearing the browser cache timed out. Try auditing this page again and file a bug if the issue persists."
+      ],
+      "rawArtifactSha256": "552b6cfd46b9e81f0d590821f991a9540ee8f0c9e70aa3a450bea4290548ef50",
+      "concurrency": "launched directly; background batch task 932362bi6w was started afterwards",
+      "hostLoadAvg1Min": null,
+      "hostLoadAvgNote": "not recorded",
+      "distilledArtifact": "reverify-raw/obs02-fresh-A.summary.json",
+      "distilledArtifactCommitted": true,
+      "rawArtifactCommitted": false
+    },
+    {
+      "label": "fresh re-verification B, kooshapari.com desktop",
+      "fetchTime": "2026-10-19T21:39:43.525Z",
+      "lighthouseVersion": "13.4.1",
+      "finalUrl": "https://kooshapari.com/",
+      "formFactor": "desktop",
+      "categoryScores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 419,
+        "largest-contentful-paint": 446.5,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0,
+        "speed-index": 1182.1793227230287,
+        "server-response-time": 25
+      },
+      "runWarnings": [
+        "Clearing the browser cache timed out. Try auditing this page again and file a bug if the issue persists."
+      ],
+      "rawArtifactSha256": "2b31ecb69cb1c3c73c29c9096b2aa8962f0d441332dd6f984f54de49f39443a0",
+      "concurrency": "background batch task 932362bi6w, sequential within that task",
+      "hostLoadAvg1Min": null,
+      "hostLoadAvgNote": "not recorded",
+      "distilledArtifact": "reverify-raw/obs03-fresh-B.summary.json",
+      "distilledArtifactCommitted": true,
+      "rawArtifactCommitted": false
+    },
+    {
+      "label": "fresh re-verification C, kooshapari.com desktop",
+      "fetchTime": "2026-10-19T21:41:54.231Z",
+      "lighthouseVersion": "13.4.1",
+      "finalUrl": "https://kooshapari.com/",
+      "formFactor": "desktop",
+      "categoryScores": {
+        "performance": 52,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 2799,
+        "largest-contentful-paint": 2964.5,
+        "total-blocking-time": 299.5,
+        "cumulative-layout-shift": 0.000007855349352635049,
+        "speed-index": 5913.723226906632,
+        "server-response-time": 48
+      },
+      "runWarnings": [
+        "Clearing the browser cache timed out. Try auditing this page again and file a bug if the issue persists."
+      ],
+      "rawArtifactSha256": "5ea0cf501ecfae55ff0104896ba0373bb70f3baf9a7ab8297de9537dd68bcb55",
+      "concurrency": "background batch task 932362bi6w, sequential within that task; overlapped with other local activity",
+      "hostLoadAvg1Min": null,
+      "hostLoadAvgNote": "not recorded",
+      "distilledArtifact": "reverify-raw/obs04-fresh-C.summary.json",
+      "distilledArtifactCommitted": true,
+      "rawArtifactCommitted": false
+    },
+    {
+      "label": "fresh re-verification controlled 1, kooshapari.com desktop",
+      "fetchTime": "2026-10-19T21:48:15.000Z",
+      "lighthouseVersion": "13.4.1",
+      "finalUrl": "https://kooshapari.com/",
+      "formFactor": "desktop",
+      "categoryScores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 510.08500000000004,
+        "largest-contentful-paint": 552.085,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.004996414056896963,
+        "speed-index": 932.5685539954646,
+        "server-response-time": 25
+      },
+      "runWarnings": [
+        "Clearing the browser cache timed out. Try auditing this page again and file a bug if the issue persists."
+      ],
+      "rawArtifactSha256": "7848c3196249debf5e3bb99920418a35b73b345afa8e247c2c9d3d3e46770377",
+      "concurrency": "controlled series 4791438sqr; no other task of this session running",
+      "hostLoadAvg1Min": 904.43,
+      "hostLoadAvgNote": "macOS 1-minute load average sampled immediately before the run; host has 10 CPUs",
+      "distilledArtifact": "reverify-raw/obs05-controlled-1.summary.json",
+      "distilledArtifactCommitted": true,
+      "rawArtifactCommitted": false
+    },
+    {
+      "label": "fresh re-verification controlled 2, kooshapari.com desktop",
+      "fetchTime": "2026-10-19T21:50:41.578Z",
+      "lighthouseVersion": "13.4.1",
+      "finalUrl": "https://kooshapari.com/",
+      "formFactor": "desktop",
+      "categoryScores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 404,
+        "largest-contentful-paint": 432,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0,
+        "speed-index": 843.2456256716437,
+        "server-response-time": 24
+      },
+      "runWarnings": [
+        "Clearing the browser cache timed out. Try auditing this page again and file a bug if the issue persists."
+      ],
+      "rawArtifactSha256": "fadb7eaa74cdd219b432189a953f7e0ad5ba7fadcecb861e792bfa07696cbd97",
+      "concurrency": "controlled series 4791438sqr; no other task of this session running",
+      "hostLoadAvg1Min": 803.2,
+      "hostLoadAvgNote": "macOS 1-minute load average sampled immediately before the run; host has 10 CPUs",
+      "distilledArtifact": "reverify-raw/obs06-controlled-2.summary.json",
+      "distilledArtifactCommitted": true,
+      "rawArtifactCommitted": false
+    },
+    {
+      "label": "fresh re-verification controlled 3, kooshapari.com desktop",
+      "fetchTime": "2026-10-19T21:52:54.708Z",
+      "lighthouseVersion": "13.4.1",
+      "finalUrl": "https://kooshapari.com/",
+      "formFactor": "desktop",
+      "categoryScores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 483,
+        "largest-contentful-paint": 535,
+        "total-blocking-time": 4.5,
+        "cumulative-layout-shift": 0.000007855349352635049,
+        "speed-index": 1284.0210101740568,
+        "server-response-time": 25
+      },
+      "runWarnings": [
+        "Clearing the browser cache timed out. Try auditing this page again and file a bug if the issue persists."
+      ],
+      "rawArtifactSha256": "ecf6b08a1f2d987344091e4655b1ad2155bfb66f170a61bcde4c7467a185ea8a",
+      "concurrency": "controlled series 4791438sqr; no other task of this session running",
+      "hostLoadAvg1Min": 804.95,
+      "hostLoadAvgNote": "macOS 1-minute load average sampled immediately before the run; host has 10 CPUs",
+      "distilledArtifact": "reverify-raw/obs07-controlled-3.summary.json",
+      "distilledArtifactCommitted": true,
+      "rawArtifactCommitted": false
+    },
+    {
+      "label": "fresh re-verification controlled 4, kooshapari.com desktop",
+      "fetchTime": "2026-10-19T21:55:20.068Z",
+      "lighthouseVersion": "13.4.1",
+      "finalUrl": "https://kooshapari.com/",
+      "formFactor": "desktop",
+      "categoryScores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 577.012,
+        "largest-contentful-paint": 579.012,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0,
+        "speed-index": 1024.7272468733292,
+        "server-response-time": 32
+      },
+      "runWarnings": [
+        "Clearing the browser cache timed out. Try auditing this page again and file a bug if the issue persists."
+      ],
+      "rawArtifactSha256": "a76d13c415472f79015f52a497db8c538447201120af68816f9cd15ff65cc260",
+      "concurrency": "controlled series 4791438sqr; no other task of this session running",
+      "hostLoadAvg1Min": 847.4,
+      "hostLoadAvgNote": "macOS 1-minute load average sampled immediately before the run; host has 10 CPUs",
+      "distilledArtifact": "reverify-raw/obs08-controlled-4.summary.json",
+      "distilledArtifactCommitted": true,
+      "rawArtifactCommitted": false
+    },
+    {
+      "label": "fresh re-verification controlled 5, kooshapari.com desktop",
+      "fetchTime": "2026-10-19T21:57:52.195Z",
+      "lighthouseVersion": "13.4.1",
+      "finalUrl": "https://kooshapari.com/",
+      "formFactor": "desktop",
+      "categoryScores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 425.818,
+        "largest-contentful-paint": 502.318,
+        "total-blocking-time": 6,
+        "cumulative-layout-shift": 0.000007855349352635049,
+        "speed-index": 1135.5168383710095,
+        "server-response-time": 22
+      },
+      "runWarnings": [
+        "Clearing the browser cache timed out. Try auditing this page again and file a bug if the issue persists."
+      ],
+      "rawArtifactSha256": "6a4ca174e0330185caba16e15ac1fd25e8bdf5e4efdfc0105c1feb38e2999b9f",
+      "concurrency": "controlled series 4791438sqr; no other task of this session running",
+      "hostLoadAvg1Min": 872.21,
+      "hostLoadAvgNote": "macOS 1-minute load average sampled immediately before the run; host has 10 CPUs",
+      "distilledArtifact": "reverify-raw/obs09-controlled-5.summary.json",
+      "distilledArtifactCommitted": true,
+      "rawArtifactCommitted": false
+    }
+  ],
+  "summary": {
+    "totalObservations": 9,
+    "performanceValues": [
+      100,
+      98,
+      99,
+      52,
+      100,
+      100,
+      99,
+      100,
+      99
+    ],
+    "performanceMin": 52,
+    "performanceMax": 100,
+    "performanceAt100": 4,
+    "performanceAtLeast98": 8,
+    "accessibilityValues": [
+      100
+    ],
+    "bestPracticesValues": [
+      100
+    ],
+    "seoValues": [
+      100
+    ],
+    "finding": "Accessibility, Best Practices and SEO scored 100 in every one of the 9 observations. Performance did not: it ranged 52-100, with 4 observations at exactly 100 and 8 at 98 or above.",
+    "outlier": {
+      "label": "fresh re-verification C, kooshapari.com desktop",
+      "performance": 52,
+      "distinguishingMetrics": {
+        "first-contentful-paint": 2799,
+        "largest-contentful-paint": 2965,
+        "total-blocking-time": 300,
+        "server-response-time": 48
+      },
+      "note": "Server response time stayed at 48 ms, and Accessibility, Best Practices and SEO all stayed at 100. The loss is entirely in the client-side simulated metrics (FCP, LCP, TBT), which Lighthouse extrapolates from the observed local Chrome timing. The host was under extreme load during this window."
+    },
+    "runWarningAnalysis": "The warning 'Clearing the browser cache timed out.' appears in all 8 fresh runs, including the 6 that scored 99 or 100. It is therefore not the discriminator between the low and high observations. The committed round 6m raw report carries an empty runWarnings array, so the warning is a new host-side condition and not a change in the audited site.",
+    "committedArtifactIntegrity": "The committed round 6m summary kooshapari_com-desktop.summary.json was verified to be a faithful distillation of the committed RAW-kooshapari.com-desktop.json: identical fetchTime, identical finalUrl, all 4 category scores equal, and all 8 metric numericValues round-tripping exactly. The committed all-100 result is a true record of that batch; it is not reproducible on this host.",
+    "scope": "All observations are kooshapari.com desktop only. The other 6 committed in-scope runs (www.kooshapari.com and kooshapari-site.vercel.app, desktop and mobile) were not re-run."
+  },
+  "distillation": {
+    "tool": "scripts/distill-lighthouse.js",
+    "purpose": "The 8 fresh raw reports are ~700 KB each. Following the bundle convention established in round 6m (distilled summaries committed, raw reports not), each fresh raw report was distilled to a committed summary that keeps every scored audit with its weight, every metric, the full config, and runWarnings.",
+    "changeMadeInThisRound": "The distiller previously did not carry runWarnings. That field is material to this finding, because the cache-clearing warning is present in all 8 fresh runs and absent from the committed one, and a reader needs it to see why the warning is not the discriminator between the 52 and the 100s. runWarnings was added to the distiller and all 8 fresh summaries were regenerated. The 8 committed round 6m summaries were NOT regenerated: they are the historical artifact of that batch, they predate the field, and the committed RAW-kooshapari.com-desktop.json carries the full runWarnings data for the primary run.",
+    "losslessnessVerified": "For each of the 8 fresh runs, every scored audit in the raw report (770 in total across the 8) was checked to be present in the distilled summary with an identical score, weight and numericValue; every distilled metric was checked to round-trip exactly against the raw numericValue; category scores, fetchTime, finalUrl, lighthouseVersion and runWarnings were compared field by field. 0 mismatches.",
+    "rawReportsRetained": "The 8 fresh raw reports are retained outside the repository; each observation records its SHA-256 here so the distillation can be re-verified against the original.",
+    "distillerChangeCommitted": "scripts/distill-lighthouse.js now emits runWarnings. No other field of the distiller output changed; the 8 round 6m summaries would gain only the added field if regenerated, which was deliberately not done."
+  },
+  "observationIndexNote": "The 8 fresh observations are numbered 02-09 to align with the observation table in docs/audits/2026-10-19/lighthouse/README.md; observation 01 is the committed round 6m run."
+}

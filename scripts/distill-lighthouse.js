@@ -119,6 +119,10 @@ function distill(reportPath) {
     locale: config.locale ?? null,
     categoryScores,
     metrics,
+    // Harness-side warnings (e.g. "Clearing the browser cache timed out.").
+    // These are properties of the measurement run, not of the page, and they
+    // can explain variance between otherwise identical runs, so they are kept.
+    runWarnings: raw.runWarnings ?? [],
     scoredAuditCount: scoredAudits.length,
     failures,
     scoredAudits,

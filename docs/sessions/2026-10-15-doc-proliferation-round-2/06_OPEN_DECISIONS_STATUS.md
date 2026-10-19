@@ -196,6 +196,13 @@ separate operator decision, not part of the
   > Evidence at `docs/audits/2026-10-19/lighthouse/`.
   > The bullet above is retained unedited because it
   > records what the 2026-10-15 preflight observed.
+  >
+  > **Re-verified 2026-10-19 21:33-22:01 UTC (round
+  > 6p).** The all-100 result is a faithful record of
+  > its batch, but its Performance component is not
+  > reproducible on this host: 8 further runs observed
+  > 52-100. Accessibility, Best Practices and SEO held
+  > at 100 across all 9 observations.
 - Redirect map destination check. The
   `vercel.json` / `redirects` config is in the
   repo; checking the live redirect map against
@@ -458,6 +465,17 @@ state flip needed.
 - Evidence: `docs/audits/2026-10-19/lighthouse/`
   (8 distilled summaries + the raw primary report,
   produced by `scripts/distill-lighthouse.js`)
+
+**Re-verification (2026-10-19 21:33-22:01 UTC, round
+6p).** 8 further `kooshapari.com` desktop runs on this
+host observed Performance **100, 98, 99, 52, 100, 100,
+99, 100, 99** across the 9 observations including the
+committed one. Accessibility, Best Practices and SEO
+stayed at 100 in every observation. The Performance
+score is **not reproducible** on this host; the
+all-100 batch above stands as that batch's
+observation. Evidence:
+`docs/audits/2026-10-19/lighthouse/reverification-2026-10-19T21Z.json`.
 
 **Domain-scope correction.** `phenotype.space` is
 **not** an alias of the `kooshapari-site` Vercel
