@@ -91,13 +91,23 @@ PUBLICATION_PROOF_DEFERRED gate:
   06:36 UTC; round 6i at 2026-10-19 00:09 UTC)
 - Evidence bundle: DONE (captured at
   `docs/deploy/2026-10-19.md`; 10 per-requirement
-  observations, all PASS)
+  observations, all PASS; round 6k added a
+  curl-based network perf baseline with
+  TTFB, response sizes, and security headers
+  for the 4 production domains and the key
+  prebuilt assets)
 - Lighthouse score: NOT RUN. Lighthouse CLI 13.4.1
   is installed at `/opt/homebrew/bin/lighthouse`,
   but no Chrome browser binary is present on this
-  host. The operator has not authorized installing
-  a browser binary unilaterally. The 07 doc
-  section H already flagged this as a known gap.
+  host. The PageSpeed Insights API free tier
+  (consumer `project_number:583797351490`) is
+  also rate-limit-exhausted (HTTP 429); the
+  WebPageTest public endpoint returned HTTP 403
+  (no API key); no browser-automation is in
+  `node_modules`. The operator has not authorized
+  installing a browser binary unilaterally. The
+  07 doc section H already flagged this as a known
+  gap.
 
 Per the AGENTS.md policy ("Show UNKNOWN where
 evidence or timing is missing. Do not invent

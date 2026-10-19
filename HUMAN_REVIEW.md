@@ -815,6 +815,43 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > choice between Lighthouse-install and
 > close-criteria-amendment.
 
+> **Round 6k (2026-10-19): curl-based perf baseline
+> + Lighthouse agent-exhausted state.** Operator
+> had asked for a Lighthouse score; no Chrome
+> binary is present on this host, so the pane
+> explored the agent-actionable alternatives
+> before reporting back. The PageSpeed Insights
+> API free tier (consumer
+> `project_number:583797351490`) returned
+> HTTP 429 (daily quota exhausted). The
+> WebPageTest public endpoint returned
+> HTTP 403 (no API key). No
+> browser-automation is in `node_modules`
+> (no puppeteer, no playwright, no chrome-headless-shell
+> in puppeteer cache). What the pane CAN do
+> without a browser is capture network-side
+> performance that any Lighthouse run would
+> observe at the network boundary: TTFB, total
+> round-trip, response sizes, cache hits, and
+> security headers. The result is a new
+> "Performance baseline" section in
+> `docs/deploy/2026-10-19.md` with 5 HTML
+> samples (TTFB 89-139 ms, median 111 ms),
+> 3 samples each for bundle/data/prerender
+> (all `x-vercel-cache: HIT`), and
+> full response headers (HSTS 2-year, nosniff,
+> DENY frame). This is real network evidence,
+> not a model prediction. STATE.md was
+> updated to record the new perf baseline +
+> the agent-exhausted state for Lighthouse
+> (PSI quota exhausted, WebPageTest key absent,
+> no headless binary). The pane is parked on
+> the operator choice between
+> Lighthouse-install and close-criteria-amendment;
+> a new partial item (curl perf baseline) was
+> completed in this round to fill the gap
+> that was actually agent-actionable.
+
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new
 > pane, new agent, new operator session) can
