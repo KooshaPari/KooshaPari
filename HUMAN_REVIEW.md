@@ -780,6 +780,41 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > the post-20th-pass arc is closed across two
 > production deploys.
 
+> **Round 6j (2026-10-19): publication-proof
+> evidence + state update.** Operator "go" signal
+> at 03:12 UTC re-opened the doc-cleanup lane. The
+> 2026-10-17 cohort-fwd session's
+> "blocked-pending-operator" list had 4 items:
+> DNS attach, deploy, evidence bundle, and state
+> flip to PUBLICATION_PROOF_CLOSED. The first 3
+> are now done (round 6e deploy, round 6i deploy,
+> and the 4 custom domains serve 200); the 4th
+> (Lighthouse score required for the state flip)
+> is the last open item. Lighthouse CLI 13.4.1 is
+> installed at /opt/homebrew/bin/lighthouse, but
+> no Chrome browser binary is present on this host,
+> so a Lighthouse audit cannot run without an
+> operator-authorized install
+> (e.g. `npx puppeteer browsers install chrome` or
+> `brew install --cask google-chrome`). Per the
+> AGENTS.md "no fabricated percentages" rule, the
+> STATE.md status line remains
+> PUBLICATION_PROOF_DEFERRED until the operator
+> either runs Lighthouse (action 1) or redefines
+> the close criteria to skip Lighthouse (action
+> 2). The 06 doc item 5, 08 doc table row 180,
+> and HUMAN_REVIEW.md paragraphs already record
+> the deploys; this round added a new
+> per-requirement evidence bundle at
+> `docs/deploy/2026-10-19.md` (10 observations
+> all PASS) and a 2026-10-19 update section in
+> STATE.md that lists each blocked-pending-operator
+> item with its current status (3 DONE, 1 NOT
+> RUN). No production deploy; this is a doc-only
+> change. The pane is parked on the operator
+> choice between Lighthouse-install and
+> close-criteria-amendment.
+
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new
 > pane, new agent, new operator session) can

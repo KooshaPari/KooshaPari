@@ -67,4 +67,56 @@ agent's authority to take.
 - Cutover plan: `PRODUCTION_CUTOVER.md`
 - Provenance: `PROVENANCE.md`
 - Deploy readiness: `docs/deploy/2026-10-17.md`
+- Deploy evidence: `docs/deploy/2026-10-19.md`
+- Public interface check: `docs/sessions/2026-10-15-doc-proliferation-round-2/07_PUBLIC_INTERFACE_VERIFICATION.md`
 - Master audit cohort: PhenoRegistry `docs/audits/2026-10-17/MASTER.md`
+
+## 2026-10-19 update
+
+The two production deploys of the post-20th-pass
+arc (round 6e on 2026-10-18 and round 6i on
+2026-10-19) have shipped the 0403d845 bundle to
+live, with the post-6f content (museum-quiet voice
+NetWeave no-JS view descriptions). All 4 custom
+domains serve HTTP 200; the per-requirement
+receipt is at `docs/deploy/2026-10-19.md`.
+
+Status of the original
+PUBLICATION_PROOF_DEFERRED gate:
+
+- DNS attach: DONE (kooshapari.com,
+  www.kooshapari.com, kooshapari-site.vercel.app,
+  phenotype.space)
+- Production deploy: DONE (round 6e at 2026-10-18
+  06:36 UTC; round 6i at 2026-10-19 00:09 UTC)
+- Evidence bundle: DONE (captured at
+  `docs/deploy/2026-10-19.md`; 10 per-requirement
+  observations, all PASS)
+- Lighthouse score: NOT RUN. Lighthouse CLI 13.4.1
+  is installed at `/opt/homebrew/bin/lighthouse`,
+  but no Chrome browser binary is present on this
+  host. The operator has not authorized installing
+  a browser binary unilaterally. The 07 doc
+  section H already flagged this as a known gap.
+
+Per the AGENTS.md policy ("Show UNKNOWN where
+evidence or timing is missing. Do not invent
+percentages or finish dates."), the status line
+remains `PUBLICATION_PROOF_DEFERRED` until one
+of the following happens:
+
+1. A Chrome binary is installed and a Lighthouse
+   run is executed (operator action).
+2. The close criteria are redefined to skip
+   Lighthouse (a STATE.md amendment).
+
+The single remaining item is documented here, in
+`docs/deploy/2026-10-19.md`, and in
+`docs/sessions/2026-10-15-doc-proliferation-round-2/06_OPEN_DECISIONS_STATUS.md`
+item 5. The post-20th-pass arc is otherwise
+closed: 8 commits pushed to `origin/main`
+(c1a13de through bbcae40), all 5 items in the 06
+doc are CLOSED/DECIDED, the unit suite is
+767/767 PASS, and `HUMAN_REVIEW.md` carries the
+complete round-6 audit trail (6c, 6d, 6e, 6f, 6g,
+6h, 6i, 6i-correction).
