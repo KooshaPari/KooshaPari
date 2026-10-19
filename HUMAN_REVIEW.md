@@ -852,6 +852,34 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > completed in this round to fill the gap
 > that was actually agent-actionable.
 
+> **Round 6l (2026-10-19): cold-cache +
+> protocol-level perf extension.** A follow-up
+> to round 6k that probes what the warm-cache
+> baseline hides. Captured 5 protocol-level
+> scenarios: (1) cold cache via
+> `Cache-Control: no-cache` (181 ms first-hit,
+> then 94-95 ms), (2) unique query param
+> (94-107 ms, confirms path-based cache key),
+> (3) HTTP/1.1 vs HTTP/2 (no meaningful
+> difference; 92-114 ms), (4) TLS 1.2 vs 1.3
+> (TLS 1.2: 126-261 ms, TLS 1.3: 0 B
+> received — real client+server interaction
+> signal, not a Vercel TLS 1.3 claim),
+> (5) 10x concurrent (3 trials: 30/30 HTTP 200
+> in 116-149 ms wall, mean TTFB 98-107 ms).
+> Plus `x-vercel-id` sampling: all 4 production
+> domains route to `sfo1` edge. The TTFB band
+> stays in 89-181 ms across all scenarios; the
+> network-side evidence is now broad enough
+> that a Lighthouse run would observe similar
+> TTFB and response sizes, plus the
+> LCP/CLS/INP/FCP/TBT metrics curl cannot
+> capture. State remains: Lighthouse
+> agent-exhausted, publication proof parked on
+> operator choice. New "Cold-cache +
+> protocol-level" sub-section added to
+> `docs/deploy/2026-10-19.md`.
+
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new
 > pane, new agent, new operator session) can
