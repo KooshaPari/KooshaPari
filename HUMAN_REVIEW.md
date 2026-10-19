@@ -728,6 +728,40 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > deploy (operator-signal-blocked, per AGENTS.md
 > policy).
 
+> **Round 6i (2026-10-19): post-6f production
+> deploy.** Operator "go" signal at 00:08 UTC
+> re-opened the deploy lane to ship the dormant
+> 6f content (museum-quiet voice no-JS view
+> descriptions for NetWeave) to live. The
+> prebuilt was source-aligned (post-6f, rebuilt
+> in 6g), so the deploy was a pure
+> `vercel deploy --prod --prebuilt` of the
+> already-validated bundle. Deploy returned Ready
+> in 5s; deployment URL
+> `kooshapari-site-gllx4x2ca-koosha-paridehpours-projects.vercel.app`
+> aliased to `kooshapari.com`. Post-flight
+> confirmed: live bundle `app.bundle.0403d845.js`
+> is 220,293 B (byte-identical to prebuilt --
+> unchanged from round 6e because 6f did not
+> touch JS); live `/work/netweave.html` is
+> 13,426 B (byte-identical to
+> `dist/work/netweave.html` -- the 5 tightened
+> descriptions A bounded traffic field, Directed
+> graph, Three discrete states, Evidence
+> boundary, What remains open are present in
+> live, the 5 pre-6f verbose descriptions are
+> absent); live `/data/phenotype.js` is 12,204 B
+> (byte-identical to prebuilt; the 14,721 B
+> source file is build-stripped down to 12,204 B
+> by removing the 7-line comment header); all 4
+> custom domains serve HTTP 200. 767/767 unit
+> pass, 0 working tree changes, 0 stashes. Live
+> == prebuilt == source (post-6f) end-to-end
+> byte-identical at `0403d845`. The 06 doc and
+> 08 doc were updated to record both deploys
+> (round 6e and round 6i); the post-20th-pass
+> arc is closed across two production deploys.
+
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new
 > pane, new agent, new operator session) can

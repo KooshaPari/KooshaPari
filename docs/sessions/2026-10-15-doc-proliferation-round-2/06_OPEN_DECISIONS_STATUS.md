@@ -338,3 +338,39 @@ The pane's job on item 5 is now closed: the prebuilt
 hash, the live hash, and the deployment URL are
 recorded; live == prebuilt byte-identical; 4 custom
 domains serve 200.
+
+**Item 5 — second deploy (2026-10-19, 00:08 UTC,
+round 6i):** Operator "go" signal at 00:08 UTC
+re-opened the deploy lane to ship the 6f content
+(museum-quiet voice no-JS view descriptions for
+NetWeave, shipped in commit `6ac8662`) to live.
+- Local commit at deploy: `82ddac28c94949523a7536c34dac81db9af73190`
+  (round 6h, the audit-trail pointer; source == prebuilt
+  == post-6f)
+- Prebuilt bundle: `app.bundle.0403d845.js` (220,293 B)
+  (unchanged from round 6e — 6f did not touch JS)
+- Live bundle: `app.bundle.0403d845.js` (220,293 B)
+  (byte-identical to prebuilt)
+- Live `/data/phenotype.js`: 12,204 B (byte-identical
+  to prebuilt; 14,721 B source strips down to 12,204 B
+  during build)
+- Live `/work/netweave.html`: 13,426 B (byte-identical
+  to `dist/work/netweave.html`; 5 tightened descriptions
+  present: A bounded traffic field, Directed graph,
+  Three discrete states, Evidence boundary, What
+  remains open; pre-6f verbose descriptions count: 0)
+- Deployment URL:
+  `https://kooshapari-site-gllx4x2ca-koosha-paridehpours-projects.vercel.app`
+  (5s duration, Ready, Production, aliased to
+  kooshapari.com)
+- All 4 custom domains serve HTTP 200: kooshapari.com,
+  www.kooshapari.com, kooshapari-site.vercel.app,
+  phenotype.space
+- 767/767 unit pass
+- 0 working tree changes, 0 stashes; the deploy was
+  pure prebuilt, source-aligned
+
+Item 5 status: CLOSED (round 6e and round 6i). The
+post-20th-pass arc is now closed end-to-end across
+two production deploys. Live == prebuilt
+byte-identical at `0403d845`.
