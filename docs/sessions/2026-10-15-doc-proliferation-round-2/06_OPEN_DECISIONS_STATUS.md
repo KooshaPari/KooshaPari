@@ -22,7 +22,9 @@ correct item-by-item breakdown.
 > cannot run hosted verification" claim was the
 > central stale assumption; the preflight on
 > 2026-10-15 found the Vercel CLI authenticated and
-> the live site reachable on 4 production domains.
+> the live site reachable on 3 portfolio domains
+> (plus 2 further registered hostnames that
+> serve a separate site).
 
 > **Resume full-project handoff (round 6d, 2026-10-15):**
 > A fresh-context ownership handoff is recorded in
@@ -118,13 +120,24 @@ not run hosted verification. A read-only preflight on
   `Koosha Paridehpour's projects`).
   Build command: `npm run stage:publication`. Output
   directory: `dist`. Node 24.x.
-- **The site is publicly live on 4 production domains.**
+- **The site is publicly live on 3 portfolio domains.**
   All returned HTTP 200 on 2026-10-15:
   - `https://kooshapari-site.vercel.app/` (200)
   - `https://kooshapari.com/` (200, custom domain)
   - `https://www.kooshapari.com/` (200, custom domain)
   - `https://phenotype.space/` (200, custom domain)
   - `https://pheno.studio/` (301 redirect)
+  **Correction (2026-10-19, round 6m/6n).** The
+  list above was previously headed "4 production
+  domains". Only the first three serve the
+  portfolio. `phenotype.space` and `pheno.studio`
+  resolve to a separate Cloudflare Pages site
+  (title "Phenotype", no `x-vercel-id`); `pheno.studio`
+  answers 301 with `location:
+  https://phenotype.space/studio/`. All five
+  hostnames answer HTTP 200, which is why the
+  original 2026-10-15 preflight recorded them
+  together.
   The current production deployment URL is
   `https://kooshapari-site-d6tdyu7kk-koosha-paridehpours-projects.vercel.app`,
   marked `Ready Production`, age 18d, deployed by
@@ -408,6 +421,16 @@ Pages site. The in-scope portfolio is 3 domains
 Lighthouse SEO score of 82 reflects that other site's
 issues; the audit is retained at
 `docs/audits/2026-10-19/lighthouse/phenotype_space-desktop.summary.json`.
+
+A second, independent probe on 2026-10-19
+21:02-21:03 UTC (round 6n) re-derived the same
+taxonomy and added one further fact: `pheno.studio`
+answers 301 with `location:
+https://phenotype.space/studio/`, so it redirects
+**into** the separate Cloudflare site rather than
+into a canonical form of the portfolio. The two
+Cloudflare hosts are one separate site, and
+`pheno.studio` is an alias of it.
 
 The `STATE.md` status line has moved from
 `PUBLICATION_PROOF_DEFERRED` to

@@ -29,18 +29,21 @@ action like `vercel deploy --prod --prebuilt`),
 status is INFORMATIONAL and the unblock action
 is stated explicitly.
 
-## A. Live portfolio site (4 production domains)
+## A. Live portfolio site (3 portfolio domains + 2 separate Cloudflare hosts)
 
-The hosted site is publicly accessible on 4
-production domains. All returned HTTP 200 on
-2026-10-15 except `pheno.studio` (301 redirect
-to a canonical form).
+The hosted site is publicly accessible on 3
+portfolio domains plus 2 further hostnames
+that are registered to the same Vercel
+account but do **not** serve the portfolio.
+All returned HTTP 200 on 2026-10-15.
 
 > **Correction (2026-10-19, round 6m).** This
-> section originally read that
-> `phenotype.space` "serves the portfolio" with
-> "same title". A direct probe on 2026-10-19
-> 20:54 UTC disproves that: `phenotype.space`
+> section originally read that the site is
+> "publicly accessible on 4 production
+> domains" and that `phenotype.space`
+> "serves the portfolio" with "same title".
+> A direct probe on 2026-10-19 20:54 UTC
+> disproves that: `phenotype.space`
 > returns `server: cloudflare` and
 > `cf-ray: a4d2acfcc852cb83-LAX` (no
 > `x-vercel-id`), its title is **"Phenotype"**, not
@@ -50,9 +53,18 @@ to a canonical form).
 > site**, not an alias of the `kooshapari-site`
 > Vercel project. The in-scope portfolio is **3
 > domains**: `kooshapari.com`, `www.kooshapari.com`,
-> and `kooshapari-site.vercel.app`. The
-> `phenotype.space` row below is corrected to claim
-> only what was observed: HTTP 200.
+> and `kooshapari-site.vercel.app`.
+>
+> A second probe on 2026-10-19 21:02 UTC
+> (round 6n) re-confirmed this from an
+> independent process and added the
+> `pheno.studio` detail: `pheno.studio`
+> answers 301 and its `location:` target is
+> `https://phenotype.space/studio/` — i.e. it
+> redirects **into** the separate Cloudflare
+> site, not into the Vercel portfolio. The
+> `phenotype.space` row below is corrected to
+> claim only what was observed: HTTP 200.
 
 | Requirement | Concrete check | Observed result | Status |
 |---|---|---|---|
@@ -60,7 +72,7 @@ to a canonical form).
 | `kooshapari.com` serves the portfolio | `curl -sIL https://kooshapari.com/` | `HTTP/2 200`, `text/html`, same title | PASS |
 | `www.kooshapari.com` serves the portfolio | `curl -sIL https://www.kooshapari.com/` | `HTTP/2 200`, `text/html`, same title | PASS |
 | `phenotype.space` serves HTTP 200 | `curl -sIL https://phenotype.space/` | `HTTP/2 200`, `text/html` | PASS (see note) |
-| `pheno.studio` serves the portfolio | `curl -sIL https://pheno.studio/` | `HTTP/2 301` (redirect to canonical) | PASS |
+| `pheno.studio` redirects into the separate Cloudflare site | `curl -sIL https://pheno.studio/` | `HTTP/2 301` -> `location: https://phenotype.space/studio/`, final title "Phenotype" | NOT the portfolio (see note) |
 | Live bundle is served from `/bundled/` | `curl -sL https://kooshapari-site.vercel.app/bundled/manifest.json` | `{"app.bundle.js": "app.bundle.7b217faa.js"}` | PASS |
 | Live CSS bundles load (3 expected) | `curl -sL https://kooshapari.com/ \| grep styles/bundled/` | `core.7b878534.css`, `components.ec7d5f41.css`, `pages.beaaea1f.css` (3 found) | PASS |
 | Skip-link is in the shell | `curl -sL https://kooshapari.com/ \| grep skip-link` | `<a class="skip-link" href="#view-root">Skip to content</a>` | PASS |
@@ -154,7 +166,7 @@ site is live.
 | Project has 3 custom domains | `vercel domains ls` | `kooshapari.com` (31d), `pheno.studio` (102d), `phenotype.space` (116d) | PASS |
 | Project has 6 production deployments, 4 READY | `vercel ls` | 6 deployments listed, latest 3 all "Ready Production" | PASS |
 | Current production deployment is 18d old | `vercel ls` Age column | 18d for the latest | PASS |
-| The 04_ARC_CLOSING statement "the pane cannot run hosted verification" is FALSE on 2026-10-15 | the preflight ran end-to-end with no operator input | the pane ran `whoami`, `ls`, `project inspect`, `domains ls`, and HTTP HEAD/GET against 4 production domains | PASS |
+| The 04_ARC_CLOSING statement "the pane cannot run hosted verification" is FALSE on 2026-10-15 | the preflight ran end-to-end with no operator input | the pane ran `whoami`, `ls`, `project inspect`, `domains ls`, and HTTP HEAD/GET against 5 registered hostnames (3 serving the portfolio) | PASS |
 | Post-20th-pass production redeploy is a separate decision (the 20th-pass prebuilt is NOT yet on the live site) | bundle-hash comparison + `vercel ls --prod` | prebuilt = `8d6cbde8.js`; live = `7b217faa.js` (18d old) | INFORMATIONAL (write action) |
 | Unblock action for the post-20th-pass redeploy | operator signal "ship prod" or "ship preview" | the pane has CLI auth + project link + prebuilt + deployment templates ready; will ship on signal | NOT-YET-LIVE |
 
@@ -183,7 +195,7 @@ checks:
 | Goal / Item | Where mapped | Public-interface result |
 |---|---|---|
 | Item 1: Resume per-role vs consolidated (Option A) | Section B (live data) + Section D (workbench fix, the OTHER 20th-pass deliverable) | Live `/data/phenotype.js` IS the consolidated view (4 ROLES, 2 PERSONAS, no per-role/per-persona pages). Option A is what's deployed. |
-| Item 2: VERCEL_TOKEN for hosted gate | Section A (live site) + Section E (Vercel state) | CLI authenticated, 4 production domains serve HTTP 200, project linked. The "needs VERCEL_TOKEN" framing was stale. |
+| Item 2: VERCEL_TOKEN for hosted gate | Section A (live site) + Section E (Vercel state) | CLI authenticated, 3 portfolio domains serve HTTP 200 (plus 2 further registered hostnames), project linked. The "needs VERCEL_TOKEN" framing was stale. |
 | Item 3: ResVault handoff | Section C (filesystem) | 4 files at the ResVault target, byte-identical to the round-4 staging, with real content headers. Git history preserved. |
 | Item 4: Loose-file round 5 | Section F (doc proliferation) | Shipped at 6119c80; repo root has 0 loose `.md` files. |
 | Item 5: Post-20th-pass production redeploy | Section E (Vercel state) + Section A (live bundle) | Live bundle is 18d old, predates the workbench fix. The prebuilt has the fix. A `vercel deploy --prod --prebuilt` would close the gap but is a write action awaiting operator signal. |
@@ -221,7 +233,12 @@ What is **NOT** closed by this verification:
 
 What is **closed** by this verification:
 
-- 4 production domains are live and serve the portfolio.
+- 3 portfolio domains are live and serve the portfolio
+  (`kooshapari.com`, `www.kooshapari.com`,
+  `kooshapari-site.vercel.app`). 2 further registered
+  hostnames (`phenotype.space`, `pheno.studio`)
+  answer HTTP 200 but serve a separate Cloudflare
+  Pages site, not the portfolio.
 - The live PDF is byte-identical to the local PDF.
 - The live data file is byte-identical to the prebuilt data file.
 - The 4 ROLES + 2 PERSONAS are served (Option A confirmed).

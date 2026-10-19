@@ -23,7 +23,8 @@ Lighthouse evidence at
   `https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app`
 - Route receipt: `docs/deploy/2026-10-19.md` (10
   per-requirement observations, all PASS; 4 custom
-  domains serving HTTP 200; live bundle and
+  domains serving HTTP 200, of which 3 serve the
+  portfolio; live bundle and
   `/data/phenotype.js` byte-identical to prebuilt;
   live PDF byte-identical to local)
 - Lighthouse: **100 / 100 / 100 / 100** (Performance /
@@ -125,8 +126,10 @@ Status of the original
 PUBLICATION_PROOF_DEFERRED gate:
 
 - DNS attach: DONE (kooshapari.com,
-  www.kooshapari.com, kooshapari-site.vercel.app,
-  phenotype.space)
+  www.kooshapari.com, kooshapari-site.vercel.app;
+  `phenotype.space` and `pheno.studio` are
+  registered to the same account but resolve
+  to a separate Cloudflare Pages site)
 - Production deploy: DONE (round 6e at 2026-10-18
   06:36 UTC; round 6i at 2026-10-19 00:09 UTC)
 - Evidence bundle: DONE (captured at
@@ -134,8 +137,8 @@ PUBLICATION_PROOF_DEFERRED gate:
   observations, all PASS; round 6k added a
   curl-based network perf baseline with
   TTFB, response sizes, and security headers
-  for the 4 production domains and the key
-  prebuilt assets)
+  for the 3 in-scope portfolio domains and the
+  key prebuilt assets)
 - Lighthouse score: **DONE — 100 / 100 / 100 / 100.**
   Lighthouse 13.4.1 run against the live production
   domains on 2026-10-19 20:40-20:46 UTC. 7 in-scope

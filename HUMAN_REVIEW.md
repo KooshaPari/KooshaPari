@@ -625,7 +625,11 @@ installed and authenticated (`vercel whoami` returns
 the site is publicly live on 4 production domains
 (`kooshapari-site.vercel.app`, `kooshapari.com`,
 `www.kooshapari.com`, `phenotype.space` all 200 OK,
-`pheno.studio` 301); 3 custom domains are registered;
+`pheno.studio` 301)
+[corrected 2026-10-19, round 6n: all 5 hostnames
+do answer HTTP 200, but only 3 serve the portfolio;
+`phenotype.space` and `pheno.studio` resolve to a
+separate Cloudflare Pages site]; 3 custom domains are registered;
 the prebuilt output is current
 (`app.bundle.8d6cbde8.js`, 220,028 B, 30 pages,
 0 warnings).** The pane's read-only preflight also
@@ -680,7 +684,9 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > is byte-identical to local, live data tree
 > matches prebuilt, workbench JS files served on
 > the live site, ResVault target holds the 4
-> files with byte parity) are recorded in
+> files with byte parity)
+> [corrected 2026-10-19, round 6n: 5 hostnames
+> answer HTTP 200, 3 serve the portfolio] are recorded in
 > `docs/sessions/2026-10-15-doc-proliferation-round-2/07_PUBLIC_INTERFACE_VERIFICATION.md`.
 > The 714/714 unit pass is a build-time check;
 > the 07 doc is the public-interface check.
@@ -925,7 +931,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > `PUBLICATION_PROOF_CLOSED`, with a closure
 > receipt (deploy SHA `e95e763`, bundle `0403d845`,
 > route receipt pointer, Lighthouse scores, unit
-> suite 767/767). All four steps of the STATE.md
+> suite 774/774). All four steps of the STATE.md
 > close sequence are now complete. No production
 > deploy was needed or performed in this round; it
 > is evidence and documentation work only.
@@ -953,6 +959,71 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > capture, config retention, and non-zero exit with no
 > input). Unit suite is now **774/774 PASS**, 0 fail
 > (767/767 at round 6i, +7 from this file).
+>
+> **Round 6n (2026-10-19 21:01-21:05 UTC): domain
+> scope re-derived from a fresh probe.** After the
+> round 6m push, a consistency sweep found four
+> documents still asserting the superseded "4
+> production domains" claim. Rather than edit the
+> wording on the strength of one earlier probe, a
+> read-only probe worker re-derived the taxonomy
+> from scratch against all 5 registered hostnames
+> (`kooshapari.com`, `www.kooshapari.com`,
+> `kooshapari-site.vercel.app`, `pheno.studio`,
+> `phenotype.space`), and the orchestrator ran an
+> independent second probe in parallel. Both agree.
+>
+> Observed, 2026-10-19 21:02-21:03 UTC:
+>
+> | Host | Status | `server:` | `x-vercel-id` | Title |
+> |---|---|---|---|---|
+> | `kooshapari.com` | 200 | Vercel | `sfo1::dsxp7-…` | Koosha Paridehpour — Technical Atelier |
+> | `www.kooshapari.com` | 200 | Vercel | `sfo1::ln586-…` | Koosha Paridehpour — Technical Atelier |
+> | `kooshapari-site.vercel.app` | 200 | Vercel | `sfo1::6dwdn-…` | Koosha Paridehpour — Technical Atelier |
+> | `pheno.studio` | 301 -> `https://phenotype.space/studio/` | cloudflare | absent | Phenotype |
+> | `phenotype.space` | 200 | cloudflare (via `cf-ray`) | absent | Phenotype |
+>
+> **New fact, not in the round 6m note:** `pheno.studio`
+> does not redirect to a "canonical form" of the
+> portfolio. Its `location:` target is
+> `https://phenotype.space/studio/` — it redirects
+> **into** the separate Cloudflare Pages site. So the
+> round 6l/6m reading of `pheno.studio` as a
+> portfolio redirect was also wrong; the two
+> Cloudflare hosts are one separate site, and
+> `pheno.studio` is an alias of it.
+>
+> The two probe passes also differ on one detail,
+> recorded here rather than smoothed over. The
+> `phenotype.space` apex serves `/robots.txt` as
+> `text/html` (the SPA catch-all), while
+> `pheno.studio/robots.txt`, followed across the
+> redirect to `/studio/robots.txt`, returns
+> `text/plain` with a Cloudflare-managed robots
+> template. Both observations are real; they
+> describe two different paths on the same site.
+> The round 6m claim that `phenotype.space` "serves
+> its /robots.txt as HTML" is confirmed by both.
+>
+> Corrected in this round (the historical 2026-10-15
+> preflight record is left intact above, since it is
+> a dated account of what that preflight observed):
+> - `STATE.md` — DNS-attach list and the round 6k
+>   perf-baseline domain count
+> - `07_PUBLIC_INTERFACE_VERIFICATION.md` — the
+>   section A heading, its intro, the section E
+>   hosted-verification row, the item 2 row, and
+>   the section H "closed" bullet
+> - `06_OPEN_DECISIONS_STATUS.md` — the preflight
+>   summary line and the "publicly live" bullet
+>
+> `docs/deploy/2026-10-19.md` needed no further
+> change: its round 6m correction already states
+> the 3-domain scope, and the 5th receipt row still
+> reads "All 4 custom domains serve HTTP 200" because
+> all 4 custom domains registered to the Vercel
+> account do answer HTTP 200 — only 3 of them serve
+> the portfolio.
 
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new
