@@ -327,13 +327,138 @@ checks.
 form factor: Performance 95, Accessibility 100,
 Best Practices 100, SEO 66, and a fifth category
 "Agentic Browsing" 67. The present run is against
-the **production** domains and shows 100 across the
-four standard categories. The SEO 66 -> 100 and the
-Performance 95 -> 100 movement reflects the shipped
+the **production** domains and showed 100 across the
+four standard categories *as observed in that batch*.
+The SEO 66 -> 100 movement reflects the shipped
 site, not a different measurement method; the
 "Agentic Browsing" category is not in the current
 Lighthouse 13.4.1 default category set and was not
 requested.
+
+**Corrected 2026-10-19 (round 6p).** The Performance
+95 -> 100 movement is real for that batch, but a
+Performance score of 100 is **not** a stable property
+of the site on this host: 8 further runs measured
+Performance 52-100, while Accessibility, Best
+Practices and SEO held at 100 in all 9 observations.
+See "Re-verification (2026-10-19 21:33-22:01 UTC)"
+above. The SEO 66 -> 100 movement is unaffected by
+this correction — SEO was 100 in every observation.
+
+## Claim sweep (2026-10-19 22:35-23:15 UTC, round 6q)
+
+Round 6p reported a "repository-wide stale-claim
+sweep" that returned zero uncovered sites. That claim
+was too strong. The round 6p sweep searched **one
+pattern family** — the numeric form `100/100/100/100` —
+and so could not see the same falsified claim written
+in prose in this file's "Comparison to the prior
+evidence" section. Round 6q found it, annotated it,
+and replaced the assertion with a re-runnable check.
+<!-- sweep:quotation -->
+
+**The sweep is now a script, not a claim.**
+
+```
+node scripts/sweep-lighthouse-claims.js
+node scripts/sweep-lighthouse-claims.js --json
+npm run test:sweep
+```
+
+It enumerates **every** tracked Markdown file, matches
+both the numeric and the prose form of a score claim,
+requires a dated correction marker within 14 lines of
+each claim, and carries an explicit allowlist for
+claims about *other* runs.
+<!-- sweep:quotation -->
+The allowlist covers the 2026-09-12 preview at
+Performance 95, the 2026-09-15 audit at 99, the
+2026-09-16 local preview at 72-96 — each with a
+written reason, because those records are accurate and
+rewriting them would falsify history.
+
+Current state over 124 tracked Markdown files:
+
+| Status | Count | Meaning |
+|---|---|---|
+| annotated | 45 | a dated correction is visible near the claim |
+| adjudicated | 5 | a claim about a different run, with a reason |
+| quotation | 14 | the falsified text quoted inside a correction |
+| **uncovered** | **0** | a claim with no correction and no adjudication |
+
+<!-- sweep:counts {"trackedMarkdownFiles":124,"claims":64,"annotated":45,"adjudicated":5,"quotation":14,"uncovered":0,"proseForm":45,"numericForm":19,"annotationWindowLines":14} -->
+
+The counts above are the state at the time of writing. They are
+reproducible with the command; they are not a claim in place of one.
+The `sweep:counts` line above is the canonical machine-readable
+statement of the same numbers, and a test compares it against the
+live sweep result — so these figures cannot drift from the
+measurement without the suite failing.
+
+**A quotation is marked in the document, not in the script.**
+A claim that a correction *quotes* rather than asserts carries an
+explicit `<!-- sweep:quotation -->` marker on the block that
+contains it. The marker is scoped to its own block — a paragraph, a
+list item — so it cannot excuse a claim sitting in the next one.
+An earlier design kept a list of distinctive phrases inside the
+script instead; that list was invisible to a reader of the
+document, had to be edited whenever a round quoted the claim
+again, and — as the negative control showed — a phrase loose enough
+to cover a real quotation was also loose enough to excuse a genuine
+stale claim. The in-document marker cannot drift out of sync with
+the text it describes.
+
+**The sweep was verified against a negative control.**
+<!-- sweep:quotation -->
+A synthetic stale claim — "shows 100 across the four
+standard categories" plus "scored 100 / 100 / 100 / 100
+without exception" — was written into a tracked file and
+the sweep was required to report it as uncovered. The
+first version of the script **failed that control**: its
+quotation-exemption marker was too loose, so the
+injected claim was excused as a quotation and the sweep
+reported zero uncovered. That defect is fixed, and the
+control is now a permanent test
+(`tests/sweep-lighthouse-claims.test.js`).
+
+Two further defects were found and fixed by the same
+process, each of which could have let a stale claim
+survive a sweep that appeared to pass:
+
+- **Line-wrapped claims were invisible.** The prose
+  claim in this file is hard-wrapped as "shows 100 across
+  the" / "four standard categories". A per-line matcher
+  cannot see a phrase split across a line break. The
+  matcher now runs over a whitespace-collapsed text with
+  a character-to-line map, so a match is reported against
+  the real line it starts on.
+  <!-- sweep:quotation -->
+- **Verb inflections were invisible.** The pattern
+  <!-- sweep:quotation -->
+  matched "shows 100" but not "showed 100" or "scoring
+  100". A correction that changes the tense of the claim
+  would have moved it out of the sweep's sight. All
+  inflections that can carry a score claim are now
+  matched.
+- **The numeric form had the same line-wrap blind spot.**
+  <!-- sweep:quotation -->
+  This one surfaced during the final review, by accident:
+  a documentation edit re-wrapped the string
+  "100 / 100 / 100 / 100" across a line break, and the
+  claim count fell from 62 to 61 with no error raised.
+  The numeric matcher was running per line while the
+  prose matcher ran against the whitespace-collapsed
+  text. The numeric form is the only form the round 6p
+  sweep ever searched, so this gap sat directly on the
+  form that mattered most. Both forms now match against
+  the collapsed text, and the defect is pinned by its own
+  negative control.
+
+The sweep finds 64 claims in total: 19 in the numeric form
+(the four-category all-100 string) and 45 in the prose
+form. The prose form is what the round 6p sweep could not
+see at all — it is the measure of what the original sweep
+was not seeing.
 
 ## Reproduction
 

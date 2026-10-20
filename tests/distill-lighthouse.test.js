@@ -10,8 +10,9 @@ const SCRIPT = new URL('../scripts/distill-lighthouse.js', import.meta.url).path
 /**
  * Minimal but structurally faithful Lighthouse report shape. The distiller
  * reads: lighthouseVersion, fetchTime, finalUrl, configSettings,
- * categories, and audits (with score / weight / numericValue /
- * numericUnit / displayValue / title / explanation / details).
+ * categories, audits (with score / weight / numericValue /
+ * numericUnit / displayValue / title / explanation / details),
+ * and runWarnings.
  */
 function makeReport(overrides = {}) {
   return {
@@ -174,6 +175,26 @@ test('distill reports the audit count and the source file name', () => {
     const out = runDistiller(makeReport(), dir);
     assert.equal(out.scoredAuditCount, 6);
     assert.equal(out.distilledFrom, 'input.json');
+  });
+});
+
+test('distill preserves harness-side run warnings', () => {
+  withTempDir((dir) => {
+    const warned = makeReport({
+      runWarnings: [
+        'Clearing the browser cache timed out. Try auditing this page again and file a bug if the issue persists.',
+      ],
+    });
+    const out = runDistiller(warned, dir);
+    assert.equal(out.runWarnings.length, 1);
+    assert.match(out.runWarnings[0], /Clearing the browser cache timed out/);
+  });
+});
+
+test('distill emits an empty run warnings array when the report has none', () => {
+  withTempDir((dir) => {
+    const out = runDistiller(makeReport(), dir);
+    assert.deepEqual(out.runWarnings, []);
   });
 });
 

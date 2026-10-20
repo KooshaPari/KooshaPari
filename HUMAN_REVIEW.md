@@ -1194,6 +1194,37 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > Every historical statement is **annotated, not
 > rewritten** — each records what its batch observed.
 >
+> **Corrected in round 6q (2026-10-19 22:35-23:10
+> UTC): the sweep was narrower than claimed.** Round
+> 6p reported a "repository-wide stale-claim sweep"
+> that returned zero uncovered sites. That sweep
+> searched one pattern family — the numeric form
+> `100/100/100/100` — and reported "13 sites, 0
+> uncovered". A later re-read of the request showed
+> that claim overstated what had been checked. The
+> same README asserts the falsified claim in **prose
+> form** in its "Comparison to the prior evidence"
+> section: "shows 100 across the four standard
+> categories" and "Performance 95 -> 100". A numeric
+> sweep cannot see that. Round 6q annotated it with a
+> dated correction and re-ran the sweep over every
+> tracked file that mentions Lighthouse, in both
+> numeric and prose form.
+>
+> The substance of the finding was never in doubt —
+> the 52 observation and the 9 raw reports stand. What
+> was wrong was the completeness claim made about
+> the sweep, and that claim is now corrected rather
+> than defended.
+>
+> **Also added in round 6q: a regression test.** The
+> `runWarnings` field added to
+> `scripts/distill-lighthouse.js` in round 6p had no
+> test. Two tests now cover it: one asserting a
+> warning survives the distillation, one asserting an
+> absent warning yields an empty array rather than an
+> undefined field.
+>
 > **New artifact.**
 > `docs/audits/2026-10-19/lighthouse/reverification-2026-10-19T21Z.json`
 > — machine-readable: 9 observations with scores,
@@ -1250,6 +1281,119 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > 200 (Cloudflare). The three portfolio hosts carry
 > `x-vercel-id`; the other two do not. This matches the
 > taxonomy recorded in rounds 6n and 6o.
+>
+> **Round 6q (2026-10-19 22:35-23:20 UTC): the sweep
+> was narrower than claimed, and is now a script.**
+> Round 6p reported a "repository-wide stale-claim
+> sweep" that returned zero uncovered sites. Re-reading
+> that claim showed it overstated what had actually
+> been checked. The round 6p sweep searched **one
+> pattern family** — the numeric form
+> `100/100/100/100` — and could not see the same
+> falsified claim written in prose in the audit
+> README's "Comparison to the prior evidence"
+> section: "shows 100 across the four standard
+> categories" and "Performance 95 -> 100". That
+> section is annotated with a dated correction in
+> round 6q.
+> <!-- sweep:quotation -->
+>
+> **What changed.**
+>
+> 1. The prose claim in the audit README is annotated.
+> 2. The `runWarnings` field added to
+>    `scripts/distill-lighthouse.js` in round 6p now
+>    has two tests: a warning survives distillation, and
+>    an absent warning yields an empty array.
+> 3. The sweep is now a committed, re-runnable script —
+>    `scripts/sweep-lighthouse-claims.js`, also
+>    `npm run test:sweep`. It enumerates every tracked
+>    Markdown file, matches numeric and prose forms,
+>    requires a dated correction within 14 lines, and
+>    carries a written reason for every adjudicated
+>    claim about a different run.
+>
+> **The sweep was tested against a negative control, and
+> the first version failed it.** A synthetic stale claim
+> was written into a tracked file and the sweep was
+> required to report it as uncovered. It reported zero
+> uncovered: the quotation-exemption marker was too
+> loose, so the injected claim was excused as a
+> quotation. Two further defects surfaced the same way —
+> line-wrapped claims were invisible to a per-line
+> matcher, and "showed 100" was invisible to a pattern
+> that only matched "shows 100". All three are fixed, and
+> the control is now a permanent test
+> (`tests/sweep-lighthouse-claims.test.js`).
+> <!-- sweep:quotation -->
+>
+> **A third defect surfaced during the final review, in the
+> numeric form itself.** A documentation edit re-wrapped
+> the string "100 / 100 / 100 / 100" across a line break,
+> and the sweep's claim count fell from 62 to 61 without
+> any error. The numeric matcher was running per line
+> while the prose matcher ran against the
+> whitespace-collapsed text — so the numeric form, the
+> *only* form the round 6p sweep ever searched, carried
+> the same line-wrap blind spot that had just been fixed
+> in the prose form. Both forms now match against the
+> collapsed text. The defect is pinned by its own negative
+> control, which injects a wrapped numeric claim and
+> requires the sweep to report it.
+> <!-- sweep:quotation -->
+>
+> **The documented counts are now checked by the suite, not
+> by a human.** Round 6q's own documentation drifted from the
+> measured result three times: once when the numeric matcher was
+> fixed and the claim count moved, once when a paragraph was quoted
+> inside a correction and the quotation count moved, and once when
+> the numeric-form count changed. Every drift was caught by a human
+> re-reading a diff, which is not a gate. Each document now carries
+> a canonical `sweep:counts` marker line stating the counts
+> as one machine-readable value, and a test compares that line
+> against the live sweep result. The test was proved to fail: a
+> deliberate one-digit change to the canonical line turns it red.
+> The counts in prose are rendered from the same measurement.
+>
+> **The quotation exemption is marked in the document, not
+> in the script.** A claim that a correction quotes rather
+> than asserts carries an explicit `<!-- sweep:quotation -->`
+> marker on the block containing it, and the exemption is
+> scoped to that block. The first design kept a list of
+> distinctive phrases inside the script instead. That list
+> was invisible to a reader, had to be edited each time a
+> round quoted the claim again, and — as the negative
+> control showed — a phrase loose enough to cover a real
+> quotation was also loose enough to excuse a genuine stale
+> claim. A marker in the document cannot drift out of sync
+> with the text it describes. The block scoping is pinned by
+> its own negative control: a marked paragraph is excused,
+> an unmarked paragraph in the same file is still reported.
+>
+> **Current state.** Over 124 tracked Markdown files: 64
+> claims found, 45 annotated, 5 adjudicated, 14
+> quotations, **0 uncovered**. The prose matcher finds 45
+> claims; the numeric matcher alone finds 19. The prose
+> form is the measure of what the round 6p sweep could
+> not see.
+>
+> <!-- sweep:counts {"trackedMarkdownFiles":124,"claims":64,"annotated":45,"adjudicated":5,"quotation":14,"uncovered":0,"proseForm":45,"numericForm":19,"annotationWindowLines":14} -->
+>
+> **Evidence unchanged.** No score, metric, or probe
+> observation was altered. The round 6p bundle was
+> re-verified after the edits: 36/36 category scores
+> (9 observations x 4 categories) and 54/54 metric values
+> match the committed distilled artifacts, and the committed
+> `RAW-kooshapari.com-desktop.json` SHA-256 matches
+> the recorded hash. The 8 committed round 6m summaries
+> remain untouched.
+>
+> **Verification.** Unit suite re-run: **787/787 pass, 0
+> fail** (774/774 at round 6p, plus 13 new tests: 2 for
+> `runWarnings`, 11 for the sweep). Anti-pattern
+> detector: **0 violations across 29 patterns**. No
+> production deploy was performed or needed. No
+> Lighthouse run was repeated in this round.
 
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new

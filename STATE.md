@@ -27,10 +27,10 @@ Lighthouse evidence at
   portfolio; live bundle and
   `/data/phenotype.js` byte-identical to prebuilt;
   live PDF byte-identical to local)
-- Lighthouse: **100 / 100 / 100 / 100** (Performance /
-  Accessibility / Best Practices / SEO) across 7
-  in-scope runs — desktop and mobile on
-  `kooshapari.com`, `www.kooshapari.com`, and
+- Lighthouse, the committed round 6m batch: **100 / 100 /
+  100 / 100** (Performance / Accessibility / Best
+  Practices / SEO) across 7 in-scope runs — desktop and
+  mobile on `kooshapari.com`, `www.kooshapari.com`, and
   `kooshapari-site.vercel.app`. Desktop LCP
   355-406 ms, mobile LCP 1,369-1,392 ms, TBT 0 ms,
   CLS 0.00. Evidence:
@@ -50,9 +50,9 @@ Lighthouse evidence at
   in the locally-simulated client metrics, not in the
   site. Evidence:
   `docs/audits/2026-10-19/lighthouse/reverification-2026-10-19T21Z.json`.
-- Unit suite: 774/774 PASS, 0 fail (767/767 at round
-  6i, +7 from the round 6m `scripts/distill-lighthouse.js`
-  test file).
+- Unit suite: 787/787 PASS, 0 fail (774/774 at round 6p,
+  +2 for the `runWarnings` field and +11 for the claim
+  sweep, both added in round 6q).
 
 ## What's done
 
@@ -215,6 +215,20 @@ previously-listed conditions have been met:
    happened, the artifacts are committed, and the result
    is faithfully recorded. The Performance number is now
    reported as a range, not a constant.
+   Round 6q corrected the *sweep* that backed the
+   annotation, and replaced it with a re-runnable
+   check: `scripts/sweep-lighthouse-claims.js`
+   (`npm run test:sweep`). Over 124 tracked Markdown
+   files it finds 64 Lighthouse score claims, of which
+   45 carry a dated correction, 5 are adjudicated as
+   claims about a different run, 14 are quotations
+   inside a correction, and **0 are uncovered**. The
+   script is tested against a negative control that
+   injects a stale claim and requires the sweep to
+   report it. Details in
+   `docs/audits/2026-10-19/lighthouse/README.md`,
+   section "Claim sweep".
+   <!-- sweep:counts {"trackedMarkdownFiles":124,"claims":64,"annotated":45,"adjudicated":5,"quotation":14,"uncovered":0,"proseForm":45,"numericForm":19,"annotationWindowLines":14} -->
 2. The close criteria no longer need redefining.
 
 Remaining notes, neither of which blocks closure:
