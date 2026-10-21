@@ -248,9 +248,41 @@ Remaining notes, neither of which blocks closure:
   real-user field data, and no field-data claim is
   made.
 
-The post-20th-pass arc is closed: 13 commits pushed to
-`origin/main` (c1a13de through the round 6m close),
+The post-20th-pass arc is closed: 17 commits pushed to
+`origin/main` (c1a13de through the round 6q close),
 all 5 items in the 06 doc are CLOSED/DECIDED, the unit
-suite is 774/774 PASS, and `HUMAN_REVIEW.md` carries
+suite is 787/787 PASS, and `HUMAN_REVIEW.md` carries
 the complete round-6 audit trail (6c, 6d, 6e, 6f, 6g,
-6h, 6i, 6i-correction, 6j, 6k, 6l, 6m).
+6i, 6j, 6k, 6l, 6m, 6n, 6o, 6p, 6q) — 14 round
+entries.
+
+**Corrected 2026-10-21 (round 6r).** This paragraph
+was last written at round 6m and had gone stale in
+three ways, each of which is corrected above rather
+than defended:
+
+- The unit suite was stated as 774/774. It was
+  774/774 when the paragraph was written; the
+  closure receipt above now states **787/787**, which
+  is the measured value.
+- The round list stopped at 6m. Rounds 6n, 6o, 6p and
+  6q have run since and each has a `HUMAN_REVIEW.md`
+  entry.
+- The list named **6h** and **6i-correction** as
+  `HUMAN_REVIEW.md` round entries. Neither has its own
+  heading in that file, and neither appears in it as
+  a string. They exist as git commit labels only:
+  `82ddac2` ("round 6h HUMAN_REVIEW audit-trail
+  pointer for 6f + 6g") and `bbcae40` ("round 6i
+  correction -- framing of state alignment"). Their
+  *content* is in the file — 6h added the 6f and 6g
+  entries, and 6i-correction amended the 6i entry in
+  place — so no round was dropped from the record;
+  the entry list simply did not match the headings
+  that exist. The corrected list above is the 14
+  headings that are actually present.
+
+The commit count counts round-scoped commits on the
+first-parent line from `c1a13de` through the tip:
+13 at the round 6m close, 17 now. The definition
+reproduces the historical 13 exactly.

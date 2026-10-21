@@ -1394,6 +1394,74 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > detector: **0 violations across 29 patterns**. No
 > production deploy was performed or needed. No
 > Lighthouse run was repeated in this round.
+>
+> **Round 6r (2026-10-21 00:52-01:06 UTC): the closing
+> paragraph of `STATE.md` had gone stale.** Round 6q
+> left one sentence in `STATE.md` untouched since round
+> 6m. It was accurate when written and wrong by the time
+> round 6q landed, in three separate ways. The correction
+> is recorded here and the paragraph is fixed in place.
+>
+> **1. It contradicted the same file.** The paragraph
+> stated the unit suite as 774/774. Two hundred lines
+> above it, the closure receipt stated 787/787 — the
+> measured value after round 6q. A reader who took the
+> paragraph at its word would have believed the suite had
+> lost 13 tests.
+>
+> **2. Its round list had stopped at 6m.** Rounds 6n,
+> 6o, 6p and 6q had each run and each has a
+> `HUMAN_REVIEW.md` entry. The list predated all four.
+>
+> **3. It named two rounds that are not entries in
+> `HUMAN_REVIEW.md`.** The list read "... 6g, 6h, 6i,
+> 6i-correction, 6j ...". Neither **6h** nor
+> **6i-correction** has its own heading in that file, and
+> the strings do not occur in it at all. They exist as
+> git commit labels only: `82ddac2` ("round 6h
+> HUMAN_REVIEW audit-trail pointer for 6f + 6g") and
+> `bbcae40` ("round 6i correction -- framing of state
+> alignment"). Their *content* is present — 6h added the
+> 6f and 6g entries, and 6i-correction amended the 6i
+> entry in place — so nothing was dropped from the
+> record. The list simply did not match the headings
+> that exist.
+>
+> **The census was taken twice, independently.** A
+> direct grep over the round-heading forms, and a
+> read-only subagent audit of the same file, returned the
+> same 14 headings: 6c, 6d, 6e, 6f, 6g, 6i, 6j, 6k, 6l,
+> 6m, 6n, 6o, 6p, 6q. The subagent also confirmed by
+> `git log -S` that no commit ever added a "Round 6h" or
+> "6i-correction" heading. The file's ordering is not
+> chronological — 6e precedes 6c, and 6d is the last
+> entry — which is a separate observation and was left
+> as it stands.
+>
+> **The commit count was reconstructed, not guessed.**
+> The paragraph's "13 commits" figure was checked against
+> the git history rather than assumed. It is not the count
+> of all commits in the range (57 on the first-parent line
+> at the round 6m close) and not the count of round
+> headings (12 at that point). It is the count of
+> round-scoped commits on the first-parent line from
+> `c1a13de` through the tip, plus the two round 6f
+> prerender fixes and the 6f no-JS tightening: 13 at the
+> round 6m close, reproducing the historical figure
+> exactly, and 17 now.
+>
+> **What did not change.** No score, metric, or probe
+> observation was touched. No production deploy was
+> performed. No Lighthouse run was repeated. The
+> substantive record — the 6m batch, the 6p
+> re-verification, and the round 6q sweep — is unchanged.
+> Only a summary sentence that had drifted from the
+> measurement was brought back into line with it.
+>
+> **Verification.** Unit suite: **787/787 pass, 0 fail**;
+> claim sweep: 64 claims, **0 uncovered**; anti-pattern
+> detector: **0 violations across 29 patterns**; syntax
+> check: clean. All four gates exit 0.
 
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new
