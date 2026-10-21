@@ -37,5 +37,16 @@ jobs:
       - name: Test suite
         run: npm test
 
+      # The stale-claim scanner. It checks whether a document's stated
+      # test count agrees with the suite's actual count, and whether a
+      # "complete" round list matches the rounds that have entries.
+      #
+      # It measures the suite itself, in a child run that excludes the
+      # stale-claim test files, so the count it compares against is the
+      # count the suite reports. This is the CI half of the check; the
+      # pre-commit hook runs it locally.
+      - name: Stale-claim scanner
+        run: node scripts/scan-stale-claims.js
+
       - name: Coverage gate (85% floor)
         run: npm run test:coverage

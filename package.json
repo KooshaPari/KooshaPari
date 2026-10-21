@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "node scripts/enable-hooks.js",
     "test": "node --test tests/*.test.js",
-    "test:stale-claims": "node --test tests/stale-claim-classes.test.js tests/stale-claim-rules.test.js tests/stale-claim-scan.test.js",
+    "test:stale-claims": "node --test tests/stale-claim-classes.test.js tests/stale-claim-rules.test.js tests/stale-claim-scan.test.js tests/stale-claim-controls.test.js tests/stale-claim-gates.test.js",
     "test:sweep": "node scripts/sweep-lighthouse-claims.js",
     "test:coverage": "node --test --experimental-test-coverage --test-coverage-include='scripts/**/*.js' --test-coverage-lines=85 --test-coverage-branches=85 --test-coverage-functions=85 tests/*.test.js",
     "test:e2e": "npm run stage:publication && npx playwright test",

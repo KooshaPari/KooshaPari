@@ -175,9 +175,9 @@ const ADJUDICATED_OTHER_RUNS = new Map([
  */
 const QUOTATION_ANNOTATION = '<!-- sweep:quotation -->';
 
-function trackedMarkdownFiles() {
+function trackedMarkdownFiles(root = REPO_ROOT) {
   const out = execFileSync('git', ['ls-files', '-z', '*.md'], {
-    cwd: REPO_ROOT,
+    cwd: root,
     encoding: 'utf8',
     maxBuffer: 64 * 1024 * 1024,
   });
@@ -341,8 +341,8 @@ function findClaimSpans(lines) {
   });
 }
 
-export function sweep({ window = 14 } = {}) {
-  const files = trackedMarkdownFiles();
+export function sweep({ window = 14, root = REPO_ROOT } = {}) {
+  const files = trackedMarkdownFiles(root);
   const claims = [];
   const uncovered = [];
   const adjudicated = [];
@@ -350,7 +350,7 @@ export function sweep({ window = 14 } = {}) {
   for (const file of files) {
     let lines;
     try {
-      lines = readFileSync(join(REPO_ROOT, file), 'utf8').split('\n');
+      lines = readFileSync(join(root, file), 'utf8').split('\n');
     } catch {
       continue;
     }

@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { sweep } from '../scripts/sweep-lighthouse-claims.js';
@@ -19,6 +18,11 @@ const REPO = new URL('..', import.meta.url).pathname;
  *   2. a synthetic stale claim IS detected (positive control)
  *   3. the same claim written in PROSE is ALSO detected — this is the
  *      exact case round 6p missed
+ *
+ * The negative controls themselves live in
+ * `tests/sweep-lighthouse-controls.test.js`; this file covers the
+ * sweep's behaviour against the real repository and the published
+ * documentation.
  */
 
 test('the tracked repository currently has no uncovered Lighthouse claim', () => {
@@ -83,148 +87,6 @@ test('a claim split across a line break is still detected', () => {
     'the line-wrapped prose claim must be detected by the sweep',
   );
   assert.equal(split.status, 'annotated');
-});
-
-/**
- * Negative control. The claim below is written the way a genuine stale
- * claim would read. It must be reported as uncovered, otherwise the
- * sweep is not actually capable of failing.
- */
-test('a synthetic stale claim is detected as uncovered', () => {
-  const dir = mkdtempSync(join(tmpdir(), 'sweep-lh-'));
-  const rel = 'docs/audits/2026-10-19/lighthouse/zz-sweep-negative-control.md';
-  const abs = join(REPO, rel);
-  const body = [
-    '# Negative control',
-    '',
-    'The production site shows 100 across the four standard categories',
-    'and every run scored 100 / 100 / 100 / 100 without exception.',
-    '',
-  ].join('\n');
-
-  writeFileSync(abs, body);
-  execFileSync('git', ['add', '-f', rel], { cwd: REPO, stdio: 'pipe' });
-
-  try {
-    const result = sweep();
-    const caught = result.uncovered.filter((c) => c.file === rel);
-    assert.ok(
-      caught.some((c) => c.form === 'prose'),
-      'the prose form must be caught',
-    );
-    assert.ok(
-      caught.some((c) => c.form === 'numeric'),
-      'the numeric form must be caught',
-    );
-    // The injected text yields 1 numeric + 2 prose matches: the
-    // "shows 100 across ..." phrase, and "scored 100 / 100 / ...".
-    assert.equal(caught.length, 3);
-    assert.equal(
-      caught.filter((c) => c.form === 'numeric').length,
-      1,
-      'exactly one numeric claim in the injected control',
-    );
-  } finally {
-    execFileSync('git', ['rm', '-f', '--cached', rel], {
-      cwd: REPO,
-      stdio: 'pipe',
-    });
-    rmSync(abs, { force: true });
-    rmSync(dir, { recursive: true, force: true });
-  }
-});
-
-/**
- * Negative control for the exemption mechanism itself.
- *
- * The exemption is an explicit in-document marker
- * (`<!-- sweep:quotation -->`) scoped to the paragraph that carries
- * it. Two properties must hold:
- *
- *   1. a claim in a marked paragraph is excused
- *   2. a claim in an UNMARKED paragraph, in the same file and in the
- *      same section, is still reported as uncovered
- *
- * Property 2 is the one that matters. If the exemption leaked beyond
- * the marked paragraph, it would silently excuse a genuine stale
- * claim — the exact failure the first version of this sweep had.
- */
-test('the quotation annotation excuses only the paragraph that carries it', () => {
-  const rel = 'docs/audits/2026-10-19/lighthouse/zz-sweep-quotation-scope.md';
-  const abs = join(REPO, rel);
-  const body = [
-    '# Quotation scope control',
-    '',
-    '<!-- sweep:quotation -->',
-    'The production site shows 100 across the four standard categories.',
-    '',
-    'The production site also shows 100 across the four standard categories.',
-    '',
-  ].join('\n');
-
-  writeFileSync(abs, body);
-  execFileSync('git', ['add', '-f', rel], { cwd: REPO, stdio: 'pipe' });
-
-  try {
-    const result = sweep();
-    const caught = result.uncovered.filter((c) => c.file === rel);
-    assert.equal(
-      caught.length,
-      1,
-      'exactly the unmarked claim must be uncovered; the marked one must be exempt',
-    );
-    assert.ok(caught[0].text.includes('also shows 100 across the'));
-  } finally {
-    execFileSync('git', ['rm', '-f', '--cached', rel], {
-      cwd: REPO,
-      stdio: 'pipe',
-    });
-    rmSync(abs, { force: true });
-  }
-});
-
-/**
- * Negative control for the numeric form's own line-wrap blind spot.
- *
- * The numeric form is the ONLY form the round 6p sweep searched, so a
- * gap in it is the most consequential gap in this script. Its matcher
- * ran per-line while the prose matcher ran against the
- * whitespace-collapsed text — so the four-category string, hard-wrapped
- * across two lines, was invisible to the form that mattered most.
- *
- * This control was found by accident: a documentation edit re-wrapped
- * the string "100 / 100 / 100 / 100" across a line break, and the
- * sweep's claim count silently fell by one. The defect is now fixed
- * and pinned here.
- */
-test('a numeric claim split across a line break is still detected', () => {
-  const rel = 'docs/audits/2026-10-19/lighthouse/zz-sweep-numeric-wrap.md';
-  const abs = join(REPO, rel);
-  const body = [
-    '# Numeric wrap control',
-    '',
-    'The measured result was 100 / 100 / 100 /',
-    '100 across the four standard categories.',
-    '',
-  ].join('\n');
-
-  writeFileSync(abs, body);
-  execFileSync('git', ['add', '-f', rel], { cwd: REPO, stdio: 'pipe' });
-
-  try {
-    const result = sweep();
-    const caught = result.uncovered.filter((c) => c.file === rel);
-    assert.ok(
-      caught.some((c) => c.form === 'numeric'),
-      'the wrapped numeric claim must be caught, not skipped',
-    );
-  } finally {
-    execFileSync('git', ['rm', '-f', '--cached', rel], {
-      cwd: REPO,
-      stdio: 'pipe',
-    });
-    rmSync(abs, { force: true });
-  }
 });
 
 /**

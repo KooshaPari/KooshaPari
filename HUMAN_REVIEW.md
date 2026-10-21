@@ -1644,6 +1644,219 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > correction — is unchanged. Three drifted figures in `STATE.md`
 > were brought back into line with the measurement, and one round
 > entry was added.
+>
+> **Second pass, 2026-10-21 (same round).** The round 6s close
+> was reviewed against the acceptance path rather than against the
+> gates, and three defects in the round's own work were found. The
+> gates had all passed. The gates were not the thing being checked.
+>
+> - **The documented entry point did not work.** The scanner
+>   required `--measured N` and exited 2 without it. The command the
+>   entry above records as the way to run it —
+>   `npm run scan:stale-claims` — failed every time it was invoked
+>   the way a gate invokes a command. Observed, before the fix:
+>
+>   ```
+>   $ npm run scan:stale-claims
+>   scan-stale-claims: --measured <N> is required.
+>   exit 2
+>   ```
+>
+>   The scanner now measures the suite itself, in a child run that
+>   excludes the stale-claim test files, and `--measured` is an
+>   override rather than a requirement. Observed, after the fix:
+>
+>   ```
+>   $ npm run scan:stale-claims
+>   measured unit-suite count : 845
+>   measurement source        : measured by running the suite
+>   checks run                : 247
+>   findings                  : 0
+>   exit 0
+>   ```
+>
+> - **The scanner was wired into no gate.** It was a script, not a
+>   gate. Nothing ran it automatically, so it would have drifted out
+>   of date exactly as the documents did — the failure mode it was
+>   built to prevent. It now runs in the pre-commit hook whenever
+>   Markdown is staged, and in the CI workflow.
+>
+> - **The measurement logic was unreachable from the CLI.** The code
+>   that measures the suite without recursing lived in a test
+>   helper. It is now `scripts/stale-claim-measure.js`, imported by
+>   both the CLI and the tests, so there is one measurement and one
+>   definition of the exclusion list. The exclusion list is DERIVED,
+>   not written: it is every test file that imports the measurement
+>   helper, found by searching the test tree. A hand-written list
+>   would have been a second copy to go stale, and a measuring test
+>   file missing from it would make the measurement recurse forever.
+>
+> - **Three controls mutated the repository they were testing.**
+>   `tests/sweep-lighthouse-claims.test.js` wrote temporary Markdown
+>   into the real `docs/` tree and mutated the Git index, which
+>   broke concurrent `git ls-files` reads and left the tree dirty
+>   when a control failed between plant and restore. The sweep now
+>   takes an injectable `{ root }`, and the controls build isolated
+>   temporary Git repositories instead.
+>
+> The suite grew from 838 to 845 as a result. The scanner named the
+> `STATE.md` lines that had fallen behind — `STATE.md:53` and
+> `STATE.md:254` — on its own, before either was corrected. The count
+> has now moved seven times during this round — 832, 834, 835, 837,
+> 838, 842, 845 — and the scanner caught every drift without being asked.
+>
+> **Verification.** Unit suite: **845/845 pass, 0 fail** across 85
+> test files; scanner via its documented entry point:
+> **247 checks, 0 findings**, exit 0, measurement source "measured by
+> running the suite"; stale-claim tests: **58 pass, 0 fail** across
+> five files (20 classes, 15 rules, 8 scan, 9 controls, 6 gates);
+> claim sweep: 124 files, 64 claims found (45 annotated, 5 adjudicated,
+> 14 quotation), **0 uncovered**; anti-pattern detector: **0 violations
+> across 29 patterns**; `npm run check`: exit 0; `npm run verify:bundle`:
+> 36/36 category scores, 54/54 metric values, exit 0;
+> `npm run compare:sweeps`: 6p saw 18 sites, 6q saw 64, 0 sites only
+> 6p could see, exit 0.
+>
+> The gate was exercised in BOTH directions, as the real hook, not as
+> a string assertion. Clean tree: detector 0 violations, suite
+> 845/845, scanner 247 checks and 0 findings, `[pre-commit] ok`,
+> exit 0. With a genuinely planted `777/777` current count in
+> `STATE.md`: the scanner reported one `A-count` finding naming
+> `STATE.md:53`, the figure `777/777`, and the reason, and the hook
+> exited 1.
+>
+> Every file this round wrote is at or below 350 lines.
+> `tests/stale-claim-scan.test.js` was 458 lines after the first
+> split and was split again into `tests/stale-claim-scan.test.js`
+> (209 lines, the measurement and the CLI) and
+> `tests/stale-claim-controls.test.js` (269 lines, the negative
+> controls), which are both under the 350-line target. The only file
+> over the target is `scripts/sweep-lighthouse-claims.js` at 481
+> lines, which was already 481 lines at commit `92c26d6` and is not
+> round 6s's.
+
+> **Round 6t (2026-10-21 05:00-06:00 UTC): the size gate could
+> not see the test tree, and the browser spec it could not see
+> was nearly twice the hard limit.**
+> Round 6t was asked to prove that the round 6r defect class had
+> no sibling instances. It found one. The instance was not a stale
+> sentence in a document — it was a gate that reported success
+> while the thing it policed was broken.
+>
+> **The sibling.** `scripts/anti-pattern-detector.sh` check #27
+> enforces the repository's 500-line hard limit. Until round 6t it
+> scanned only `scripts/`, `data/`, and `styles/`. The `tests/` tree
+> was invisible to it. `tests/browser/acceptance.spec.js` stood at
+> **974 lines** — nearly double the hard limit — while the detector
+> reported `0 violations across 29 patterns` and exited 0.
+>
+> This is the round 6r defect class in a different costume. A gate
+> that cannot see a file cannot police it; a detector that reports
+> success while a real violation sits in the tree is worse than no
+> detector, because it is believed. The round 6r defect was a
+> document asserting something the measurement contradicted. The
+> round 6t defect was a gate asserting something the tree
+> contradicted. Both are a claim that is true of what was examined
+> and false of the world.
+>
+> **The scope is now pinned, in both directions.**
+> `scripts/anti-pattern-detector.sh` check #27 now scans every
+> tracked JavaScript module the project maintains —
+> `scripts/*.js`, `scripts/**/*.js`, `data/*.js`, `styles/*.css`,
+> `tests/*.js`, `tests/**/*.js`, `tests/**/*.mjs`.
+> `tests/size-mandate-gate.test.js` (198 lines) pins that scope as
+> TEXT, because a test that merely ran the detector could not
+> distinguish "the scope is right" from "the tree happens to have
+> no oversized file right now" — and the second state is exactly
+> what let the 974-line file survive. A second test walks the
+> tracked files and asks the detector's own glob list which ones
+> it would miss; the answer must be none. A third exercises the
+> detector in its FAILING direction whenever a tracked module
+> exceeds the hard limit: the detector must exit non-zero AND name
+> the offending path.
+>
+> **The oversized file is now split.** The 974-line browser spec
+> became six spec files — `homepage.spec.js` (166),
+> `homepage-focus-ring.spec.js` (275), `content-routes.spec.js`
+> (165), `scroll-reveal.spec.js` (189), `sharecli.spec.js` (111),
+> `lightbox.spec.js` (75) — plus a 12-line shared helper at
+> `tests/browser/helpers/acceptance-support.js`. Every resulting
+> file is at or below 275 lines, inside both the 350-line target and
+> the 500-line hard limit.
+>
+> **The split preserved the suite exactly.** The before and after
+> Playwright lists are identical: **28 tests in 6 files**. The 21
+> test declarations are the same 21, character for character; the
+> static-asset sweep expands over the same 8 routes in the same
+> order; the 11 describe blocks are the same 11. Observed from the
+> real runner, not asserted from the source.
+>
+> **The browser suite does not pass on this host, and did not
+> before the split either.** This is recorded rather than glossed.
+> The full Playwright run fails 14 of 28 tests in BOTH trees. The
+> dominant error is `browser.newContext: Target page, context or
+> browser has been closed` — the browser process dies mid-run, not
+> an assertion failure. The host was under load average 10-17 at
+> the time. The e2e suite is not run in CI, and the last recorded
+> clean run was 29/29 on 2026-10-15 on a lower-load host.
+>
+> The equivalence was measured, not assumed. Both trees were run
+> under identical conditions on the same host with the same
+> `--retries=2`:
+>
+> | Tree | Passed | Failed | Total attempts |
+> |---|---|---|---|
+> | HEAD `92c26d6` (one 974-line file) | 26/28 | 2 | 55 |
+> | Round 6t (six files) | 26/28 | 2 | 55 |
+>
+> The two failing tests are the SAME two in both runs — `ShareCLI
+> has heading and download` and `all project pages render with
+> title, summary, and navigation`. The title sets are identical and
+> the attempt counts are identical. The split changed the
+> execution order (Playwright sorts by filename), which changed
+> which tests happened to fail in the no-retry run, and changed
+> nothing else. The split is behaviour-preserving on this evidence.
+> It is not a claim that the browser suite is green; it is a claim
+> that the split did not make it less green.
+>
+> **A second, smaller split.** `tests/sweep-lighthouse-claims.test.js`
+> stood at 364 lines, over the 350-line target though inside the
+> hard limit. It is now `tests/sweep-lighthouse-claims.test.js`
+> (201 lines) plus `tests/sweep-lighthouse-controls.test.js` (117
+> lines) plus `tests/helpers/sweep-lighthouse-support.js` (74
+> lines). Both sweep files pass together: **11/11**.
+>
+> **Verification.** Unit suite: **848/848 pass, 0 fail** across 87
+> test files; scanner via its documented entry point: **249 checks,
+> 0 findings**, exit 0, measurement source "measured by running the
+> suite"; stale-claim tests: **58 pass, 0 fail** across five files
+> (20 classes, 15 rules, 8 scan, 9 controls, 6 gates);
+> `tests/size-mandate-gate.test.js`: **3 pass, 0 fail**; claim
+> sweep: 124 files, 64 claims found (45 annotated, 5 adjudicated,
+> 14 quotation), **0 uncovered**; anti-pattern detector: **0
+> violations across 29 patterns**, exit 0, with one warning — the
+> pre-existing `scripts/sweep-lighthouse-claims.js` at 481 lines,
+> which was already 481 lines at commit `92c26d6` and is not round
+> 6t's; `npm run check`: exit 0; `npm run verify:bundle`: 36/36
+> category scores, 54/54 metric values, exit 0; `npm run
+> compare:sweeps`: 6p saw 18 sites, 6q saw 64, 0 sites only 6p
+> could see, exit 0.
+>
+> The suite grew from 845 to 848. The scanner named the three
+> `STATE.md` lines that had fallen behind — `STATE.md:53`,
+> `STATE.md:254`, `STATE.md:331` — on its own, before this
+> document was corrected. That is requirement 1 demonstrated for the
+> eighth time.
+>
+> **What did not change.** No production deploy was performed. No
+> Lighthouse run was repeated. No score, metric, or probe
+> observation was touched. The published bundle is byte-identical to
+> the one deployed at SHA `e95e763`. The substantive record — the
+> 6m batch, the 6p re-verification, the round 6q sweep, the round
+> 6r correction, and the round 6s close — is unchanged. What
+> changed is that a gate can now see the whole tree, and the tree
+> is whole.
+
 
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new

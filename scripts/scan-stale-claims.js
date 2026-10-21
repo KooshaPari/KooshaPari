@@ -21,32 +21,35 @@
  *   CLASS B — a round named as a HUMAN_REVIEW.md round entry when no
  *             such entry exists.
  *
- * The measured count is a REQUIRED INPUT, not something this script
- * computes. It is passed with --measured, and the caller is expected
- * to have measured it from a real test run.
+ * The measured count is MEASURED, not supplied. The scanner runs the
+ * suite itself, in a child process that excludes the three
+ * stale-claim test files, and counts the excluded files' own tests
+ * from their source. The number the scanner uses is therefore the
+ * number the suite reports.
  *
- * That is a deliberate constraint. This script runs inside the unit
- * suite's own gate, and the unit suite is what produces the count. If
- * the script spawned the suite to measure the count, the suite would
- * spawn the script, which would spawn the suite. The measurement is
- * made once, by whoever runs the gate, and handed in.
+ * That is a deliberate constraint. Hardcoding the count would be the
+ * defect the script exists to detect: a constant here is a second
+ * place for the count to drift, and a count that drifts in the
+ * scanner is indistinguishable from a count that drifts in a document.
+ * Measuring it inside the test run is impossible for the same reason
+ * — the scanner's own tests are part of the suite. So the measurement
+ * is made by a process that is not part of the measured run.
  *
- * The alternative — hardcoding the count — is the defect the script
- * exists to detect. Round 6r's failure was exactly a count that had
- * drifted from its measurement. A constant here would be a second
- * place to forget to update.
+ * `--measured N` overrides the measurement. It exists for the case
+ * where the caller has already measured the suite and does not want
+ * it measured twice, and for the tests that need to check the
+ * scanner against a specific count.
  *
  * Exit code 0 = no sibling instance found.
  * Exit code 1 = at least one sibling instance.
  * Exit code 2 = the script was invoked incorrectly.
  *
- * Usage: node scripts/scan-stale-claims.js --measured 787 [--json]
+ * Usage: node scripts/scan-stale-claims.js [--measured N] [--json]
  */
 
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
+import { join } from 'node:path';
 
 import {
   classifyCount,
@@ -68,19 +71,44 @@ import {
   ROUND_TOKEN,
 } from './stale-claim-classes.js';
 
-const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+import { measureSuite, REPO_ROOT } from './stale-claim-measure.js';
 
 /**
- * The measured unit-suite count, read from --measured.
+ * The measured unit-suite count.
  *
- * @returns {number|null} the count, or null when it was not supplied.
+ * `--measured N` wins when it is present and valid. Otherwise the
+ * suite is measured here, by a child run that excludes the
+ * stale-claim test files.
+ *
+ * @returns {{count: number, source: string}}
  */
-function readMeasured() {
+function resolveMeasured() {
   const index = process.argv.indexOf('--measured');
-  if (index === -1) return null;
-  const parsed = Number(process.argv[index + 1]);
-  if (!Number.isInteger(parsed) || parsed <= 0) return null;
-  return parsed;
+  if (index !== -1) {
+    const parsed = Number(process.argv[index + 1]);
+    if (Number.isInteger(parsed) && parsed > 0) {
+      return { count: parsed, source: 'supplied with --measured' };
+    }
+    console.error(
+      `scan-stale-claims: --measured must be a positive integer.\n` +
+        `Received: ${process.argv[index + 1]}`,
+    );
+    process.exit(2);
+  }
+
+  try {
+    const result = measureSuite();
+    return {
+      count: result.count,
+      source: 'measured by running the suite',
+    };
+  } catch (err) {
+    console.error(
+      `scan-stale-claims: the suite could not be measured.\n${err.message}\n\n` +
+        `Pass the count from a real run with --measured N to proceed.`,
+    );
+    process.exit(2);
+  }
 }
 
 function trackedMarkdownFiles() {
@@ -92,18 +120,7 @@ function trackedMarkdownFiles() {
   return out.split('\0').filter(Boolean);
 }
 
-const MEASURED = readMeasured();
-
-if (MEASURED === null) {
-  console.error(
-    'scan-stale-claims: --measured <N> is required.\n' +
-      'The count must come from a real test run. Pass the number the run reported.\n' +
-      'The scanner will not guess, and it will not hardcode one: a constant here\n' +
-      'would be a second place for the count to drift, which is the defect this\n' +
-      'script exists to detect.',
-  );
-  process.exit(2);
-}
+const { count: MEASURED, source: MEASURED_SOURCE } = resolveMeasured();
 
 const findings = [];
 const checks = [];
@@ -167,20 +184,11 @@ for (const file of trackedMarkdownFiles()) {
 //
 // SCOPE. Both checks run over a PARAGRAPH, not a line.
 //
-// The round lists in this repository wrap across lines. `STATE.md`
-// reads
-//
-//     the complete round-6 audit trail (6c, 6d, 6e, 6f, 6g,
-//     6i, 6j, 6k, 6l, 6m, 6n, 6o, 6p, 6q) — 14 round
-//     entries.
-//
-// A LINE-scoped check reads neither list correctly: the tokens are
-// split across two lines, and neither line carries both the
-// "HUMAN_REVIEW" marker and the round token. A line-scoped check
-// therefore examines two lines in the whole tree and finds no round
-// token on either — it cannot report the round 6r defect it exists
-// to detect. The paragraph scope is the scope the defect is written
-// in.
+// The round lists in this repository wrap across lines, so a
+// LINE-scoped check examines two lines in the whole tree and finds no
+// round token on either. It cannot report the round 6r defect it
+// exists to detect. The paragraph scope is the scope the defect is
+// written in.
 //
 // CLASS B asks whether every round NAMED in a list has an entry.
 // CLASS C asks the other question: whether every entry is NAMED.
@@ -195,19 +203,11 @@ for (const file of trackedMarkdownFiles()) {
 // whole paragraph rather than against a window around the token:
 //
 //   1. A paragraph that says the round does NOT exist. That is the
-//      correction itself, not a defect. `STATE.md` and
-//      `HUMAN_REVIEW.md` both carry such a paragraph for 6h and
-//      6i-correction.
-//
+//      correction itself, not a defect.
 //   2. A paragraph that is itself a dated record. A deploy receipt
 //      from 2026-10-19 may say what it said on 2026-10-19.
-//
 //   3. A paragraph inside a HUMAN_REVIEW.md round entry. A round
-//      entry is a dated record by construction: the round 6o entry
-//      names 6h and 6i-correction because it is describing the
-//      history that preceded it. This is the SAME region model Class
-//      A uses, and it is applied for the same reason: a round entry
-//      is a record of a moment, not a claim about the present.
+//      entry is a dated record by construction.
 //
 // The predicates that decide whether a paragraph belongs to a class
 // live in `stale-claim-classes.js`, with the round token itself.
@@ -318,6 +318,7 @@ if (asJson) {
       {
         generatedAtUtc: new Date().toISOString(),
         measuredTestCount: MEASURED,
+        measurementSource: MEASURED_SOURCE,
         humanReviewRoundEntries: [...existingRounds].sort(),
         checksRun: checks.length,
         findings,
@@ -329,6 +330,7 @@ if (asJson) {
 } else {
   console.log('=== stale-claim sibling scan ===\n');
   console.log(`measured unit-suite count : ${MEASURED}`);
+  console.log(`measurement source        : ${MEASURED_SOURCE}`);
   console.log(`HUMAN_REVIEW.md entries    : ${[...existingRounds].sort().join(', ')}`);
   console.log(`                           (${existingRounds.size} entries)`);
   console.log(`checks run                : ${checks.length}`);

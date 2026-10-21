@@ -4,8 +4,9 @@
 # Skip with:    git commit --no-verify
 #
 # Runs the constitution's anti-pattern detector when files under scripts/
-# are staged, and the full test suite when files under tests/ or scripts/
-# are staged. Either gate failing aborts the commit.
+# are staged, the full test suite when files under tests/ or scripts/
+# are staged, and the stale-claim scanner when Markdown is staged.
+# Either gate failing aborts the commit.
 
 set -euo pipefail
 
@@ -20,10 +21,12 @@ fi
 
 SCAN_SCRIPTS=0
 SCAN_TESTS=0
+SCAN_MARKDOWN=0
 for f in $STAGED; do
   case "$f" in
     scripts/*) SCAN_SCRIPTS=1 ;;
     tests/*)   SCAN_TESTS=1 ;;
+    *.md)      SCAN_MARKDOWN=1 ;;
   esac
 done
 
@@ -42,6 +45,24 @@ if [[ "$SCAN_TESTS" -eq 1 || "$SCAN_SCRIPTS" -eq 1 ]]; then
   if ! node --test tests/*.test.js >/dev/null 2>&1; then
     echo "[pre-commit] tests failed — fix failures or use --no-verify"
     echo "[pre-commit] (run 'node --test tests/*.test.js' for details)"
+    FAILED=1
+  fi
+fi
+
+# The stale-claim scanner checks whether a document's stated test count
+# agrees with the suite's actual count, and whether a "complete" round
+# list matches the rounds that have entries.
+#
+# It runs whenever Markdown is staged, because that is what it reads.
+# It measures the suite itself, so it costs one extra suite run. The
+# measurement is a child process that excludes the stale-claim test
+# files, so the count it compares against is the count the suite
+# reports.
+if [[ "$SCAN_MARKDOWN" -eq 1 ]]; then
+  echo "[pre-commit] running stale-claim scanner (Markdown staged)"
+  if ! node scripts/scan-stale-claims.js; then
+    echo "[pre-commit] stale-claim scanner found a stale claim — fix it or use --no-verify"
+    echo "[pre-commit] (run 'node scripts/scan-stale-claims.js' for details)"
     FAILED=1
   fi
 fi

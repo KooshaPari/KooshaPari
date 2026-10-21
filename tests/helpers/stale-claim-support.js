@@ -1,7 +1,7 @@
 /**
  * Shared fixtures and helpers for the stale-claim scanner tests.
  *
- * These are the pieces the three stale-claim test files have in
+ * These are the pieces the stale-claim test files have in
  * common: where the repository is, how to run the scanner, how to
  * measure the suite, and the verbatim round 6r paragraph.
  *
@@ -9,108 +9,46 @@
  * importing it adds nothing to the suite count. The files that use
  * it are:
  *
- *   tests/stale-claim-classes.test.js   the class predicates
- *   tests/stale-claim-rules.test.js     the rules, as pure functions
- *   tests/stale-claim-scan.test.js      the CLI and the tree
+ *   tests/stale-claim-classes.test.js    the class predicates
+ *   tests/stale-claim-rules.test.js      the rules, as pure functions
+ *   tests/stale-claim-scan.test.js       the measurement and the CLI
+ *   tests/stale-claim-controls.test.js   the negative controls
+ *   tests/stale-claim-gates.test.js      the gate wiring
  */
 
-import assert from 'node:assert/strict';
-import { execFileSync, spawnSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import { copyFileSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { roundEntryRanges } from '../../scripts/stale-claim-rules.js';
+import {
+  listTestFiles,
+  measureSuite,
+  MEASURED_EXCLUSIONS,
+} from '../../scripts/stale-claim-measure.js';
 
 // This module lives in `tests/helpers/`, so the repository root is two
 // levels up.
 export const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 export const SCANNER = join(REPO_ROOT, 'scripts', 'scan-stale-claims.js');
 
-/**
- * The test files of this repository, in a stable order.
- *
- * Only the top level of `tests/` is scanned. The stale-claim tests
- * live there, and a nested layout would need a recursive walk that
- * nothing else in this repository uses.
- *
- * @returns {string[]}
- */
-export function listTestFiles() {
-  return readdirSync(join(REPO_ROOT, 'tests'))
-    .filter((name) => name.endsWith('.test.js'))
-    .sort()
-    .map((name) => join('tests', name));
-}
+export { listTestFiles, MEASURED_EXCLUSIONS };
 
 /**
  * The suite's own count, measured by running the suite.
  *
- * THE MEASURED RUN EXCLUDES THE MEASURING FILE.
- *
- * A file that measures the suite cannot be part of the measured run: a
- * child that ran it would itself measure the suite, and the recursion
- * would never terminate. The exclusion is by explicit file list, not by
- * a glob, so what was measured is stated rather than implied.
- *
- * The exclusion costs nothing in coverage. Every assertion in the
- * stale-claim tests is about the TREE — the documents, the scanner, the
- * rules. The tests the excluded files contribute to the count are
- * counted here explicitly, from their own source, so the number the
- * scanner is given is the number the suite would report.
+ * The measurement itself lives in `scripts/stale-claim-measure.js`, so
+ * the CLI and the tests share ONE definition of how the count is
+ * produced. This wrapper exists only so the tests read the same way
+ * they did before the module was extracted.
  *
  * @param {string[]} exclude  repo-relative paths of the files to exclude
  * @returns {number}
  */
-export function measureSuite(exclude = []) {
-  // The node test runner marks a child process as "already inside a
-  // test run" with `NODE_TEST_CONTEXT`. If that marker is inherited,
-  // the child skips running the files and prints no summary at all:
-  //
-  //     Warning: node:test run() is being called recursively within
-  //     a test file. skipping running files.
-  //
-  // The marker is therefore removed for the child. The child is a
-  // fresh, independent run of the suite — which is the whole point of
-  // it.
-  const env = { ...process.env };
-  delete env.NODE_TEST_CONTEXT;
-
-  const others = listTestFiles().filter((f) => !exclude.includes(f));
-  const result = spawnSync(process.execPath, ['--test', ...others], {
-    cwd: REPO_ROOT,
-    encoding: 'utf8',
-    env,
-    maxBuffer: 64 * 1024 * 1024,
-  });
-
-  const output = `${result.stdout ?? ''}\n${result.stderr ?? ''}`;
-  const m = /^ℹ tests (\d+)$/m.exec(output);
-  assert.ok(
-    m,
-    `the suite must report a test count. Output was:\n${output.slice(-2000)}`,
-  );
-
-  const failed = /^ℹ fail (\d+)$/m.exec(output);
-  assert.ok(
-    failed && Number(failed[1]) === 0,
-    `the suite must pass for the measured count to be meaningful. Output was:\n${output.slice(-2000)}`,
-  );
-
-  // The tests the excluded files contribute to the count.
-  //
-  // They are counted from each excluded file's own source rather than
-  // written down as a literal, so the count cannot drift when a test
-  // is added there. A top-level `test(` call is one test, which is
-  // what the runner counts.
-  let own = 0;
-  for (const rel of exclude) {
-    const source = readFileSync(join(REPO_ROOT, rel), 'utf8');
-    own += (source.match(/^test\(/gm) ?? []).length;
-  }
-
-  return Number(m[1]) + own;
+export function suiteCount(exclude = MEASURED_EXCLUSIONS) {
+  return measureSuite({ exclude }).count;
 }
 
 /**
@@ -122,8 +60,25 @@ export function measureSuite(exclude = []) {
  */
 export function runScanner(measured, extra = []) {
   const args = [SCANNER, '--measured', String(measured), ...extra];
+  return runScannerRaw(args);
+}
+
+/**
+ * Run the scanner with exactly the arguments given, and nothing added.
+ *
+ * `runScanner` always supplies `--measured N`, because most tests want
+ * to pin the count the scanner is given. This one does not, so a test
+ * can exercise the NO-ARGUMENT entry point — the one the round's own
+ * documentation names, and the one a gate invokes. A test that only
+ * ever ran the scanner with an explicit count would not have noticed
+ * that the no-argument form exited 2.
+ *
+ * @param {string[]} args
+ * @returns {{status: number, stdout: string, stderr: string}}
+ */
+export function runScannerRaw(args) {
   try {
-    const stdout = execFileSync('node', args, {
+    const stdout = execFileSync('node', [SCANNER, ...args], {
       cwd: REPO_ROOT,
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'pipe'],
@@ -167,7 +122,19 @@ export function runScannerInCopy(measured, mutate) {
     for (const rel of tracked.split('\0').filter(Boolean)) {
       const dest = join(dir, rel);
       mkdirSync(dirname(dest), { recursive: true });
-      copyFileSync(join(REPO_ROOT, rel), dest);
+      try {
+        copyFileSync(join(REPO_ROOT, rel), dest);
+      } catch (err) {
+        // The file vanished between `git ls-files` and the copy.
+        //
+        // This is not hypothetical. `tests/sweep-lighthouse-claims.test.js`
+        // writes a control file into the repository's own `docs/` tree,
+        // `git add -f`s it, and removes it afterwards. A concurrent
+        // `git ls-files` sees the file; by the time it is copied, it is
+        // gone. The control file is a test artefact, not a document,
+        // so skipping it is correct.
+        if (err.code !== 'ENOENT') throw err;
+      }
     }
 
     // The scanner and the modules it imports. These may be untracked

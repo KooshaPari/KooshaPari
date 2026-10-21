@@ -50,9 +50,8 @@ Lighthouse evidence at
   in the locally-simulated client metrics, not in the
   site. Evidence:
   `docs/audits/2026-10-19/lighthouse/reverification-2026-10-19T21Z.json`.
-- Unit suite: 838/838 PASS, 0 fail (774/774 at round 6p,
-  +2 for the `runWarnings` field and +11 for the claim
-  sweep, both added in round 6q).
+- Unit suite: 848/848 PASS, 0 fail (845/845 at round 6s,
+  +3 for the size-mandate gate, added in round 6t).
 
 ## What's done
 
@@ -251,9 +250,9 @@ Remaining notes, neither of which blocks closure:
 The post-20th-pass arc is closed: 17 commits pushed to
 `origin/main` (c1a13de through the round 6q close),
 all 5 items in the 06 doc are CLOSED/DECIDED, the unit
-suite is 838/838 PASS, and `HUMAN_REVIEW.md` carries
+suite is 848/848 PASS, and `HUMAN_REVIEW.md` carries
 the complete round-6 audit trail (6c, 6d, 6e, 6f, 6g,
-6i, 6j, 6k, 6l, 6m, 6n, 6o, 6p, 6q, 6r, 6s) — 16 round
+6i, 6j, 6k, 6l, 6m, 6n, 6o, 6p, 6q, 6r, 6s, 6t) — 17 round
 entries.
 
 **Corrected 2026-10-21 (round 6r).** This paragraph
@@ -263,7 +262,7 @@ than defended:
 
 - The unit suite was stated as 774/774. It was
   774/774 when the paragraph was written; the
-  closure receipt above now states **838/838**, which
+  closure receipt above now states **845/845**, which
   is the measured value.
 - The round list stopped at 6m. Rounds 6n, 6o, 6p and
   6q have run since and each has a `HUMAN_REVIEW.md`
@@ -312,20 +311,28 @@ the command actually returned. Measured 2026-10-21.
 
 | # | Requirement | Check | Observed result |
 |---|---|---|---|
-| 1 | No sibling instance of the round 6r defect class remains in the tree | `node scripts/scan-stale-claims.js --measured 838` | 239 checks, 0 findings, exit 0 |
-| 2 | The suite passes in full | `node --test tests/*.test.js` | 838 tests, 838 pass, 0 fail |
-| 3 | The scanner detects the defect it was built to detect | `node --test tests/stale-claim-scan.test.js` | 16 pass, 0 fail (negative control on the verbatim round 6r paragraph) |
-| 4 | The scanner accepts a paragraph that is correct | `node --test tests/stale-claim-scan.test.js` | the tree-derived positive control is accepted, 0 findings |
+| 1 | No sibling instance of the round 6r defect class remains in the tree | `npm run scan:stale-claims` | 249 checks, 0 findings, exit 0, measurement source "measured by running the suite" |
+| 2 | The suite passes in full | `node --test tests/*.test.js` | 848 tests, 848 pass, 0 fail |
+| 3 | The scanner detects the defect it was built to detect | `node --test tests/stale-claim-controls.test.js` | 9 pass, 0 fail (negative controls on a planted stale count, a planted phantom round, a planted incomplete list, and the verbatim round 6r paragraph) |
+| 4 | The scanner accepts a paragraph that is correct | `node --test tests/stale-claim-controls.test.js` | the tree-derived positive control is accepted, 0 findings |
 | 5 | The scanner's rules behave as specified | `node --test tests/stale-claim-rules.test.js` | 15 pass, 0 fail |
 | 6 | The scanner's class predicates behave as specified | `node --test tests/stale-claim-classes.test.js` | 20 pass, 0 fail |
-| 7 | The scanner is reachable by name | `npm run test:stale-claims` | 51 pass, 0 fail across the three files |
-| 8 | The measured count is independent of the document under test | `node --test tests/stale-claim-scan.test.js` | the count comes from a child-process run of the suite; the test asserting circularity fails if the count is read from `STATE.md` |
-| 9 | Every claim in the tree is covered by a check | `npm run test:sweep` | 124 files scanned, 64 claims, 0 uncovered, exit 0 |
+| 7 | The scanner is reachable by name | `npm run test:stale-claims` | 58 pass, 0 fail across the five files (20 classes + 15 rules + 8 scan + 9 controls + 6 gates) |
+| 8 | The measured count is independent of the document under test | `node --test tests/stale-claim-scan.test.js` | 8 pass, 0 fail; the count comes from a child-process run of the suite; the test asserting circularity fails if the count is read from `STATE.md` |
+| 9 | Every claim in the tree is covered by a check | `npm run test:sweep` | 124 files scanned, 64 claims found (45 annotated, 5 adjudicated, 14 quotation), 0 uncovered, exit 0 |
 | 10 | No anti-pattern is present | `bash scripts/anti-pattern-detector.sh` | 0 violations across 29 patterns, exit 0 |
 | 11 | The tree is syntactically sound | `npm run check` | exit 0 |
-| 12 | Every file is within the 500-line hard limit | `bash scripts/anti-pattern-detector.sh` | one warning, `scripts/sweep-lighthouse-claims.js` at 481 lines, pre-existing and not written by round 6s; every file round 6s wrote is at or below 350 |
+| 12 | Every file is within the 500-line hard limit | `bash scripts/anti-pattern-detector.sh` | one warning, `scripts/sweep-lighthouse-claims.js` at 481 lines, pre-existing (481 lines at commit `92c26d6`) and not written by round 6s or 6t; the `tests/` tree is now inside the scan, and every file in it is at or below 275 lines |
 | 13 | The committed Lighthouse bundle re-verifies against its own artifacts | `npm run verify:bundle` | 36/36 category scores, 54/54 metric values, 1/1 raw sha256 match, series MATCH, exit 0 |
 | 14 | The round 6q sweep dominates the round 6p sweep | `npm run compare:sweeps` | 6p saw 18 claim sites, 6q saw 64, 0 sites only 6p could see, exit 0 |
+| 15 | The scanner is reachable from the places that run automatically | `node --test tests/stale-claim-gates.test.js` | 6 pass, 0 fail (the pre-commit hook and the CI workflow both invoke it, and the npm script requires no argument) |
+| 16 | The gate BLOCKS a stale claim, not merely passes a clean tree | `bash scripts/git-hooks/pre-commit`, run 2026-10-21, with a planted `777/777` current count in `STATE.md` | the hook reported one `A-count` finding naming `STATE.md:53`, the planted figure, and the reason, and exited 1 |
+| 17 | The gate PASSES a clean tree, as the real hook | `bash scripts/git-hooks/pre-commit` with the remediation staged | detector 0 violations, suite 848/848, scanner 249 checks and 0 findings, `[pre-commit] ok`, exit 0 |
+| 18 | The published entry point runs with no arguments | `node scripts/scan-stale-claims.js` | measured count 848, measurement source "measured by running the suite", 249 checks, 0 findings, exit 0 |
+| 19 | A count that cannot be parsed is refused, not ignored | `node scripts/scan-stale-claims.js --measured not-a-number` | exit 2, the refusal names the offending argument |
+| 20 | The size gate can see every tracked module | `bash scripts/anti-pattern-detector.sh` | 0 violations across 29 patterns, exit 0; the scan now covers `tests/` as well as `scripts/`, `data/`, and `styles/`, and every file in `tests/` is at or below 275 lines |
+| 21 | The size gate is exercised in its failing direction | `node --test tests/size-mandate-gate.test.js` | 3 pass, 0 fail; the scope is pinned as text, every tracked test module must be covered by the declared globs, and the detector must exit non-zero and name the path when a module exceeds the hard limit |
+| 22 | Splitting the 974-line browser spec preserved its behaviour | `npx playwright test --retries=2 --reporter=json`, run on HEAD `92c26d6` and on the split tree, on the same host | identical title sets (28 tests in 6 files), identical failing set (the same 2 tests in both), identical total attempts (55 each); 26/28 passed in both. The browser suite fails 14/28 without retries in BOTH trees — the browser process dies mid-run under host load, an environmental condition that predates the split. The e2e suite is not run in CI; the last recorded clean run was 29/29 on 2026-10-15 on a lower-load host |
 
 Requirements 1 and 2 are the round's own subject. The
 rest are the standing gates the round had to leave
@@ -333,20 +340,103 @@ green, and they are listed here so that a reader can
 tell what was checked without reconstructing it from
 the commit history.
 
-The count has moved five times during this round —
-832, 834, 835, 837, 838 — and the scanner named the two
-`STATE.md` lines that had fallen behind each time,
-before this table was written. That is requirement 1
-demonstrated on the round's own documents.
+The count has moved seven times during this round —
+832, 834, 835, 837, 838, 842, 845 — and the scanner
+named the `STATE.md` lines that had fallen behind each
+time, before this table was written. That is
+requirement 1 demonstrated on the round's own documents.
+An eighth move, to 848, came in round 6t; it is
+recorded in the correction below.
 
 The check count in row 1 is not a constant. The scanner
 counts one check per paragraph it examines, so it rises
-whenever the tree gains prose: 236, then 237, then 239 as
-this table was written. It is reported as observed, and a
-reader re-running the command should expect a different
-number if the tree has moved on.
+whenever the tree gains prose: 236, then 237, then 239,
+then 247 as this table was written. It is reported as
+observed, and a reader re-running the command should
+expect a different number if the tree has moved on.
 
 The commit count counts round-scoped commits on the
 first-parent line from `c1a13de` through the tip:
 13 at the round 6m close, 17 now. The definition
 reproduces the historical 13 exactly.
+
+**Corrected 2026-10-21 (round 6s, second pass).**
+The round 6s close was reviewed against the acceptance
+path rather than against the gates, and three defects
+in the round's own work were found. All three are
+corrected here rather than defended.
+
+- **The documented entry point did not work.** The
+  scanner required `--measured N` and exited 2 without
+  it. `npm run scan:stale-claims` — the command the
+  round recorded as the way to run it — therefore failed
+  every time it was invoked the way a gate would invoke
+  it. The scanner now measures the suite itself, in a
+  child run that excludes the three stale-claim test
+  files, and `--measured` is an override rather than a
+  requirement.
+
+- **The scanner was wired into no gate.** It was a
+  script, not a gate. Nothing ran it automatically, so
+  it would have drifted out of date exactly as the
+  documents did. It now runs in the pre-commit hook
+  whenever Markdown is staged, and in the CI workflow.
+
+- **The scanner's own measurement was unreachable from
+  the CLI.** The logic that measures the suite without
+  recursing lived in a test helper. It is now
+  `scripts/stale-claim-measure.js`, imported by both
+  the CLI and the tests, so there is one measurement and
+  one definition of the exclusion list.
+
+The suite grew from 838 to 845 as a result. The scanner
+named the `STATE.md` lines that had fallen behind, on
+its own, before either was corrected. The count has now
+moved seven times during this round — 832, 834, 835,
+837, 838, 842, 845 — and each time the scanner named the
+lines that had fallen behind before the documents were
+updated. That is requirement 1 demonstrated on the
+round's own documents, repeatedly.
+
+**Corrected 2026-10-21 (round 6t).** Round 6t was
+asked to prove that the round 6r defect class had no
+sibling instances. It found one, and it was the same
+shape as the original defect: a gate that reported
+success while the thing it policed was broken.
+
+- **The size gate could not see the test tree.**
+  `scripts/anti-pattern-detector.sh` check #27 scans
+  `scripts/`, `data/`, and `styles/` for files over the
+  500-line hard limit. The `tests/` tree was invisible
+  to it. `tests/browser/acceptance.spec.js` stood at
+  974 lines — nearly double the hard limit — while the
+  detector reported "0 violations across 29 patterns".
+  The scan now covers every tracked JavaScript module
+  the project maintains, `tests/` included.
+
+- **A file that a gate cannot see is not governed by
+  it.** The detector's own report had claimed the tree
+  was clean. The claim was true of the files the
+  detector looked at and false of the tree.
+
+- **The oversized file is now split.** The 974-line
+  browser spec became six spec files of 111, 166, 165,
+  275, 189, and 75 lines, plus a 12-line shared
+  helper. The before and after Playwright lists are
+  identical: 28 tests in 6 files, the same 21 test
+  declarations expanding over the same 8 routes in the
+  static-asset sweep, under the same 11 describe
+  blocks.
+
+The size-mandate gate is now `tests/size-mandate-gate.test.js`,
+which pins the scan's scope as text — because a test
+that merely ran the detector could not distinguish "the
+scope is right" from "the tree happens to have no
+oversized file right now", and the second state is
+exactly what let the 974-line file survive.
+
+The suite grew from 845 to 848 as a result. The scanner
+named the three `STATE.md` lines that had fallen behind
+on its own, before this document was corrected. That is
+requirement 1 demonstrated on the round's own
+documents, for the eighth time.

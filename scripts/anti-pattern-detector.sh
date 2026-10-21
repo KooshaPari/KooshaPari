@@ -151,11 +151,20 @@ fi
 # 27. Source files must respect the size mandate: <=350 lines target, <=500 hard
 # limit. Files over the 500 hard limit are violations; files over the 350 target
 # are reported as warnings so the gate reflects the documented contract. Scoped
-# to tracked first-party source (scripts/, data/, styles/) so generated output
-# (bundled/, dist/) and local artifacts (test-screenshots/, output/) are not
-# mistaken for maintained modules. Uses git ls-files rather than a glob sweep so
-# ignored and untracked scratch files cannot cause false hits.
-SIZE_SCAN=$(git ls-files 'scripts/*.js' 'scripts/**/*.js' 'data/*.js' 'styles/*.css' 2>/dev/null \
+# to tracked first-party source (scripts/, data/, styles/, tests/) so generated
+# output (bundled/, dist/) and local artifacts (test-screenshots/, output/) are
+# not mistaken for maintained modules. Uses git ls-files rather than a glob sweep
+# so ignored and untracked scratch files cannot cause false hits.
+#
+# WHY tests/ IS IN SCOPE.
+#
+# This scan originally covered only scripts/, data/, and styles/. That left
+# tests/ invisible, and the gap hid a real hard-limit violation:
+# tests/browser/acceptance.spec.js stood at 974 lines — nearly double the
+# 500-line hard limit — while the detector reported "0 violations across 29
+# patterns". A gate that cannot see a file cannot police it, so the scope was
+# widened to every tracked JavaScript module the project maintains.
+SIZE_SCAN=$(git ls-files 'scripts/*.js' 'scripts/**/*.js' 'data/*.js' 'styles/*.css' 'tests/*.js' 'tests/**/*.js' 'tests/**/*.mjs' 2>/dev/null \
   | xargs wc -l 2>/dev/null \
   | grep -v ' total$' \
   | awk '$1>350 {print $1" "$2}')
