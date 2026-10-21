@@ -13,6 +13,34 @@ set -uo pipefail
 REPO_ROOT="${1:-$(git rev-parse --show-toplevel 2>/dev/null || pwd)}"
 cd "$REPO_ROOT" || { echo "[detector] cannot cd to $REPO_ROOT" >&2; exit 2; }
 
+# TOOL PRECONDITION: ripgrep must exist.
+#
+# This detector shells out to `rg`. If `rg` is absent, every `rg -q`
+# check exits non-zero, every "is this thing present" check reports the
+# thing as MISSING, and the detector produces a long list of violations
+# on files that are entirely correct. It reports a confident falsehood
+# rather than an error.
+#
+# That is not hypothetical. GitHub's ubuntu-latest image does not ship
+# ripgrep, and this workflow ran the detector without it for six
+# consecutive commits before 2026-10-21. Every one of those runs failed
+# with a fabricated violation list naming files that had the required
+# markup. The failure looked like a content regression and was a missing
+# binary.
+#
+# So the absence of the tool is checked first, and it is a distinct
+# exit code (2) from a violation (1). A caller can tell "the tree has
+# problems" from "I could not look at the tree".
+if ! command -v rg >/dev/null 2>&1; then
+  echo "[detector] ripgrep (rg) is not on PATH." >&2
+  echo "[detector] This detector requires rg. Install it, for example:" >&2
+  echo "[detector]   macOS:  brew install ripgrep" >&2
+  echo "[detector]   Debian: sudo apt-get install -y ripgrep" >&2
+  echo "[detector] Refusing to run: without rg every check would report" >&2
+  echo "[detector] correct files as missing their required markup." >&2
+  exit 2
+fi
+
 # Self-exclusion: do not match this script's own pattern comments.
 # NOTE: no inner single quotes here — bash keeps them as literal characters
 # when this variable is word-split into rg args, which broke every `rgs`

@@ -34,8 +34,19 @@ FAILED=0
 
 if [[ "$SCAN_SCRIPTS" -eq 1 ]]; then
   echo "[pre-commit] running anti-pattern detector (scripts/ staged)"
-  if ! bash scripts/anti-pattern-detector.sh; then
-    echo "[pre-commit] detector failed — fix violations or use --no-verify"
+  # `set -e` is in force, so the status is captured with the `||` form.
+  # A bare `cmd` followed by `status=$?` would abort the hook on the
+  # first failing command and never reach the assignment.
+  DETECTOR_STATUS=0
+  bash scripts/anti-pattern-detector.sh || DETECTOR_STATUS=$?
+  if [[ "$DETECTOR_STATUS" -eq 1 ]]; then
+    echo "[pre-commit] detector found violations — fix them or use --no-verify"
+    FAILED=1
+  elif [[ "$DETECTOR_STATUS" -ne 0 ]]; then
+    # Exit 2 is the detector's "I could not look at the tree" code — a
+    # missing tool, not a finding. It is reported as its own failure so
+    # the cause is not mistaken for a content problem.
+    echo "[pre-commit] detector could not run (exit $DETECTOR_STATUS) — see the message above"
     FAILED=1
   fi
 fi

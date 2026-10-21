@@ -1826,12 +1826,13 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > lines) plus `tests/helpers/sweep-lighthouse-support.js` (74
 > lines). Both sweep files pass together: **11/11**.
 >
-> **Verification.** Unit suite: **848/848 pass, 0 fail** across 87
-> test files; scanner via its documented entry point: **249 checks,
+> **Verification.** Unit suite: **852/852 pass, 0 fail** across 88
+> test files; scanner via its documented entry point: **250 checks,
 > 0 findings**, exit 0, measurement source "measured by running the
 > suite"; stale-claim tests: **58 pass, 0 fail** across five files
 > (20 classes, 15 rules, 8 scan, 9 controls, 6 gates);
-> `tests/size-mandate-gate.test.js`: **3 pass, 0 fail**; claim
+> `tests/size-mandate-gate.test.js`: **3 pass, 0 fail**;
+> `tests/detector-tooling.test.js`: **4 pass, 0 fail**; claim
 > sweep: 124 files, 64 claims found (45 annotated, 5 adjudicated,
 > 14 quotation), **0 uncovered**; anti-pattern detector: **0
 > violations across 29 patterns**, exit 0, with one warning — the
@@ -1842,11 +1843,57 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > compare:sweeps`: 6p saw 18 sites, 6q saw 64, 0 sites only 6p
 > could see, exit 0.
 >
-> The suite grew from 845 to 848. The scanner named the three
+> The suite grew from 845 to 852. The scanner named the three
 > `STATE.md` lines that had fallen behind — `STATE.md:53`,
 > `STATE.md:254`, `STATE.md:331` — on its own, before this
 > document was corrected. That is requirement 1 demonstrated for the
 > eighth time.
+>
+> **A second time, on the round's own documents.** Adding the
+> detector-tooling tests moved the count from 848 to 852, and the
+> scanner immediately reported `STATE.md claims 848/848 but the
+> suite holds 852 tests`. The count that had been correct when it
+> was written became stale as the round's own tests were added —
+> the same shape as the round 6r defect, caught by the same gate,
+> on the same document. The count was corrected to 852 before this
+> entry was written.
+>
+> **A CI failure that was not a content failure.** The round 6t
+> push turned CI red at the "Anti-pattern detector" step, with 62
+> violations naming `blog.html`, `contact.html`, `resume.html`,
+> every file under `work/`, and `styles/base.css` — files that
+> carry the required `<main>`, `lang`, skip link, and focus ring.
+> The violation set was byte-identical to the one from the six
+> previous red runs on `main`.
+>
+> The cause was a missing binary, not a missing landmark.
+> `scripts/anti-pattern-detector.sh` shells out to `rg`, and
+> GitHub's `ubuntu-latest` image does not ship ripgrep. Every
+> `rg -q` then exits non-zero, and "is this present?" is answered
+> "no" for every file. The detector reported a confident,
+> specific, entirely fabricated list of violations.
+>
+> This was confirmed, not guessed. Running the detector with `rg`
+> removed from PATH on the identical tree reproduced the CI
+> violation set exactly — the same five violation types, the same
+> files, the same lines — and running it in a fresh clone with
+> ripgrep present reported 0 violations. The same comparison was
+> made against the previous commit's CI run: identical violation
+> sets. The failure predated this round by six commits and was
+> never a content problem.
+>
+> Two fixes. The workflow now installs ripgrep before the detector
+> runs. And the detector now checks for its own tooling and refuses
+> to run without it, exiting **2** — a code distinct from the **1**
+> it uses for a violation, so "the tree has problems" can be told
+> apart from "I could not look at the tree". The pre-commit hook
+> reports the two separately.
+>
+> `tests/detector-tooling.test.js` holds the guard in place with
+> four tests: the detector refuses without ripgrep; the refusal
+> uses exit 2 and fabricates no content violations; the
+> precondition is written into the detector's own source; and the
+> workflow installs ripgrep before it runs the detector.
 >
 > **What did not change.** No production deploy was performed. No
 > Lighthouse run was repeated. No score, metric, or probe

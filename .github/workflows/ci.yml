@@ -28,6 +28,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # The anti-pattern detector shells out to ripgrep. The GitHub
+      # ubuntu-latest image does NOT ship ripgrep, so without this step
+      # every `rg` invocation fails, every `rg -q` check reports the
+      # thing it was looking for as missing, and the detector reports a
+      # long list of violations on files that are perfectly correct.
+      # That is what made CI red on main for six consecutive commits
+      # before 2026-10-21: the failure was the missing tool, not the
+      # code.
+      #
+      # The install is pinned to the package the runner provides. It is
+      # a dependency of the detector, so it is declared here rather
+      # than assumed.
+      - name: Install ripgrep
+        run: sudo apt-get update && sudo apt-get install -y ripgrep
+
       - name: Anti-pattern detector
         run: bash scripts/anti-pattern-detector.sh
 
