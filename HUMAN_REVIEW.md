@@ -2163,6 +2163,85 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > therefore a measurement of the tree at the moment it was taken,
 > not a constant of the repository — the same discipline the
 > stale-claim scanner applies to counts applies here.
+>
+> **Round 6u closed a third time (2026-10-21 22:12-22:17 UTC): the
+> reconciliation commit was itself committed, pushed, and confirmed
+> green.** The claim that did not match its measurement was corrected
+> from 88.61% to **88.63%** branches, leaving the lines figure at
+> 91.18% and the function figure — the one the 85% floor turns on —
+> at 86.48%. Commit `ef50ad3` was pushed, and CI run
+> **39685095488** on `ubuntu-latest`
+> (`https://github.com/KooshaPari/KooshaPari/actions/runs/39685095488`)
+> concluded **success** in 1m50s with every step green. The runner
+> printed **883/883** tests, **269 checks, 0 findings**, and
+> **91.18% / 88.63% / 86.48%** coverage — the figures the tree at
+> `ef50ad3` measured.
+>
+> The final commit was made through the real pre-commit hook, not
+> with `--no-verify`: the hook ran the stale-claim scanner against
+> the staged Markdown, reported 269 checks and 0 findings, and
+> printed `[pre-commit] ok`. Every gate was separately measured on
+> that tree before the commit — suite 883/883, coverage 91.18% /
+> 88.63% / 86.48%, stale-claim tests 58/58, sweep 64 claims with 0
+> uncovered, detector 0 violations across 29 patterns, and
+> `npm run verify:bundle` re-verifying the committed Lighthouse
+> artifacts at 36/36 category scores, 54/54 metric values and 1/1
+> raw sha256 match.
+>
+> **Round 6u closed a fourth time (2026-10-21 22:18-22:35 UTC): the
+> closing paragraph of `STATE.md` was re-measured line by line, and
+> two claims in it had drifted.** The round 6r round had found and
+> corrected this defect class in this same paragraph; the paragraph
+> had drifted again since, in ways the scanner cannot see, because
+> the scanner checks *test counts*, not *commit counts*.
+>
+> - The commit count read **17**. The ledger's own definition —
+>   round-scoped commits on the first-parent line from `c1a13de` —
+>   reproduces 13 at the round 6m close and 17 at the round 6r
+>   close exactly, so the definition was reconstructed and re-run
+>   rather than re-guessed. The commit that wrote the 17 was
+>   `4222594`, and the three that have joined the range since are
+>   the round 6s scanner commit `92c26d6`, the round 6t
+>   size-mandate commit `a11c928`, and the round 6u ledger commit
+>   `766a27d`. The figure at the round 6u close is **20**.
+> - The range end read "the round 6q close". The arc now runs
+>   through the round 6u close.
+>
+> The count is now **anchored to a named commit** (`ef50ad3`) rather
+> than to `HEAD`. The distinction is not cosmetic. A `HEAD`-relative
+> command is a claim that can be invalidated by the very act of
+> committing the sentence that states it — and this round's own
+> commit subject contains the word "round", which the definition
+> matches, so a `HEAD`-anchored sentence would have been false the
+> moment it landed. An anchored claim is also a falsifiable one: a
+> reader can re-run it and get 20, and can check that it also gives
+> 13 at `798e54f` and 17 at `4222594`. Growth after the anchor is
+> the arc advancing, not the ledger being wrong.
+>
+> Everything else in that paragraph was re-measured and still holds:
+> the 18 round headings are present in this file, the 06 doc
+> carries 12 CLOSED/DECIDED markers across its 5 items with no OPEN
+> item, and the suite measures 883/883.
+>
+> **A second order of the same effect, in the opposite direction.**
+> The check count and the coverage figure are also properties of the
+> tree's content, and this round moved both: correcting the
+> paragraph added prose, the prose added scanner checks, and the
+> added checks shifted which branches the scanner's own tests
+> exercise. The count settled at **272** and the coverage at
+> **91.21% lines / 88.69% branches / 86.48% functions**, each
+> measured twice with an identical result. The historical
+> observations are preserved where they belong — 252 and 253 checks
+> and 91.18% / 88.61% for the runs that printed them, and 269
+> checks and 91.18% / 88.63% for the tree at `ef50ad3` — while
+> rows 1 and 29 carry the current figures.
+>
+> The general shape of the finding is worth stating plainly, because
+> it is a property of this ledger rather than of any one round: a
+> number written in prose is a measurement of the tree at the moment
+> it was taken. Every current-state claim in this file is now
+> anchored to a command that reproduces it, and every dated
+> observation is marked as describing its own moment.
 
 
 > **Round 6d (2026-10-15): resume full-project
