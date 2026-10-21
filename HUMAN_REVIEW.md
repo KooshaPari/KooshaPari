@@ -2242,6 +2242,46 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > it was taken. Every current-state claim in this file is now
 > anchored to a command that reproduces it, and every dated
 > observation is marked as describing its own moment.
+>
+> **Round 6u closed a fifth time (2026-10-21 22:58-23:01 UTC): the
+> reconciliation commit was itself committed, pushed, and confirmed
+> green.** Commit `4a86509` — "docs(ledger): anchor the round-scoped
+> commit count and reconcile the drifted closure claims" — was made
+> through the real pre-commit hook, which reported **272 checks, 0
+> findings** on the staged Markdown and printed `[pre-commit] ok`,
+> and was pushed to `origin/main`. CI run **39690295469**
+> (`https://github.com/KooshaPari/KooshaPari/actions/runs/39690295469`)
+> concluded **success** in 1m46s with every step green — Anti-pattern
+> detector, Syntax check, Stage publication, Test suite, Stale-claim
+> scanner, and Coverage gate. The runner printed **883/883** tests,
+> **272 checks, 0 findings**, and **91.21% / 88.69% / 86.48%**
+> coverage, matching the committed claims exactly.
+>
+> Recording that run moved the count once more — to **274** — because
+> the entry above states figures of its own, and a figure stated in
+> prose is a figure the scanner can check. This is the fourth
+> instance of the same effect in this arc, and the ledger now says so
+> where a reader will meet it rather than leaving them to discover it
+> a fourth time: rows 1, 17, and 18 carry the current count, and
+> rows 28, 30, and 31 carry the counts their own runs printed.
+>
+> The arc is now closed on evidence rather than on assertion: the
+> commit that states the current figures is the commit that the
+> runner measured those figures on, and the coverage figure did not
+> move when the count did — 91.21% / 88.69% / 86.48% held across
+> every edit in this round.
+>
+> One measurement deserves recording because it looked like a
+> regression and was not. With the generated `bundled/` directory
+> removed, the scanner refused to run — it needs the staged bundle
+> to count against — and the coverage gate reported a lower figure
+> (89.12% / 87.80% / 85.74%) because ten bundle-dependent tests
+> could not execute. Both numbers were artefacts of a missing
+> generated directory, not of the tree's content: re-staging the
+> bundle restored **272** and **91.21% / 88.69% / 86.48%** exactly.
+> The honest reading is that these figures are properties of a
+> *staged* tree, and the ledger should say so rather than let a
+> reader infer it.
 
 
 > **Round 6d (2026-10-15): resume full-project
