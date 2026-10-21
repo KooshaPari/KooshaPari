@@ -2069,10 +2069,10 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > scanner emits one check per count-claim it reads in the tracked
 > Markdown, so **the ledger's own prose changes the number it
 > reports**. It stood at **251** when the first part of this round's
-> entry was written. The new `STATE.md` control rows (26 and 27) and
-> this continuation's own text added count-claims, and it now stands
-> at **253**. The earlier figure is left as it was recorded at the
-> time; the current one is in `STATE.md` row 1.
+> entry was written. The new `STATE.md` control rows and this
+> continuation's own text added count-claims, and the count moved
+> again with each one. The earlier figures are left as they were
+> recorded at the time; the current one is in `STATE.md` row 1.
 >
 > **What did not change in this continuation.** No production deploy
 > was performed. No Lighthouse run was repeated. No score, metric,
@@ -2114,6 +2114,55 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > clean, and the stash is empty. The two prior CI runs on `main` —
 > the round 6t and 6s pushes — had concluded **failure**, and both
 > are now superseded by a green run on the same runner.
+>
+> **Round 6u closed again (2026-10-21 20:29-20:33 UTC): the ledger
+> update was itself committed, pushed, and confirmed green.** The
+> count the scanner reports depends on the ledger's own prose, so
+> recording the run moved the count; the ledger edit was therefore
+> itself a commit that needed a green run of its own. Commit
+> `766a27d` was pushed, and CI run **39670793875** on `ubuntu-latest`
+> (`https://github.com/KooshaPari/KooshaPari/actions/runs/39670793875`)
+> concluded **success** in 1m22s with every step green. The runner
+> printed **253 checks, 0 findings** — the count the local tree
+> measured at that commit — alongside the same 883/883 suite and the
+> same 91.18% / 88.61% / 86.48% coverage.
+>
+> **The gates were exercised against the real paths, in the failing
+> direction.** Three defects were planted in the working tree and
+> driven through a real `git commit`, so the real hook — not a
+> harness — decided each one:
+>
+> - A stale current count (`777/777` at `STATE.md:53`) — the
+>   round 6r defect class. The hook reported one `A-count` finding
+>   naming the line, the figure, and the reason, and **exited 1**.
+> - An incomplete round list (6u omitted) — the round 6s defect
+>   class. The hook reported one `C-missing` finding naming `6u` and
+>   **exited 1**.
+> - A phantom round (`6v`, named with no entry) — the other half of
+>   the round 6s defect class. The hook reported one `B-round`
+>   finding and **exited 1**.
+>
+> In all three cases the commit did not land, `HEAD` stayed put, and
+> the working tree was restored byte-identical. The positive
+> direction was then exercised on the same tree: the documented
+> entry point exits 0, the sweep accounts for all 64 claims with 0
+> uncovered, and the scanner reports its measured count with 0
+> findings.
+>
+> **One more thing worth recording, because it was not expected and it
+> is a property of the design rather than a defect.** The coverage
+> figure is a function of the tree's *content*. The scanner's own
+> tests exercise whichever branches the ledger's prose happens to
+> trigger, so editing a count-claim moves the number: the tree
+> measured 91.18% lines and 88.63% branches with this entry in
+> place, and 91.18% and 88.61% with the two Markdown files
+> reverted, and 91.21% and 88.69% at an earlier draft of this
+> entry. The function figure, which is what the 85% requirement
+> turns on, is 86.48% in every one of those states, and the gate
+> passes in all of them. A coverage number recorded in prose is
+> therefore a measurement of the tree at the moment it was taken,
+> not a constant of the repository — the same discipline the
+> stale-claim scanner applies to counts applies here.
 
 
 > **Round 6d (2026-10-15): resume full-project
