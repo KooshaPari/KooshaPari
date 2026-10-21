@@ -1463,6 +1463,188 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > detector: **0 violations across 29 patterns**; syntax
 > check: clean. All four gates exit 0.
 
+> **Round 6s (2026-10-21 03:18-03:40 UTC): a scanner for the
+> round 6r defect class, and the three live instances it found.**
+> Round 6r corrected one instance of a defect class. It did not
+> establish that the class was exhausted. Round 6s built the check
+> that would establish it, ran it against the tree, and found three
+> more instances — all of them in the file round 6r had just
+> edited.
+>
+> **The class.** A stale claim about the present, in a document
+> that a reader would take at its word. Round 6r's instance had
+> three parts, and each part needs its own check:
+>
+> - **Class A — a stale count.** The document states a
+>   unit-suite count that no longer matches the measurement, and
+>   carries no dated annotation qualifying it as a record of the
+>   past.
+> - **Class B — a phantom round.** The document names a round as a
+>   `HUMAN_REVIEW.md` round entry when no such entry exists.
+> - **Class C — an incomplete list.** The document claims its list
+>   is the complete set of round entries, and omits a round that
+>   has one.
+>
+> Class B and Class C are not the same check, and the difference is
+> where the defect lived. Round 6r's list named two rounds that had
+> no entry (**6h**, **6i-correction**) and omitted four that did
+> (**6n**, **6o**, **6p**, **6q**). Class B catches the first half.
+> Only Class C catches the second.
+>
+> **The scope had to be the paragraph, not the line.** The round
+> lists in this repository wrap across lines, and neither line of a
+> wrapped list carries both the `HUMAN_REVIEW.md` marker and a
+> round token. A line-scoped check examined two lines in the whole
+> tree and found no round token on either. It could not have
+> reported the defect it existed to detect.
+>
+> **Three defects were found in the check itself**, and each was
+> fixed before the check was trusted:
+>
+> 1. **The round token was too narrow.** It read `6[a-z]`, one
+>    lowercase letter. It matched every real round in this tree,
+>    but a round named `6zz` or `6abc` would have been silently
+>    invisible to the one check that exists to catch phantom
+>    rounds. The token is now `6[a-z]+`. The measured cost of the
+>    broadening, over the tracked Markdown, is four extra tokens
+>    — `6dwdn`, `6px`, `6browser`, `6vw` — none of which is in a
+>    paragraph that claims to be a round-entry list. The same
+>    narrowing was found in `ROUND_ENTRY`, the pattern that
+>    enumerates the entries, and fixed to match: the two must
+>    agree, or the entry set and the claim set are drawn from
+>    different alphabets.
+> 2. **The first implementation of Class C read the wrong
+>    parenthesised group.** The round 6s paragraph holds two: a
+>    commit range (`c1a13de through the round 6q close`) and the
+>    round list. Taking the first group would have found one token
+>    in it and skipped the paragraph — precisely the failure Class C
+>    exists to catch. Every parenthesised group is now examined and
+>    the one holding the most round tokens is taken.
+> 3. **The check was circular.** The test that was supposed to
+>    prove the tree was clean read its expected count out of
+>    `STATE.md` and compared `STATE.md` against it. The two numbers
+>    were the same number by construction, so the check could not
+>    fail however far the document had drifted. It reported 787/787
+>    while the suite held 834 tests. The count is now measured by
+>    running the suite, in a child process, and the document's
+>    claim is checked against that measurement — two independent
+>    facts, asserted directly and without the scanner.
+>
+> **The three live instances**, all in `STATE.md`:
+>
+> - `STATE.md:53` — unit suite stated as **787/787**. The suite
+>   held **838**.
+> - `STATE.md:254` — unit suite stated as **787/787**. Same.
+> - `STATE.md:251` — the "complete round-6 audit trail" named 14
+>   rounds and omitted **6r**, which has a `HUMAN_REVIEW.md` entry
+>   of its own.
+>
+> The 787 figure was not a fabrication. It was correct when
+> written: the suite measured **787** at commit `492969c` (round
+> 6q) and **787** at commit `4222594` (round 6r). It became stale
+> when round 6s added its own 51 tests — 20 in
+> `stale-claim-classes.test.js`, 15 in `stale-claim-rules.test.js`,
+> 16 in `stale-claim-scan.test.js`. The count changed; the document
+> did not.
+>
+> **A fourth defect was found in the check, by the check.** The
+> test that asserted a planted historical claim was clean planted
+> this:
+>
+> > `787/787 PASS, 0 fail (774/774 at round 6p, plus 13 new tests since)`
+>
+> and asserted the scanner would report nothing. It reported one
+> finding, and it was right to. "at round 6p" qualifies the
+> **774/774** that follows it; the **787/787** in front of it is a
+> current claim that disagrees with the measurement. The clause
+> boundary falls between the two figures, so each is judged on its
+> own. The test had planted the round 6r defect and then asserted
+> its absence. The plant was corrected to a genuinely historical
+> clause, and the defective form was kept as a second test that
+> requires the scanner to flag it — the defect shape is now a
+> regression test rather than an assumption.
+>
+> **The count drifted again after the fix, and the scanner caught
+> it.** Adding that one test moved the suite from 834 to 835.
+> `STATE.md` said 834. The scanner reported two findings on the
+> next run, at `STATE.md:53` and `STATE.md:254`, and the document
+> was updated. This is the intended behaviour and it is now
+> observed rather than argued: the check caught the drift caused
+> by the check's own test suite.
+>
+> It happened three more times, for the same reason and with the
+> same result. Splitting the oversized test file added a test, and
+> the count moved to 838. Each time the scanner named the two lines
+> in `STATE.md` that had fallen behind, and each time the document
+> was brought back into line. The count has moved five times in
+> this round — 832, 834, 835, 837, 838 — and the scanner caught
+> every drift without being asked.
+>
+> **The positive control was stale, and the scanner said so.** The
+> control that asserted the scanner ACCEPTED the paragraph round
+> 6r corrected the defect to began failing after round 6r added its
+> own entry. That paragraph is no longer correct: the count 787 is
+> no longer the measured count, and the list of rounds it names now
+> omits rounds that have entries. The scanner was right and the
+> control was wrong. The control was replaced with one built from
+> the tree — the measured count, and the rounds that currently have
+> entries — and the once-correct paragraph was kept as a SECOND
+> NEGATIVE control, because a paragraph that was true and is now
+> false is precisely the shape of the round 6r defect.
+>
+> A hand-written list of rounds in a test fixture is the defect
+> itself, one level down. It has to be maintained by hand, and it
+> goes stale the moment a round is added, and the person who adds
+> the round is the person who would have to update it.
+>
+> **The check is now durable.** It ships as
+> `scripts/scan-stale-claims.js` with its rules, scope, and
+> classes in three further modules, a negative control holding the
+> round 6r paragraph verbatim, and a `C-missing` check that the
+> first implementation lacked. It is reachable as
+> `npm run scan:stale-claims`, and its tests as
+> `npm run test:stale-claims`. The measured count it is given
+> comes from running the suite, not from the document it checks.
+>
+> **The test suite is split by concern.** The single file grew past
+> the repository's 500-line limit, so it is now three files over
+> three concerns — the class predicates, the rules as pure
+> functions, and the CLI against the tree — with the shared
+> fixtures and the measurement in `tests/helpers/`. The measured
+> count is unchanged in kind: the measuring file excludes the three
+> stale-claim test files from its child run and counts their tests
+> from their own source, so the number the scanner is given is
+> still the number the suite reports.
+>
+> **Verification.** Unit suite: **838/838 pass, 0 fail** across 84
+> test files; scanner: **239 checks, 0 findings**, exit 0; claim
+> sweep: 124 files scanned, 64 claims, **0 uncovered**; anti-pattern
+> detector: **0 violations across 29 patterns**; `npm run check`:
+> exit 0; bundle re-verification: 36/36 category scores, 54/54
+> metric values, 1/1 raw sha256 match. Every file this round wrote
+> is at or below 350 lines. All gates exit 0.
+>
+> The full requirement-to-check-to-observed-result table is in
+> `STATE.md` under "Round 6s evidence map". It is here in summary
+> only; the table is the record.
+>
+> **Two tools that were written but never committed are now
+> committed.** `scripts/verify-lighthouse-bundle.mjs` and
+> `scripts/compare-sweep-coverage.mjs` were written in rounds 6p
+> and 6q and left untracked. Both run clean against the current
+> tree, so they are committed here and given names in
+> `package.json` — `npm run verify:bundle` and
+> `npm run compare:sweeps`. A verification harness that lives only
+> in one working directory is not a durable record of anything.
+>
+> **What did not change.** No production deploy was performed. No
+> Lighthouse run was repeated. No score, metric, or probe
+> observation was touched. The substantive record — the 6m batch,
+> the 6p re-verification, the round 6q sweep, and the round 6r
+> correction — is unchanged. Three drifted figures in `STATE.md`
+> were brought back into line with the measurement, and one round
+> entry was added.
+
 > **Round 6d (2026-10-15): resume full-project
 > ownership handoff.** A fresh context (new
 > pane, new agent, new operator session) can

@@ -50,7 +50,7 @@ Lighthouse evidence at
   in the locally-simulated client metrics, not in the
   site. Evidence:
   `docs/audits/2026-10-19/lighthouse/reverification-2026-10-19T21Z.json`.
-- Unit suite: 787/787 PASS, 0 fail (774/774 at round 6p,
+- Unit suite: 838/838 PASS, 0 fail (774/774 at round 6p,
   +2 for the `runWarnings` field and +11 for the claim
   sweep, both added in round 6q).
 
@@ -251,9 +251,9 @@ Remaining notes, neither of which blocks closure:
 The post-20th-pass arc is closed: 17 commits pushed to
 `origin/main` (c1a13de through the round 6q close),
 all 5 items in the 06 doc are CLOSED/DECIDED, the unit
-suite is 787/787 PASS, and `HUMAN_REVIEW.md` carries
+suite is 838/838 PASS, and `HUMAN_REVIEW.md` carries
 the complete round-6 audit trail (6c, 6d, 6e, 6f, 6g,
-6i, 6j, 6k, 6l, 6m, 6n, 6o, 6p, 6q) — 14 round
+6i, 6j, 6k, 6l, 6m, 6n, 6o, 6p, 6q, 6r, 6s) — 16 round
 entries.
 
 **Corrected 2026-10-21 (round 6r).** This paragraph
@@ -263,7 +263,7 @@ than defended:
 
 - The unit suite was stated as 774/774. It was
   774/774 when the paragraph was written; the
-  closure receipt above now states **787/787**, which
+  closure receipt above now states **838/838**, which
   is the measured value.
 - The round list stopped at 6m. Rounds 6n, 6o, 6p and
   6q have run since and each has a `HUMAN_REVIEW.md`
@@ -279,8 +279,72 @@ than defended:
   entries, and 6i-correction amended the 6i entry in
   place — so no round was dropped from the record;
   the entry list simply did not match the headings
-  that exist. The corrected list above is the 14
+  that exist. The corrected list above is the 16
   headings that are actually present.
+
+**Corrected 2026-10-21 (round 6s).** Round 6s built
+a scanner for this defect class and ran it against
+this tree. It found three live instances of the class
+it was built to detect, all of them in this file:
+
+- The unit suite was stated as **787/787** in two
+  places. The suite held **838** tests. The 787 figure
+  was correct at commit `492969c` (round 6q) and at
+  commit `4222594` (round 6r) — both measured at 787 —
+  and became stale when round 6s added its own 51
+  tests (20 in `stale-claim-classes.test.js`, 15 in
+  `stale-claim-rules.test.js`, 16 in
+  `stale-claim-scan.test.js`).
+- The round list omitted **6r**, which has a
+  `HUMAN_REVIEW.md` entry of its own. The list said
+  "the complete round-6 audit trail" and then named
+  14 of the 15 headings that exist.
+
+Both are corrected above. The scanner that found them
+now runs on every suite invocation, against a count
+measured by running the suite rather than read out of
+this file.
+
+### Round 6s evidence map
+
+Each requirement, the command that checks it, and what
+the command actually returned. Measured 2026-10-21.
+
+| # | Requirement | Check | Observed result |
+|---|---|---|---|
+| 1 | No sibling instance of the round 6r defect class remains in the tree | `node scripts/scan-stale-claims.js --measured 838` | 239 checks, 0 findings, exit 0 |
+| 2 | The suite passes in full | `node --test tests/*.test.js` | 838 tests, 838 pass, 0 fail |
+| 3 | The scanner detects the defect it was built to detect | `node --test tests/stale-claim-scan.test.js` | 16 pass, 0 fail (negative control on the verbatim round 6r paragraph) |
+| 4 | The scanner accepts a paragraph that is correct | `node --test tests/stale-claim-scan.test.js` | the tree-derived positive control is accepted, 0 findings |
+| 5 | The scanner's rules behave as specified | `node --test tests/stale-claim-rules.test.js` | 15 pass, 0 fail |
+| 6 | The scanner's class predicates behave as specified | `node --test tests/stale-claim-classes.test.js` | 20 pass, 0 fail |
+| 7 | The scanner is reachable by name | `npm run test:stale-claims` | 51 pass, 0 fail across the three files |
+| 8 | The measured count is independent of the document under test | `node --test tests/stale-claim-scan.test.js` | the count comes from a child-process run of the suite; the test asserting circularity fails if the count is read from `STATE.md` |
+| 9 | Every claim in the tree is covered by a check | `npm run test:sweep` | 124 files scanned, 64 claims, 0 uncovered, exit 0 |
+| 10 | No anti-pattern is present | `bash scripts/anti-pattern-detector.sh` | 0 violations across 29 patterns, exit 0 |
+| 11 | The tree is syntactically sound | `npm run check` | exit 0 |
+| 12 | Every file is within the 500-line hard limit | `bash scripts/anti-pattern-detector.sh` | one warning, `scripts/sweep-lighthouse-claims.js` at 481 lines, pre-existing and not written by round 6s; every file round 6s wrote is at or below 350 |
+| 13 | The committed Lighthouse bundle re-verifies against its own artifacts | `npm run verify:bundle` | 36/36 category scores, 54/54 metric values, 1/1 raw sha256 match, series MATCH, exit 0 |
+| 14 | The round 6q sweep dominates the round 6p sweep | `npm run compare:sweeps` | 6p saw 18 claim sites, 6q saw 64, 0 sites only 6p could see, exit 0 |
+
+Requirements 1 and 2 are the round's own subject. The
+rest are the standing gates the round had to leave
+green, and they are listed here so that a reader can
+tell what was checked without reconstructing it from
+the commit history.
+
+The count has moved five times during this round —
+832, 834, 835, 837, 838 — and the scanner named the two
+`STATE.md` lines that had fallen behind each time,
+before this table was written. That is requirement 1
+demonstrated on the round's own documents.
+
+The check count in row 1 is not a constant. The scanner
+counts one check per paragraph it examines, so it rises
+whenever the tree gains prose: 236, then 237, then 239 as
+this table was written. It is reported as observed, and a
+reader re-running the command should expect a different
+number if the tree has moved on.
 
 The commit count counts round-scoped commits on the
 first-parent line from `c1a13de` through the tip:
