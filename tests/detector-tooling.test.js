@@ -31,7 +31,8 @@
 
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 
@@ -46,12 +47,33 @@ const DETECTOR = join(REPO_ROOT, 'scripts', 'anti-pattern-detector.sh');
  * parent process, and so the detector's own `command -v rg` sees exactly
  * what a CI runner without ripgrep would show it.
  *
+ * THE STUB DIRECTORY IS UNIQUE PER INVOCATION.
+ *
+ * This used to live at a fixed path under the repository (`output/no-rg-path`),
+ * which made it a shared mutable object. Two suite runs overlapping — the
+ * stale-claim scanner's nested measurement run and the parent run, or two
+ * CI jobs on the same checkout — would `rm -rf` the directory out from
+ * under each other. The observable symptom was the detector failing to
+ * spawn at all: the `bash` symlink had been deleted between the directory
+ * being populated and the detector being executed, so the spawn raised
+ * ENOENT, the catch block reported `err.status ?? 1`, and the test saw
+ * exit 1 with EMPTY output where it expected exit 2 with a message.
+ *
+ * That failure was reported as "the detector does not exit 2 when its
+ * tooling is absent", which is a claim about the detector's behaviour and
+ * was false. The detector was never consulted. This is the same class of
+ * defect as the missing-tool bug this file exists to pin: an environment
+ * failure presented as a content failure.
+ *
+ * A unique temporary directory per invocation removes the sharing
+ * entirely. The directory is created under the system temp dir rather
+ * than in the repository, so the test does not leave anything in the tree
+ * and does not depend on `output/` existing.
+ *
  * @returns {{status: number, stdout: string, stderr: string}}
  */
 function runDetectorWithoutRipgrep() {
-  const stubDir = join(REPO_ROOT, 'output', 'no-rg-path');
-  rmSync(stubDir, { recursive: true, force: true });
-  mkdirSync(stubDir, { recursive: true });
+  const stubDir = mkdtempSync(join(tmpdir(), 'no-rg-path-'));
 
   // A directory of symlinks to the tools the detector needs, minus rg.
   // `rg` is simply not linked, so `command -v rg` fails the way it does on
@@ -87,10 +109,26 @@ function runDetectorWithoutRipgrep() {
     });
     return { status: 0, stdout, stderr: '' };
   } catch (err) {
+    // A NON-ZERO EXIT and a FAILED SPAWN are different events, and they
+    // must not be reported as the same number.
+    //
+    // `err.status` is the detector's own exit code and is only present
+    // when the child actually ran. When the child could not be started
+    // at all — ENOENT on the executable, EACCES, a killed process — there
+    // is no status, and the old `err.status ?? 1` collapsed that case
+    // into exit 1, which is the detector's code for "the tree has
+    // violations". A test asserting on that number would then be
+    // asserting on a fact about the test harness and reading as a fact
+    // about the detector.
+    //
+    // A spawn failure is surfaced as a distinct, unmistakable status so
+    // that no assertion can mistake it for the detector's behaviour.
+    const spawned = typeof err.status === 'number';
     return {
-      status: err.status ?? 1,
+      status: spawned ? err.status : 127,
       stdout: err.stdout ?? '',
-      stderr: err.stderr ?? '',
+      stderr: err.stderr ?? (spawned ? '' : `spawn failed: ${err.message}`),
+      spawned,
     };
   } finally {
     rmSync(stubDir, { recursive: true, force: true });
@@ -101,6 +139,10 @@ test('the detector refuses to run without ripgrep', () => {
   const result = runDetectorWithoutRipgrep();
   const output = `${result.stdout}\n${result.stderr}`;
 
+  assert.ok(
+    result.spawned,
+    `the detector must have actually run; it did not spawn. output was: ${output}`,
+  );
   assert.notEqual(
     result.status,
     0,
@@ -125,6 +167,10 @@ test('the missing-tool exit code is distinct from a violation', () => {
   // exactly what happened for six consecutive CI runs.
   const result = runDetectorWithoutRipgrep();
 
+  assert.ok(
+    result.spawned,
+    `the detector must have actually run; it did not spawn. output was: ${result.stdout}${result.stderr}`,
+  );
   assert.equal(
     result.status,
     2,

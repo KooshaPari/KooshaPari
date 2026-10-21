@@ -1370,14 +1370,14 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > its own negative control: a marked paragraph is excused,
 > an unmarked paragraph in the same file is still reported.
 >
-> **Current state.** Over 124 tracked Markdown files: 64
+> **Current state.** Over 125 tracked Markdown files: 64
 > claims found, 45 annotated, 5 adjudicated, 14
 > quotations, **0 uncovered**. The prose matcher finds 45
 > claims; the numeric matcher alone finds 19. The prose
 > form is the measure of what the round 6p sweep could
 > not see.
 >
-> <!-- sweep:counts {"trackedMarkdownFiles":124,"claims":64,"annotated":45,"adjudicated":5,"quotation":14,"uncovered":0,"proseForm":45,"numericForm":19,"annotationWindowLines":14} -->
+> <!-- sweep:counts {"trackedMarkdownFiles":125,"claims":64,"annotated":45,"adjudicated":5,"quotation":14,"uncovered":0,"proseForm":45,"numericForm":19,"annotationWindowLines":14} -->
 >
 > **Evidence unchanged.** No score, metric, or probe
 > observation was altered. The round 6p bundle was
@@ -1903,6 +1903,182 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > 6r correction, and the round 6s close — is unchanged. What
 > changed is that a gate can now see the whole tree, and the tree
 > is whole.
+
+> **Round 6u (2026-10-21 19:20-19:55 UTC): the CI workflow
+> never staged the publication, and the coverage floor was not
+> being met.**
+> Round 6t made the detector able to see the whole tree. Round 6u
+> asked what the tree, once visible, actually said — and found two
+> things that were true of the harness and false of the world.
+>
+> **The staging step was missing from CI.** `tests/workbench-
+> dynamic.test.js` reads the content-hashed bundle in `bundled/`
+> to prove the two project workbenches were not inlined into the
+> main bundle. `bundled/` is gitignored, so a fresh checkout does
+> not have it, and the only thing that produces it is
+> `npm run stage:publication`. The CI workflow never ran that
+> step. From the day the workflow was added it went: install
+> dependencies, run the detector, stop.
+>
+> The failure it produced read as *"manifest.json must exist after
+> a bundle run"* — which is true, and not the point. The point is
+> that CI never ran a bundle. The step was missing underneath a
+> step that had been failing, so it was never reached. This is the
+> round 6t lesson repeated one level down: a gate that fails
+> early hides the gates behind it.
+>
+> `tests/ci-workflow-gate.test.js` (146 lines) pins the workflow's
+> shape in three tests: the staging step runs; it runs BEFORE the
+> suite that reads its output; and the workflow still reaches the
+> coverage gate, the stale-claim scanner, and the ripgrep install.
+> The negative control was exercised directly — the same file was
+> run against the pre-round workflow and **2 of its 3 tests failed**,
+> naming the missing staging step. Against the corrected workflow
+> all 3 pass.
+>
+> **The coverage floor was not being met.** The repository holds an
+> 85% floor on lines, branches, and functions, enforced by
+> `npm run test:coverage`. Measured at HEAD before this round, the
+> tree stood at **89.06% lines, 89.09% branches, 81.94% functions**.
+> The function floor was **3.06 points below** the requirement. The
+> gate was wired, it ran, and it was failing for a reason nobody
+> had read: two modules carried substantial untested behaviour.
+>
+> `scripts/media/cast-player.js` had **0% function coverage** — the
+> player's own transport handlers (play, pause, seek, reset, speed
+> selection, restart, keyboard control) were never driven.
+> `tests/cast-player-transport.test.js` (276 lines, 12 tests) now
+> drives them through the real public controller, and the module
+> stands at **92.00% functions**.
+>
+> `scripts/scroll-reveal.js` had uncovered branches in its observer
+> and scroll-safety-net paths. `tests/scroll-reveal.test.js` (329
+> lines, 16 tests) now covers them, and the module stands at
+> **100.00% functions**.
+>
+> **The tree now stands at 91.18% lines, 88.61% branches, 86.48%
+> functions** — all three above the 85% floor, and `npm run
+> test:coverage` exits 0. The suite is **883 tests, 883 pass, 0
+> fail**.
+>
+> **A coverage trap worth recording.** The first attempt at the
+> scroll-reveal tests loaded a fresh module instance per test via a
+> cache-busted import (`import('../scripts/scroll-reveal.js?x=1')`).
+> V8 treats a query-string-suffixed path as a **different file**,
+> so coverage counted it as an additional, mostly-uncovered copy
+> alongside the canonical path. Overall function coverage went
+> **down**, from 84.48% to 81.10%, while `scroll-reveal.js` itself
+> appeared to rise from 0.00% to 68.75%. The suite was getting
+> better and the number was getting worse, and the number was the
+> one the gate reads. The fix is to load one canonical instance per
+> test file and structure the tests around the module's real
+> lifecycle; Node's runner already gives each test file its own
+> module registry. Recorded in
+> `docs/reference/node-test-coverage-cache-bust-pitfall.md`.
+>
+> **The ledger was corrected, not rewritten.** The scanner named
+> three `852/852` figures in `STATE.md` — at lines 53, 254, and 331
+> — as asserted as current while disagreeing with the measured
+> count. All three now read 883/883, and the scanner reports **251
+> checks, 0 findings**. The two remaining `852` figures (lines 354
+> and 444) are dated historical records of round 6t's move to 852
+> and were deliberately left alone. No prior entry in this file was
+> rewritten.
+>
+> **What did not change.** No production deploy was performed. No
+> Lighthouse run was repeated. No score, metric, or probe
+> observation was touched. The published bundle is byte-identical to
+> the one deployed at SHA `e95e763`. The browser suite was not
+> re-run; its last recorded clean run remains 29/29 on 2026-10-15.
+> No file in `scripts/` was modified — the round changed the
+> harness and the tests, not the site.
+>
+> **Round 6u continued (2026-10-21 19:55-20:15 UTC): the CI
+> workflow was verified by running it, and a latent race was
+> found in the harness while running it.**
+>
+> A CI-equivalent pass was run locally in the workflow's exact step
+> order, and it did not come back clean. An independent worker
+> running the same steps reported that the suite was **flaky rather
+> than green**: 883 tests, but only 5 of 7 runs passed. That is a
+> finding about the repository, not about the worker, and it was
+> chased rather than re-run until it looked better.
+>
+> **The flake was reproduced deterministically.** Four concurrent
+> runs of the suite (`node --test tests/*.test.js`) produced
+> **three failures out of four**. Every failure was the same test:
+> `tests/detector-tooling.test.js:121`, *"the missing-tool exit
+> code is distinct from a violation"*, which asserted exit code 2
+> and observed **exit 1 with empty output**.
+>
+> **The cause was shared mutable state.** That test builds a stub
+> `PATH` directory so the detector can be run without ripgrep, and
+> the directory lived at a **fixed path**, `output/no-rg-path`. Each
+> invocation began by `rm -rf`-ing it and repopulating it with
+> symlinks. Under concurrency one run deleted another's directory
+> between the population and the spawn: the `bash` symlink vanished,
+> the spawn raised ENOENT, and the catch block's `err.status ?? 1`
+> reported **exit 1** — the detector's code for *"the tree has
+> violations"* — for a child process that had never run at all.
+>
+> That is the same class of defect this file exists to pin: an
+> environment failure presented as a content failure. The assertion
+> read as a claim about the detector and was false; the detector was
+> never consulted. The `err.status ?? 1` fallback is what made it
+> possible to read one as the other.
+>
+> **The fix is two changes, both in
+> `tests/detector-tooling.test.js`.** The stub directory is now a
+> fresh `mkdtemp` under the system temp dir per invocation, so no
+> two runs can touch it; and a spawn failure is now reported as a
+> distinct status 127 with a `spawn failed:` message rather than
+> being folded into the detector's exit 1, with both behaviour
+> tests asserting `result.spawned` so a harness failure can never
+> again be read as a detector failure.
+>
+> **The fix was verified in the condition that broke it.** Eight
+> concurrent runs of the file in isolation: **8 passed, 0 failed**.
+> Four concurrent runs of the whole suite: **4 passed, 0 failed**,
+> against the same command that had produced three failures out of
+> four before the change. Six sequential suite runs also passed.
+>
+> **The fresh-checkout path was proven in both directions.**
+> `bundled/` is gitignored (`.gitignore:7`), and no file under it is
+> tracked, so a fresh CI checkout has none. **Negative control:**
+> with `bundled/` removed, the suite ran 868 tests with **10
+> failures** — the bundle-dependent tests failing for want of the
+> artifact. **Positive control:** after `npm run stage:publication`,
+> the same suite ran **883 tests, 883 passed, 0 failed**, and
+> `bundled/` held exactly the hashed bundle `app.bundle.0403d845.js`
+> and its manifest. The staging step is what turns the first result
+> into the second, which is the thing the workflow fix exists to
+> guarantee.
+>
+> **Every workflow step was then run in order from that
+> bundled-less state**, each exiting 0: the anti-pattern detector
+> (**0 violations across 29 patterns**), the syntax check, the
+> staging step, the test suite (**883/883**), the stale-claim
+> scanner (**252 checks, 0 findings**), the coverage gate
+> (**91.18% lines, 88.61% branches, 86.48% functions**), the
+> stale-claim tests (**58/58**), and the sweep (**64 claims, 0
+> uncovered**). The real pre-commit hook then passed with
+> `[pre-commit] ok`.
+>
+> The scanner's check count moved from **251 to 252** across this
+> continuation, and the reason is worth stating: the scanner emits
+> one check per count-claim it reads in the tracked Markdown, and
+> the new `STATE.md` control rows (26 and 27) state measured counts
+> of their own. The figure above is the current measurement. The
+> **251** recorded earlier in this round's entry was the
+> measurement at the time that entry was written and is left as it
+> stood.
+>
+> **What did not change in this continuation.** No production deploy
+> was performed. No Lighthouse run was repeated. No score, metric,
+> or probe observation was touched. No file in `scripts/` was
+> modified — the race fix is in a test file, and the site is
+> byte-identical to what was deployed at SHA `e95e763`. No prior
+> entry in this file was rewritten.
 
 
 > **Round 6d (2026-10-15): resume full-project

@@ -50,9 +50,11 @@ Lighthouse evidence at
   in the locally-simulated client metrics, not in the
   site. Evidence:
   `docs/audits/2026-10-19/lighthouse/reverification-2026-10-19T21Z.json`.
-- Unit suite: 852/852 PASS, 0 fail (845/845 at round 6s,
+- Unit suite: 883/883 PASS, 0 fail (845/845 at round 6s,
   +3 for the size-mandate gate and +4 for the detector-tooling
-  gate, added in round 6t).
+  gate, added in round 6t, +12 for the CI workflow gate and the
+  cast-player transport tests, and +16 for the scroll-reveal
+  orchestrator tests, added in round 6u; measured 2026-10-21).
 
 ## What's done
 
@@ -218,7 +220,7 @@ previously-listed conditions have been met:
    Round 6q corrected the *sweep* that backed the
    annotation, and replaced it with a re-runnable
    check: `scripts/sweep-lighthouse-claims.js`
-   (`npm run test:sweep`). Over 124 tracked Markdown
+   (`npm run test:sweep`). Over 125 tracked Markdown
    files it finds 64 Lighthouse score claims, of which
    45 carry a dated correction, 5 are adjudicated as
    claims about a different run, 14 are quotations
@@ -228,7 +230,7 @@ previously-listed conditions have been met:
    report it. Details in
    `docs/audits/2026-10-19/lighthouse/README.md`,
    section "Claim sweep".
-   <!-- sweep:counts {"trackedMarkdownFiles":124,"claims":64,"annotated":45,"adjudicated":5,"quotation":14,"uncovered":0,"proseForm":45,"numericForm":19,"annotationWindowLines":14} -->
+   <!-- sweep:counts {"trackedMarkdownFiles":125,"claims":64,"annotated":45,"adjudicated":5,"quotation":14,"uncovered":0,"proseForm":45,"numericForm":19,"annotationWindowLines":14} -->
 2. The close criteria no longer need redefining.
 
 Remaining notes, neither of which blocks closure:
@@ -251,9 +253,9 @@ Remaining notes, neither of which blocks closure:
 The post-20th-pass arc is closed: 17 commits pushed to
 `origin/main` (c1a13de through the round 6q close),
 all 5 items in the 06 doc are CLOSED/DECIDED, the unit
-suite is 852/852 PASS, and `HUMAN_REVIEW.md` carries
+suite is 883/883 PASS, and `HUMAN_REVIEW.md` carries
 the complete round-6 audit trail (6c, 6d, 6e, 6f, 6g,
-6i, 6j, 6k, 6l, 6m, 6n, 6o, 6p, 6q, 6r, 6s, 6t) — 17 round
+6i, 6j, 6k, 6l, 6m, 6n, 6o, 6p, 6q, 6r, 6s, 6t, 6u) — 18 round
 entries.
 
 **Corrected 2026-10-21 (round 6r).** This paragraph
@@ -312,15 +314,15 @@ the command actually returned. Measured 2026-10-21.
 
 | # | Requirement | Check | Observed result |
 |---|---|---|---|
-| 1 | No sibling instance of the round 6r defect class remains in the tree | `npm run scan:stale-claims` | 250 checks, 0 findings, exit 0, measurement source "measured by running the suite" |
-| 2 | The suite passes in full | `node --test tests/*.test.js` | 852 tests, 852 pass, 0 fail |
+| 1 | No sibling instance of the round 6r defect class remains in the tree | `npm run scan:stale-claims` | 252 checks, 0 findings, exit 0, measurement source "measured by running the suite" |
+| 2 | The suite passes in full | `node --test tests/*.test.js` | 883 tests, 883 pass, 0 fail |
 | 3 | The scanner detects the defect it was built to detect | `node --test tests/stale-claim-controls.test.js` | 9 pass, 0 fail (negative controls on a planted stale count, a planted phantom round, a planted incomplete list, and the verbatim round 6r paragraph) |
 | 4 | The scanner accepts a paragraph that is correct | `node --test tests/stale-claim-controls.test.js` | the tree-derived positive control is accepted, 0 findings |
 | 5 | The scanner's rules behave as specified | `node --test tests/stale-claim-rules.test.js` | 15 pass, 0 fail |
 | 6 | The scanner's class predicates behave as specified | `node --test tests/stale-claim-classes.test.js` | 20 pass, 0 fail |
 | 7 | The scanner is reachable by name | `npm run test:stale-claims` | 58 pass, 0 fail across the five files (20 classes + 15 rules + 8 scan + 9 controls + 6 gates) |
 | 8 | The measured count is independent of the document under test | `node --test tests/stale-claim-scan.test.js` | 8 pass, 0 fail; the count comes from a child-process run of the suite; the test asserting circularity fails if the count is read from `STATE.md` |
-| 9 | Every claim in the tree is covered by a check | `npm run test:sweep` | 124 files scanned, 64 claims found (45 annotated, 5 adjudicated, 14 quotation), 0 uncovered, exit 0 |
+| 9 | Every claim in the tree is covered by a check | `npm run test:sweep` | 125 files scanned, 64 claims found (45 annotated, 5 adjudicated, 14 quotation), 0 uncovered, exit 0 |
 | 10 | No anti-pattern is present | `bash scripts/anti-pattern-detector.sh` | 0 violations across 29 patterns, exit 0 |
 | 11 | The tree is syntactically sound | `npm run check` | exit 0 |
 | 12 | Every file is within the 500-line hard limit | `bash scripts/anti-pattern-detector.sh` | one warning, `scripts/sweep-lighthouse-claims.js` at 481 lines, pre-existing (481 lines at commit `92c26d6`) and not written by round 6s or 6t; the `tests/` tree is now inside the scan, and every file in it is at or below 275 lines |
@@ -328,8 +330,8 @@ the command actually returned. Measured 2026-10-21.
 | 14 | The round 6q sweep dominates the round 6p sweep | `npm run compare:sweeps` | 6p saw 18 claim sites, 6q saw 64, 0 sites only 6p could see, exit 0 |
 | 15 | The scanner is reachable from the places that run automatically | `node --test tests/stale-claim-gates.test.js` | 6 pass, 0 fail (the pre-commit hook and the CI workflow both invoke it, and the npm script requires no argument) |
 | 16 | The gate BLOCKS a stale claim, not merely passes a clean tree | `bash scripts/git-hooks/pre-commit`, run 2026-10-21, with a planted `777/777` current count in `STATE.md` | the hook reported one `A-count` finding naming `STATE.md:53`, the planted figure, and the reason, and exited 1 |
-| 17 | The gate PASSES a clean tree, as the real hook | `bash scripts/git-hooks/pre-commit` with the remediation staged | detector 0 violations, suite 852/852, scanner 250 checks and 0 findings, `[pre-commit] ok`, exit 0 |
-| 18 | The published entry point runs with no arguments | `node scripts/scan-stale-claims.js` | measured count 852, measurement source "measured by running the suite", 250 checks, 0 findings, exit 0 |
+| 17 | The gate PASSES a clean tree, as the real hook | `bash scripts/git-hooks/pre-commit` with the remediation staged | detector 0 violations, suite 883/883, scanner 252 checks and 0 findings, `[pre-commit] ok`, exit 0 |
+| 18 | The published entry point runs with no arguments | `node scripts/scan-stale-claims.js` | measured count 883, measurement source "measured by running the suite", 252 checks, 0 findings, exit 0 |
 | 19 | A count that cannot be parsed is refused, not ignored | `node scripts/scan-stale-claims.js --measured not-a-number` | exit 2, the refusal names the offending argument |
 | 20 | The size gate can see every tracked module | `bash scripts/anti-pattern-detector.sh` | 0 violations across 29 patterns, exit 0; the scan now covers `tests/` as well as `scripts/`, `data/`, and `styles/`, and every file in `tests/` is at or below 275 lines |
 | 21 | The size gate is exercised in its failing direction | `node --test tests/size-mandate-gate.test.js` | 3 pass, 0 fail; the scope is pinned as text, every tracked test module must be covered by the declared globs, and the detector must exit non-zero and name the path when a module exceeds the hard limit |
@@ -337,6 +339,8 @@ the command actually returned. Measured 2026-10-21.
 | 23 | The detector refuses to run without ripgrep | `node --test tests/detector-tooling.test.js` | 4 pass, 0 fail; with `rg` removed from PATH the detector exits 2 with a message naming ripgrep, and does not report content violations on correct files |
 | 24 | The missing-tool failure is distinguishable from a finding | `env PATH=<no rg> bash scripts/anti-pattern-detector.sh` | exit 2, with "ripgrep (rg) is not on PATH" and install instructions; the violation exit code remains 1 |
 | 25 | CI installs the tool the detector needs, before using it | `gh run view` on the CI run for this commit | the workflow gained an "Install ripgrep" step ahead of "Anti-pattern detector"; without it the detector on `ubuntu-latest` reported 62 fabricated violations on files that carry the required markup, and CI was red on main for the six commits before this round |
+| 26 | CI stages the publication before the suite that reads its output | `rm -rf bundled && npm run stage:publication && node --test tests/*.test.js` | negative control: without `bundled/` the suite ran 868 tests with 10 failures; positive control: after `npm run stage:publication` it ran 883 tests, 883 pass, 0 fail, with `bundled/` holding exactly `app.bundle.0403d845.js` and `manifest.json`. `bundled/` is gitignored (`.gitignore:7`) and no file under it is tracked, so a fresh checkout has none — this is the path CI actually takes |
+| 27 | The suite is not flaky under concurrency | four concurrent `node --test tests/*.test.js` runs | before the round 6u continuation fix, 3 of 4 concurrent runs failed at `tests/detector-tooling.test.js:121` (exit 1 with empty output where exit 2 was asserted); after it, 4 of 4 passed, and 8 of 8 concurrent runs of that file in isolation passed. The cause was a fixed shared stub-PATH directory (`output/no-rg-path`) that concurrent runs deleted from under each other, with `err.status ?? 1` reporting the failed spawn as the detector's violation exit code |
 
 Requirements 1 and 2 are the round's own subject. The
 rest are the standing gates the round had to leave

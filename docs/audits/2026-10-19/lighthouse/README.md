@@ -377,7 +377,7 @@ Performance 95, the 2026-09-15 audit at 99, the
 written reason, because those records are accurate and
 rewriting them would falsify history.
 
-Current state over 124 tracked Markdown files:
+Current state over 125 tracked Markdown files:
 
 | Status | Count | Meaning |
 |---|---|---|
@@ -386,7 +386,7 @@ Current state over 124 tracked Markdown files:
 | quotation | 14 | the falsified text quoted inside a correction |
 | **uncovered** | **0** | a claim with no correction and no adjudication |
 
-<!-- sweep:counts {"trackedMarkdownFiles":124,"claims":64,"annotated":45,"adjudicated":5,"quotation":14,"uncovered":0,"proseForm":45,"numericForm":19,"annotationWindowLines":14} -->
+<!-- sweep:counts {"trackedMarkdownFiles":125,"claims":64,"annotated":45,"adjudicated":5,"quotation":14,"uncovered":0,"proseForm":45,"numericForm":19,"annotationWindowLines":14} -->
 
 The counts above are the state at the time of writing. They are
 reproducible with the command; they are not a claim in place of one.

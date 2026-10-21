@@ -49,6 +49,28 @@ jobs:
       - name: Syntax check
         run: npm run check
 
+      # The publication staging step. It runs esbuild over the CSS and the
+      # JavaScript and writes the content-hashed bundle plus its manifest
+      # into `bundled/`, which is gitignored and therefore absent from a
+      # fresh checkout.
+      #
+      # `tests/workbench-dynamic.test.js` reads that bundle to prove the
+      # two project workbenches were NOT inlined into the main bundle. It
+      # has no way to pass without the artifact, and before this step
+      # existed the CI runner never produced one. The failure read as
+      # "manifest.json must exist after a bundle run", which is true and
+      # not the point: the point is that CI never ran a bundle.
+      #
+      # This is the second defect that the ripgrep fix uncovered. The
+      # detector had been failing on the missing tool since the workflow
+      # was added, so the step after it was never reached, so the missing
+      # build step was never seen.
+      #
+      # The staging step is local: it needs no network and no Vercel
+      # account. It writes to `dist/` and `bundled/`, both gitignored.
+      - name: Stage publication
+        run: npm run stage:publication
+
       - name: Test suite
         run: npm test
 
