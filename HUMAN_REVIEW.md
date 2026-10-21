@@ -2064,14 +2064,15 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > uncovered**). The real pre-commit hook then passed with
 > `[pre-commit] ok`.
 >
-> The scanner's check count moved from **251 to 252** across this
-> continuation, and the reason is worth stating: the scanner emits
-> one check per count-claim it reads in the tracked Markdown, and
-> the new `STATE.md` control rows (26 and 27) state measured counts
-> of their own. The figure above is the current measurement. The
-> **251** recorded earlier in this round's entry was the
-> measurement at the time that entry was written and is left as it
-> stood.
+> The scanner's check count moved across this continuation, and the
+> reason is worth stating, because the mechanism is not obvious: the
+> scanner emits one check per count-claim it reads in the tracked
+> Markdown, so **the ledger's own prose changes the number it
+> reports**. It stood at **251** when the first part of this round's
+> entry was written. The new `STATE.md` control rows (26 and 27) and
+> this continuation's own text added count-claims, and it now stands
+> at **253**. The earlier figure is left as it was recorded at the
+> time; the current one is in `STATE.md` row 1.
 >
 > **What did not change in this continuation.** No production deploy
 > was performed. No Lighthouse run was repeated. No score, metric,
@@ -2079,6 +2080,40 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > modified — the race fix is in a test file, and the site is
 > byte-identical to what was deployed at SHA `e95e763`. No prior
 > entry in this file was rewritten.
+>
+> **Round 6u closed (2026-10-21 20:23-20:25 UTC): the work was
+> committed, pushed, and confirmed green on the real runner.**
+>
+> The change was committed at SHA `d7dc6b1` and pushed to
+> `origin/main`. The real pre-commit hook ran as part of that
+> commit and reported `[pre-commit] ok`. The push triggered CI run
+> **39669823674** on `ubuntu-latest`
+> (`https://github.com/KooshaPari/KooshaPari/actions/runs/39669823674`),
+> and it concluded **success** in 1m34s with every step green:
+> Checkout, Set up Node.js, Install dependencies, Install ripgrep,
+> Anti-pattern detector, Syntax check, **Stage publication**, Test
+> suite, Stale-claim scanner, Coverage gate (85% floor).
+>
+> **The runner's own numbers match the local measurements
+> exactly.** Stage publication reported *"Hashed bundle references
+> applied to 29 page(s) (87 CSS, 29 JS reference rewrites)"* and
+> *"Importmap injected into 27 page(s)"*. The suite reported **883
+> tests, 883 pass, 0 fail**. The scanner reported **252 checks, 0
+> findings**. The coverage gate reported **91.18% lines, 88.61%
+> branches, 86.48% functions**.
+>
+> That last point is the one worth stating plainly: the workflow
+> change is not an assertion that CI now stages the publication, it
+> is an observation that a real `ubuntu-latest` runner did stage it,
+> produced the bundle, and then ran the suite green against that
+> bundle. Before this round the same runner never reached the
+> staging step at all.
+>
+> After the push, `HEAD` and `origin/main` are both
+> `d7dc6b1c36852e60d6356cae7584e3ef2f25fbb4`, the working tree is
+> clean, and the stash is empty. The two prior CI runs on `main` —
+> the round 6t and 6s pushes — had concluded **failure**, and both
+> are now superseded by a green run on the same runner.
 
 
 > **Round 6d (2026-10-15): resume full-project
