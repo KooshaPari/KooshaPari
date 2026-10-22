@@ -144,3 +144,44 @@ test('the CI workflow reaches the coverage gate', () => {
     'the CI workflow must keep the ripgrep install step',
   );
 });
+
+test('the CI workflow pins no action to a retired Node.js runtime', () => {
+  // GitHub deprecated the Node.js 20 action runtime on 2025-09-19 and
+  // now force-runs node20 actions on node24, printing a warning on every
+  // job. `actions/checkout` and `actions/setup-node` both declared
+  // `using: node20` through their v4 majors and only declared
+  // `using: node24` from v5 onward.
+  //
+  // The warning is cosmetic: the workflow still ran, and every step
+  // still went green. But it is the platform announcing that the pinned
+  // runtime is retired, and a workflow that keeps pinning a retired
+  // runtime will eventually fail outright when the override is removed.
+  //
+  // This test pins the floor at v5 — the first major of each action that
+  // targets node24 natively — rather than pinning the exact version in
+  // use, so that ordinary version bumps do not have to touch this file
+  // while a silent downgrade does not pass.
+  const workflow = readFileSync(WORKFLOW, 'utf8');
+
+  const pinned = [...workflow.matchAll(/uses:\s*(actions\/[a-z-]+)@v(\d+)/g)].map(
+    (match) => ({ action: match[1], major: Number(match[2]) }),
+  );
+
+  assert.ok(pinned.length > 0, 'the workflow must pin at least one action');
+  assert.ok(
+    pinned.some((entry) => entry.action === 'actions/checkout'),
+    'the workflow must pin actions/checkout',
+  );
+  assert.ok(
+    pinned.some((entry) => entry.action === 'actions/setup-node'),
+    'the workflow must pin actions/setup-node',
+  );
+
+  for (const entry of pinned) {
+    assert.ok(
+      entry.major >= 5,
+      `${entry.action}@v${entry.major} targets the retired node20 runtime; ` +
+        'v5 or newer is required',
+    );
+  }
+});

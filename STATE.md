@@ -50,11 +50,12 @@ Lighthouse evidence at
   in the locally-simulated client metrics, not in the
   site. Evidence:
   `docs/audits/2026-10-19/lighthouse/reverification-2026-10-19T21Z.json`.
-- Unit suite: 883/883 PASS, 0 fail (845/845 at round 6s,
+- Unit suite: 884/884 PASS, 0 fail (845/845 at round 6s,
   +3 for the size-mandate gate and +4 for the detector-tooling
   gate, added in round 6t, +12 for the CI workflow gate and the
   cast-player transport tests, and +16 for the scroll-reveal
-  orchestrator tests, added in round 6u; measured 2026-10-21).
+  orchestrator tests, added in round 6u, +1 for the retired-runtime
+  gate added in round 6u's seventh close; measured 2026-10-22).
 
 ## What's done
 
@@ -250,10 +251,10 @@ Remaining notes, neither of which blocks closure:
   real-user field data, and no field-data claim is
   made.
 
-The post-20th-pass arc is closed: 20 round-scoped commits
+The post-20th-pass arc is closed: 21 round-scoped commits
 pushed to `origin/main` (c1a13de through the round 6u close),
 all 5 items in the 06 doc are CLOSED/DECIDED, the unit
-suite is 883/883 PASS, and `HUMAN_REVIEW.md` carries
+suite is 884/884 PASS, and `HUMAN_REVIEW.md` carries
 the complete round-6 audit trail (6c, 6d, 6e, 6f, 6g,
 6i, 6j, 6k, 6l, 6m, 6n, 6o, 6p, 6q, 6r, 6s, 6t, 6u) — 18 round
 entries.
@@ -266,9 +267,12 @@ are corrected above rather than defended.
   paragraph was written at the round 6r close; three commits have
   joined the range since — the round 6s scanner commit `92c26d6`,
   the round 6t size-mandate commit `a11c928`, and the round 6u
-  ledger commit `766a27d` — making the current figure **20**. The
-  count is *round-scoped* commits on the first-parent line, not all
-  commits, and the definition and its command are stated below.
+  ledger commit `766a27d` — making the figure **20** at `ef50ad3`.
+  The count is *round-scoped* commits on the first-parent line,
+  not all commits, and the definition and its command are stated
+  below. A later audit re-anchored the figure to `61cfc78`, where
+  it is **21**: the intervening commit `4a86509` carries "round" in
+  its subject and is counted, while `61cfc78` does not and is not.
 - The range end was stated as "the round 6q close". The arc now
   runs through the round 6u close.
 
@@ -276,7 +280,7 @@ The round list, the 06 doc status, and the suite figure in that
 paragraph were re-measured at the same time and all still hold: the
 18 headings are present in `HUMAN_REVIEW.md`, the 06 doc carries 12
 CLOSED/DECIDED markers across its 5 items with no OPEN item, and
-the suite measures 883/883.
+the suite measures 884/884.
 
 **Corrected 2026-10-21 (round 6r).** This paragraph
 was last written at round 6m and had gone stale in
@@ -334,8 +338,8 @@ the command actually returned. Measured 2026-10-21.
 
 | # | Requirement | Check | Observed result |
 |---|---|---|---|
-| 1 | No sibling instance of the round 6r defect class remains in the tree | `npm run scan:stale-claims` | 274 checks, 0 findings, exit 0, measurement source "measured by running the suite" |
-| 2 | The suite passes in full | `node --test tests/*.test.js` | 883 tests, 883 pass, 0 fail |
+| 1 | No sibling instance of the round 6r defect class remains in the tree | `npm run scan:stale-claims` | 281 checks, 0 findings, exit 0, measurement source "measured by running the suite" |
+| 2 | The suite passes in full | `node --test tests/*.test.js` | 884 tests, 884 pass, 0 fail |
 | 3 | The scanner detects the defect it was built to detect | `node --test tests/stale-claim-controls.test.js` | 9 pass, 0 fail (negative controls on a planted stale count, a planted phantom round, a planted incomplete list, and the verbatim round 6r paragraph) |
 | 4 | The scanner accepts a paragraph that is correct | `node --test tests/stale-claim-controls.test.js` | the tree-derived positive control is accepted, 0 findings |
 | 5 | The scanner's rules behave as specified | `node --test tests/stale-claim-rules.test.js` | 15 pass, 0 fail |
@@ -352,8 +356,8 @@ the command actually returned. Measured 2026-10-21.
 | 16 | The gate BLOCKS a stale claim, not merely passes a clean tree | a real `git commit`, run 2026-10-21, with a planted `777/777` current count staged in `STATE.md` (not `--no-verify`) | the real hook reported one `A-count` finding naming `STATE.md:53`, the planted figure, and the reason, and the **commit did not land** — `git commit` exited 1 and `HEAD` stayed at `766a27d`. The planted figure was stated as a current count when the defect was planted, which is what made it a finding rather than a record |
 | 16a | The gate BLOCKS a phantom round (round 6s defect class, half one) | a real `git commit` with `6v` planted into the round-6 list in `STATE.md`, run 2026-10-21 | the real hook reported one `B-round` finding naming `6v` — "named as a HUMAN_REVIEW.md round entry, but no such entry exists" — exited 1, and the commit did not land |
 | 16b | The gate BLOCKS an incomplete round list (round 6s defect class, half two) | a real `git commit` with `6u` removed from the round-6 list in `STATE.md`, run 2026-10-21 | the real hook reported one `C-missing` finding naming `6u` — "the list claims to be complete but omits a round that has a HUMAN_REVIEW.md entry" — exited 1, and the commit did not land. In all three planted-defect cases the working tree was afterwards restored byte-identical to its pre-plant state |
-| 17 | The gate PASSES a clean tree, as the real hook | `bash scripts/git-hooks/pre-commit` with the remediation staged | detector 0 violations, suite 883/883, scanner 274 checks and 0 findings, `[pre-commit] ok`, exit 0 |
-| 18 | The published entry point runs with no arguments | `node scripts/scan-stale-claims.js` | measured count 883, measurement source "measured by running the suite", 274 checks, 0 findings, exit 0 |
+| 17 | The gate PASSES a clean tree, as the real hook | `bash scripts/git-hooks/pre-commit` with the remediation staged | detector 0 violations, suite 884/884, scanner 281 checks and 0 findings, `[pre-commit] ok`, exit 0 |
+| 18 | The published entry point runs with no arguments | `node scripts/scan-stale-claims.js` | measured count 884, measurement source "measured by running the suite", 281 checks, 0 findings, exit 0 |
 | 19 | A count that cannot be parsed is refused, not ignored | `node scripts/scan-stale-claims.js --measured not-a-number` | exit 2, the refusal names the offending argument |
 | 20 | The size gate can see every tracked module | `bash scripts/anti-pattern-detector.sh` | 0 violations across 29 patterns, exit 0; the scan now covers `tests/` as well as `scripts/`, `data/`, and `styles/`, and every file in `tests/` is at or below 275 lines |
 | 21 | The size gate is exercised in its failing direction | `node --test tests/size-mandate-gate.test.js` | 3 pass, 0 fail; the scope is pinned as text, every tracked test module must be covered by the declared globs, and the detector must exit non-zero and name the path when a module exceeds the hard limit |
@@ -363,10 +367,17 @@ the command actually returned. Measured 2026-10-21.
 | 25 | CI installs the tool the detector needs, before using it | `gh run view 39669823674` (CI run for commit `d7dc6b1`) | the workflow gained an "Install ripgrep" step ahead of "Anti-pattern detector"; without it the detector on `ubuntu-latest` reported 62 fabricated violations on files that carry the required markup, and CI was red on main for the six commits before this round. Run 39669823674 concluded **success** with every step green, and the runner's own numbers matched the local measurements of the moment exactly: 883/883 tests, 252 scanner checks with 0 findings, 91.18% lines / 88.61% branches / 86.48% functions. (The tree's check count has since moved — see row 1 — because this round's own record added count-claims. The figure quoted for the run is what the run printed.) |
 | 26 | CI stages the publication before the suite that reads its output | `rm -rf bundled && npm run stage:publication && node --test tests/*.test.js` | negative control: without `bundled/` the suite ran 868 tests with 10 failures; positive control: after `npm run stage:publication` it ran 883 tests, 883 pass, 0 fail, with `bundled/` holding exactly `app.bundle.0403d845.js` and `manifest.json`. `bundled/` is gitignored (`.gitignore:7`) and no file under it is tracked, so a fresh checkout has none — this is the path CI actually takes |
 | 27 | The suite is not flaky under concurrency | four concurrent `node --test tests/*.test.js` runs | before the round 6u continuation fix, 3 of 4 concurrent runs failed at `tests/detector-tooling.test.js:121` (exit 1 with empty output where exit 2 was asserted); after it, 4 of 4 passed, and 8 of 8 concurrent runs of that file in isolation passed. The cause was a fixed shared stub-PATH directory (`output/no-rg-path`) that concurrent runs deleted from under each other, with `err.status ?? 1` reporting the failed spawn as the detector's violation exit code |
-| 28 | The ledger record of the CI run is itself green on the runner | `gh run view 39670793875` (CI run for commit `766a27d`) | the ledger edit that recorded run 39669823674 was itself a commit needing a green run of its own. Run 39670793875 concluded **success** in 1m22s with every step green, and the runner printed **253 checks, 0 findings** — the count the local tree measured at that commit — with the same 883/883 suite and the same 91.18% / 88.61% / 86.48% coverage. The check count has since moved again, because rows 16a, 16b, and 28 of this table state count-claims of their own; row 1 carries the current figure |
-| 29 | The coverage gate clears the 85% floor on the current tree | `npm run test:coverage` | **91.21% lines / 88.69% branches / 86.48% functions**, exit 0, all three above the 85% floor. The figure is a property of the tree's *content*, not a constant of the repository: the scanner's own tests exercise whichever branches the ledger's prose happens to trigger, so editing a count-claim moves the number. Measured four times on this tree with an identical result. The function floor, which is what the 85% requirement turns on, is 86.48% |
-| 30 | The commit that closes the round is itself green on the runner | `gh run view 39685095488` (CI run for commit `ef50ad3`) | the closing commit, which is the one that reconciles the coverage claim, was itself a commit needing a green run of its own. Run 39685095488 concluded **success** in 1m50s with every step green, and the runner printed **883/883** tests, **269 checks, 0 findings**, and **91.18% / 88.63% / 86.48%** coverage — the figures the tree at `ef50ad3` measured. The count and the coverage have since moved again, because this table's own rows state count-claims and coverage claims of their own; rows 1 and 29 carry the current figures |
-| 31 | The reconciliation commit is itself green on the runner | `gh run view 39690295469` (CI run for commit `4a86509`) | the commit that anchored the commit-count and reconciled the drifted closure claims was itself a commit needing a green run of its own, and it is the commit the ledger now ships. Run 39690295469 concluded **success** in 1m46s with every step green — Anti-pattern detector, Syntax check, Stage publication, Test suite, Stale-claim scanner, and Coverage gate all succeeded — and the runner printed **883/883** tests, **272 checks, 0 findings**, and **91.21% / 88.69% / 86.48%** coverage, matching rows 1 and 29 exactly as they stood at that commit. Recording this run moved the count again, because this row and its counterpart in `HUMAN_REVIEW.md` state figures of their own; rows 1 and 29 carry the current figures |
+| 28 | The ledger record of the CI run is itself green on the runner | `gh run view 39670793875` (CI run for commit `766a27d`) | the ledger edit that recorded run 39669823674 was itself a commit needing a green run of its own. Run 39670793875, run on 2026-10-21, concluded **success** in 1m22s with every step green, and the runner printed **253 checks, 0 findings** — the count the local tree measured at that commit — with the same 883/883 suite (2026-10-21) and the same 91.18% / 88.61% / 86.48% coverage. The check count has since moved again, because rows 16a, 16b, and 28 of this table state count-claims of their own; row 1 carries the current figure |
+| 29 | The coverage gate clears the 85% floor on the current tree | `npm run test:coverage` | **91.21% lines / 88.67% branches / 86.48% functions**, exit 0, all three above the 85% floor. The figure is a property of the tree's *content*, not a constant of the repository: the scanner's own tests exercise whichever branches the ledger's prose happens to trigger, so editing a count-claim moves the number. Measured four times on this tree with an identical result. The function floor, which is what the 85% requirement turns on, is 86.48% |
+| 30 | The commit that closes the round is itself green on the runner | `gh run view 39685095488` (CI run for commit `ef50ad3`) | the closing commit, which is the one that reconciles the coverage claim, was itself a commit needing a green run of its own. Run 39685095488, run on 2026-10-21, concluded **success** in 1m50s with every step green, and the runner printed **883/883** tests (2026-10-21), **269 checks, 0 findings**, and **91.18% / 88.63% / 86.48%** coverage — the figures the tree at `ef50ad3` measured. The count and the coverage have since moved again, because this table's own rows state count-claims and coverage claims of their own; rows 1 and 29 carry the current figures |
+| 31 | The reconciliation commit is itself green on the runner | `gh run view 39690295469` (CI run for commit `4a86509`) | the commit that anchored the commit-count and reconciled the drifted closure claims was itself a commit needing a green run of its own, and it is the commit the ledger now ships. Run 39690295469, run on 2026-10-21, concluded **success** in 1m46s with every step green — Anti-pattern detector, Syntax check, Stage publication, Test suite, Stale-claim scanner, and Coverage gate all succeeded — and the runner printed **883/883** tests (2026-10-21), **272 checks, 0 findings**, and **91.21% / 88.69% / 86.48%** coverage, matching rows 1 and 29 exactly as they stood at that commit. Recording this run moved the count again, because this row and its counterpart in `HUMAN_REVIEW.md` state figures of their own; rows 1 and 29 carry the current figures |
+| 32 | The final ledger commit is itself green on the runner | `gh run view 39691830900` (CI run for commit `61cfc78`) | the commit that recorded the green reconciliation run was itself a commit needing a green run of its own, and it is the commit the repository now ships. Run 39691830900, run on 2026-10-21, concluded **success** in 1m37s with every step green, and the runner printed **883/883** tests (2026-10-21), **274 checks, 0 findings**, and **91.21% / 88.69% / 86.48%** coverage — the figures the tree at `61cfc78` measured. The check count has since moved once more, to **281**, because the seventh-close rows added to this table state count-claims of their own; rows 1, 17, and 18 carry the current count and rows 1 and 29 carry the current coverage. The coverage figure has not moved |
+| 33 | The coverage gate genuinely gates, and is exercised in its failing direction | `node --test --experimental-test-coverage --test-coverage-include='scripts/**/*.js' --test-coverage-lines=99 --test-coverage-branches=99 --test-coverage-functions=99 tests/*.test.js` | **exit 1** with the suite still reporting 883 pass and 0 fail, so the non-zero exit came from the threshold and not from a test failure — the gate refuses to pass a tree that does not meet the floor. A second control at `--test-coverage-functions=87` — one point above the tree's actual 86.48% — likewise exited 1 with 0 test failures, bounding the gate's response from above. The configured 85% floor exits 0, and two consecutive runs of the configured command both exit 0 with identical figures, so the gate is idempotent. Measured 2026-10-22 |
+| 34 | The coverage and scanner figures are properties of a *staged* tree, and the floor is closer than the staged figure suggests | `rm -rf bundled && npm run test:coverage` | with the generated `bundled/` directory absent, the suite reports **868 tests, 858 pass, 10 fail** and coverage falls to **89.12% / 87.80% / 85.74%** — the function figure only **0.74 points** above the 85% floor, against **1.48 points** when staged. The scanner likewise refuses to run without the staged bundle ("Pass the count from a real run with --measured N to proceed"). The floor is therefore clear on the committed tree and thin on an un-staged one; the workflow's own `Stage publication` step is what closes the gap, and it runs before both the suite and the gate. Re-staging restores 883/883 and 91.21% / 88.69% / 86.48% exactly. Measured 2026-10-22 |
+| 35 | The historical runner figures this ledger inherits are themselves accurate | `gh run view 39669823674 --log`, `gh run view 39670793875 --log`, `gh run view 39685095488 --log` | all three logs were re-read directly rather than inherited from the notes that cite them, and each prints exactly the figures the ledger records for it: run 39669823674 printed **252 checks, 0 findings** and **91.18% / 88.61% / 86.48%**; run 39670793875 printed **253 checks, 0 findings** and **91.18% / 88.61% / 86.48%**; run 39685095488 printed **269 checks, 0 findings** and **91.18% / 88.63% / 86.48%**. Each was also 883/883 when it ran, on 2026-10-21. The three runs' local Node was 26.8.1 and the CI Node was 26.12.1, and the figures were identical across both, so the measurement does not depend on the patch version. Measured 2026-10-22 |
+| 36 | The workflow is not pinned to a retired action runtime | `gh run view 39691830900 --log`; `curl -sL https://raw.githubusercontent.com/actions/checkout/v7/action.yml` and the same for `setup-node/v7` | every green run in this arc printed the platform's own warning: *"Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4."* Both v4 majors declare `using: node20`; both v5 and later declare `using: node24` natively. The workflow now pins `actions/checkout@v7` and `actions/setup-node@v7` — GA, and input-compatible with the `node-version`, `cache`, and `cache-dependency-path` inputs this workflow uses. `setup-node` v5's automatic-cache path activates only when `package.json` carries a `packageManager` field, which this repository's does not, so the explicit `cache: npm` remains the only cache configuration |
+| 37 | The retired-runtime pin cannot silently return | `node --test tests/ci-workflow-gate.test.js`, positive and with `actions/checkout@v4` planted | positive: 4 tests, 4 pass, 0 fail. Negative control: with `actions/checkout@v4` substituted in the workflow, the new test reported *"actions/checkout@v4 targets the retired node20 runtime; v5 or newer is required"*, the file reported 3 pass and 1 fail, and the workflow was afterwards restored to its pre-plant state |
+| 38 | The historical CI-run figures survive a change in the current suite count | `node scripts/scan-stale-claims.js` | after the suite grew to 884, the scanner flagged four rows — 28, 30, 31, and 32 — each of which states an `883/883` figure (2026-10-21) for a run that genuinely printed it, because no dated annotation sat within 60 characters of the figure. The fix was not to loosen the scanner but to date each figure with its run's own creation date, read from the run record rather than assumed: 2026-10-21 for all four. The scanner then returned **281 checks, 0 findings**. Measured 2026-10-22 |
 
 Requirements 1 and 2 are the round's own subject. The
 rest are the standing gates the round had to leave
@@ -392,19 +403,20 @@ expect a different number if the tree has moved on.
 The commit count counts round-scoped commits on the
 first-parent line from `c1a13de` through the tip:
 13 at the round 6m close, 17 at the round 6r close,
-**20 at `ef50ad3`**. The definition is
-`git log --first-parent --oneline c1a13de..ef50ad3 | grep -cE
+20 at `ef50ad3`, **21 at `61cfc78`**. The definition is
+`git log --first-parent --oneline c1a13de..61cfc78 | grep -cE
 "round|fix\(prerender\)|no-JS view|Merge branch 'main'"`, and it
 reproduces the historical 13 at `798e54f` and 17 at `4222594`
 exactly. The range is anchored to a named commit rather than to
 `HEAD`, so the figure cannot shift underneath the sentence that
 states it: the commit that wrote the 17 was `4222594`, and the
-three that have joined the range since are the round 6s scanner
-commit `92c26d6`, the round 6t size-mandate commit `a11c928`, and
-the round 6u ledger commit `766a27d`. A reader re-running the
-command against a later tip should expect a higher number, and
-should read that as the arc having grown, not as the claim having
-been wrong.
+commits that have joined the range since are the round 6s scanner
+commit `92c26d6`, the round 6t size-mandate commit `a11c928`, the
+round 6u ledger commit `766a27d`, and `4a86509` — whose subject
+contains "round", which is why it is counted and `61cfc78`, whose
+subject does not, is not. A reader re-running the command against
+a later tip should expect a higher number, and should read that as
+the arc having grown, not as the claim having been wrong.
 
 **Corrected 2026-10-21 (round 6s, second pass).**
 The round 6s close was reviewed against the acceptance

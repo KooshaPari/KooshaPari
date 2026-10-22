@@ -14,11 +14,29 @@ jobs:
     timeout-minutes: 15
 
     steps:
+      # Both actions are pinned to a major that natively targets the
+      # Node.js 24 runtime. The runners deprecated the Node.js 20
+      # runtime on 2025-09-19 and now FORCE node20 actions to run on
+      # node24, printing a warning on every job. The v4 majors of these
+      # two actions still declare `using: node20`, so the workflow was
+      # running on a runtime the platform had retired, by way of an
+      # override that is explicitly documented as temporary.
+      #
+      # `actions/checkout@v7` and `actions/setup-node@v7` declare
+      # `using: node24` themselves. The inputs this workflow relies on
+      # (`node-version`, `cache`, `cache-dependency-path`) are unchanged
+      # from v4. `setup-node` v5 added an automatic-cache path that
+      # activates only when package.json carries a `packageManager`
+      # field; this repository's package.json does not, so the explicit
+      # `cache: npm` below remains the only cache configuration.
+      #
+      # `tests/ci-workflow-gate.test.js` asserts that neither action is
+      # pinned below v5, so the deprecation cannot silently return.
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           # The coverage gate was verified on Node 26.8.1. Pinned to the major
           # series that was actually exercised rather than an untested guess.

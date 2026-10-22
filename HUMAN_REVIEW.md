@@ -2282,6 +2282,112 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > The honest reading is that these figures are properties of a
 > *staged* tree, and the ledger should say so rather than let a
 > reader infer it.
+>
+> **Round 6u closed a sixth time (2026-10-21 23:16 - 2026-10-22
+> 03:10 UTC): the closing audit was re-run against the *shipped*
+> tree rather than against the notes that describe it.** The three
+> points below were each verified from primary evidence — a run
+> log, a threshold's exit code, or a deleted directory — rather
+> than from the previous round's summary of them.
+>
+> - **The historical figures are accurate.** Runs 39669823674,
+>   39670793875, and 39685095488 were re-read from their logs
+>   rather than inherited from the notes citing them. Each prints
+>   exactly what this ledger records: 252, 253, and 269 checks with
+>   0 findings, and coverage of 91.18% / 88.61% / 86.48%,
+>   91.18% / 88.61% / 86.48%, and 91.18% / 88.63% / 86.48%
+>   respectively, each 883/883. The local Node was 26.8.1 and the
+>   CI Node 26.12.1, and the figures were identical across both, so
+>   the measurement does not depend on the patch version.
+> - **The coverage gate genuinely gates.** This had been assumed,
+>   never tested. Run at a 99% floor it exits 1 while the suite
+>   still reports 883 pass and 0 fail — the failure is the
+>   threshold, not a test. Run at `--test-coverage-functions=87`,
+>   one point above the tree's actual 86.48%, it likewise exits 1
+>   with 0 test failures, bounding the response from above. At the
+>   configured 85% it exits 0, and two consecutive runs both exit 0
+>   with identical figures, so the gate is idempotent and not
+>   merely a printout.
+> - **The floor is thinner on an un-staged tree than the headline
+>   figure suggests.** Staged, the function figure is 86.48% — 1.48
+>   points above the floor. Un-staged, it is 85.74% — only **0.74
+>   points** above, with 10 of 883 tests failing. The committed
+>   tree clears the floor comfortably; an un-staged checkout clears
+>   it barely. The workflow's own `Stage publication` step is what
+>   closes that gap, and it runs before both the suite and the gate,
+>   so CI is not exposed to it. This is worth knowing precisely
+>   because it means the floor is not as robust as 86.48% makes it
+>   look.
+>
+> Two of my own measurements in this window were wrong and were
+> caught rather than reported: a coverage run that appeared to exit
+> 1 was traced to the missing `bundled/` directory, and a scanner
+> that appeared to exit nonzero was traced to a concurrent coverage
+> run starving it of CPU. Neither was a tree defect. Both are now
+> stated in the ledger with their cause, because a reader who
+> reproduces them should not have to rediscover that they are
+> artefacts.
+>
+> The audit also moved the count once more, to **277** (measured
+> 2026-10-22 03:15 UTC; the count has since moved again, to 281, as
+> the seventh close records), for the same
+> reason it has moved four times before: the new evidence-map rows
+> state figures of their own. The coverage figure did not move —
+> **91.21% / 88.69% / 86.48%** has now survived every edit in this
+> arc. The commit count moved from 20 to **21** for a related
+> reason worth stating plainly: the count's definition matches
+> commit *subjects*, and `4a86509`'s subject contains the word
+> "round" while `61cfc78`'s does not. The figure is therefore
+> sensitive to how this round's own commits happened to be named,
+> which is exactly why it is anchored to a named commit and
+> re-measured rather than left to drift.
+>
+> **Round 6u closed a seventh time (2026-10-22 03:11-04:06 UTC): the
+> CI workflow was moved off a retired runtime, and the ledger was
+> brought back onto the new measurements that followed.**
+>
+> - **The workflow was running on a runtime the platform had
+>   retired.** Every green run in this arc printed a warning:
+>   *"Node.js 20 is deprecated. The following actions target
+>   Node.js 20 but are being forced to run on Node.js 24:
+>   actions/checkout@v4, actions/setup-node@v4."* The v4 majors of
+>   both actions declare `using: node20`; v5 and later declare
+>   `using: node24` natively. The workflow now pins
+>   `actions/checkout@v7` and `actions/setup-node@v7`, both GA
+>   (`v7.0.0` on 2026-06-18 and 2026-07-14 respectively), both
+>   input-compatible with the inputs this workflow uses, and both
+>   free of the warning. `setup-node` v5 added an automatic-cache
+>   path that activates only when `package.json` carries a
+>   `packageManager` field; this repository's `package.json` does
+>   not, so the explicit `cache: npm` remains the only cache
+>   configuration and the cache behaviour is unchanged.
+> - **The deprecation cannot silently return.**
+>   `tests/ci-workflow-gate.test.js` now asserts that no pinned
+>   `actions/*` major is below v5, and the assertion was exercised
+>   in its failing direction: with `actions/checkout@v4` planted,
+>   the test reported *"actions/checkout@v4 targets the retired
+>   node20 runtime; v5 or newer is required"* and exited nonzero.
+> - **The suite grew by one test, and the ledger followed it.**
+>   The suite is now **884/884**, not 883/883, because the gate
+>   test above is a new test. The branch figure moved with it, from
+>   88.69% to **88.67%**; lines stayed at **91.21%** and functions at
+>   **86.48%**. The scanner's own logic had to be satisfied first:
+>   the four historical CI-run rows state an `883/883` figure for
+>   runs that genuinely printed it, and the scanner flagged all four
+>   because they carried no dated annotation near the figure. The
+>   fix was not to loosen the scanner but to date each figure with
+>   the run's own creation date, read from the run record:
+>   2026-10-21 for all four. The check count ended this close at
+>   **281**, with **0 findings**, and the suite at **884/884**.
+> - **One environmental cause was separated from the tree's
+>   condition.** A run of the suite reported 11 failures with
+>   `ENOSPC: no space left on device`. The host's data volume was
+>   at 98% capacity; the scanner directory held 186 GB, of which
+>   521 MB belonged to this project's own abandoned staging
+>   directories. Those five directories were removed and the
+>   remaining space was left alone. The failures were an artefact
+>   of a full disk, not a defect in the tree, and the suite passes
+>   884/884 with the disk at 96%.
 
 
 > **Round 6d (2026-10-15): resume full-project
