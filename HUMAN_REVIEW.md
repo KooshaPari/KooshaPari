@@ -2400,6 +2400,110 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   workflow still ran, but it was the platform saying that the
 >   pinned runtime was retired, and a workflow that keeps pinning a
 >   retired runtime fails outright once the override is removed.
+>
+> **Round 6u closed an eighth time (2026-10-22 05:00-07:20 UTC): the
+> ledger's remaining stale claims were corrected against live
+> measurements, and the file was brought back under the 500-line hard
+> limit.**
+>
+> - **One current claim in `STATE.md` was wrong about the audit
+>   clone.** The file asserted the clone at
+>   `~/.jcode/scratch/master-audit-2026-10-17/clones/kooshapari` was
+>   "clean and on `main` at HEAD `f84011b`". Measured on 2026-10-22,
+>   the clone's `HEAD` and its `origin/main` ref both point at
+>   `d12a30a` — a real ancestor of the published line, 25 commits back
+>   — and it has not fetched since 2026-10-16. The clone is therefore a
+>   stale snapshot, not a checkout of the published head, and must be
+>   fetched before it can confirm anything about the current tree. The
+>   claim is now stated that way, with the remote tip recorded as an
+>   observation of the moment rather than a claim about the tip, since
+>   committing the correction moves the tip.
+> - **The check count and the coverage figure both moved, and the
+>   current claims moved with them.** Adding the clone-claim row and
+>   the row recording run 39723189497 raised the scanner's check count
+>   from **283** to **285** (0 findings), and the ledger's prose
+>   changed which branches the scanner's own tests exercise, which
+>   moved the coverage figure from 91.21% / 88.67% to **91.18% /
+>   88.61% / 86.48%**. Row 29 of the evidence map was updated to the
+>   measured value and re-measured to a fixed point: the second
+>   measurement of the edited tree returned the same figures, so the
+>   claim and the tree agree.
+> - **A gap in the gate was found and named.** The scanner validates
+>   *test* counts but not *check* counts: planting a wrong check count
+>   into row 1 of the evidence map returned "285 checks, 0 findings"
+>   with no finding. The check-count claims in rows 1, 17, and 18 were
+>   therefore corrected by hand against a live measurement, and the
+>   check-count rows that are genuinely historical — 38 and 40 — were
+>   left dated as they are.
+> - **`STATE.md` was over the hard limit and is now under it.** The
+>   corrections pushed the file from 500 to 509 lines. It was compacted
+>   to **499** lines by removing duplicated prose rather than by
+>   deleting evidence: the count-moved narrative appeared twice, the
+>   deploy-approval plan was a numbered list restating its own
+>   summary, and the round 6t correction carried a bullet that
+>   restated its predecessor. Every dated fact survived the compaction
+>   and the scanner's check count did not fall, which is the
+>   observable test of that.
+> - **The battery is green on the committed tree.** Scanner **285
+>   checks, 0 findings**; suite **884/884**; coverage **91.18% lines /
+>   88.61% branches / 86.48% functions**, all three above the 85%
+>   floor; anti-pattern detector **0 violations across 29 patterns**;
+>   Lighthouse claim sweep **0 uncovered** across 125 tracked Markdown
+>   files.
+> - **An environmental condition was separated from the tree's
+>   condition.** During this close the host's load average ran near
+>   1000 and the suite repeatedly exceeded the 600-second foreground
+>   budget. Two `node --test` process groups were killed and the
+>   measurement was re-run detached, where it completed and returned
+>   the same figures. The timeouts were the host, not the tree.
+>
+> **Round 6u closed a ninth time (2026-10-22 07:20-08:05 UTC): a
+> gitignored build artifact was mistaken for a leftover, and the
+> mistake was caught by the suite rather than defended away.**
+>
+> - **`bundled/` is an input to the suite, not a residue of it.**
+>   `bundled/` is gitignored, so it does not appear in `git status`, and
+>   it had been present in the working tree since the last staging run.
+>   It was removed on the reading that a gitignored directory left over
+>   from a previous run should not be carried forward. That reading was
+>   wrong. `tests/bundle-js.test.js`, `tests/build-output.test.js`,
+>   `tests/ci-workflow-gate.test.js`, and the workbench tests all read
+>   `bundled/manifest.json` and the hashed bundle beside it, and
+>   `tests/ci-workflow-gate.test.js` states the dependency in its own
+>   header — "`bundled/` is gitignored, so a fresh checkout does not have
+>   it, and the only thing that produces it is `npm run
+>   stage:publication`". The workflow's own `Stage publication` step
+>   runs before the suite for exactly this reason.
+> - **The mistake was visible in the measurements before it was
+>   explained.** Removing the directory failed **10 tests** and moved the
+>   coverage figure from 91.18 / 88.61 / 86.48 to 90.09 / 87.59 / 85.53
+>   — all three still above the 85% floor, but no longer the figures the
+>   ledger claimed, which is exactly the failure the claim would have
+>   hidden had the numbers not been re-measured. The artifact was
+>   regenerated with `npm run stage:publication`, which produced
+>   `bundled/app.bundle.0403d845.js` — the same content hash the ledger
+>   records as the publication bundle — and the re-measured tree returned
+>   **884/884**, **91.18 / 88.61 / 86.48**, exit 0. Staging twice
+>   produced the identical hash, so the artifact is deterministic.
+> - **Row 34 of the evidence map was corrected rather than defended.**
+>   It recorded the unstaged measurement as "868 tests, 858 pass, 10
+>   fail". Re-running its exact command (`rm -rf bundled && npm run
+>   test:coverage`) on 2026-10-22 returned **869 tests, 859 pass, 10
+>   fail** with the same coverage figures — the suite has grown by one
+>   test since the row was written. The row now carries the current
+>   figures, keeps its original date, and states that the test count
+>   moved while the coverage figures did not.
+> - **The battery is green on the committed tree.** Scanner **285
+>   checks, 0 findings**; suite **884/884**; coverage **91.18% lines /
+>   88.61% branches / 86.48% functions**, all three above the 85%
+>   floor; anti-pattern detector **0 violations across 29 patterns**;
+>   Lighthouse claim sweep **0 uncovered** across 125 tracked Markdown
+>   files.
+> - **The lesson recorded is narrow.** A gitignored directory is not
+>   automatically a leftover, and the question "does the suite read
+>   this?" is answerable from the suite's own source rather than by
+>   inspection of `git status`.
+
 
 
 > **Round 6d (2026-10-15): resume full-project
