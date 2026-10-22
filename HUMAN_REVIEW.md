@@ -2388,6 +2388,18 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   remaining space was left alone. The failures were an artefact
 >   of a full disk, not a defect in the tree, and the suite passes
 >   884/884 with the disk at 96%.
+> - **The change is green on the runner, and the platform's warning
+>   is gone.** Run 39721702987, for commit `00d92d9`, concluded
+>   **success** on 2026-10-22 with every step green. The runner
+>   printed **884/884** tests, **281 checks, 0 findings**, and
+>   **91.21% / 88.67% / 86.48%** coverage — identical to the local
+>   measurements at the same commit, which is the same agreement
+>   every prior run in this arc showed. The log contains **zero**
+>   occurrences of the *"Node.js 20 is deprecated"* warning that
+>   every run before it carried. That warning was cosmetic and the
+>   workflow still ran, but it was the platform saying that the
+>   pinned runtime was retired, and a workflow that keeps pinning a
+>   retired runtime fails outright once the override is removed.
 
 
 > **Round 6d (2026-10-15): resume full-project
