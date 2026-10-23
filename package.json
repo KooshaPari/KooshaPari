@@ -18,7 +18,7 @@
     "preview": "npm run stage:publication && node scripts/preview-server.js"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.13.0",
+    "@axe-core/playwright": "^4.14.0",
     "@playwright/test": "^1.63.0",
     "esbuild": "^0.28.2",
     "linkedom": "^0.18.13",
