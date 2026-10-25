@@ -2555,9 +2555,9 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   than by removing evidence: a word-multiset comparison against the
 >   prior tree confirmed that the only words that disappeared were the
 >   ones the corrections deliberately replaced.
-> - **The battery is green on the merged tree.** Scanner **291
->   checks, 0 findings**; suite **884/884**; coverage **91.90% lines /
->   88.81% branches / 86.74% functions**, all three above the 85%
+> - **The battery is green on the merged tree.** Scanner **295
+>   checks, 0 findings**; suite **884/884**; coverage **91.87% lines /
+>   88.75% branches / 86.74% functions**, all three above the 85%
 >   floor; anti-pattern detector **0 violations across 29 patterns**;
 >   Lighthouse claim sweep **0 uncovered** across 125 tracked Markdown
 >   files.
@@ -2627,6 +2627,63 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   narrow and worth stating: a measurement and a mutation of the same
 >   directory do not share a lane, even when the mutation is only
 >   investigative.
+>
+> **Round 6u closed an eleventh time (2026-10-25 01:23-01:30 UTC): the
+> acceptance path was exercised from a genuine fresh checkout, and the
+> mechanism behind the live stub was identified.**
+>
+> - **The acceptance path was reproduced from a real clone.** Every
+>   green measurement up to this point came from a working tree with a
+>   warm `bundled/` and `dist/`, which is not the tree CI sees. A
+>   scratch clone at `c468e65`, with no `bundled/`, no `dist/`, and no
+>   `node_modules`, was put through CI's exact sequence and reproduced
+>   every figure the ledger records: detector **0 violations across 29
+>   patterns**, syntax check exit 0, `stage:publication` yielding **224
+>   files** and `bundled/app.bundle.d36aedd8.js`, suite **884/884**,
+>   scanner **295 checks, 0 findings**, coverage **91.87% lines / 88.75%
+>   branches / 86.74% functions**, sweep **125 files, 64 claims, 0
+>   uncovered**. The figures are properties of the committed tree.
+> - **Four standing gates that earlier closes had inherited unmeasured
+>   were run.** `npm run test:stale-claims` **58/58**; `npm run check`
+>   exit 0; `npm run verify:bundle` **36/36 category scores, 54/54 metric
+>   values, 1/1 raw sha256, series MATCH**; `npm run compare:sweeps`
+>   **6p saw 18, 6q saw 64, 0 sites only 6p could see**. Rows 7, 11, 13
+>   and 14 are now measured on this tree rather than carried.
+> - **The live stub's mechanism was identified, and it is the tree's own
+>   build output.** `vercel.json`'s `buildCommand` is
+>   `npm run stage:publication && node scripts/stub-all.mjs`. Commit
+>   `09e983f` appended that second clause. Reproduced in a scratch
+>   clone: `stage:publication` alone gives **224 files** and a
+>   22,503-byte `index.html`; appending `stub-all.mjs` reduces `dist/` to
+>   **1 file** and a **718-byte** `index.html` whose sha256 prefix is
+>   `81e7f1928cf70467` — **byte-identical** to the live `kooshapari.com`
+>   body. The live stub is not a deploy-host artifact; it is what this
+>   tree builds.
+> - **The consequence: no gate exercises the production build path.**
+>   CI's "Stage publication" step runs `npm run stage:publication`
+>   alone, so CI validates the **portfolio** while production builds the
+>   **stub**. The workflow contains **0** occurrences of `stub-all` and
+>   **0** of `vercel build`. The build-output test asserts
+>   `vercel.json`'s rewrite exclusions but never its `buildCommand`, and
+>   it reads `.vercel/output/static/` — a gitignored artifact from a
+>   local build dated 2026-10-24 18:18 — instead of running the build,
+>   so it compares the portfolio against an older portfolio. The
+>   `npm run verify` script, the only thing that runs `npx vercel
+>   build`, is not a CI step. **This is the round 6r defect shape
+>   again: a gate that reports success while the thing it policed is
+>   broken.** It is recorded as row 49 and is left for the lane that
+>   owns the stub decision; this lane did not change `vercel.json`'s
+>   `buildCommand`.
+> - **The failure modes were exercised rather than assumed.** Replacing
+>   the staged output with the stub yields **869 tests, 857 pass, 12
+>   fail**, and the failures are diagnosable — the errors name the exact
+>   missing paths (`ENOENT ... open 'dist/work/gmk-arch.html'`) rather
+>   than only asserting a count. The remedy is `npm run
+>   stage:publication`. The pre-commit hook with `bundled/` absent
+>   exits **1** with `ENOENT ... scandir 'bundled'`; after staging it
+>   exits **0** with `[pre-commit] ok`. That prerequisite is documented
+>   at `README.md:71`, so the hook is correct and the gap is in a
+>   reader's expectation.
 
 
 
