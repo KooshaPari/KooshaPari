@@ -2555,7 +2555,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   than by removing evidence: a word-multiset comparison against the
 >   prior tree confirmed that the only words that disappeared were the
 >   ones the corrections deliberately replaced.
-> - **The battery is green on the merged tree.** Scanner **298
+> - **The battery is green on the merged tree.** Scanner **302
 >   checks, 0 findings**; suite **884/884**; coverage **91.87% lines /
 >   88.75% branches / 86.74% functions**, all three above the 85%
 >   floor; anti-pattern detector **0 violations across 29 patterns**;
@@ -2640,7 +2640,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   every figure the ledger records: detector **0 violations across 29
 >   patterns**, syntax check exit 0, `stage:publication` yielding **224
 >   files** and `bundled/app.bundle.d36aedd8.js`, suite **884/884**,
->   scanner **298 checks, 0 findings**, coverage **91.87% lines / 88.75%
+>   scanner **305 checks, 0 findings**, coverage **91.87% lines / 88.75%
 >   branches / 86.74% functions**, sweep **125 files, 64 claims, 0
 >   uncovered**. The figures are properties of the committed tree.
 > - **Four standing gates that earlier closes had inherited unmeasured
@@ -2721,7 +2721,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   `f9d4122`, with `npm ci`, ran the full CI sequence twice and
 >   returned identical results both times: detector 0/29, `check` exit 0,
 >   `stage:publication` 224 files and `app.bundle.d36aedd8.js`, suite
->   **884/884**, scanner **298 checks, 0 findings**, sweep 64 claims with
+>   **884/884**, scanner **305 checks, 0 findings**, sweep 64 claims with
 >   0 uncovered. The standing gates and the coverage gate were then run
 >   inside that clone: **58/58**, **36/36 and 54/54 and 1/1 and MATCH**,
 >   **6p 18 / 6q 64 / 0**, and coverage **91.87 / 88.75 / 86.74**. Rows 52
@@ -2741,6 +2741,67 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   row 42. Every stated date matches its run's own creation date. The
 >   scanner checks prose patterns and does not check that a cited SHA or
 >   run id exists; row 55 is that check.
+>
+> **Round 6u closed a thirteenth time (2026-10-25 01:46-01:58 UTC): the
+> paths no gate runs were exercised, and the ledger's own attribution
+> of the live stub was found to be wrong.**
+>
+> - **`npm run verify` cannot pass on this tree, and the cause is
+>   ordering.** The script is `npx --no-install vercel build --yes &&
+>   npm test && npm run check && npm run test:e2e`. It has never been run
+>   in this arc and CI does not run it. It **exits 1**. `vercel build`
+>   runs `vercel.json`'s `buildCommand`, which ends with
+>   `scripts/stub-all.mjs` and therefore leaves `dist/` holding **1
+>   file**; the very next step, `npm test`, asserts against `dist/` and
+>   fails with `ENOENT ... open 'dist/work/gmk-arch.html'`. The same
+>   tree with `npm run stage:publication && npm test` passes
+>   **884/884**. Row 56 records it.
+> - **The e2e suite, which CI never runs, fails three of twenty-eight.**
+>   Measured: **25 passed, 3 failed** in 1.4m. The causes are named, and
+>   they are not the host load row 22 records — all **15** project pages
+>   exist in `dist/work/` and both `.cast` recordings are present. The
+>   *"Parent view renders 9 agent cards"* spec still expects content
+>   that the stub lane's `036f698` replaced with a 14-line stub; the
+>   *"ShareCLI has heading and download"* spec fails because
+>   `dist/work/sharecli.html` carries **two** `<h1>` elements inside
+>   `<main>` and `toHaveText` requires exactly one — pre-existing, from
+>   `4fece01`, not from this arc. Row 57 records it.
+> - **A correction to this lane's own earlier attribution.** Rows 44 and
+>   48 said the live stub was caused by the empty commit `7bd91ab`
+>   ("chore: trigger vercel deploy"). **That was wrong.** `7bd91ab` is
+>   dated 2026-10-21 and the stub was already live before this arc
+>   began, so a commit cannot explain a state that predates it. The
+>   mechanism is the production `buildCommand`, and the stub persists
+>   because Vercel's git integration re-runs that build on every push.
+> - **Every push to `main` deploys to production, including this lane's.**
+>   The repository has one workflow, `ci.yml`, with no deploy step; the
+>   deploy comes from Vercel's git integration, whose alias
+>   `kooshapari-site-git-main-...vercel.app` is bound to branch `main`.
+>   The newest deployment's log reads *"Cloning
+>   github.com/KooshaPari/KooshaPari (Branch: main, Commit: bd356b9)"*.
+>   Five production deployments were created in the 43 minutes of this
+>   arc, one per push, each 15 to 29 seconds after it: `905fba0` →
+>   `nkn3taonq`, `edb9411` → `finzgewow`, `c468e65` → `ibcmd3j3y`,
+>   `f9d4122` → `8644robah`, `bd356b9` → `nwsif2h4q`. Each one re-published
+>   the stub; none changed it. **This lane did not invoke a deploy**
+>   — it did not run `vercel deploy` or `vercel --prod` — but its pushes
+>   did cause deployments through Vercel's own integration, and the
+>   ledger now says so plainly rather than claiming a cleaner record
+>   than it has. Row 58 records it.
+> - **The production build is deterministic and byte-identical to live.**
+>   Two consecutive `npx vercel build --yes` runs from a clean state each
+>   left `dist/` holding **1 file** with an `index.html` whose sha256
+>   prefix is `81e7f1928cf70467` — identical to each other and to the
+>   live `kooshapari.com` body — and `git status --short` was **empty**
+>   after both, so the build mutates no tracked file. Row 59 records it.
+> - **The scanner's own controls all fire, and the ledger's table is
+>   sound.** The controls file reports **9 pass, 0 fail**, including
+>   detectors for a planted stale count, a phantom round, an incomplete
+>   round list, and the verbatim round 6r paragraph; rules **15/15**,
+>   classes **20/20**, gates **6/6**. The evidence map parses as a
+>   well-formed table: **55** rows numbered contiguously with no gap and
+>   no duplicate, every row carrying exactly **4** content cells. Row 60
+>   records it.
 
 
 
