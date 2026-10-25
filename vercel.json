@@ -101,7 +101,7 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!index\\.html|sitemap\\.xml|robots\\.txt|favicon\\.ico|assets/|asset-sources/|styles/|bundled/|scripts/|data/|public/|tests/|docs/|output/|\\.playwright-cli/|.*\\.md|.*\\.html|.*\\.css|.*\\.js|.*\\.webp|.*\\.png|.*\\.jpg|.*\\.svg|.*\\.gif|.*\\.ico|.*\\.woff|.*\\.woff2|.*\\.ttf|.*\\.eot|.*\\.glb).*)",
       "destination": "/index.html"
     }
   ]

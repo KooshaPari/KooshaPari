@@ -2504,6 +2504,67 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   this?" is answerable from the suite's own source rather than by
 >   inspection of `git status`.
 
+> **Round 6u closed a tenth time (2026-10-22 08:00-08:40 UTC): a
+> concurrent lane's red `main` was found on the runner, diagnosed to a
+> single assertion, and fixed without undoing the other lane's
+> decision.**
+>
+> - **The remote tip arrived red, and the failure was read rather than
+>   assumed.** Four commits from another lane landed on `main` between
+>   the ninth close and this one — `036f698` (parent route replaced by
+>   an under-construction page), `e2518d7` (`scripts/stub-all.mjs`),
+>   `7bd91ab` (deploy trigger), and `09e983f` (site-wide
+>   under-construction stub). The first push of this lane was rejected
+>   because `origin/main` had advanced. The rebased tree showed CI run
+>   **39735524075**, for commit `09e983f`, concluded **failure**.
+> - **The failure was isolated to one assertion.** The failing test was
+>   *"Vercel static output contains only staged publication assets and
+>   matches source"* at `tests/build-output.test.js:150`. The two
+>   stale-claim tests failed with it, but only as a consequence: the
+>   scanner measures the suite, and the suite was red.
+> - **The cause was a dropped contract, not a wrong decision.** Commit
+>   `09e983f` replaced `vercel.json`'s 216-line `rewrites` array — 30
+>   per-page rules plus a catch-all rule carrying the path exclusions —
+>   with a single `/(.*)` rule. The exclusions the build contract
+>   requires (`tests/`, `docs/`, `output/`, `.playwright-cli/`, and
+>   `.*\.md`) went with the rules they were attached to.
+> - **The fix keeps the other lane's intent.** The exclusion
+>   negative-lookahead was restored on the surviving rule, and its
+>   destination was changed from `/root.html` to `/index.html` to match
+>   the stub the lane had introduced. The stub decision stands; only the
+>   exclusion contract was repaired.
+> - **The merged tree was re-measured, not assumed.** The build-output
+>   test passed **3/3**; the full suite passed **884/884**; the scanner
+>   reported **285 checks, 0 findings** at that moment; the detector
+>   reported **0 violations across 29 patterns**; the Lighthouse sweep
+>   reported **0 uncovered** across 125 tracked Markdown files.
+> - **The coverage figures moved with the tree, and were re-measured
+>   rather than defended.** The figure had been 91.18% lines / 88.61%
+>   branches / 86.48% functions. On the merged tree it measures
+>   **91.90% lines / 88.81% branches / 86.74% functions**. The lift has
+>   a cause: commit `036f698` replaced a 184-line roster view with a
+>   14-line stub, removing uncovered code. The margin over the 85%
+>   function floor widened from 1.48 points to 1.74 points.
+> - **Row 42 of the evidence map records the diagnosis**, and row 29
+>   carries the re-measured coverage. Historical rows keep their own
+>   dated figures and were not rewritten.
+> - **The ledger was compacted rather than truncated.** `STATE.md` was
+>   at 499 lines before the tenth-close entries were added. It is now
+>   under the 500-line hard limit again, and the compaction was
+>   performed by rewrapping prose paragraphs to a wider measure rather
+>   than by removing evidence: a word-multiset comparison against the
+>   prior tree confirmed that the only words that disappeared were the
+>   ones the corrections deliberately replaced.
+> - **The battery is green on the merged tree.** Scanner **288
+>   checks, 0 findings**; suite **884/884**; coverage **91.90% lines /
+>   88.81% branches / 86.74% functions**, all three above the 85%
+>   floor; anti-pattern detector **0 violations across 29 patterns**;
+>   Lighthouse claim sweep **0 uncovered** across 125 tracked Markdown
+>   files.
+> - **No deployment was performed by this lane.** The other lane's
+>   deploy trigger was not exercised, and no production publish was
+>   attempted from here.
+
 
 
 > **Round 6d (2026-10-15): resume full-project
