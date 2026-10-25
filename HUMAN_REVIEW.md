@@ -2555,7 +2555,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   than by removing evidence: a word-multiset comparison against the
 >   prior tree confirmed that the only words that disappeared were the
 >   ones the corrections deliberately replaced.
-> - **The battery is green on the merged tree.** Scanner **295
+> - **The battery is green on the merged tree.** Scanner **298
 >   checks, 0 findings**; suite **884/884**; coverage **91.87% lines /
 >   88.75% branches / 86.74% functions**, all three above the 85%
 >   floor; anti-pattern detector **0 violations across 29 patterns**;
@@ -2640,7 +2640,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   every figure the ledger records: detector **0 violations across 29
 >   patterns**, syntax check exit 0, `stage:publication` yielding **224
 >   files** and `bundled/app.bundle.d36aedd8.js`, suite **884/884**,
->   scanner **295 checks, 0 findings**, coverage **91.87% lines / 88.75%
+>   scanner **298 checks, 0 findings**, coverage **91.87% lines / 88.75%
 >   branches / 86.74% functions**, sweep **125 files, 64 claims, 0
 >   uncovered**. The figures are properties of the committed tree.
 > - **Four standing gates that earlier closes had inherited unmeasured
@@ -2684,6 +2684,63 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   exits **0** with `[pre-commit] ok`. That prerequisite is documented
 >   at `README.md:71`, so the hook is correct and the gap is in a
 >   reader's expectation.
+>
+> **Round 6u closed a twelfth time (2026-10-25 01:35-01:42 UTC): every
+> claim from the eleventh close was re-exercised independently, and two
+> of them were corrected.**
+>
+> - **The production build was run for real.** The eleventh close
+>   reconstructed the stub by appending `stub-all.mjs` by hand, which
+>   showed what the build *would* do but not what it *does*. The real
+>   command — `npx vercel build --yes`, which reads `vercel.json`'s
+>   `buildCommand` itself — completed with exit 0 in 7s and left `dist/`
+>   holding exactly **1 file**, a 718-byte `index.html` whose sha256 is
+>   **byte-identical** to the live `kooshapari.com` body. `outputDirectory`
+>   is `dist`, and the stub script empties `dist/` after staging, so the
+>   deployment carries the stub alone.
+> - **The live site's file set was enumerated rather than sampled.**
+>   `/root.html`, `/robots.txt`, `/sitemap.xml`, `/favicon.svg`,
+>   `/engineering.html`, `/work/gmk-arch.html`, `/data/phenotype.js` and
+>   `/bundled/app.bundle.d36aedd8.js` all return **404**. `/work/` and
+>   `/blog/` return **200** but with the **same 718-byte stub body**,
+>   because the rewrite serves `index.html` for every path. The live site
+>   is one file plus a catch-all.
+> - **A correction to the eleventh close: the build-output gate is not
+>   vacuous.** The eleventh close said CI is "structurally blind" to the
+>   production build path. Measured, the gate is **live**: in a scratch
+>   clone `tests/build-output.test.js` reports **3 pass, 0 fail** against
+>   a freshly staged tree and **1 pass, 2 fail** against a tree left in
+>   the production-built state, with `ENOENT ... open
+>   'dist/engineering.html'` naming the divergence. The gate detects the
+>   difference between the staged portfolio and the built stub. What it
+>   does not do is *produce* the build, so in CI — where the tree is
+>   always freshly staged — it never sees the divergence arise. Rows 48
+>   and 49 carry the corrected statements.
+> - **A second clone, by a second route, reproduced every figure
+>   twice.** A shallow `--depth 1` clone from the **GitHub remote** at
+>   `f9d4122`, with `npm ci`, ran the full CI sequence twice and
+>   returned identical results both times: detector 0/29, `check` exit 0,
+>   `stage:publication` 224 files and `app.bundle.d36aedd8.js`, suite
+>   **884/884**, scanner **298 checks, 0 findings**, sweep 64 claims with
+>   0 uncovered. The standing gates and the coverage gate were then run
+>   inside that clone: **58/58**, **36/36 and 54/54 and 1/1 and MATCH**,
+>   **6p 18 / 6q 64 / 0**, and coverage **91.87 / 88.75 / 86.74**. Rows 52
+>   and 53 record it.
+> - **The failing-direction gates were confirmed by planting real
+>   defects.** The size-mandate gate, the detector-tooling gate and the
+>   CI-workflow gate all pass; `scan-stale-claims --measured not-a-number`
+>   exits **2** naming the argument. Then `actions/checkout@v4` was
+>   planted in the workflow: the CI-workflow gate reported **3 pass, 1
+>   fail** with *"actions/checkout@v4 targets the retired node20
+>   runtime; v5 or newer is required"*, and the workflow was afterwards
+>   restored byte-identical. These gates are live. Row 54 records it.
+> - **Every citation in this ledger was checked for existence.** All
+>   **26** cited commit SHAs resolve to real commits. All **12** cited CI
+>   run ids resolve to the commit the ledger names — 11 `success`, and
+>   run 39735524075 `failure` for `09e983f`, the red run described in
+>   row 42. Every stated date matches its run's own creation date. The
+>   scanner checks prose patterns and does not check that a cited SHA or
+>   run id exists; row 55 is that check.
 
 
 
