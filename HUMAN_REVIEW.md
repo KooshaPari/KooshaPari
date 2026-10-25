@@ -2555,7 +2555,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   than by removing evidence: a word-multiset comparison against the
 >   prior tree confirmed that the only words that disappeared were the
 >   ones the corrections deliberately replaced.
-> - **The battery is green on the merged tree.** Scanner **290
+> - **The battery is green on the merged tree.** Scanner **291
 >   checks, 0 findings**; suite **884/884**; coverage **91.90% lines /
 >   88.81% branches / 86.74% functions**, all three above the 85%
 >   floor; anti-pattern detector **0 violations across 29 patterns**;
@@ -2575,6 +2575,58 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   88.81% branches / 86.74% functions** — identical to the local
 >   measurements at the same commit. Row 43 of the evidence map records
 >   it.
+> - **The live site was checked, and it is no longer the published
+>   portfolio.** Measured 2026-10-25 at 01:15 UTC, all three in-scope
+>   domains — `kooshapari.com`, `www.kooshapari.com`, and
+>   `kooshapari-site.vercel.app` — return HTTP 200 and serve the same
+>   718-byte page titled "Under construction". Every portfolio route
+>   (`/`, `/engineering`, `/work`, `/resume`, `/blog`) returns that
+>   identical body, and `/data/phenotype.js` and
+>   `/bundled/app.bundle.0403d845.js` both return HTTP 404. The receipt
+>   of 2026-10-19 recorded HTTP 200 on those same routes with content
+>   byte-identical to prebuilt, so the live site has changed since the
+>   closure was recorded.
+> - **The cause was located.** Commit `7bd91ab` ("chore: trigger vercel
+>   deploy") is an empty commit whose only purpose was to trigger a
+>   Vercel deployment, and the deployment it triggered carried
+>   `09e983f`'s site-wide stub. `scripts/stub-all.mjs` clears `dist/`
+>   and writes a single `index.html`. Row 44 of the evidence map
+>   records the observation.
+> - **The ledger was corrected rather than defended.** The status
+>   section now carries a dated correction stating that the closure
+>   describes what was published and verified on 2026-10-19 and is no
+>   longer a statement about what the live site serves. The 2026-10-19
+>   receipt bullet is explicitly dated and cross-referenced. The
+>   historical receipt and Lighthouse evidence are untouched.
+> - **This lane did not deploy, and did not restore.** No deployment
+>   was performed from here in either direction — neither to ship the
+>   stub nor to roll the site back to the portfolio. The stub is
+>   another lane's deliberate decision, and reversing it is not this
+>   lane's call to make.
+> - **The bundle hash moved with the tree, and was re-measured.** The
+>   bundle filename carries a content hash of the bundled JavaScript
+>   (`sha256(bundle).slice(0, 8)` in `scripts/bundle-js.js`), so it is
+>   a property of the tree's content rather than a constant. The ledger
+>   recorded `app.bundle.0403d845.js`; on the current tree
+>   `npm run stage:publication` produces
+>   **`app.bundle.d36aedd8.js`**, deterministically across three
+>   consecutive runs. The cause is commit `036f698`, which replaced the
+>   184-line `scripts/views/parent.js` roster view with a 14-line stub;
+>   that view is inside the bundle graph, so the content hash moved
+>   with it. Row 26 now carries the current hash and keeps its original
+>   dated figure.
+> - **One measurement was invalidated by this lane's own action, and
+>   was re-run.** A coverage run started at 01:16:45 was corrupted
+>   because `scripts/stub-all.mjs` was executed in parallel at 01:17:16
+>   to compare the local build against the live stub; that script clears
+>   `dist/`, and three content tests failed against the emptied
+>   directory (869 tests, 866 pass, 3 fail, coverage 89.78 / 87.80 /
+>   85.99). The local `dist/` was immediately restored by
+>   `npm run stage:publication` (224 files, a 22,503-byte `index.html`),
+>   and the coverage gate was re-run on a quiet tree. The lesson is
+>   narrow and worth stating: a measurement and a mutation of the same
+>   directory do not share a lane, even when the mutation is only
+>   investigative.
 
 
 
