@@ -2555,7 +2555,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   than by removing evidence: a word-multiset comparison against the
 >   prior tree confirmed that the only words that disappeared were the
 >   ones the corrections deliberately replaced.
-> - **The battery is green on the merged tree.** Scanner **288
+> - **The battery is green on the merged tree.** Scanner **290
 >   checks, 0 findings**; suite **884/884**; coverage **91.90% lines /
 >   88.81% branches / 86.74% functions**, all three above the 85%
 >   floor; anti-pattern detector **0 violations across 29 patterns**;
@@ -2564,6 +2564,17 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > - **No deployment was performed by this lane.** The other lane's
 >   deploy trigger was not exercised, and no production publish was
 >   attempted from here.
+> - **The closing commit is green on the runner.** Commit `905fba0`
+>   was pushed without force and CI run **40149266785** concluded
+>   **success** on 2026-10-25 in 1m58s, with every step green — Setup
+>   job, Checkout, Set up Node.js, Install dependencies, Install
+>   ripgrep, Anti-pattern detector, Syntax check, Stage publication,
+>   Test suite, Stale-claim scanner, Coverage gate (85% floor), Post
+>   Set up Node.js, Post Checkout, and Complete job. The runner printed
+>   **884/884** tests, **288 checks, 0 findings**, and **91.90% lines /
+>   88.81% branches / 86.74% functions** — identical to the local
+>   measurements at the same commit. Row 43 of the evidence map records
+>   it.
 
 
 
