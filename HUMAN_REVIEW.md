@@ -2555,9 +2555,9 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   than by removing evidence: a word-multiset comparison against the
 >   prior tree confirmed that the only words that disappeared were the
 >   ones the corrections deliberately replaced.
-> - **The battery is green on the merged tree.** Scanner **302
->   checks, 0 findings**; suite **884/884**; coverage **91.87% lines /
->   88.75% branches / 86.74% functions**, all three above the 85%
+> - **The battery is green on the merged tree.** Scanner **318
+>   checks, 0 findings**; suite **884/884**; coverage **91.90% lines /
+>   88.80% branches / 86.74% functions**, all three above the 85%
 >   floor; anti-pattern detector **0 violations across 29 patterns**;
 >   Lighthouse claim sweep **0 uncovered** across 125 tracked Markdown
 >   files.
@@ -2640,7 +2640,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   every figure the ledger records: detector **0 violations across 29
 >   patterns**, syntax check exit 0, `stage:publication` yielding **224
 >   files** and `bundled/app.bundle.d36aedd8.js`, suite **884/884**,
->   scanner **305 checks, 0 findings**, coverage **91.87% lines / 88.75%
+>   scanner **318 checks, 0 findings**, coverage **91.90% lines / 88.80%
 >   branches / 86.74% functions**, sweep **125 files, 64 claims, 0
 >   uncovered**. The figures are properties of the committed tree.
 > - **Four standing gates that earlier closes had inherited unmeasured
@@ -2721,7 +2721,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   `f9d4122`, with `npm ci`, ran the full CI sequence twice and
 >   returned identical results both times: detector 0/29, `check` exit 0,
 >   `stage:publication` 224 files and `app.bundle.d36aedd8.js`, suite
->   **884/884**, scanner **305 checks, 0 findings**, sweep 64 claims with
+>   **884/884**, scanner **318 checks, 0 findings**, sweep 64 claims with
 >   0 uncovered. The standing gates and the coverage gate were then run
 >   inside that clone: **58/58**, **36/36 and 54/54 and 1/1 and MATCH**,
 >   **6p 18 / 6q 64 / 0**, and coverage **91.87 / 88.75 / 86.74**. Rows 52
@@ -2802,6 +2802,53 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   well-formed table: **55** rows numbered contiguously with no gap and
 >   no duplicate, every row carrying exactly **4** content cells. Row 60
 >   records it.
+>
+> **Round 6u closed a fourteenth time (2026-10-25 02:07-02:17 UTC): the
+> thirteenth close's findings were themselves tested, and two of them
+> were corrected.**
+>
+> - **The stub's ship date is now exact.** Reading the deployed body of
+>   each production deployment through the authenticated CLI gives a
+>   clean boundary: `gevh5ms29`, created **23:32:01** on 2026-10-21 --
+>   thirteen seconds after the empty commit `7bd91ab` -- served the
+>   **portfolio**; `h7ta0ny0i`, created **23:41:28**, two seconds after
+>   `09e983f`, served the **stub**; `8rctaf36x`, created at 23:41:25 right
+>   after `e2518d7`, was **Canceled**. Deployments 6, 7 and 9 days old all
+>   served the portfolio. So `7bd91ab` did trigger a deploy, but it
+>   published the portfolio; the stub first shipped with `09e983f`. Row 62
+>   records it.
+> - **A correction: the `npm run verify` failure has two causes, not
+>   one.** Row 56 blamed ordering alone. Running each of the script's
+>   four steps in sequence after the build: the build exits **0** and
+>   leaves `dist/` holding one file; `npm test` exits **1** against that
+>   stub; `npm run check` exits **0**, because it only syntax-checks four
+>   files; `npm run test:e2e` exits **1** as well, and it **restages**
+>   the portfolio first, so its failure is **independent** of the build.
+>   Reordering would move the failure rather than fix it. Row 63 records
+>   it.
+> - **The e2e failures are deterministic.** Three runs at `6e7e209` all
+>   report **25 passed, 3 failed** out of **28**, and the failing set is
+>   byte-identical across runs. These are properties of the tree, not the
+>   host load row 22 records. Row 64 records it.
+> - **Every row cross-reference in this ledger resolves.** The ledger
+>   contains **39** row citations naming **15** distinct rows, and
+>   **0** name a row that does not exist; each was checked against the
+>   cited row's own subject and matches. Row 65 records it.
+> - **And a real gap in the scanner, found by planting a defect in the
+>   real tree and committing it for real.** Planted as
+>   `901 tests, 901 pass, 0 fail`, the scanner reported **318 checks and
+>   0 findings** and **the commit landed** -- the real hook, no
+>   `--no-verify`. Planted as the fraction form `901` slash `901` in a
+>   sentence reading "unit tests pass", the scanner reported
+>   **`FINDING [A-count] STATE.md:323`** and **the commit did
+>   not land**. The cause is exact: `COUNT_RE` at
+>   `scripts/stale-claim-patterns.js:157` matches only the **fraction**
+>   form `N/N`; the notation `N tests, N pass, 0 fail` is never offered
+>   as a candidate. **The gap is live on this tree**: the ledger's own
+>   prose uses that notation 7 times in `STATE.md` and twice in
+>   `HUMAN_REVIEW.md`, and the scanner's negative control uses the
+>   fraction form, which is why row 60's controls did not catch it.
+>   Row 66 records it.
 
 
 
