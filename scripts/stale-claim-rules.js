@@ -47,6 +47,8 @@ import {
   precedingClause,
 } from './stale-claim-scope.js';
 
+import { regionAt } from './stale-claim-regions.js';
+
 export {
   ARCHIVAL_PHRASE,
   BARE_SHA,
@@ -72,128 +74,11 @@ export {
   sectionOf,
 } from './stale-claim-scope.js';
 
-/**
- * The line ranges occupied by HUMAN_REVIEW.md round entries, and the
- * round tokens.
- *
- * A round entry opens on a line that reads "**Round 6x (date): title"
- * and runs until the blockquote ends. Round 6c is not a blockquote;
- * the pattern allows for that.
- */
-export function roundEntryRanges(lines) {
-  const entries = [];
-  let current = null;
-
-  lines.forEach((line, i) => {
-    const m = ROUND_ENTRY.exec(line);
-    if (m) {
-      if (current) current.end = i - 1;
-      current = { round: m[1].toLowerCase(), start: i, end: lines.length - 1 };
-      entries.push(current);
-      return;
-    }
-    // A round entry block ends at the first blank line that is not
-    // inside the blockquote.
-    if (current && line.trim() === '' && !line.startsWith('>')) {
-      current.end = i - 1;
-      current = null;
-    }
-  });
-
-  return entries;
-}
-
-/**
- * The current and historical regions of a file.
- *
- * A region is historical when it is a dated session record, a dated
- * deploy record, a dated audit, or a dated round entry in
- * `HUMAN_REVIEW.md`. Everything else is current.
- *
- * @param {string} file
- * @param {string[]} lines
- * @returns {Array<{start: number, end: number, historical: boolean, reason: string}>}
- */
-export function regionsOf(file, lines) {
-  const regions = [];
-
-  if (SESSION_SCOPED.test(file) && !CURRENT_DOCUMENTS.has(file)) {
-    regions.push({
-      start: 0,
-      end: lines.length - 1,
-      historical: true,
-      reason: 'the file is a dated record',
-    });
-    return regions;
-  }
-
-  if (DEPLOY_SCOPED.test(file) && !CURRENT_DOCUMENTS.has(file)) {
-    regions.push({
-      start: 0,
-      end: lines.length - 1,
-      historical: true,
-      reason: 'the file is a dated deploy record',
-    });
-    return regions;
-  }
-
-  if (file !== 'HUMAN_REVIEW.md') {
-    regions.push({
-      start: 0,
-      end: lines.length - 1,
-      historical: false,
-      reason: 'the file is a current document',
-    });
-    return regions;
-  }
-
-  // HUMAN_REVIEW.md: the round trail begins at the first round entry
-  // and runs to the end. Everything before it is the current region.
-  const entries = roundEntryRanges(lines);
-  if (!entries.length) {
-    regions.push({
-      start: 0,
-      end: lines.length - 1,
-      historical: false,
-      reason: 'the file has no round entries',
-    });
-    return regions;
-  }
-
-  const first = entries.reduce((a, b) => (a.start <= b.start ? a : b));
-  regions.push({
-    start: 0,
-    end: first.start - 1,
-    historical: false,
-    reason: 'the current summary region, before the round trail',
-  });
-
-  // Each round entry is its own historical region.
-  for (const entry of entries) {
-    regions.push({
-      start: entry.start,
-      end: entry.end,
-      historical: true,
-      reason: `a dated round entry (round ${entry.round})`,
-    });
-  }
-
-  return regions;
-}
-
-/**
- * The region containing line `i`.
- *
- * @param {Array} regions
- * @param {number} i
- * @returns {object|null}
- */
-export function regionAt(regions, i) {
-  for (const region of regions) {
-    if (i >= region.start && i <= region.end) return region;
-  }
-  return null;
-}
+export {
+  regionAt,
+  regionsOf,
+  roundEntryRanges,
+} from './stale-claim-regions.js';
 
 /**
  * The test-count figures on line `i`.

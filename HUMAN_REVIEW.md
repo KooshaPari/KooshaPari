@@ -2640,7 +2640,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   every figure the ledger records: detector **0 violations across 29
 >   patterns**, syntax check exit 0, `stage:publication` yielding **224
 >   files** and `bundled/app.bundle.d36aedd8.js`, suite **884/884**,
->   scanner **327 checks, 0 findings**, coverage **91.93% lines / 88.85%
+>   scanner **329 checks, 0 findings**, coverage **91.93% lines / 88.85%
 >   branches / 86.76% functions**, sweep **125 files, 64 claims, 0
 >   uncovered**. The figures are properties of the committed tree.
 > - **Four standing gates that earlier closes had inherited unmeasured
@@ -2721,7 +2721,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   `f9d4122`, with `npm ci`, ran the full CI sequence twice and
 >   returned identical results both times: detector 0/29, `check` exit 0,
 >   `stage:publication` 224 files and `app.bundle.d36aedd8.js`, suite
->   **884/884**, scanner **327 checks, 0 findings**, sweep 64 claims with
+>   **884/884**, scanner **329 checks, 0 findings**, sweep 64 claims with
 >   0 uncovered. The standing gates and the coverage gate were then run
 >   inside that clone: **58/58**, **36/36 and 54/54 and 1/1 and MATCH**,
 >   **6p 18 / 6q 64 / 0**, and coverage **91.87 / 88.75 / 86.74**. Rows 52
@@ -2837,7 +2837,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 > - **And a real gap in the scanner, found by planting a defect in the
 >   real tree and committing it for real.** Planted in the count
 >   notation -- a total, then "pass", then a failure count -- the
->   scanner reported **327 checks and 0 findings** and **the commit
+>   scanner reported **329 checks and 0 findings** and **the commit
 >   landed** -- the real hook, no `--no-verify`. Planted in the
 >   fraction form, the scanner reported
 >   **`FINDING [A-count] STATE.md:323`** and **the commit did
@@ -2881,6 +2881,27 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   own dated numbers, and the ones whose date marker had drifted out
 >   of the classifier's 60-character window were given the date inline.
 >   Row 67 records the fix.
+>
+> **Round 6u closed a sixteenth time (2026-10-28 06:11-06:24 UTC): the
+> scanner's decision logic is split at its own seam, and the split changed
+> no behaviour.**
+>
+> - **The count-notation fix pushed a file past the target.** Row 67 took
+>   `scripts/stale-claim-rules.js` from 334 lines to 352, past the
+>   350-line target the detector reports as a warning. The file is split
+>   at the seam its own documentation describes: **STAGE 1, THE REGION**
+>   moves to `scripts/stale-claim-regions.js` at 150 lines, and **STAGE
+>   2, THE CLAUSE** stays in `scripts/stale-claim-rules.js` at 237 lines.
+> - **No importer was edited.** The three region functions are
+>   re-exported from the new module, so `scripts/scan-stale-claims.js`
+>   and both test files are untouched.
+> - **The split changed nothing observable.** The scanner's JSON output
+>   was captured before and after and compared field by field: measured
+>   count 886, measurement source "measured by running the suite", 328
+>   checks, 18 round entries, 0 findings -- identical. The suite reports
+>   **886/886**. The detector's warning for this file is gone; the only
+>   one left is `scripts/sweep-lighthouse-claims.js` at 481 lines, which
+>   predates this round. Row 68 records it.
 
 
 
