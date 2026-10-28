@@ -2556,7 +2556,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   prior tree confirmed that the only words that disappeared were the
 >   ones the corrections deliberately replaced.
 > - **The battery is green on the merged tree.** Scanner **327
->   checks, 0 findings**; suite **886/886**; coverage **91.93% lines /
+>   checks, 0 findings**; suite **886/886**; coverage **91.95% lines /
 >   88.85% branches / 86.76% functions**, all three above the 85%
 >   floor; anti-pattern detector **0 violations across 29 patterns**;
 >   Lighthouse claim sweep **0 uncovered** across 125 tracked Markdown
@@ -2640,7 +2640,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   every figure the ledger records: detector **0 violations across 29
 >   patterns**, syntax check exit 0, `stage:publication` yielding **224
 >   files** and `bundled/app.bundle.d36aedd8.js`, suite **884/884**,
->   scanner **329 checks, 0 findings**, coverage **91.93% lines / 88.85%
+>   scanner **329 checks, 0 findings**, coverage **91.95% lines / 88.85%
 >   branches / 86.76% functions**, sweep **125 files, 64 claims, 0
 >   uncovered**. The figures are properties of the committed tree.
 > - **Four standing gates that earlier closes had inherited unmeasured
