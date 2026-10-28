@@ -157,6 +157,25 @@ export const CURRENT_DOCUMENTS = new Set(['STATE.md', 'HUMAN_REVIEW.md']);
 export const COUNT_RE = /(?<![\d/])(\d{3,4})\s*\/\s*(\d{3,4})(?![\d/])/g;
 
 /**
+ * A count written as "N tests, N pass, N fail" or "N pass, N fail".
+ *
+ * The repository writes its suite figures both ways, and only the
+ * fraction form was recognised. A count in this notation is a claim
+ * about the same quantity as "N/M": the FIRST number is the total
+ * suite size, which is what the scanner measures, and the second is
+ * how many of them passed. The pair is normalised into the same
+ * {num, den} shape as the fraction form, so the classifier that
+ * decides current-versus-historical applies to both without change.
+ *
+ * The totals are three or four digits, matching COUNT_RE, so that
+ * small per-file counts ("3 pass, 0 fail" in a test-name list) are
+ * not treated as suite totals. The lookarounds keep the match from
+ * starting inside a longer run of digits.
+ */
+export const COUNT_NOTATION_RE =
+  /(?<![\d/])(\d{3,4})\s+tests?\s*,\s*(\d{3,4})\s+pass(?:ed|ing)?(?:\s*,\s*\d+\s+fail(?:ed|ing|ures?)?)?/g;
+
+/**
  * Words that, near a figure, mark it as a count of TESTS.
  *
  * "pass" alone is not enough: "4 .md files, 14377/4771/10110/12341 B"

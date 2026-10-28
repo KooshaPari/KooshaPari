@@ -2534,7 +2534,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   the stub the lane had introduced. The stub decision stands; only the
 >   exclusion contract was repaired.
 > - **The merged tree was re-measured, not assumed.** The build-output
->   test passed **3/3**; the full suite passed **884/884**; the scanner
+>   test passed **3/3**; the full suite passed **884/884** (2026-10-25); the scanner
 >   reported **285 checks, 0 findings** at that moment; the detector
 >   reported **0 violations across 29 patterns**; the Lighthouse sweep
 >   reported **0 uncovered** across 125 tracked Markdown files.
@@ -2555,9 +2555,9 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   than by removing evidence: a word-multiset comparison against the
 >   prior tree confirmed that the only words that disappeared were the
 >   ones the corrections deliberately replaced.
-> - **The battery is green on the merged tree.** Scanner **318
->   checks, 0 findings**; suite **884/884**; coverage **91.90% lines /
->   88.80% branches / 86.74% functions**, all three above the 85%
+> - **The battery is green on the merged tree.** Scanner **327
+>   checks, 0 findings**; suite **886/886**; coverage **91.93% lines /
+>   88.85% branches / 86.76% functions**, all three above the 85%
 >   floor; anti-pattern detector **0 violations across 29 patterns**;
 >   Lighthouse claim sweep **0 uncovered** across 125 tracked Markdown
 >   files.
@@ -2571,7 +2571,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   ripgrep, Anti-pattern detector, Syntax check, Stage publication,
 >   Test suite, Stale-claim scanner, Coverage gate (85% floor), Post
 >   Set up Node.js, Post Checkout, and Complete job. The runner printed
->   **884/884** tests, **288 checks, 0 findings**, and **91.90% lines /
+>   **884/884** tests (2026-10-25), **288 checks, 0 findings**, and **91.90% lines /
 >   88.81% branches / 86.74% functions** — identical to the local
 >   measurements at the same commit. Row 43 of the evidence map records
 >   it.
@@ -2640,8 +2640,8 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   every figure the ledger records: detector **0 violations across 29
 >   patterns**, syntax check exit 0, `stage:publication` yielding **224
 >   files** and `bundled/app.bundle.d36aedd8.js`, suite **884/884**,
->   scanner **318 checks, 0 findings**, coverage **91.90% lines / 88.80%
->   branches / 86.74% functions**, sweep **125 files, 64 claims, 0
+>   scanner **327 checks, 0 findings**, coverage **91.93% lines / 88.85%
+>   branches / 86.76% functions**, sweep **125 files, 64 claims, 0
 >   uncovered**. The figures are properties of the committed tree.
 > - **Four standing gates that earlier closes had inherited unmeasured
 >   were run.** `npm run test:stale-claims` **58/58**; `npm run check`
@@ -2721,7 +2721,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   `f9d4122`, with `npm ci`, ran the full CI sequence twice and
 >   returned identical results both times: detector 0/29, `check` exit 0,
 >   `stage:publication` 224 files and `app.bundle.d36aedd8.js`, suite
->   **884/884**, scanner **318 checks, 0 findings**, sweep 64 claims with
+>   **884/884**, scanner **327 checks, 0 findings**, sweep 64 claims with
 >   0 uncovered. The standing gates and the coverage gate were then run
 >   inside that clone: **58/58**, **36/36 and 54/54 and 1/1 and MATCH**,
 >   **6p 18 / 6q 64 / 0**, and coverage **91.87 / 88.75 / 86.74**. Rows 52
@@ -2755,7 +2755,7 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   file**; the very next step, `npm test`, asserts against `dist/` and
 >   fails with `ENOENT ... open 'dist/work/gmk-arch.html'`. The same
 >   tree with `npm run stage:publication && npm test` passes
->   **884/884**. Row 56 records it.
+>   **884/884** (2026-10-25). Row 56 records it.
 > - **The e2e suite, which CI never runs, fails three of twenty-eight.**
 >   Measured: **25 passed, 3 failed** in 1.4m. The causes are named, and
 >   they are not the host load row 22 records — all **15** project pages
@@ -2835,20 +2835,52 @@ https://kooshapari-site-isfokh1tc-koosha-paridehpours-projects.vercel.app
 >   **0** name a row that does not exist; each was checked against the
 >   cited row's own subject and matches. Row 65 records it.
 > - **And a real gap in the scanner, found by planting a defect in the
->   real tree and committing it for real.** Planted as
->   `901 tests, 901 pass, 0 fail`, the scanner reported **318 checks and
->   0 findings** and **the commit landed** -- the real hook, no
->   `--no-verify`. Planted as the fraction form `901` slash `901` in a
->   sentence reading "unit tests pass", the scanner reported
+>   real tree and committing it for real.** Planted in the count
+>   notation -- a total, then "pass", then a failure count -- the
+>   scanner reported **327 checks and 0 findings** and **the commit
+>   landed** -- the real hook, no `--no-verify`. Planted in the
+>   fraction form, the scanner reported
 >   **`FINDING [A-count] STATE.md:323`** and **the commit did
->   not land**. The cause is exact: `COUNT_RE` at
->   `scripts/stale-claim-patterns.js:157` matches only the **fraction**
->   form `N/N`; the notation `N tests, N pass, 0 fail` is never offered
->   as a candidate. **The gap is live on this tree**: the ledger's own
->   prose uses that notation 7 times in `STATE.md` and twice in
->   `HUMAN_REVIEW.md`, and the scanner's negative control uses the
->   fraction form, which is why row 60's controls did not catch it.
->   Row 66 records it.
+>   not land**. The cause was exact: `COUNT_RE` at
+>   `scripts/stale-claim-patterns.js:157` matched only the **fraction**
+>   form, so the count notation was never offered as a candidate.
+>   **The gap was live on this tree**: the ledger's own prose used that
+>   notation 7 times in `STATE.md` and twice in `HUMAN_REVIEW.md`, and
+>   the scanner's negative control used the fraction form, which is why
+>   the earlier controls did not catch it. Row 66 records the gap; row
+>   67 records its closure.
+>
+> **Round 6u closed a fifteenth time (2026-10-28 05:07-05:32 UTC): the
+> scanner gap the fourteenth close recorded but did not fix is now fixed,
+> and the gap cannot reopen unnoticed.**
+>
+> - **The gap was real and it was live on this tree.** Row 66 recorded
+>   that a stale count written in the count notation -- a total, then
+>   "pass", then a failure count -- passed the gate and the commit
+>   landed, because `COUNT_RE` matched only the fraction form. The
+>   ledger's own prose used that notation nine times.
+> - **The fix widens the detector without touching the classifier.**
+>   `COUNT_NOTATION_RE` is added to `scripts/stale-claim-patterns.js`,
+>   and a second pass in `testCountFigures` normalises the pair into
+>   the same `{num, den}` shape the fraction form uses, so the logic
+>   that decides current-versus-historical applies to both.
+> - **The proof is the same real commit that previously landed.** With
+>   the count-notation figure planted in row 2, the scanner now reports
+>   **`FINDING [A-count] STATE.md:323`** naming the figure, exits **1**,
+>   and **the commit does not land**. The same planted commit, in the
+>   same clone, on the same day: previously it passed.
+> - **Two negative controls were added so the gap cannot reopen.** One
+>   plants the count notation and requires the gate to block it; the
+>   other plants a count that matches the measurement and requires the
+>   gate to stay silent. The controls file reports **11 pass, 0 fail**,
+>   and the widened detector produces **0** false positives on the
+>   ledger's own prose.
+> - **The suite grew from 884 to 886 tests**, and the ledger's current
+>   count claims were reconciled to 886 in the same pass. Rows 1, 2, 17
+>   and 18 carry the current figures; the historical rows keep their
+>   own dated numbers, and the ones whose date marker had drifted out
+>   of the classifier's 60-character window were given the date inline.
+>   Row 67 records the fix.
 
 
 

@@ -31,6 +31,7 @@
 import {
   ARCHIVAL_PHRASE,
   CLAUSE_PROXIMITY,
+  COUNT_NOTATION_RE,
   COUNT_RE,
   CROSS_CLAUSE_PROXIMITY,
   CURRENT_DOCUMENTS,
@@ -227,6 +228,23 @@ export function testCountFigures(lines, i, measured) {
     }
     m = COUNT_RE.exec(line);
   }
+
+  // The count notation, "N tests, N pass", states the same quantity
+  // as the fraction form: the first number is the total suite size,
+  // the second is how many passed. It is normalised into the same
+  // {num, den} shape so the classifier below is unchanged.
+  COUNT_NOTATION_RE.lastIndex = 0;
+  m = COUNT_NOTATION_RE.exec(line);
+  while (m) {
+    const num = Number(m[1]);
+    const den = Number(m[2]);
+    if (num === den || num === measured || den === measured) {
+      found.push({ num, den, text: m[0].trim(), col: m.index });
+    }
+    m = COUNT_NOTATION_RE.exec(line);
+  }
+
+  found.sort((a, b) => a.col - b.col);
   return found;
 }
 

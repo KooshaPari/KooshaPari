@@ -82,6 +82,60 @@ test('the scanner detects a planted stale current claim', () => {
   assert.match(finding.note, /asserted as current but differs/);
 });
 
+test('the scanner detects a planted stale count in the count notation', () => {
+  // The repository writes its suite figures in two notations: the
+  // fraction form "774/774" and the count form "774 tests, 774 pass,
+  // 0 fail". Only the fraction form was recognised, so a stale claim
+  // written in the count form passed the gate and the commit landed.
+  // This control plants the count form and requires the gate to block
+  // it, so the gap cannot reopen unnoticed.
+  const result = runScannerInCopy(MEASURED, (dir) => {
+    // The plant targets ROW 2 of the evidence map, which states the
+    // suite's CURRENT count and carries no dated annotation. The
+    // ledger states this figure in several notations across several
+    // rows, and the dated ones must be left alone.
+    plant(
+      dir,
+      /\| 2 \| The suite passes in full \| `node --test tests\/\*\.test\.js` \| \d+ tests, \d+ pass, 0 fail \|/,
+      '| 2 | The suite passes in full | `node --test tests/*.test.js` | 774 tests, 774 pass, 0 fail |',
+    );
+  });
+
+  assert.equal(result.status, 1, 'the scanner must exit 1 on a planted stale count claim');
+  const report = JSON.parse(result.stdout);
+  // The tree carries many counts, so the finding is selected by the
+  // figure it names, not by being the first one reported.
+  const finding = report.findings.find(
+    (f) => f.file === 'STATE.md' && f.kind === 'A-count' && /^774 tests, 774 pass/.test(f.text),
+  );
+  assert.ok(finding, 'the finding must name STATE.md and the planted figure');
+  assert.match(finding.note, /asserted as current but differs/);
+});
+
+test('the scanner does not flag a count-notation claim that matches the measurement', () => {
+  // The widened detector must not create false positives on a count
+  // that agrees with the measurement. The plant is a no-op when the
+  // tree already states the measured count in this notation, so the
+  // control uses a figure that differs from the measurement and is
+  // dated, which is the shape the classifier must treat as a record.
+  const result = runScannerInCopy(MEASURED, (dir) => {
+    plant(
+      dir,
+      /\| 2 \| The suite passes in full \| `node --test tests\/\*\.test\.js` \| \d+ tests, \d+ pass, 0 fail \|/,
+      '| 2 | The suite passes in full | `node --test tests/*.test.js` | '
+        + `${MEASURED} tests, ${MEASURED} pass, 0 fail (2026-10-25) |`,
+    );
+  });
+
+  assert.equal(result.status, 0, 'a count that matches the measurement must not be flagged');
+  const report = JSON.parse(result.stdout);
+  assert.equal(
+    report.findings.filter((f) => f.file === 'STATE.md').length,
+    0,
+    'no finding may name STATE.md',
+  );
+});
+
 test('the scanner does not flag a planted historical observation', () => {
   // The same count, but the clause that governs it says when it was
   // measured. It is a record, not a claim, and must survive.
