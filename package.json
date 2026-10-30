@@ -21,7 +21,7 @@
     "@axe-core/playwright": "^4.13.0",
     "@playwright/test": "^1.63.0",
     "esbuild": "^0.28.2",
-    "linkedom": "^0.18.13",
+    "linkedom": "^0.18.14",
     "playwright": "^1.63.0"
   },
   "dependencies": {}
