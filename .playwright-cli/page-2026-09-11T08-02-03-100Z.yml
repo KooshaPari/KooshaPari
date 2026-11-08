@@ -1,0 +1,253 @@
+- generic [active] [ref=f23e1]:
+  - generic [ref=f23e2]:
+    - link "Skip to content" [ref=f23e3] [cursor=pointer]:
+      - /url: "#view-root"
+    - generic [ref=f23e4]:
+      - banner [ref=f23e5]:
+        - link "Koosha Paridehpour Systems / products / infrastructure" [ref=f23e6] [cursor=pointer]:
+          - /url: /
+          - strong [ref=f23e7]: Koosha Paridehpour
+          - generic [ref=f23e8]: Systems / products / infrastructure
+        - navigation "Primary navigation" [ref=f23e9]:
+          - link "Work" [ref=f23e10] [cursor=pointer]:
+            - /url: /work
+          - link "Writing" [ref=f23e11] [cursor=pointer]:
+            - /url: /blog
+          - link "Resume" [ref=f23e12] [cursor=pointer]:
+            - /url: /resume
+          - link "Contact" [ref=f23e13] [cursor=pointer]:
+            - /url: /contact
+        - generic [ref=f23e14]:
+          - group "Portfolio lens" [ref=f23e15]:
+            - button "Engineering" [pressed] [ref=f23e16] [cursor=pointer]
+            - button "Product" [ref=f23e17] [cursor=pointer]
+          - button "Reader" [ref=f23e18] [cursor=pointer]
+          - button "Index" [ref=f23e19] [cursor=pointer]
+      - main [ref=f23e20]:
+        - generic [ref=f23e21]:
+          - region "Technical Atelier introduction and WITF artifact" [ref=f23e22]:
+            - generic [ref=f23e23]:
+              - paragraph [ref=f23e24]: Koosha Paridehpour / Technical Atelier
+              - heading "Software systems, technical products, and the infrastructure between them." [level=1] [ref=f23e25]
+              - paragraph [ref=f23e26]: A working studio archive spanning systems software, technical product and program leadership, computational research, and complex physical products.
+              - paragraph [ref=f23e27]: Engineering decisions are read through architecture, runtime constraints, interfaces, and verification.
+              - navigation "Portfolio readings" [ref=f23e28]:
+                - link "Read Engineering" [ref=f23e29] [cursor=pointer]:
+                  - /url: /engineering
+                - link "Read Product" [ref=f23e30] [cursor=pointer]:
+                  - /url: /product
+            - article [ref=f23e31]:
+              - generic [ref=f23e32]:
+                - paragraph [ref=f23e33]: Material artifact
+                - heading [level=2] [ref=f23e34]:
+                  - link "WITF Board" [ref=f23e35] [cursor=pointer]:
+                    - /url: /work/witf
+                - paragraph [ref=f23e36]: A Southpaw XT full-size Alice-style keyboard shaped by changing demand, production volume, fulfillment, and pricing decisions.
+              - figure "physical-product / historical" [ref=f23e37]:
+                - figure [ref=f23e38]:
+                  - img "Black WITF Board keyboard shown from above on a warm concrete-colored surface, revealing its split Alice layout and left-side number pad." [ref=f23e39]
+              - generic [ref=f23e41]:
+                - generic [ref=f23e42]:
+                  - generic [aria-hidden] [ref=f23e43]: E
+                  - paragraph [ref=f23e44]: Constraint modeling linked supplier capacity, accessory scope, pricing, and outsourced fulfillment as volume moved from approximately 15 to 100 to 50 units.
+                - 'note "unit planning sequence: ~15 -> ~100 -> ~50" [ref=f23e45]':
+                  - strong [ref=f23e46]: ~15 -> ~100 -> ~50
+                  - generic [ref=f23e47]: unit planning sequence
+                  - generic [ref=f23e48]: canonical user fact
+                - paragraph [ref=f23e49]:
+                  - generic [ref=f23e50]: Engineering evidence
+                  - strong [ref=f23e51]: Retained project records
+                  - generic [ref=f23e52]: "Selected media: 2 manifest-traced files; ownership and licensing review pending."
+          - region [ref=f23e53]:
+            - generic [ref=f23e54]:
+              - paragraph [ref=f23e55]: engineering lens / selected studies
+              - heading "Artifacts, systems sheets, and experiment notes" [level=2] [ref=f23e56]
+              - paragraph [ref=f23e57]: The same practice, reordered by the decisions each lens brings forward.
+            - generic [ref=f23e58]:
+              - article [ref=f23e59]:
+                - generic [ref=f23e60]:
+                  - paragraph [ref=f23e61]: Runtime topology
+                  - heading [level=2] [ref=f23e62]:
+                    - link "ShareCLI" [ref=f23e63] [cursor=pointer]:
+                      - /url: /work/sharecli
+                  - paragraph [ref=f23e64]: Rust process and resource runtime for high-concurrency coding-agent workloads.
+                - img "Process topology drawing connecting concurrent coding agents to queues, coalesced events, shared runtime state, and host resources." [ref=f23e65]:
+                  - generic [ref=f23e66]:
+                    - generic [ref=f23e67]: "01"
+                    - strong [ref=f23e68]: agent bursts
+                  - generic [aria-hidden] [ref=f23e69]: "->"
+                  - generic [ref=f23e70]:
+                    - generic [ref=f23e71]: "02"
+                    - strong [ref=f23e72]: process observation
+                  - generic [aria-hidden] [ref=f23e73]: "->"
+                  - generic [ref=f23e74]:
+                    - generic [ref=f23e75]: "03"
+                    - strong [ref=f23e76]: coalesce + queue
+                  - generic [aria-hidden] [ref=f23e77]: "->"
+                  - generic [ref=f23e78]:
+                    - generic [ref=f23e79]: "04"
+                    - strong [ref=f23e80]: shared host state
+                - paragraph [ref=f23e81]: Process topology drawing connecting concurrent coding agents to queues, coalesced events, shared runtime state, and host resources.
+                - generic [ref=f23e82]:
+                  - generic [ref=f23e83]:
+                    - generic [aria-hidden] [ref=f23e84]: E
+                    - paragraph [ref=f23e85]: Process observation, queueing, coalescing, and optional FUSE views make burst contention inspectable at the host boundary.
+                  - paragraph [ref=f23e86]:
+                    - generic [ref=f23e87]: Engineering evidence
+                    - strong [ref=f23e88]: Repository documentation and project history
+              - article [ref=f23e89]:
+                - generic [ref=f23e90]:
+                  - paragraph [ref=f23e91]: Policy routing sheet
+                  - heading [level=2] [ref=f23e92]:
+                    - link "Substrate" [ref=f23e93] [cursor=pointer]:
+                      - /url: /work/substrate
+                  - paragraph [ref=f23e94]: AI execution and provider-routing substrate spanning HTTP, CLI, MCP, and A2A interfaces.
+                - img "Provider-routing systems map linking HTTP, CLI, MCP, and A2A callers through policy, health, retry, and budget controls." [ref=f23e95]:
+                  - generic [ref=f23e96]:
+                    - generic [ref=f23e97]: "01"
+                    - strong [ref=f23e98]: HTTP / CLI / MCP / A2A
+                  - generic [aria-hidden] [ref=f23e99]: "->"
+                  - generic [ref=f23e100]:
+                    - generic [ref=f23e101]: "02"
+                    - strong [ref=f23e102]: policy + budget
+                  - generic [aria-hidden] [ref=f23e103]: "->"
+                  - generic [ref=f23e104]:
+                    - generic [ref=f23e105]: "03"
+                    - strong [ref=f23e106]: health + fallback
+                  - generic [aria-hidden] [ref=f23e107]: "->"
+                  - generic [ref=f23e108]:
+                    - generic [ref=f23e109]: "04"
+                    - strong [ref=f23e110]: provider execution
+                - paragraph [ref=f23e111]: Provider-routing systems map linking HTTP, CLI, MCP, and A2A callers through policy, health, retry, and budget controls.
+                - generic [ref=f23e112]:
+                  - generic [ref=f23e113]:
+                    - generic [aria-hidden] [ref=f23e114]: E
+                    - paragraph [ref=f23e115]: One policy boundary coordinates provider health, rate limits, retries, fallbacks, budgets, and auditable execution across four interfaces.
+                  - paragraph [ref=f23e116]:
+                    - generic [ref=f23e117]: Engineering evidence
+                    - strong [ref=f23e118]: Repository documentation and project history
+              - article [ref=f23e119]:
+                - generic [ref=f23e120]:
+                  - paragraph [ref=f23e121]: Fork-delta experiment
+                  - heading [level=2] [ref=f23e122]:
+                    - link "phenotype-omlx" [ref=f23e123] [cursor=pointer]:
+                      - /url: /work/phenotype-omlx
+                  - paragraph [ref=f23e124]: MLX inference research stack with Rust performance cores, multi-backend routing, and evaluation tooling.
+                - img "Experiment sheet separating the attributed upstream omlx runtime from phenotype-omlx fork additions for routing, Rust performance cores, and evaluation." [ref=f23e125]:
+                  - generic [ref=f23e126]:
+                    - generic [ref=f23e127]: "01"
+                    - strong [ref=f23e128]: Upstream
+                    - paragraph [ref=f23e129]: jundot/omlx / attributed
+                  - generic [ref=f23e130]:
+                    - generic [ref=f23e131]: "02"
+                    - strong [ref=f23e132]: Fork delta
+                    - paragraph [ref=f23e133]: Routing + Rust performance cores
+                  - generic [ref=f23e134]:
+                    - generic [ref=f23e135]: "03"
+                    - strong [ref=f23e136]: Method
+                    - paragraph [ref=f23e137]: Backend comparison + evaluation
+                  - generic [ref=f23e138]:
+                    - generic [ref=f23e139]: "04"
+                    - strong [ref=f23e140]: Boundary
+                    - paragraph [ref=f23e141]: Research scope / support varies
+                - paragraph [ref=f23e142]: Experiment sheet separating the attributed upstream omlx runtime from phenotype-omlx fork additions for routing, Rust performance cores, and evaluation.
+                - generic [ref=f23e143]:
+                  - generic [ref=f23e144]:
+                    - generic [aria-hidden] [ref=f23e145]: E
+                    - paragraph [ref=f23e146]: The experiment boundary keeps upstream MLX functionality distinct from fork-added multi-backend routing, Rust performance cores, and evaluation paths.
+                  - paragraph [ref=f23e147]:
+                    - generic [ref=f23e148]: Engineering evidence
+                    - strong [ref=f23e149]: Repository documentation and project history
+              - article [ref=f23e150]:
+                - generic [ref=f23e151]:
+                  - paragraph [ref=f23e152]: Simulation field note
+                  - heading [level=2] [ref=f23e153]:
+                    - link "NetWeave" [ref=f23e154] [cursor=pointer]:
+                      - /url: /work/netweave
+                  - paragraph [ref=f23e155]: Go traffic simulation combining directed-graph routing with disjoint cellular automata for vehicle and lane behavior.
+                - img "Traffic-simulation study tracing points of interest through A-star routing, a directed road graph, per-road cellular automata, and a WebSocket browser view." [ref=f23e156]:
+                  - generic [ref=f23e157]:
+                    - generic [ref=f23e158]: "01"
+                    - strong [ref=f23e159]: Route layer
+                    - paragraph [ref=f23e160]: A* over directed road graph
+                  - generic [ref=f23e161]:
+                    - generic [ref=f23e162]: "02"
+                    - strong [ref=f23e163]: Traffic layer
+                    - paragraph [ref=f23e164]: Per-road cellular automata
+                  - generic [ref=f23e165]:
+                    - generic [ref=f23e166]: "03"
+                    - strong [ref=f23e167]: Observed
+                    - paragraph [ref=f23e168]: Congestion, waves, gridlock
+                  - generic [ref=f23e169]:
+                    - generic [ref=f23e170]: "04"
+                    - strong [ref=f23e171]: Boundary
+                    - paragraph [ref=f23e172]: Congestion-aware rerouting remained future work
+                - paragraph [ref=f23e173]: Traffic-simulation study tracing points of interest through A-star routing, a directed road graph, per-road cellular automata, and a WebSocket browser view.
+                - generic [ref=f23e174]:
+                  - generic [ref=f23e175]:
+                    - generic [aria-hidden] [ref=f23e176]: E
+                    - paragraph [ref=f23e177]: Directed-graph routing handles strategic movement while disjoint cellular automata expose lane-level congestion, waves, and gridlock.
+                  - paragraph [ref=f23e178]:
+                    - generic [ref=f23e179]: Engineering evidence
+                    - strong [ref=f23e180]: Supporting project evidence is being assembled
+              - article [ref=f23e181]:
+                - generic [ref=f23e182]:
+                  - paragraph [ref=f23e183]: Material artifact
+                  - heading [level=2] [ref=f23e184]:
+                    - link "GMK Arch" [ref=f23e185] [cursor=pointer]:
+                      - /url: /work/gmk-arch
+                  - paragraph [ref=f23e186]: An Arch Linux-inspired mechanical keyboard keyset carried from concept through manufacturing, distribution, and community launch.
+                - figure "physical-product / historical" [ref=f23e187]:
+                  - img "Transparent GMK Arch wordmark specimen with a pale ARCH letterform and teal Arch Linux and GMK marks." [ref=f23e188]
+                - generic [ref=f23e190]:
+                  - generic [ref=f23e191]:
+                    - generic [aria-hidden] [ref=f23e192]: E
+                    - paragraph [ref=f23e193]: Kitting coverage, manufacturer constraints, and a 10-region distribution interface shaped one coordinated release system.
+                  - 'note "sold line items: ~4,900" [ref=f23e194]':
+                    - strong [ref=f23e195]: ~4,900
+                    - generic [ref=f23e196]: sold line items
+                    - generic [ref=f23e197]: canonical user fact
+                  - paragraph [ref=f23e198]:
+                    - generic [ref=f23e199]: Engineering evidence
+                    - strong [ref=f23e200]: Retained project records
+                    - generic [ref=f23e201]: "Selected media: 1 manifest-traced file; ownership and licensing review pending."
+              - article [ref=f23e202]:
+                - generic [ref=f23e203]:
+                  - paragraph [ref=f23e204]: Upstream routing overview
+                  - heading [level=2] [ref=f23e205]:
+                    - link "OmniRoute" [ref=f23e206] [cursor=pointer]:
+                      - /url: /work/omniroute
+                  - paragraph [ref=f23e207]: "Rank #5 external contributor to OmniRoute (`diegosouzapw/OmniRoute`, ~59.9k GitHub stars at audit time), with 101 merged pull requests across routing intelligence, provider integrations, reliability hardening, API/protocol compatibility, and operational tooling. Contributions named in 21 upstream releases and personally acknowledged by the maintainer."
+                - figure "OmniRoute / upstream routing overview. Failure paths are conditional; dashed in the diagram." [ref=f23e208]:
+                  - generic [ref=f23e209]:
+                    - generic [ref=f23e210]:
+                      - generic [ref=f23e211]: OmniRoute / routing plate
+                      - generic [ref=f23e212]: Conceptual model
+                    - 'img "OmniRoute conditional routing overview Conceptual routing overview, not a universal execution trace or live telemetry. Direct-model and combo strategies differ; fallback depends on eligibility, error classification and configured limits. Request -> Target selection: resolve the requested model or configured combo. Target selection -> Provider execution: select an eligible target and connection; provider breaker, connection cooldown and model lockout have distinct scopes. Provider execution -> Response: a successful attempt returns a response. Provider execution -> Failure state: classify an unsuccessful attempt; not every error changes every failure mechanism. Failure state -> Target selection: eligible fallback or bounded retry only when policy permits. Failure state -> Response: stop or exhausted attempts return an error; fallback is not guaranteed." [ref=f23e213]':
+                      - generic [ref=f23e216]: Request
+                      - generic [ref=f23e219]: Target selection
+                      - generic [ref=f23e222]: Provider execution
+                      - generic [ref=f23e225]: Response
+                      - generic [ref=f23e228]: Failure state
+                    - list "Routing path legend" [ref=f23e231]:
+                      - listitem [ref=f23e232]: Request / response path
+                      - listitem [ref=f23e233]: Conditional failure path
+                  - paragraph [ref=f23e235]: Conceptual routing overview, not a universal execution trace or live telemetry. Direct-model and combo strategies differ; fallback depends on eligibility, error classification and configured limits.
+                  - group [ref=f23e236]:
+                    - generic "Read routing paths" [ref=f23e237] [cursor=pointer]
+                - paragraph [ref=f23e238]: "Structured routing sheet describing OmniRoute dispatch: provider selection, fallback cooldowns, and policy-aware routing under degradation."
+                - generic [ref=f23e239]:
+                  - generic [ref=f23e240]:
+                    - generic [aria-hidden] [ref=f23e241]: E
+                    - paragraph [ref=f23e242]: Fallback cooldowns, latency-optimized routing, and fallback-cache scoping by target URL hardened dispatch under provider degradation.
+                  - 'note "merged pull requests: 101" [ref=f23e243]':
+                    - strong [ref=f23e244]: "101"
+                    - generic [ref=f23e245]: merged pull requests
+                    - generic [ref=f23e246]: upstream PR history
+                  - paragraph [ref=f23e247]:
+                    - generic [ref=f23e248]: Engineering evidence
+                    - strong [ref=f23e249]: Upstream contribution records
+      - contentinfo [ref=f23e250]:
+        - generic [ref=f23e251]: Koosha Paridehpour · canonical portfolio preview
+        - generic [ref=f23e252]: Evidence-led · legacy sources preserved
+  - status [ref=f23e253]

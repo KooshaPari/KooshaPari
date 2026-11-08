@@ -1,0 +1,500 @@
+/* Hybrid Shell — shared precision-material design layer. Loaded last on every route.
+   Fills gaps in the token + base + shell + component CSS stack. */
+
+/* 1. CONTACT — channel cards (missing CSS) */
+.contact-channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--space-4);
+  margin-block: var(--space-4);
+}
+.contact-channel {
+  padding: var(--space-4);
+  border: 1px solid var(--precision-rule);
+  background: var(--surface-raised);
+}
+.contact-channel h2 {
+  margin-block: 0 var(--space-2);
+  font-size: var(--step-1);
+}
+.contact-channel p {
+  color: var(--ink-muted);
+  margin-block: 0 var(--space-3);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+.contact-channel a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--precision-rule);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+  text-decoration: none;
+  transition: border-color var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
+}
+.contact-channel a:hover { border-color: var(--ink); }
+.contact-channel a:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.contact-note {
+  margin-block: var(--space-5) 0;
+  color: var(--ink-muted);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+}
+/* 2. ARTIFACT BADGE — reserve space below the badge so the eyebrow never overlaps. */
+.artifact-header {
+  padding-top: calc(var(--space-2) + 1.3rem);
+}
+
+/* 3. RESUME — card areas, CTA (missing CSS) */
+.resume-card__areas {
+  margin-block: 0 var(--space-3);
+  padding-left: var(--space-4);
+}
+.resume-card__areas li {
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+  line-height: 1.6;
+  padding-block: var(--space-1);
+}
+.resume-card__areas li + li {
+  border-top: 1px solid var(--precision-rule);
+}
+.resume-cta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-block: var(--space-5) 0;
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+}
+.resume-cta__sep { color: var(--ink-muted); }
+/* 3. TEXT LINK — shared inline link style (missing CSS) */
+.text-link {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--motion-fast) ease;
+}
+.text-link:hover { border-bottom-color: var(--accent); }
+.text-link:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+/* 4. METRIC GRID — project detail metrics (missing CSS) */
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: var(--space-3);
+  margin-block: var(--space-3) var(--space-2);
+}
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border: 1px solid var(--precision-rule);
+  background: var(--surface-raised);
+}
+.metric-card strong {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1;
+  font-feature-settings: "tnum";
+}
+.metric-card span {
+  color: var(--ink-muted);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.metric-card small {
+  color: var(--ink-muted);
+  font-family: var(--font-meta);
+  font-size: calc(var(--step--1) * 0.9);
+  line-height: 1.3;
+}
+/* 5. NAV — lens control, index trigger, tools, nav links */
+.lens-control {
+  gap: 0;
+  border: 1px solid var(--precision-rule);
+  border-radius: 0;
+  overflow: visible;
+}
+.lens-control button {
+  min-height: 2.75rem;
+  padding-inline: var(--space-3);
+  border: 0;
+  border-right: 1px solid var(--precision-rule);
+  background: transparent;
+  color: var(--ink-muted);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: background var(--motion-fast) ease, color var(--motion-fast) ease;
+}
+.lens-control button:last-child { border-right: 0; }
+.lens-control button[aria-pressed="true"] {
+  background: var(--graphite-950);
+  color: var(--paper-100);
+}
+.lens-control button:hover:not([aria-pressed="true"]) {
+  color: var(--ink);
+  background: color-mix(in oklch, var(--ink) 5%, transparent);
+}
+
+.index-trigger {
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+  padding: 0 var(--space-3);
+  min-height: 2.75rem;
+  border: 0;
+  border-left: 1px solid var(--precision-rule);
+  background: transparent;
+  color: var(--ink-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: color var(--motion-fast) ease;
+}
+.index-trigger:hover { color: var(--ink); }
+
+.reader-toggle {
+  min-height: 2.75rem;
+  padding: 0 var(--space-3);
+  border: 0;
+  border-left: 1px solid var(--precision-rule);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink-muted);
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background var(--motion-fast) ease, color var(--motion-fast) ease;
+}
+.reader-toggle:hover { color: var(--ink); }
+.reader-toggle[aria-pressed="true"] {
+  background: var(--graphite-950);
+  color: var(--paper-100);
+}
+
+.atelier-tools {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.atelier-nav { gap: var(--space-4); }
+.atelier-nav a {
+  font-family: var(--font-meta);
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--space-1);
+  color: var(--ink-muted);
+  transition: color var(--motion-fast) ease;
+}
+.atelier-nav a:hover { color: var(--ink); }
+.atelier-nav a[aria-current="page"] {
+  color: var(--ink);
+  text-decoration-color: var(--accent);
+  text-underline-offset: 4px;
+}
+/* 6. FOOTER — mobile stacking */
+.footer { padding-right: var(--gutter); }
+.footer span { white-space: nowrap; }
+/* 7. READER MODE — layered on base.css (height collapse, canvas width, nav hiding). */
+body[data-reader="true"] .atelier-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-chrome);
+  height: auto; /* clear base.css height:32px collapse */
+}
+body[data-reader="true"] .atelier-tools { gap: 0; }
+body[data-reader="true"] .lens-control { display: none; }
+/* Exclude reader toggle (has both classes) from base.css .index-trigger hiding. */
+body[data-reader="true"] .atelier-tools > .index-trigger:not(.reader-toggle) {
+  display: none;
+}
+body[data-reader="true"] .reader-toggle { border-left: 0; display: inline-flex; }
+body[data-reader="true"] #view-root {
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-6);
+  max-width: 60ch;
+  margin-inline: auto;
+}
+body[data-reader="true"] {
+  font-size: var(--step-1);
+  line-height: 1.7;
+}
+/* 8a. WORK-CATALOG — empty state and reset (missing CSS) */
+.work-catalog__empty {
+  grid-column: 1 / -1;
+  padding: var(--space-5) 0;
+  text-align: center;
+  color: var(--ink-muted);
+  font-family: var(--font-meta);
+  font-size: var(--step-0);
+  line-height: 1.6;
+}
+.work-catalog__empty p { margin-block: 0 var(--space-2); }
+.work-catalog__reset {
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  padding: 0.55rem 0.7rem;
+  background: var(--surface-raised);
+  color: var(--ink);
+  font: 600 0.78rem/1 var(--font-reading);
+  cursor: pointer;
+  transition: border-color var(--motion-fast) ease;
+}
+.work-catalog__reset:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.work-catalog__reset:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+/* 8b. MOBILE — tablet 860px */
+@media (max-width: 860px) {
+  .atelier-header {
+    grid-template-columns: 1fr auto;
+    gap: var(--space-3);
+  }
+  .atelier-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: space-between;
+    border-top: 1px solid var(--precision-rule);
+    padding-top: var(--space-3);
+  }
+  .atelier-tools { justify-self: end; }
+  .home-opening {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    min-height: auto;
+    padding-block: var(--space-3) var(--space-4);
+  }
+  .home-identity { max-width: none; }
+  .home-identity h1 {
+    max-width: none;
+    font-size: clamp(1.8rem, 7.5vw, 2.8rem);
+  }
+  .home-artifact-sequence { grid-template-columns: 1fr; }
+  .home-artifact-sequence .artifact--systems,
+  .home-artifact-sequence .artifact--experiment,
+  .home-artifact-sequence .artifact--physical {
+    grid-column: auto;
+    margin-top: 0;
+  }
+  .artifact-context { grid-template-columns: 1fr; }
+  .home-featured-heading { grid-template-columns: 1fr; }
+  .home-featured-heading h2,
+  .home-featured-heading > p:last-child { grid-column: auto; }
+  .work-catalog__featured-list { grid-template-columns: 1fr; }
+  .work-catalog__featured-project { grid-column: auto; margin-top: 0; }
+  .hero-plate { grid-template-columns: 1fr; gap: var(--space-3); }
+  .hero-accent-bar {
+    grid-row: auto; width: 100%; height: 4px; min-height: 0;
+  }
+  .case-hero {
+    margin-inline: calc(-1 * var(--gutter));
+    border-radius: 0; border-left: 0; border-right: 0;
+  }
+  .project-index-group { grid-column: 1 / -1; }
+  .metric-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-channels { grid-template-columns: 1fr; }
+  .resume-grid { grid-template-columns: 1fr; }
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    padding-right: var(--gutter);
+  }
+  .footer span { white-space: normal; }
+  .systems-route { display: none; }
+  .project-nav__link { min-height: 44px; }
+  .case-gallery__item a { min-height: 44px; }
+  .work-catalog__control-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+/* 8c. SYSTEMS-DIAGRAM mid-range: 4 columns, arrows hidden */
+@media (min-width: 561px) and (max-width: 1199px) {
+  .systems-diagram {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+  .systems-route { display: none; }
+  .systems-node {
+    min-height: auto;
+    padding: var(--space-2);
+  }
+  .systems-node strong {
+    font-size: var(--step--1);
+  }
+}
+/* Mobile: 560px (compact header + badge clearance) */
+@media (max-width: 560px) {
+  .atelier-header {
+    gap: var(--space-1);
+    min-height: auto;
+    padding: var(--space-2) var(--gutter);
+  }
+  .atelier-identity span { max-width: 22ch; line-height: 1.2; }
+  .atelier-tools { flex-wrap: nowrap; gap: var(--space-1); justify-self: end; }
+  .lens-control button,
+  .index-trigger,
+  .reader-toggle {
+    min-height: 2.75rem;
+    padding-inline: var(--space-2);
+    font-size: 0.72rem;
+  }
+  .atelier-nav {
+    gap: var(--space-1);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .atelier-nav::-webkit-scrollbar { display: none; }
+
+  .home-intro { font-size: var(--step-0); margin-bottom: var(--space-2); }
+  .home-reading { margin-bottom: var(--space-2); border-left-width: 2px; }
+  .artifact { gap: var(--space-3); padding: var(--space-3); }
+  .artifact-annotation {
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    gap: var(--space-1);
+  }
+  .artifact-annotation > span { width: 1.5rem; height: 1.5rem; }
+  .metric-grid { grid-template-columns: 1fr; }
+  .case-tech { gap: 0.3rem; }
+  .case-tech span { padding: 0.15rem 0.4rem; font-size: 0.68rem; }
+
+  .systems-diagram {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+    padding: var(--space-2);
+  }
+  .systems-node {
+    min-height: auto;
+    grid-template-columns: 2rem 1fr;
+    align-items: baseline;
+  }
+  .experiment-row { grid-template-columns: 2rem 1fr; }
+  .experiment-row p { grid-column: 2; }
+  .project-index { padding: var(--space-4) var(--space-3); }
+  .project-index-groups {
+    gap: var(--space-4) var(--space-3);
+    padding-block: var(--space-4) var(--space-6);
+  }
+  .project-index-group a {
+    grid-template-columns: 1.8rem minmax(6rem, 1fr);
+    gap: var(--space-2);
+  }
+  .project-index-group a > span:nth-of-type(2),
+  .project-index-group small { grid-column: 2; }
+  .blog-view { padding: var(--space-4) var(--space-3) var(--space-6); }
+  .post-card { padding: var(--space-3); }
+  .post-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+  .home-opening-artifact .artifact-media {
+    box-shadow: 0.6rem 0.6rem 0 color-mix(in oklch, var(--olive-500) 18%, transparent);
+  }
+}
+/* Project index: search input and empty state (global, not inside media query) */
+.project-index-search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-block: var(--space-3) var(--space-2);
+}
+.project-index-search input {
+  flex: 1;
+  min-height: 2.75rem;
+  padding: 0 var(--space-3);
+  border: 1px solid color-mix(in oklch, var(--paper-100) 28%, transparent);
+  background: transparent;
+  color: var(--paper-100);
+  font-family: var(--font-reading);
+  font-size: var(--step-0);
+}
+.project-index-search input::placeholder { color: var(--concrete-300); }
+.project-index-search input:focus-visible { outline: none; border-color: var(--arch-300); box-shadow: var(--focus-ring); }
+.project-index-empty {
+  grid-column: 1 / -1;
+  padding: var(--space-5) 0;
+  text-align: center;
+  color: var(--concrete-300);
+  font-family: var(--font-meta);
+  font-size: var(--step-0);
+}
+/* 9. REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  .case-hero:hover img,
+  .home-artifact-sequence article:hover,
+  .work-catalog__featured-project:hover,
+  .work-catalog__featured-project:hover .work-catalog__featured-image img,
+  .post-card:hover { transform: none; box-shadow: none; }
+}
+/* 9b. CONTAINER QUERIES — diagram layout adapts to artifact card width, not viewport. */
+.artifact { container-type: inline-size; }
+@container (max-width: 680px) {
+  .systems-diagram,
+  .experiment-sheet {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+  .systems-route { display: none; }
+  .experiment-row {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    min-width: 0;
+  }
+}
+@container (max-width: 440px) {
+  .systems-diagram,
+  .experiment-sheet {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+  .systems-route { display: none; }
+  .systems-node {
+    min-height: auto;
+    grid-template-columns: 2rem 1fr;
+    align-items: baseline;
+    padding: var(--space-1) var(--space-2);
+  }
+  .experiment-row {
+    grid-template-columns: 2rem 1fr;
+    min-width: 0;
+  }
+}
+/* 10. FORCED COLORS */
+@media (forced-colors: active) {
+  .lens-control button[aria-pressed="true"],
+  .reader-toggle[aria-pressed="true"] { background: Highlight; color: HighlightText; }
+  .text-link { color: LinkText; }
+  .contact-channel a { border-color: ButtonText; }
+  .hero-accent-bar { background: Highlight; }
+  .case-tech span { border-color: ButtonText; }
+  .work-catalog__filter[aria-pressed="true"] { background: Highlight; color: HighlightText; }
+  .post-card { border-left-color: Highlight; }
+  .lens-annotation { border-left-color: Highlight; }
+}
+/* 11. PRINT */
+@media print {
+  .atelier-header, .atelier-nav, .atelier-tools,
+  .lens-control, .index-trigger, .reader-toggle,
+  .footer, .project-index, .skip-link { display: none !important; }
+  #view-root { padding: 0; min-height: auto; }
+  body { background: white; color: black; }
+  .case-hero img { max-width: 100%; page-break-inside: avoid; }
+  a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+}

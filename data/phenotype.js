@@ -1,7 +1,7 @@
 /* ============================================================
  *  Koosha Paridehpour — Phenotype Profile Data
- *  Source: /Users/kooshapari/Downloads/KP-Prod.pdf
- *          /Users/kooshapari/Downloads/KP-Eng.pdf
+ *  Source: /Users/<REDACTED>/Downloads/KP-Prod.pdf
+ *          /Users/<REDACTED>/Downloads/KP-Eng.pdf
  *  Extracted into 3 lenses: Product-persona, Engineering-persona,
  *  and a derived Combined Phenotype. Radial axes are scored
  *  0–100 from explicit evidence in the resumes (not vibes).
@@ -9,10 +9,10 @@
 
 export const IDENTITY = {
   legalName: "Koosha Paridehpour",
-  handle: "kooshapari",
-  email: "kooshapari@kooshapari.com",
-  website: "kooshapari.com",
-  github: "github.com/kooshapari",
+  handle: "<REDACTED>",
+  email: "<REDACTED>@<REDACTED>.com",
+  website: "<REDACTED>.com",
+  github: "github.com/KooshaPari",
   phone: "+1 (424) 330-5106",
   currentCity: "Santa Monica, CA",
   inferredRegion: "424 → West LA / South Bay (greater Los Angeles)",
@@ -298,8 +298,8 @@ export const RECRUITER_STATS = {
 };
 
 export const SOURCE = {
-  product: "/Users/kooshapari/Downloads/KP-Prod.pdf",
-  engineering: "/Users/kooshapari/Downloads/KP-Eng.pdf",
+  product: "/Users/<REDACTED>/Downloads/KP-Prod.pdf",
+  engineering: "/Users/<REDACTED>/Downloads/KP-Eng.pdf",
   generated: new Date().toISOString(),
 };
 
@@ -322,11 +322,11 @@ export const PUBLIC_RECORD = {
       resumeSays:
         "Staff-track platform/dev-tools engineer at Phenotype (AI/SaaS framing)",
       publicRecord:
-        "phenotype.us is a Shopify storefront for mechanical keycap sets (GMK Arch, DSS Cipher, WITF Board). The 'AI platform' framing lives on a separate site: projects.kooshapari.com (84 GitHub projects, auto-generated).",
+        "phenotype.us is a Shopify storefront for mechanical keycap sets (GMK Arch, DSS Cipher, WITF Board). The 'AI platform' framing lives on a separate site: projects.<REDACTED>.com (84 GitHub projects, auto-generated).",
       verdict: "contradicts",
       citations: [
         "https://phenotype.us",
-        "https://projects.kooshapari.com",
+        "https://projects.<REDACTED>.com",
         "https://github.com/KooshaPari?tab=repositories",
       ],
     },
@@ -365,13 +365,13 @@ export const PUBLIC_RECORD = {
       publicRecord:
         "Medium titles that match the cynical/casual GitHub bio, NOT the resume voice: 'Why I stopped being a Product Manager', 'You could replace me with an LLM', 'Pivot table from Google Sheets and Microsoft Excel using Rust'.",
       verdict: "contradicts",
-      citations: ["https://medium.com/@kooshapari"],
+      citations: ["https://medium.com/@<REDACTED>"],
     },
     {
       claim: "Co-author on OsireLLM (38★)",
       resumeSays: "SDK / dev-tools staff work",
       publicRecord:
-        "KooshaPari/OsireLLM is a co-authored repo on the @KooshaPari GitHub (38 stars). Genuine SDK work, matches the 'dev-tools' framing.",
+        "<REDACTED>/OsireLLM is a co-authored repo on the @<REDACTED> GitHub (38 stars). Genuine SDK work, matches the 'dev-tools' framing.",
       verdict: "matches",
       citations: ["https://github.com/KooshaPari/OsireLLM"],
     },
@@ -389,7 +389,7 @@ export const PUBLIC_RECORD = {
   ],
 
   github: {
-    handle: "KooshaPari",
+    handle: "<REDACTED>",
     url: "https://github.com/KooshaPari",
     userId: 42529354,
     repos: 121,
@@ -415,7 +415,7 @@ export const PUBLIC_RECORD = {
         name: "thegent",
         stars: null,
         url: "https://github.com/KooshaPari/thegent",
-        note: "Matches local daemon /Users/kooshapari/thegent/.",
+        note: "Matches local daemon /Users/<REDACTED>/thegent/.",
       },
       {
         name: "forgecode",
@@ -453,10 +453,10 @@ export const PUBLIC_RECORD = {
       citations: ["https://phenotype.us"],
     },
     software: {
-      portfolioUrl: "https://projects.kooshapari.com",
+      portfolioUrl: "https://projects.<REDACTED>.com",
       projectCount: 84,
       generatedBy:
-        "auto-generated from `gh repo list` filtered to KooshaPari",
+        "auto-generated from `gh repo list` filtered to <REDACTED>",
       flagshipRepos: [
         "pheno",
         "forgecode",
@@ -485,7 +485,7 @@ export const PUBLIC_RECORD = {
         "substrate",
       ],
       citations: [
-        "https://projects.kooshapari.com",
+        "https://projects.<REDACTED>.com",
         "https://github.com/KooshaPari?tab=repositories",
       ],
     },
@@ -531,18 +531,18 @@ export const PUBLIC_RECORD = {
   },
 
   socialHandles: [
-    { platform: "GitHub", handle: "@KooshaPari", url: "https://github.com/KooshaPari", confidence: "high" },
-    { platform: "LinkedIn", handle: "/in/kooshapari", url: "https://www.linkedin.com/in/kooshapari", confidence: "high" },
-    { platform: "LinkedIn", handle: "/in/kooshapari-ram-designs (historical)", url: "https://www.linkedin.com/in/kooshapari-ram-designs", confidence: "high" },
-    { platform: "Hacker News", handle: "kooshapari", url: "https://news.ycombinator.com/user?id=kooshapari", confidence: "medium-high" },
-    { platform: "Instagram", handle: "@kooshapari", url: "https://www.instagram.com/kooshapari/", confidence: "medium" },
+    { platform: "GitHub", handle: "@<REDACTED>", url: "https://github.com/KooshaPari", confidence: "high" },
+    { platform: "LinkedIn", handle: "/in/<REDACTED>", url: "https://www.linkedin.com/in/<REDACTED>", confidence: "high" },
+    { platform: "LinkedIn", handle: "/in/<REDACTED>-ram-designs (historical)", url: "https://www.linkedin.com/in/<REDACTED>-ram-designs", confidence: "high" },
+    { platform: "Hacker News", handle: "<REDACTED>", url: "https://news.ycombinator.com/user?id=<REDACTED>", confidence: "medium-high" },
+    { platform: "Instagram", handle: "@<REDACTED>", url: "https://www.instagram.com/<REDACTED>/", confidence: "medium" },
     { platform: "Instagram", handle: "@phenotype_us", url: "https://www.instagram.com/phenotype_us/", confidence: "medium" },
-    { platform: "Medium", handle: "@kooshapari", url: "https://medium.com/@kooshapari", confidence: "medium" },
-    { platform: "Devpost", handle: "kooshapari", url: "https://devpost.com/kooshapari", confidence: "medium" },
-    { platform: "Swimcloud", handle: "kooshapari", url: "https://www.swimcloud.com/swimmer/kooshapari", confidence: "medium" },
-    { platform: "Hashnode", handle: "@kooshapari", url: "https://hashnode.com/@kooshapari", confidence: "low" },
-    { platform: "dev.to", handle: "kooshapari", url: "https://dev.to/kooshapari", confidence: "low" },
-    { platform: "Substack", handle: "@kooshapari", url: "https://substack.com/@kooshapari", confidence: "low" },
+    { platform: "Medium", handle: "@<REDACTED>", url: "https://medium.com/@<REDACTED>", confidence: "medium" },
+    { platform: "Devpost", handle: "<REDACTED>", url: "https://devpost.com/<REDACTED>", confidence: "medium" },
+    { platform: "Swimcloud", handle: "<REDACTED>", url: "https://www.swimcloud.com/swimmer/<REDACTED>", confidence: "medium" },
+    { platform: "Hashnode", handle: "@<REDACTED>", url: "https://hashnode.com/@<REDACTED>", confidence: "low" },
+    { platform: "dev.to", handle: "<REDACTED>", url: "https://dev.to/<REDACTED>", confidence: "low" },
+    { platform: "Substack", handle: "@<REDACTED>", url: "https://substack.com/@<REDACTED>", confidence: "low" },
     { platform: "Toptal", handle: "koosha-paridehpour", url: "https://www.toptal.com/resume/koosha-paridehpour", confidence: "low" },
     { platform: "Twitter/X", handle: "NOT FOUND", url: "", confidence: "NOT FOUND" },
     { platform: "YouTube", handle: "NOT FOUND", url: "", confidence: "NOT FOUND" },
@@ -555,15 +555,15 @@ export const PUBLIC_RECORD = {
   ],
 
   writing: [
-    { title: "Why I stopped being a Product Manager", url: "https://medium.com/@kooshapari", confidence: "medium (title only, article not opened)" },
-    { title: "Pivot table from Google Sheets and Microsoft Excel using Rust", url: "https://medium.com/@kooshapari", confidence: "medium" },
-    { title: "You could replace me with an LLM", url: "https://medium.com/@kooshapari", confidence: "medium" },
+    { title: "Why I stopped being a Product Manager", url: "https://medium.com/@<REDACTED>", confidence: "medium (title only, article not opened)" },
+    { title: "Pivot table from Google Sheets and Microsoft Excel using Rust", url: "https://medium.com/@<REDACTED>", confidence: "medium" },
+    { title: "You could replace me with an LLM", url: "https://medium.com/@<REDACTED>", confidence: "medium" },
   ],
 
   personalDomains: [
-    { url: "https://kooshapari.com", note: "currently redirects to ramdesigns.xyz" },
+    { url: "https://<REDACTED>.com", note: "currently redirects to ramdesigns.xyz" },
     { url: "https://ramdesigns.xyz", note: "personal Adobe Portfolio listing keyboard designs + Phenotype" },
-    { url: "https://projects.kooshapari.com", note: "live Phenotype software portfolio (84 projects)" },
+    { url: "https://projects.<REDACTED>.com", note: "live Phenotype software portfolio (84 projects)" },
   ],
 
   notFound: [

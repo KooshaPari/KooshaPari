@@ -41,6 +41,8 @@ for (const directory of directories) {
 }
 
 await prerenderTopLevel(publication);
+// The deployed root rewrite must serve the same complete static homepage.
+await cp(join(publication, 'index.html'), join(publication, 'root.html'));
 await prerenderProjects(publication);
 await prerenderPosts(publication);
 

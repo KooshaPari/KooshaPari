@@ -1,0 +1,212 @@
+{
+  "asset": "hybrid-materials",
+  "description": "Procedural explanatory artwork suite \u2014 three conceptual software objects rendered as a studio plate (composite) plus distinct per-project scenes.",
+  "palette": [
+    "graphite",
+    "porcelain",
+    "muted teal"
+  ],
+  "renderer": "Cycles CPU, 32 samples, denoising, Standard view transform",
+  "seed": 0,
+  "boundary": "Original procedural geometry. No third-party assets. Hand-authored explanatory artwork, not recorded tool output.",
+  "generators": {
+    "composite": "build_scene.py",
+    "per_project": "build_project.py"
+  },
+  "composite": {
+    "size_bytes": 9636,
+    "md5": "0895cecd400b6a43de9737fd1521c24f",
+    "sha256": "974c56fdd51f31dcafb9d77ba52c89806c5dd9c4aec2445767c66c6f53d4a239",
+    "filename": "hybrid-materials.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 800
+    }
+  },
+  "projects": {
+    "sharecli": {
+      "description": "Four capsules on a queue rail \u2014 Rust process and resource runtime for high-concurrency coding-agent workloads. Third capsule highlighted (active/coalescing state).",
+      "workbench_alignment": "4-node topology: agent bursts -> process observation -> coalesce + queue -> shared host state.",
+      "desktop": {
+        "size_bytes": 8660,
+        "md5": "4c4ca0bb95f7172aacd736adf7b98d2d",
+        "sha256": "709805d9c5e0aa87832ecb2e6072b4d0ec3eeef58883e15da279bf4ab6d857c0",
+        "filename": "sharecli-desktop.webp",
+        "dimensions": {
+          "width": 1200,
+          "height": 800
+        },
+        "target_size": {
+          "width": 1200,
+          "height": 800
+        }
+      },
+      "mobile": {
+        "size_bytes": 5504,
+        "md5": "107faf6e85ed687b75d459aaed7d051b",
+        "sha256": "9fa3d40b2f2ec0c818a4435fb306b1b131fccf2b17d39763e55f457e54641a36",
+        "filename": "sharecli-mobile.webp",
+        "dimensions": {
+          "width": 800,
+          "height": 700
+        },
+        "target_size": {
+          "width": 800,
+          "height": 700
+        }
+      }
+    },
+    "substrate": {
+      "description": "Three-layer policy stack with interface ports \u2014 AI execution and provider-routing substrate spanning HTTP, CLI, MCP, and A2A interfaces.",
+      "workbench_alignment": "4-node topology: HTTP/CLI/MCP/A2A -> policy+budget -> health+fallback -> provider execution.",
+      "desktop": {
+        "size_bytes": 6304,
+        "md5": "15cfb252d097b3032c102fb058240a77",
+        "sha256": "8eea54056eed56547229e26f1a83fd56f9811b329b6dd3dd517533113874895d",
+        "filename": "substrate-desktop.webp",
+        "dimensions": {
+          "width": 1200,
+          "height": 800
+        },
+        "target_size": {
+          "width": 1200,
+          "height": 800
+        }
+      },
+      "mobile": {
+        "size_bytes": 3742,
+        "md5": "99a86af4c53cd98dcb0de77e71bcb346",
+        "sha256": "b8d0771a3827002d77d9451f72914de82c7e5e64d26a39b1d6000ed0f3d851a3",
+        "filename": "substrate-mobile.webp",
+        "dimensions": {
+          "width": 800,
+          "height": 700
+        },
+        "target_size": {
+          "width": 800,
+          "height": 700
+        }
+      }
+    },
+    "phenotype-omlx": {
+      "description": "Compute and memory slabs with indicator bars \u2014 MLX inference research stack with Rust performance cores, multi-backend routing, and evaluation tooling.",
+      "workbench_alignment": "4-row experiment sheet: upstream -> fork delta -> method -> boundary.",
+      "desktop": {
+        "size_bytes": 11534,
+        "md5": "2af3a8b14e7822a770c92a819803a8f8",
+        "sha256": "a55a6a40f2b171029117f9ce491c3e82f71cf02ae80c297126c659553d128a60",
+        "filename": "phenotype-omlx-desktop.webp",
+        "dimensions": {
+          "width": 1200,
+          "height": 800
+        },
+        "target_size": {
+          "width": 1200,
+          "height": 800
+        }
+      },
+      "mobile": {
+        "size_bytes": 6906,
+        "md5": "7790f0b345895bc21523090e6ef6716b",
+        "sha256": "198e1752e11e79bbc59ad638465df883e2b06d34665a8b00aa7ad232ce5cb3a7",
+        "filename": "phenotype-omlx-mobile.webp",
+        "dimensions": {
+          "width": 800,
+          "height": 700
+        },
+        "target_size": {
+          "width": 800,
+          "height": 700
+        }
+      }
+    }
+  },
+  "renders": {
+    "sharecli-desktop.webp": {
+      "size_bytes": 8660,
+      "md5": "4c4ca0bb95f7172aacd736adf7b98d2d",
+      "sha256": "709805d9c5e0aa87832ecb2e6072b4d0ec3eeef58883e15da279bf4ab6d857c0",
+      "filename": "sharecli-desktop.webp",
+      "dimensions": {
+        "width": 1200,
+        "height": 800
+      },
+      "target_size": {
+        "width": 1200,
+        "height": 800
+      }
+    },
+    "sharecli-mobile.webp": {
+      "size_bytes": 5504,
+      "md5": "107faf6e85ed687b75d459aaed7d051b",
+      "sha256": "9fa3d40b2f2ec0c818a4435fb306b1b131fccf2b17d39763e55f457e54641a36",
+      "filename": "sharecli-mobile.webp",
+      "dimensions": {
+        "width": 800,
+        "height": 700
+      },
+      "target_size": {
+        "width": 800,
+        "height": 700
+      }
+    },
+    "substrate-desktop.webp": {
+      "size_bytes": 6304,
+      "md5": "15cfb252d097b3032c102fb058240a77",
+      "sha256": "8eea54056eed56547229e26f1a83fd56f9811b329b6dd3dd517533113874895d",
+      "filename": "substrate-desktop.webp",
+      "dimensions": {
+        "width": 1200,
+        "height": 800
+      },
+      "target_size": {
+        "width": 1200,
+        "height": 800
+      }
+    },
+    "substrate-mobile.webp": {
+      "size_bytes": 3742,
+      "md5": "99a86af4c53cd98dcb0de77e71bcb346",
+      "sha256": "b8d0771a3827002d77d9451f72914de82c7e5e64d26a39b1d6000ed0f3d851a3",
+      "filename": "substrate-mobile.webp",
+      "dimensions": {
+        "width": 800,
+        "height": 700
+      },
+      "target_size": {
+        "width": 800,
+        "height": 700
+      }
+    },
+    "phenotype-omlx-desktop.webp": {
+      "size_bytes": 11534,
+      "md5": "2af3a8b14e7822a770c92a819803a8f8",
+      "sha256": "a55a6a40f2b171029117f9ce491c3e82f71cf02ae80c297126c659553d128a60",
+      "filename": "phenotype-omlx-desktop.webp",
+      "dimensions": {
+        "width": 1200,
+        "height": 800
+      },
+      "target_size": {
+        "width": 1200,
+        "height": 800
+      }
+    },
+    "phenotype-omlx-mobile.webp": {
+      "size_bytes": 6906,
+      "md5": "7790f0b345895bc21523090e6ef6716b",
+      "sha256": "198e1752e11e79bbc59ad638465df883e2b06d34665a8b00aa7ad232ce5cb3a7",
+      "filename": "phenotype-omlx-mobile.webp",
+      "dimensions": {
+        "width": 800,
+        "height": 700
+      },
+      "target_size": {
+        "width": 800,
+        "height": 700
+      }
+    }
+  },
+  "render_note": "Re-rendered after geometry fixes: ShareCLI arrow repositioned and camera widened; Substrate Y-stagger tripled for visible 3-layer separation; OMLX bus trace thickened to bridge both slabs. Blender 4.4.3 direct binary path used (symlink path resolution broken). Standard view transform (AgX unavailable in headless).",
+  "render_timestamp": "2026-09-13T04:41:08.593662+00:00"
+}

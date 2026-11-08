@@ -1,12 +1,42 @@
 import { PROJECTS } from '../../data/projects.js';
-import { el } from '../components/dom.js';
+import { el, onImageFallback } from '../components/dom.js';
 import { metricAnnotation, evidenceLabel, publicEvidenceSummary } from '../components/evidence.js';
 import { diagramFromCaseStudy, renderDiagram } from '../media/diagrams.js';
 import { renderNetWeaveWorkbench } from '../media/netweave-workbench.js';
 import { renderShareCliWorkbench } from '../media/sharecli-workbench.js';
 import { renderShareCliRecordings } from '../media/sharecli-recording.js';
 import { renderSubstratePlate } from '../media/systems-plate.js';
+import { renderProjectVisual } from '../media/project-visuals.js';
+import { renderOmniRouteTopology } from '../media/omniroute-topology.js';
 import { renderNotFound } from './not-found.js';
+
+// WebP derivative mapping for WITF gallery images.
+const WITF_WEBP = {
+  '/public/projects/witf/hero-01.jpg': {
+    desktop: '/public/projects/physical-products-review/witf/hero-01-desktop.webp',
+    mobile: '/public/projects/physical-products-review/witf/hero-01-mobile.webp',
+  },
+  '/public/projects/witf/hero-02.jpg': {
+    desktop: '/public/projects/physical-products-review/witf/hero-02-desktop.webp',
+    mobile: '/public/projects/physical-products-review/witf/hero-02-mobile.webp',
+  },
+};
+
+/** Create a <picture> element with WebP derivatives when available, else a plain <img>. */
+function createGalleryImage(src, asset, projectTitle) {
+  const alt = asset?.alt ?? `${projectTitle} project visual`;
+  const width = asset?.width ?? 1600;
+  const height = asset?.height ?? 900;
+  const webp = WITF_WEBP[src];
+  if (webp) {
+    return el('picture', {},
+      el('source', { media: '(max-width: 600px)', srcset: webp.mobile, type: 'image/webp' }),
+      el('source', { srcset: webp.desktop, type: 'image/webp' }),
+      onImageFallback(el('img', { src, alt, loading: 'lazy', decoding: 'async', width, height })),
+    );
+  }
+  return onImageFallback(el('img', { src, alt, loading: 'lazy', decoding: 'async', width, height }));
+}
 
 const COMPACT_SECTIONS = {
   byteport: [
@@ -26,7 +56,7 @@ const COMPACT_SECTIONS = {
   ],
   'cliproxyapi-plusplus': [
     ['Context', 'A forked multi-provider AI proxy focused on routing, auth, quotas, diagnostics, and operational controls.'],
-    ['Upstream boundary', 'Attributed to router-for-me/CLIProxyAPI; only KooshaPari\u2019s extension scope is presented here.'],
+    ['Upstream boundary', 'Attributed to router-for-me/CLIProxyAPI; only <REDACTED>\u2019s extension scope is presented here.'],
     ['Current boundary', 'Upstream popularity is not imported as local adoption evidence.'],
   ],
   'agentapi-plusplus': [
@@ -90,6 +120,47 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
   const substratePlate = project.slug === 'substrate'
     ? el('div', { class: 'case-section case-substrate-plate' }, el('h2', {}, 'Execution boundary'), renderSubstratePlate())
     : null;
+  const omlxMaterialImage = project.slug === 'phenotype-omlx'
+    ? el('div', { class: 'case-section case-omlx-material' }, el('h2', {}, 'Material boundary'),
+        el('figure', { class: 'project-visual project-visual--material', 'data-visual': 'phenotype-omlx-material' },
+          el('div', { class: 'project-visual__image-frame' },
+            el('picture', {},
+              el('source', { media: '(max-width: 600px)', srcset: '/public/projects/hybrid-materials/phenotype-omlx-mobile.webp', type: 'image/webp' }),
+              onImageFallback(el('img', {
+                src: '/public/projects/hybrid-materials/phenotype-omlx-desktop.webp',
+                alt: project.presentation?.alt ?? 'phenotype-omlx MLX inference material boundary',
+                loading: 'lazy',
+                decoding: 'async',
+                width: 1200,
+                height: 800,
+              })),
+            ),
+          ),
+          el('figcaption', {}, 'MLX inference material boundary'),
+        ),
+      )
+    : null;
+
+  // Project-specific visual from the semantic visual factory.
+  // Returns null for projects whose visuals are already rendered above
+  // (NetWeave, ShareCLI, OmniRoute, Substrate, phenotype-omlx, physical
+  // products via hero gallery). Provides SVG diagrams for BytePort,
+  // Tracera, CLIProxyAPI++, AgentAPI++ and compact visuals for archive.
+  const projectVisual = (() => {
+    const rendered = renderProjectVisual(project, { lens, mode: 'detail' });
+    if (!rendered) return null;
+    const heading = project.category === 'physical-product'
+      ? 'Product visual'
+      : project.category === 'cloud'
+        ? 'Deployment architecture'
+        : project.category === 'developer-tools'
+          ? 'Extension architecture'
+          : 'Architecture';
+    return el('div', { class: 'case-section case-visual-section' },
+      el('h2', {}, heading),
+      rendered,
+    );
+  })();
 
   const disclosure = project.caseStudy?.disclosure
     ? el('div', { class: 'case-section case-disclosure' }, el('h2', {}, 'AI-assistance disclosure'), el('p', {}, project.caseStudy.disclosure))
@@ -130,6 +201,9 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
     netweave: 'netweave', sharecli: 'sharecli', omniroute: 'omniroute',
     'gmk-arch': 'physical', witf: 'physical', 'dss-cipher': 'physical',
     substrate: 'substrate', 'phenotype-omlx': 'omlx',
+    byteport: 'diagram', tracera: 'diagram',
+    'cliproxyapi-plusplus': 'diagram', 'agentapi-plusplus': 'diagram',
+    mcpforge: 'compact', forgecode: 'compact', frostify: 'compact',
   };
   const family = FAMILY_MAP[project.slug];
 
@@ -146,14 +220,7 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
     ? (() => {
         const asset = project.presentation?.assets?.find((entry) => entry.src === project.gallery[0]);
         return el('figure', { class: 'case-hero' },
-          el('img', {
-            src: project.gallery[0],
-            alt: asset?.alt ?? project.presentation?.alt ?? `${project.title} project visual`,
-            loading: 'eager',
-            decoding: 'async',
-            width: asset?.width ?? project.presentation?.media?.width ?? 1600,
-            height: asset?.height ?? project.presentation?.media?.height ?? 900,
-          }),
+          createGalleryImage(project.gallery[0], asset, project.title),
           asset?.alt ? el('figcaption', {}, asset.alt) : null,
         );
       })()
@@ -171,26 +238,46 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
     caseStudyAttrs.style = `--family-accent: var(--family-${family}-active, var(--family-${family}))`;
   }
 
+  // ── Previous / next project links ────────────────────────────
+  const slugList = PROJECTS.map(p => p.slug);
+  const idx = slugList.indexOf(slug);
+  const prevProject = idx > 0 ? PROJECTS[idx - 1] : null;
+  const nextProject = idx < slugList.length - 1 ? PROJECTS[idx + 1] : null;
+  const projectNav = el('nav', { class: 'project-nav', 'aria-label': 'Project navigation' },
+    prevProject
+      ? el('a', { href: `/work/${prevProject.slug}`, class: 'project-nav__link project-nav__prev' },
+          el('span', { class: 'project-nav__label' }, '\u2190 Previous'),
+          el('span', { class: 'project-nav__title' }, prevProject.title),
+        )
+      : el('span', { class: 'project-nav__link project-nav__link--disabled' }),
+    nextProject
+      ? el('a', { href: `/work/${nextProject.slug}`, class: 'project-nav__link project-nav__next' },
+          el('span', { class: 'project-nav__label' }, 'Next \u2192'),
+          el('span', { class: 'project-nav__title' }, nextProject.title),
+        )
+      : el('span', { class: 'project-nav__link project-nav__link--disabled' }),
+  );
+
   root.replaceChildren(
     el('section', caseStudyAttrs,
       el('a', { href: '/work', class: 'back-link' }, '\u2190 Back to work'),
       heroPlate,
       project.gallery?.length > 1
         ? el('div', { class: 'case-gallery' },
-            project.gallery.map((src) => {
+            project.gallery.slice(1).map((src) => {
               const asset = project.presentation?.assets?.find((entry) => entry.src === src);
-              return el('img', {
-                src,
-                alt: asset?.alt ?? project.presentation?.alt ?? `${project.title} project visual`,
-                loading: 'lazy',
-                width: asset?.width ?? project.presentation?.media?.width ?? 1600,
-                height: asset?.height ?? project.presentation?.media?.height ?? 900,
-              });
+              const alt = asset?.alt ?? project.presentation?.alt ?? `${project.title} project visual`;
+              return el('figure', { class: 'case-gallery__item' },
+                el('a', { href: src, target: '_blank', rel: 'noreferrer' },
+                  createGalleryImage(src, asset, project.title),
+                ),
+                asset?.alt ? el('figcaption', {}, asset.alt) : null,
+              );
             }))
         : null,
       lensAnnotation,
       el('div', { class: 'case-copy' },
-        overview, diagram, netweaveField, shareCliWorkbench, substratePlate,
+        overview, diagram, projectVisual, omlxMaterialImage, netweaveField, shareCliWorkbench, substratePlate,
         sections.map(([heading, copy]) =>
           el('div', { class: 'case-section' }, el('h2', {}, heading), el('p', {}, copy))),
         disclosure, evidence,
@@ -198,8 +285,7 @@ export function renderProjectDetail(root, slug, lens = 'engineering') {
         evidencePanel,
       ),
       project.repo ? el('a', { href: project.repo, target: '_blank', rel: 'noreferrer', class: 'text-link' }, 'View repository') : null,
+      projectNav,
     ),
   );
 }
-
-

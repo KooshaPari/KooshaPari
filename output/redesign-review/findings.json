@@ -1,0 +1,386 @@
+[
+  {
+    "ts": "2026-09-12T11:29:22.388Z",
+    "severity": "info",
+    "category": "lens-state",
+    "slug": "home-engineering",
+    "viewport": "mobile",
+    "detail": "{\"classes\":\"\",\"dataLens\":null,\"url\":\"#construction-entered\"}"
+  },
+  {
+    "ts": "2026-09-12T11:29:31.447Z",
+    "severity": "info",
+    "category": "lens-state",
+    "slug": "home-product",
+    "viewport": "mobile",
+    "detail": "{\"classes\":\"\",\"dataLens\":null,\"url\":\"#construction-entered\"}"
+  },
+  {
+    "ts": "2026-09-12T11:29:39.512Z",
+    "severity": "info",
+    "category": "index-dialog",
+    "slug": "work",
+    "viewport": "mobile",
+    "detail": "Index dialog open: true"
+  },
+  {
+    "ts": "2026-09-12T11:29:39.517Z",
+    "severity": "info",
+    "category": "index-items",
+    "slug": "work",
+    "viewport": "mobile",
+    "detail": "15 projects in Index dialog"
+  },
+  {
+    "ts": "2026-09-12T11:29:40.244Z",
+    "severity": "info",
+    "category": "filter-buttons",
+    "slug": "work",
+    "viewport": "mobile",
+    "detail": "9 filter buttons found"
+  },
+  {
+    "ts": "2026-09-12T11:29:46.586Z",
+    "severity": "warning",
+    "category": "h1-mismatch",
+    "slug": "resume",
+    "viewport": "mobile",
+    "detail": "h1 \"Two ways to read the work\" does not match expected project \"Resume\""
+  },
+  {
+    "ts": "2026-09-12T11:29:54.335Z",
+    "severity": "warning",
+    "category": "h1-mismatch",
+    "slug": "contact",
+    "viewport": "mobile",
+    "detail": "h1 \"Let’s build something consequential.\" does not match expected project \"Contact\""
+  },
+  {
+    "ts": "2026-09-12T11:30:03.017Z",
+    "severity": "warning",
+    "category": "h1-mismatch",
+    "slug": "blog",
+    "viewport": "mobile",
+    "detail": "h1 \"Writing\" does not match expected project \"Blog\""
+  },
+  {
+    "ts": "2026-09-12T11:30:25.044Z",
+    "severity": "warning",
+    "category": "h1-mismatch",
+    "slug": "engineering",
+    "viewport": "mobile",
+    "detail": "h1 \"Software systems, technical products, and the infrastructure between them.\" does not match expected project \"Engineering\""
+  },
+  {
+    "ts": "2026-09-12T11:33:04.834Z",
+    "severity": "error",
+    "category": "navigation",
+    "slug": "mcpforge",
+    "viewport": "mobile",
+    "detail": "Failed to load: c.type is not a function"
+  },
+  {
+    "ts": "2026-09-12T11:33:14.654Z",
+    "severity": "error",
+    "category": "navigation",
+    "slug": "forgecode",
+    "viewport": "mobile",
+    "detail": "Failed to load: c.type is not a function"
+  },
+  {
+    "ts": "2026-09-12T11:33:29.940Z",
+    "severity": "error",
+    "category": "navigation",
+    "slug": "frostify",
+    "viewport": "mobile",
+    "detail": "Failed to load: c.type is not a function"
+  },
+  {
+    "ts": "2026-09-12T11:33:47.461Z",
+    "severity": "warning",
+    "category": "h1-mismatch",
+    "slug": "blog-omniroute",
+    "viewport": "mobile",
+    "detail": "h1 \"Why we forked OmniRoute — and how to avoid it\" does not match expected project \"Blog-omniroute\""
+  },
+  {
+    "ts": "2026-09-12T11:34:09.259Z",
+    "severity": "info",
+    "category": "lens-state",
+    "slug": "home-engineering",
+    "viewport": "desktop",
+    "detail": "{\"classes\":\"\",\"dataLens\":null,\"url\":\"#construction-entered\"}"
+  },
+  {
+    "ts": "2026-09-12T11:34:09.270Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "home-engineering",
+    "viewport": "desktop",
+    "detail": "37 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:34:25.163Z",
+    "severity": "info",
+    "category": "lens-state",
+    "slug": "home-product",
+    "viewport": "desktop",
+    "detail": "{\"classes\":\"\",\"dataLens\":null,\"url\":\"#construction-entered\"}"
+  },
+  {
+    "ts": "2026-09-12T11:34:25.275Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "home-product",
+    "viewport": "desktop",
+    "detail": "37 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:34:57.163Z",
+    "severity": "info",
+    "category": "index-dialog",
+    "slug": "work",
+    "viewport": "desktop",
+    "detail": "Index dialog open: true"
+  },
+  {
+    "ts": "2026-09-12T11:34:57.171Z",
+    "severity": "info",
+    "category": "index-items",
+    "slug": "work",
+    "viewport": "desktop",
+    "detail": "15 projects in Index dialog"
+  },
+  {
+    "ts": "2026-09-12T11:34:57.651Z",
+    "severity": "info",
+    "category": "filter-buttons",
+    "slug": "work",
+    "viewport": "desktop",
+    "detail": "9 filter buttons found"
+  },
+  {
+    "ts": "2026-09-12T11:34:57.680Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "work",
+    "viewport": "desktop",
+    "detail": "52 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:35:07.809Z",
+    "severity": "warning",
+    "category": "h1-mismatch",
+    "slug": "resume",
+    "viewport": "desktop",
+    "detail": "h1 \"Two ways to read the work\" does not match expected project \"Resume\""
+  },
+  {
+    "ts": "2026-09-12T11:35:10.090Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "resume",
+    "viewport": "desktop",
+    "detail": "32 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:35:19.553Z",
+    "severity": "warning",
+    "category": "h1-mismatch",
+    "slug": "contact",
+    "viewport": "desktop",
+    "detail": "h1 \"Let’s build something consequential.\" does not match expected project \"Contact\""
+  },
+  {
+    "ts": "2026-09-12T11:35:21.264Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "contact",
+    "viewport": "desktop",
+    "detail": "32 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:35:28.021Z",
+    "severity": "warning",
+    "category": "h1-mismatch",
+    "slug": "blog",
+    "viewport": "desktop",
+    "detail": "h1 \"Writing\" does not match expected project \"Blog\""
+  },
+  {
+    "ts": "2026-09-12T11:35:28.534Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "blog",
+    "viewport": "desktop",
+    "detail": "29 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:35:33.795Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "archive",
+    "viewport": "desktop",
+    "detail": "34 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:35:42.767Z",
+    "severity": "warning",
+    "category": "h1-mismatch",
+    "slug": "engineering",
+    "viewport": "desktop",
+    "detail": "h1 \"Software systems, technical products, and the infrastructure between them.\" does not match expected project \"Engineering\""
+  },
+  {
+    "ts": "2026-09-12T11:35:46.728Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "engineering",
+    "viewport": "desktop",
+    "detail": "37 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:35:52.614Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "product",
+    "viewport": "desktop",
+    "detail": "37 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:35:56.888Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "gmk-arch",
+    "viewport": "desktop",
+    "detail": "30 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:36:11.812Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "witf",
+    "viewport": "desktop",
+    "detail": "33 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:36:22.103Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "sharecli",
+    "viewport": "desktop",
+    "detail": "45 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:36:27.192Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "substrate",
+    "viewport": "desktop",
+    "detail": "33 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:36:31.822Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "phenotype-omlx",
+    "viewport": "desktop",
+    "detail": "33 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:36:36.358Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "netweave",
+    "viewport": "desktop",
+    "detail": "43 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:36:38.525Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "byteport",
+    "viewport": "desktop",
+    "detail": "33 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:36:40.833Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "tracera",
+    "viewport": "desktop",
+    "detail": "33 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:36:43.248Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "dss-cipher",
+    "viewport": "desktop",
+    "detail": "31 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:36:45.652Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "cliproxyapi-plusplus",
+    "viewport": "desktop",
+    "detail": "33 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:36:47.892Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "agentapi-plusplus",
+    "viewport": "desktop",
+    "detail": "33 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:36:49.695Z",
+    "severity": "error",
+    "category": "navigation",
+    "slug": "mcpforge",
+    "viewport": "desktop",
+    "detail": "Failed to load: c.type is not a function"
+  },
+  {
+    "ts": "2026-09-12T11:36:51.697Z",
+    "severity": "error",
+    "category": "navigation",
+    "slug": "forgecode",
+    "viewport": "desktop",
+    "detail": "Failed to load: c.type is not a function"
+  },
+  {
+    "ts": "2026-09-12T11:36:53.795Z",
+    "severity": "error",
+    "category": "navigation",
+    "slug": "frostify",
+    "viewport": "desktop",
+    "detail": "Failed to load: c.type is not a function"
+  },
+  {
+    "ts": "2026-09-12T11:36:55.727Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "omniroute",
+    "viewport": "desktop",
+    "detail": "33 focusable elements"
+  },
+  {
+    "ts": "2026-09-12T11:36:58.300Z",
+    "severity": "warning",
+    "category": "h1-mismatch",
+    "slug": "blog-omniroute",
+    "viewport": "desktop",
+    "detail": "h1 \"Why we forked OmniRoute — and how to avoid it\" does not match expected project \"Blog-omniroute\""
+  },
+  {
+    "ts": "2026-09-12T11:36:58.781Z",
+    "severity": "info",
+    "category": "focusable-count",
+    "slug": "blog-omniroute",
+    "viewport": "desktop",
+    "detail": "29 focusable elements"
+  }
+]

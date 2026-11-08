@@ -69,7 +69,7 @@ evidence_policy: source=linkedin_mcp|date=2026-09-03|evidence_type=intervention_
 
 | Field | Value |
 |---|---|
-| candidate_id | koosha@domain.com |
+| candidate_id | <REDACTED>@domain.com |
 | message_id | {UUID} |
 | role_id | {role_band from role-band-map.csv} |
 | campaign_id | {intervention_type}_{date} |

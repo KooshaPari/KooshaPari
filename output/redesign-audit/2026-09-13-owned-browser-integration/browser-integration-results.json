@@ -1,0 +1,157 @@
+{
+  "timestamp": "2026-09-13T05:02:01.268Z",
+  "serverPort": 56431,
+  "baseUrl": "http://127.0.0.1:56431",
+  "results": [
+    {
+      "id": "reader-active",
+      "pass": true,
+      "detail": "data-reader=\"true\""
+    },
+    {
+      "id": "dialog-opens",
+      "pass": true,
+      "detail": "dialog.open=true"
+    },
+    {
+      "id": "search-empty-before-escape",
+      "pass": true,
+      "detail": "search=\"\""
+    },
+    {
+      "id": "escape-empty-closes-dialog",
+      "pass": true,
+      "detail": "dialog.open=false"
+    },
+    {
+      "id": "focus-return-after-close",
+      "pass": true,
+      "detail": "activeElement: BUTTON.index-trigger"
+    },
+    {
+      "id": "dialog-reopens",
+      "pass": true,
+      "detail": "dialog.open=true"
+    },
+    {
+      "id": "search-nonempty-typed",
+      "pass": true,
+      "detail": "search=\"zzz-nomatch\""
+    },
+    {
+      "id": "escape-nonempty-clears-search",
+      "pass": true,
+      "detail": "after=\"\""
+    },
+    {
+      "id": "escape-nonempty-dialog-stays-open",
+      "pass": true,
+      "detail": "dialog.open=true"
+    },
+    {
+      "id": "home-focuses-first-item",
+      "pass": true,
+      "detail": "tag=A text=\"01GMK ArchAn Arch Linux-inspir\""
+    },
+    {
+      "id": "arrow-down-moves-focus",
+      "pass": true,
+      "detail": "tag=A text=\"02WITF BoardA Southpaw XT full\""
+    },
+    {
+      "id": "arrow-up-moves-focus",
+      "pass": true,
+      "detail": "tag=A text=\"01GMK ArchAn Arch Linux-inspir\""
+    },
+    {
+      "id": "arrow-up-from-first-goes-to-search",
+      "pass": true,
+      "detail": "tag=INPUT class=\"project-index-search\""
+    },
+    {
+      "id": "images-found-for-intercept",
+      "pass": true,
+      "detail": "plain=true picture=true total=5"
+    },
+    {
+      "id": "plain-src-removed",
+      "pass": true,
+      "detail": "src present: false"
+    },
+    {
+      "id": "plain-srcset-removed",
+      "pass": true,
+      "detail": "srcset present: false"
+    },
+    {
+      "id": "plain-fallback-class",
+      "pass": true,
+      "detail": "img-fallback class: true"
+    },
+    {
+      "id": "plain-fallback-data",
+      "pass": true,
+      "detail": "data-fallback: true"
+    },
+    {
+      "id": "plain-alt-preserved",
+      "pass": true,
+      "detail": "alt: \"Black WITF Board keyboard shown from above on a warm concret\""
+    },
+    {
+      "id": "plain-title-promoted",
+      "pass": true,
+      "detail": "title: \"Black WITF Board keyboard shown from above on a warm concret\""
+    },
+    {
+      "id": "picture-src-removed",
+      "pass": true,
+      "detail": "src present: false"
+    },
+    {
+      "id": "picture-srcset-removed",
+      "pass": true,
+      "detail": "srcset present: false"
+    },
+    {
+      "id": "picture-fallback-class",
+      "pass": true,
+      "detail": "img-fallback class: true"
+    },
+    {
+      "id": "picture-fallback-data",
+      "pass": true,
+      "detail": "data-fallback: true"
+    },
+    {
+      "id": "picture-srcset-neutralized",
+      "pass": true,
+      "detail": "srcsets cleared: true"
+    },
+    {
+      "id": "picture-alt-preserved",
+      "pass": true,
+      "detail": "alt: \"ShareCLI process runtime material boundary showing concurren\""
+    },
+    {
+      "id": "picture-title-promoted",
+      "pass": true,
+      "detail": "title: \"ShareCLI process runtime material boundary showing concurren\""
+    },
+    {
+      "id": "no-repeated-failed-requests",
+      "pass": true,
+      "detail": "/public/projects/witf/hero-01.jpg count: 1"
+    },
+    {
+      "id": "no-repeated-failed-requests",
+      "pass": true,
+      "detail": "/public/projects/hybrid-materials/sharec count: 1"
+    },
+    {
+      "id": "successful-images-unaffected",
+      "pass": true,
+      "detail": "2 images loaded OK"
+    }
+  ]
+}

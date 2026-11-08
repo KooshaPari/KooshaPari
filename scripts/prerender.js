@@ -11,6 +11,7 @@ import { renderResume } from './views/resume.js';
 import { renderContact } from './views/contact.js';
 import { renderBlogIndex } from './views/blog-index.js';
 import { renderBlogPost } from './views/blog-post.js';
+import { renderArchive } from './views/archive.js';
 
 const TOP_LEVEL_ROUTES = [
   { file: 'index.html', route: { view: 'home' }, render: (root) => renderHome(root, { projects: PROJECTS, lens: 'engineering' }) },
@@ -20,6 +21,7 @@ const TOP_LEVEL_ROUTES = [
   { file: 'resume.html', route: { view: 'resume' }, render: (root) => renderResume(root) },
   { file: 'contact.html', route: { view: 'contact' }, render: (root) => renderContact(root) },
   { file: 'blog.html', route: { view: 'blog' }, render: (root) => renderBlogIndex(root, { posts: POSTS }) },
+  { file: 'archive.html', route: { view: 'archive' }, render: (root) => renderArchive(root, { projects: PROJECTS }) },
 ];
 
 function removeInertControls(document) {
@@ -61,7 +63,7 @@ export async function prerenderProjects(publication) {
       });
       renderProjectDetail(root, project.slug);
       document.title = `${project.title} — Koosha Paridehpour`;
-      const url = `https://kooshapari.com/work/${project.slug}`;
+      const url = `https://<REDACTED>.com/work/${project.slug}`;
       document.querySelector('link[rel="canonical"]').setAttribute('href', url);
       for (const selector of ['meta[name="description"]', 'meta[property="og:description"]']) {
         document.querySelector(selector)?.setAttribute('content', project.summary);
@@ -91,7 +93,7 @@ export async function prerenderPosts(publication) {
       });
       renderBlogPost(root, post.slug);
       document.title = `${post.title} — Koosha Paridehpour`;
-      const url = `https://kooshapari.com/blog/${post.slug}`;
+      const url = `https://<REDACTED>.com/blog/${post.slug}`;
       document.querySelector('link[rel="canonical"]')?.setAttribute('href', url);
       for (const selector of ['meta[name="description"]', 'meta[property="og:description"]', 'meta[name="twitter:description"]']) {
         document.querySelector(selector)?.setAttribute('content', post.excerpt);

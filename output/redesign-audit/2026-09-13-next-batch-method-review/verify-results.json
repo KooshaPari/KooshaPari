@@ -1,0 +1,501 @@
+{
+  "meta": {
+    "generated": "2026-09-13T04:32:03.532Z",
+    "gitRev": "7d6b3ff",
+    "serverPID": 59721,
+    "browserPID": "unknown"
+  },
+  "constructionGate": {
+    "gateHidden": false,
+    "gateAriaHidden": null,
+    "gateDisplay": "grid",
+    "gateVisibility": "visible",
+    "gateOpacity": "1",
+    "gateVisible": true,
+    "gateRectWidth": 1440,
+    "gateRectHeight": 900,
+    "siteInert": true,
+    "bodyLocked": true,
+    "gateH1Count": 1,
+    "gateH1Texts": [
+      "Under construction"
+    ],
+    "siteH1Count": 1,
+    "siteH1Texts": [
+      "Software systems, technical products, and the infrastructure between them."
+    ],
+    "totalH1Count": 2,
+    "siteFirstChildInert": false,
+    "gateRole": "dialog",
+    "gateAriaModal": "true"
+  },
+  "focusVisible": {
+    "computedAnalysis": {
+      "totalInteractive": 37,
+      "sampled": 20,
+      "withDefaultVisibleFocus": 1,
+      "withFocusRingCSS": 1,
+      "elements": [
+        {
+          "tag": "A",
+          "text": "Continue to site",
+          "href": "#construction-entered",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "rgba(255, 255, 255, 0.26) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.18) 0px 11.2px ",
+          "hasFocusVisibleCSS": true,
+          "index": 0
+        },
+        {
+          "tag": "A",
+          "text": "Skip to content",
+          "href": "#view-root",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 1
+        },
+        {
+          "tag": "A",
+          "text": "Koosha ParidehpourSystems / products / i",
+          "href": "/",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 2
+        },
+        {
+          "tag": "A",
+          "text": "Work",
+          "href": "/work",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 3
+        },
+        {
+          "tag": "A",
+          "text": "Writing",
+          "href": "/blog",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 4
+        },
+        {
+          "tag": "A",
+          "text": "Resume",
+          "href": "/resume",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 5
+        },
+        {
+          "tag": "A",
+          "text": "Contact",
+          "href": "/contact",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 6
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Engineering",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 7
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Product",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 8
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Reader",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 9
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Index",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 10
+        },
+        {
+          "tag": "A",
+          "text": "Read Engineering",
+          "href": "/engineering",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 11
+        },
+        {
+          "tag": "A",
+          "text": "Read Product",
+          "href": "/product",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 12
+        },
+        {
+          "tag": "A",
+          "text": "WITF Board",
+          "href": "/work/witf",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 13
+        },
+        {
+          "tag": "A",
+          "text": "ShareCLI",
+          "href": "/work/sharecli",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 14
+        },
+        {
+          "tag": "A",
+          "text": "Substrate",
+          "href": "/work/substrate",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 15
+        },
+        {
+          "tag": "A",
+          "text": "phenotype-omlx",
+          "href": "/work/phenotype-omlx",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 16
+        },
+        {
+          "tag": "A",
+          "text": "NetWeave",
+          "href": "/work/netweave",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 17
+        },
+        {
+          "tag": "A",
+          "text": "GMK Arch",
+          "href": "/work/gmk-arch",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 18
+        },
+        {
+          "tag": "A",
+          "text": "OmniRoute",
+          "href": "/work/omniroute",
+          "defaultOutlineStyle": "none",
+          "defaultBoxShadow": "none",
+          "hasFocusVisibleCSS": false,
+          "index": 19
+        }
+      ]
+    },
+    "tabFocusResults": [
+      {
+        "tag": "A",
+        "text": "Writing",
+        "outlineStyle": "none",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(85, 90, 82)",
+        "boxShadow": "rgb(243, 240, 232) 0px 0px 0px 3px, rgb(63, 135, 149) 0px 0px 0px 6px",
+        "offsetWidth": 72,
+        "offsetHeight": 44,
+        "isVisible": true
+      },
+      {
+        "tag": "A",
+        "text": "Resume",
+        "outlineStyle": "none",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(85, 90, 82)",
+        "boxShadow": "rgb(243, 240, 232) 0px 0px 0px 3px, rgb(63, 135, 149) 0px 0px 0px 6px",
+        "offsetWidth": 64,
+        "offsetHeight": 44,
+        "isVisible": true
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "outlineStyle": "none",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(85, 90, 82)",
+        "boxShadow": "rgb(243, 240, 232) 0px 0px 0px 3px, rgb(63, 135, 149) 0px 0px 0px 6px",
+        "offsetWidth": 72,
+        "offsetHeight": 44,
+        "isVisible": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Engineering",
+        "outlineStyle": "none",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(243, 240, 232)",
+        "boxShadow": "rgb(243, 240, 232) 0px 0px 0px 3px, rgb(63, 135, 149) 0px 0px 0px 6px",
+        "offsetWidth": 128,
+        "offsetHeight": 44,
+        "isVisible": true
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Product",
+        "outlineStyle": "none",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(85, 90, 82)",
+        "boxShadow": "rgb(243, 240, 232) 0px 0px 0px 3px, rgb(63, 135, 149) 0px 0px 0px 6px",
+        "offsetWidth": 92,
+        "offsetHeight": 44,
+        "isVisible": true
+      }
+    ]
+  },
+  "routeDenominator": [
+    {
+      "route": "/",
+      "status": 200,
+      "title": "Technical Atelier — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 5850
+    },
+    {
+      "route": "/engineering",
+      "status": 200,
+      "title": "Engineering Work — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 5850
+    },
+    {
+      "route": "/product",
+      "status": 200,
+      "title": "Product / Program Work — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 5777
+    },
+    {
+      "route": "/work",
+      "status": 200,
+      "title": "Work Index — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 2676
+    },
+    {
+      "route": "/work/sharecli",
+      "status": 200,
+      "title": "ShareCLI — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 4582
+    },
+    {
+      "route": "/work/gmk-arch",
+      "status": 200,
+      "title": "GMK Arch — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 2437
+    },
+    {
+      "route": "/work/witf",
+      "status": 200,
+      "title": "WITF Board — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 2408
+    },
+    {
+      "route": "/work/substrate",
+      "status": 200,
+      "title": "Substrate — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 2573
+    },
+    {
+      "route": "/work/phenotype-omlx",
+      "status": 200,
+      "title": "phenotype-omlx — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 2477
+    },
+    {
+      "route": "/work/netweave",
+      "status": 200,
+      "title": "NetWeave — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 5095
+    },
+    {
+      "route": "/work/byteport",
+      "status": 200,
+      "title": "BytePort — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 1398
+    },
+    {
+      "route": "/work/tracera",
+      "status": 200,
+      "title": "Tracera — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 1308
+    },
+    {
+      "route": "/work/omniroute",
+      "status": 200,
+      "title": "OmniRoute — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 4535
+    },
+    {
+      "route": "/work/dss-cipher",
+      "status": 200,
+      "title": "DSS Cipher — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 967
+    },
+    {
+      "route": "/work/frostify",
+      "status": 200,
+      "title": "Frostify — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 1198
+    },
+    {
+      "route": "/resume",
+      "status": 200,
+      "title": "Resume — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 1044
+    },
+    {
+      "route": "/contact",
+      "status": 200,
+      "title": "Contact — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 791
+    },
+    {
+      "route": "/blog",
+      "status": 200,
+      "title": "Writing — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 806
+    },
+    {
+      "route": "/blog/why-we-forked-omniroute",
+      "status": 200,
+      "title": "Why we forked OmniRoute — and how to avoid it — Koosha Parid",
+      "h1Count": 2,
+      "bodyLen": 9019
+    },
+    {
+      "route": "/archive",
+      "status": 200,
+      "title": "Archive — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 1292
+    },
+    {
+      "route": "/work/agentapi-plusplus",
+      "status": 200,
+      "title": "AgentAPI++ — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 1298
+    },
+    {
+      "route": "/work/cliproxyapi-plusplus",
+      "status": 200,
+      "title": "CLIProxyAPI++ — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 1453
+    },
+    {
+      "route": "/work/forgecode",
+      "status": 200,
+      "title": "ForgeCode — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 1029
+    },
+    {
+      "route": "/work/mcpforge",
+      "status": 200,
+      "title": "MCPForge — Koosha Paridehpour",
+      "h1Count": 2,
+      "bodyLen": 1082
+    }
+  ],
+  "overflow": [
+    {
+      "route": "/",
+      "viewport": "1440x900",
+      "scrollWidth": 1530,
+      "clientWidth": 1440,
+      "hasHorizontalOverflow": true,
+      "bodyScrollWidth": 1530,
+      "bodyClientWidth": 1440
+    },
+    {
+      "route": "/engineering",
+      "viewport": "1440x900",
+      "scrollWidth": 1530,
+      "clientWidth": 1440,
+      "hasHorizontalOverflow": true,
+      "bodyScrollWidth": 1530,
+      "bodyClientWidth": 1440
+    },
+    {
+      "route": "/product",
+      "viewport": "1440x900",
+      "scrollWidth": 1504,
+      "clientWidth": 1440,
+      "hasHorizontalOverflow": true,
+      "bodyScrollWidth": 1504,
+      "bodyClientWidth": 1440
+    },
+    {
+      "route": "/work",
+      "viewport": "1440x900",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "hasHorizontalOverflow": false,
+      "bodyScrollWidth": 1440,
+      "bodyClientWidth": 1440
+    },
+    {
+      "route": "/work/sharecli",
+      "viewport": "1440x900",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "hasHorizontalOverflow": false,
+      "bodyScrollWidth": 1440,
+      "bodyClientWidth": 1440
+    },
+    {
+      "route": "/contact",
+      "viewport": "1440x900",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "hasHorizontalOverflow": false,
+      "bodyScrollWidth": 1440,
+      "bodyClientWidth": 1440
+    }
+  ]
+}

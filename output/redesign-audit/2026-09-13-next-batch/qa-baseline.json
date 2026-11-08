@@ -1,0 +1,3590 @@
+{
+  "meta": {
+    "script": "qa-baseline.mjs",
+    "generated": "2026-09-13T04:09:24.455Z",
+    "completed": "2026-09-13T04:11:54.769Z",
+    "gitRevision": "7d6b3ff",
+    "serverPID": 54489,
+    "viewports": [
+      "390x844",
+      "1440x900"
+    ],
+    "routeCount": 20,
+    "totalChecks": 40,
+    "ownershipProof": "headless chromium launched by this script, PID tracked, no system capture"
+  },
+  "routeManifest": [
+    "/",
+    "/engineering",
+    "/product",
+    "/work",
+    "/work/sharecli",
+    "/work/gmk-arch",
+    "/work/witf",
+    "/work/substrate",
+    "/work/phenotype-omlx",
+    "/work/netweave",
+    "/work/byteport",
+    "/work/tracera",
+    "/work/omniroute",
+    "/work/dss-cipher",
+    "/work/frostify",
+    "/resume",
+    "/contact",
+    "/blog",
+    "/blog/why-we-forked-omniroute",
+    "/archive"
+  ],
+  "totals": {
+    "ok": 40,
+    "errors": 0,
+    "overflowRoutes": [
+      "/@1440x900",
+      "/engineering@1440x900",
+      "/product@1440x900"
+    ],
+    "multiH1": [
+      {
+        "route": "/",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/engineering",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/product",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/work",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/work/sharecli",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/work/gmk-arch",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/work/witf",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/work/substrate",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/work/phenotype-omlx",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/work/netweave",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/work/byteport",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/work/tracera",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/work/omniroute",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/work/dss-cipher",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/work/frostify",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/resume",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/contact",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/blog",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/blog/why-we-forked-omniroute",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/archive",
+        "viewport": "390x844",
+        "h1": 2
+      },
+      {
+        "route": "/",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/engineering",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/product",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/work",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/work/sharecli",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/work/gmk-arch",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/work/witf",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/work/substrate",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/work/phenotype-omlx",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/work/netweave",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/work/byteport",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/work/tracera",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/work/omniroute",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/work/dss-cipher",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/work/frostify",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/resume",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/contact",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/blog",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/blog/why-we-forked-omniroute",
+        "viewport": "1440x900",
+        "h1": 2
+      },
+      {
+        "route": "/archive",
+        "viewport": "1440x900",
+        "h1": 2
+      }
+    ],
+    "jsErrors": [],
+    "networkErrors": [],
+    "noJSFailures": []
+  },
+  "results": [
+    {
+      "route": "/",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Technical Atelier — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Software systems, technical products, and the infrastructure between them."
+        },
+        {
+          "tag": "H2",
+          "text": "WITF Board"
+        },
+        {
+          "tag": "H2",
+          "text": "Artifacts, systems sheets, and experiment notes"
+        },
+        {
+          "tag": "H2",
+          "text": "ShareCLI"
+        },
+        {
+          "tag": "H2",
+          "text": "Substrate"
+        },
+        {
+          "tag": "H2",
+          "text": "phenotype-omlx"
+        },
+        {
+          "tag": "H2",
+          "text": "NetWeave"
+        },
+        {
+          "tag": "H2",
+          "text": "GMK Arch"
+        },
+        {
+          "tag": "H2",
+          "text": "OmniRoute"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 37,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/37 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/engineering",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Engineering Work — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Software systems, technical products, and the infrastructure between them."
+        },
+        {
+          "tag": "H2",
+          "text": "WITF Board"
+        },
+        {
+          "tag": "H2",
+          "text": "Artifacts, systems sheets, and experiment notes"
+        },
+        {
+          "tag": "H2",
+          "text": "ShareCLI"
+        },
+        {
+          "tag": "H2",
+          "text": "Substrate"
+        },
+        {
+          "tag": "H2",
+          "text": "phenotype-omlx"
+        },
+        {
+          "tag": "H2",
+          "text": "NetWeave"
+        },
+        {
+          "tag": "H2",
+          "text": "GMK Arch"
+        },
+        {
+          "tag": "H2",
+          "text": "OmniRoute"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 37,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/37 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/product",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Product / Program Work — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Software systems, technical products, and the infrastructure between them."
+        },
+        {
+          "tag": "H2",
+          "text": "WITF Board"
+        },
+        {
+          "tag": "H2",
+          "text": "Artifacts, systems sheets, and experiment notes"
+        },
+        {
+          "tag": "H2",
+          "text": "GMK Arch"
+        },
+        {
+          "tag": "H2",
+          "text": "ShareCLI"
+        },
+        {
+          "tag": "H2",
+          "text": "Substrate"
+        },
+        {
+          "tag": "H2",
+          "text": "phenotype-omlx"
+        },
+        {
+          "tag": "H2",
+          "text": "NetWeave"
+        },
+        {
+          "tag": "H2",
+          "text": "OmniRoute"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 37,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/37 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Work Index — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Work"
+        },
+        {
+          "tag": "H2",
+          "text": "Featured work"
+        },
+        {
+          "tag": "H3",
+          "text": "GMK Arch"
+        },
+        {
+          "tag": "H3",
+          "text": "WITF Board"
+        },
+        {
+          "tag": "H3",
+          "text": "ShareCLI"
+        },
+        {
+          "tag": "H3",
+          "text": "Substrate"
+        },
+        {
+          "tag": "H3",
+          "text": "phenotype-omlx"
+        },
+        {
+          "tag": "H3",
+          "text": "OmniRoute"
+        },
+        {
+          "tag": "H3",
+          "text": "NetWeave"
+        },
+        {
+          "tag": "H2",
+          "text": "Selected work"
+        },
+        {
+          "tag": "H3",
+          "text": "BytePort"
+        },
+        {
+          "tag": "H3",
+          "text": "Tracera"
+        },
+        {
+          "tag": "H3",
+          "text": "CLIProxyAPI++"
+        },
+        {
+          "tag": "H3",
+          "text": "AgentAPI++"
+        },
+        {
+          "tag": "H3",
+          "text": "DSS Cipher"
+        },
+        {
+          "tag": "H3",
+          "text": "MCPForge"
+        },
+        {
+          "tag": "H3",
+          "text": "ForgeCode"
+        },
+        {
+          "tag": "H3",
+          "text": "Frostify"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 52,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/52 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/sharecli",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "ShareCLI — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "ShareCLI"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Runtime boundary"
+        },
+        {
+          "tag": "H3",
+          "text": "Reader / Explore Runtime Workbench"
+        },
+        {
+          "tag": "H4",
+          "text": "Concurrent work arrives"
+        },
+        {
+          "tag": "H4",
+          "text": "Reader sequence"
+        },
+        {
+          "tag": "H3",
+          "text": "Recorded CLI sessions"
+        },
+        {
+          "tag": "H4",
+          "text": "CLI help session"
+        },
+        {
+          "tag": "H4",
+          "text": "Runtime health session"
+        },
+        {
+          "tag": "H2",
+          "text": "Problem"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Constraints"
+        },
+        {
+          "tag": "H2",
+          "text": "Key decisions"
+        },
+        {
+          "tag": "H2",
+          "text": "Verification"
+        },
+        {
+          "tag": "H2",
+          "text": "Current limitations"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 45,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/45 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/gmk-arch",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "GMK Arch — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "GMK Arch"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Discovery"
+        },
+        {
+          "tag": "H2",
+          "text": "Design"
+        },
+        {
+          "tag": "H2",
+          "text": "Prototyping"
+        },
+        {
+          "tag": "H2",
+          "text": "Manufacturing"
+        },
+        {
+          "tag": "H2",
+          "text": "Economics"
+        },
+        {
+          "tag": "H2",
+          "text": "Distribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Outcomes"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 30,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/30 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/witf",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "WITF Board — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "WITF Board"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Discovery"
+        },
+        {
+          "tag": "H2",
+          "text": "Design"
+        },
+        {
+          "tag": "H2",
+          "text": "Prototyping"
+        },
+        {
+          "tag": "H2",
+          "text": "Manufacturing"
+        },
+        {
+          "tag": "H2",
+          "text": "Economics"
+        },
+        {
+          "tag": "H2",
+          "text": "Distribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Outcomes"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 32,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/32 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/substrate",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Substrate — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Substrate"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Execution boundary"
+        },
+        {
+          "tag": "H2",
+          "text": "Problem"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Constraints"
+        },
+        {
+          "tag": "H2",
+          "text": "Key decisions"
+        },
+        {
+          "tag": "H2",
+          "text": "Verification"
+        },
+        {
+          "tag": "H2",
+          "text": "Current limitations"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 33,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/33 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/phenotype-omlx",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "phenotype-omlx — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "phenotype-omlx"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Material boundary"
+        },
+        {
+          "tag": "H2",
+          "text": "Problem"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Constraints"
+        },
+        {
+          "tag": "H2",
+          "text": "Key decisions"
+        },
+        {
+          "tag": "H2",
+          "text": "Verification"
+        },
+        {
+          "tag": "H2",
+          "text": "Current limitations"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 33,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/33 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/netweave",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "NetWeave — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "NetWeave"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Overview"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Traffic field"
+        },
+        {
+          "tag": "H3",
+          "text": "Reader / Explore Workbench"
+        },
+        {
+          "tag": "H4",
+          "text": "A bounded traffic field"
+        },
+        {
+          "tag": "H2",
+          "text": "Why this simulation architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Directed graph + cellular automata split"
+        },
+        {
+          "tag": "H2",
+          "text": "Routing model"
+        },
+        {
+          "tag": "H2",
+          "text": "Emergent traffic behavior"
+        },
+        {
+          "tag": "H2",
+          "text": "The system-level routing problem"
+        },
+        {
+          "tag": "H2",
+          "text": "Experimental authoring workflow"
+        },
+        {
+          "tag": "H2",
+          "text": "What was not finished"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective / later external comparison"
+        },
+        {
+          "tag": "H2",
+          "text": "AI-assistance disclosure"
+        },
+        {
+          "tag": "H2",
+          "text": "Evidence status"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 43,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/43 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/byteport",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "BytePort — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "BytePort"
+        },
+        {
+          "tag": "H2",
+          "text": "Deployment architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Current boundary"
+        },
+        {
+          "tag": "H2",
+          "text": "Why it matters"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 33,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/33 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/tracera",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Tracera — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Tracera"
+        },
+        {
+          "tag": "H2",
+          "text": "Extension architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Focus"
+        },
+        {
+          "tag": "H2",
+          "text": "Current boundary"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 33,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/33 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/omniroute",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "OmniRoute — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "OmniRoute"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Classification"
+        },
+        {
+          "tag": "H2",
+          "text": "Routing intelligence"
+        },
+        {
+          "tag": "H2",
+          "text": "Provider and model integration"
+        },
+        {
+          "tag": "H2",
+          "text": "Reliability and degraded-provider handling"
+        },
+        {
+          "tag": "H2",
+          "text": "API and protocol compatibility"
+        },
+        {
+          "tag": "H2",
+          "text": "UI and dashboard performance"
+        },
+        {
+          "tag": "H2",
+          "text": "Operational and security documentation"
+        },
+        {
+          "tag": "H2",
+          "text": "Verification"
+        },
+        {
+          "tag": "H2",
+          "text": "Claims excluded"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 33,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/33 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/dss-cipher",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "DSS Cipher — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "DSS Cipher"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Evidence"
+        },
+        {
+          "tag": "H2",
+          "text": "Current boundary"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 31,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/31 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/frostify",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Frostify — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Frostify"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Evidence"
+        },
+        {
+          "tag": "H2",
+          "text": "Upstream boundary"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 32,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/32 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/resume",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Resume — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Two ways to read the work"
+        },
+        {
+          "tag": "H2",
+          "text": "Engineering"
+        },
+        {
+          "tag": "H2",
+          "text": "Product / Program"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 32,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/32 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/contact",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Contact — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Let’s build something consequential."
+        },
+        {
+          "tag": "H2",
+          "text": "Email"
+        },
+        {
+          "tag": "H2",
+          "text": "GitHub"
+        },
+        {
+          "tag": "H2",
+          "text": "LinkedIn"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 32,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/32 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/blog",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Writing — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Writing"
+        },
+        {
+          "tag": "H2",
+          "text": "Why we forked OmniRoute — and how to avoid it"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 29,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/29 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/blog/why-we-forked-omniroute",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Why we forked OmniRoute — and how to avoid it — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Why we forked OmniRoute — and how to avoid it"
+        },
+        {
+          "tag": "H2",
+          "text": "What broke for us at scale"
+        },
+        {
+          "tag": "H2",
+          "text": "How we keep the fork aligned"
+        },
+        {
+          "tag": "H2",
+          "text": "What we're contributing back, not carrying"
+        },
+        {
+          "tag": "H2",
+          "text": "What the fork is not"
+        },
+        {
+          "tag": "H2",
+          "text": "If you're considering a fork yourself"
+        },
+        {
+          "tag": "H2",
+          "text": "What's next"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 29,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/29 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/archive",
+      "viewport": "390x844",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Archive — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "DSS Cipher"
+        },
+        {
+          "tag": "H3",
+          "text": "ForgeCode"
+        },
+        {
+          "tag": "H3",
+          "text": "Frostify"
+        },
+        {
+          "tag": "H3",
+          "text": "GMK Arch"
+        },
+        {
+          "tag": "H3",
+          "text": "MCPForge"
+        },
+        {
+          "tag": "H3",
+          "text": "WITF Board"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 34,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/34 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Technical Atelier — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Software systems, technical products, and the infrastructure between them."
+        },
+        {
+          "tag": "H2",
+          "text": "WITF Board"
+        },
+        {
+          "tag": "H2",
+          "text": "Artifacts, systems sheets, and experiment notes"
+        },
+        {
+          "tag": "H2",
+          "text": "ShareCLI"
+        },
+        {
+          "tag": "H2",
+          "text": "Substrate"
+        },
+        {
+          "tag": "H2",
+          "text": "phenotype-omlx"
+        },
+        {
+          "tag": "H2",
+          "text": "NetWeave"
+        },
+        {
+          "tag": "H2",
+          "text": "GMK Arch"
+        },
+        {
+          "tag": "H2",
+          "text": "OmniRoute"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": true,
+      "focusableCount": 37,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/37 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/engineering",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Engineering Work — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Software systems, technical products, and the infrastructure between them."
+        },
+        {
+          "tag": "H2",
+          "text": "WITF Board"
+        },
+        {
+          "tag": "H2",
+          "text": "Artifacts, systems sheets, and experiment notes"
+        },
+        {
+          "tag": "H2",
+          "text": "ShareCLI"
+        },
+        {
+          "tag": "H2",
+          "text": "Substrate"
+        },
+        {
+          "tag": "H2",
+          "text": "phenotype-omlx"
+        },
+        {
+          "tag": "H2",
+          "text": "NetWeave"
+        },
+        {
+          "tag": "H2",
+          "text": "GMK Arch"
+        },
+        {
+          "tag": "H2",
+          "text": "OmniRoute"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": true,
+      "focusableCount": 37,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/37 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/product",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Product / Program Work — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Software systems, technical products, and the infrastructure between them."
+        },
+        {
+          "tag": "H2",
+          "text": "WITF Board"
+        },
+        {
+          "tag": "H2",
+          "text": "Artifacts, systems sheets, and experiment notes"
+        },
+        {
+          "tag": "H2",
+          "text": "GMK Arch"
+        },
+        {
+          "tag": "H2",
+          "text": "ShareCLI"
+        },
+        {
+          "tag": "H2",
+          "text": "Substrate"
+        },
+        {
+          "tag": "H2",
+          "text": "phenotype-omlx"
+        },
+        {
+          "tag": "H2",
+          "text": "NetWeave"
+        },
+        {
+          "tag": "H2",
+          "text": "OmniRoute"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": true,
+      "focusableCount": 37,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/37 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Work Index — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Work"
+        },
+        {
+          "tag": "H2",
+          "text": "Featured work"
+        },
+        {
+          "tag": "H3",
+          "text": "GMK Arch"
+        },
+        {
+          "tag": "H3",
+          "text": "WITF Board"
+        },
+        {
+          "tag": "H3",
+          "text": "ShareCLI"
+        },
+        {
+          "tag": "H3",
+          "text": "Substrate"
+        },
+        {
+          "tag": "H3",
+          "text": "phenotype-omlx"
+        },
+        {
+          "tag": "H3",
+          "text": "OmniRoute"
+        },
+        {
+          "tag": "H3",
+          "text": "NetWeave"
+        },
+        {
+          "tag": "H2",
+          "text": "Selected work"
+        },
+        {
+          "tag": "H3",
+          "text": "BytePort"
+        },
+        {
+          "tag": "H3",
+          "text": "Tracera"
+        },
+        {
+          "tag": "H3",
+          "text": "CLIProxyAPI++"
+        },
+        {
+          "tag": "H3",
+          "text": "AgentAPI++"
+        },
+        {
+          "tag": "H3",
+          "text": "DSS Cipher"
+        },
+        {
+          "tag": "H3",
+          "text": "MCPForge"
+        },
+        {
+          "tag": "H3",
+          "text": "ForgeCode"
+        },
+        {
+          "tag": "H3",
+          "text": "Frostify"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 52,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/52 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/sharecli",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "ShareCLI — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "ShareCLI"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Runtime boundary"
+        },
+        {
+          "tag": "H3",
+          "text": "Reader / Explore Runtime Workbench"
+        },
+        {
+          "tag": "H4",
+          "text": "Concurrent work arrives"
+        },
+        {
+          "tag": "H4",
+          "text": "Reader sequence"
+        },
+        {
+          "tag": "H3",
+          "text": "Recorded CLI sessions"
+        },
+        {
+          "tag": "H4",
+          "text": "CLI help session"
+        },
+        {
+          "tag": "H4",
+          "text": "Runtime health session"
+        },
+        {
+          "tag": "H2",
+          "text": "Problem"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Constraints"
+        },
+        {
+          "tag": "H2",
+          "text": "Key decisions"
+        },
+        {
+          "tag": "H2",
+          "text": "Verification"
+        },
+        {
+          "tag": "H2",
+          "text": "Current limitations"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 45,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/45 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/gmk-arch",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "GMK Arch — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "GMK Arch"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Discovery"
+        },
+        {
+          "tag": "H2",
+          "text": "Design"
+        },
+        {
+          "tag": "H2",
+          "text": "Prototyping"
+        },
+        {
+          "tag": "H2",
+          "text": "Manufacturing"
+        },
+        {
+          "tag": "H2",
+          "text": "Economics"
+        },
+        {
+          "tag": "H2",
+          "text": "Distribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Outcomes"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 30,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/30 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/witf",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "WITF Board — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "WITF Board"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Discovery"
+        },
+        {
+          "tag": "H2",
+          "text": "Design"
+        },
+        {
+          "tag": "H2",
+          "text": "Prototyping"
+        },
+        {
+          "tag": "H2",
+          "text": "Manufacturing"
+        },
+        {
+          "tag": "H2",
+          "text": "Economics"
+        },
+        {
+          "tag": "H2",
+          "text": "Distribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Outcomes"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 32,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/32 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/substrate",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Substrate — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Substrate"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Execution boundary"
+        },
+        {
+          "tag": "H2",
+          "text": "Problem"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Constraints"
+        },
+        {
+          "tag": "H2",
+          "text": "Key decisions"
+        },
+        {
+          "tag": "H2",
+          "text": "Verification"
+        },
+        {
+          "tag": "H2",
+          "text": "Current limitations"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 33,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/33 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/phenotype-omlx",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "phenotype-omlx — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "phenotype-omlx"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Material boundary"
+        },
+        {
+          "tag": "H2",
+          "text": "Problem"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Constraints"
+        },
+        {
+          "tag": "H2",
+          "text": "Key decisions"
+        },
+        {
+          "tag": "H2",
+          "text": "Verification"
+        },
+        {
+          "tag": "H2",
+          "text": "Current limitations"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 33,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/33 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/netweave",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "NetWeave — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "NetWeave"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Overview"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Traffic field"
+        },
+        {
+          "tag": "H3",
+          "text": "Reader / Explore Workbench"
+        },
+        {
+          "tag": "H4",
+          "text": "A bounded traffic field"
+        },
+        {
+          "tag": "H2",
+          "text": "Why this simulation architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Directed graph + cellular automata split"
+        },
+        {
+          "tag": "H2",
+          "text": "Routing model"
+        },
+        {
+          "tag": "H2",
+          "text": "Emergent traffic behavior"
+        },
+        {
+          "tag": "H2",
+          "text": "The system-level routing problem"
+        },
+        {
+          "tag": "H2",
+          "text": "Experimental authoring workflow"
+        },
+        {
+          "tag": "H2",
+          "text": "What was not finished"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective / later external comparison"
+        },
+        {
+          "tag": "H2",
+          "text": "AI-assistance disclosure"
+        },
+        {
+          "tag": "H2",
+          "text": "Evidence status"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 43,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/43 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/byteport",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "BytePort — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "BytePort"
+        },
+        {
+          "tag": "H2",
+          "text": "Deployment architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Current boundary"
+        },
+        {
+          "tag": "H2",
+          "text": "Why it matters"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 33,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/33 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/tracera",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Tracera — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Tracera"
+        },
+        {
+          "tag": "H2",
+          "text": "Extension architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Focus"
+        },
+        {
+          "tag": "H2",
+          "text": "Current boundary"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 33,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/33 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/omniroute",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "OmniRoute — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "OmniRoute"
+        },
+        {
+          "tag": "H3",
+          "text": "Product lens"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Classification"
+        },
+        {
+          "tag": "H2",
+          "text": "Routing intelligence"
+        },
+        {
+          "tag": "H2",
+          "text": "Provider and model integration"
+        },
+        {
+          "tag": "H2",
+          "text": "Reliability and degraded-provider handling"
+        },
+        {
+          "tag": "H2",
+          "text": "API and protocol compatibility"
+        },
+        {
+          "tag": "H2",
+          "text": "UI and dashboard performance"
+        },
+        {
+          "tag": "H2",
+          "text": "Operational and security documentation"
+        },
+        {
+          "tag": "H2",
+          "text": "Verification"
+        },
+        {
+          "tag": "H2",
+          "text": "Claims excluded"
+        },
+        {
+          "tag": "H2",
+          "text": "Retrospective"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 33,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/33 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/dss-cipher",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "DSS Cipher — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "DSS Cipher"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Evidence"
+        },
+        {
+          "tag": "H2",
+          "text": "Current boundary"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 31,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/31 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/work/frostify",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Frostify — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Frostify"
+        },
+        {
+          "tag": "H2",
+          "text": "Architecture"
+        },
+        {
+          "tag": "H2",
+          "text": "Context"
+        },
+        {
+          "tag": "H2",
+          "text": "Evidence"
+        },
+        {
+          "tag": "H2",
+          "text": "Upstream boundary"
+        },
+        {
+          "tag": "H2",
+          "text": "Provenance & Attribution"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 32,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/32 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/resume",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Resume — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Two ways to read the work"
+        },
+        {
+          "tag": "H2",
+          "text": "Engineering"
+        },
+        {
+          "tag": "H2",
+          "text": "Product / Program"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 32,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/32 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/contact",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Contact — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Let’s build something consequential."
+        },
+        {
+          "tag": "H2",
+          "text": "Email"
+        },
+        {
+          "tag": "H2",
+          "text": "GitHub"
+        },
+        {
+          "tag": "H2",
+          "text": "LinkedIn"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 32,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/32 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/blog",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Writing — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Writing"
+        },
+        {
+          "tag": "H2",
+          "text": "Why we forked OmniRoute — and how to avoid it"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 29,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/29 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/blog/why-we-forked-omniroute",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Why we forked OmniRoute — and how to avoid it — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Why we forked OmniRoute — and how to avoid it"
+        },
+        {
+          "tag": "H2",
+          "text": "What broke for us at scale"
+        },
+        {
+          "tag": "H2",
+          "text": "How we keep the fork aligned"
+        },
+        {
+          "tag": "H2",
+          "text": "What we're contributing back, not carrying"
+        },
+        {
+          "tag": "H2",
+          "text": "What the fork is not"
+        },
+        {
+          "tag": "H2",
+          "text": "If you're considering a fork yourself"
+        },
+        {
+          "tag": "H2",
+          "text": "What's next"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 29,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/29 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    },
+    {
+      "route": "/archive",
+      "viewport": "1440x900",
+      "status": "ok",
+      "httpStatus": 200,
+      "title": "Archive — Koosha Paridehpour",
+      "h1Count": 2,
+      "headingViolations": "expected 1 h1, got 2",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Under construction"
+        },
+        {
+          "tag": "H1",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "DSS Cipher"
+        },
+        {
+          "tag": "H3",
+          "text": "ForgeCode"
+        },
+        {
+          "tag": "H3",
+          "text": "Frostify"
+        },
+        {
+          "tag": "H3",
+          "text": "GMK Arch"
+        },
+        {
+          "tag": "H3",
+          "text": "MCPForge"
+        },
+        {
+          "tag": "H3",
+          "text": "WITF Board"
+        },
+        {
+          "tag": "H2",
+          "text": "Project Index"
+        },
+        {
+          "tag": "H3",
+          "text": "Featured"
+        },
+        {
+          "tag": "H3",
+          "text": "Physical Products"
+        },
+        {
+          "tag": "H3",
+          "text": "Archive"
+        },
+        {
+          "tag": "H3",
+          "text": "Compact"
+        }
+      ],
+      "hasOverflow": false,
+      "focusableCount": 34,
+      "focusableWithVisibleFocus": 1,
+      "keyboardCoverage": "1/34 with visible focus",
+      "noJSRendered": true,
+      "errors": {
+        "network": [],
+        "console": [],
+        "js": []
+      }
+    }
+  ]
+}

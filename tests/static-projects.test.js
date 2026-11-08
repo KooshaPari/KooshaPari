@@ -60,6 +60,6 @@ test('every published blog post has meaningful static content and clean navigati
       assert.ok(document.querySelector(`header a[href="${href}"]`), `${post.slug} static navigation misses ${href}`);
     }
     assert.equal(document.title, `${post.title} — Koosha Paridehpour`);
-    assert.equal(document.querySelector('link[rel="canonical"]').getAttribute('href'), `https://kooshapari.com/blog/${post.slug}`);
+    assert.equal(document.querySelector('link[rel="canonical"]').getAttribute('href'), `https://<REDACTED>.com/blog/${post.slug}`);
   }
 });

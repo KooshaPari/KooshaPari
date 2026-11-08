@@ -35,6 +35,7 @@ test('Vercel static output contains only staged publication assets and matches s
     'scripts/views/contact.js',
     'scripts/views/home.js',
     'scripts/views/not-found.js',
+    'scripts/views/archive.js',
     'scripts/views/project-detail.js',
     'scripts/views/resume.js',
     'scripts/views/work-index.js',
@@ -57,7 +58,7 @@ test('Vercel static output contains only staged publication assets and matches s
     ]);
     assert.deepEqual(built, source, `stale Vercel output: ${file}`);
   }
-  for (const file of ['index.html', 'engineering.html', 'product.html', 'work.html', 'resume.html', 'contact.html', 'blog.html']) {
+  for (const file of ['index.html', 'engineering.html', 'product.html', 'work.html', 'resume.html', 'contact.html', 'blog.html', 'archive.html']) {
     const [staged, built] = await Promise.all([
       readFile(`dist/${file}`),
       readFile(`.vercel/output/static/${file}`),

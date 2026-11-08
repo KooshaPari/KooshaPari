@@ -14,6 +14,7 @@ import { renderContact } from './views/contact.js';
 import { renderNotFound } from './views/not-found.js';
 import { renderBlogIndex } from './views/blog-index.js';
 import { renderBlogPost } from './views/blog-post.js';
+import { renderArchive } from './views/archive.js';
 import { initializeConstructionGate } from './construction-gate.js';
 
 const shellRoot = $('#shell-root');
@@ -43,6 +44,7 @@ function setPageMetadata(route) {
     resume: 'Resume',
     contact: 'Contact',
     blog: 'Writing',
+    archive: 'Archive',
   };
   const title = project?.title ?? post?.title ?? labels[route.view] ?? 'Page not found';
   const description = project?.summary ?? post?.excerpt
@@ -54,8 +56,8 @@ function setPageMetadata(route) {
     : post
       ? `/blog/${route.slug}`
       : route.view === 'home' ? '/' : `/${route.view}`;
-  const canonicalUrl = `https://kooshapari.com${canonicalPath}`;
-  document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://kooshapari.com${canonicalPath}`);
+  const canonicalUrl = `https://<REDACTED>.com${canonicalPath}`;
+  document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://<REDACTED>.com${canonicalPath}`);
   document.querySelector('meta[name="description"]')?.setAttribute('content', description);
   document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title);
   document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
@@ -102,6 +104,8 @@ function render() {
     renderContact(viewRoot);
   } else if (route.view === 'blog') {
     renderBlogIndex(viewRoot, { posts: POSTS });
+  } else if (route.view === 'archive') {
+    renderArchive(viewRoot, { projects: PROJECTS });
   } else if (route.view === 'post') {
     renderBlogPost(viewRoot, route.slug);
   } else if (route.view === 'not-found') {

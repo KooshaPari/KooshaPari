@@ -78,4 +78,4 @@ For now, the fork exists because it has to, and it's small enough that it costs 
 
 ---
 
-*If you're working on AI infrastructure and want to talk shop, find me on [LinkedIn](https://linkedin.com/in/kooshapari) or open an issue in [`KooshaPari/OmniRoute`](https://github.com/KooshaPari/OmniRoute).*
+*If you're working on AI infrastructure and want to talk shop, find me on [LinkedIn](https://linkedin.com/in/<REDACTED>) or open an issue in [`<REDACTED>/OmniRoute`](https://github.com/KooshaPari/OmniRoute).*

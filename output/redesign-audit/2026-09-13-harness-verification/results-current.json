@@ -1,0 +1,174 @@
+{
+  "sweepTime": "2026-09-13T00:24:21.354Z",
+  "server": "http://127.0.0.1:4397",
+  "findings": [
+    {
+      "ts": "2026-09-13T00:24:26.976Z",
+      "severity": "error",
+      "category": "console",
+      "slug": "mcpforge",
+      "viewport": "mobile",
+      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "ts": "2026-09-13T00:24:26.976Z",
+      "severity": "error",
+      "category": "console",
+      "slug": "mcpforge",
+      "viewport": "mobile",
+      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "ts": "2026-09-13T00:24:26.993Z",
+      "severity": "error",
+      "category": "media-broken",
+      "slug": "mcpforge",
+      "viewport": "mobile",
+      "detail": "Image failed to load: currentSrc=http://127.0.0.1:4397/public/projects/mcpforge/card.webp naturalWidth=0"
+    },
+    {
+      "ts": "2026-09-13T00:24:29.281Z",
+      "severity": "error",
+      "category": "console",
+      "slug": "forgecode",
+      "viewport": "mobile",
+      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "ts": "2026-09-13T00:24:29.281Z",
+      "severity": "error",
+      "category": "console",
+      "slug": "forgecode",
+      "viewport": "mobile",
+      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "ts": "2026-09-13T00:24:29.291Z",
+      "severity": "error",
+      "category": "media-broken",
+      "slug": "forgecode",
+      "viewport": "mobile",
+      "detail": "Image failed to load: currentSrc=http://127.0.0.1:4397/public/projects/forgecode/card.webp naturalWidth=0"
+    },
+    {
+      "ts": "2026-09-13T00:24:31.202Z",
+      "severity": "error",
+      "category": "console",
+      "slug": "frostify",
+      "viewport": "mobile",
+      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "ts": "2026-09-13T00:24:31.202Z",
+      "severity": "error",
+      "category": "console",
+      "slug": "frostify",
+      "viewport": "mobile",
+      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "ts": "2026-09-13T00:24:31.216Z",
+      "severity": "error",
+      "category": "media-broken",
+      "slug": "frostify",
+      "viewport": "mobile",
+      "detail": "Image failed to load: currentSrc=http://127.0.0.1:4397/public/projects/frostify/card.webp naturalWidth=0"
+    },
+    {
+      "ts": "2026-09-13T00:24:33.728Z",
+      "severity": "error",
+      "category": "console",
+      "slug": "mcpforge",
+      "viewport": "desktop",
+      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "ts": "2026-09-13T00:24:33.728Z",
+      "severity": "error",
+      "category": "console",
+      "slug": "mcpforge",
+      "viewport": "desktop",
+      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "ts": "2026-09-13T00:24:33.736Z",
+      "severity": "error",
+      "category": "media-broken",
+      "slug": "mcpforge",
+      "viewport": "desktop",
+      "detail": "Image failed to load: currentSrc=http://127.0.0.1:4397/public/projects/mcpforge/card.webp naturalWidth=0"
+    },
+    {
+      "ts": "2026-09-13T00:24:33.752Z",
+      "severity": "info",
+      "category": "focusable-count",
+      "slug": "mcpforge",
+      "viewport": "desktop",
+      "detail": "33 focusable elements"
+    },
+    {
+      "ts": "2026-09-13T00:24:35.728Z",
+      "severity": "error",
+      "category": "console",
+      "slug": "forgecode",
+      "viewport": "desktop",
+      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "ts": "2026-09-13T00:24:35.728Z",
+      "severity": "error",
+      "category": "console",
+      "slug": "forgecode",
+      "viewport": "desktop",
+      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "ts": "2026-09-13T00:24:35.734Z",
+      "severity": "error",
+      "category": "media-broken",
+      "slug": "forgecode",
+      "viewport": "desktop",
+      "detail": "Image failed to load: currentSrc=http://127.0.0.1:4397/public/projects/forgecode/card.webp naturalWidth=0"
+    },
+    {
+      "ts": "2026-09-13T00:24:35.744Z",
+      "severity": "info",
+      "category": "focusable-count",
+      "slug": "forgecode",
+      "viewport": "desktop",
+      "detail": "33 focusable elements"
+    },
+    {
+      "ts": "2026-09-13T00:24:37.732Z",
+      "severity": "error",
+      "category": "console",
+      "slug": "frostify",
+      "viewport": "desktop",
+      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "ts": "2026-09-13T00:24:37.732Z",
+      "severity": "error",
+      "category": "console",
+      "slug": "frostify",
+      "viewport": "desktop",
+      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "ts": "2026-09-13T00:24:37.742Z",
+      "severity": "error",
+      "category": "media-broken",
+      "slug": "frostify",
+      "viewport": "desktop",
+      "detail": "Image failed to load: currentSrc=http://127.0.0.1:4397/public/projects/frostify/card.webp naturalWidth=0"
+    },
+    {
+      "ts": "2026-09-13T00:24:37.752Z",
+      "severity": "info",
+      "category": "focusable-count",
+      "slug": "frostify",
+      "viewport": "desktop",
+      "detail": "32 focusable elements"
+    }
+  ]
+}

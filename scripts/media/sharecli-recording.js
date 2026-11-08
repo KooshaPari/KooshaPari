@@ -1,4 +1,5 @@
 import { el } from '../components/dom.js';
+import { renderCastReplay } from './cast-replay.js';
 
 const SHARECLI_REVISION = '81c4dfaa208749adfa56ec6bbe07e01b5f80397e';
 
@@ -46,17 +47,21 @@ export function renderShareCliRecordings(documentRef = document) {
   root.append(
     el('h3', { id: 'sharecli-recordings-title' }, 'Recorded CLI sessions'),
     el('p', { class: 'sharecli-recordings__intro' }, 'Replayable terminal captures from the real ShareCLI CLI. These recordings are evidence of the commands shown, not a recording of the illustrative state model above.'),
-    el('div', { class: 'sharecli-recordings__grid' }, SHARECLI_RECORDINGS.map((recording) => el('article', { class: 'sharecli-recording' },
-      el('h4', {}, recording.label),
-      el('p', { class: 'sharecli-recording__kind' }, recording.kind),
-      el('dl', {},
-        el('div', {}, el('dt', {}, 'Command'), el('dd', {}, recording.command)),
-        el('div', {}, el('dt', {}, 'Revision'), el('dd', {}, recording.revision)),
-        el('div', {}, el('dt', {}, 'Captured'), el('dd', {}, recording.capturedAt)),
-      ),
-      el('p', { class: 'sharecli-recording__boundary' }, recording.boundary),
-      el('a', { class: 'text-link', href: recording.href, download: `sharecli-${recording.id}-real.cast` }, 'Download terminal recording (.cast)'),
-    ))),
+    el('div', { class: 'sharecli-recordings__grid' }, SHARECLI_RECORDINGS.map((recording) => {
+      const card = el('article', { class: 'sharecli-recording' },
+        el('h4', {}, recording.label),
+        el('p', { class: 'sharecli-recording__kind' }, recording.kind),
+        el('dl', {},
+          el('div', {}, el('dt', {}, 'Command'), el('dd', {}, recording.command)),
+          el('div', {}, el('dt', {}, 'Revision'), el('dd', {}, recording.revision)),
+          el('div', {}, el('dt', {}, 'Captured'), el('dd', {}, recording.capturedAt)),
+        ),
+        el('p', { class: 'sharecli-recording__boundary' }, recording.boundary),
+        el('a', { class: 'text-link', href: recording.href, download: `sharecli-${recording.id}-real.cast` }, 'Download terminal recording (.cast)'),
+      );
+      card.appendChild(renderCastReplay(recording));
+      return card;
+    })),
   );
   return root;
 }

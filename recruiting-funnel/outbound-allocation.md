@@ -63,7 +63,7 @@ Daily outbound allocation =
 
 | Field | Value |
 |---|---|
-| candidate_id | koosha@domain.com |
+| candidate_id | <REDACTED>@domain.com |
 | message_id | {UUID} |
 | role_id | {role_band from role-band-map.csv} |
 | campaign_id | {source_channel}_{date} |

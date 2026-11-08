@@ -69,7 +69,8 @@ function initReader() {
 
   // Escape exits Reader Mode
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && readerMode && !e.defaultPrevented) {
+    if (e.key === 'Escape' && readerMode && !e.defaultPrevented &&
+        !document.querySelector('dialog[open]')) {
       applyReaderMode(false);
       persistReader();
     }

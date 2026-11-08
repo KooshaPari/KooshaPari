@@ -1,6 +1,6 @@
 # Canonical Portfolio Static-SPA Design
 
-**Goal:** Evolve the existing `koosha-phenotype` static SPA into a coherent canonical portfolio preview for `kooshapari.com`, serving Engineering and Product lenses from shared project records.
+**Goal:** Evolve the existing `koosha-phenotype` static SPA into a coherent canonical portfolio preview for `<REDACTED>.com`, serving Engineering and Product lenses from shared project records.
 
 **Architecture:** Preserve the vanilla ES-module/static architecture. Introduce a typed-by-convention project data module, a shared renderer for cards/case studies, and hash-based route views for `/`, `/engineering`, `/product`, `/work`, `/resume`, and `/contact` compatibility without adding a backend or framework migration.
 

@@ -6,6 +6,7 @@ const VIEW_ROUTES = new Set([
   'resume',
   'contact',
   'blog',
+  'archive',
 ]);
 
 export function parseRoute(input = '') {
@@ -31,7 +32,7 @@ export function parseRoute(input = '') {
     try {
       return { view: 'project', slug: decodeURIComponent(segments[1]) };
     } catch {
-      return { view: 'home' };
+      return { view: 'not-found' };
     }
   }
 
@@ -45,13 +46,23 @@ export function parseRoute(input = '') {
     try {
       return { view: 'post', slug: decodeURIComponent(segments[1]) };
     } catch {
-      return { view: 'home' };
+      return { view: 'not-found' };
     }
   }
 
   // /blog — blog index
   if (segments[0] === 'blog' && segments.length === 1) {
     return { view: 'blog' };
+  }
+
+  // /archive — historical records
+  if (segments[0] === 'archive' && segments.length === 1) {
+    return { view: 'archive' };
+  }
+
+  // Static top-level views reject extra segments
+  if (['resume', 'contact', 'archive'].includes(segments[0]) && segments.length > 1) {
+    return { view: 'not-found' };
   }
 
   // /resume, /contact — static top-level views
@@ -112,6 +123,9 @@ export function navigateTo(route) {
       break;
     case 'blog':
       path = '/blog';
+      break;
+    case 'archive':
+      path = '/archive';
       break;
     default:
       path = route.view ? `/${route.view}` : '/';

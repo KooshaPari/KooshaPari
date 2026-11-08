@@ -1,0 +1,36 @@
+{
+  "id": "netweave-local-rules-v4",
+  "project": "netweave",
+  "iteration": "v4-overhead-traffic-instrument-short-body",
+  "created": "2026-09-12T04:38:00-07:00",
+  "rights": "Original procedural geometry; no third-party inputs; no license grant asserted",
+  "boundary": "Illustrative local-spacing study, not recorded NetWeave output; no congestion-aware rerouting implemented",
+  "generator": "asset-sources/netweave-local-rules-v1/build_scene_v4.py",
+  "tools": { "blender": "4.4.3 direct application binary", "encoder": "cwebp -q 82" },
+  "states": [1, 2, 3],
+  "dimensions": { "desktop": [1600, 1100], "mobile": [800, 1000] },
+  "outputs": {
+    "desktop": ["desktop-01-v4.webp", "desktop-02-v4.webp", "desktop-03-v4.webp"],
+    "mobile": ["mobile-01-v4.webp", "mobile-02-v4.webp", "mobile-03-v4.webp"]
+  },
+  "geometry": {
+    "body_length": 0.88,
+    "body_width": 0.62,
+    "body_height": 0.24,
+    "wheel_offset_x": 0.28,
+    "wheel_radius": 0.13,
+    "cell_spacing": 1.0,
+    "clearance_between_bodies": 0.12,
+    "wheel_protrusion": 0.15
+  },
+  "notes": [
+    "Bodies shortened from v3 1.40 to 0.88 (0.63x scale).",
+    "Wheel offset, roof, and windshield glass scaled proportionally.",
+    "Geometry centers are 1.0 apart; 0.88 body gives 0.12 clearance between adjacent vehicle edges.",
+    "Wheels protrude 0.15 past body ends (radius 0.13, center at 0.28).",
+    "Stationary lead vehicle and illustration boundary preserved from v3.",
+    "Road plate, lane markings, chevrons unchanged from v3."
+  ],
+  "review": "Blender render complete; geometry clearance verified in script constants",
+  "disposition": "LOCAL-VERIFIED; NOT YET PROMOTED"
+}

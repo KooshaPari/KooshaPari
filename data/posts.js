@@ -1,4 +1,4 @@
-// Writing / blog content for kooshapari.com.
+// Writing / blog content for <REDACTED>.com.
 //
 // Each post is structured so the renderer (`scripts/views/blog-post.js`)
 // can lay it out without parsing markdown. Sections are ordered and
@@ -80,7 +80,7 @@ export const POSTS = [
 
       { type: 'hr' },
 
-      { type: 'note', text: "If you're working on AI infrastructure and want to talk shop, find me on LinkedIn or open an issue in KooshaPari/OmniRoute." },
+      { type: 'note', text: "If you're working on AI infrastructure and want to talk shop, find me on LinkedIn or open an issue in <REDACTED>/OmniRoute." },
     ],
   },
 ];

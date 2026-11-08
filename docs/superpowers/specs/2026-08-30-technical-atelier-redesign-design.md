@@ -1,10 +1,10 @@
-# KooshaPari Technical Atelier Portfolio Redesign
+# <REDACTED> Technical Atelier Portfolio Redesign
 
 ## Status and authority
 
 This specification supersedes the generic visual treatment in `2026-08-29-canonical-portfolio-design.md`. It preserves the existing project classification, evidence model, canonical routes, migration safeguards, and shared-record/two-lens architecture.
 
-The redesign produces a professional, distinctive portfolio preview for human review. It does not authorize DNS changes, production redirects, production-domain attachment, or retirement of Adobe Portfolio, Ram Designs, `projects.kooshapari.com`, or `phenotype.space`.
+The redesign produces a professional, distinctive portfolio preview for human review. It does not authorize DNS changes, production redirects, production-domain attachment, or retirement of Adobe Portfolio, Ram Designs, `projects.<REDACTED>.com`, or `phenotype.space`.
 
 ## Goal
 
@@ -211,10 +211,10 @@ All full studies share navigation, evidence labels, typography, and related-proj
 
 ### phenotype-omlx — fork-delta experiment sheet
 
-- Split opening identifies upstream `jundot/omlx` and KooshaPari fork/extension.
+- Split opening identifies upstream `jundot/omlx` and <REDACTED> fork/extension.
 - A delta matrix distinguishes upstream capability from multi-backend routing, Rust performance cores, evaluation tooling, and supported research on speculative decoding, quantization, concurrency, MLX, and Apple Silicon.
 - Experiment notes and diagrams use only repository-supported claims.
-- Upstream OMLX work is never attributed to KooshaPari.
+- Upstream OMLX work is never attributed to <REDACTED>.
 
 ### NetWeave — simulation notebook
 
@@ -340,7 +340,7 @@ No CMS, database, authentication, or runtime backend is required. Rich media mus
 
 ## Metadata and analytics
 
-- Retain canonical `https://kooshapari.com/` handling on preview builds.
+- Retain canonical `https://<REDACTED>.com/` handling on preview builds.
 - Preview deployments remain `noindex` while protected or under review.
 - Home uses Person schema.
 - Software pages may use supported SoftwareSourceCode/CreativeWork fields.

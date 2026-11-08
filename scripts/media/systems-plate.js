@@ -16,7 +16,7 @@ const EDGES = [
 export function createSubstratePlateDefinition() {
   return {
     title: 'Substrate policy routing plate',
-    attribution: 'Substrate is presented as KooshaPari-owned repository work; no performance or scale claim is made.',
+    attribution: 'Substrate is presented as <REDACTED>-owned repository work; no performance or scale claim is made.',
     summary: 'A static architecture drawing of the recorded Substrate boundary: callers enter a policy layer, controls make health, retry, and budget behavior explicit, and execution remains provider-dependent.',
     nodes: NODES.map((node) => ({ ...node })),
     edges: EDGES.map((edge) => ({ ...edge })),

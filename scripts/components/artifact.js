@@ -1,4 +1,4 @@
-import { el } from './dom.js';
+import { el, onImageFallback } from './dom.js';
 import { createLayeredImage } from '../media/layered-image.js';
 import { renderOmniRouteTopology } from '../media/omniroute-topology.js';
 import {
@@ -59,7 +59,7 @@ export function physicalPlate(record, lens) {
                 layers: [{ label: 'shadow', className: 'layered-image__layer--shadow' }],
                 className: 'artifact-media__layered',
               })
-            : el('img', {
+            : onImageFallback(el('img', {
             src: image,
             alt: record.presentation.alt,
             width: selectedAsset?.width ?? media.width,
@@ -67,7 +67,7 @@ export function physicalPlate(record, lens) {
             loading: record.slug === 'witf' ? 'eager' : 'lazy',
             decoding: 'async',
             ...(record.slug === 'witf' ? { fetchpriority: 'high' } : {}),
-            }),
+            })),
           el('figcaption', {}, `${record.category} / ${record.status}`),
         )
       : null,
@@ -78,6 +78,39 @@ export function physicalPlate(record, lens) {
       metricAnnotation(record, lens),
       evidenceLabel(record, lens),
     ),
+  );
+}
+
+// ── Material visual frame for artifact cards ──────────────────
+function materialVisualFrame(slug) {
+  const src = `/public/projects/hybrid-materials/${slug}-desktop.webp`;
+  const mobileSrc = `/public/projects/hybrid-materials/${slug}-mobile.webp`;
+  const label = {
+    sharecli: 'Process runtime material boundary',
+    substrate: 'Provider routing material boundary',
+    'phenotype-omlx': 'MLX inference material boundary',
+  }[slug];
+  const alt = {
+    sharecli: 'ShareCLI process runtime material boundary showing concurrent coding-agent resource observation.',
+    substrate: 'Substrate AI execution material boundary spanning policy routing and provider control.',
+    'phenotype-omlx': 'phenotype-omlx MLX inference material boundary with Rust performance cores and multi-backend routing.',
+  }[slug];
+  if (!label) return null;
+  return el('figure', { class: 'project-visual project-visual--material', 'data-visual': `${slug}-material` },
+    el('div', { class: 'project-visual__image-frame' },
+      el('picture', {},
+        el('source', { media: '(max-width: 600px)', srcset: mobileSrc, type: 'image/webp' }),
+        onImageFallback(el('img', {
+          src,
+          alt,
+          loading: 'lazy',
+          decoding: 'async',
+          width: 1200,
+          height: 800,
+        })),
+      ),
+    ),
+    el('figcaption', {}, label),
   );
 }
 
@@ -116,6 +149,7 @@ export function systemsSheet(record, lens) {
           : null,
       ]),
     ),
+    materialVisualFrame(record.slug),
     el('p', { class: 'artifact-text-summary', id: summaryId }, artifactTextSummary(record)),
     el(
       'div',
@@ -168,6 +202,7 @@ export function experimentNote(record, lens) {
         ),
       ),
     ),
+    materialVisualFrame(record.slug),
     el('p', { class: 'artifact-text-summary', id: summaryId }, artifactTextSummary(record)),
     el(
       'div',
@@ -188,6 +223,13 @@ const ARTIFACT_FAMILY_MAP = {
   'dss-cipher': 'physical',
   substrate: 'substrate',
   'phenotype-omlx': 'omlx',
+  byteport: 'diagram',
+  tracera: 'diagram',
+  'cliproxyapi-plusplus': 'diagram',
+  'agentapi-plusplus': 'diagram',
+  mcpforge: 'compact',
+  forgecode: 'compact',
+  frostify: 'compact',
 };
 
 export function createArtifact(record, lens) {

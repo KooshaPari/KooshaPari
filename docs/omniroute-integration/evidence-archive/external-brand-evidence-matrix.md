@@ -14,7 +14,7 @@
 |---|---:|---|---|---|
 | `diegosouzapw/OmniRoute` | **60,948** | diegosouzapw | NO (upstream) | Original repo; subject of comparison |
 | `BerriAI/litellm` | **57,990** | BerriAI | NO (upstream) | LLM gateway / routing comparable |
-| `KooshaPari/OmniRoute` | 6 | KooshaPari | YES (personal fork) | Mirror only; do not count for "popularity" |
+| `<REDACTED>/OmniRoute` | 6 | <REDACTED> | YES (personal fork) | Mirror only; do not count for "popularity" |
 
 **Delta:** OmniRoute > LiteLLM by **+2,958 stars** at snapshot time.
 **Comparison boundary:** evaluated open-source AI routing/gateway comparables; not an exhaustive census of every routing library.

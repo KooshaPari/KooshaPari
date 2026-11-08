@@ -78,10 +78,10 @@ const CARD_IMAGES = {
   netweave: { src: '/public/projects/netweave/desktop-01-v3.webp', alt: 'NetWeave traffic simulation showing directed-graph routing and cellular automata lane behavior across a road network.' },
   'gmk-arch': { src: '/public/projects/gmk-arch/hero.png', alt: 'Transparent GMK Arch wordmark with a pale ARCH letterform and teal Arch Linux and GMK marks.' },
   witf: { src: '/public/projects/witf/hero-01.jpg', alt: 'Black WITF Board keyboard shown from above on a warm concrete-colored surface, revealing its split Alice layout.' },
-  sharecli: { src: '/public/projects/sharecli/card.webp', alt: 'ShareCLI runtime and resource observation interface for coding-agent concurrency.' },
+  sharecli: { src: '/public/projects/hybrid-materials/sharecli-desktop.webp', alt: 'ShareCLI process runtime material boundary showing concurrent coding-agent resource observation.' },
   omniroute: { src: '/public/projects/omniroute/card.webp', alt: 'OmniRoute policy-aware multi-provider routing topology.' },
-  substrate: { src: '/public/projects/substrate/card.webp', alt: 'Substrate AI execution and provider-routing boundary.' },
-  'phenotype-omlx': { src: '/public/projects/phenotype-omlx/card.webp', alt: 'phenotype-omlx MLX inference research stack with Rust performance cores.' },
+  substrate: { src: '/public/projects/hybrid-materials/substrate-desktop.webp', alt: 'Substrate AI execution material boundary spanning policy routing and provider control.' },
+  'phenotype-omlx': { src: '/public/projects/hybrid-materials/phenotype-omlx-desktop.webp', alt: 'phenotype-omlx MLX inference material boundary with Rust performance cores and multi-backend routing.' },
 };
 
 function featuredProject(project) {
@@ -177,6 +177,28 @@ function renderGroup(group) {
   );
 }
 
+function renderEmptyState(filter, onReset) {
+  const filterLabel = WORK_FILTERS.find(([v]) => v === filter)?.[1] ?? filter;
+  const message = filter === 'all'
+    ? 'No projects in the catalog yet.'
+    : `No projects match the \u201c${filterLabel}\u201d filter.`;
+
+  return el('div', { class: 'work-catalog__empty', role: 'status' },
+    el('p', {}, message),
+    filter !== 'all'
+      ? el('p', {},
+          'Try a different focus area or ',
+          el('button', {
+            type: 'button',
+            class: 'work-catalog__reset',
+            onclick: onReset,
+          }, 'show all work'),
+          '.',
+        )
+      : null,
+  );
+}
+
 export function renderWorkCatalog(root, { projects }) {
   const render = (filter = 'all', focusFilter = null) => {
     const catalog = buildWorkCatalog(projects, filter);
@@ -210,7 +232,9 @@ export function renderWorkCatalog(root, { projects }) {
           el('div', { class: 'work-catalog__control-heading' }, el('span', {}, 'Filter by focus'), count),
           el('div', { role: 'group', 'aria-label': 'Filter work by focus', class: 'work-catalog__filters' }, controls),
         ),
-        catalog.groups.map(renderGroup),
+        catalog.total === 0
+          ? renderEmptyState(filter, () => render('all', 'all'))
+          : catalog.groups.map(renderGroup),
       ),
     );
 

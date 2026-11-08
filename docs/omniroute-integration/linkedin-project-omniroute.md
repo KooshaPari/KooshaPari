@@ -1,11 +1,11 @@
 # LinkedIn Project — OmniRoute (canonical content)
 
 This is the canonical copy-paste content for adding an **OmniRoute
-Project** entry to the KooshaPari LinkedIn profile.
+Project** entry to the <REDACTED> LinkedIn profile.
 
 LinkedIn UI labels this as a "Project" (separate from Experience/employment).
 Do NOT add OmniRoute under Experience/employment — that would imply a role
-with the upstream maintainer, which KooshaPari does not have.
+with the upstream maintainer, which <REDACTED> does not have.
 
 ---
 
@@ -70,13 +70,13 @@ June 2026 – July 2026 (focused 28-day contribution burst)
 
 ## Do NOT do
 
-- Do NOT add this as Experience/employment (KooshaPari is not employed by
+- Do NOT add this as Experience/employment (<REDACTED> is not employed by
   the upstream maintainer and does not have a maintenance role).
 - Do NOT claim maintainership.
 - Do NOT call OmniRoute "my project" anywhere in the description.
 - Do NOT use "125K lines authored" as a hero metric.
 - Do NOT claim current live rank without the "as recorded" qualifier.
-- Do NOT describe the ~59.9k GitHub stars as belonging to KooshaPari.
+- Do NOT describe the ~59.9k GitHub stars as belonging to <REDACTED>.
 
 ---
 

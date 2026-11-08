@@ -1,0 +1,65 @@
+{
+  "asset": "hybrid-materials-phenotype-omlx",
+  "project": "phenotype-omlx",
+  "description": "Compute and memory slabs with indicator bars representing MLX inference research stack with Rust performance cores, multi-backend routing, and evaluation tooling.",
+  "palette": [
+    "graphite",
+    "porcelain",
+    "muted teal"
+  ],
+  "camera": {
+    "type": "ORTHO",
+    "position": [
+      0.0,
+      -2.6,
+      10.5
+    ],
+    "ortho_scale": 4.199999809265137,
+    "target": [
+      0.0,
+      2.299999952316284,
+      0.20000000298023224
+    ]
+  },
+  "renderer": "Cycles CPU, 32 samples, denoising, AgX view transform",
+  "seed": 0,
+  "boundary": "Original procedural geometry. No third-party assets. Hand-authored explanatory artwork, not recorded tool output. Scene derived from composite build_scene.py; unrelated object groups hidden for focused render.",
+  "generator": "build_project.py",
+  "composite_source": "build_scene.py",
+  "renders": {
+    "desktop": {
+      "filename": "phenotype-omlx-desktop.webp",
+      "size_bytes": 11534,
+      "md5": "2af3a8b14e7822a770c92a819803a8f8",
+      "sha256": "a55a6a40f2b171029117f9ce491c3e82f71cf02ae80c297126c659553d128a60",
+      "dimensions": {
+        "width": 1200,
+        "height": 800
+      },
+      "target_size": {
+        "width": 1200,
+        "height": 800
+      }
+    },
+    "mobile": {
+      "filename": "phenotype-omlx-mobile.webp",
+      "size_bytes": 6906,
+      "md5": "7790f0b345895bc21523090e6ef6716b",
+      "sha256": "198e1752e11e79bbc59ad638465df883e2b06d34665a8b00aa7ad232ce5cb3a7",
+      "dimensions": {
+        "width": 800,
+        "height": 700
+      },
+      "target_size": {
+        "width": 800,
+        "height": 700
+      }
+    }
+  },
+  "blend_file": {
+    "filename": "phenotype-omlx.blend",
+    "size_bytes": 865861,
+    "md5": "63219ea1f9867ef14c8175c5f96fd19a",
+    "sha256": "3c49a69e2c201272e612a8b2dfefb5c916f103e958b34cc20e1885093210d4b4"
+  }
+}

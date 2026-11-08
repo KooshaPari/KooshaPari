@@ -1,0 +1,146 @@
+[
+  {
+    "caseId": "mcpforge@mobile-390",
+    "slug": "mcpforge",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "url": "http://127.0.0.1:56642/work/mcpforge",
+    "timestamp": "2026-09-13T01:18:57.082Z",
+    "h1": {
+      "present": true,
+      "text": "MCPForge"
+    },
+    "overflow": {
+      "detected": false,
+      "elements": []
+    },
+    "httpErrors": [],
+    "pageErrors": [],
+    "requestFailures": [],
+    "images": [],
+    "browserLaunch": true,
+    "httpStatus": 200
+  },
+  {
+    "caseId": "mcpforge@desktop-1440",
+    "slug": "mcpforge",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "url": "http://127.0.0.1:56642/work/mcpforge",
+    "timestamp": "2026-09-13T01:18:58.499Z",
+    "h1": {
+      "present": true,
+      "text": "MCPForge"
+    },
+    "overflow": {
+      "detected": false,
+      "elements": []
+    },
+    "httpErrors": [],
+    "pageErrors": [],
+    "requestFailures": [],
+    "images": [],
+    "browserLaunch": true,
+    "httpStatus": 200
+  },
+  {
+    "caseId": "forgecode@mobile-390",
+    "slug": "forgecode",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "url": "http://127.0.0.1:56642/work/forgecode",
+    "timestamp": "2026-09-13T01:18:59.746Z",
+    "h1": {
+      "present": true,
+      "text": "ForgeCode"
+    },
+    "overflow": {
+      "detected": false,
+      "elements": []
+    },
+    "httpErrors": [],
+    "pageErrors": [],
+    "requestFailures": [],
+    "images": [],
+    "browserLaunch": true,
+    "httpStatus": 200
+  },
+  {
+    "caseId": "forgecode@desktop-1440",
+    "slug": "forgecode",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "url": "http://127.0.0.1:56642/work/forgecode",
+    "timestamp": "2026-09-13T01:19:00.966Z",
+    "h1": {
+      "present": true,
+      "text": "ForgeCode"
+    },
+    "overflow": {
+      "detected": false,
+      "elements": []
+    },
+    "httpErrors": [],
+    "pageErrors": [],
+    "requestFailures": [],
+    "images": [],
+    "browserLaunch": true,
+    "httpStatus": 200
+  },
+  {
+    "caseId": "frostify@mobile-390",
+    "slug": "frostify",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "url": "http://127.0.0.1:56642/work/frostify",
+    "timestamp": "2026-09-13T01:19:02.318Z",
+    "h1": {
+      "present": true,
+      "text": "Frostify"
+    },
+    "overflow": {
+      "detected": false,
+      "elements": []
+    },
+    "httpErrors": [],
+    "pageErrors": [],
+    "requestFailures": [],
+    "images": [],
+    "browserLaunch": true,
+    "httpStatus": 200
+  },
+  {
+    "caseId": "frostify@desktop-1440",
+    "slug": "frostify",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "url": "http://127.0.0.1:56642/work/frostify",
+    "timestamp": "2026-09-13T01:19:03.532Z",
+    "h1": {
+      "present": true,
+      "text": "Frostify"
+    },
+    "overflow": {
+      "detected": false,
+      "elements": []
+    },
+    "httpErrors": [],
+    "pageErrors": [],
+    "requestFailures": [],
+    "images": [],
+    "browserLaunch": true,
+    "httpStatus": 200
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "asset": "hybrid-materials",
+  "description": "Three conceptual software objects \u2014 sharecli capsules on queue rail, substrate layered policy ports, phenotype-omlx compute/memory slabs \u2014 rendered as a single studio plate.",
+  "palette": [
+    "graphite",
+    "porcelain",
+    "muted teal"
+  ],
+  "camera": {
+    "type": "ORTHO",
+    "position": [
+      0.0,
+      -9.5,
+      14.0
+    ],
+    "ortho_scale": 11.5,
+    "target": [
+      0.0,
+      0.30000001192092896,
+      0.4000000059604645
+    ]
+  },
+  "resolution": {
+    "width": 1200,
+    "height": 800
+  },
+  "renderer": "Cycles CPU, 32 samples, denoising, AgX view transform",
+  "seed": 0,
+  "boundary": "Original procedural geometry.  No third-party assets.  Hand-authored explanatory artwork, not recorded tool output.",
+  "generator": "build_scene.py",
+  "rendered_png": {
+    "filename": "hybrid-materials.png",
+    "size_bytes": 697673,
+    "md5": "a25c4b94939ec479d1f8d1c5e205b55d",
+    "sha256": "e8a47ec334e888e80b5cd7c33626cfc2e0a2d3e06f33285565c214b173c98b88"
+  }
+}

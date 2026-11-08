@@ -1,0 +1,166 @@
+- generic [active] [ref=f9e1]:
+  - generic [ref=f9e2]:
+    - link "Skip to content" [ref=f9e3] [cursor=pointer]:
+      - /url: "#view-root"
+    - generic [ref=f9e4]:
+      - banner [ref=f9e5]:
+        - link "Koosha Paridehpour Systems / products / infrastructure" [ref=f9e6] [cursor=pointer]:
+          - /url: /
+          - strong [ref=f9e7]: Koosha Paridehpour
+          - generic [ref=f9e8]: Systems / products / infrastructure
+        - navigation "Primary navigation" [ref=f9e9]:
+          - link "Work" [ref=f9e10] [cursor=pointer]:
+            - /url: /work
+          - link "Writing" [ref=f9e11] [cursor=pointer]:
+            - /url: /blog
+          - link "Resume" [ref=f9e12] [cursor=pointer]:
+            - /url: /resume
+          - link "Contact" [ref=f9e13] [cursor=pointer]:
+            - /url: /contact
+        - generic [ref=f9e14]:
+          - group "Portfolio lens" [ref=f9e15]:
+            - button "Engineering" [pressed] [ref=f9e16] [cursor=pointer]
+            - button "Product" [ref=f9e17] [cursor=pointer]
+          - button "Reader" [ref=f9e18] [cursor=pointer]
+          - button "Index" [ref=f9e19] [cursor=pointer]
+      - main [ref=f9e20]:
+        - generic [ref=f9e21]:
+          - link "← Back to work" [ref=f9e22] [cursor=pointer]:
+            - /url: /work
+          - paragraph [ref=f9e23]: systems · current
+          - heading "ShareCLI" [level=1] [ref=f9e24]
+          - paragraph [ref=f9e25]: Rust process and resource runtime for high-concurrency coding-agent workloads.
+          - generic [ref=f9e26]:
+            - heading "Engineering lens" [level=3] [ref=f9e27]
+            - paragraph [ref=f9e28]: Process observation, queueing, coalescing, and optional FUSE views make burst contention inspectable at the host boundary.
+          - generic [ref=f9e29]:
+            - generic [ref=f9e30]:
+              - heading "Runtime boundary" [level=2] [ref=f9e31]
+              - region [ref=f9e32]:
+                - heading "Reader / Explore Runtime Workbench" [level=3] [ref=f9e33]
+                - paragraph [ref=f9e34]: Static architecture, the complete state sequence, and the same precision-object render are available without JavaScript, animation, or network activity. Reduced motion and no-JavaScript contexts present the same still object vocabulary. The Workbench is illustrative and stays separate from the recorded ShareCLI .cast replays.
+                - group "Illustrative ShareCLI runtime states" [ref=f9e35]:
+                  - button "Burst" [pressed] [ref=f9e36] [cursor=pointer]
+                  - button "Coalesce" [ref=f9e37] [cursor=pointer]
+                  - button "Observe" [ref=f9e38] [cursor=pointer]
+                  - button "Recover" [ref=f9e39] [cursor=pointer]
+                - generic [ref=f9e40]:
+                  - paragraph [ref=f9e41]: State 01 / Burst
+                  - paragraph [ref=f9e42]: Graphite-anodized aluminum capsule on a brushed-titanium rail
+                  - heading "Concurrent work arrives" [level=4] [ref=f9e43]
+                  - paragraph [ref=f9e44]: Four graphite-anodized aluminum capsules stack on a brushed-titanium rail; the lead capsule is highlighted.
+                  - img "Graphite-anodized aluminum capsule on a brushed-titanium rail" [ref=f9e45]
+                  - paragraph [ref=f9e46]: Illustrative runtime explanation; not a recorded ShareCLI .cast replay and not a measured workload trace.
+                  - generic "Illustrative runtime boundary" [ref=f9e47]:
+                    - generic [ref=f9e48]: agent requests
+                    - generic [ref=f9e49]: shared queue
+                    - generic [ref=f9e50]: host resources
+                  - generic [ref=f9e51]:
+                    - term [ref=f9e52]: Highlighted object
+                    - definition [ref=f9e53]: pusher
+                    - term [ref=f9e54]: Lead object
+                    - definition [ref=f9e55]: pusher
+                    - term [ref=f9e56]: Material
+                    - definition [ref=f9e57]: graphite-anodized aluminum
+                    - term [ref=f9e58]: Object primitive
+                    - definition [ref=f9e59]: capsule
+                - button "Visitor motion choice (off by default)" [ref=f9e60] [cursor=pointer]: "Motion: off"
+                - region [ref=f9e61]:
+                  - heading "Reader sequence" [level=4] [ref=f9e62]
+                  - list [ref=f9e63]:
+                    - listitem [ref=f9e64]:
+                      - strong [ref=f9e65]: "Burst:"
+                      - text: Capsules slide onto the rail; the highlighted lead capsule is the newest arrival and the stationary base rail is fixed.
+                    - listitem [ref=f9e66]:
+                      - strong [ref=f9e67]: "Coalesce:"
+                      - text: Compatible capsules are joined into a sintered-ceramic stand before repeated work is scheduled; the highlighted stand replaces the duplicate pushers.
+                    - listitem [ref=f9e68]:
+                      - strong [ref=f9e69]: "Observe:"
+                      - text: A brushed-titanium observer column is fitted to the rail; the highlighted observer inspects the surrounding capsules without changing their position on the stationary base.
+                    - listitem [ref=f9e70]:
+                      - strong [ref=f9e71]: "Recover:"
+                      - text: The capsules settle into a cast-aluminum recover frame; the highlighted frame marks the bounded rest position on the stationary base rail.
+                - paragraph [ref=f9e72]: Illustrative runtime explanation. Available ShareCLI help and thermal golden fixtures are labelled test fixtures, not an interactive terminal capture or live telemetry.
+                - generic [ref=f9e73]:
+                  - button "Back" [ref=f9e74] [cursor=pointer]
+                  - button "Reset" [ref=f9e75] [cursor=pointer]
+              - region [ref=f9e76]:
+                - heading "Recorded CLI sessions" [level=3] [ref=f9e77]
+                - paragraph [ref=f9e78]: Replayable terminal captures from the real ShareCLI CLI. These recordings are evidence of the commands shown, not a recording of the illustrative state model above.
+                - generic [ref=f9e79]:
+                  - article [ref=f9e80]:
+                    - heading "CLI help session" [level=4] [ref=f9e81]
+                    - paragraph [ref=f9e82]: recorded-replay
+                    - generic [ref=f9e83]:
+                      - generic [ref=f9e84]:
+                        - term [ref=f9e85]: Command
+                        - definition [ref=f9e86]: cargo run --quiet -- --help
+                      - generic [ref=f9e87]:
+                        - term [ref=f9e88]: Revision
+                        - definition [ref=f9e89]: 81c4dfaa208749adfa56ec6bbe07e01b5f80397e
+                      - generic [ref=f9e90]:
+                        - term [ref=f9e91]: Captured
+                        - definition [ref=f9e92]: 2026-09-06
+                    - paragraph [ref=f9e93]: Recorded terminal replay; not illustrative Workbench state; separate from the illustrative Runtime Workbench.
+                    - link "Download terminal recording (.cast)" [ref=f9e94] [cursor=pointer]:
+                      - /url: /public/projects/sharecli/recordings/sharecli-help-real.cast
+                  - article [ref=f9e95]:
+                    - heading "Runtime health session" [level=4] [ref=f9e96]
+                    - paragraph [ref=f9e97]: recorded-replay
+                    - generic [ref=f9e98]:
+                      - generic [ref=f9e99]:
+                        - term [ref=f9e100]: Command
+                        - definition [ref=f9e101]: version + health + status
+                      - generic [ref=f9e102]:
+                        - term [ref=f9e103]: Revision
+                        - definition [ref=f9e104]: 81c4dfaa208749adfa56ec6bbe07e01b5f80397e
+                      - generic [ref=f9e105]:
+                        - term [ref=f9e106]: Captured
+                        - definition [ref=f9e107]: 2026-09-06
+                    - paragraph [ref=f9e108]: Recorded terminal replay; not illustrative Workbench state; separate from the illustrative Runtime Workbench.
+                    - link "Download terminal recording (.cast)" [ref=f9e109] [cursor=pointer]:
+                      - /url: /public/projects/sharecli/recordings/sharecli-health-real.cast
+            - generic [ref=f9e110]:
+              - heading "Problem" [level=2] [ref=f9e111]
+              - paragraph [ref=f9e112]: Coding-agent workloads create many concurrent processes and resource events; the runtime needs to observe and coordinate them without hiding contention.
+            - generic [ref=f9e113]:
+              - heading "Context" [level=2] [ref=f9e114]
+              - paragraph [ref=f9e115]: ShareCLI sits close to the OS/runtime boundary, where process state, filesystem behavior, and thermal pressure affect user-visible performance.
+            - generic [ref=f9e116]:
+              - heading "Architecture" [level=2] [ref=f9e117]
+              - paragraph [ref=f9e118]: Rust coordinates process/resource observation, queueing, coalescing, and optional FUSE-backed views for shared execution state.
+            - generic [ref=f9e119]:
+              - heading "Constraints" [level=2] [ref=f9e120]
+              - paragraph [ref=f9e121]: The design must remain installable, buildable, and demonstrable on real developer machines while handling bursts instead of assuming a quiet workload.
+            - generic [ref=f9e122]:
+              - heading "Key decisions" [level=2] [ref=f9e123]
+              - paragraph [ref=f9e124]: Coalescing, debounce, and queue policies reduce duplicate work; observability makes contention and thermal behavior inspectable.
+            - generic [ref=f9e125]:
+              - heading "Verification" [level=2] [ref=f9e126]
+              - paragraph [ref=f9e127]: The current repository evidence includes install/build/demo paths and documents the runtime boundary.
+            - generic [ref=f9e128]:
+              - heading "Current limitations" [level=2] [ref=f9e129]
+              - paragraph [ref=f9e130]: No adoption or scale claim is made; hardware-specific contention and FUSE behavior remain important operational variables.
+            - generic [ref=f9e131]:
+              - heading "Retrospective" [level=2] [ref=f9e132]
+              - paragraph [ref=f9e133]: The project treats coding-agent concurrency as a systems problem, not merely a CLI feature.
+            - generic [ref=f9e134]:
+              - heading "Provenance & Attribution" [level=2] [ref=f9e135]
+              - generic [ref=f9e136]:
+                - generic [ref=f9e137]:
+                  - term [ref=f9e138]: Evidence source
+                  - definition [ref=f9e139]: Repository documentation and project history
+                - generic [ref=f9e140]:
+                  - term [ref=f9e141]: Repository
+                  - definition [ref=f9e142]:
+                    - link "https://github.com/KooshaPari/sharecli" [ref=f9e143] [cursor=pointer]:
+                      - /url: https://github.com/KooshaPari/sharecli
+                - generic [ref=f9e144]:
+                  - term [ref=f9e145]: Available in lens
+                  - definition [ref=f9e146]: engineering
+          - link "View repository" [ref=f9e147] [cursor=pointer]:
+            - /url: https://github.com/KooshaPari/sharecli
+      - contentinfo [ref=f9e148]:
+        - generic [ref=f9e149]: Koosha Paridehpour · canonical portfolio preview
+        - generic [ref=f9e150]: Evidence-led · legacy sources preserved
+  - status [ref=f9e151]

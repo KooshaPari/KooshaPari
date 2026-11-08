@@ -10,10 +10,10 @@
 
 | loss_reason | candidate_id | message_id | role_id | campaign_id | source_channel | date_format | timezone | version_stamp |
 |---|---|---|---|---|---|---|---|---|
-| recruiter_low_quality | koosha@domain.com | 1 | Maria Clark | DataAnnotation_spam_eval | recruiter | 2026-09-01T00:00:00Z | UTC | 2026-09-03 |
-| recruiter_low_quality | koosha@domain.com | 2 | Aryan Gulati | informal_generic | recruiter | 2026-09-02T00:00:00Z | UTC | 2026-09-03 |
-| comp_mismatch; stack_mismatch; YOE_mismatch | koosha@domain.com | 3 | Kathleen Dewan | Robert Half_Torrance_Java | recruiter | 2026-09-02T00:00:00Z | UTC | 2026-09-03 |
-| role_mismatch | koosha@domain.com | 7 | Joe Fields | timebook.ai_PM | recruiter | 2026-09-02T00:00:00Z | UTC | 2026-09-03 |
+| recruiter_low_quality | <REDACTED>@domain.com | 1 | Maria Clark | DataAnnotation_spam_eval | recruiter | 2026-09-01T00:00:00Z | UTC | 2026-09-03 |
+| recruiter_low_quality | <REDACTED>@domain.com | 2 | Aryan Gulati | informal_generic | recruiter | 2026-09-02T00:00:00Z | UTC | 2026-09-03 |
+| comp_mismatch; stack_mismatch; YOE_mismatch | <REDACTED>@domain.com | 3 | Kathleen Dewan | Robert Half_Torrance_Java | recruiter | 2026-09-02T00:00:00Z | UTC | 2026-09-03 |
+| role_mismatch | <REDACTED>@domain.com | 7 | Joe Fields | timebook.ai_PM | recruiter | 2026-09-02T00:00:00Z | UTC | 2026-09-03 |
 
 ---
 

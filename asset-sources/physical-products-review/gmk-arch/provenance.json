@@ -1,0 +1,51 @@
+{
+  "project": "gmk-arch",
+  "reviewDate": "2026-09-12",
+  "assets": [
+    {
+      "file": "wordmark-hero-354x90.png",
+      "description": "Transparent GMK Arch wordmark with pale ARCH letterform and teal Arch Linux and GMK marks.",
+      "dimensions": { "width": 354, "height": 90 },
+      "bytes": 4794,
+      "sha256": "73362047e4efa5f89a2d355f732425ab7afe3a206f3c4d421dade1cefc10a11a",
+      "format": "PNG RGBA",
+      "source": "retained-assets (byte-identical to public/projects/gmk-arch/hero.png)",
+      "ownership": "koosha-paridehpour",
+      "licensing": "review-pending",
+      "notes": "Existing hero asset; wordmark only, not a product keyset photo."
+    },
+    {
+      "file": "product-render-0m1fl5V.png",
+      "description": "GMK Arch dark keycaps with teal Arch Linux-inspired legends on a keyboard, wooden desk background, with 'ARCH GMK' wordmark overlay in upper-left. Only actual product render found across retained assets, original portfolio (<REDACTED>.myportfolio.com), and Geekhack thread (topic=112566.0).",
+      "dimensions": { "width": 320, "height": 121 },
+      "bytes": 55200,
+      "sha256": "dc10a7653b72227b6d0274bf25992c7e5cc4207d671fe2b9656fd92f4a86bfb8",
+      "format": "PNG RGBA",
+      "sourceUrl": "https://i.imgur.com/0m1fl5V.png",
+      "sourceContext": "Geekhack group buy thread https://geekhack.org/index.php?topic=112566.0, posted by <REDACTED> (thread OP vendor/designer)",
+      "ownership": "unclear — uploaded by <REDACTED> to Imgur as thread vendor; render may be by third-party renderer (e.g. RoastPotatoes or similar). Licensing not confirmed.",
+      "licensing": "NOT CLEARED — do not publish without explicit rights confirmation",
+      "notes": "Very small resolution (320x121). Contains wordmark overlay baked into image. Not suitable as standalone hero without upscaling. Faithful product-visual candidate but resolution-constrained."
+    },
+    {
+      "file": "interest-check-YP29bIB.png",
+      "description": "Creative interest-check graphic styled as an Arch Linux terminal: 'sudo pacman -S gmk-arch', 'sudo systemctl start interest-check.service', with ASCII Arch logo and package-install dialogue. NOT a product keyset render.",
+      "dimensions": { "width": 2667, "height": 1466 },
+      "bytes": 153314,
+      "sha256": "15c31dccf7fb49abb5d1170d2ab282f1eade6ca6a36caf4db2045098c71094ec",
+      "format": "PNG RGBA",
+      "sourceUrl": "https://i.imgur.com/YP29bIB.png",
+      "sourceContext": "Geekhack group buy thread https://geekhack.org/index.php?topic=112566.0, first post by <REDACTED>",
+      "ownership": "likely koosha-paridehpour (creative promotional graphic created for the interest check)",
+      "licensing": "review-pending — likely owned but confirm",
+      "notes": "High-resolution creative/branding graphic. Shows GMKArch identity but not the physical keyset product. Could serve as supplementary branding visual, not primary product hero."
+    }
+  ],
+  "searchExhaustive": {
+    "retainedRepo": "koosha-phenotype — public/projects/gmk-arch/ contains only hero.png (354x90 wordmark)",
+    "originalPortfolio": "<REDACTED>.myportfolio.com — single image (same 354x90 wordmark) plus 512x512 Arch Linux logo OG image. No product renders.",
+    "geekhackThread": "topic=112566.0 — 16 user-uploaded images audited; only 0m1fl5V.png shows actual GMKArch keycaps. All others are vendor logos or other keyset advertising.",
+    "vercelDeploy": "koosha-phenotype/.vercel/output/static/public/projects/gmk-arch/ — same 354x90 hero.png only",
+    "distBuild": "koosha-phenotype/dist/public/projects/gmk-arch/ — same 354x90 hero.png only"
+  }
+}

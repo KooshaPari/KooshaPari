@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Move the public KooshaPari portfolio from verified blind drafts to a reviewed, reproducible, safely promotable release without expanding into private resume variants or external-account mutations.
+**Goal:** Move the public <REDACTED> portfolio from verified blind drafts to a reviewed, reproducible, safely promotable release without expanding into private resume variants or external-account mutations.
 
-**Architecture:** Keep `/Users/kooshapari/CodeProjects/Phenotype/repos/koosha-phenotype` as the active source copy and treat `/Users/kooshapari/CodeProjects/Phenotype/repos/worktrees/KooshaPari-public-sync-20260909` as the Git promotion target. Preserve object-first visual modules, static/no-JavaScript fallbacks, explicit evidence boundaries, and separate source, review, sync, push, and deploy gates.
+**Architecture:** Keep `/Users/<REDACTED>/CodeProjects/Phenotype/repos/koosha-phenotype` as the active source copy and treat `/Users/<REDACTED>/CodeProjects/Phenotype/repos/worktrees/<REDACTED>-public-sync-20260909` as the Git promotion target. Preserve object-first visual modules, static/no-JavaScript fallbacks, explicit evidence boundaries, and separate source, review, sync, push, and deploy gates.
 
 **Tech Stack:** Static HTML, CSS, vanilla JavaScript modules, Node.js tests, Vercel preview build, Playwright browser acceptance, local screenshot review, Git worktree promotion.
 
@@ -94,7 +94,7 @@ Worktree verification + publication audit
 
 ## WP03 — Source/worktree reconciliation
 
-**Files:** source copy under `koosha-phenotype`; Git target `worktrees/KooshaPari-public-sync-20260909`.
+**Files:** source copy under `koosha-phenotype`; Git target `worktrees/<REDACTED>-public-sync-20260909`.
 
 - [ ] Freeze the approved allowlist after WP01/WP02.
 - [ ] Exclude `node_modules/`, `.vercel/`, Playwright output, private exports, and unrelated generated files from promotion.

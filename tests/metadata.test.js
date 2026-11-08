@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 test('OmniRoute static metadata retains its contribution boundary', async () => {
   const html = await readFile('work/omniroute.html', 'utf8');
   assert.match(html, /<title>OmniRoute — Koosha Paridehpour<\/title>/);
-  assert.match(html, /https:\/\/kooshapari\.com\/work\/omniroute/);
+  assert.match(html, /https:\/\/<REDACTED>\.com\/work\/omniroute/);
   assert.match(html, /External contribution to OmniRoute/);
   assert.doesNotMatch(html, /Technical Atelier<\/title>/);
 });

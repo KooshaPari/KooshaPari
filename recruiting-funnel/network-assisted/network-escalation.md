@@ -40,7 +40,7 @@ evidence_policy: source=linkedin_mcp|date=2026-09-03|evidence_type=network_escal
 - **Status:** Internal process (OmniRoute team network)
 - **Network evidence:** Existing team network — confirmed active via internal comment thread Sep 2
 - **Action:** No external action needed; internal process
-- **Verified signal (snapshot captured 2026-09-04):** Original OmniRoute repository (`diegosouzapw/OmniRoute`) had 60,948 stars, versus LiteLLM (`BerriAI/litellm`) at 57,990. The comparison is limited to the evaluated open-source AI routing/gateway projects; it is not an exhaustive ranking of every routing library. This is third-party validation of the project category — NOT owned-project scale. KooshaPari's fork has 6 stars. Evidence: `koosha-phenotype/docs/omniroute-integration/evidence-archive/omniroute-upstream-2026-09-03.json` and `litellm-2026-09-03.json`.
+- **Verified signal (snapshot captured 2026-09-04):** Original OmniRoute repository (`diegosouzapw/OmniRoute`) had 60,948 stars, versus LiteLLM (`BerriAI/litellm`) at 57,990. The comparison is limited to the evaluated open-source AI routing/gateway projects; it is not an exhaustive ranking of every routing library. This is third-party validation of the project category — NOT owned-project scale. <REDACTED>'s fork has 6 stars. Evidence: `koosha-phenotype/docs/omniroute-integration/evidence-archive/omniroute-upstream-2026-09-03.json` and `litellm-2026-09-03.json`.
 
 ### LinkedIn activity-driven (Jul 2026)
 - **Channel:** Comment/post-driven feed exposure
@@ -104,7 +104,7 @@ Per data contract, every network-assisted funnel entry requires:
 
 | candidate_id | message_id | role_id | campaign_id | source_channel | date_format | timezone | version_stamp |
 |---|---|---|---|---|---|---|---|
-| koosha@domain.com | 2026-09-02T00:00:00Z | Radiant_Nuclear | Rachel_Haigh | referral | 2026-09-01T00:00:00Z | UTC | 2026-09-03 |
+| <REDACTED>@domain.com | 2026-09-02T00:00:00Z | Radiant_Nuclear | Rachel_Haigh | referral | 2026-09-01T00:00:00Z | UTC | 2026-09-03 |
 
 ---
 

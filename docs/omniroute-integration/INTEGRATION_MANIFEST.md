@@ -36,7 +36,7 @@ This change is auto-rendered on `/engineering` (the SPA reads from
 ### Files CREATED in `docs/omniroute-integration/`
 
 - `github-profile-readme-omniroute.md` — canonical copy-paste content for
-  the `KooshaPari/KooshaPari` GitHub profile README "Open Source
+  the `<REDACTED>/<REDACTED>` GitHub profile README "Open Source
   Contributions" section.
 - `linkedin-project-omniroute.md` — canonical copy-paste content for the
   LinkedIn Project entry, plus framing language and do-not-do rules.
@@ -49,9 +49,9 @@ LinkedIn staging. They remain in this repo for reference.
 
 ## 2. Files modified (outside this repo)
 
-### `KooshaPari/KooshaPari` — GitHub profile README — ✅ PUSHED
+### `<REDACTED>/<REDACTED>` — GitHub profile README — ✅ PUSHED
 
-- **Action**: cloned to `/Users/kooshapari/.forge/work/KooshaPari-profile`,
+- **Action**: cloned to `/Users/<REDACTED>/.forge/work/<REDACTED>-profile`,
   applied the OmniRoute "Open Source Contributions" section, committed, and
   pushed to `main` on the remote.
 - **Commit**: `41fab1f` — "Add OmniRoute external contribution section (#101 PRs, Rank #5)"
@@ -63,30 +63,30 @@ LinkedIn staging. They remain in this repo for reference.
   - Footer link to the upstream PR search filtered by author
 - **Verification**:
   ```
-  gh api repos/KooshaPari/KooshaPari/contents/README.md --jq '.sha, .size'
+  gh api repos/<REDACTED>/<REDACTED>/contents/README.md --jq '.sha, .size'
   → 2eff43f3235f631a6e91c1680113b0315656ab54 / 3503 bytes
-  gh api repos/KooshaPari/KooshaPari/contents/README.md | base64 -d | grep -A2 -i omniroute
+  gh api repos/<REDACTED>/<REDACTED>/contents/README.md | base64 -d | grep -A2 -i omniroute
   → "### [OmniRoute]…— External Contributor / **Rank #5…101 merged PRs**" ✓
   git ls-remote origin
   → 41fab1fd6cc43e6d0290c92e3e5ca5af8675cc9d HEAD main ✓
   ```
-- **Public blast**: YES — live on https://github.com/KooshaPari/KooshaPari
+- **Public blast**: YES — live on https://github.com/KooshaPari/<REDACTED>
 
-### `kooshapari.com` engineering page — ✅ DEPLOYED
+### `<REDACTED>.com` engineering page — ✅ DEPLOYED
 
-- **Action**: ran `vercel --prod --yes` from `/Users/kooshapari/CodeProjects/Phenotype/repos/koosha-phenotype`.
+- **Action**: ran `vercel --prod --yes` from `/Users/<REDACTED>/CodeProjects/Phenotype/repos/koosha-phenotype`.
 - **Build**: 469 ms, 201 deployment files, deployment `GuZAU47pEMpmgpF8K6CcgUMj2ci7`.
 - **URL**: `https://koosha-phenotype-arccfeb7k-koosha-paridehpours-projects.vercel.app`
-- **Alias**: aliased to `https://www.kooshapari.com` (production domain).
+- **Alias**: aliased to `https://www.<REDACTED>.com` (production domain).
 - **Verification**:
   ```
-  curl -sL https://www.kooshapari.com/data/projects.js | grep omniroute
+  curl -sL https://www.<REDACTED>.com/data/projects.js | grep omniroute
   → { id:'omniroute', slug:'omniroute', title:'OmniRoute', status:'upstream-contribution', ...
      provenance:'External contribution to `diegosouzapw/OmniRoute`. Not an owned or maintained project.', ...
      repo:'https://github.com/diegosouzapw/OmniRoute', ...
   ```
   Project card visible at `/engineering` (SPA-rendered from `data/projects.js`).
-- **Public blast**: YES — live on https://www.kooshapari.com/engineering
+- **Public blast**: YES — live on https://www.<REDACTED>.com/engineering
 
 ### Engineering resume DOCX (Universal) — ✅ PROMOTED
 
@@ -149,7 +149,7 @@ for direct job applications.
   OmniRoute — Open Source Contributor appears in the Projects section
   between `LLM-Lab` and `AgilePlus`, with start date `Jun 2026`, the full
   2-paragraph description, and the `… more` truncation marker.
-- **Public blast**: YES — live on https://www.linkedin.com/in/kooshapari
+- **Public blast**: YES — live on https://www.linkedin.com/in/<REDACTED>
 
 ---
 
@@ -157,11 +157,11 @@ for direct job applications.
 
 | Surface | Status | Mechanism | Public blast? |
 |---|---|---|---|
-| `kooshapari.com` engineering page | **LIVE** | `data/projects.js` edit + `vercel --prod` | YES — verified via curl |
+| `<REDACTED>.com` engineering page | **LIVE** | `data/projects.js` edit + `vercel --prod` | YES — verified via curl |
 | Engineering resume DOCX (Universal) | **LIVE** (local file) | Pandoc round-trip + canonical promotion | Local only |
 | GitHub profile README | **PUSHED** | git clone → patch → commit → push | YES — verified via `gh api` |
 | LinkedIn Project entry | **POSTED** | `linkedin_add_project` after singleton-file cleanup | YES — verified via `linkedin_get_sections` |
-| Personal `KooshaPari/OmniRoute` fork | **NOT TOUCHED** (intentionally — not the proof source for the 101 PRs) | n/a | n/a |
+| Personal `<REDACTED>/OmniRoute` fork | **NOT TOUCHED** (intentionally — not the proof source for the 101 PRs) | n/a | n/a |
 | Upstream `diegosouzapw/OmniRoute` | **NOT TOUCHED** (read-only audit source) | n/a | n/a |
 | Management resume DOCX | **NOT TOUCHED** (per task: only engineering resume unless space/use-case later justifies it) | n/a | n/a |
 
@@ -183,7 +183,7 @@ Every surface that went public uses the canonical-safe wording. Spot-check:
 
 Stars attribute: "~59.9k GitHub stars at audit time" is always wrapped in
 context that the stars belong to upstream (`diegosouzapw/OmniRoute`), never
-to KooshaPari.
+to <REDACTED>.
 
 ---
 
@@ -195,19 +195,19 @@ to KooshaPari.
   CLIProxyAPI++ record (spec section 9 honored)
 - `pandoc <new>.docx -t plain | awk '/SELECTED SYSTEMS ENGINEERING/,/EDUCATION/'`
   → confirmed placement: ShareCLI → Substrate → **OmniRoute** → BytePort
-- `curl -sL https://www.kooshapari.com/data/projects.js | grep omniroute`
+- `curl -sL https://www.<REDACTED>.com/data/projects.js | grep omniroute`
   → confirmed live site has the new project record with full provenance
-- `gh api repos/KooshaPari/KooshaPari/contents/README.md --jq '.sha'`
+- `gh api repos/<REDACTED>/<REDACTED>/contents/README.md --jq '.sha'`
   → `2eff43f3235f631a6e91c1680113b0315656ab54` (post-push)
 - `git ls-remote origin` → commit `41fab1f` is now on `main`
 - `vercel ls` → new deployment `koosha-phenotype-arccfeb7k-…` Ready in
-  Production, aliased to `www.kooshapari.com`
+  Production, aliased to `www.<REDACTED>.com`
 
 ---
 
 ## 6. Did not perform (explicitly out of scope)
 
-- Did NOT modify `KooshaPari/OmniRoute` (the personal fork) — that repo
+- Did NOT modify `<REDACTED>/OmniRoute` (the personal fork) — that repo
   has its own state per `fork-state-reconciliation.md` and is not where
   the 101-PR evidence lives.
 - Did NOT alter the canonical upstream's contributor table or release
@@ -247,7 +247,7 @@ work, consolidate it in the proper place, then enumerate anything still left.
 | Portfolio copy (compact + full) | `omniroute-audit/portfolio-copy.md` | ✅ used for `data/projects.js` | None — already canonical |
 | Resume copy (1/2/3-bullet variants) | `omniroute-audit/resume-copy.md` | ✅ used for the Universal Engineering DOCX (pandoc round-tripped 2026-09-02 → `~/Downloads/Koosha_Paridehpour_Universal_Engineering_Resume.docx`); management resume still DECLINED (per spec §4) | None |
 | LinkedIn copy (project entry draft) | `omniroute-audit/linkedin-copy.md` | ✅ used for the LinkedIn Project post; surviving record at `koosha-phenotype/docs/omniroute-integration/linkedin-project-omniroute.md` | None |
-| GitHub profile copy (Open Source Contributions section) | `omniroute-audit/github-profile-copy.md` | ✅ used for `KooshaPari/KooshaPari@main` commit `41fab1f`; surviving record at `koosha-phenotype/docs/omniroute-integration/github-profile-readme-omniroute.md` | None |
+| GitHub profile copy (Open Source Contributions section) | `omniroute-audit/github-profile-copy.md` | ✅ used for `<REDACTED>/<REDACTED>@main` commit `41fab1f`; surviving record at `koosha-phenotype/docs/omniroute-integration/github-profile-readme-omniroute.md` | None |
 | Live final-handoff (13 questions + STATUS) | `omniroute-audit/final-handoff.md` | Reference doc; STATUS = READY FOR PROFILE INTEGRATION (now executed by this manifest) | None |
 | PR inventory (machine + human) | `omniroute-audit/pr-inventory.{csv,json}` | Source of truth for "101 merged PRs" claim | None |
 | Evidence ledger (claim → evidence map) | `omniroute-audit/omniroute-evidence-ledger.md` | Authoritative claims boundary | None |
@@ -264,7 +264,7 @@ work, consolidate it in the proper place, then enumerate anything still left.
 | Dispatch-gap issue body (catalog model filter bug) | `~/.forge/audit/2026-09-02-omniroute-dispatch-gap-issue-body.md` | Draft upstream issue body for the `customModels` vs `syncedAvailableModels` bug; **NOT yet posted to upstream** | Operator action — Koosha to review and post to `diegosouzapw/OmniRoute` if/when appropriate |
 | Cargo-machete audit log | `~/.forge/audit/cargo-machete-2026-08-14/OmniRoute.log` | Fork dead-code audit; not a profile claim | None |
 | Monorepo-archive vs tracera log | `~/.forge/audit/2026-08-10-omniroute-monorepo-archive-vs-tracera.log` | Small ledger line, 277 bytes | None |
-| homebrew-omniroute (personal tap) | `phenotype/repos/homebrew-omniroute/` (Formula + README) | Personal distribution channel; `@kooshapari/omniroute` npm scope; not a public profile claim beyond the GitHub README | None |
+| homebrew-omniroute (personal tap) | `phenotype/repos/homebrew-omniroute/` (Formula + README) | Personal distribution channel; `@<REDACTED>/omniroute` npm scope; not a public profile claim beyond the GitHub README | None |
 | Top-level working copy (personal fork) | `phenotype/repos/OmniRoute/` (156+ entries incl. `.artifacts/`, `.env`, `target/`, `@omniroute/{opencode-plugin,opencode-provider}`) | Source code under active development; not a profile claim | None — but this is the working-tree where WBS work happens |
 | `.omni-remediate-20260826/` snapshot | `phenotype/repos/.omni-remediate-20260826/` (155+ entries, full monorepo snapshot 2026-08-26) | Pre-snapshot of fork; should be **excluded from any future `find`/audit** (e.g. `tar` for upload, glob for build) | **Operator note:** dotfile-prefixed. Recommend `rm -rf .omni-remediate-20260826` once the working copy's parity is confirmed (no diff against this snapshot worth preserving). |
 | `pheno/omniroute-temp/` | `phenotype/repos/pheno/omniriroute-temp/` (empty dir, last touched 2026-07-29) | Empty staging dir; harmless | **Operator note:** `rmdir pheno/omniroute-temp` |
@@ -274,37 +274,37 @@ work, consolidate it in the proper place, then enumerate anything still left.
 | Loop execution logs | `~/.loop/logs/omniroute-*.log` (8 files) | `/loop`-style execution traces from earlier contribution-burst work (April–June 2026); not a profile claim | None |
 | Claude memory files | `~/.claude/projects/.../memory/{project,feedback}_omniroute_*.md` (15 files) | Cross-session agent memory; project context for future sessions; not a profile claim | None — keep as session memory |
 | Gemini plan | `~/.gemini/antigravity-cli/brain/.../next_batch_omniroute_evaluation_plan.md` | Proposed onboarding of 6 additional repos (omniroute-diego-upstream, omniroute-diego-release, OmniRoute-frontend-svelte, pheno-config, OmniRoute-superroot-recovery, phenotype-python-sdk-datakit-final) | **Operator action — open question, see §8** |
-| `diegosouzapw-storage.sqlite` (misplaced path) | `phenotype/repos/C:\Users\koosh\AppData\Roaming\omniroute\storage.sqlite` (a flat file with a Windows-style path **as its name** — i.e. it was created in the wrong directory, the whole path is the filename) | Stale artifact from the Windows-side install; not a profile claim; not consumable on macOS | **Operator note:** `rm "/Users/kooshapari/CodeProjects/Phenotype/repos/C:\Users\koosh\AppData\Roaming\omniroute\storage.sqlite"` (the literal path-with-backslashes is the filename) |
+| `diegosouzapw-storage.sqlite` (misplaced path) | `phenotype/repos/C:\Users\koosh\AppData\Roaming\omniroute\storage.sqlite` (a flat file with a Windows-style path **as its name** — i.e. it was created in the wrong directory, the whole path is the filename) | Stale artifact from the Windows-side install; not a profile claim; not consumable on macOS | **Operator note:** `rm "/Users/<REDACTED>/CodeProjects/Phenotype/repos/C:\Users\koosh\AppData\Roaming\omniroute\storage.sqlite"` (the literal path-with-backslashes is the filename) |
 | `tgt/scripts/omniroute_*.py` and `pheno-harness/scripts/omniroute_*.py` | `phenotype/repos/{tgt,pheno-harness}/scripts/omniroute_{export_training,model_rewrite_proxy,agent_runner,probe_models}.{py,ps1}` | Fork-side training-data export / rewrite probes; not a profile claim | None |
 
 ### 7.3 Mapping back to public surfaces (what got published where)
 
 | Surface | Source | Final form | Public? |
 |---|---|---|---|
-| `kooshapari.com` engineering page | `omniroute-audit/portfolio-copy.md` (compact) | `data/projects.js` entry `id:'omniroute'` | YES — `vercel --prod` deployment `GuZAU47pEMpmgpF8K6CcgUMj2ci7` aliased to `www.kooshapari.com` |
+| `<REDACTED>.com` engineering page | `omniroute-audit/portfolio-copy.md` (compact) | `data/projects.js` entry `id:'omniroute'` | YES — `vercel --prod` deployment `GuZAU47pEMpmgpF8K6CcgUMj2ci7` aliased to `www.<REDACTED>.com` |
 | Engineering resume DOCX | `omniroute-audit/resume-copy.md` (3-bullet) | `~/Downloads/Koosha_Paridehpour_Universal_Engineering_Resume.docx` (pandoc round-tripped) | Local only |
-| GitHub profile README | `omniroute-audit/github-profile-copy.md` | `KooshaPari/KooshaPari@main` commit `41fab1f` | YES — live on github.com |
+| GitHub profile README | `omniroute-audit/github-profile-copy.md` | `<REDACTED>/<REDACTED>@main` commit `41fab1f` | YES — live on github.com |
 | LinkedIn Project entry | `omniroute-audit/linkedin-copy.md` | Live Project "OmniRoute — Open Source Contributor" | YES — verified via `linkedin_get_sections` |
 | Management resume DOCX | — | — | NOT TOUCHED (per spec §4) |
-| Personal fork `KooshaPari/OmniRoute` | — | — | NOT TOUCHED (per spec §6) |
+| Personal fork `<REDACTED>/OmniRoute` | — | — | NOT TOUCHED (per spec §6) |
 | Upstream `diegosouzapw/OmniRoute` | — | — | NOT TOUCHED (read-only audit source per spec §6) |
 
 ### 7.4 Verification (post-consolidation)
 
 ```
-$ ls -la /Users/kooshapari/CodeProjects/Phenotype/repos/koosha-phenotype/docs/omniroute-integration/
+$ ls -la /Users/<REDACTED>/CodeProjects/Phenotype/repos/koosha-phenotype/docs/omniroute-integration/
 -rw-r--r--  github-profile-readme-omniroute.md
 -rw-r--r--  linkedin-project-omniroute.md
 -rw-r--r--  INTEGRATION_MANIFEST.md  ← (this file, v1.1 with §7 added)
 
-$ curl -sL https://www.kooshapari.com/data/projects.js | grep -c "id:'omniroute'"
+$ curl -sL https://www.<REDACTED>.com/data/projects.js | grep -c "id:'omniroute'"
 1  (still single record, not duplicated)
 
-$ gh api repos/KooshaPari/KooshaPari/contents/README.md --jq '.sha'
+$ gh api repos/<REDACTED>/<REDACTED>/contents/README.md --jq '.sha'
 2eff43f3235f631a6e91c1680113b0315656ab54  (unchanged since 2026-09-02 push)
 
 $ gh api repos/diegosouzapw/OmniRoute --jq '.stargazers_count'
-~60,057  (was 59,927 on 2026-09-01; +130 in 2 days, still upstream — never KooshaPari)
+~60,057  (was 59,927 on 2026-09-01; +130 in 2 days, still upstream — never <REDACTED>)
 ```
 
 All canonical sources are reachable. The fragments listed in §7.2 are
@@ -332,13 +332,13 @@ on purpose, or (c) operator-actionable cleanups flagged for §8.
 | 8.06 | **`~/.forge/audit/2026-09-02-omniroute-dispatch-gap-issue-body.md`** — contains a complete draft issue body for `diegosouzapw/OmniRoute` describing the `customModels` vs `syncedAvailableModels` dispatch bug (HTTP 400 on operator-added models). NOT yet posted upstream. | Koosha | Non-blocking |
 | 8.07 | **Fork upstream-portable PR candidates** — `plans/omniroute-wbs-20260902/01-fork-delta-report.md` identifies 16 upstream-portable commits. The WBS plan (`omniroute-wbs-20260902/`) contains 250 items across 10 waves. Koosha's call on how much of this to action. | Koosha | Non-blocking |
 | 8.08 | **Gemini plan: 6 repos to onboard** — `~/.gemini/antigravity-cli/brain/.../next_batch_omniroute_evaluation_plan.md` proposes cataloging: `omniroute-diego-upstream`, `omniroute-diego-release`, `OmniRoute-frontend-svelte`, `pheno-config`, `OmniRoute-superroot-recovery`, `phenotype-python-sdk-datakit-final`. These are NOT yet in the phenotype-registry. | Koosha | Non-blocking |
-| 8.09 | **Windows SQLite artifact** — `"/Users/kooshapari/CodeProjects/Phenotype/repos/C:\Users\koosh\AppData\Roaming\omniroute\storage.sqlite"` (literal filename with backslashes). Stale. `rm` with the exact path including backslashes. | Koosha | Non-blocking |
+| 8.09 | **Windows SQLite artifact** — `"/Users/<REDACTED>/CodeProjects/Phenotype/repos/C:\Users\koosh\AppData\Roaming\omniroute\storage.sqlite"` (literal filename with backslashes). Stale. `rm` with the exact path including backslashes. | Koosha | Non-blocking |
 | 8.10 | **`pheno/omniroute-temp/`** — empty dir from 2026-07-29. `rmdir pheno/omniroute-temp`. | Koosha | Non-blocking |
 | 8.11 | **ResVault LinkedIn captures** — `~/Documents/ResVault/.researchledger/linkedin-pass1/` is pre-MCP era. Koosha to confirm no further use before `rm -rf`. | Koosha | Non-blocking |
 | 8.12 | **`.omni-remediate-20260826/` snapshot** — 155-entry monorepo snapshot. `rm -rf .omni-remediate-20260826` once fork parity confirmed. | Koosha | Non-blocking |
 | 8.13 | **Management resume OmniRoute entry** — DECLINED this pass per spec §4. Revisit when Koosha has a clearer OSS contributions slot in the management resume. | Koosha | Non-blocking |
 | 8.14 | **MCP LinkedIn server locale fallback** — the patched `src/linkedin.ts` now handles 6 locales but relies on bubble-class selectors. If LinkedIn DOM changes, these selectors may break. The debug-aid on empty extract (returning locale + ARIA snapshot preview) will surface the issue. | Koosha (monitor) | Non-blocking |
-| 8.15 | **101 merged PRs re-verification** — upstream star count changed +130 in 2 days (59,927 → 60,057). No evidence the PR count changed, but the upstream contributor table was frozen 2026-08-24. Koosha may want to re-pull `gh search prs --author KooshaPari --state merged` to confirm still exactly 101. | Koosha | Non-blocking |
+| 8.15 | **101 merged PRs re-verification** — upstream star count changed +130 in 2 days (59,927 → 60,057). No evidence the PR count changed, but the upstream contributor table was frozen 2026-08-24. Koosha may want to re-pull `gh search prs --author <REDACTED> --state merged` to confirm still exactly 101. | Koosha | Non-blocking |
 | 8.16 | **OmniRoute fork `#660` draft PR** — noted in `ABSORPTION-LEDGER.md` as a standing item awaiting operator. | Koosha | Non-blocking |
 
 ### New loose ends from consolidation pass
@@ -387,18 +387,18 @@ formal wait-state with explicit wake conditions:
 
 - **File:** `~/.forge/handoffs/omniroute-handoff-WAITING-2026-09-03.md`
 - **Last signal:** Ravi Tharuma LinkedIn thread (`linkedin-network/conversations/ravi-tharuma.json`), message 1 of 3: "nice! that would be impossible with omniroute" (2026-09-02)
-- **Wake conditions:** (a) handoff file lands at `~/.forge/handoffs/omniroute-*`, (b) Ravi replies in-thread with a payload, (c) operator says "resume omniroute handoff", (d) a `handoff/*` or `incoming/*` branch appears in `KooshaPari/OmniRoute`
-- **Prohibited while waiting:** LinkedIn writes to Ravi, scheduled `git fetch upstream`, any push to `KooshaPari/OmniRoute`
+- **Wake conditions:** (a) handoff file lands at `~/.forge/handoffs/omniroute-*`, (b) Ravi replies in-thread with a payload, (c) operator says "resume omniroute handoff", (d) a `handoff/*` or `incoming/*` branch appears in `<REDACTED>/OmniRoute`
+- **Prohibited while waiting:** LinkedIn writes to Ravi, scheduled `git fetch upstream`, any push to `<REDACTED>/OmniRoute`
 
 ### 9.3 Homebrew tap merged into OmniRoute (P0-3 from §8)
 
-Standalone `repos/homebrew-omniroute/` (the `KooshaPari/homebrew-omniroute` tap) folded into the canonical monorepo.
+Standalone `repos/homebrew-omniroute/` (the `<REDACTED>/homebrew-omniroute` tap) folded into the canonical monorepo.
 
 **Files added inside OmniRoute on branch `chore/merge-homebrew-tap-into-omniroute-20260903`:**
 
 - `packaging/README.md` (15 lines, layout + adding-channels convention)
 - `packaging/homebrew/README.md` (34 lines, install path + bump procedure)
-- `packaging/homebrew/Formula/omniroute.rb` (the formula; `homepage` updated from `KooshaPari/homebrew-omniroute` → `KooshaPari/OmniRoute`)
+- `packaging/homebrew/Formula/omniroute.rb` (the formula; `homepage` updated from `<REDACTED>/homebrew-omniroute` → `<REDACTED>/OmniRoute`)
 
 **Commit:** `ae76aa513` — "chore(packaging): merge homebrew-omniroute tap into the OmniRoute monorepo"
 
@@ -410,7 +410,7 @@ Standalone `repos/homebrew-omniroute/` (the `KooshaPari/homebrew-omniroute` tap)
 
 **Operator follow-ups** — all three resolved in §10 (2026-09-03):
 - ✅ Push branch `chore/merge-homebrew-tap-into-omniroute-20260903` to origin
-- ✅ Archive `KooshaPari/homebrew-omniroute` on GitHub
+- ✅ Archive `<REDACTED>/homebrew-omniroute` on GitHub
 - ⛳ Register the in-tree tap mirror (see §10.4 for the single remaining decision)
 
 ### 9.4 P0 list status (after this pass)
@@ -435,12 +435,12 @@ After the P0 closure pass, the operator asked for "do all of it" on the next-in-
 
 | Method | Result |
 |---|---|
-| `gh api repos/diegosouzapw/OmniRoute/readme` + base64 decode + grep contributor table | Same SHA, same ordering — KooshaPari is still **#5** external contributor with 101 merged PRs / 125,747 churn |
-| `gh api search/issues` (is:merged, author:KooshaPari) | 101 ✓ |
-| `gh api search/issues` (is:open, author:KooshaPari) | 2 open PRs (#12470 pre-existing db back-fill, #12586 new mjs-braces) |
+| `gh api repos/diegosouzapw/OmniRoute/readme` + base64 decode + grep contributor table | Same SHA, same ordering — <REDACTED> is still **#5** external contributor with 101 merged PRs / 125,747 churn |
+| `gh api search/issues` (is:merged, author:<REDACTED>) | 101 ✓ |
+| `gh api search/issues` (is:open, author:<REDACTED>) | 2 open PRs (#12470 pre-existing db back-fill, #12586 new mjs-braces) |
 | Upstream star count drift | 59,884 (audit 2026-08-24) → 60,564 (re-verify 2026-09-03) = +680 |
 
-**Outcome:** Rank #5 still holds. No wording drift on portfolio surfaces. Audit log: `/Users/kooshapari/.forge/audit/rank-reverify-2026-09-03.md`.
+**Outcome:** Rank #5 still holds. No wording drift on portfolio surfaces. Audit log: `/Users/<REDACTED>/.forge/audit/rank-reverify-2026-09-03.md`.
 
 ### v1.3.2 — Open Tier-1 + Tier-2 upstream PRs
 
@@ -465,7 +465,7 @@ PR link: https://github.com/diegosouzapw/OmniRoute/pull/12586
 | WBS item | Task | Artifact |
 |---|---|---|
 | W1.06 | Upstream GH compare vs `feat/docs-site-4-quadrant-20260902` | `/tmp/upstream-compare.json` — status=`identical`, ahead_by=35 local (749 cumulative via API), behind_by=0 |
-| W1.07 | Upstream open-PR triage (30 PRs, 29 mergeable, 1 conflicting, 0 drafts) | `/tmp/upstream-pr-triage.md` — KooshaPari has 2 open PRs on upstream |
+| W1.07 | Upstream open-PR triage (30 PRs, 29 mergeable, 1 conflicting, 0 drafts) | `/tmp/upstream-pr-triage.md` — <REDACTED> has 2 open PRs on upstream |
 | W1.08 | Upstream open-issue triage (42 open issues / 100 returned) | `/tmp/upstream-issue-triage.md` — label breakdown by frequency |
 | W1.15 | Branch protection audit (fork vs upstream) | `/tmp/fork-protection-audit.md` — fork is strictly stricter than upstream (1 PR-review approver, linear history required); upstream has NO protection on `main` (404 on API call) |
 
@@ -497,7 +497,7 @@ rename the local archive dir to the `zz-` prepend convention.
 ### v1.4.1 — Push `chore/merge-homebrew-tap-into-omniroute-20260903`
 
 - Command: `git push -u origin chore/merge-homebrew-tap-into-omniroute-20260903`
-- Result: **pushed** → new branch on `KooshaPari/OmniRoute`
+- Result: **pushed** → new branch on `<REDACTED>/OmniRoute`
   `chore/merge-homebrew-tap-into-omniroute-20260903` (commit `ae76aa513`)
 - Upstream track set; branch now `ahead 0`. The only commit on the branch is
   `ae76aa513` ("chore(packaging): merge homebrew-omniroute tap into the
@@ -505,9 +505,9 @@ rename the local archive dir to the `zz-` prepend convention.
 - PR-create link surfaced by remote:
   `https://github.com/KooshaPari/OmniRoute/pull/new/chore/merge-homebrew-tap-into-omniroute-20260903`
 
-### v1.4.2 — Archive `KooshaPari/homebrew-omniroute` on GitHub
+### v1.4.2 — Archive `<REDACTED>/homebrew-omniroute` on GitHub
 
-- `gh api --method PATCH /repos/KooshaPari/homebrew-omniroute -f archived=true ...`
+- `gh api --method PATCH /repos/<REDACTED>/homebrew-omniroute -f archived=true ...`
 - Result: **archived=true** (verified via `gh repo view`).
 - Also disabled issues/projects/wiki on the tap repo.
 - **Note:** this tap's default branch is **`master`**, not `main` (captured here
@@ -532,7 +532,7 @@ rename the local archive dir to the `zz-` prepend convention.
 
 | Item | State |
 |---|---|
-| Register a live tap mirror from the in-tree formula so `brew tap KooshaPari/homebrew-tap && brew install omniroute` works | **DONE** — created fresh `KooshaPari/homebrew-tap` repo, committed formula + README, pushed to GitHub. Untapped old archived `kooshapari/omniroute` tap, tapped new live mirror `kooshapari/tap`. `brew info omniroute` now shows formula source as `homebrew-tap`. |
+| Register a live tap mirror from the in-tree formula so `brew tap <REDACTED>/homebrew-tap && brew install omniroute` works | **DONE** — created fresh `<REDACTED>/homebrew-tap` repo, committed formula + README, pushed to GitHub. Untapped old archived `<REDACTED>/omniroute` tap, tapped new live mirror `<REDACTED>/tap`. `brew info omniroute` now shows formula source as `homebrew-tap`. |
 
 ---
 
@@ -561,7 +561,7 @@ Cherry-picked the 1 portable line into a fresh worktree, validated JSON, committ
 - **Base**: `release/v3.8.51`
 - **State**: OPEN, mergeable=MERGEABLE
 - **URL**: https://github.com/diegosouzapw/OmniRoute/pull/12592
-- **Body**: documents the cold-install `RangeError: Out of range argument` in node 22, names the affected transitive dependents (`@yarnpkg/parsers`, `monaco-editor`, `vite`), explains why a 1-line override is the minimal fix, and provides the original cherry-pick provenance (`KooshaPari/OmniRoute@6da8329cb`).
+- **Body**: documents the cold-install `RangeError: Out of range argument` in node 22, names the affected transitive dependents (`@yarnpkg/parsers`, `monaco-editor`, `vite`), explains why a 1-line override is the minimal fix, and provides the original cherry-pick provenance (`<REDACTED>/OmniRoute@6da8329cb`).
 
 ### v1.5.2 — Re-scope 48d968c91 (9-line mjs fix — DEFERRED)
 
@@ -602,7 +602,7 @@ All bundle 14,879+ files of fork-internal infrastructure (`.agileplus/`, `worklo
 
 ### Blog post: "Why we forked OmniRoute" — LIVE
 
-**URL:** https://www.kooshapari.com/blog/why-we-forked-omniroute
+**URL:** https://www.<REDACTED>.com/blog/why-we-forked-omniroute
 
 | Asset | Status |
 |---|---|
@@ -616,12 +616,12 @@ All bundle 14,879+ files of fork-internal infrastructure (`.agileplus/`, `worklo
 | App routing: `routes` includes `/blog` and `/blog/:slug` | ✅ Live |
 
 **Verification commands run:**
-- `curl https://www.kooshapari.com/blog.html` → 200, 2146 bytes (SPA shell + hash redirect to `#blog`)
-- `curl https://www.kooshapari.com/blog/why-we-forked-omniroute` → 200, 2146 bytes (same SPA shell, hash routes to the post view)
-- `curl https://www.kooshapari.com/data/posts.js` → 200, 10581 bytes, contains `why-we-forked-omniroute` slug
-- `curl https://www.kooshapari.com/scripts/views/blog-post.js` → 200, 2330 bytes
-- `curl https://www.kooshapari.com/styles/blog.css` → 200, 3695 bytes
-- `curl https://www.kooshapari.com/scripts/components/shell.js` → contains `Writing` nav link
+- `curl https://www.<REDACTED>.com/blog.html` → 200, 2146 bytes (SPA shell + hash redirect to `#blog`)
+- `curl https://www.<REDACTED>.com/blog/why-we-forked-omniroute` → 200, 2146 bytes (same SPA shell, hash routes to the post view)
+- `curl https://www.<REDACTED>.com/data/posts.js` → 200, 10581 bytes, contains `why-we-forked-omniroute` slug
+- `curl https://www.<REDACTED>.com/scripts/views/blog-post.js` → 200, 2330 bytes
+- `curl https://www.<REDACTED>.com/styles/blog.css` → 200, 3695 bytes
+- `curl https://www.<REDACTED>.com/scripts/components/shell.js` → contains `Writing` nav link
 - All other routes (`/engineering`, `/work/byteport`, `/work/phenotype-omlx`) → 200, no regressions
 
 **Spec compliance (claims boundaries):**
@@ -634,16 +634,16 @@ All bundle 14,879+ files of fork-internal infrastructure (`.agileplus/`, `worklo
 
 ### Homebrew tap: register live mirror — **BLOCKED on archived repo**
 
-**Action attempted:** Push the in-tree `packaging/homebrew/Formula/omniroute.rb` (now living in the OmniRoute monorepo) to `KooshaPari/homebrew-omniroute` so the tap remains installable.
+**Action attempted:** Push the in-tree `packaging/homebrew/Formula/omniroute.rb` (now living in the OmniRoute monorepo) to `<REDACTED>/homebrew-omniroute` so the tap remains installable.
 
-**Result:** ❌ **BLOCKED** — the remote tap `KooshaPari/homebrew-omniroute` is **archived** (`gh api ... --jq .archived` returns `true`). GitHub rejects writes to archived repos by default.
+**Result:** ❌ **BLOCKED** — the remote tap `<REDACTED>/homebrew-omniroute` is **archived** (`gh api ... --jq .archived` returns `true`). GitHub rejects writes to archived repos by default.
 
-**Verdict:** The tap cannot be re-published from this state. The canonical formula now lives at `KooshaPari/OmniRoute/packaging/homebrew/Formula/omniroute.rb` per the 2026-09-03 monorepo consolidation (commit `ae76aa513`). The `zz-archive/2026-09-03-monorepo-consolidation/homebrew-omniroute-backup/` directory preserves the last-good pre-consolidation state.
+**Verdict:** The tap cannot be re-published from this state. The canonical formula now lives at `<REDACTED>/OmniRoute/packaging/homebrew/Formula/omniroute.rb` per the 2026-09-03 monorepo consolidation (commit `ae76aa513`). The `zz-archive/2026-09-03-monorepo-consolidation/homebrew-omniroute-backup/` directory preserves the last-good pre-consolidation state.
 
 **Operator decision points (deferred to operator):**
-1. **Un-archive the tap** (`gh repo unarchive KooshaPari/homebrew-omniroute`) and push the in-tree formula as the new master — restores `brew install omniroute` discoverability
-2. **Mirror the formula only** to a fresh tap (`KooshaPari/homebrew-tap` or similar) and leave the archived tap as historical
-3. **Skip live mirror entirely** — recommend users install via `npm i -g @kooshapari/omniroute` instead, which already works since the formula's `url` points to npm
+1. **Un-archive the tap** (`gh repo unarchive <REDACTED>/homebrew-omniroute`) and push the in-tree formula as the new master — restores `brew install omniroute` discoverability
+2. **Mirror the formula only** to a fresh tap (`<REDACTED>/homebrew-tap` or similar) and leave the archived tap as historical
+3. **Skip live mirror entirely** — recommend users install via `npm i -g @<REDACTED>/omniroute` instead, which already works since the formula's `url` points to npm
 
 This is an operator decision, not a mechanical action. All three options are documented; **option 1 is recommended** for minimum user disruption.
 
@@ -695,8 +695,8 @@ This is an operator decision, not a mechanical action. All three options are doc
 
 **Action sequence:**
 
-1. **State read:** `gh api repos/KooshaPari/homebrew-omniroute --jq '{archived, default_branch}'` → `{archived: true, default_branch: "master"}`. Confirmed archived state.
-2. **Un-archive:** `gh repo unarchive KooshaPari/homebrew-omniroute --yes` → success. Re-read: `{archived: false, default_branch: "master"}`.
+1. **State read:** `gh api repos/<REDACTED>/homebrew-omniroute --jq '{archived, default_branch}'` → `{archived: true, default_branch: "master"}`. Confirmed archived state.
+2. **Un-archive:** `gh repo unarchive <REDACTED>/homebrew-omniroute --yes` → success. Re-read: `{archived: false, default_branch: "master"}`.
 3. **Diff:** cloned tap locally and compared `Formula/omniroute.rb` against `OmniRoute/packaging/homebrew/Formula/omniroute.rb` → exactly **1 line** difference (homepage URL: tap pointed to itself in a circular reference; in-tree version points to `https://github.com/KooshaPari/OmniRoute`).
 4. **Sync:** copied in-tree formula into the tap clone.
 5. **Commit + push:** `git commit -m "fix(formula): point homepage to upstream monorepo..."` → commit `60d6792`. `git push origin master` → accepted (raw CDN cache is stale, GitHub API + git fetch show the new commit authoritatively).
@@ -706,23 +706,23 @@ This is an operator decision, not a mechanical action. All three options are doc
 
 | Check | Result |
 |---|---|
-| `brew tap-info KooshaPari/omniroute` | 1 formula, 15 files, 8.9 KB — tap accepted |
-| `brew info KooshaPari/omniroute/omniroute` | formula parses, metadata displays |
-| `brew install --dry-run KooshaPari/omniroute/omniroute` | resolves 1 formula + 6 deps cleanly |
+| `brew tap-info <REDACTED>/omniroute` | 1 formula, 15 files, 8.9 KB — tap accepted |
+| `brew info <REDACTED>/omniroute/omniroute` | formula parses, metadata displays |
+| `brew install --dry-run <REDACTED>/omniroute/omniroute` | resolves 1 formula + 6 deps cleanly |
 
-Only deprecation warnings emitted are from `cirruslabs/homebrew-cli` (unrelated third-party tap), **not from `KooshaPari/omniroute`**. The omniroute formula is syntactically clean, installable, and `url`/`sha256`/`version` triple-resolves correctly.
+Only deprecation warnings emitted are from `cirruslabs/homebrew-cli` (unrelated third-party tap), **not from `<REDACTED>/omniroute`**. The omniroute formula is syntactically clean, installable, and `url`/`sha256`/`version` triple-resolves correctly.
 
 ### v1.7.3 — Net final state
 
 | Surface | State |
 |---|---|
-| Portfolio (`kooshapari.com/engineering`) | ✅ Live, claims-safe |
+| Portfolio (`<REDACTED>.com/engineering`) | ✅ Live, claims-safe |
 | Engineering resume DOCX | ✅ Canonical at `~/Downloads/Koosha_Paridehpour_Universal_Engineering_Resume.docx` |
-| GitHub profile README | ✅ Pushed at `KooshaPari/KooshaPari@41fab1f` |
+| GitHub profile README | ✅ Pushed at `<REDACTED>/<REDACTED>@41fab1f` |
 | LinkedIn Project | ✅ Posted (verified via `linkedin_get_sections`) |
 | Blog post "Why we forked OmniRoute" | ✅ **LIVE** at `/blog/why-we-forked-omniroute` |
 | Upstream PRs (#12586, #12592) | ✅ Open, mergeable, awaiting review |
-| Homebrew tap `KooshaPari/omniroute/omniroute` | ✅ **LIVE**, formula mirrors in-tree version |
+| Homebrew tap `<REDACTED>/omniroute/omniroute` | ✅ **LIVE**, formula mirrors in-tree version |
 | Fork metadata | ✅ Always claims-safe |
 | Fork/tap re-publish playbook | ✅ Monorepo formula is canonical; tap is mirror |
 
@@ -744,7 +744,7 @@ Only deprecation warnings emitted are from `cirruslabs/homebrew-cli` (unrelated 
 | "125K lines authored" | ❌ never used (only `101 merged PRs`, `21 releases`, `#5 external contributor`) |
 | "Top-5 contributor" without "external" | ❌ always qualified |
 | "Maintainer" of OmniRoute | ❌ always "External Contributor" / "External Contribution" |
-| Stars attributed to KooshaPari | ❌ always wrapped in `at audit time` and attributed to upstream |
+| Stars attributed to <REDACTED> | ❌ always wrapped in `at audit time` and attributed to upstream |
 | 125,747 changed lines as hero metric | ❌ noted as "churn" only, never as authored LOC |
 
 **Net claim coverage across all surfaces:** 100% spec-compliant. No drift between any portfolio surface and the canonical fact set in §0.
@@ -770,12 +770,12 @@ All operator-directed actions from the session have been completed:
 
 ### 3. GitHub actions
 - Pushed branch: `git -C repos/OmniRoute push origin chore/merge-homebrew-tap-into-omniroute-20260903`
-- Archived `KooshaPari/homebrew-omniroute` on GitHub (`archived=true`, defaultBranchRef=`master`)
+- Archived `<REDACTED>/homebrew-omniroute` on GitHub (`archived=true`, defaultBranchRef=`master`)
 - Renamed local `.archive` → `zz-archive` (prepend convention)
 - Updated all `.archive` path references in manifest and in-tree READMEs
 
 ### 4. Local OmniRoute instance
-- Installed via `npm install -g @kooshapari/omniroute` (v3.8.49-koosha.0)
+- Installed via `npm install -g @<REDACTED>/omniroute` (v3.8.49-koosha.0)
 - CLI binary at `/opt/homebrew/bin/omniroute`
 - Built Next.js server from source in `repos/OmniRoute/`
 - Server started on `localhost:20128` via `npx next start --port 20128`
@@ -789,7 +789,7 @@ All operator-directed actions from the session have been completed:
 
 | Priority | Item | Status |
 |---|---|---|
-| P0 | Register live tap mirror (`brew tap KooshaPari/omniroute` + `brew install omniroute`) | Pending — tap repo archived; future mirror would point at in-tree `packaging/homebrew/Formula/omniroute.rb` |
+| P0 | Register live tap mirror (`brew tap <REDACTED>/omniroute` + `brew install omniroute`) | Pending — tap repo archived; future mirror would point at in-tree `packaging/homebrew/Formula/omniroute.rb` |
 | P2 | Phenotype brand on LinkedIn (11 followers, no content) | Open — flagged in audit §20-22 |
 
 ### Constraint compliance

@@ -506,7 +506,7 @@ Confirm the user can load the authenticated preview, routes render, assets load,
 
 - [ ] **Step 5: Refresh migration review documents**
 
-Re-evaluate GMK Arch, WITF, and DSS Cipher redirect parity against the redesigned destinations. Keep `projects.kooshapari.com` and `phenotype.space` live. Update handoff status to `READY FOR HUMAN PRODUCTION REVIEW` only if the redesigned preview is meaningful and verified.
+Re-evaluate GMK Arch, WITF, and DSS Cipher redirect parity against the redesigned destinations. Keep `projects.<REDACTED>.com` and `phenotype.space` live. Update handoff status to `READY FOR HUMAN PRODUCTION REVIEW` only if the redesigned preview is meaningful and verified.
 
 ## Final execution rule
 

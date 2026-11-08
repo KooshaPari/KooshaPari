@@ -1,0 +1,35 @@
+{
+  "asset": "hybrid-materials-sharecli",
+  "project": "sharecli",
+  "generator": "build_project.py",
+  "renderer": "Cycles CPU, 32 samples, denoising, Standard view transform",
+  "render_timestamp": "2026-09-13T04:41:29.822992+00:00",
+  "renders": {
+    "desktop": {
+      "filename": "sharecli-desktop.webp",
+      "size_bytes": 8660,
+      "md5": "4c4ca0bb95f7172aacd736adf7b98d2d",
+      "sha256": "709805d9c5e0aa87832ecb2e6072b4d0ec3eeef58883e15da279bf4ab6d857c0",
+      "target_size": {
+        "width": 1200,
+        "height": 800
+      }
+    },
+    "mobile": {
+      "filename": "sharecli-mobile.webp",
+      "size_bytes": 5504,
+      "md5": "107faf6e85ed687b75d459aaed7d051b",
+      "sha256": "9fa3d40b2f2ec0c818a4435fb306b1b131fccf2b17d39763e55f457e54641a36",
+      "target_size": {
+        "width": 800,
+        "height": 700
+      }
+    }
+  },
+  "blend_file": {
+    "filename": "sharecli.blend",
+    "size_bytes": 829169,
+    "md5": "8386635c91589a973a116a181dc8685d",
+    "sha256": "00760e4c36455a58968dd3eb1a65420ed766fb0b6f7ac2c03508474aa29a6a0e"
+  }
+}

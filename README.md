@@ -2,7 +2,7 @@
 
 Software engineer working across systems software, distributed and agent infrastructure, ML inference/evaluation, developer tooling, and cloud platforms. I also have a background in technical product/program leadership and physical-product commercialization.
 
-[![AI slop inside](https://sladge.net/badge.svg)](https://sladge.net) [![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/KooshaPari/KooshaPari/total)](https://github.com/KooshaPari/KooshaPari/releases)
+[![AI slop inside](https://sladge.net/badge.svg)](https://sladge.net) [![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/<REDACTED>/<REDACTED>/total)](https://github.com/KooshaPari/<REDACTED>/releases)
 
 ## Selected Engineering Work
 
@@ -53,7 +53,7 @@ Highlights:
 - Reliability hardening across cooldowns, fallback caches, and stream lifetime
 - Contributions named in 21 upstream releases; personally acknowledged by the maintainer
 
-[View merged contributions → upstream PR search](https://github.com/diegosouzapw/OmniRoute/pulls?q=author%3AKooshaPari)
+[View merged contributions → upstream PR search](https://github.com/diegosouzapw/OmniRoute/pulls?q=author%3A<REDACTED>)
 
 ## Earlier Work
 

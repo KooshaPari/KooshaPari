@@ -1,4 +1,4 @@
-import { el } from './dom.js';
+import { el, $$ } from './dom.js';
 
 const GROUPS = [
   ['Featured', (project) => project.featured],
@@ -25,6 +25,8 @@ function partitionProjects(projects) {
 
 export function createProjectIndex({ projects, onNavigate = () => {} }) {
   let returnFocus = null;
+  let searchEl = null;
+  let renderResults = () => {};
   const titleId = 'project-index-title';
   const dialog = el('dialog', {
     class: 'project-index',
@@ -36,8 +38,55 @@ export function createProjectIndex({ projects, onNavigate = () => {} }) {
     dialog.close();
   }
 
+  function handleKeydown(event) {
+    if (!dialog.open) return;
+    const items = $$('.project-index-groups a', dialog);
+    const current = document.activeElement;
+    const index = items.indexOf(current);
+
+    switch (event.key) {
+      case 'ArrowDown':
+        if (index < items.length - 1) {
+          event.preventDefault();
+          items[index + 1]?.focus();
+        }
+        break;
+      case 'ArrowUp':
+        if (index > 0) {
+          event.preventDefault();
+          items[index - 1]?.focus();
+        } else if (index === 0) {
+          event.preventDefault();
+          searchEl?.focus();
+        }
+        break;
+      case 'Home':
+        if (event.target === searchEl) {
+          event.preventDefault();
+          items[0]?.focus();
+        }
+        break;
+      case 'Escape':
+        if (event.target === searchEl && searchEl.value) {
+          event.preventDefault();
+          event.stopPropagation();
+          searchEl.value = '';
+          renderResults();
+        }
+        break;
+    }
+  }
+
   function render() {
-    const groups = partitionProjects(projects);
+    const search = el('input', {
+      type: 'search',
+      placeholder: 'Find a project or technology',
+      'aria-label': 'Search project index',
+      class: 'project-index-search',
+    });
+    searchEl = search;
+    const results = el('div', { class: 'project-index-groups' });
+    const count = el('p', { role: 'status', 'aria-live': 'polite' });
     const closeButton = el(
       'button',
       { class: 'project-index-close', type: 'button', onclick: close },
@@ -51,10 +100,15 @@ export function createProjectIndex({ projects, onNavigate = () => {} }) {
         el('div', {}, el('p', { class: 'atelier-label' }, 'Complete catalog'), el('h2', { id: titleId }, 'Project Index')),
         closeButton,
       ),
-      el(
-        'div',
-        { class: 'project-index-groups' },
-        groups.map(([label, entries], groupIndex) =>
+      search, count, results,
+    );
+
+    renderResults = () => {
+      const query = search.value.trim().toLowerCase();
+      const filtered = projects.filter(project => [project.title, project.category, project.summary, ...(project.technologies ?? [])].join(' ').toLowerCase().includes(query));
+      count.textContent = `${filtered.length} ${filtered.length === 1 ? 'project' : 'projects'}`;
+      const groups = partitionProjects(filtered);
+      const items = groups.map(([label, entries], groupIndex) =>
           el(
             'section',
             { class: 'project-index-group', 'aria-labelledby': `index-group-${groupIndex}` },
@@ -65,7 +119,7 @@ export function createProjectIndex({ projects, onNavigate = () => {} }) {
               entries.map((project, index) =>
                 el(
                   'li',
-                  {},
+                  { role: 'option' },
                   el(
                     'a',
                     {
@@ -84,16 +138,26 @@ export function createProjectIndex({ projects, onNavigate = () => {} }) {
               ),
             ),
           ),
-        ),
-      ),
-    );
+        );
+      if (!filtered.length) {
+        items.push(
+          el('div', { class: 'project-index-empty', role: 'status' },
+            el('p', {}, 'No projects match your search.'),
+            el('p', {}, 'Try a different project name, category, or technology \u2014 or browse the full catalog below.'),
+          ),
+        );
+      }
+      results.replaceChildren(...items);
+    };
+    search.addEventListener('input', renderResults);
+    renderResults();
   }
 
   function open(trigger = document.activeElement) {
     returnFocus = trigger instanceof HTMLElement ? trigger : null;
     render();
     if (!dialog.open) dialog.showModal();
-    dialog.querySelector('a, button')?.focus();
+    setTimeout(() => dialog.querySelector('.project-index-search')?.focus(), 0);
   }
 
   dialog.addEventListener('cancel', (event) => {
@@ -104,6 +168,7 @@ export function createProjectIndex({ projects, onNavigate = () => {} }) {
     returnFocus?.focus();
     returnFocus = null;
   });
+  dialog.addEventListener('keydown', handleKeydown);
 
   render();
   return { element: dialog, open, close, render };

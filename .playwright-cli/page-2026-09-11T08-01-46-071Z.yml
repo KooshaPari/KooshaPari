@@ -1,0 +1,120 @@
+- generic [active] [ref=f21e1]:
+  - generic [ref=f21e2]:
+    - link "Skip to content" [ref=f21e3] [cursor=pointer]:
+      - /url: "#view-root"
+    - generic [ref=f21e4]:
+      - banner [ref=f21e5]:
+        - link "Koosha Paridehpour Systems / products / infrastructure" [ref=f21e6] [cursor=pointer]:
+          - /url: /
+          - strong [ref=f21e7]: Koosha Paridehpour
+          - generic [ref=f21e8]: Systems / products / infrastructure
+        - navigation "Primary navigation" [ref=f21e9]:
+          - link "Work" [ref=f21e10] [cursor=pointer]:
+            - /url: /work
+          - link "Writing" [ref=f21e11] [cursor=pointer]:
+            - /url: /blog
+          - link "Resume" [ref=f21e12] [cursor=pointer]:
+            - /url: /resume
+          - link "Contact" [ref=f21e13] [cursor=pointer]:
+            - /url: /contact
+        - generic [ref=f21e14]:
+          - group "Portfolio lens" [ref=f21e15]:
+            - button "Engineering" [pressed] [ref=f21e16] [cursor=pointer]
+            - button "Product" [ref=f21e17] [cursor=pointer]
+          - button "Reader" [ref=f21e18] [cursor=pointer]
+          - button "Index" [ref=f21e19] [cursor=pointer]
+      - main [ref=f21e20]:
+        - generic [ref=f21e21]:
+          - link "← Back to work" [ref=f21e22] [cursor=pointer]:
+            - /url: /work
+          - paragraph [ref=f21e23]: simulation · historical prototype
+          - heading "NetWeave" [level=1] [ref=f21e24]
+          - paragraph [ref=f21e25]: Go traffic simulation combining directed-graph routing with disjoint cellular automata for vehicle and lane behavior.
+          - generic [ref=f21e26]:
+            - heading "Engineering lens" [level=3] [ref=f21e27]
+            - paragraph [ref=f21e28]: Directed-graph routing handles strategic movement while disjoint cellular automata expose lane-level congestion, waves, and gridlock.
+          - generic [ref=f21e29]:
+            - generic [ref=f21e30]:
+              - heading "Overview" [level=2] [ref=f21e31]
+              - paragraph [ref=f21e32]: A research-oriented browser simulation of road networks, vehicle flow, and routing decisions. A Go backend streamed state to an HTML/CSS/JavaScript visualization over WebSockets.
+            - generic [ref=f21e33]:
+              - heading "Architecture" [level=2] [ref=f21e34]
+              - figure "Traffic-simulation study tracing points of interest through A-star routing, a directed road graph, per-road cellular automata, and a WebSocket browser view." [ref=f21e35]:
+                - img "NetWeave architecture Traffic-simulation study tracing points of interest through A-star routing, a directed road graph, per-road cellular automata, and a WebSocket browser view." [ref=f21e36]:
+                  - generic [ref=f21e37]: POIs -> A* route cost (road type, speed, turn penalty)
+                  - generic [ref=f21e40]: directed road graph
+                  - generic [ref=f21e43]: intersections = nodes
+                  - generic [ref=f21e46]: roads = edges
+                  - generic [ref=f21e49]: per-road 2D cellular automata
+            - generic [ref=f21e53]:
+              - heading "Traffic field" [level=2] [ref=f21e54]
+              - region [ref=f21e55]:
+                - heading "Reader / Explore Workbench" [level=3] [ref=f21e56]
+                - paragraph [ref=f21e57]: Static poster and transcript are available without JavaScript, WebGL, or automatic playback. Reduced motion uses the same still artwork.
+                - tablist "NetWeave inspection views" [ref=f21e58]:
+                  - tab "Overview" [selected] [ref=f21e59] [cursor=pointer]
+                  - tab "Route" [ref=f21e60] [cursor=pointer]
+                  - tab "Traffic" [ref=f21e61] [cursor=pointer]
+                  - tab "Evidence" [ref=f21e62] [cursor=pointer]
+                  - tab "Notes" [ref=f21e63] [cursor=pointer]
+                - tabpanel "Overview" [ref=f21e64]:
+                  - heading "A bounded traffic field" [level=4] [ref=f21e65]
+                  - paragraph [ref=f21e66]: An original explanatory study of local vehicle spacing. It describes the relationship without presenting a recorded simulator trace.
+                - figure [ref=f21e67]:
+                  - generic [ref=f21e68]:
+                    - img "Four vehicle blocks on a gridded lane; three following vehicles sit two cells behind a stationary lead vehicle at the rightmost cell." [ref=f21e70]
+                    - group "Illustrative traffic states" [ref=f21e71]:
+                      - button "Open gaps" [pressed] [ref=f21e72] [cursor=pointer]
+                      - button "Gaps narrow" [ref=f21e73] [cursor=pointer]
+                      - button "Approach" [ref=f21e74] [cursor=pointer]
+                    - group "Motion preference" [ref=f21e75]:
+                      - button "Enable discrete motion by choice" [ref=f21e76] [cursor=pointer]: Enable discrete motion
+                    - paragraph [ref=f21e77]: Three following vehicles sit two cells behind the stationary lead vehicle. Each following vehicle keeps an open gap before the stationary lead vehicle.
+                  - paragraph [ref=f21e78]: Illustrative local-spacing study. Original explanatory artwork, not recorded NetWeave output. The amber vehicle is a following vehicle; the rightmost graphite-grey vehicle stays stationary. Congestion-aware rerouting remained future work.
+                - generic [ref=f21e79]:
+                  - button "Back" [ref=f21e80] [cursor=pointer]
+                  - button "Reset" [ref=f21e81] [cursor=pointer]
+            - generic [ref=f21e82]:
+              - heading "Why this simulation architecture" [level=2] [ref=f21e83]
+              - paragraph [ref=f21e84]: The model separated strategic movement through a directed road graph from local traffic physics. Intersections became graph nodes and road segments became edges, while each road carried a disjoint 2D cellular automaton for vehicles, lanes, and gaps.
+            - generic [ref=f21e85]:
+              - heading "Directed graph + cellular automata split" [level=2] [ref=f21e86]
+              - paragraph [ref=f21e87]: A* routed vehicles between points of interest using road type, speed limit, and turn penalties. The Nagel–Schreckenberg-inspired automata handled acceleration, gap-based slowing, randomized driver variability, lane/merge/intersection behavior, and progression into the next segment.
+            - generic [ref=f21e88]:
+              - heading "Routing model" [level=2] [ref=f21e89]
+              - paragraph [ref=f21e90]: Vehicles spawned at residential POIs, travelled to commercial POIs, then received a new assignment of the opposite type. Congestion-aware weighting and in-route recalculation were documented as future work, not completed functionality.
+            - generic [ref=f21e91]:
+              - heading "Emergent traffic behavior" [level=2] [ref=f21e92]
+              - paragraph [ref=f21e93]: The simulation produced congestion, stop-and-go waves, and gridlock from local rules running on ordinary consumer hardware. Those behaviors made the network-level consequences of routing policy visible rather than theoretical.
+            - generic [ref=f21e94]:
+              - heading "The system-level routing problem" [level=2] [ref=f21e95]
+              - paragraph [ref=f21e96]: "Within roughly a week, the prototype exposed a mismatch between individually optimal routes and network-wide flow: independently minimizing route cost can concentrate agents on the same attractive segments. The next correction was identified as congestion-aware weighting, dynamic rerouting, and—at the broader system level—occasionally accepting a slower route to reduce aggregate bottleneck pressure."
+            - generic [ref=f21e97]:
+              - heading "Experimental authoring workflow" [level=2] [ref=f21e98]
+              - paragraph [ref=f21e99]: An unsubmitted Stable Diffusion + ControlNet workflow translated hand-drawn road sketches into an OSM-like visual normalization and then into backend network geometry. The proof of concept worked at baseline, but limited data, compute, and iteration time kept accuracy below reliable-ingestion quality.
+            - generic [ref=f21e100]:
+              - heading "What was not finished" [level=2] [ref=f21e101]
+              - paragraph [ref=f21e102]: Congestion-aware A*, dynamic in-route recalculation, and production-grade sketch ingestion were future or experimental directions. This entry does not claim they shipped.
+            - generic [ref=f21e103]:
+              - heading "Retrospective / later external comparison" [level=2] [ref=f21e104]
+              - paragraph [ref=f21e105]: Any comparison to later mapping or routing experiments belongs in a separately sourced retrospective. No claim of prediction, copying, or causal influence is made here.
+            - generic [ref=f21e106]:
+              - heading "AI-assistance disclosure" [level=2] [ref=f21e107]
+              - paragraph [ref=f21e108]: AI-assisted implementation reduced the cost and time required to turn the simulation design into an executable environment. The requirements, architecture, simulation model, algorithm selection, routing design, system interpretation, future direction, and identification of the routing failure mode remained user-owned.
+            - generic [ref=f21e109]:
+              - heading "Evidence status" [level=2] [ref=f21e110]
+              - paragraph [ref=f21e111]: Canonical user brief supplied 2026-08-30
+              - paragraph [ref=f21e112]: "Repository history, submitted Google Doc, MP4 presentation, screenshots, simulation output, and ControlNet experiment artifacts: locate and attach before public publication."
+            - generic [ref=f21e113]:
+              - heading "Provenance & Attribution" [level=2] [ref=f21e114]
+              - generic [ref=f21e115]:
+                - generic [ref=f21e116]:
+                  - term [ref=f21e117]: Evidence source
+                  - definition [ref=f21e118]: Supporting project evidence is being assembled
+                - generic [ref=f21e119]:
+                  - term [ref=f21e120]: Available in lens
+                  - definition [ref=f21e121]: engineering
+      - contentinfo [ref=f21e122]:
+        - generic [ref=f21e123]: Koosha Paridehpour · canonical portfolio preview
+        - generic [ref=f21e124]: Evidence-led · legacy sources preserved
+  - status [ref=f21e125]

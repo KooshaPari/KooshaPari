@@ -1,0 +1,35 @@
+{
+  "asset": "hybrid-materials-substrate",
+  "project": "substrate",
+  "generator": "build_project.py",
+  "renderer": "Cycles CPU, 32 samples, denoising, Standard view transform",
+  "render_timestamp": "2026-09-13T04:41:30.010574+00:00",
+  "renders": {
+    "desktop": {
+      "filename": "substrate-desktop.webp",
+      "size_bytes": 6304,
+      "md5": "15cfb252d097b3032c102fb058240a77",
+      "sha256": "8eea54056eed56547229e26f1a83fd56f9811b329b6dd3dd517533113874895d",
+      "target_size": {
+        "width": 1200,
+        "height": 800
+      }
+    },
+    "mobile": {
+      "filename": "substrate-mobile.webp",
+      "size_bytes": 3742,
+      "md5": "99a86af4c53cd98dcb0de77e71bcb346",
+      "sha256": "b8d0771a3827002d77d9451f72914de82c7e5e64d26a39b1d6000ed0f3d851a3",
+      "target_size": {
+        "width": 800,
+        "height": 700
+      }
+    }
+  },
+  "blend_file": {
+    "filename": "substrate.blend",
+    "size_bytes": 829169,
+    "md5": "1c2eb79ac906bbc2627b835b96b91f76",
+    "sha256": "fd79050c53759df43f4caf9f854b1b9c93ef3e0c1145218587515847b7d8240b"
+  }
+}

@@ -1,0 +1,2717 @@
+{
+  "meta": {
+    "startedAt": "2026-09-13T07:44:02.570Z",
+    "headSha": "7d6b3ffb6616e94646d52f7c3c83a24a88b5de86",
+    "sourceHashes": {
+      "index.html": "0aaaea3e1dec25f8",
+      "scripts/app.js": "a504942081f11581",
+      "scripts/router.js": "1534b4454c1357ab",
+      "scripts/reader-state.js": "20cdbacac2921a57",
+      "scripts/lens-state.js": "bd490fa30a7cda06",
+      "scripts/components/project-index.js": "29f1939da85a9e97",
+      "scripts/components/shell.js": "53aa32809e62b909",
+      "scripts/components/dom.js": "b7e330f36768e079",
+      "data/projects.js": "8a02729035a605bd",
+      "data/posts.js": "f4e62148cd32befa"
+    },
+    "httpPid": 13742,
+    "browserServerPid": 13846,
+    "browserVersion": "chromium/1.63.0",
+    "wsEndpoint": "ws://[::1]:57102/0669617ab51c0d748a0416b92768cd0c",
+    "httpPort": 57101,
+    "routeCount": 24,
+    "finishedAt": "2026-09-13T07:47:07.744Z"
+  },
+  "cases": [
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/archive",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/archive\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/archive",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/archive\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/archive",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/archive\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/blog",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/blog\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/blog",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/blog\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/blog",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/blog\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/blog/why-we-forked-omniroute",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/blog/why-we-forked-omniroute\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/blog/why-we-forked-omniroute",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/blog/why-we-forked-omniroute\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/blog/why-we-forked-omniroute",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/blog/why-we-forked-omniroute\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/contact",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/contact\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/contact",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/contact\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/contact",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/contact\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/engineering",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/engineering\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/engineering",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/engineering\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/engineering",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/engineering\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/product",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/product\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/product",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/product\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/product",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/product\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/resume",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/resume\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/resume",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/resume\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/resume",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/resume\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/agentapi-plusplus",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/agentapi-plusplus\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/agentapi-plusplus",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/agentapi-plusplus\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/agentapi-plusplus",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/agentapi-plusplus\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/byteport",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/byteport\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/byteport",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/byteport\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/byteport",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/byteport\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/cliproxyapi-plusplus",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/cliproxyapi-plusplus\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/cliproxyapi-plusplus",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/cliproxyapi-plusplus\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/cliproxyapi-plusplus",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/cliproxyapi-plusplus\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/dss-cipher",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/dss-cipher\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/dss-cipher",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/dss-cipher\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/dss-cipher",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/dss-cipher\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/forgecode",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/forgecode\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/forgecode",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/forgecode\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/forgecode",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/forgecode\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/frostify",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/frostify\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/frostify",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/frostify\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/frostify",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/frostify\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/gmk-arch",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/gmk-arch\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/gmk-arch",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/gmk-arch\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/gmk-arch",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/gmk-arch\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/mcpforge",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/mcpforge\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/mcpforge",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/mcpforge\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/mcpforge",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/mcpforge\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/netweave",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/netweave\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/netweave",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/netweave\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/netweave",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/netweave\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/omniroute",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/omniroute\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/omniroute",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/omniroute\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/omniroute",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/omniroute\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/phenotype-omlx",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/phenotype-omlx\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/phenotype-omlx",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/phenotype-omlx\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/phenotype-omlx",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/phenotype-omlx\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/sharecli",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/sharecli\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/sharecli",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/sharecli\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/sharecli",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/sharecli\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/substrate",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/substrate\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/substrate",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/substrate\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/substrate",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/substrate\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/tracera",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/tracera\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/tracera",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/tracera\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/tracera",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/tracera\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/witf",
+        "scrollW": 390,
+        "clientW": 390,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/witf\",\"scrollW\":390,\"clientW\":390,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/witf",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/witf\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/witf",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/witf\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Software systems, technical products, and the infrastructure between them."
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Software systems, technical products, and the infrastructure between them.\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/archive",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Archive"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/archive\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Archive\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/blog",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Writing"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/blog\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Writing\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/blog/why-we-forked-omniroute",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Why we forked OmniRoute — and how to avoid it"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/blog/why-we-forked-omniroute\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Why we forked OmniRoute — and how to avoid it\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/contact",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Let’s build something consequential."
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/contact\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Let’s build something consequential.\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/engineering",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Software systems, technical products, and the infrastructure between them."
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/engineering\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Software systems, technical products, and the infrastructure between them.\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/product",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Software systems, technical products, and the infrastructure between them."
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/product\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Software systems, technical products, and the infrastructure between them.\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/resume",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Two ways to read the work"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/resume\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Two ways to read the work\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Work"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Work\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/agentapi-plusplus",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "AgentAPI++"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/agentapi-plusplus\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"AgentAPI++\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/byteport",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "BytePort"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/byteport\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"BytePort\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/cliproxyapi-plusplus",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "CLIProxyAPI++"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/cliproxyapi-plusplus\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"CLIProxyAPI++\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/dss-cipher",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "DSS Cipher"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/dss-cipher\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"DSS Cipher\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/forgecode",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "ForgeCode"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/forgecode\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"ForgeCode\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/frostify",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Frostify"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/frostify\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Frostify\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/gmk-arch",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "GMK Arch"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/gmk-arch\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"GMK Arch\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/mcpforge",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "MCPForge"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/mcpforge\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"MCPForge\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/netweave",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "NetWeave"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/netweave\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"NetWeave\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/omniroute",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "OmniRoute"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/omniroute\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"OmniRoute\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/phenotype-omlx",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "phenotype-omlx"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/phenotype-omlx\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"phenotype-omlx\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/sharecli",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "ShareCLI"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/sharecli\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"ShareCLI\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/substrate",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Substrate"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/substrate\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Substrate\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/tracera",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Tracera"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/tracera\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Tracera\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "route": "/work/witf",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "WITF Board"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/witf\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"WITF Board\"}]}"
+    },
+    {
+      "name": "gateDismissal",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "gateFound": false,
+        "viewRootVisible": true
+      },
+      "detail": "{\"gateFound\":false,\"viewRootVisible\":true}"
+    },
+    {
+      "name": "readerIndexEscape",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "httpStatus": 200,
+        "bodyLen": 2770,
+        "readerActiveBefore": "true",
+        "readerActiveAfterEscape": "false",
+        "readerReEnabled": "true",
+        "readerActivated": true,
+        "escapeDeactivated": true,
+        "reActivated": true
+      },
+      "detail": "{\"httpStatus\":200,\"bodyLen\":2770,\"readerActiveBefore\":\"true\",\"readerActiveAfterEscape\":\"false\",\"readerReEnabled\":\"true\",\"readerActivated\":true,\"escapeDeactivated\":true,\"reActivated\":true}"
+    },
+    {
+      "name": "forcedImageError",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "variant": "plain-img",
+        "loaded": false,
+        "errorCount": 1,
+        "handlerAttached": true,
+        "srcRemoved": true,
+        "fallbackClass": true,
+        "dataFallback": true,
+        "altPreserved": true
+      },
+      "detail": "{\"variant\":\"plain-img\",\"loaded\":false,\"errorCount\":1,\"handlerAttached\":true,\"srcRemoved\":true,\"fallbackClass\":true,\"dataFallback\":true,\"altPreserved\":true}"
+    },
+    {
+      "name": "forcedImageError",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "variant": "picture-element",
+        "loaded": false,
+        "errorCount": 1,
+        "handlerAttached": true,
+        "imgSrcRemoved": true,
+        "imgSrcsetRemoved": true,
+        "sourceSrcsetRemoved": true,
+        "fallbackClass": true,
+        "dataFallback": true,
+        "altPreserved": true
+      },
+      "detail": "{\"variant\":\"picture-element\",\"loaded\":false,\"errorCount\":1,\"handlerAttached\":true,\"imgSrcRemoved\":true,\"imgSrcsetRemoved\":true,\"sourceSrcsetRemoved\":true,\"fallbackClass\":true,\"dataFallback\":true,\"altPreserved\":true}"
+    },
+    {
+      "name": "searchClearAndFocus",
+      "viewport": "mobile-390",
+      "status": "pass",
+      "raw": {
+        "dialogOpen": true,
+        "searchValueBeforeEscape": "nonexistent-query-xyz",
+        "searchValueAfterEscape": "",
+        "searchCleared": true,
+        "dialogStillOpen": true,
+        "dialogPreserved": true,
+        "focusTarget": {
+          "tag": "BUTTON",
+          "id": "",
+          "class": "index-trigger"
+        },
+        "focusReturned": true
+      },
+      "detail": "{\"dialogOpen\":true,\"searchValueBeforeEscape\":\"nonexistent-query-xyz\",\"searchValueAfterEscape\":\"\",\"searchCleared\":true,\"dialogStillOpen\":true,\"dialogPreserved\":true,\"focusTarget\":{\"tag\":\"BUTTON\",\"id\":\"\",\"class\":\"index-trigger\"},\"focusReturned\":true}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/archive",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/archive\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/archive",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/archive\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/archive",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/archive\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/blog",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/blog\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/blog",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/blog\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/blog",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/blog\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/blog/why-we-forked-omniroute",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/blog/why-we-forked-omniroute\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/blog/why-we-forked-omniroute",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/blog/why-we-forked-omniroute\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/blog/why-we-forked-omniroute",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/blog/why-we-forked-omniroute\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/contact",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/contact\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/contact",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/contact\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/contact",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/contact\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/engineering",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/engineering\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/engineering",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/engineering\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/engineering",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/engineering\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/product",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/product\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/product",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/product\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/product",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/product\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/resume",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/resume\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/resume",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/resume\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/resume",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/resume\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/agentapi-plusplus",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/agentapi-plusplus\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/agentapi-plusplus",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/agentapi-plusplus\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/agentapi-plusplus",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/agentapi-plusplus\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/byteport",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/byteport\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/byteport",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/byteport\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/byteport",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/byteport\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/cliproxyapi-plusplus",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/cliproxyapi-plusplus\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/cliproxyapi-plusplus",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/cliproxyapi-plusplus\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/cliproxyapi-plusplus",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/cliproxyapi-plusplus\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/dss-cipher",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/dss-cipher\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/dss-cipher",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/dss-cipher\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/dss-cipher",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/dss-cipher\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/forgecode",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/forgecode\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/forgecode",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/forgecode\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/forgecode",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/forgecode\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/frostify",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/frostify\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/frostify",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/frostify\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/frostify",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/frostify\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/gmk-arch",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/gmk-arch\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/gmk-arch",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/gmk-arch\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/gmk-arch",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/gmk-arch\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/mcpforge",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/mcpforge\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/mcpforge",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/mcpforge\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/mcpforge",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/mcpforge\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/netweave",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/netweave\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/netweave",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/netweave\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/netweave",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/netweave\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/omniroute",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/omniroute\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/omniroute",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/omniroute\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/omniroute",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/omniroute\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/phenotype-omlx",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/phenotype-omlx\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/phenotype-omlx",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/phenotype-omlx\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/phenotype-omlx",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/phenotype-omlx\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/sharecli",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/sharecli\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/sharecli",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/sharecli\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/sharecli",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/sharecli\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/substrate",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/substrate\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/substrate",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/substrate\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/substrate",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/substrate\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/tracera",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/tracera\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/tracera",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/tracera\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/tracera",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/tracera\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "overflow",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/witf",
+        "scrollW": 1440,
+        "clientW": 1440,
+        "overflow": false
+      },
+      "detail": "{\"route\":\"/work/witf\",\"scrollW\":1440,\"clientW\":1440,\"overflow\":false}"
+    },
+    {
+      "name": "pageErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/witf",
+        "count": 0,
+        "messages": []
+      },
+      "detail": "{\"route\":\"/work/witf\",\"count\":0,\"messages\":[]}"
+    },
+    {
+      "name": "requestErrors",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/witf",
+        "count": 0,
+        "failures": []
+      },
+      "detail": "{\"route\":\"/work/witf\",\"count\":0,\"failures\":[]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Software systems, technical products, and the infrastructure between them."
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Software systems, technical products, and the infrastructure between them.\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/archive",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Archive"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/archive\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Archive\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/blog",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Writing"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/blog\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Writing\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/blog/why-we-forked-omniroute",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Why we forked OmniRoute — and how to avoid it"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/blog/why-we-forked-omniroute\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Why we forked OmniRoute — and how to avoid it\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/contact",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Let’s build something consequential."
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/contact\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Let’s build something consequential.\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/engineering",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Software systems, technical products, and the infrastructure between them."
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/engineering\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Software systems, technical products, and the infrastructure between them.\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/product",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Software systems, technical products, and the infrastructure between them."
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/product\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Software systems, technical products, and the infrastructure between them.\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/resume",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Two ways to read the work"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/resume\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Two ways to read the work\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Work"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Work\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/agentapi-plusplus",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "AgentAPI++"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/agentapi-plusplus\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"AgentAPI++\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/byteport",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "BytePort"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/byteport\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"BytePort\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/cliproxyapi-plusplus",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "CLIProxyAPI++"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/cliproxyapi-plusplus\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"CLIProxyAPI++\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/dss-cipher",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "DSS Cipher"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/dss-cipher\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"DSS Cipher\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/forgecode",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "ForgeCode"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/forgecode\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"ForgeCode\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/frostify",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Frostify"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/frostify\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Frostify\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/gmk-arch",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "GMK Arch"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/gmk-arch\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"GMK Arch\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/mcpforge",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "MCPForge"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/mcpforge\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"MCPForge\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/netweave",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "NetWeave"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/netweave\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"NetWeave\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/omniroute",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "OmniRoute"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/omniroute\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"OmniRoute\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/phenotype-omlx",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "phenotype-omlx"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/phenotype-omlx\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"phenotype-omlx\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/sharecli",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "ShareCLI"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/sharecli\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"ShareCLI\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/substrate",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Substrate"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/substrate\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Substrate\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/tracera",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "Tracera"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/tracera\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"Tracera\"}]}"
+    },
+    {
+      "name": "headingVisibility",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "route": "/work/witf",
+        "h1Count": 1,
+        "allVisible": true,
+        "visibility": [
+          {
+            "index": 0,
+            "visible": true,
+            "text": "WITF Board"
+          }
+        ]
+      },
+      "detail": "{\"route\":\"/work/witf\",\"h1Count\":1,\"allVisible\":true,\"visibility\":[{\"index\":0,\"visible\":true,\"text\":\"WITF Board\"}]}"
+    },
+    {
+      "name": "gateDismissal",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "gateFound": false,
+        "viewRootVisible": true
+      },
+      "detail": "{\"gateFound\":false,\"viewRootVisible\":true}"
+    },
+    {
+      "name": "readerIndexEscape",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "httpStatus": 200,
+        "bodyLen": 2770,
+        "readerActiveBefore": "true",
+        "readerActiveAfterEscape": "false",
+        "readerReEnabled": "true",
+        "readerActivated": true,
+        "escapeDeactivated": true,
+        "reActivated": true
+      },
+      "detail": "{\"httpStatus\":200,\"bodyLen\":2770,\"readerActiveBefore\":\"true\",\"readerActiveAfterEscape\":\"false\",\"readerReEnabled\":\"true\",\"readerActivated\":true,\"escapeDeactivated\":true,\"reActivated\":true}"
+    },
+    {
+      "name": "forcedImageError",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "variant": "plain-img",
+        "loaded": false,
+        "errorCount": 1,
+        "handlerAttached": true,
+        "srcRemoved": true,
+        "fallbackClass": true,
+        "dataFallback": true,
+        "altPreserved": true
+      },
+      "detail": "{\"variant\":\"plain-img\",\"loaded\":false,\"errorCount\":1,\"handlerAttached\":true,\"srcRemoved\":true,\"fallbackClass\":true,\"dataFallback\":true,\"altPreserved\":true}"
+    },
+    {
+      "name": "forcedImageError",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "variant": "picture-element",
+        "loaded": false,
+        "errorCount": 1,
+        "handlerAttached": true,
+        "imgSrcRemoved": true,
+        "imgSrcsetRemoved": true,
+        "sourceSrcsetRemoved": true,
+        "fallbackClass": true,
+        "dataFallback": true,
+        "altPreserved": true
+      },
+      "detail": "{\"variant\":\"picture-element\",\"loaded\":false,\"errorCount\":1,\"handlerAttached\":true,\"imgSrcRemoved\":true,\"imgSrcsetRemoved\":true,\"sourceSrcsetRemoved\":true,\"fallbackClass\":true,\"dataFallback\":true,\"altPreserved\":true}"
+    },
+    {
+      "name": "searchClearAndFocus",
+      "viewport": "desktop-1440",
+      "status": "pass",
+      "raw": {
+        "dialogOpen": true,
+        "searchValueBeforeEscape": "nonexistent-query-xyz",
+        "searchValueAfterEscape": "",
+        "searchCleared": true,
+        "dialogStillOpen": true,
+        "dialogPreserved": true,
+        "focusTarget": {
+          "tag": "BUTTON",
+          "id": "",
+          "class": "index-trigger"
+        },
+        "focusReturned": true
+      },
+      "detail": "{\"dialogOpen\":true,\"searchValueBeforeEscape\":\"nonexistent-query-xyz\",\"searchValueAfterEscape\":\"\",\"searchCleared\":true,\"dialogStillOpen\":true,\"dialogPreserved\":true,\"focusTarget\":{\"tag\":\"BUTTON\",\"id\":\"\",\"class\":\"index-trigger\"},\"focusReturned\":true}"
+    }
+  ],
+  "summary": {
+    "total": 202,
+    "pass": 202,
+    "fail": 0,
+    "error": 0,
+    "routeCount": 24,
+    "viewportCount": 2,
+    "routes": [
+      "/",
+      "/archive",
+      "/blog",
+      "/blog/why-we-forked-omniroute",
+      "/contact",
+      "/engineering",
+      "/product",
+      "/resume",
+      "/work",
+      "/work/agentapi-plusplus",
+      "/work/byteport",
+      "/work/cliproxyapi-plusplus",
+      "/work/dss-cipher",
+      "/work/forgecode",
+      "/work/frostify",
+      "/work/gmk-arch",
+      "/work/mcpforge",
+      "/work/netweave",
+      "/work/omniroute",
+      "/work/phenotype-omlx",
+      "/work/sharecli",
+      "/work/substrate",
+      "/work/tracera",
+      "/work/witf"
+    ]
+  }
+}
